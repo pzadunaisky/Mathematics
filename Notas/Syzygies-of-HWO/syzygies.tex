@@ -1,0 +1,776 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{notas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\newcommand\PP{\mathbb P}
+
+\newcommand\GG{\Gamma}
+\newcommand\C{\mathcal C}
+\renewcommand\H{\mathcal H}
+\newcommand\F{\mathcal F}
+\renewcommand\O{\mathcal O}
+
+\newcommand\ot{\otimes}
+\renewcommand\phi{\varphi}
+\newcommand\id{\mathsf{Id}}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand\ll{\llbracket}
+\newcommand\rr{\rrbracket}
+\newcommand\gen[1]{\left\langle#1\right\rangle}
+
+\newcommand\g{\mathfrak g}
+\renewcommand\b{\mathfrak b}
+\newcommand\h{\mathfrak h}
+\newcommand\p{\mathfrak p}
+\newcommand\gl{\mathfrak{gl}}
+\renewcommand\sl{\mathfrak{sl}}
+
+\newcommand\wt{\mathsf{wt}}
+\newcommand\rt{\mathsf{rt}}
+
+\newcommand\buena{buena}
+
+\DeclareMathOperator\ad{\mathsf{ad}}
+\DeclareMathOperator\tr{\mathsf{tr}}
+\DeclareMathOperator\SL{\mathsf{SL}}
+\DeclareMathOperator\GL{\mathsf{GL}}
+\DeclareMathOperator\Lie{\mathsf{Lie}}
+\DeclareMathOperator\End{\mathsf{End}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+\renewcommand\sl{\mathfrak{sl}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Syzygies of Highest Weight Orbits}
+\date{[syzygies.tex]}
+\author{Pablo Zadunaisky}
+
+\begin{document}
+\maketitle
+Notas del artículo ``On syzygies of highest weight orbits'' de A.L. Gorodentsev, A. S.
+Horoshkin y A. N. Rudakov.
+
+\section{Grupos y álgebras de Lie}
+A lo largo de esta sección $G$ es un grupo de Lie sobre $\CC$, en la mayoría de los casos
+semisimple (o sea que su álgebra de Lie es semisimple), conexo y simplemente conexo. 
+
+\paragraph
+\about{Variedades complejas}
+Una variedad compleja u holomorfa es el análogo complejo a una variedad diferenciable. 
+La definición es igual, simplemente se pide que la variedad sea localmente homeomorfa a 
+$\CC^n$ para algún $n \geq 0$ y que los cambios de coordenadas sean diferenciables en el 
+sentido complejo, i.e. \emph{holomorfos}. 
+Eso permite definir la noción de función holomorfa sobre una variedad $V$, fibrados 
+holomorfos, secciones holomorfas, formas holomorfas, etc. Claramente toda variedad 
+compleja es una variedad diferenciable. Solo consideramos variedades de dimensión finita.
+
+\paragraph
+\about{Grupos de Lie y subgrupos distinguidos}
+Un grupo de Lie complejo es un grupo con estructura de variedad compleja tal que las 
+operaciones de producto y tomar inverso resulten holomorfas. Nuestro ejemplo estándar 
+es $\SL_n(\CC)$, donde las operaciones son más que holomorfas, son polinomiales. Notar
+que en ese caso el grupo es además de una variedad compleja, una variedad algebraica; 
+esto es cierto para cualquier grupo de Lie complejo semisimple y simplemente conexo.
+
+Un \newterm{subgrupo de Borel} de $G$ es un subgrupo $B \subset G$ maximal entre los 
+subgrupos de Lie conexos y solubles de $G$. Todo grupo de Lie complejo tiene subgrupos 
+de Borel, y son todos conjugados entre sí. Un \newterm{subgrupo parabólico} es un 
+subgrupo de Lie $P$ tal que $B \subset P \subset G$. Todo grupo de Borel contiene un 
+toro maximal, es decir un subgrupo $T \subset B$ maximal repecto de la propiedad de ser 
+isomorfo a un producto de copias de $\CC^\times$.
+
+\begin{Example*}
+En el caso $\SL_n(\CC)$ los subgrupos de Borel son todos conjugados al grupo $B$ de 
+matrices triangulares superiores con determinente $1$. Para cada $1 \leq r \leq n$ se 
+tiene un subrgrupo parabólico $P_r$ dado por las matrices $A$ tales que $a_{ij} = 0$ si 
+$j \leq r < i$. Dada una sucesión $\lambda = (i_1, i_s, \ldots, i_r)$ con $1 \leq i_1 
+< i_2 < \cdots < i_r \leq n$, el grupo $P_\lambda = \bigcap_{i \in \lambda} P_i$ es un 
+subgrupo parabólico, y esto agota la lista de grupos parabólicos que contienen a $B$.
+\end{Example*}
+
+\paragraph
+\about{Álgebras de Lie y sus condimentos}
+Recordemos que a cada grupo de Lie $G$ le asociamos su álgebra de Lie $\g$, que
+identificamos con el tangente en la identidad $T_eG$ y con los campos invariantes a
+izquierda. Si $G$ es un grupo de Lie semisimple entonces $\g$ es un álgebra de Lie 
+semisimple, y $\h \subset \g$ resulta ser una subálgebra de Cartan de $\g$. Existe 
+entonces un conjunto $\Phi \subset \h^*$ cuyos elementos llamamos \emph{raíces}, y una 
+descomposición $\g = \h \oplus \bigoplus_{\alpha \in \Phi} \g_\alpha$, de forma que:
+\begin{enumerate}
+  \item $\Phi$ genera $\h^*$;
+  \item si $\alpha \in \Phi$ entonces $- \alpha \in \Phi$ y no hay otro vector paralelo
+  a $\alpha$ en $\Phi$;
+  \item $\g_\alpha = \{x \in \g \mid [h,x] = \alpha(h)x \mbox{ para todo } h \in \h\}$;
+  \item $[\g_\alpha, \g_\beta] \subset \g_{\alpha + \beta}$ para cada $\alpha, \beta \in 
+    \Phi$;
+ \item $\dim \g_\alpha = 1$ para cada $\alpha \in \Phi$;
+\end{enumerate} 
+ Como $\h$ es abeliana tiene sentido poner $\h = \g_0$. 
+
+ Sobre $\g$ está definida la \emph{forma de Killing}, dada por $(x,y) = \tr(\ad x \circ 
+ \ad y)$. La semisimplicidad de $\g$ es equivalente a que $(-,-)$ sea no degenerada, y 
+ la restricción de la forma de Killing a $\h$ también resulta no degenerada. Por lo 
+ tanto podemos identificar $\h$ con $\h^*$; en particular este último espacio tiene un 
+ producto interno, que también notamos $(-,-)$ para confundir al enemigo. Siguiendo con 
+ nuestra lista,
+ \begin{enumerate}[resume]
+\item para cada $\alpha \in \Phi$ existe $t_\alpha \in \h$ con $(t_\alpha, h) = 
+\alpha(h)$ para todo $h \in \h$;
+\item $[g_\alpha, g_{-\alpha}] = \gen{t_\alpha}$;
+\item $\g_\alpha \oplus \gen{t_\alpha} \oplus \g_\alpha \cong \sl_2(\CC)$ como álgebra de Lie;
+
+
+\item $(\g_\alpha, \g_\beta) \neq 0$ sii $\alpha = - \beta$ ($\alpha, \beta \in \Phi \cup
+ \{0\}$);
+\item $(\alpha, \beta) = (t_\alpha, t_\beta) = \alpha(t_\beta) \in \QQ$.
+ \end{enumerate}
+
+\paragraph
+\about{Reticulados de raíces y de pesos}
+Se define $\Lambda^\rt \subset \h^*$ como el $\ZZ$-módulo generado por $\Phi$, y notamos 
+$\Lambda_\RR = \RR \ot_\ZZ \Lambda^\rt$. El último punto del aparatado anterior implica que $(-,-)$ induce un producto intero real sobre este espacio.
+
+Como $\Phi$ es un conjunto finito $\Lambda_\RR$ 
+es de dimensión finita, y existe un hiperplano $H \subset \Lambda_\RR$ con $H \cap 
+\Phi = \emptyset$. Elegimos arbitrariamente uno de los semiespacios de $\Lambda_\RR 
+\setminus H$ como $H^+$ y notamos $\Phi^+ = \Phi \cap H^+$, así $\Phi = \Phi^+ \cup 
+-\Phi^+$ de donde se deduce que $\Phi^+$ genera $\Lambda$. Como $\Lambda$ es un 
+$\ZZ$-módulo finitamente generado y sin torsión, es libre, y una base está dada por 
+$\Delta = \{\alpha_1, \ldots, \alpha_n \}$, con $n = \dim \h$ y las $\alpha_i$ son los 
+elementos de $\Phi^+$ que no pueden escribirse como suma de dos elementos de $\Phi^+$. 
+Las llamamos \emph{raíces simples} y forman una base de $\h^*$. 
+
+Vimos que $\h^*$ es un espacio con producto interno. Para cada $\alpha \in \Delta$ se define $\alpha^\vee = 2\alpha/(\alpha,\alpha)$. Entonces $\Delta^\vee$ también es una base de $\h^*$, que tiene una base dual a la que 
+notamos $\Pi = \{\varpi_1, \ldots, \varpi_n \}$. Notamos por $\Lambda^\wt$ al $\ZZ$-
+módulo libre generado por $\Pi$; notar que $\Lambda^\wt \subset \Lambda^\rt$ es el 
+conjunto de elementos de $\h^*$ cuyo producto interno contra $\Lambda^\rt$ es un número 
+entero. Dados $\lambda, \mu \in \Lambda^\wt$ decimos que $\mu < \lambda$ si $\lambda - 
+\mu$ es una suma de raíces positivas.Dada $\alpha_i \in \Delta$, llamamos $s_i$ a la 
+única reflexión tal que $\alpha_i \mapsto - \alpha_i$. El grupo de Weyl $W$ de $\g$ es 
+el grupo generado por las $s_i$ en $\End_\RR(\Lambda_\RR)$; como las reflexiones 
+ortogonales son isometrías, el producto interno $(-,-)$ es invariante por la acción de 
+$W$. Más aún, $W$ actúa sobre $\Lambda^\wt$ y sobre $\Lambda$, permutando las raíces de 
+manera transitiva.
+
+\paragraph
+\about{Representaciones de peso máximo}
+Sea $V$ una representación de dimensión finita de $\g$. Para cada $\mu \in \Lambda^\wt$ 
+se define 
+\[
+	V_\mu = \{v \in V \mid h \cdot v = \mu(h) v \mbox{ para todo } h \in \h\}.
+\]
+Entonces 
+\begin{enumerate}
+	\item $V = \bigoplus_{\mu \in \Lambda^\wt} V_{\mu}$;
+	\item $\g_\alpha V_\mu \subset V_{\alpha + \mu}$;
+	\item el conjunto $\{\mu \mid V_\mu \neq 0\}$ tiene un máximo, que llamamos $\lambda$, para el cual $x_\alpha V_\lambda = 0$ para todo $\alpha \in \Phi^+$;
+	\item $\lambda = \sum_i n_i \varpi_i$ con $n_i \in \NN_0$;
+	\item $\dim V_\lambda = 1$; 
+	\item si $V_\mu \neq 0$ entonces $\mu$ está en la clausura convexa en $\Lambda^\wt$ de
+		la órbita de $\lambda$ por $W$.
+\end{enumerate}
+Un peso de la forma $\lambda = \sum_i n_i \varpi_i$ con $n_i \in \NN_0$ se llamada \emph{
+entero dominante}. Dado un peso íntegro dominante existe una 
+única representación irreducible de $\g$, que notamos por $V(\lambda)$. Notamos 
+$v_\lambda$ a algún vector no nulo de $V(\lambda)_\lambda$, que por lo anterior genera
+$V(\lambda)$ como $\g$-módulo. 
+
+\section{Órbitas de peso máximo}
+A lo largo de esta sección $G$ denota un grupo de Lie complejo, semisimple, conexo y 
+simplemente conexo, y $\g$ su álgebra de Lie. Una \newterm{representación holomorfa} 
+de $G$ es un morfismo de grupos de Lie $G \to \GL(V)$, donde $V$ es un $\CC$-espacio 
+vectorial, que supondremos siempre de dimensión finita. Toda representación holomorfa de 
+$G$ puede diferenciarse, obteniendo así un morfismo de álgebras de Lie $\g \to \gl(V)$, 
+es decir una representación del álgebra de Lie $\g$. A lo largo de esta sección usamos 
+indiscriminadamente el siguiente resultado.
+\begin{Theorem*}
+Si $G$ es un grupo de Lie semisimple, conexo y simplemente conexo, entonces toda representación de dimensión finita de $\g$ es la diferencial de una representación de 
+$G$.
+\end{Theorem*}
+
+\subsection{Geometría de las órbitas de peso máximo}
+\paragraph
+\about{Órbitas de vectores de peso máximo: $G/P$ como variedad proyectiva}
+Sea $\lambda \in \Lambda^\wt$ un peso dominante entero y sea $V = V(\lambda)$ la 
+representación de $\g$ correspondiente. Sea $\p \subset \g$ la mayor subálgebra 
+tal que $\p v_\lambda \subset \gen{v_\lambda}$. Si $\b = \h \oplus \bigoplus_{\alpha \in 
+\Phi^+}$ entonces $\b \subset \p$, y de hecho 
+\[
+	\p = \b \oplus \bigoplus_{(\alpha, \lambda) = 0} \g_\alpha.
+\]
+
+La representación $V$ proviene de una acción de $G$ sobre $V$, y el estabilizador de 
+$\gen{v_\lambda}$ por esta acción es el grupo $P_\lambda \subset G$ que tiene a $\p$ por 
+álgebra de Lie; como $\p \supset \b$, el grupo $P$ contiene a $B$, el grupo que tiene a 
+$\b$ por álgebra de Lie que resulta ser un Borel. Así $P$ es un grupo parabólico. 
+Tenemos una función inyectiva $G/P \to \PP(V)$ dada por $g \mapsto g \cdot v_\lambda$. 
+Esto induce una inmersión de $G/P$ en un espacio proyectivo de dimensión finita. A 
+continuación mostramos que es una variedad proyectiva.
+
+\paragraph
+\about{El elemento de Casimir de $U(\g)$}
+Sea $\{a_i\}$ una base de $\g$ y $\{b_i\}$ su base dual respecto de la forma de Killing.
+El \newterm{elemento de Casimir} de $U(\g)$ es $\Omega = \sum_i a_ib_i \in U(\g)$, que no
+depende de la base elegida. Esto se deduce del hecho de que como $V$ es un espacio con producto interno $V \ot V \cong V^* \ot V \cong \End(V)$ y a través de ese isomorfismo 
+$\sum_i a_i \ot b_i \in V \ot V \mapsto \id_V \in \End(V)$.
+
+El elemento de Casimir es central en $U(\g)$. Para verlo,
+alcanza con probar que $\Omega a_i = a_i \Omega$ para todo $i$. Pongamos
+\begin{align*}
+	[a_i, a_j] &= \sum_k \lambda^k_{i,j} a_k & [b_i, a_j] &= \sum_k \mu^k_{i,j} a_k.
+\end{align*}
+De la simetría de la forma de Killing y que $(a_i, b_j) = \delta_{i,j}$ se deduce
+\begin{align*}
+	\lambda^k_{i,j} = ([a_i, a_j], b_k) = (a_i, [a_j, b_k]) = -\mu_{k,j}^i,
+\end{align*}
+y por lo tanto
+\begin{align*}
+	[\Omega, a_j] &= \sum_{i} [a_i, a_j]b_i + a_i[b_i, a_j] = \sum_{i,k} \lambda^k_{i,j}
+	a_k b_i + \mu_{i,j}^k a_ib_k \\
+	&= \sum_{i,k} (\lambda^k_{i,j} + \mu^i_{k,j})a_ib_k = 0.
+\end{align*}
+
+Sea $\lambda \in \Lambda^\wt$ un peso dominante y $V(\lambda)$ la representación 
+asociada, con vector de peso máximo $v_\lambda$. Como la multiplicación por $\Omega$ es 
+un endomorfismo del $U(\g)$-módulo simple $V(\lambda)$, se tiene que 
+$\Omega|_{V(\lambda)} = c_\lambda \id$ para algún $c_\lambda \in \CC$. Entonces tomando 
+$h_i$ una base autodual de $\h$ y $g_\alpha \in \g_\alpha$ de forma que $(g_\alpha, 
+g_{-\alpha}) = 1$, tenemos
+\begin{align*}
+	\Omega 
+		&= \sum_i h_i^2 + \sum_{\alpha \in \Phi^+} (g_\alpha g_{-\alpha} + g_{-\alpha}
+		g_\alpha) = \sum_i h_i^2 + \sum_{\alpha \in \Phi^+} (2g_{-\alpha} g_\alpha 
+			+ [g_\alpha, g_{-\alpha}])
+\end{align*}
+Ahora 
+\[
+([g_\alpha, g_{-\alpha}], h) = (g_\alpha, [g_{-\alpha}, h]) = \alpha(h)
+\]
+con lo cual $[g_\alpha, g_{-\alpha}] = t_\alpha$, y por lo tanto
+\begin{align*}
+	\Omega &= \sum_i h_i^2 + 2\sum_{\alpha \in \Phi^+}g_{-\alpha}g_{a\alpha} + \sum_{\alpha \in \Phi^+} t_\alpha
+\end{align*}
+
+Ahora $h \cdot v_\lambda = \lambda(h)$ para todo $h \in \h$, y $g_\alpha v_\lambda \in 
+V_{\lambda + \alpha} = 0$. Luego
+\begin{align*}
+	\Omega v_\lambda &= \sum_i \lambda(h_i)^2 + \sum_{\alpha \in \Phi^+} t_{\alpha} v_\lambda 
+	= (\lambda, \lambda)v_\lambda + \left(\sum_{\alpha \in \Phi^+} \alpha, \lambda\right)v_\lambda
+	=	(\lambda + 2\rho, \lambda)v_\lambda.
+\end{align*}
+Luego $c_\lambda = (\lambda + 2 \rho, \lambda)$. 
+
+\paragraph
+\about{Ecuaciones cuadráticas para $G/P$}
+Dadas dos representaciones $V, V'$ de $\g$, el producto tensorial $V \ot V'$ también es 
+una representación de $\g$, y el elemento de Casimir actúa por
+\begin{align*}
+\Delta(\Omega) 
+	&= \sum_i (a_i \ot 1 + 1 \ot a_i)(b_i \ot 1 + 1 \ot b_i) \\
+	&= \Omega \ot 1 + (a_i \ot b_i + b_i \ot a_i) + 1 \ot \Omega \\
+	&= \Omega \ot 1 + 2\Omega_2 + 1 \ot \Omega,
+\end{align*}
+donde $\Omega_2 = \sum_i a_i \ot b_i = \sum_i b_i \ot a_i$. De la definición se deduce que 
+\begin{align*}
+	\Omega_2(v \ot v') = \frac{1}{2}(\Omega(v \ot v') - \Omega(v) \ot v' - v \ot 
+	\Omega(v'))
+\end{align*}
+con lo cual $\Omega_2$ conmuta con la acción de $\g$, y por lo tanto con la de $G$.
+
+\begin{Proposition*}[1.3.2]
+Sea $\lambda$ un peso dominante entero. Las siguientes afirmaciones son equivalentes:
+\begin{enumerate}[label=(\alph*)]
+	\item $x \in G \cdot v_\lambda$;
+	\item $x \ot x \in V(2\lambda) \subset V(\lambda) \ot V(\lambda)$;
+	\item $\Omega(x \ot x) = 4 (\lambda + \rho, \rho)$;
+	\item $\Omega_2(x \ot x) = (\lambda, \lambda) x \ot x$.
+\end{enumerate}
+\end{Proposition*}
+\begin{proof}
+	La implicación $a \Rightarrow b$ es cierta porque $v_\lambda \ot v_\lambda$ genera
+	$V(2\lambda) \subset V(\lambda) \ot V(\lambda)$, así que $x \ot x = g (v_\lambda \ot
+	v_\lambda) \in V(2\lambda)$. A continuación $b \Rightarrow c$ se sigue de la fórmula
+	para $\Omega$, y $c \Leftrightarrow d$ se deduce de la relación entre $\Omega$ y
+	$\Omega_2$. Que $c \Rightarrow a$ se deduce de la siguiente proposición, que es más
+	general.
+\end{proof}
+\begin{Proposition*}
+	Las ecuaciones $\{\Omega(x \ot x) = 4(\rho + \lambda, \lambda)x \ot x \mid x \in
+	Gv_\lambda\}$ generan el ideal de la variedad $X = G/P \subset \PP(V(\lambda))$.
+\end{Proposition*}
+\begin{proof}
+	El álgebra de coordenadas homogéneas de $\PP(V(\lambda))$ se identifica como
+	$\g$-módulo con el álgebra simétrica $S(V(\mu))$, donde $V(\mu) \cong V(\lambda)^*$ y 
+	$\mu = -w_{\mathsf{max}}(\lambda)$.
+
+	Para cada $r \geq 0$, la componente homogénea $S^r(V(\mu))$ contiene una copia de
+	$V(r\mu)$, con lo cual podemos escribir $S^r(\mu) = V(r\mu) \oplus \bigoplus_{\lambda
+	\in \Lambda_r(\mu)} V(\lambda)$ donde $\lambda \in \Lambda_r(\mu)$ implica $\lambda <
+	r\mu$. Definimos $J_r = \bigoplus_{\Lambda_r(\mu)} V(\lambda)$, que por definición es
+	un espacio invariante por la acción de $\g$. Si $x \in S^q V(\mu)$ entonces $x\cdot
+	J_r \subset \bigoplus_{\lambda \in \Lambda_r(\mu)} V(\lambda + q\mu) \subset J_{r+q}$,
+	con lo cual $J = \bigoplus_r J_r$ es un ideal; notar que cualquier ideal
+	$\g$-invariante $I$ que contenga estrictamente a $J$ contiene algún elemento $x \in
+	V(q\lambda)$ para algún $q \gg 0$, con lo cual contiene a $V(q\lambda)$ y $V(I) =
+	\emptyset$. Si $Y = V(J)$ entonces $I(Y) \supset J$ es $\g$-invariante, y por lo tanto
+	$V(J) = J$. Más aún, $J \subset I(G/P)$ y por lo tanto $J = I(G/P)$. Alcanza entonces
+	con ver que $J = \gen{J_2}$.
+
+	Para probarlo, hacemos la siguiente observación. Como $\lambda \in \Lambda_r(\mu)$
+	implica que $\lambda < r \mu$, el operador $\Omega - c_{r\mu}\id$ se anula sobre
+	$V(r\mu)$ y es igual a $(c_{r\lambda} - c_{r\mu}) \id \neq 0$ sobre $J_r$, por lo que
+	$(\Omega - c_{r\mu}\id)(S^r(V(\mu))) = J_r$. Una cuenta muestra que
+	\[
+		(\Omega - c_{r\mu}\id) (v^r) = \frac{r(r-1)}{2}(\Omega - c_{2\mu}\id)(v^2) v^{r-2}.
+	\]
+	Como los vectores de la forma $v^r$ generan $S^rV(\mu)$, tenemos que $J_r \subset J_2
+	S^{r-2}(V_q)$. El enunciado se sigue de que $(\mu, \mu) = (-w_{\mathsf{max}}(\lambda),
+	- w_{\mathsf{max}}(\lambda)) = (\lambda, \lambda)$.
+\end{proof}
+
+
+\section{Fibrados vectoriales y cohomología}
+\paragraph
+\about{Fibrados vectoriales}
+\label{fibrados-vectoriales}
+Los fibrados vectoriales holomorfos se definen en forma análoga a los fibrados 
+vectoriales diferenciables. Si $X$ es una variedad holomorfa, entonces los fibrados que 
+uno conoce como el tangente $TX$, el cotangente $T^*X$ y sus potencias exteriores 
+$\bigwedge^p T^* X$ son fibrados holomorfos. El \newterm{fibrado canónico} de $X$
+es por definición $\omega_X = \bigwedge^d T^* X$, donde $d = \dim X$. Notar que este es 
+un fibrado de linea, es decir con fibras de dimensión $1$.
+
+Hacemos dos observaciones: la primera es que si $\pi: E \to X$ es un fibrado vectorial y
+$\phi: Y \to X$ es una función holomorfa, entonces el pull-back $\phi^*E \to X$ también 
+es un fibrado holomorfo cuya fibra estáda dada por $\phi^*E_y = E_{\phi(y)}$ para todo 
+$y \in Y$. En particular si $Y \subset X$ y $\phi$ es la inclusión, $\phi^*E = 
+\pi^{-1}(Y)$ es la restricción de $E$ a $Y$. Por otro lado, se puede definir el fibrado 
+holomorfo dual $\pi': E' \to X$, donde cada fibra es el dual de la fibra correspondiente 
+de $E$. El isomorfismo $V \to V' \to \End(V)$ natural induce un isomorfismo $E \ot E' \to
+X \times \End(\CC^n)$, donde $n$ es la dimensión de las fibras de $E$.
+
+\paragraph
+\label{fibrado-tautologico}
+El \newterm{fibrado tautológico} sobre $\PP(V)$, es el espacio $\O_{\PP}(-1) = 
+\{(p,v) \mid p \in \PP(V), v \in p\} \subset \PP(V) \times V$ con la proyección obvia. 
+Este es otro fibrado de linea. Notamos por $\O_{\PP}(1)$ su fibrado dual, y en general 
+por $\O_{\PP}(\pm n)$ a la $n$-ésima potencia tensorial de $\O_{\PP}(\pm 1)$. Notar que 
+$\O_\PP(n) \ot \O_\PP(-n)$ es el fibrado trivial. Si $X \subset \PP(V)$ notamos $\O_X(n)
+= i^*(\O_{\PP(V)}(n))$. 
+
+\paragraph
+\about{Haces}
+\label{haces}
+Si $X$ es una variedad compleja, un \newterm{haz} $\mathcal F$ de grupos abelianos es 
+una asignación $U \mapsto \mathcal F(U)$, donde $\mathcal F(U)$ es un grupo abeliano, 
+compatible con las restricciones en el siguiente sentido: 
+\begin{enumerate}
+\item siempre que $V \subset U$ se tiene un morfismo $\rho_{U,V}: \mathcal F(U) \to 
+	\mathcal F(V)$, tal que $\rho_{U,U} = \id$ y $\rho_{U,V} \circ \rho_{V,W} = 
+	\rho_{U,W}$; y
+\item si $\{U_i\}_{i \in I}$ es un cubrimiento de $U$, y $s_i \in \mathcal F(U_i)$ son 
+	tales que $s_i|_{U_i \cap U_j} = s_j|_{U_i \cap U_j}$ entonces existe un único $s 
+	\in \mathcal F(U)$ tal que $s|_{U_i} = s_i$.
+\end{enumerate}
+La categoría de haces de grupos abelianos (o de espacios vectoriales, o a valores en una
+categoría abeliana suficientemente buena) es una categoría abeliana con suficientes 
+inyectivos.
+
+\paragraph
+\about{Haces asociados a un fibrado}
+\label{haces-asociados-a-un-fibrado}
+Dado un fibrado holomorfo $E \to X$, podemos asociarle el haz $\GG(E,-)$ que a cada 
+abierto $U$ le asigna 
+\[
+	\GG(E,U) = \{s: U \to E \mbox{ continua } \mid \pi \circ s = \id_U\},
+\]
+el haz de secciones continuas de $\pi$ definidas sobre $U$. También existen haces de 
+secciones diferenciables $\C^\infty(E,-)$, y homolomorfas $\H(E,-)$.
+
+\begin{Example*}
+Si $X$ es una variedad holomorfa y $E = \bigwedge^p T^*X$, entonces $\GG(E,-), 
+\C^\infty(E,-)$ y $\H(E,-)$ son los haces de $p$-formas continuas, diferencialbes y 
+holomorfas, respectivamente. 
+\end{Example*}
+
+\begin{Example*}
+Sea $X = \PP^3$ y sea $E = \O_X(-1)$ como en \ref{fibrado-tautologico}. Una sección 
+$s: X \to E$ es una elección para cada $p = [x_0:x_1:x_2]$ de un vector $s(p) \in \langle
+(x_0,x_1,x_2)\rangle$. Sea $U = \{p \in \PP^3 \mid x_0 \neq 0\}$ y $\tilde s = s|_{U}$. 
+Identificando $U \cong \CC^2$ de la manera estándar tenemos que $\tilde s$ induce una 
+función $f:\CC^2 \to \CC$ de la siguiente forma: para cada $(z_1, z_2)$ tenemos 
+\[
+\tilde s(z_1,z_2) = s([1:z_1:z_2]) = (f(z_1,z_2), f(z_1,z_2) z_1, f(z_1,z_2)z_2).
+\]
+En otras palabras $f(z_1,z_2) = \pi_0(s([1:z_1:z_2]))$, en particular está bien definido
+el límite de $f$ cuando $(z_1,z_2) \to \infty$ porque esto se corresponde con 
+aproximarse a un punto en $\PP^2 \setminus U$, y en estos puntos $\pi_0 \circ s$ vale 
+idénticamente $0$. Luego $f$ es una función holomorfa y acotada que se anula en el 
+infinito. En otras palabras la única sección global de $\O_X(-1)$ es la sección nula.
+
+La misma demostración funciona para ver que $\O_{\PP^n(\CC)}(-1)$ no tiene secciones no 
+nulas.
+\end{Example*}
+
+\begin{Example*}
+Sigamos con $X = \PP^3$, pero ahora $E = \O_X(1)$. En este caso una sección está dada por
+la elección de un funcional sobre cada recta de $\CC^3$. Este fibrado tiene secciones 
+globales: para cada punto $p = [x_0:x_1:x_2]$ sea $L_p = \langle (x_0,x_1,x_2) \rangle$,
+y sea $s_i(p) = \pi_i|_{L_p}$. Si $s$ es una sección global continua (resp.
+diferenciable, holomorfa) deben existir funciones $f_i: \PP^3 \to \CC$ tales que
+\[
+	s = f_0 \cdot \pi_0 + f_1 \cdot \pi_1 + f_2 \cdot \pi_2.
+\]
+Las $f_i$ deben ser continuas (resp. diferenciables, holomorfas). En particular si $s$
+es holomorfa deben ser constantes, y por lo tanto $\H(E,\PP^3) = \langle \pi_0, \pi_1, 
+\pi_2\rangle$. Este resultado se generaliza para $\PP^n$.
+\end{Example*}
+
+\paragraph
+\about{Fibrados de linea y morfismos}
+\label{fibrados-de-linea-y-morfismos}
+Sea $X$ una variedad holomorfa y sean $\phi: X \to \PP^n$ una función holomorfa y $E = 
+\phi^*(\O(1))$. Este fibrado tiene secciones globales $\pi_0 \circ \phi, \ldots, \pi_n 
+\circ \phi$ que generan $\H(E,X)$, y además es inversible con inverso $\phi^*(\O(-1))$. 
+
+Por otro lado, dado un fibrado de linea inversible $L \to X$ con secciones globales
+$g_0, \ldots, g_n$ tales que $\H(U,L) = \langle \rho_U(g_i) \mid i = 0, \ldots, n\rangle$
+para todo abierto $U$, podemos construir una correspondiente $\phi: X \to \PP^n$. Tomamos
+un abierto trivializante $V$, donde $\H(V,L) = \langle h \rangle$, y funciones $f_i: V \
+to \CC$ tales que $g_i = f_i h$. Como las $g_i$ generand $\H(V,L)$, al menos una de las 
+$f_i$ es no nula y por lo tanto $V \to \PP^n$ dada por $v \mapsto [f_0(v): \ldots, 
+f_n(v)]$ está bien definida. Más aún, no depende de la elección de $h$ (pero sí de la de 
+las $g_i$!), y por lo tanto eligiendo un cubrimiento por abiertos trivializantes podemos
+definir $\phi$ como el pegado de todas las funciones así definidas. Notar además que $L
+= \phi^*\O(1)$ y $g_i = \pi_i \circ \phi$.
+
+
+
+\paragraph
+\about{Cohomología con coeficientes en un fibrado: Clase fundamental de una variedad, 
+dualidad de Serre y variedades subcanónicas}
+La categoría de haces sobre una variedad $X$ es una categoría abeliana con suficientes
+inyectivos. El funtor que a cada haz $\mathcal F$ le asigna sus secciones globales 
+$\mathcal F(X)$ es un funtor de haces en grupos abelianos, y es exacto a izquierda. Sus 
+funtores derivados a derecha son los grupos de cohomología a coeficientes en haces 
+$H^q(X, \mathcal F)$ con $q \geq 0$. 
+
+Si $\dim X = d$ y $\mathcal F$ proviene de un fibrado vectorial entonces $H^q(X, \mathcal
+F) = 0$ para $q > d$. Más aún, si $\omega_X = \bigwedge^d T^*X$ un teorema demostrado 
+por Serre afirma que existe un pairing
+\[
+	H^{q}(X, \mathcal F) \ot H^{d-q}(X, \omega_X \ot \F^*) \to H^d(X, \omega_X) \cong \CC
+\]
+La variedad $X \subset \PP(V)$ se dice \newterm{subcanónica} si $\omega_X \cong \O_X(-N)$
+para algún $N > 0$.
+
+\subsection{Fibrados vectoriales sobre OPM}
+En esta sección $G$ es un grupo de Lie, $B$ un subgrupo de Borel, $P$ un grupo parabólico y $\g, \b, \p$ sus respectivas álgebras de Lie, con álgebra de Cartan $\h$.
+
+A cada peso dominante $\lambda = \sum_i n_i \varpi_i$ le asignamos la subálgebra de Lie
+\[
+	\p = \b \oplus \bigoplus_{\alpha \in \Delta^+ \cap \lambda^\perp} \g_{-\alpha}
+\]
+que como vimos estabiliza a $\gen{v_\lambda} \subset V(\lambda)$.
+La suma directa es sobre las raíces que son sumas de raíces simples $\alpha_i$ tales que 
+$n_i = (\lambda, \alpha_i) = 0$; como este conjunto depende solamente de $\p$ y no de 
+$\lambda$ lo notamos $\Delta_\p$. Como $\b \subset \p$ tenemos que $\p$ es el álgebra de
+Lie de un subrgrupo parabólico $P$. Notamos además
+\[
+	\Lambda^\wt_\p = \{\mu \in \Lambda^\wt : (\mu, \alpha) = 0 \mbox{ para toda } \alpha
+	\in \Delta_\p\}.
+\]
+Observar que los pesos $\mu \in \Lambda^\wt_\p$ son exactamente los que tienen a $\p$
+como álgebra de Lie asociada. 
+
+\begin{Example}
+\label{g24}
+Sea $\g = \mathfrak{sl}_4(\CC)$, con $\h = \langle E_{i,i}- E_{i+1,i+1} \mid 1 \leq i
+\leq 3\rangle$. Elegimos como raíces positivas las que corresponden a matrices
+triangulares superiores, y en ese caso las raíces simples son
+\begin{align*}
+	\alpha &= (2,-1,0) & \beta &= (-1,2,-1) & \gamma &= (0,-1,2),
+\end{align*}
+y los pesos fundamentales son $\varpi_i = e_i$.
+
+Tomemos la representación $\bigwedge^2 \CC^4$, cuyo peso es $\varpi_2$. El estabilizador
+del vector de peso máximo es
+\[
+	\p = \left\{\begin{pmatrix} * & * & * &* \\ *&*&*&*\\ 0 & 0 &*&*
+\\0&0&*&*\end{pmatrix}\right\} = \b \oplus \g_{-\alpha} \oplus \g_{-\gamma}
+	\]
+\end{Example}
+donde $\beta = (-2,1,0) = - \alpha_1$ y $\gamma = (0,1,-2) = - \alpha_3$, y
+$\Lambda_\p^\wt = \ZZ \varpi_2$.
+
+El correspondiente cociente $G/P$ corresponde a la grassmanniana $(2,4)$. En general,
+sobre $\sl_n$ las OPM's que corresponden a pesos fundamentales son grassmannianas.
+
+\begin{Example}
+Sigamos con $\g = \sl_4(\CC)$, pero tomemos el peso $\lambda = \varpi_1 + \varpi_2 +
+\varpi_3$. En ese caso $\p = \b$, $\Lambda^\wt_\p = \Lambda^\wt$, y la variedad
+correspondiente $G/B$ es la variedad de banderas completas. Más en general, los cocientes
+de $\sl_n(\CC)$ corresponden siempre a variedades de banderas parciales.
+\end{Example}
+
+\paragraph
+\about{Fibrados vectoriales inducidos por pesos}
+Sea $\mu \in \Lambda^\wt_\p$. Entonces $\p$ tiene una representación holomorfa 
+unidimensional $[\mu] = \gen{w}$, donde $h w = \mu(h)$ y $\g_\alpha w = 0$ para todo 
+$\alpha \in \Phi^+ \cup \Delta_\p$. Esta representación se puede integrar a una 
+representación del grupo $P \subset G$.
+
+A partir de $[\mu]$ construimos un fibrado de linea sobre $G/P$, al que notamos $L(\mu)$.
+Por definición
+\begin{align*}
+L(\mu) &= G \times_P [\mu] = \{(g,v) \in G \times [\mu]\}/\sim
+\end{align*}
+donde $(g,v) \sim (g',v')$ si y solo si existe $p \in P$ tal que $gp = g', p^{-1}v = 
+v'$. La función $\pi: L(\mu) \to G/P$ está bien definida y es un fibrado de linea holomorfo. 
+
+\begin{Example}
+Sigamos con $\sl_4(\CC)$ y $\lambda = \varpi_2$. La representación $[\varpi_2]$ de $\p$ se
+integra a una representación de $P$, donde para cada $M = \begin{pmatrix} A & B \\ 0 &
+C\end{pmatrix} \in P$ tenemos $M (e_1 \wedge e_2) = (\det A) (e_1 \wedge e_2)$.
+Por otro lado $G/P$ se identifica con la grassmanniana $(2,4)$ de la siguiente manera:
+si $A \in G$ es la matriz $A = (c_1|c_2|c_3|c_4)$ entonces $A \mapsto \langle c_1,
+c_2\rangle$; claramente el estabilizador de $\id$ es $P$. La fibra arriba de un punto
+$V \in G(2,4)$ es $V \times \CC (e_1 \wedge e_2)$. 
+
+Veamos la inmersión asociada a $\pi_2$. Primero recordamos que la representación se
+integra a una acción de $\SL_4(\CC)$, dada por $M e_1 \wedge e_2 = \sum_{i<j}
+|M^{i,j}_{1,2}| e_i \wedge e_j$, luego tomando las coordenadas homogéneas dadas por la
+base $\{e_1 \wedge e_2, e_1 \wedge e_3, e_1\wedge e_4, e_2 \wedge e_3, e_2 \wedge e_4, e_3
+\wedge e_4\}$, el morfismo $\phi: \SL_4(\CC) \to \PP(V(\varpi_2))$ está dado por 
+$M \mapsto [|M_{1,2}^{1,2}| : \cdots : |M^{1,3}_{1,2}|]$, donde $M^{i,j}_{k,l}$ es el
+menor formado por las filas $i,j$ y las columnas $k,l$. 
+
+Calculemos $\phi^* \O(1)$. Para hacerlo observamos que existe un morfismo $f: \SL_4(\CC)
+\times \langle e_1 \wedge e_2\rangle \to \O(1)$ dado por $M \times \lambda(e_1 \wedge e_2)
+\mapsto M \times \lambda M(e_1 \wedge e_2)$ tal que conmuta el diagrama de flechas sólidas
+\begin{align*}
+	\xymatrix{
+		SL_4(\CC) \times \langle e_1 \wedge e_2\rangle
+		\ar@/^18pt/[rrd]^-f \ar[dd] \ar@{-->}[dr]^\pi & {} &{}\\
+	{} & \phi^*\O(1) \ar[r] \ar[d] & \O(1) \ar[d]\\
+		\SL_4(\CC) \ar[r] & \SL_4(\CC)/P \ar[r]& \PP(\varpi_2)
+	}
+\end{align*}
+y por propiedad universal del pull-back existe un morfismo $\pi$ punteado. Más aún, $f$ es
+biyectiva en las fibras, con lo cual $\pi$ también lo es. El resultado final es que $\pi$
+es biyectiva en las fibras, simplemente identifica la fibra sobre $g \in SL_4(\CC)$ con la
+fibra sobre $gp \in gP$, de forma que $gp \times \lambda e_1 \wedge e_2$ se identifica con
+$g \times p \cdot e_1 \wedge e_2$. En definitiva, $\phi^* \O(1) \cong L(\varpi_2)$.
+
+En general, si $\phi_\lambda: G/P \to \PP(V(\lambda))$, entonces
+$\phi^*\O_{\PP(V(\lambda))} \cong L(\lambda)$.
+\end{Example}
+
+\paragraph
+El fibrado tangente $T G/P$ es trivial con fibra $\g/\p = \bigoplus_{\Phi^+ \setminus
+\Delta_\p} \g_{-\alpha}$, con lo cual $\omega_X^*$ es un fibrado de linea asociado al peso
+$\sum_{\alpha \in \Phi^+ \setminus \Delta_\p} \alpha = 2(\rho - \rho_\p)$, es decir
+$L(2(\rho- \rho_\p))$. Por otro lado si $G/P \hookrightarrow \PP(V(\lambda))$ entonces
+$\O_X = L(\lambda)$, con lo cual $G/P$ es subcanónica como subvariedad de
+$\PP(V(\lambda))$ si y solo si $2(\rho - \rho_\p) = N\lambda$ para algún $N$.
+
+Por ejemplo en el caso de $\p = \p(\varpi_2)$ sobre $\sl_4(\CC)$ tenemos 
+\begin{align*}
+	2(\rho - \rho_\p) = (-1,2,-1) + (1,1,-1) + (-1,1,1) + (1,0,1) = (0,4,0)
+\end{align*}
+con lo cual las únicas inmersiones subcanónicas corresponden a $\varpi_2$ y $4\varpi_2$.
+
+\paragraph
+\about{El teorema de Borel-Weil-Bott}
+El teorema de Borel-Weil-Bott nos dice los valores de los grupos de cohomología 
+$H^\bullet(G/P, L(\lambda))$ para $\lambda \in \Lambda^\wt$. La primera observación es 
+que dado $\lambda \in \Lambda^\wt$ existen exactamente dos posibilidades: o existe $w 
+\in W$ tal que $w * \lambda = w(\lambda + \rho) - \rho$ es un peso dominante, en cuyo caso $w$ es único, o $w * \lambda$ nunca es dominante. 
+\begin{itemize}
+\item Si $w * \lambda$ nunca es dominante, entonces $H^i(G/P, L(-\lambda)) = 0$ 
+	para todo $i \geq 0$.
+\item Si $w * \lambda$ es dominante, entonces $H^{\ell(w)}(G/P, L(-\lambda)) \cong 
+	V(w * \lambda)^*$, y el resto de los grupos de cohomología son nulos.
+\end{itemize}
+El peso $w(\lambda + \rho) - \rho$ es dominante si y solo si $w(\lambda - \rho)$ está en 
+el interior de la cámara de Weyl de los pesos dominantes. Ahora esto es posible si y solo
+si $\lambda - \rho$ está en el interior de una cámara de Weyl, y $w$ queda unívocamente 
+determinado como el elemento de $W$ que manda esa cámara en la cámara de pesos dominates.
+
+\begin{Proposition}
+Sea $X = G/P$ una órbita de peso máximo subcanónica, con $\omega_X = \O_X(-N)$. Entonces 
+\begin{align*}
+H^q(X, \O_X(m)) &\cong 
+\begin{cases}
+L(m\lambda)^* & \mbox{ si } q = 0, m \geq 0 \\
+L((m+N)\lambda) & \mbox{ si } q = \dim X, m \leq -N \\
+0 & \mbox{en cualquier otro caso.}
+\end{cases}
+\end{align*}
+\end{Proposition}
+\begin{proof}
+Como vimos más arriba $\O_X(-1) \cong L(\lambda)$, y tomando duales tenemos $\O_X(1) 
+\cong L(-\lambda)$. En general, $\O_X(m) \cong L(-m\lambda)$. En particular, BWB 
+garantiza que para cada $m \in \ZZ$ a lo sumo un grupo de cohomología $H^q(X, \O_X(m))$ 
+es no nulo.
+
+Si $m \geq 0$ entonces $m\lambda$ es dominante, y tomando $w = e$ en el teorema de 
+Borel-Weil-Bott obtenemos
+\[
+H^q(X, \O_X(m)) \cong H^q(X, L(-m\lambda)) \cong
+\begin{cases}
+V(m\lambda)^* & \mbox{ si } q = 0; \\
+0 & \mbox{ si } q >0.
+\end{cases}
+\]
+Por otro lado, utilizando la dualidad de Serre
+\begin{align*}
+H^q(X, \O_X(m)) 
+	&\cong H^{d-q}(X, \O_X(-N) \ot \O_X(m)^*)^* 
+	\cong H^{d-q}(X, \O_X(-m-N))^* 
+\end{align*}
+de donde deducimos que $H^d(X, \O_X(m)) \cong V((-m-N)\lambda)$ si $m \leq -N$.
+
+Nos falta verificar los casos $m = -1, \ldots, -N+1$. Una forma es sabiendo que $H^0(X, 
+\O_X(m)) = 0$ siempre que $m < 0$, resultado que vale para cualquier variedad proyectiva.
+Otra opción es notar que, dado que $H^d(X, \O_X(-N)) \cong \CC$, debemos tener $w * 
+(-N\lambda) = w(-N \lambda + \rho) - \rho = 0$, por lo tanto $w(-N \lambda + \rho) = 
+\rho$. En particular $||-N \lambda + \rho|| = ||\rho||$, y este es el menor largo que 
+puede tener un peso en el interior de una cámara de Weil. Todos los pesos $\rho - 
+k\lambda$ con $k = 1, 2, \ldots, N-1$ tienen menor norma, y por lo tanto todos 
+pertenecen al borde de alguna cámara de Weyl, en particular $H^q(X, \O_X(k \lambda)) = 
+0$ para $k = 1 \ldots, N-1$ por BWB.
+\end{proof}
+
+\section{El álgebra de syzygias de una variedad subcanónica}
+Una subvariedad $X \subset \PP(V)$ se dice \newterm{\buena} si es suave, subcanónica y
+tiene siguiente propiedad: si existen $n,d \in \ZZ, d \geq 0$ tales que $H^d(X, 
+\O_X(n))$, entonces $d \in \{0, \dim X\}$. Por lo visto en la sección anterior, toda 
+variedad de bandera subcanónica es \buena.
+
+\paragraph
+\about{Álgebra coordenada de una variedad proyectiva}
+Sea $X \subset \PP(V)$ una variedad proyectiva, y notemos $S = S(V^*)$. Si $J \subset S$ 
+es el ideal de polinomios que se anulan en $X$ entonces $A = S/J$ es el álgebra de 
+funciones coordenadas de $X$. Como $X$ es un  $S$-módulo graduado y esta es un álgebra 
+graduada conexa, $A$ tiene una resolución minimal
+\[
+	0 \to F^{\dim V} \to \cdots \to F^1 \to F^0 \to A \to 0
+\]
+donde cada $F^p = \bigoplus_{q \in \ZZ} R_{p,q} \ot_\CC S[-q]$ con $R_{p,q}$ un espacio 
+de dimensión finita, trivial para todo $p > n$ y para casi todo $q$.
+
+La hipótesis de minimalidad implica que las matrices de los diferenciales tienen 
+entradas de grado mayor o igual a $1$, en particular al tensorizar con $\CC$ obtenemos
+un complejo con diferenciales nulos, de donde se deduce que $R_{p,q} \cong \Tor^A_p(\CC,
+A)_q$. En particular las dimensiones de $R_{p, q}$ no dependen de la elección de la 
+resolución minimal.
+
+Estos espacios se pueden calcular de otra forma. Tomamos la resolución de Koszul para el 
+$S$-módulo trivial $\CC$ y tensorizamos con $A$, obteniendo
+\[
+	0 \to \Lambda^{n+1} V^* \ot A[n-1] \to \cdots \to \Lambda^2 V^* \ot A[-2] \to V \ot A[-1] \to A \to 0.
+\]
+El espacio total $\bigoplus_{i = 0}^n \Lambda^i V \ot A[-i]$ es una dg-álgebra, cuya 
+multiplicación está dada por $(\eta \ot a) \cdot (\nu \ot b) = (-1)^{|a||\nu|}\eta 
+\wedge \nu \ot ab$. Tomando en cuenta la regla de signos, la diferencial es una 
+derivación para este producto. Esto implica que la cohomología de esta álgebra, que es
+naturalmente isomorfa a $R = \bigoplus_{p,q \in \ZZ} R_{p,q}$, tiene la estructura de un 
+álgebra. Nuestro próximo objetivo es ver que en el caso en que $A$ es \buena, esta 
+álgebra es \emph{Frobenius}, es decir tiene una forma lineal asociativa no degenerada.
+
+\paragraph
+\about{El bicomplejo de Euler-Dolbeault}
+Sea $p \in \PP(V)$. El espacio tangente $T_p\PP(V)$ puede describirse como el conjunto
+de todos los vectores en $V$ perpendiculares a $p$, es decir $T_p\PP(V) \cong V / p$. 
+Podemos describir el fibrado tangente de manera global de la forma siguiente: si $v_1, 
+\ldots, v_{n+1}$ es una base de $V$, entonces $\{\frac{\partial }{\partial v_i} \mid 1 
+\leq i \leq n+1\}$ generan el tangente en cada punto $p = [p_1: \ldots:p_{n+1}]$, con 
+una única relación dada por $\sum_i p_i \frac{\partial}{\partial v_i}$. Recordemos que 
+el haz $\O_\PP(1)$ corresponde al fibrado de linea que en cada punto $p \in \PP$ tiene
+al espacio dual $p^*$; en particular, si $\delta^i$ es la base dual de $v_i$, podemos 
+restringirlas de forma que $\delta^i|_p \in \O_X(1)_p$. Tenemos una sucesión exacta de 
+fibrados vectoriales
+\[
+	0 \to \CC \stackrel{1 \mapsto \sum_i v_i \ot \delta^i}{\longrightarrow} 
+	V \ot \O_\PP(1) \to T \to 0
+\]
+donde $T$ es el fibrado tangente, $\CC$ representa el fibrado trivial y la última 
+función viene dada en el abierto trivializante $U_k$ por $v_j \ot \delta^i \mapsto 
+\delta^i(\overline p)\frac{\partial}{\partial v_j}|_p$, donde $\overline p_k = 1$ y 
+$[\overline p] = p$.
+
+La $m$-ésima potencia exterior del complejo tangente puede describirse de manera 
+similar
+\[
+	0 \to \Lambda^{m-1} T \to \Lambda^m V \ot \O_\PP(m) \to \Lambda^m T \to 0,
+\]
+donde en este caso $\frac{\partial}{\partial v_I} \mapsto \sum_i 
+\frac{\partial}{\partial v_{I \cup \{i\}}} \ot x^{I \cup \{i\}}$. Con esta sucesión de 
+complejos podemos armar un complejo exacto de fibrados sobre $\PP(V)$
+\begin{align*}
+\xymatrix{
+0 \ar[r]
+	& \CC \ar[r] 
+	& V \ot \O_\PP(1) \ar[r] 
+	& \Lambda^2 V \ot \O_\PP(2) \ar[r] 
+	& \cdots \\
+{} 
+	&\cdots \ar[r]
+	& \Lambda^{n} V \ot \O_\PP(n) \ar[r]
+	& \Lambda^{n+1} V \ot \O_\PP(n+1) \ar[r]
+	& 0
+}
+\end{align*}
+Al ser $i: X \to \PP(V)$ la inclusión de una variedad regular, el pull-back de fibrados
+es un funtor exacto, con lo cual tenemos un complejo exacto de fibrados sobre $X$
+\begin{align*}
+\xymatrix{
+C(0):
+	& 0 \ar[r]
+	& \CC \ar[r] 
+	& V \ot \O_X(1) \ar[r] 
+	& \Lambda^2 V \ot \O_X(2) \ar[r] 
+	& \cdots \\
+	& {} 
+	&\cdots \ar[r]
+	& \Lambda^{n} V \ot \O_X(n) \ar[r]
+	& \Lambda^{n+1} V \ot \O_X(n+1) \ar[r]
+	& 0
+}
+\end{align*}
+Para cada $k \in \ZZ$ ponemos $C(k) = C(0) \ot \O_X(n)$. Si tomamos $\CC \to \Omega^q_X$ 
+una resolución acíclica del fibrado trivial $\CC$ sobre $X$, obtenemos un complejo doble 
+$E^{p,q}(k):$
+\begin{align*}
+\xymatrix{
+{}
+	& \vdots
+	& \vdots
+	& {} \\
+\cdots \ar[r]
+	& \Lambda^p V^* \ot \Omega_X^{q+1}(k-p) \ar[r] \ar[u]
+	& \Lambda^{p-1} V^* \ot \Omega_X^{q+1}(k-p+1) \ar[r] \ar[u] 
+	& \cdots \\
+\cdots \ar[r]
+	& \Lambda^p V^* \ot \Omega_X^{q}(k-p) \ar[r] \ar[u]
+	& \Lambda^{p-1} V^* \ot \Omega_X^{q}(k-p+1) \ar[r] \ar[u] 
+	& \cdots\\
+{}
+	& \vdots \ar[u]
+	& \vdots \ar[u]
+	& {} \\
+}
+\end{align*}
+\end{document}

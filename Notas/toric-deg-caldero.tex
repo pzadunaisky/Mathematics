@@ -1,0 +1,456 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% esto tiene que estar, en este orden...
+\usepackage[small]{titlesec}
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8,latin1]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumerate}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+%\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+
+%\swapnumbers
+
+
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Propositionn, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Theorem, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corollary, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definition, sibling=para, style=mystyle]{Definition}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\newcommand\KK{\mathbb K}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\stack[2]{\genfrac{}{}{0pt}{2}{#1}{#2}}
+\newcommand\uu[1]{\underline{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\A{\mathcal A}
+\newcommand\B{\mathcal B}
+\renewcommand\L{\mathcal L}
+\newcommand\M{\mathcal M}
+\newcommand\F{\mathcal F}
+\renewcommand\O{\mathcal O}
+\newcommand\GG{\Gamma}
+\renewcommand\b{\mathfrak{b}}
+\newcommand\g{\mathfrak{g}}
+\newcommand\h{\mathfrak h}
+\newcommand\kk{k}
+\newcommand\n{\mathfrak{n}}
+\newcommand\opp{\mathsf{opp}}
+\DeclareMathOperator\Id{\mathsf{Id}}
+\DeclareMathOperator\st{\mathsf{st}}
+
+\newcommand\C{\mathcal C}
+\newcommand\K{\mathsf K}
+\newcommand\D{\mathsf D}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+
+\DeclareMathOperator\GrMod{\mathsf{GrMod}}
+\DeclareMathOperator\GrHom{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\GrExt{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\GrTor{\underline{\mathsf{Tor}}}
+
+\DeclareMathOperator\Ab{\mathsf{Ab}}
+\DeclareMathOperator\ShHom{\mathcal Hom}
+\DeclareMathOperator\ShExt{\mathcal Ext}
+\DeclareMathOperator\ShTor{\mathcal Tor}
+
+\DeclareMathOperator\pd{pd}
+\DeclareMathOperator\id{id}
+\DeclareMathOperator\depth{depth}
+\DeclareMathOperator\Spec{Spec}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\ann{ann}
+\DeclareMathOperator\im{Im}
+\DeclareMathOperator\gr{gr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{Toric Degenerations of Schubert Varieties [P. Caldero]}
+\author{[toric-deg-caldero.tex]}
+\date{16/8/12}
+\begin{document}
+\maketitle
+\section{General definitions}
+\paragraph \textbf{Notation}
+We work over the field $\kk = \QQ(q)$, all unadorned tensor products will be over this
+field. We denote by $\A^0$ the localization of $\QQ[q]$ at the maximal ideal of functions 
+which have a root at zero. We identify $\QQ = \A^0/q\A^0$
+
+\paragraph  
+Let $\g$ denote a finite dimensional complex simple Lie algebra with $\h \subset \g$ its
+Cartan subalgebra. Denote by $\varpi_1, \ldots, \varpi_n \in \h^*$ its fundamental weights, 
+and let $P = \ZZ \varpi_1 + \ldots + \ZZ \varpi_n \subset \h^*$ be the weight lattie. Its
+finite dimensional representations are parametrized by the \emph{dominant weights}, $P^+ = 
+\NN \varpi_1 + \ldots + \NN \varpi_n$. Let $\alpha_1, \ldots, \alpha_n$ denote the roots of
+$\g$, $\Pi$ be a basis of the root system with $n = |\Pi|$, $W$ its Weyl group and $(-,-)$ 
+the $W$-invariant form over $P$. We denote by $Q \subset P$ the lattice generated by the
+roots, and $Q^+ = Q \cap P^+$.
+
+\paragraph 
+We denote by $U_q = U_q(\g)$ the quantum envelopping algebra of $\g$ over $\QQ(q)$. 
+$U_q$ is the algebra with generators $E_i, F_i, K_\mu$ for $i = 1, \ldots, n, \mu
+\in Q$ and relations
+\begin{align*}
+	K_\lambda K_\mu &= K_{\lambda + \mu} \\
+	K_i E_j K_i^{-1} &= q^{(\alpha_i, \alpha_j)} E_j
+	& K_i F_j K_i^{-1} &= q^{-(\alpha_i, \alpha_j)} F_j \\
+	[E_i, F_j] &= \delta_{ij} \frac{K_i - K_i^{-1}}{q_i-q_i^{-1}} 
+	&\mbox{Quantum Serre Relations} 
+\end{align*}
+where $q_i = q^{(\alpha_i,\alpha_i)/2}$. For $X_i = F_i, E_i \in U_q(\g)$, we define the 
+divided powers as
+$$ X_i^{(r)} = \frac{1}{[r]_{q_i}!} X_i^r $$
+
+\paragraph
+$U_q$ is a Hopf algebra with comultiplication $\Delta$, antpode $S$ and counit
+$\varepsilon$ defined by
+\begin{align*}
+	\Delta(E_i) &= E_i \ot K_i^{-1} + E \ot 1
+&	\Delta(F_i) &= F_i \ot 1 + K_i \ot F_i 
+&	\Delta(K_i) &= K_i \ot K_i \\
+	S(E_i) &= -E_iK_i & S(F_i) &= -K_i^{-1}F_i & S(K_i) &= K_i^{-1} \\
+	\varepsilon(E_i) &= 0 & \varepsilon(F_i) &= 0 & \varepsilon(K_i) &= 1 \\
+\end{align*}
+We use Sweedler's notation, so for any element $a \in U_q$, we write $\Delta(a) = \sum a_1
+\ot a_2$.
+
+\paragraph
+We denote $U_q(\b)$ the algebra generated by all $E_i, K_i^{\pm 1}$, and by $U_q(\n)$ the
+algebra generated only by the $E_i$. The same definitions apply changing $E$ by $F$ for
+$U_q(\b^-), U_q(\n^-)$.
+
+\paragraph 
+Given $\lambda \in P^+$, we denote by $V_q(\lambda)$ the finite dimensional representation
+of $U_q(\g)$ of highest weight $\lambda$. We fix a highest weight vector and denote it
+$v_\lambda$. It is clear that $V_q(\lambda) = U_q(\n^-) v_\lambda$. 
+
+Given an element $w \in W$, we denote by $v_{w\lambda}$ the image of $v_\lambda$ by the 
+Lusztig operator $T_w$. This simpliy fixes an element in the one dimensional component of 
+weight $w \cdot \lambda$ of $V_q(\lambda)$, where $\cdot$ is the action of the Weyl group 
+on the weight lattice. The module $V_q(\lambda)_w := U_q(\b)v_{w\lambda}$ is called a 
+Demazure module. 
+
+\paragraph
+We denote by $U_i$ the sub-Hopf-algebra of $U_q$ generated by $E_i, F_i, K_i^{\pm 1}$.
+
+\paragraph
+Since $U_q(\g)$ is a Hopf algebra, its vector space dual $U_q(\g)^*$ is an algebra, with
+multiplication given by $\phi \cdot \psi (a) = \sum \phi(a_1) \psi(a_2)$. 
+
+\section{Global and crystal bases}
+\paragraph
+Denote by $\B \subset U_q(\n^-)$ the canonical (or global) basis as defined in \cite{J}*{chapter 11}.
+This is a basis of the $\ZZ[q,q^{-1}]$-form of $U_q(\n^-)$, the $\ZZ[q,q^{-1}]$ algebra
+generated by $K_\mu$ and the divided powers $F_i^{(m)}$ for all $\mu \in Q$, $m \in \NN$.
+From this one deduced immediately that for $b,b' \in \B$, $bb' \in \ZZ[q,q^{-1}]\B$. By
+construction, $b \in \B$ if and only if $\overline b \in \B$, where $\overline -$ is the
+antiautomorphism of $U_q$ which fixes the $E_i, F_i$ and sends $K_\lambda$ to
+$K_{-\lambda}$.
+
+\paragraph
+Once again by construction, there are operators $\tilde E_i, \tilde F_i: U_q(\n^-) \to
+U_q(\n^-)$ such that for all $b \in \B$, there is a $b' \in \B \cup \{0\}$ with $\tilde
+E_i(b) \equiv b' \mod q^{-1}$. The assignation $b \mapsto b'$ is denoted by $e_i: \B \to
+\B \cup \{0\}$. Put $\varepsilon_i(b) = \max \{k|e_i^k(b)\neq 0\}$
+
+\begin{Theorem*}
+\label{global-crystal}
+	Let $\lambda \in P^+$, $\lambda = \sum_i \lambda_i \varpi_i$. Set
+$$ \B_\lambda = \{b \in \B|\varepsilon_i(\overline b) \leq \lambda_i\}$$
+Then the map $b \in \B_\lambda \mapsto b v_\lambda$ is bijective and its image is a basis
+of $V_q(\lambda)$.
+\end{Theorem*}
+This is \cite{J}*{11.16 Theorem}, where $\B_\lambda$ is not given explicitly. This is
+given without proof in \cite{K}*{Proposition 8.2}.
+
+\paragraph
+\textbf{String parametrization of the Cannonical basis:}
+\label{string}
+Fix a reduced decompostion of the longest word of the Weyl group, say $w_0 = s_{i_1} \ldots 
+s_{i_N}$. Associated to any such decomposition there is a parametriation of the cannonical
+basis by elements of $\NN^N$, which we now present.
+
+Let $\Lambda_i(b) = \tilde e_i^{\varepsilon_i(b)}(b)$. Assign to each $b \in \B$ the
+sequence of numbers 
+$$A_{\tilde w_0} (b) = (\varepsilon_{i_N}(b),\varepsilon_{i_{N-1}}(\Lambda_{N}(b))
+,\ldots, \varepsilon_{i_1}(\Lambda_{i_2} \ldots \Lambda_{i_N}(b))) \in \NN^N $$
+The image of this parametrization is denoted by $\C_{\tilde w_0} \subset \NN^N$. It is the 
+set of integral points of a finitely generated rational cone. For each $\psi \in \C$, we
+write $b^\psi = A_{\tilde w_0}^{-1}(\psi)$.
+
+This results are found in \cite{Lit}
+
+\paragraph
+Consider the bilinear form $(-,-): U_q(\n) \times U_q(\n^-) \to \kk$. Since it is
+non-degenerate, for every $b \in B$ there is a unique element $b^* \in U_q(\n)$ such that 
+$(b^*,b') = \delta_{bb'}$. The set $\B^*$ of all such elements is a basis of $U_q(\n)$,
+called the \emph{dual canonical basis}. It is proven in \cite{L}*{14.4.13} that this basis
+shares many traits with $\B$, for examble $b^* b'^* \in \ZZ[q,q^{-1}]\B^*$
+
+
+\section{Matrix coefficients and quantum flag varieties}
+\paragraph Let $V$ be a finite dimensional representation of $U_q$. There is an injective
+morphism $i: V^* \ot V \to U_q(\g)^*$, such that for any $\xi \in V^*, v \in V, a \in U_q$,
+$i(\xi \ot v) (a) = \xi (av)$. The image of $i$ is called the set of matrix coefficients
+of $V$. It is standard to denote the matrix coefficient corresponding to $v \in
+V_q(\lambda), \xi \in V_q(\lambda)^*$ by $c^\lambda_{\xi,v}$.
+
+\begin{Lemma}
+Any matrix coefficient is a linear combination of matrix coefficients of irreducible
+representations. Furthermore, the $k$-span of said matrix coefficients forms a subalgebra
+of $U_q(\g)^*$.
+\end{Lemma}
+We denote this algebra by $\O_q[G]$.
+
+\begin{proof}
+Let $c$ be a matrix coefficient, corresponding to $v \in V, \xi \in V^*$. We may decompose
+$V = \bigoplus_{i = 1}^r V_q(\lambda_i)$, $v = \sum v_i, \xi = \sum \xi_i$. It is
+immediate to check that $c = \sum_i c^{\lambda_i}_{\xi_i,v_i}$. 
+
+Take $c^\lambda_{v,\xi}$ and $c^\mu_{w,\xi}$. By definition their product is given by
+convolution, that is, 
+$$c^\lambda_{v,\xi} \cdot c^\mu_{w, \chi} (a) = \sum c^\lambda_{v,\xi}(a_1) 
+c^\mu_{w,\chi}(a_2) = \xi(a_1 v) \chi(a_2 w) = i(\chi \ot \xi, v \ot w)$$
+which is again a matrix coefficient.
+\end{proof}
+
+\paragraph 
+Let $C^+(\lambda)$ be the set of matrix coefficients of the form
+$c^\lambda_{\xi,v_{\lambda}}$. We put $\O_q[G/U] := \sum_{\lambda \in P^+} C^+(\lambda)$
+
+\begin{Lemma*}
+$\O_q[G/U]$ is a $P^+$-graded algebra.
+\end{Lemma*}
+\begin{proof}
+	$U_q(\g)^*$ has a natural left $U_q$-module structure, which restricts to
+$C^+(\lambda)$, and the assignation $\xi \mapsto c^\lambda_{\xi,v_\lambda}$ is an
+isomorphism. Hence $C^+(\lambda)$ is an irreducible $U_q$-module. Given a total order of
+$P^+$, there is no highest weight vector of weight $\lambda$ in $\bigoplus_{\mu < \lambda} 
+C^+(\mu)$, hence $C^+(\lambda)$ does not intersect this sum. This proves that the sum is
+direct.
+
+Now given $c_\xi \in C^+(\lambda), c_\chi \in C^+(\mu)$, we have that 
+$c_\xi c_\chi = i(\xi \ot \chi,v_\lambda \ot v_\mu)$. Let $V' = U_q(\g) v_\lambda \ot
+v_\mu$, then $i(\xi \ot \chi,v_\lambda \ot v_\mu) = i(\xi \ot \chi|_{V'}, v_\lambda \ot
+v_\mu)$. It is easy to check that $v_\lambda \ot v_\mu$ is a highest weight vector of
+weight $\lambda + \mu$, so $V' \cong V_q(\lambda + \mu)$. Through this isomorphism, we
+have $c_\xi c_\chi = c^{\lambda + \mu}_{\xi \ot \chi|_{V'}, v_\lambda \ot v_\mu} \in
+C^+(\lambda + \mu)$.
+\end{proof}
+
+From this lemma we deduce that given $I \subset \{\varpi_1, \ldots, \varpi_n\}$ and
+setting $\mathcal J = \sum_{i \notin I} \NN \varpi_i$, we have an associated $P^+$-graded
+subalgebra of $\O_q[G/U]$, 
+$$\O_q[G/P_I]:= \bigoplus_{\lambda \in \mathcal J} C^+(\lambda)$$
+which is the \emph{quantum flag variety associated to $I$}.
+
+\begin{Lemma}
+Let $\rho: U_q(\g)^* \to U_q(\b^-)^*$ be the restriction morphism. Then $\rho$ is
+injective over $\O_q[G/U]$, and hence over $\O_q[G/P_I]$.
+\end{Lemma}
+\begin{proof}
+	Let $c_i = c_{\xi_i,v_{\lambda_i}}^{\lambda_i}$, $c = c_1 + \ldots + c_n$ and 
+suppose that $\rho(c) = 0$. To see that $c = 0$, it is enough to prove it for all
+monomials of the form $F^I K_\mu E^J$. Now $c_i(F^I K_\mu E^J) = \xi_i(F^I K_\mu E^J
+v_\lambda)$. If $J \neq 0$, then $E^J v_\lambda = 0$ and hence $c (F^I K_\mu E^J) = \sum
+c_i(F^I K_\mu E^J) = 0$. On the other hand, if $J = 0$, $F^J K_\mu \in U_q(\b^-)$, and so
+$c(F^J K_\mu) = 0$ by hypothesis. Hence $c = 0$.
+\end{proof}
+
+\paragraph
+Fix $I$ a subset of the set of fundamental weights, and denote by $W_I \subset W$ the
+subgroup generated by reflections $s_{\alpha_i}$ with $i \in I$. Finally, for each class
+$W/W_I$ pick a representative of smallest length; the set of all this representatives is
+denoted by $W^I$.
+
+Fix $w \in W^I$, and let $V_q(\lambda)_w$ be the associated Demazure module. The space
+$$J_w^I = \bigoplus_{\lambda \in \mathcal J} \kk-\mathsf{span}\{c_\xi \in C^+(\lambda)|\xi 
+\in V_q(\lambda)_w^\perp \} \subset \O_q[G/P_I]$$
+is called the \emph{Schubert ideal} associated to $w$. It is a two-sided ideal because the 
+image of $v_\lambda \ot v_\mu$ by $w$ is $v_{w \lambda} \ot v_{w \mu}$, hence by the
+product formula, if either $\xi$ or $\chi$ are zero over their respective Demazure modules,
+then $c_\xi \cdot c_\chi$ will be zero over $V_q(\lambda + \mu)_w$. The quotient
+$\O_q[G/P_I]_w = \O_q[G/P_I]/J^I_w$ is called the quantum Schubert variety associated to
+$w$.
+
+\section{Caldero's Formula and semigroup dominated algebras}
+Following Caldero's style, we claim that the following reuslts can be found in the paper
+we are reviewing. 
+
+\begin{Theorem} 
+Fix a decomposition $\tilde w_0 = s_{i_1} \ldots s_{i_N}$ of the longest word of $W$.
+Let $\GG_{\tilde w_0} = \{(\lambda, \psi)|b_{\psi} \in \B_\lambda\} \subset P^+ \times
+\NN^N$. Then the set $b_\psi^* K_\lambda$ is a basis of $\rho(\O_q[G/U])$.
+\end{Theorem}
+As we have seen before, $\rho$ is injective over the quantum flag varieties, and so from
+this we get a basis of $\O_q[G/U]$ parametrized by the elements of $\GG_{\tilde w_0}$.
+For each $s \in \GG_{\tilde w_0}$, we denote by $b_s$ the corresponding element of the
+basis of $\O_q[G/U]$.
+
+\paragraph
+Since $P^+$ is an ordered semigroup isomorphic to $\NN^n$, $\GG_{\tilde w_0}$ can be seen
+as embedded in $\NN^{n+N}$. Caldero claims that it is also a rational cone, but I haven't
+checked this. His referece, as usual, is incomplete.
+
+\begin{Theorem*}
+Let $s,s' \in \GG_{\tilde w_0}$. Then we have
+\begin{align*} 
+\label{domination}
+\tag{$\dagger$}
+b_s b_{s'} &= \sum_{s'' < s + s'} d_{s,s'}^{s''} b_{s''} 
+& d_{s,s'}^{s''} \in \kk 
+\end{align*}
+Furthermore, $d_{s,s'}^{s+s'} = q^{?}$.
+\end{Theorem*}
+
+\paragraph
+Since for each $\tilde w_0$ we get a diferent parametrization, the previous formula is in
+fact several diferent ones. We say that $\tilde w_0$ is \emph{adapted} to $w \in W$ if
+there is a reduced decomposition of $w$ of the form $s_{i_1} \ldots s_{i_l}$, where $l =
+\ell(w)$. In that case, from \cite{Lit}*{section 1} we have that $A_{\tilde w_0}(\B_w) =
+\NN^l \times \NN^{N - l}$, so in particular, the basis of $\O_q[G/U]_w$ is parametrized
+by $P^+ \times \NN^l$.
+
+\paragraph
+Suppose $s = (\lambda, \psi)$. Then by definition $b^*_\psi \in (B_\lambda)^* \subset
+V_q(\lambda)^*$, so formula (\ref{domination}) also makes sense when restricted to
+$\O_q[G/P_I]$, and by the same reduction argument as before, to Schubert varieties
+$\O_q[G/P_I]_w$, only this time the parametrizing semigroup is $\mathcal J$. Therefore
+formula (\ref{domination}) makes sense when retricted to arbitrary Schubert varieties of
+arbitrary quantum flag varieties. In the next section we will prove, following Caldero's
+idea, that algebras with a basis satisfying a relation such as this always have a toric 
+degeneration.
+\end{document}
+\textbf{Dual Spaces and Bilinear Forms}
+\paragraph
+There exists a unique bilinear form $(-,-):U_q(\b) \times U_q(\b^-)\to \kk$ such that for
+all $u,u' \in U_q(\b), v,v' \in U_q(\b^-), \lambda, \mu \in P^+, i,j \in \{1, \ldots,
+n\}$.
+\begin{align*}
+	(u,vv') &= (u_1,v)(u_2,v') & (uu',v) &= (u',v_1)(u,v_2) \\
+	(K_\lambda,K_\mu) &= q^{(\lambda, \mu)} & (K_\lambda, F_i)&=0 \\
+	(K_\lambda, E_i) &= 0 & (E_i,F_j)&= \frac{\delta_{ij}}{1-q_i^2}.
+\end{align*}
+Fixing $\mu \in Q^+$, this form is non degenerate over $U_q(\b)_\mu \times
+U_q(\b^-)_{-\mu}$. See \cite{J}*{Proposition 6.12} for a proof (Jantzen proves this for a
+bilinear form on $U_q(\b^-) \times U_q(\b)$ with different values on the generators, but
+his proof can be adapted to the present case). We point out that $(1,-) = (-,1) =
+\varepsilon$, the counit of the algebra.
+
+For any dominant weight in the root lattice, $\lambda \in Q^+$, the restriction of $(-,-)$
+to $U_q(\b)_\mu \times U_q(\b^-)_{-\mu}$ is nondegenerate \cite{J}*{Proposition 6.18}.
+This is the first result in this notes that uses the fact that $\mathsf{char} \kk = 0$ and
+that $q$ is trascendental over $\QQ$. 
+
+\paragraph
+With this bilinear form, we may define
+\begin{align*} 
+	\langle-,-\rangle&: U_q \times U_q \to \kk(q^{1/2}) \\
+	\langle X_1 K_\lambda S(Y_1), Y_2 K_\mu S(X_2) \rangle &=
+(X_1,Y_2)(X_2,Y_1)q^{-(\lambda,\mu)/2}.
+\end{align*}
+where $X_i \in U_q(\b)$, $Y_i \in U_q(\b^-)$. This defines a nondegenerate bilinear form.
+See \cite{J}*{6.20} for the details.
+
+\begin{Lemma}
+	Let $\beta: U_q(\b) \to U_q(\b^-)^*, \beta(u)(v) = (u,v)$, and $\zeta: U_q(\g) \to
+U_q(\g)^*, \zeta(u)(v) = \langle u,v \rangle$. Then $\beta$ and $\zeta$ are injective, and
+$\beta$ is an anti-homomorphism of algebras.
+\end{Lemma}
+\begin{proof}
+Ijectivity is an immediate consequence of the fact that both bilinear forms are
+nondegenerate. Now given $u,u' \in U_q(\b)$, $\beta(uu')(v) = (uu',v) = (u',v_1)(u,v_2) =
+[\beta(u') \cdot \beta(u)](v)$
+\end{proof}
+
+\paragraph
+\label{bilinear-Lustig}
+There is an algebra isomorphism $f:U_q(\n) \to U_q(\n^-)$. The bilinear form induced by
+$$ U_q(\n) \times U_q(\n) \to U_q(\n)\times U_q(\n^-)\stackrel{(-,-)}{\to} \kk$$
+coincides with the bilinear form defined by Lusztig in his book.
+======================================
+\paragraph
+Let $L_i$ be the adjoint to the operator $u \mapsto F_i u$ for the bilinear form $(-,-)$. 
+Then $L_i(u) = (u_2,F_i)u_1$. This is a quantum
+derivation, and in fact for any homogeneous element of degree $\alpha \in Q$, $e_\alpha
+\in U_q(\n)$ we have $L_i(e_\alpha u) = L_i(e_\alpha) u + q^{(\alpha,\alpha_i)}e_\alpha
+L_i(u)$. Set $L_i^{(m)} = \frac{1}{[m]_{q_i}!}L_i^m$.
+\begin{Lemma*}
+We have the following equality $ \varepsilon_i(b) = \max\{m|L^{(m)}(b^*) \neq 0\}$.
+Furthermore, $L_i^{(\varepsilon_i(b))}(b^*) = (\tilde e_i^{(\varepsilon_i(b))}(b))^*$
+\end{Lemma*}
+
+
+
+

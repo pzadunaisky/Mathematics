@@ -1,0 +1,1926 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,fleqn]{article}
+
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumitem}
+\usepackage[osf,noBBpl]{mathpazo}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{helvet}
+\usepackage{stmaryrd}
+%\usepackage{showlabels}
+
+
+%%%%%%%%%%%%Theorems, for paragraphs package%%%%%%%%%%%%%%%%%%%%%%%%%%
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\normalfont]{mystyle-plain}
+\declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposition, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Theorem, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corollary, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definition, sibling=para, style=mystyle]{Definition}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty-plain}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+\declaretheorem[name=Remark, style=mystyle-empty]{Remark*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+
+\makeatletter
+\renewenvironment{proof}[1][\textit{Proof}]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\newcommand\note[1]{\marginpar{{
+\begin{flushleft}
+\tiny#1
+\end{flushleft}
+}}}
+
+\renewcommand\labelitemi{-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\stack[2]{\genfrac{}{}{0pt}{2}{#1}{#2}}
+\newcommand\vspan[1]{\left\langle #1 \right\rangle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\A{\mathcal A}
+\newcommand\B{\mathcal B}
+\newcommand\C{\mathcal C}
+\newcommand\D{\mathcal D}
+\newcommand\I{\mathcal I}
+\renewcommand\S{\mathcal S}
+\newcommand\K{\mathcal K}
+\newcommand\F{\mathcal F}
+\newcommand\G{\mathcal G}
+\newcommand\GG{\Gamma}
+\renewcommand\L{\mathcal L}
+\newcommand\M{\mathcal M}
+\renewcommand\O{\mathcal O}
+\newcommand\R{\mathcal R}
+\newcommand\tphi{\tilde \phi}
+\renewcommand\b{\mathbf b}
+\renewcommand\k{\Bbbk}
+\renewcommand\q{\mathbf{q}}
+\newcommand\m{\mathfrak m}
+\newcommand\n{\mathfrak n}
+\newcommand\g{\mathfrak g}
+\newcommand{\Rho}{\mathrm{P}}
+\newcommand\opp{\circ}
+\newcommand\norm{\mathsf{norm}}
+\newcommand\join{\vee}
+\newcommand\meet{\wedge}
+\newcommand\DC{\mathsf{DC}}
+\renewcommand\AA{\mathbb A}
+\newcommand\lex{\mathsf{lex}}
+
+\DeclareMathOperator\Sgrp{\mathsf{Sgrp}}
+\DeclareMathOperator\Grp{\mathsf{Grp}}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\mmod{\mathsf{mod}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+\DeclareMathOperator\GrHom{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\GrExt{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\GrTor{\underline{\mathsf{Tor}}}
+
+
+\DeclareMathOperator\gr{\mathsf{gr}}
+\DeclareMathOperator\im{Im}
+\DeclareMathOperator\id{injdim}
+\DeclareMathOperator\pd{pdim}
+\DeclareMathOperator\ldim{ldim}
+\DeclareMathOperator\height{\mathsf{ht}}
+\DeclareMathOperator\st{\mathsf{st}}
+\DeclareMathOperator\depth{depth}
+\DeclareMathOperator\lcd{lcd}
+\DeclareMathOperator\Spec{Spec}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\Id{Id}
+\DeclareMathOperator\rank{rk}
+\DeclareMathOperator\rk{rk}
+\DeclareMathOperator\irr{irr}
+\DeclareMathOperator\GKdim{\mathsf{GKdim}}
+\DeclareMathOperator\relint{\mathsf{relint}}
+\DeclareMathOperator\coker{\mathsf{coker}}
+\DeclareMathOperator\tr{\mathsf{tr}}
+\DeclareMathOperator\SL{\mathsf{SL}}
+\DeclareMathOperator\ev{\mathsf{ev}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Quantum toric degeneration of quantum Schubert varieties}
+\date{[lrpz3-bis.tex]}
+\author{Pablo Zadunaisky}
+
+\begin{document}
+\maketitle
+
+
+%\newpage 
+\section{Introduction}
+
+The article is organized as follows: section \ref{graded-connected-algebras} contains
+general material on connected $\NN_0^r$-graded algebras. We adapt some well-known 
+defintions for connected $\NN_0$-graded algebras to the $\NN_0^r$-graded context. The 
+regularity properties of $\NN_0^r$-graded algebras are defined in terms of its category 
+of $\ZZ^r$-graded modules, and since an algebra may posses several diferent gradings we 
+study how these properties change when the grading changes. In the last subsection we 
+prove our main transfer result: if a connected $\NN_0^r$-graded has a filtration by 
+finite dimensional graded subspaces then, under mild technical conditions, the original 
+algebra inherits the regularity properties of the associated graded ring, see Theorem 
+\ref{transfer}. The key result is Proposition \ref{P:ext-ss}, which is an $\NN_0^r$-
+graded version of the classical spectral sequence relating $\Ext$-spaces of a filtered 
+algebra with those of its associated graded algebra. However the finer grading forces us 
+to do some careful bookkeeping, and it turns out that property $\chi$, or rather its 
+$\NN_0^{r+1}$-graded analogue, plays a delicate role, see Corollary \ref{ldim}.
+
+In section \ref{qatv} we review the basic theory of affine semigroups and recall some 
+results from our previous article \cite{RZ2} on semigroup algebras twisted by a cocycle, 
+which are quantum analogues of affine toric varieties. Then we introduce a family of 
+algebras with a presentation modeled on that of an affine semigroup; this definition is 
+inspired in the classical definition of Hodge algebras and their descendants, namely 
+algebras with a straightening law and their quantum versions. We show that these 
+algebras have a natural filtration, and give  sufficient conditions for their associated 
+graded rings to be quantum affine toric varieties.
+
+Section \ref{q-flag-schubert} contains a quick review of the definitions of quantum flag
+varieties and their Schubert subvarieties. We then review Caldero's results on 
+cannonical bases for these varieties found in \cite{C}, use them to show that Schubert 
+varieties have quantum toric degenerations, and apply the results from the previous
+section to deduce some of their homological regularity properties in Theorem 
+\ref{Schubert-deg}. 
+
+We finish with a short section \ref{richardson}, where we revisit the results of our 
+previous article \cite{RZ} in the context of this article.
+
+
+
+
+
+%\newpage 
+\section{Degeneration of graded connected algebras}
+\label{graded-connected-algebras}
+Let $r$ be a positive integer. Throughout this article $A$ denotes a noetherian connected
+$\NN_0^{r}$-graded $\k$-algebra. Here connected means that the homogeneous component of 
+$A$ of degree $(0, \ldots, 0)$ is isomorphic to $\k$ as a ring, so the 
+ideal generated by all homogeneous elements of non-zero degree is the unique maximal 
+graded ideal of $A$; we denote this ideal by $\m$. Clearly $A/\m \cong \k$ as vector 
+spaces, and we will use this isomorphism to give $\k$ the structure of an $A$-bimodule.
+
+\subsection*{Graded modules}
+%\label{graded-connected-algebras}
+
+\paragraph
+\label{grmod-generalities}
+We denote by $\ZZ^{r}\Mod A$ the category of $\ZZ^{r}$-graded $A$-modules with 
+homogeneous morphisms of degree $0$. We review some general properties of this category; 
+the reader is referred to \cite{NV}*{chapter 2} for proofs and details.
+
+ The category 
+$\ZZ^r\Mod A$ has enough projectives and injectives, so we may speak of the graded 
+projective and injective dimensions of an object $M$, which we denote by $\pd_A^{\ZZ^r} 
+M$ and  $\id^{\ZZ^r}_A M$, respectively. We denote by $\ZZ^{r}\mmod A$ the subcategory 
+of finitely generated $\ZZ^{r}$-graded $A$-modules. Since $A$ is noetherian $\ZZ^r 
+\mmod A$ is an abelian category with enough projectives. 
+
+For every object $M$ of $\ZZ^{r}\Mod A$ and every $\xi \in \ZZ^{r}$ we denote by $M_\xi$ 
+the homogeneous component of $M$ of degree $\xi$. Also, we denote by $M[\xi]$ the object
+of $\ZZ^{r}\Mod A$ with the same underlying $A$-module as $M$ and with homogeneous 
+components $M[\xi]_{\zeta} = M_{\zeta + \xi}$ for all $\zeta \in \ZZ^{r}$. If
+$f: N \to M$ is a morphism in $\ZZ^{r}\Mod A$ then the same function defines a morphism
+$f[\xi]:N[\xi] \to M[\xi]$. In this way we get an endofunctor $[\xi]: \ZZ^{r}\Mod A \to
+\ZZ^{r}\Mod A$, called the $\xi$-suspension functor; it is an autoequivalence, with 
+inverse $[-\xi]$.
+
+%\paragraph
+%\label{minimal-projective-resolution}
+%If $M$ is a finitely generated $\ZZ^r$-graded $A$-module then $V = \k \ot_A M$ is a 
+%finite dimensional graded vector space. Fix $m_1, \ldots, m_n \in M$ such that their 
+%classes modulo $\m M$ form a basis of $V$; then the homogeneous $A$-linear map $p_M: A
+%\ot_\k V \to M$ defined by $p_M(1 \ot_\k \overline{m_i})= m_i$ is a minimal projective
+%cover of $M$ in $\ZZ^r\Mod A$. By taking a projective cover for $\ker p_M$ and iterating
+%the process we obtain a minimal projective resolution of $M$ in $\ZZ^r\Mod A$.
+
+Given $N, M$ objects of $\ZZ^{r}\Mod A$ we set 
+\begin{align*} 
+  \GrHom_A(N, M) = \bigoplus_{\xi \in \ZZ^{r}} \Hom_{\ZZ^{r}\Mod A}(N,M[\xi]).  
+\end{align*} 
+This is a $\ZZ^{r}$-graded vector space, with its component of degree $\xi \in \ZZ^{r}$
+equal to the space of homogeneous $A$-linear maps of degree $\xi$ from $N$ to $M$. For
+every $i \geq 0$ we denote by $\GrExt_A^i$ the $i$-th right derived functor of 
+$\GrHom_A$. We point out that 
+\[
+  \GrHom_A(N[\xi], M) \cong \GrHom_A(N,M[-\xi]) \cong \GrHom_A(N,M)[-\xi],
+\]
+as $\ZZ^r$-graded vector spaces, and that these isomorphisms induce analogous ones for 
+the coresponding right derived functors.
+
+\paragraph
+\label{ext-change-of-grading}
+Given $\xi = (\xi_1, \ldots, \xi_r) \in \ZZ^r$ we set $|\xi| = \xi_1 + \cdots +
+\xi_r$. Given a $\ZZ^{r}$-graded vector space $V$, we denote by $|V|$ the $\ZZ$-graded
+vector space whose $n$-th homogeneous component is 
+\begin{align*}
+  |V|_n = \bigoplus_{|\xi| = n} V_\xi.
+\end{align*}
+In particular $|A|$ is a connected $\NN_0$-graded algebra. Also, if $M$ is a 
+$\ZZ^r$-graded $A$-module then $|M|$ is a $\ZZ$-graded $|A|$-module, and this 
+assignation is functorial. Since $A$ is noetherian, \cite{RZ2}*{Proposition 1.3.7} 
+implies that for every $i \geq 0$ and any pair of $\ZZ^r$-graded modules $N, M$, with $N$
+finitely generated, there is an isomorphism of $\ZZ$-graded modules
+\[
+  |\GrExt^i_A(N,M)| \cong \GrExt^i_{|A|}(|N|,|M|),
+\]
+natural in both variables. 
+
+%\newpage 
+\subsection*{Homological regularity properties}
+%\label{homological-regularity}
+
+In this subsection we discuss some homological properties a connected $\NN_0^r$-graded
+algebra may posses. Most of the material found in this section is standard for connected
+$\NN_0$-graded algebras.
+
+\paragraph
+\label{chi}
+Let $M$ be a $\ZZ^r$-graded $A$-module. We say that $\chi(M)$ holds if for each $i \geq 
+0$ the graded vector space $\GrExt_A^i(\k, M)$ is finite dimensional, and say that the
+algebra $A$ has property $\chi$ if $\chi(M)$ holds for every finitely generated 
+$\ZZ^r$-graded $A$-module $M$. Property $\chi$ was originally introduced in 
+\cite{AZ}*{section 3} and plays a fundamental role in noncommutative algebraic geometry.
+
+\paragraph
+\label{torsion-functor}
+Associated to $A$ and $\m$ there is a \emph{torsion functor} 
+\begin{align*} 
+  \GG_\m: \ZZ^{r}\Mod A &\to \ZZ^{r}\Mod A \\ 
+  M &\longmapsto \{x \in M \mid \m^n x = 0 \mbox{ for } n \gg 0\}, 
+\end{align*} 
+which acts on morphisms by restriction and correstriction. The torsion functor is left
+exact, and for each $i \geq 0$ its $i$-th right derived functor is denoted by $H_\m^i$ 
+and called the \emph{$i$-th local cohomology functor} of $A$. 
+
+There exists a natural isomorphism
+\begin{align*} 
+\GG_\m \cong \varinjlim_n \GrHom_A(A/\m^n, -) 
+\end{align*}
+which by standard homological algebra extends to natural isomorphisms
+\begin{align*} 
+H^i_\m \cong \varinjlim_n \GrExt^i_A(A/\m^n, -) 
+\end{align*} 
+for all $i \geq 1$. 
+
+We denote by $A^\opp$ the opposite algebra of $A$, which is also
+a connected $\NN_0^r$-graded algebra, and by $\m^\opp$ its maximal graded ideal. We write
+$\GG_{\m^\opp}$ and $H^i_{\m^\opp}$ for the corresponding torsion and local cohomology
+functors, respectively.
+
+\paragraph
+\label{depth-and-ldim}
+Given an object $M$ of $\ZZ^{r}\Mod A$, its \emph{depth} and \emph{local dimension}
+are defined as
+\begin{align*} 
+  \depth_\m M &= \inf \{i \in \NN_0 \mid \GrExt^i_A(\k, M) \neq 0\}, \\ 
+  \ldim_\m M &= \sup \{i \in \NN_0 \mid H^i_\m(M) \neq 0\},
+\end{align*} 
+respectively. The \emph{local cohomological dimension} of $A$, denoted by $\lcd_\m A$, is
+the supremum of the $\ldim_\m M$ with $M$ finitely generated.
+
+\paragraph
+\label{AS-reg}
+The following definition is taken from \cite{RZ2}*{Definition 2.1.1}. It is an 
+$\NN_0^r$-graded analogue of the definition of the AS-Cohen-Macaulay, AS-Gorenstein and 
+AS-regular properties for connected $\NN_0$-graded algebras found in the literature, see 
+for example the introduction to \cite{JZ}.
+\begin{Definition*}
+Let $A$ be a connected noetherian $\NN_0^{r}$-graded algebra.  
+\begin{enumerate} 
+\item $A$ is called \emph{AS-Cohen-Macaulay} if there exists $n \in \NN_0$ such that
+  $H^i_{\m}(A) = 0$ and $H_{\m^\opp}^i(A) = 0$ for all $i \neq n$.
+
+\item $A$ is called \emph{left AS-Gorenstein} if it has finite graded injective dimension
+  $n$ and there exists $\ell \in \ZZ^{r}$, called the \emph{Gorenstein shift} of
+  $A$, such that
+\[ 
+\GrExt_{A}^i(\k,A) \cong 
+  \begin{cases} 
+    \k[\ell] & \mbox{for } i = n, 
+    \\ 0 & \mbox{for } i \neq n
+  \end{cases} 
+\] 
+as $\ZZ^{r}$-graded $A^\opp$-modules. We say $A$ is \emph{right} AS-Gorenstein if 
+$A^\opp$ is left AS-Gorenstein. Finally $A$ is \emph{AS-Gorenstein} if $A$ and $A^\opp$ 
+are left AS-Gorenstein, with the same injective dimensions and Gorenstein shifts.
+
+\item $A$ is called \emph{AS-regular} if it is AS-Gorenstein, and its left and right 
+graded global dimensions are finite and equal.
+\end{enumerate} 
+\end{Definition*} 
+
+\paragraph
+\label{invariance-by-grading}
+The properties discussed in paragraphs \ref{chi} to \ref{AS-reg} are defined in terms of
+the category of $\ZZ^r$-graded $A$-modules. In \ref{ext-change-of-grading} we defined 
+the algebra $|A|$, which is equal to $A$ as algebra but is endowed with an connected 
+$\NN_0$-grading induced by the grading on $A$ and the group morphism $|\cdot|$. The 
+maximal graded ideals of $A$ and $|A|$ coincide as vector spaces, so we may ask whether 
+the fact that $A$ has property $\chi$, or finite local dimension, or the 
+AS-Cohen-Macaulay property, etc., implies that $|A|$ has the corresponding property.
+
+Let us say that a property $P$ does not depend on the grading of $A$ if the following 
+holds: for every connected $\NN_0^t$-graded algebra $B$ with maximal ideal $\n$, which 
+is isomorphic to $A$ as algebra through an isomorphism that sends $\n$ to $\m$, $A$ has 
+property $P$ if and only if $B$ has property $P$. As shown in 
+\cite{RZ2}*{Corollary 1.3.9}, the local dimension of $A$ does not depend on the grading 
+of $A$. An analogous result is proved in \cite{RZ2}*{Remark 2.1.7} for the properties 
+defined in \ref{AS-reg}. However, the situation is more delicate for property $\chi$. 
+The following lemma shows that property $\chi$ is independent of the grading of $A$ 
+under the hypothesis that $A$ has finite local dimension; we do not know whether this 
+hypothesis can be eliminated.
+
+\begin{Lemma*}
+Suppose $\lcd_\m A < \infty$. Then the algebra $A$ has property $\chi$ if and only if
+$\chi(A)$ holds.
+\end{Lemma*}
+\begin{proof}
+If $A$ has property $\chi$ then clearly $\chi(A)$ holds. To prove the opposite
+implication, assume $\chi(A)$ holds. Recall from \ref{ext-change-of-grading} that for 
+every $\ZZ^r$-graded $A$-module $M$ and for every $i \geq 0$ there exists a graded 
+vector space isomorphism
+\[
+  |\GrExt^i_A(\k, M)|
+    \cong \GrExt_{|A|}^i(|\k|, |M|),
+\]
+so $\chi(M)$ holds if and only if $\chi(|M|)$ holds; in view of this, the hypothesis 
+implies $\chi(|A|)$ holds. 
+
+Since $\ldim_{|\m|} |A| = \ldim_\m A < \infty$, we may apply 
+\cite{RZ}*{Proposition 2.2.6} and conclude that $|A|$ has property $\chi$. From this
+it follows that $\chi(|M|)$ holds for every $\ZZ^r$-graded $A$-module $M$, and hence so 
+does $\chi(M)$.
+\end{proof}
+
+\paragraph
+\label{chi-and-local-cohomology}
+We finish this subsection with a technical result on the relation between property 
+$\chi$ and local cohomology. For every $n \in \NN_0$ we denote by $A_{\geq n}$ the ideal
+generated by all homogeneous elements of degree $\xi$ with $|\xi| \geq n$. 
+
+\begin{Lemma*}
+Let $M$ be a finitely generated $\ZZ^r$-graded $A$-module such that $\chi(M)$ 
+holds. Then for every $i \geq 0$ and every $t \in \ZZ$ there exists $n_0 \in \ZZ$ such 
+that 
+\begin{align*}
+  \GrExt^i_A(A/A_{\geq n}, M)_\xi &\cong H^i_\m(M)_\xi
+\end{align*}
+for all $n \geq n_0$ and all $\xi \in \ZZ^r$ such that $|\xi| \geq t$.
+\end{Lemma*}
+\begin{proof}
+Clearly $A_{\geq n} \subset \m^n$. Since $\m$ is finitely generated, say by elements 
+$x_1, \ldots, x_n$ with degrees $\xi^1, \ldots, \xi^n$, setting $d = \max \{|\xi^i| : 
+i = 1, \ldots, n\}$ we obtain $\m^n \subset A_{\geq dn}$. In other words 
+$(A_{\geq n})_{n \geq 0}$ and $\{\m^n\}_{n \geq 0}$ are cofinal, so the proof of 
+\cite{BS}*{Proposition 3.1.1} easily adapts to show that for every $i \geq 0$ there 
+exist natural isomorphisms
+\begin{align*}
+  \varinjlim_n \GrExt^i_A(A/A_{\geq n}, -) \cong \varinjlim_n \GrExt^i_A(A/\m^n, -) \cong
+  H^i_\m.
+\end{align*} 
+The statement of the lemma will follow if we show that for all $\xi$ as in the
+statement, the homogeneous component of degree $\xi$ of the natural map
+\begin{align*}
+  \pi^n: \GrExt^i_A(A/A_{\geq n}, M) \to H^i_\m(M)
+\end{align*}
+is an isomorphism for $n \gg 0$.
+
+Fixing $t$ as in the statement, \cite{AZ}*{Propositions 3.5 (1)} implies that
+the natural map $\pi^n_d: \GrExt^i_{|A|}(|A|/|A_{\geq n}|, |M|)_d \to H^i_{|\m|}(|M|)_d$
+is an isomorphism for all $d \geq t$ if $n$ is large enough. Now by 
+\cite{RZ2}*{Propositions 1.3.7 and 1.3.8} there exist isomorphisms
+\begin{align*}
+\GrExt^i_{|A|}(|A|/|A_{\geq n}|, |M|)_d 
+&\cong \bigoplus_{|\xi| = d}\GrExt^i_{A}(A/A_{\geq n}, M)_\xi;\\
+H^i_{|\m|}(|M|)_d 
+  &\cong \bigoplus_{|\xi| = d} H^i_\m(M)_\xi.
+\end{align*}
+Since the assignation $M \mapsto |M|$ is functorial, we also get that $\pi^n_d = 
+\bigoplus_{|\xi| = d} \pi^n_\xi$. Thus for all $\xi$ such
+that $|\xi| \geq t$, the map $\pi^n_\xi$ is an isomorphism if $n$ is large enough.
+\end{proof}
+
+
+%\newpage 
+\subsection*{Transfer of regularity properties by degeneration}
+\label{transfer-of-regularity}
+In this subsection we prove that if $A$ has a filtration compatible with its grading, and
+the associated graded algebra has property $\chi$, then the regularity properties 
+discussed in the previous subsection transfer from $\gr A$ to $A$. 
+All undefined terms regarding filtrations can be found in \cite{VO}*{chapter I}.
+
+\paragraph
+\label{regular-filtration}
+Recall that $A$ denotes a noetherian $\NN_0^r$-graded algebra.
+The general setup for the subsection is as follows: we assume that $A$ has a 
+\emph{connected} filtration, that is an exhaustive filtration $\F = \{F_nA\}_{n \geq 
+0}$, with $\k = F_0A \subset F_1A \subset \cdots \subset F_nA \subset \cdots 
+\bigcup_{n \geq 0} F_nA = A$, such that each layer $F_nA$ is a finite dimensional graded 
+vector space, and $F_nA \cdot F_m A \subset F_{n+m}A$ for all $n, m \in \NN_0$. For each 
+$\xi \in \NN_0^r$ the homogeneous component $A_\xi$ has an induced
+filtration $\{F_nA_\xi\}_{n \geq 0}$, where $F_nA_\xi = F_nA \cap A_\xi$. Since
+$A_\xi$ is finite dimensional this filtration is finite, so the associated graded ring 
+$\gr A$ is a connected and locally finite $\NN_0^{r+1}$-graded algebra. 
+
+Given any $\ZZ^r$-graded $A$-module $M$ with a filtration whose layers are 
+$\ZZ^r$-graded subspaces, we can construct the $\ZZ^{r+1}$-graded $\gr A$-module $\gr M$.
+If $M$ is any $\ZZ^r$-graded $A$-module then it can be endowed with such a filtration as 
+follows: fix a graded subspace $N \subset M$ that generates 
+$M$ over $A$, and for each $n \geq 0$ set $F_nM = (F_nA) N$. Any such filtration is 
+called \emph{standard}, and is an exhaustive and discrete filtration by graded subspaces.
+If $M$ is finitely generated and $N$ is finite dimensional then the layers of this 
+filtration are also finite dimensional. 
+
+
+
+\paragraph
+\label{P:ext-ss} 
+The main tool used to transfer homological information from $\gr A$ to $A$ is a 
+spectral sequence that we associate to any pair of $\ZZ^r$-graded $A$-modules $N, 
+M$, which converges to $\GrExt^i_A(N,M)$ and whose first page consists of the 
+homogeneous components of $\GrExt^i_A(\gr N, \gr M)$. The proof is straightforward, but 
+relies on several graded analogues of classical constructions for filtered rings. These
+constructions can be found in \cite{VO}*{Chapter I} and \cite{MR}*{Section 7.6}, and the
+proofs found in the references easily adapt to the graded context, so we use them
+without further comment.
+
+In order to keep track of the extra component in the grading when passing to associated 
+graded objects, we make a slight abuse of notation and given a $\ZZ^{r+1}$-graded vector 
+space $V$, we denote by $V_{(\xi, p)}$ its homogeneous component of degree $(\xi_1, 
+\ldots, \xi_r, p)$.
+
+\begin{Proposition*} 
+Suppose that $\gr A$ is noetherian.
+Let $M, N$ be filtered $\ZZ^r$-graded $A$-modules, with $N$ finitely generated, and
+suppose that the filtration on $N$ is standard and the filtration on $M$ is discrete. Then
+for every $\xi \in \ZZ^r$ there exists a convergent spectral sequence
+\begin{align*} 
+  E(N,M)_\xi: E_{p,q}^1 = \GrExt_{\gr A}^{-p-q}(\gr N, \gr M)_{(\xi,p)}
+    &\Rightarrow \GrExt_A^{-p-q}(N,M)_\xi 
+    &p,q \in \ZZ, 
+\end{align*} 
+such that the filtration of the vector spaces on the right hand side is finite.
+\end{Proposition*}
+\begin{proof}
+By the $\ZZ^r$-graded version of \cite{MR}*{Theorem 6.17}, there exists a projective
+resolution $P^\bullet \to N$ by filtered projective $\ZZ^r$-graded $A$-modules with
+filtered differentials, such that the associated graded complex $\gr P^\bullet \to \gr N$
+is a $\ZZ^{r+1}$-graded projective resolution of the $\gr A$-module $\gr N$.
+Using the filtration for the $\GrHom$ spaces defined in \cite{VO}*{section I.2}, the
+complex $\GrHom_A(P^\bullet, M)$ is a graded complex with a filtration by graded
+subcomplexes, whose differentials are filtered maps.
+
+If we fix $\xi \in \ZZ^r$ the homogeneous component $\GrHom_A(P^\bullet, M)_\xi$ is a 
+complex of filtered finite dimensional vector spaces. By \cite{W}*{5.5.1.2} there exists 
+a spectral sequence with page one equal to
+\begin{align*} 
+  E_{p,q}^1 
+  &= H_{p+q}\left(\frac{F_p \GrHom_A(P^\bullet,M)_\xi}
+      {F_{p-1}  \GrHom_A(P^\bullet,M)_\xi}\right) 
+    & p,q \in \ZZ,
+\end{align*} 
+that converges to   
+\begin{align*} 
+  H_{p+q}(\GrHom_{A}(P^\bullet,M)_\xi) \cong \GrExt^{-p-q}_A(N,M)_\xi.
+\end{align*}
+This last space is finite dimensional, and hence the filtration on it is finite. Thus 
+we only need to prove that for each $p,q \in \ZZ$ there exists an isomorphism
+\begin{align*} 
+  H_{p+q}\left(\frac{F_p \GrHom_A(P^\bullet,M)_\xi}{F_{p-1} \GrHom_A(P^\bullet,M)_\xi}
+  \right) 
+    &\cong \GrExt_{\gr A}^{-p-q}(\gr N, \gr M)_{(\xi,p)}.
+\end{align*} 
+
+By \cite{VO}*{Lemma 6.4}, there exists an isomorphism of complexes $\phi(P^\bullet, M):
+\gr (\GrHom_A(P^\bullet, M)) \to \GrHom_{\gr A}(\gr P^\bullet, \gr M)$, which is defined
+explicitly in the reference. Direct inspection shows that the map $\phi(P^\bullet, M)$ 
+is homogeneous, so looking at its component of degree $\xi$ we obtain an isomorphism
+\begin{align*}
+\frac{F_p \GrHom_A(P^\bullet,M)_\xi}{F_{p-1} \GrHom_A(P^\bullet,M)}_\xi \cong 
+\GrHom_{\gr A}(\gr P^\bullet, \gr M)_{(\xi,p)}.
+\end{align*}
+Since $\gr P^\bullet$ is a $\ZZ^{r+1}$-graded projective resolution of $\gr N$, we obtain
+the desired isomorphism by applying $H_{p+q}$ to both sides of the isomorphism.
+\end{proof}
+
+
+\begin{Corollary}
+\label{C:consequences-of-ext-ss}
+Suppose $\gr A$ is noetherian, and let $M, N$ be as in Proposition \ref{P:ext-ss}.
+\begin{enumerate}
+  \item \label{I:dims}  For each $i \geq 0$ and each $\xi \in \ZZ^{r}$
+    \[
+      \dim_\k \GrExt^i_A(N,M)_\xi \leq \sum_{p=-\infty}^\infty \dim_\k \GrExt^i_{\gr
+      A}(\gr N, \gr M)_{(\xi, p)}.
+    \]
+  
+  \item \label{I:pd-id} $\pd_A^{\ZZ^r} N \leq \pd_{\gr A}^{\ZZ^{r+1}} \gr N$ and  
+    $\id_A^{\ZZ^r} M \leq \id_{\gr A}^{\ZZ^{r+1}} \gr M$. 
+  
+  \item \label{I:chi} If $\chi(\gr M)$ holds then $\chi(M)$ holds.
+\end{enumerate}
+\end{Corollary}
+
+\paragraph
+\label{ldim} 
+We now prove a result that relates the local cohomology of a $\ZZ^r$-graded $A$-module 
+$M$ with that of its associated graded module $\gr M$. We will do this by combining 
+Proposition \ref{P:ext-ss} with Lemma \ref{chi-and-local-cohomology} and the formalism
+of the change of grading functors introduced in \cite{RZ}*{Section 1.3}. We recall the
+relevant details. Given a group morphism $\phi: \ZZ^r \to \ZZ^t$, with $t \in \NN_0$, 
+there exists a functor $\phi_!: \ZZ^r\Mod \k \to \ZZ^t \Mod \k$ that sends a 
+$\ZZ^r$-graded vector space $V$ to the $\ZZ^t$-graded vector space $\phi_!(V)$, whose 
+homogeneous component of degree $\zeta \in \ZZ^t$ is
+\[
+  V_\zeta = \bigoplus_{\phi(\xi) = \zeta} V_\xi.
+\]
+Notice that $\phi_!$ does not change the underlying vector space, only its grading.
+If $R$ is a $\ZZ^r$-graded algebra then $\phi_!(R)$ is a $\ZZ^t$-graded algebra, and if 
+$M$ is a $\ZZ^r$-graded $R$-module then $\phi_!(M)$ is a $\ZZ^t$-graded 
+$\phi_!(R)$-module with the same underlying $R$-module structure as $M$.
+
+\begin{Corollary*}
+Assume $\gr A$ is noetherian. Let $M$ be a filtered $\ZZ^r$-graded $A$-module with a
+discrete filtration, and assume $\chi(\gr M)$ holds. Then for each $i \geq 0$ and each 
+$\xi \in \ZZ^r$ 
+  \[
+    \dim_\k H^i_\m(M)_\xi \leq \sum_{p=- \infty}^\infty \dim_\k H^i_{\gr \m}(\gr
+    M)_{(\xi, p)}.
+  \]
+\end{Corollary*}
+\begin{proof}
+Let $\pi: \ZZ^{r+1} \to \ZZ^r$ be the projection to the first $r$-coordinates, and set $B
+= \pi_!(\gr A)$, so for every $\xi \in \ZZ^r$
+\begin{align*}
+B_\xi = \bigoplus_{p \in \ZZ} \gr A_{(\xi, p)} = \gr (A_\xi).
+\end{align*}
+Thus $B$ is a connected $\NN_0^r$-graded algebra. Set $\n = \pi_!(\gr \m)$, which is
+the maximal graded ideal of $B$, and set $\tilde M = \pi_!(\gr M)$.
+
+By \cite{RZ2}*{Proposition 1.3.7} $\chi(\gr M)$ implies
+$\chi(\tilde M)$ and by item \ref{I:chi} of Corollary \ref{C:consequences-of-ext-ss} it 
+also implies $\chi(M)$, so we may apply Lemma \ref{chi-and-local-cohomology} to both $M$ 
+and $\tilde M$, and deduce that for all $\xi \in \ZZ^r$ and all $i \geq 0$, the natural 
+maps 
+\begin{align*}
+  \GrExt^i_A(A/A_{\geq n}, M)_\xi &\to H^i_\m(M)_\xi;\\
+  \GrExt^i_B(B/B_{\geq n}, \tilde M)_\xi &\to H^i_\n( \tilde M)_\xi;
+\end{align*}
+are isomorphisms for $n \gg 0$.
+
+Combining this with \cite{RZ2}*{Propositions 1.3.7 and 1.3.8}, we obtain a chain of
+isomorphisms
+\begin{align*}
+\bigoplus_{p \in \ZZ} \GrExt^i_{\gr A}\left(\frac{\gr A}{\gr (A_{\geq n})}, \gr M 
+  \right)_{(\xi, p)} 
+  &\cong \GrExt^i_B \left(B/B_{\geq n}, \tilde M \right)_\xi  \\
+  &\cong H^i_\n(\tilde M)_\xi 
+  \cong \bigoplus_{p \in \ZZ} H^i_{\gr \m}(\gr M)_{(\xi, p)} 
+\end{align*}
+By definition $\gr(A/A_{\geq n}) \cong \gr A / \gr (A_{\geq n})$, so applying item 
+\ref{I:dims} of Corollary \ref{C:consequences-of-ext-ss} and taking $n \gg 0$ we obtain
+\begin{align*}
+\dim_\k H^i_\m(M)_\xi 
+  &= \dim_\k \GrExt^i_A(A/A_{\geq n}, M)_\xi \\
+  &\leq \sum_{p = -\infty}^\infty \dim_\k
+  \GrExt^i_{\gr A}(\gr A / \gr (A_{\geq n}), M)_{(\xi, p)} \\
+  &= \sum_{p = -\infty}^\infty \dim_\k H^i_{\gr \m}(\gr M)_{(\xi, p)}.
+\end{align*}
+\end{proof}
+
+%\paragraph
+
+We are now ready to prove the main result of this section. 
+\begin{Theorem}
+\label{transfer}
+Suppose $A$ is a connected $\NN_0^r$-graded algebra endowed with a connected 
+filtration, and that $\gr A$ is noetherian and has property $\chi$. Then:
+\begin{enumerate}
+\item $A$ is noetherian and has property $\chi$;
+\item $\lcd_\m A \leq \lcd_{\gr \m} \gr A$;
+\item If $\gr A$ is AS-Cohen-Macaulay, AS-Gorenstein or AS-Regular, so is $A$.
+\end{enumerate}
+\end{Theorem}
+\begin{proof}
+The fact that $A$ is noetherian is classical, see for example \cite{MR}*{1.6.9}. If $M$ 
+is any finitely generated $\ZZ^r$-graded $A$-module, we may filter it using the procedure
+described in \ref{regular-filtration}. Since $\chi(\gr M)$ holds by hypothesis, item 
+\ref{I:chi} of Corollary \ref{C:consequences-of-ext-ss} implies $\chi(M)$ holds, which 
+proves that $A$ has property $\chi$. 
+
+Item 2 follows from Corollary \ref{ldim}, as does the fact that if $\gr A$ is
+AS-Cohen-Macaulay so is $A$. If $\gr A$ is AS-Gorenstein of injective dimension $n$ and
+Gorenstein shift $(\xi, p) \in \ZZ^{r+1}$, the algebra $A$ has injective dimension at 
+most $n$ by item \ref{I:pd-id} of Corollary \ref{C:consequences-of-ext-ss}. Also, for 
+each $\zeta \in \ZZ^r$ the spectral sequence $E(\k, A)_\zeta$ degenerates at page $1$: 
+it is zero if $\zeta \neq -\xi$, while for $\zeta = - \xi$ there is a single, one 
+dimensional non-zero entry in the diagonal $-p-q = n$. Hence we obtain vector space
+isomorphisms
+\begin{align*}
+  \GrExt^i_A(\k, A)_\zeta 
+    &\cong  \begin{cases}
+      \k & \mbox{ if  $\zeta = -\xi$ and $i = n$;} \\
+      0 & \mbox{otherwise.}
+    \end{cases}
+\end{align*}
+Any such isomorphism is also $A^\opp$-linear, so $A$ is left AS-Gorenstein of injective 
+dimension $n$ and Gorenstein shift $\xi$. The same proof applies to show that $A$ is 
+right AS-Gorenstein with the same injective dimension and Gorenstein shift, so $A$ is 
+AS-Gorenstein. 
+
+Finally, assume that $\gr A$ is AS-regular. Then $A$ is AS-Gorenstein, and item
+\ref{I:pd-id} of Corollary \ref{C:consequences-of-ext-ss} implies that it has finite
+left and right global dimensions. These dimensions are equal to the left and right 
+projective dimensions of $\k$ as $A$-module \cite{RZ2}*{Lemma 2.1.5}, which in turn equal
+the left and right injective dimensions of $A$ and hence coincide, so $A$ is AS-regular.
+\end{proof}
+
+
+%\newpage 
+\section{Quantum affine toric degenerations}
+\label{qatv}
+Recall that we denote by $A$ a noetherian connected $\NN_0^r$-graded algebra.
+In this section we recall the homological properties of quantum affine toric varieties
+proved in \cite{RZ2}, and give necessary and sufficient conditions for the algebra $A$
+to have a quantum toric degeneration, that is a connected filtration such that the
+associated graded ring is a quantum affine toric variety.
+
+\subsection*{Quantum affine toric varieties}
+
+\paragraph
+\label{affine-semigroups}
+Recall that an \emph{affine semigroup} is a semigroup isomorphic to a finitely generated 
+submonoid (i.e. a subgroup containing the neutral element) of $(\ZZ^t, +)$ for some $t 
+\geq 1$. Let $S$ be an affine semigroup and let $G(S) \subset \ZZ^t$ be the group 
+generated by $S$. It is an abelian group without torsion, and since $S$ is finitely 
+generated so is $G(S)$; the rank of $S$ is defined as the rank of $G(S)$. Whenever we 
+work with an affine semigroup $S$, we will assume it comes with a fixed embedding $S 
+\hookrightarrow \ZZ^t$, and identify $S$ with its image through this map. Since $\ZZ^t$ 
+is a totally ordered group with the lexicographic order $<_{\lex}$, the semigroup $S$ 
+inherits a total order.
+
+We say that $S$ is \emph{normal} if, whenever there exist $n \in \NN$ and $z \in G(S)$
+such that $n z \in S$, then $z \in S$. By \cite{BH}*{Proposition 6.1.2}, if $S$
+is normal then it is the set of integral points of a rational convex cone of the 
+$\RR$-vector space generated by $G(S)$. Its \emph{interior ideal} $\relint S$ is the set 
+of elements of $S$ lying in the topological interior of that convex cone.
+
+An affine semigroup is said to be positive if it is isomorphic to a subsemigroup of
+$\NN_0^t$ for some $t \geq 1$. If $S$ is positive then by \cite{MS}*{Corollary 7.23} we 
+may assume that $S \subset \NN_0^t$; notice that positive semigroups are called 
+\emph{pointed} semigroups in the reference. By \cite{MS}*{Proposition 7.15}, a positive 
+affine semigroup $S$ is generated by the set of elements $s \in S$ such that whenever $s 
+= s'+s''$, then $s' = 0$ or $s'' = 0$. This is a finite set, called the \emph{Hilbert 
+basis} of $S$. 
+
+\paragraph
+\label{congruence}
+Let $S$ be a positive affine semigroup and let $\{s_1, \ldots, s_n\}$ be its Hilbert 
+Basis. We denote by $\pi: \NN_0^n \to S$ the semigroup morphism defined by the 
+assignation $e_i \mapsto s_i$ for each $1 \leq i \leq n$, where $e_i$ is the $i$-th 
+vector in the canonical basis of $\NN_0^n$. We denote by $L(S) \subset \NN_0^n \times 
+\NN_0^n$ the set of pairs $(p,p')$ such that $\pi(p) = \pi(p')$. The set $L(S)$ is a 
+congruence, i.e. it is an equivalence relation on $S$ and $L(S) + (\xi,\xi) \subset L(S)$
+for any $\xi \in \NN_0^n$. The quotient $\NN^n_0/L(S)$ has a natural semigroup structure 
+induced by the addition of $\NN_0^n$, and is isomorphic to $S$ \cite{RGS}*{Theorem 1.2}. 
+By the proof of R\'edei's theorem found in \cite{RGS}*{Theorem 5.12} there exists a 
+finite set $P =  \{(p_1, p'_1), \ldots, (p_m,p'_m) \} \subset L(S)$, uniquely determined 
+by the lexicographic order, such that $p_i <_\lex p'_i$ and $L(S)$ is the smallest 
+congruence containing $P$.
+
+\paragraph
+\label{twisted-semigroup-algebras}
+A $2$-cocycle over $S$ is a function $\alpha: S \times S \to \k^\times$ such that $\alpha
+(s,s') \alpha(s+s',s'') = \alpha(s,s'+s'')\alpha(s',s'')$ for all $s,s',s'' \in S$. 
+Given a $2$-cocycle $\alpha$ over $S$, the \emph{$\alpha$-twisted semigroup algebra} 
+$\k^\alpha[S]$ is the associative $\k$-algebra whose underlying vector space has basis 
+$\{X^s \mid s \in S\}$ and whose product over these generators is given by 
+$X^s X^t = \alpha(s,t)X^{s+t}$. This is a noncommutative deformation of the classical 
+semigroup algebra $\k[S]$. 
+
+Let $u \geq 1$ and let $\psi: S \to \NN_0^u$ be a semigroup morphism such that
+$|\psi(s_i)| > 0$ for all $1 \leq i \leq n$. We can endow the algebra $\k^\alpha[S]$ 
+with a connected $\NN_0^u$-grading by setting $\deg X^s = \psi(s)$ for all $s \in S$. 
+Any connected grading on $\k^\alpha[S]$ such that the elements $X^s$ are homogeneous 
+and of non-zero degree arises in this way. 
+
+\begin{Definition}
+We say that the algebra $A$ is a \emph{quantum affine toric variety} if it is
+isomorphic as graded algebra to a twisted semigroup algebra $\k^\alpha[S]$ endowed with 
+the grading induced by a semigroup morphism $\psi: S \to \NN_0^r$ with $|\psi(s_i)| > 0$
+for all $i$. We call $S$ the \emph{underlying semigroup} of the quantum affine toric 
+variety.
+\end{Definition}
+
+\paragraph
+\label{properties-of-qatv}
+The following is a summary of the results proved in \cite{RZ2}*{section 3.2} about 
+the homological properties of quantum affine semigroup algebras.
+\begin{Proposition*}
+Let $S$ be a positive affine semigroup and let $R$ be a quantum affine toric variety 
+with underlying group $S$. Then the following hold.
+\begin{enumerate}[label=(\alph*)]
+  \item $R$ is noetherian and integral.
+  \item $R$ has property $\chi$ and finite local dimension equal to the rank of $S$.
+  \item Suppose $S$ is normal. Then $R$ is AS-Cohen-Macaulay and a maximal order in its 
+    division ring of fractions. Furthermore, $R$ is AS-Gorenstein if and only if
+    there exists $s \in S$ such that $\relint S = s + S$.
+\end{enumerate}
+\end{Proposition*}
+\begin{proof}
+This is proved in \cite{RZ2}*{section 3.2} in the case where the grading morphism $\psi$ 
+is the inclusion of $S$ in $\NN_0^t$. The proposition follows from the fact that all the 
+properties mentioned in it are independent of the grading, see paragraph
+\ref{invariance-by-grading}.
+\end{proof}
+
+
+%\paragraph
+%Before studying algebras with a toric degeneration we prove that twisted semigroup
+%algebras can be presented in an obvious way. Fix a possitive affine semigroup $S$ of rank
+%$r$, and consider $\k^\alpha[S]$ as a $\ZZ^r$-graded algebra in the obvious way, i.e.
+%taking $t = r$ and $\psi = \Id$ in \ref{twisted-semigroup-algebras}. Recall that $\pi:
+%\ZZ^n \to \ZZ^r$ is the morphism that sends the canonical vectors of $\ZZ^n$ to the
+%elements of the Hilbert basis of $S$, which we denote by $s_1, \ldots, s_n$. Recall also
+%the definition of the semigroup $L(S)$ in \ref{hilbert-basis}, and denote by $\{(p_1,
+%p'_1), \ldots, (p_m, p'_m)\}$ its Hilbert basis.
+%
+%Set $F = \k \langle Y_i \mid i = 1, \ldots, n \rangle$ and let $\phi: F \to \k^\alpha[S]$
+%be the morphism that maps $Y_i$ to $X^{s_i}$. We fix an $\NN_0^r$-grading on $F$ by setting
+%the degree of $Y_i$ equal to $s_i$, so $\phi$ is an $\NN_0^r$-graded algebra morphism. Given
+%$\xi = (\xi_1, \ldots, \xi_n) \in \NN_0^n$ we write $Y^\xi$ for the monomial $Y_1^{\xi_1}
+%Y_2^{\xi_2} \ldots Y_n^{\xi_n} \in F$. Notice that $\deg Y^\xi = \pi(\xi)$.
+%
+%For $1 \leq i < j \leq n$ the element 
+%\begin{align*} 
+%   C_{i,j} &= \alpha(s_i,s_j) Y_j Y_i - \alpha_\q(s_j,s_i)Y_i Y_j 
+%\end{align*} 
+%is in the kernel of $\phi$. Also, for every $s \in S$ and any $p \in \pi^{-1}(s)$ there
+%exists $d_p \in k^\times$ such that $\phi(Y^\xi) = \prod_i (X^{s_i})^{p_i} = d_p X^s$.
+%We write $d_l = d_{p_l}$ and $d'_l = d_{p'_l}$ for all $1 \leq l \leq m$, and set
+%\begin{align*} 
+% S_l= d_l Y^{p'_l} - d'_l Y^{p_l}.  
+%\end{align*}   
+%These elements also belong to the kernel of $\phi$. 
+%
+%\begin{Lemma} 
+%\label{L:semigroup-presentation} 
+%Keep the notation from the previous paragraph. The alebra $\k^\alpha[S]$ is isomorphic to
+%$F / I$ where $I \subset F$ is the ideal generated by the elements $C_{i,j}$ and $S_l$,
+%with $1\leq i < j \leq n$ and $1 \leq l \leq m$.
+%\end{Lemma} 
+%\begin{proof} 
+%Set $B = F/I$. By abuse of notation we write $Y_i$ and $Y^\xi$ for the class of $Y_i$ and
+%$Y^\xi$ in $B$ for all $1 \leq i \leq n$ and all $\xi \in \NN_0^n$. Since all the elements
+%$C_{i,j}$ and $S_l$ are homogeneous, the $\NN_0^r$-grading of $F$ induces an $\NN_0^r$-grading
+%on $B$ whose support is contained in $S$. Denote by $\tphi: B \to \k^\alpha[S]$ the graded
+%morphism induced by $\phi$. The relations imposed on $B$ imply that if $(p, p') \in L(S)$
+%then $Y^p$ and $Y^{p'}$ are nonzero multiples of each other. Hence $\dim_\k B_s = 1$ for
+%all $s \in S$, and $\tilde \phi$ is a surjective morphism between locally finite graded
+%vector spaces whose homogeneous components have the same dimension, so it is an
+%isomorphism.
+%\end{proof}
+
+
+%\newpage 
+\subsection*{Algebras with a toric degeneration}
+%\label{algebras-with-qatd}
+
+\begin{Definition}
+A \emph{quantum affine toric degeneration} of $A$ is a connected filtration on $A$ such 
+that the associated graded ring is a quantum affine toric variety. 
+\end{Definition}
+If $A$ degenerates to a quantum affine toric variety with underlying semigroup $S$, we 
+refer to $S$ as the semigroup associated to the degeneration. In view of Theorem 
+\ref{transfer} and Proposition \ref{twisted-semigroup-algebras}, an algebra with a 
+quantum toric degeneration is noetherian, integral, has property $\chi$ and finite local 
+dimension. Furthermore, we can determine whether $A$ is AS-Cohen-Macualay or 
+AS-Gorenstein by studying the semigroup $S$.
+
+We fix some notation for the rest of this subsection. Let $t \geq 1$. We denote by $S 
+\subset \NN_0^t$ a positive affine semigroup, by $\{s_1, \ldots, s_n\}$ its 
+Hilbert basis, by $\pi: \NN_0^n \to \NN_0^t$ the semigroup morphism defined by 
+$e_i \longmapsto s_i$, and denote by $P = \{(p_1, p'_1), \ldots, (p_m, p'_m)\} 
+\subset L(S)$ the minimal generating set of $L(S)$ such that $p_i <_{\lex} p'_i$ for all
+$i$, as in \ref{congruence}.
+
+\begin{Definition}
+\label{s-phi-type}
+Let $\phi:~S~\to~\NN_0$ be a semigroup morphism such that $\phi(s_i) > 0$ for all $1 
+\leq i \leq n$, and set $\tphi = \phi \circ \pi$.  We say that the algebra $A$ is of 
+$(S, \phi)$-type if the following hold. 
+\begin{enumerate}
+\item \label{generation}
+$A$ is generated as algebra by a finite set of homogeneous elements $\{b_1, 
+\ldots, b_n\}$ of the same cardinality as the Hilbert basis of $S$. We set
+$\b^\xi = \displaystyle \prod_{i = 1}^n b_i^{\xi_i}$ for each $\xi \in \NN_0^n$.
+
+\item \label{commutation}
+For each $1 \leq i < j \leq n$ and each $\xi \in \NN_0^n$ such that $\tphi(\xi) < 
+\phi(s_i + s_j)$, there exist $c_{i,j} \in \k^\times$ and $c^{i,j}_\xi \in \k$ such that
+\begin{align*}
+  b_j b_i = c_{i,j} b_i b_j + \sum_{\tphi(\xi) < \phi(s_i + s_j)} c^{i,j}_\xi
+    \b^\xi.
+\end{align*}
+
+\item \label{straightening}
+For each $1 \leq i \leq m$ and each $\xi \in \NN_0^n$ such that $\tphi(\xi) <
+\tphi(p_i)$ there exist $d_i \in \k^\times$ and $d^i_\xi \in \k$ such that
+    \begin{align*}
+      \b^{p'_i} = d_i \b^{p_i} + \sum_{\tphi(\xi) < \tphi(p_i)} d^i_\xi \b^\xi.
+    \end{align*}
+\end{enumerate}
+\end{Definition}
+
+\begin{Remark*}
+Since $\tphi(e_i) = \phi(s_i) > 0$ for all $i$, given $l \in \NN_0$ there exist 
+finitely many $\xi \in \NN_0^n$ such that $\tphi(\xi) \leq l$ and so the sums on the 
+right hand side of the formulas displayed in \ref{commutation} and \ref{straightening} 
+are finite.
+\end{Remark*}
+
+\paragraph
+\label{type-filtration}
+If $A$ is an algebra of $\phi$-type we write $F_lA = \langle \b^\xi \mid \tphi(\xi)
+\leq l \rangle$ for each $l \in \NN_0$. The fact that $\tphi(e_i) > 0$ for all $i$ 
+implies that this is a finite dimensional vector space, and that $F_0A = \k$. The 
+following lemma shows that $\F = \{F_lA\}_{l \geq 0}$ is a connected filtration on $A$.
+
+\begin{Lemma*}
+Let $A$ be an algebra of $(S, \phi)$-type.
+\begin{enumerate}
+\item \label{filtration}
+Given $\xi, \nu \in \NN_0^n$ there exists $c_{\xi, \nu} \in \k^\times$ such that $\b^\xi
+\b^\nu \equiv c_{\xi + \nu}\b^{\xi + \nu} \mod F_{\tphi(\xi + \nu) - 1}A$. In particular 
+$\F$ is a filtration on $A$.
+
+\item \label{straight}
+Given $(\xi, \nu) \in L(S)$ there exists $d_{\xi, \nu} 
+\in \k^\times$ such that $\b^\xi \equiv d_{\xi, \nu} \b^\nu \mod F_{\tphi(\xi) - 1} A$.
+\end{enumerate}
+\end{Lemma*}
+\begin{proof}
+To prove item \ref{filtration} we proceed by induction on $\tphi(\xi + \nu)$, with the
+$0$-th step being obvious since $F_0A = \k$ is a subalgebra of $A$. Suppose that the
+result holds for all $l < \tphi(\xi + \nu)$ and let $i$ be the least integer such that
+$\xi_i \neq 0$, so $\b^\xi \b^\nu = b_i (\b^{\xi - e_i} \b ^\nu)$. Using the inductive
+hypothesis we obtain
+\begin{align*}
+b_i (\b^{\xi - e_i} \b^\nu) 
+&= b_i \bigg( c_{\xi- e_i, \nu} \b^{\xi - e_i + \nu} 
+  + \sum_{\tphi(\rho) < \tphi(\xi - e_i + \nu)} c_\rho \b^\rho \bigg)\\
+&= c_{\xi- e_i, \nu} b_i \b^{\xi - e_i + \nu} 
+  + \sum_{\tphi(\rho) < \tphi(\xi - e_i + \nu)} c_\rho b_i \b^\rho
+\end{align*}
+where the $c_\rho \in \k$ and $c_{\xi - e_i,\nu} \in \k^\times$. The inductive  
+hypothesis also implies each product $b_i \b^\rho$ lies in $F_{\tphi(\xi + \nu) -1} A$,
+so
+\[
+  b_i \b^{\xi - e_i} \b^\nu \equiv c_{\xi- e_i, \nu}b_i \b^{\xi - e_i + \nu} \mod
+  F_{\tphi(\xi + \nu)-1}A.
+\]
+Now let $j$ be the least integer such that $\nu_j \neq 0$. If $i \leq j$ then $b_i 
+\b^{\xi - e_i + \nu} = \b^{\xi + \nu}$ and we are finished; otherwise, using item 2 of 
+Definition \ref{s-phi-type} and a similar argument as before, we obtain
+\begin{align*}
+  b_i \b^{\xi - e_i + \nu} = (b_i b_j)(\b^{\xi - e_i + \nu - e_j}) \equiv c_{j,i} (b_j
+  b_i)(\b^{\xi - e_i + \nu - e_j}) \mod F_{\tphi(\xi + \nu) - 1}A
+\end{align*}
+The same reasoning applied to the product $b_j(b_i\b^{\xi - e_i + \nu - e_j})$ shows that
+\begin{align*}
+  b_j (b_i \b^{\xi - e_i + \nu - e_j}) 
+    &\equiv c_{e_i, \xi - e_i + \nu - e_j} b_j(\b^{\xi  + \nu - e_j}) \mod
+  F_{\tphi(\xi + \nu) - 1}A.
+\end{align*}
+Since $j < i$, the definition of $j$ implies $b_j(\b^{\xi  + \nu - e_j}) = \b^{\xi + 
+\nu}$, so the proof of item \ref{filtration} is complete.
+
+We now prove item \ref{straight}. Set
+\[
+  T = \{(\xi, \nu) \in \NN_0^n \times \NN_0^n \mid \b^\xi \equiv c \b^{\nu} \mod
+    F_{\tphi(\xi) -1}
+    \mbox{ for some } c \in \k^\times\}.
+\]
+We will show that $L(S) \subset T$, which clearly implies the desired result.
+By definition $T$ is an equivalence relation, and item \ref{filtration} implies it is a
+congruence on $\NN_0^n$. By item \ref{straightening} of Definition \ref{s-phi-type}, 
+every pair $(p_i, p'_i) \in P$ lies in $T$. Since $L(S)$ is the smallest congruence 
+containing $P$, we deduce that $L(S) \subset T$.
+\end{proof}
+
+\paragraph
+\label{P:equivalent-qatd}
+A \emph{section} of $\pi$ is a function $\tau: S \to \NN_0^n$ such that $\pi \circ \tau =
+\Id_S$, that is $s = \sum_i \tau(s)_i s_i$ for every $s \in S$. If $A$ is an algebra of
+$(S,\phi)$-type then Lemma \ref{type-filtration} implies that for any section $\tau$ of
+$\pi$ the set $\{\b^{\tau(s)} \mid s \in S\}$ spans $A$. We now show that an algebra has 
+a quantum affine toric degeneration if and only if it is of $(S,\phi)$-type for an 
+adequate morphism $\phi$ and the spanning set determined by any section is linearly 
+independent.
+\begin{Proposition*}
+The following statements are equivalent.
+\begin{enumerate}
+\item \label{has-qat-degeneration}
+The algebra $A$ has a quantum affine toric degeneration with associated semigroup $S$.
+\item \label{every-section}
+There exists a semigroup morphism $\phi: S \to \NN_0$ such that $A$ is of 
+$(S, \phi)$-type, and for every section $\tau: S \to \NN_0^n$ of $\pi$ the set $\{
+\b^{\tau(s)} \mid s \in S\}$ is linearly independent.
+\item \label{some-section}
+There exist a semigroup morphism $\phi: S \to \NN_0$ such that $A$ is of 
+$(S, \phi)$-type and a section $\tau: S \to \NN_0^n$ of $\pi$ such that the set $\{
+\b^{\tau(s)} \mid s \in S\}$ is linearly independent.
+\end{enumerate}
+\end{Proposition*}
+\begin{proof}
+We first show that \ref{has-qat-degeneration} implies \ref{every-section}. By hypohtesis
+there exists a filtration by graded subspaces $\F = \{F_lA\}_{l \geq 0}$ such that 
+$\gr_\F A \cong \k^\alpha[S]$ as $\NN_0^{r+1}$-graded algebras for some $2$-cocycle 
+$\alpha: S \times S \to \k^\times$, with the grading on the twisted semigroup algebra 
+given by a semigroup morphism $\psi: S \to \NN_0^{r+1}$ such that $|\psi(s_i)| > 0$ for 
+all $1 \leq i \leq n$. We identify $\gr_\F A$ with $\k^\alpha[S]$ through this 
+isomorphism to simplify notation. 
+
+For each $1 \leq i \leq n$, we choose homogeneous elements $b_i \in A$ such that 
+$\gr b_i = X^{s_i}$. By definition of the product of an associated graded ring, for each 
+$\xi \in \NN_0^n$ the element $\prod_{i = 1}^n (\gr b_i)^{\xi_i}$ equals either 
+$\gr \left(\prod_{i = 1}^n b_i^{\xi_i}\right)$ or zero. Since $\k^\alpha[S]$ is an
+integral ring the last possibility cannot occur, so $\gr (\b^\xi)$ equals a nonzero 
+multiple of $X^{\pi(\xi)}$. Thus if $\tau: S \to \NN_0^n$ is a section of $\pi$ the set 
+$\{\gr \b^{\tau(s)} \mid s \in S\}$ is a basis of $\k^\alpha[S]$, which implies that 
+$\{\b^{\tau(s)} \mid s \in S\}$ is a basis of $A$. This also proves that $A$ satisfies 
+item \ref{generation} of Definition \ref{s-phi-type}.
+
+Let $\phi: S \to \NN_0$ be the additive map given by $s \mapsto \psi(s)_{r+1}$; equivalently $\phi(s)$ is the minimal $l$ such that $\b^{\tau(s)} \in F_lA$, in particular $\phi(s_i) > 0$ since $F_0A = \k$ by hypothesis. Thus $F_lA = \vspan{
+\b^{\tau(s)} \mid \phi(s) \leq l}$. For each $1 \leq i,j \leq n$
+and each $1 \leq k \leq m$ there exist $c_{i,j}, d_k \in \k^\times$ such that
+\begin{align*}
+  (\gr b_j b_i) &= c_{i,j} (\gr b_i b_j),\\
+  \gr \b^{p'_k} &= d_k \gr \b^{p_k}
+\end{align*}
+hold in $\k^\alpha[S]$, which implies that items \ref{commutation} and 
+\ref{straightening} of Definition \ref{s-phi-type} hold in $A$. Thus $A$ is of
+$(S,\phi)$-type, and we have proved \ref{has-qat-degeneration} implies 
+\ref{every-section}.
+
+It is clear that \ref{every-section} implies \ref{some-section}, so let us see that
+\ref{some-section} implies \ref{has-qat-degeneration}. Define the filtration 
+$\{F_l A\}_{l \geq 0}$ as in \ref{type-filtration}. By item 2 of Lemma 
+\ref{type-filtration}, the set $\{\b^{\tau(s)} \mid \phi(s) \leq l\}$ generates $F_lA$
+for each $l \in \NN_0$, and since by hypothesis it is linearly independent, it is a 
+basis of $F_lA$. Hence $\gr_\F A$ is generated by $\{\gr \b^{\tau(s)} \mid s \in S\}$. 
+Once again by Lemma \ref{type-filtration} for each $s,s' \in S$ there exist 
+$\beta(s,s'), \alpha(s,s') \in \k^\times$ such that
+\begin{align*}
+(\gr \b^{\tau(s)})(\gr \b^{\tau(s')}) = \beta(s,s') \gr \b^{\tau(s) + \tau(s')} = 
+\alpha(s,s') \gr \b^{\tau(s+s')}.
+\end{align*}
+Associativity of the product of $\gr_\F A$ implies that $\alpha: S \times S \to 
+\k^\times$ is a $2$-coycle, so we may consider the $\k$-linear map $\k^\alpha[S] \to 
+\gr_\F A$ induced by the assignation $X^s \mapsto \gr \b^{\tau(s)}$. This map is 
+multiplicative and hence an isomorphism of $\k$-algebras. Furthermore, the elements $\gr 
+\b^{\tau(s)}$ are homogeneous and form a basis of the maximal graded ideal of 
+$\gr_\F A$, so this algebra is indeed a quantum affine toric variety.
+\end{proof}
+
+\paragraph
+\label{lex-degeneration}
+Let $<$ be a total order on $S$ compatible with the semigroup structure, i.e. for all 
+$s,s',s'' \in S$, the inequality $s<s'$ implies $s+s'' < s'+s'' $. We will say 
+that an ordered basis $\mathcal B = \{b_s \mid s \in S\}$ is an \emph{$(S, <)$-basis} of 
+$A$ if each $b_s$ is homogeneous, and for all $s,s',s'' \in S$ such that 
+$s'' < s+s'$ there exist $c_{s,s'} \in \k^\times$ and $c_{s,s'}^{s''} \in \k$ such that
+\[
+  b_s b_{s'} = c_{s,s'} b_{s+s'} + \sum_{s'' < s+s'} c_{s,s'}^{s''} b_{s''}.
+\]
+
+Recall that we are considering $S$ along with a fixed embedding $i: S \to \NN_0^t$,
+which induces a total order on $S$ by restriction of the lexicographic order. For this
+paragraph only we consider alternative embeddings of $S$, and for each embedding
+$\iota: S \to \NN_0^u$ we denote by $<^\iota$ the total order on $S$ induced by pulling 
+back the lexicographic order of $\NN_0^u$ through $\iota$. Since $\iota$ is a semigroup
+morphism, any such order is compatible with the semigroup structure.
+\begin{Proposition*}
+The algebra $A$ has a quantum affine toric degeneration with underlying semigroup $S$ if 
+and only if there exists an embedding $\iota: S \to \NN_0^u$ such that $A$ has an 
+ordered $(S, <^\iota)$-basis.
+\end{Proposition*}
+\begin{proof}
+Suppose $A$ has a quantum affine toric degeneration with underlying semigroup $S$. Then 
+by Proposition \ref{P:equivalent-qatd} there exists a semigroup morphism $\phi:S\to 
+\NN_0$ such that $A$ is of $(S, \phi)$-type, and we may choose any section $\tau: S \to 
+\NN_0^n$ to obtain a basis $\mathcal B = \{\b^{\tau(s)} \mid s \in S\}$. Recall that with
+the identifications from \ref{affine-semigroups}, we are assuming that $S \subset 
+\NN_0^t$; let $\iota$ be the restriction to $S$ of the semigroup morphism $\phi \times 
+\Id: \NN_0^t \to \NN_0^{t+1}$, and write $<$ for $<^\iota$. Notice that $\phi(s) < 
+\phi(s')$ implies $s<s'$. By Lemma 
+\ref{type-filtration}, for all $s,s' \in S$ and all $s''$ such that $\phi(s'') < 
+\phi(s+s')$ there exist $c_{s,s'} \in \k^\times$ and $c_{s,s'}^{s''} \in \k$ such that
+\[
+  \b^{\tau(s)}\b^{\tau(s')} 
+    = c_{s,s'}\b^{\tau(s+s')} 
+      + \sum_{\phi(s'') < \phi(s+s')} c_{s,s'}^{s''} \b^{\tau(s'')},
+\]
+which implies $\mathcal B$ is an ordered $S$-basis with respect to $<$.
+
+Now assume $A$ has an ordered $S$-basis with respect to some total order $<$ induced 
+by an embedding $\iota: S \to \NN_0^u$. Since $<$ is the pull-back of the lexicographic 
+order through an embedding, we might as well assume $S \subset \NN_0^u$ and that $<$ is 
+the lexicographic order. For each $s \in S$ set $F_sA = \langle b_{s'} \mid s' \leq s 
+\rangle$ and $F_{<s}A = \langle b_{s'} \mid s' < s \rangle$. The hypothesis implies that
+$\mathcal F = \{F_sA \mid s \in S\}$ is an $S$-indexed filtration on $A$ by graded 
+subspaces, so we may form the associated $S$-graded ring
+\[
+  \gr_\F A = \bigoplus_{s \in S} \frac{F_sA}{F_{<s}A}.
+\]
+The set $\{\gr b_s \mid s \in S\}$ is a basis of $\gr_\F A$, and by definition
+$(\gr b_s) (\gr b_{s'}) = c_{s,s'} \gr b_{s+s'}$, so the map $\alpha: S \times S \to 
+\k^\times$ defined by $\alpha(s,s') = c_{s,s'}$ is a $2$-cocycle and $\gr_\F A \cong 
+\k^\alpha[S]$.
+
+For each $1 \leq i \leq n$ we put $b_i = b_{s_i}$. The set $\{\gr b_i \mid i = 1 \ldots, 
+n\}$ generates $\gr_\F A$ as algebra, so the set $\{b_i \mid i = 1, \ldots, n\}$ 
+generates $A$ as algebra. Given $\xi \in \NN_0^n$, the definition of the product of 
+the associated graded ring implies that $\prod_i(\gr b_i)^{\xi_i}$ equals either $\gr 
+(\b^\xi)$ or zero, and since $\k^\alpha[S]$ is integral the second possibility can 
+not occur. This implies that for all $1 \leq i < j \leq n$ and all $\xi \in \NN_0^n$ 
+such that $\pi(\xi) < s_i +s_j$ there exist $c_{i,j} \in \k^\times$ and $c^{i,j}_\xi \in 
+\k$ such that
+\begin{align*}
+  b_j b_i = c_{i,j} b_i b_j + \sum_{\pi(\xi) < \pi(s_i + s_j)} c^{i,j}_\xi
+    \b^\xi,
+\end{align*}
+and for each $1 \leq i \leq m$ and each $\xi \in \NN_0^n$ such that $\pi(\xi) < p_i$ 
+there exist $d_i \in \k^\times$ and $d^i_\xi \in \k$ such that
+\begin{align*}
+  \b^{p'_i} = d_i \b^{p_i} + \sum_{\pi(\xi) < p} d^i_\xi \b^\xi.
+\end{align*}
+The set 
+\[
+  C 
+    =\{\pi(\xi) \mid d^i_\xi \neq 0 \mbox{ for some } 1 \leq i \leq m, 
+      \mbox{ or } c^{i,j}_\xi \neq 0 \mbox{ for some $1 \leq i < j \leq n$}\}
+\]
+is finite and hence is contained in a cube $[0,N+1]^u$ for $N$ large enough, so the 
+morphism $\phi: \NN_0^u \to \NN$ mapping $e_i$ to $(N+1)^i$ sends each $c \in C$ to 
+the natural number having $N+1$-adic expansion $c$. In particular $\phi$ respects the 
+restriction of the lexicographic order to $C$, so $A$ is of $(S,\phi)$-type. 
+
+Let $\tau: S \to \NN_0^n$ be any section of $\pi$. The algebra $\gr_\F A$ has a natural 
+$S$-grading, and for each $s \in S$ the element $\gr \b^{\tau(s)}$ is of degree $s$. As 
+we have already observed, this is a non-zero element so the set $\{\gr \b^{\tau(s)} \mid 
+s \in S\}$ is a basis of $\gr_\F A$, which implies that $\{\b^{\tau(s)} \mid s \in S\}$ 
+is a basis of $A$. Thus by Proposition \ref{P:equivalent-qatd} $A$ has a quantum affine 
+toric degeneration with underlying semigroup $S$.
+\end{proof}
+
+\paragraph
+We finish this section with an easy consequence of Lemma \ref{type-filtration}. It will
+not be used in the sequel, but it is interesting in its own right.
+\begin{Proposition*}
+If $A$ is of $(S,\phi)$-type and for some section $\tau$ of $\pi$ the set
+$\{\b^{\tau(s)} \mid s \in S\}$ is linearly independent, then the relations given in
+items \ref{commutation} and \ref{straightening} of Definition \ref{s-phi-type} give a
+presentation of $A$.
+\end{Proposition*}
+\begin{proof}
+Since $A$ is of $(S,\phi)$-type, it is generated as algebra by homogeneous elements 
+$b_1, \ldots, b_n$, and there exist constants $c_{i,j}, c^{i,j}_\xi, d_i, d^i_\xi$ such
+that $A$ complies with Definition \ref{s-phi-type}. Furthermore, the relations described 
+in items \ref{commutation} and \ref{straightening} of this definition are homogeneous.
+
+Let $B$ be the free algebra generated by $X_1, \ldots, X_n$ and let $I$ be the ideal of
+$B$ generated by the elements
+\begin{align*}
+  X_j X_i &- c_{i,j} X_i X_j - \sum_{\tphi(\xi) < \phi(s_i + s_j)} c^{i,j}_\xi
+  X^\xi, 
+    & \mbox{for } 1 \leq i < j \leq n;\\
+  X^{p'_i} &- d_i X^{p_i} - \sum_{\tphi(\xi) < \tphi(p_i)} d^i_\xi X^\xi, 
+    &\mbox{for } 1 \leq i \leq m;
+\end{align*}
+where $X^\xi = X_1^{\xi_1} X_2^{\xi_2} \cdots X_n^{\xi_n}$ for each $\xi \in \NN^n_0$. 
+We put a grading on $B$ by setting $\deg X_i = \deg b_i$, and this induces
+a grading on $B/I$. Since $B$ is a free algebra the assignation $X_i \mapsto b_i$ 
+induces a morphism of graded algebras $B \to A$, which factors through $B/I$. We thus
+obtain a morphism of graded algebras $f: B/I \to A$.
+
+We denote by $Y_i$ the image of $X_i$ in $B/I$. Cleary $B/I$ is an $(S,\phi)$-algebra, 
+and the algebra map $f: B/I \to A$ sends $Y_i$ to $b_i$ for all $i$. Since 
+$f(Y^{\tau(s)}) = \b^{\tau(s)}$, the set $\{Y^{\tau(s)} \mid s \in S\}$ is linearly 
+independent and hence a basis of $B/I$. Thus $f$ maps a basis onto a basis, so it is 
+an isomorphism.
+\end{proof}
+
+
+%\newpage 
+\section{Quantum affine toric degeneration of quantum Schubert varieties}
+\label{q-flag-schubert}
+In this section we apply the rsults in the previous section to study Schubert varieties 
+of quantum flag varieties. We recall the definitions of quantum flag and Schubert 
+varieties found with some detail in order to establish notation, and following 
+Littelmann we associate to each a an affine semigroup $S$. We then use a result due to
+Caldero to show that each quantum Schubert variety has an $(S, <)$-basis in the sense of 
+\ref{lex-degeneration}, and hence has a quantum toric degeneration with associated 
+semigroup $S$.
+
+\subsection*{Quantum flag and Schubert varieties}
+
+\paragraph
+\label{lie-algebra-notation}
+Let $\g$ be a complex semisimple Lie algebra and let $G$ be the corresponding simply 
+connected Lie group. We denote by $\Lambda$ the weight lattice of $\g$, and write 
+$\{\varpi_1, \ldots, \varpi_n\}$ for its set of fundamental weights. Let $\Lambda^+ =
+\sum_i \NN_0 \varpi_i$ be the set of dominant weights, and $\alpha_1, \ldots,\alpha_n$ 
+the positive roots of $\g$. Let $W$ be the Weyl group of $\g$, and $s_i \in W$ the
+reflection corresponding to the $i$-th positive root. Given an element $w \in W$ we 
+denote its length by $\ell(w)$, and set $N$ to be the length of the longest word of $W$. 
+A \emph{decomposition} of $w \in W$ is a word on the generators $s_i$ that equals $w$ in 
+$W$. A decomposition of the longest word of $W$ is said to be \emph{adapted} to $w$ if
+it is of the form $s_{i_1} \ldots s_{i_N}$ with $s_{i_1} \ldots s_{i_{\ell(w)}} = w$.
+For every element $w \in W$ there exists a decomposition of the longest word of $W$ 
+adapted to $w$. In other words the longest word of $W$ is the maximum for the weak right 
+Bruhat order on $W$, see \cite{BB}*{Proposition 3.1.2}.
+
+\paragraph
+\label{quantized-enveloping-algebra}
+Fix $q \in \k^\times$ not a root of unity. Let $U_q(\g)$ be the quantum enveloping 
+algebra of $\g$ as defined in \cite{Jan}*{Definition 4.3}. Let $U_q^+(\g), U_q^-(\g)$ be 
+the positive and negative parts of $U_q(\g)$ as defined in \cite{Jan}*{4.4}. Recall that 
+for each $\lambda \in \Lambda^+$ there is an irreducible highest-weight representation 
+of $U_q(\g)$ of type $\mathbf{1}$, which we denote by $V_q(\lambda)$.
+Each $V_q(\lambda)$ decomposes as the direct sum of weight spaces $\bigoplus_{\mu \in 
+L(\lambda)} V_q(\lambda)_\mu$, where $L(\lambda)$ is a finite subset of $\Lambda$; the 
+dimensions of the weight spaces are the same as in the classical case, so the Weyl and 
+Demazure character formulas hold for these representations, see \cite{K}*{section 12.4}, 
+or \cite{Jan}*{subsection 5.15} for the Weyl formula.
+
+\paragraph
+Since $U_q(\g)$ is a Hopf
+algebra, its dual is an algebra with convolution product induced by the coproduct of
+$U_q(\g)$. There is a map $V_q(\lambda)^* \ot V_q(\lambda) \to U_q(\g)^*$ defined by
+sending $\phi \ot v \in V_q(\lambda)^* \ot V_q(\lambda)$ to the linear functional
+$c^\lambda_{\phi, v}$, which assigns to each $u \in U_q(\g)$ the scalar $c^\lambda_{\phi,
+v}(u) = \phi(uv)$. Functionals of type $c^\lambda_{\phi, v}$ are called \emph{matrix
+coefficients}. The $\k$-linear span of the matrix coefficients is a subalgebra of 
+$U_q(\g)^*$ denoted by $\O_q[G]$, called the quantized algebra of coordinate functions 
+over the group $G$. 
+
+\paragraph
+\label{q-full-flag-varieties}
+Quantum flag varieties were introduced by Soibelman in \cite{S} and by Lakshmibai and 
+Reshetikhin in \cite{qLR}; we review their definition. 
+Fix a maximal Borel subgroup $B$ of $G$. The \emph{full flag variety} associated to $G$ 
+is $G/B$. Let $C^+_q(\lambda)$ be the vector space of matrix coefficients of the form
+$c^\lambda_{\phi,v_{\lambda}}$ in $U_q(\g)^*$, where $v_\lambda$ is a highest weight
+vector in $V_q(\lambda)$, and set 
+\[ 
+  \O_q[G/B] = \bigoplus_{\lambda \in \Lambda^+} C^+_q(\lambda) \subset \O_q[G] 
+    \subset U_q(\g)^*.  
+\] 
+This is called the \emph{quantum full flag variety} of $G$. By definition the product of 
+two matrix coefficients in $\O_q[G/B]$ is again in $\O_q[G/B]$, and its decomposition 
+as a direct sum gives $\O_q[G/B]$ the structure of a $\Lambda^+$-graded 
+algebra. 
+
+\paragraph
+Let $I$ be a subset of the set of fundamental weights and set $\mathcal J(I) = 
+\sum_{\varpi_i \notin I} \NN_0 \varpi_i$. Denote by $W_I \subset W$ the subgroup 
+generated by the reflections $s_i$ with $\varpi_i \in I$, and for each class in 
+$W/W_I$ pick a representative of minimal length. We denote by $W^I$ the set of these 
+representatives. Since the Demazure character formula holds, for each $w \in W^I$ and 
+each $\lambda \in \mathcal J(I)$ the vector space $V_q(\lambda)_{w\lambda}$ has 
+dimension $1$. The \emph{Demazure module} $V_q(\lambda)_{w}$ is the 
+$U_q^+(\g)$-submodule of $V_q(\lambda)$ generated by a vector of weight $w\lambda$
+in $V_q(\lambda)$.
+
+The set $I$ determines a Lie subalgebra $\mathfrak p \subset \g$, and a parabolic 
+subgroup $P_I \subset G$. The variety $G/P_I$ is the corresponding generalized flag 
+variety. To this datum we associate the $\Lambda^+$-graded subalgebra of $\O_q[G/B]$ 
+\[ 
+  \O_q[G/P_I]:= \bigoplus_{\lambda \in \mathcal J(I)} C_q^+(\lambda) 
+\] 
+called the \emph{quantum partial flag variety associated to $I$}. The case 
+$I = \emptyset$ corresponds to the full flag variety.
+
+\paragraph
+\label{q-Schubert-varieties}
+Given vector spaces $V_2 \subset V_1$, we denote by $V_2^\perp$ the set of linear
+functionals over $V_1$ which are zero on $V_2$. For every $w \in W^I$, the vector space 
+\[
+  J_w^I = \bigoplus_{\lambda \in \mathcal J(I)} \vspan{c_{\phi,v_\lambda}^\lambda
+  \in C_q^+(\lambda) \mid \phi  \in V_q(\lambda)_w^\perp } \subset \O_q[G/P_I] 
+\] 
+is an ideal of $\O_q[G/P_I]$ called the \emph{Schubert ideal} associated to $w$. The
+quotient algebra $\O_q[G/P_I]_w = \O_q[G/P_I]/J^I_w$ is called the \emph{quantum Schubert
+variety} associated to $w$.
+
+%\newpage 
+\subsection*{Degeneration of quantum Schubert varieties}
+%\label{qtad-flag}
+
+\paragraph
+In this subsection we assume that $\k$ is of characteristic zero and that $q \in 
+\k^\times$ 
+is trascendental over $\QQ$. Our aim is to show that under these conditions quantum 
+Schubert varieties have quantum affine toric degenerations. In order to do so we work 
+for a moment over the field $\QQ(v)$, where $v$ is an indeterminate over $\QQ$, and 
+consider the $\QQ(v)$-algebra $U = U_v(\g)$. The general case will follow by extension 
+of scalars. 
+
+We denote by $U^+$ and $U^-$ the algebras $U^+_v(\g)$ and $U^-_v(\g)$, respectively. Let 
+$\A = \ZZ[v, v^{-1}] \subset \QQ(v)$. The algebra $U$ has an $\A$-form, defined 
+equivalently in \cite{Lu}*{paragraph 3.1.13} and \cite{Jan}*{section 11.1}, which we 
+denote by $U_\A$. This is a graded subring of $U$, and the algebras $U^+$ and $U^-$ also 
+have $\A$-forms which we denote by $U_\A^+$ and $U_\A^-$, respectively. By definition 
+$U \cong \QQ(v) \ot_\A U_\A$, and analogous results hold for $U_\A^+$ and $U_\A^-$.
+
+The algebra $U_\A^-$ has a homogeneous $\A$-basis $\B$, called the \emph{canonical 
+basis} of $U^-$, discovered independently by Lusztig and Kashiwara.
+For a general overview of the theory we refer to \cite{K}, and for proofs and details to
+\cite{Lu}*{section II} and \cite{Jan}*{chapters 9 - 11}. The $\A$-form $U_\A^-$ is
+compatible with the coalgebra structure of $U$, in the sense that $\Delta(U_\A^-) \subset
+U_\A^- \ot_\A U_\A^-$, where $\Delta$ is the comultiplication of $U$, see 
+\cite{Lu}*{Proposition 14.2.6 (a)}. Furthermore the highest weight modules 
+$V_v(\lambda)$ have corresponding $\A$-forms, which we denote by $V_\A(\lambda)$. All 
+these $\A$-forms are compatible with the weight decompositions of the original objects.
+
+\begin{Theorem} 
+\label{T:A-crystal-basis} 
+Let $\lambda \in \Lambda^+$, let $I$ be a subset of the fundamental weights and let 
+$w \in W^I$. There exists $\B_\lambda \subset \B$ such that $\B_\lambda v_\lambda 
+\subset V_\A(\lambda)$ is a basis of weight vectors of $V_\A(\lambda)$, and furthermore, 
+there exists a subset $\B_w \subset \B$ such that $(\B_w \cap \B_\lambda)v_\lambda$ is a 
+basis of the Demazure module $V_\A(\lambda)_w$.
+\end{Theorem} 
+\begin{proof} 
+See \cite{K1}*{Theorem 3.2.5}. Remark 3.2.6 of the same reference states that this
+decomposition induces a decomposition of the corresponding $\A$-forms.  
+\end{proof}
+
+\paragraph
+\label{L:are-semigroups}
+Littelman proved in \cite{Lit}*{Proposition 1.5, a)} that for every decomposition $w_0$ 
+of the longest word of $W$ there is a parametrization of the canonical basis $\B$ by a 
+set $\S_{w_0} \subset \NN^N$, where $N$ is the length of the longest word of $W$.  For 
+each $s \in \S_{w_0}$ let $b_{s}$ denote the corresponding element in the canonical 
+basis. Thus if $\lambda$ is a dominant weight then there exists a finite set 
+$S_{\lambda, w_0} \subset S_{w_0}$ such that $\B_\lambda = \{b_s \mid s \in 
+S_{\lambda, w_0} \}$.
+
+Let $I$ be a subset of the fundamental weights, let $w \in W^I$, and let $w_0$ be a 
+decomposition of the longest word of $W$ adapted to $w$. Following \cite{C} we set 
+\begin{align*} 
+  \tilde \S_{w_0} 
+    &= \{(s,\lambda) \mid s \in S_{\lambda,w_0}\} 
+    \subset \NN_0^N \times \Lambda^+ \cong \NN_0^{N+n},\\ 
+  \tilde \S_{w_0}^w 
+    &= \{(s,\lambda) \in \tilde \S_{w_0} \mid b_s \in \B_\lambda \cap \B_w\},  \\ 
+  \tilde \S_{w_0,I}^w 
+    &= \{(s,\lambda) \in \tilde S_{w_0}^w \mid \lambda \in \mathcal J(I)\} 
+    = \tilde S_{w_0}^w \cap (\NN_0^N \times \mathcal J(I)).  
+\end{align*} 
+These are semigroups with a total order given by the restriction of the lexicographic 
+order of $\NN_0^{N + n}$. By abuse of notation, we denote this order by $\leq_{\lex}$.  
+
+\begin{Lemma*} 
+The sets $\tilde \S_{w_0}, \tilde \S_{w_0}^w$ and $\tilde \S_{w_0, I}^w$ are normal 
+affine semigroups.  
+\end{Lemma*} 
+\begin{proof} 
+For $\tilde \S_{w_0}$ and $\tilde \S_{w_0}^w$ see \cite{C}*{Theorem 2.2 and Theorem 2.4}
+respectively. By definition $\tilde \S_{w_0,I}^w = \tilde S_{w_0}^w \cap (\NN_0^N \times
+\mathcal J(I))$, and Gordan's Lemma \cite{BH}*{Proposition 6.1.2} implies that the 
+intersection of normal semigroups is normal. 
+%Let $D = \RR_+ \tilde S_{w_0}^w$ and let $G$ be the group of fractions of 
+%$\NN_0^n \times \mathcal J(I)$. Since $\tilde S_{w_0}^w$ is normal, Gordan's Lemma 
+%\cite{BH}*{Proposition 6.1.2} implies it is equal to $D \cap (\ZZ^n \times P)$. Now 
+%every point of $G \cap D$ lies in $\tilde S_{w_0}^w$, and hence in $\NN_0^n \times P^+$. 
+%Thus 
+%\[ 
+  %\tilde S^w_{w_0,I} 
+    %= \tilde S_{w_0}^w \cap (\NN_0^n \times \mathcal J(I)) 
+    %= D \cap (\NN_0^n \times \mathcal J(I)) 
+    %= D \cap G, 
+%\]
+%and Gordan's Lemma implies that $D \cap G$ is a normal semigroup.  
+\end{proof}
+
+\paragraph
+Let $\lambda$ be a dominant integral weight. By Theorem \ref{T:A-crystal-basis}, the set
+$\B_\lambda v_\lambda$ is a basis of $V_v(\lambda)$, and hence it has a dual basis
+$\B_\lambda^*$. For every $s \in S_\lambda$ there is an element $b_{s,\lambda}^* \in
+\B_\lambda^*$ defined as the only functional that sends $b v_\lambda$ to $\delta_{b,b_s}$
+for all $b \in \B$. Each linear functional $b^*_{s, \lambda}$ induces a matrix 
+coefficient which by abuse of notation we will also denote by $b^*_{s, \lambda}$. We 
+denote by $C^+_\A$ the sub $\A$-module of $C^+_v(\lambda)$ generated by these matrix 
+coefficients, and set 
+\[ 
+  \O_\A[G/B] = \bigoplus_{\lambda \in \Lambda^+} C^+_\A(\lambda).  
+\] 
+Clearly $\O_\A[G/B] \subset \O_v[G/B] \subset U_v(\g)^*$. The product of $\O_v[G/B]$ is 
+induced by the product of this last algebra, which in turn is induced by the coproduct 
+of $U_v(\g)$. Since $U_\A$ is stable by the coproduct, $\O_\A[G/B]$ is a sub 
+$\A$-algebra of $\O_q[G/B]$.
+
+Setting 
+\begin{align*} 
+\B_{\lambda, w}^* 
+  &= \{b_{s, \lambda}^* \mid (s, \lambda) \in \tilde S_{w_0, I}^w \}, \\ 
+\B_{\lambda, w}^\perp 
+  &= \{b_{s, \lambda} \in B_\lambda^* \cap V_v(\lambda)_w^\perp\} 
+\end{align*} 
+we see that $\B_\lambda = \B_{\lambda, w}^* \sqcup \B_{\lambda, w}^\perp$, and 
+$\B_{\lambda, w}^\perp$ is a basis of $V_v(\lambda)_w^\perp$, while the restrictions of 
+the functionals of $\B_{\lambda, w}^*$ to $V_v(\lambda)_w$ form a basis of 
+$V_v(\lambda)_w^*$.  Hence it is possible to define $\A$-forms of arbitrary quantum 
+Schubert varieties, and by definition the image of matrix coefficients $b_{s, \lambda}^*$
+with $(s, \lambda) \in \tilde S_{w_0, I}^w$ form an $\A$-basis of the $\A$-algebra 
+$\O_\A[G/P_I]_w$. We keep abusing notation and denote the image of $b_{s, \lambda}^*$ in 
+this quotient by the same symbol.
+
+\begin{Proposition} 
+\label{P:basis-product} 
+Let $I$ be a finite set of fundamental weights, let $w \in W^I$, and let $w_0$ be a 
+decomposition of the longest word of $W$ adapted to $w$. Then for every $(s,
+\lambda), (s', \lambda'), (s'', \lambda'') \in \tilde S_{w_0, I}^w$ such that $(s'',
+\lambda'') <_{\lex} (s + s', \lambda + \lambda')$ there exist $c_{s, s'}^{s''} \in \A$ 
+and $c = c((s,\lambda),(s',\lambda')) \in \ZZ$ such that 
+\begin{align}
+\label{product-formula} 
+b_{(s, \lambda)}^* b_{(s', \lambda')}^* 
+  = v^c b_{(s+s', \lambda + \lambda')}^* 
+    + \sum_{s'' <_{\lex} s+s'} c_{s,s'}^{s''} b_{(s'', \lambda + \lambda')}^*.  
+\end{align} 
+\end{Proposition} 
+\begin{proof} 
+Let $\k = \CC(t^{1/d})$, where $d$ is the length of the longest root of $\g$. Then there
+is an obvious map $\QQ(v) \to \k$ sending $v$ to $t$. This induces a morphism of
+Hopf algebras $U_v(\g) \hookrightarrow U_t(\g)$. The canonical basis $\B$ of $U_v(\g)$
+maps to a basis of $U_t(\g)$, and since Demazure modules are preserved by extension of
+scalars, \ref{T:A-crystal-basis} still holds over $U_t(\g)$ (see the reference given
+there). Thus there is an obvious injective $\A$-linear morphism from $C_\A^+(\lambda)$ to
+$C_t^+(\lambda)$, and hence an injective $\A$-linear morphism $\O_\A[G/B] \to \O_t[G/B]$;
+this morphism is multiplicative since the extensions $U_\A \hookrightarrow U_v(\g)
+\hookrightarrow U_t(\g)$ are morphisms of coalgebras. Thus it is enough to establish that
+the formula holds in $\O_t[G/B]$, which is done in \cite{C}*{Proposition 2.1 and Theorem 
+2.3}.
+\end{proof} 
+
+\begin{Theorem}
+\label{Schubert-deg}
+The quantum Schubert variety $\O_q[G/P_I]_w$ degenerates to a quantum affine toric 
+variety with associated semigroup $\tilde S^w_{w_0, I}$. In particular any quantum 
+Schubert variety has property $\chi$, finite local dimension, the AS-Cohen-Macaulay 
+property, and is a maximal order in its skew-field of fractions.
+\end{Theorem}
+\begin{proof}
+By Proposition \ref{P:basis-product} $\O_q[G/P_I]_w$ has an ordered $\tilde 
+S^w_{w_0,I}$-basis with respect to $\leq_{\lex}$,so the first part of the statement
+follows from Proposition \ref{lex-degeneration}.
+
+Since $\tilde S^w_{w_0, I}$ is a normal semigroup, we know by Proposition 
+\ref{properties-of-qatv} that the associated graded ring of the quantum Schubert variety
+has property $\chi$, finite local dimension and the AS-Cohen-Macaulay property, which 
+$\O_q[G/P_I]_w$ inherits by Theorem \ref{transfer}. Also by Proposition 
+\ref{properties-of-qatv}, the quantum affine toric variety is a maximal order in its 
+ring of fractions, and it follows from \cite{Mau}*{Chapitre IV, Proposition 2.1 and 
+Chapitre V, Corollaire 2.6} that $\O_q[G/P_I]_w$ is also a maximal order. 
+\end{proof}
+
+
+%\newpage 
+\section{Quantum affine toric degeneration of an algebras with a straightening law over 
+a distributive lattice}
+\label{richardson}
+
+We finish this article by relating our previous work \cite{RZ} with the material found 
+here. In that article we proved that Richardson varieties in the quantum grassmanian as 
+defined in \cite{RZ}*{Definition 5.2.1} are symmetric quantum graded algebras with a 
+straightening law over a poset \cite{RZ}*{Definition 3.1}, and that they satisfy a 
+technical ``Condition (C)'' \cite{RZ}*{Definition 4.1}. In \cite{RZ}*{Theorem 4.9} we 
+proved that, in the language of the present article, all symmetric quantum graded ASL's 
+satisfying condition (C) have quantum toric degenerations. We now prove a similar result
+under conditions milder than (C). In order to do this, we place 
+ourselves in the context of \cite{RZ2}*{section 3}, the reader is referred to it for 
+definitions and unexplained notation.
+
+\paragraph
+For the rest of this subsection $\L$ denotes a finite distributive lattice. Given $x,y 
+\in \L$ we denote their meet by $x \meet y$ and their join by $x \join y$, as usual. 
+Recall that the rank of $\L$ is defined as the length of any maximal chain in $\L$, which
+we denote by $r$. We also denote by $J(\L)$ the set of join irreducible elements of 
+$\L$, so $r = |J(\L)|$. We see $J(\L)$ as a poset with the order induced by $\L$, and
+extend this to a total order, so $J(\L) = \{p_1, \ldots, p_n\}$ and $p_i < p_j$ implies 
+$i < j$. Birkhoff's representation theorem states that $\L$ is isomorphic to the lattice
+of poset ideals of $J(\L)$, through the assignation $l \in \L \mapsto \{p \in J(I) \mid 
+p \leq l\}$.
+
+\paragraph 
+As shown in \cite{RZ2}*{section 3.3}, associated to $\L$ there is a semigroup $S(\L)$, 
+defined as follows: $S(\L)$ is the abelian semigroup generated by $\L$ modulo the 
+relations $\{x + y \equiv (x \meet y) + (x \join y) \mid x,y \in \L\}$.
+The map $\iota: \L \to \NN_0^{r}$ defined as
+\[
+  \iota(l) = \sum_{\{i : p_i \leq l\}} e_i,
+\]
+for each $l \in L$ is injective and a lattice morphism. 
+By \cite{RZ2}*{Proposition 3.3.3}, $\iota$ induces an injective semigroup morphism 
+$\iota: S(\L) \to \NN_0^{r}$ whose image is a full normal subsemigroup, so $S(\L)$ is a
+normal affine semigroup. 
+
+Set $n = |\L|$; write $\L = \{x_1, \ldots, x_n\}$, and set $s_i = \iota(x_i)$ for each 
+$1 \leq i \leq n$. Let $\pi: \NN_0^n \to S(\L)$ be the semigroup morphism induced 
+by the assignation $e_i \mapsto s_i$ for all $i$. It follows from 
+\cite{RZ2}*{Lemma 3.3.2} that every element of $S(\L)$ can be 
+written in a unique way as $s = \sum_{i=1}^n m_i s_i$ with the condition that the set 
+$\{x_i \mid m_i \neq 0\}$ is a chain of $\L$. Setting $t(s) = (m_1, \ldots, m_n)$ we 
+obtain a section $t: S(\L) \to \NN_0^n$ of $\pi$. We refer to $t$ as the \emph{standard 
+section} of $\pi$. 
+
+\paragraph
+For every pair of elements $x,y \in \L$ we define
+\begin{align*} 
+  R(x,y) &= \{(z,z') \in \L \times \L \mid z < x, y  <z'\}.  
+\end{align*} 
+We write $R(x,y)^*$ for $R(x,y) \setminus (x \meet y, x \join y)$.
+
+\paragraph
+We continue to denote by $A$ an $\NN_0^r$-graded noetherian algebra.
+Suppose that there is an injective function $[-]: \L \to A$. A \emph{standard monomial} 
+in $A$ is a product of the form $[x_0] [x_1] \ldots [x_n]$ with $x_{i} \leq x_{i+1}$ for 
+all $1 \leq i < n$. 
+\begin{Definition*}
+\label{D:symm-q-gr-asl} 
+Let $\L$ be a finite distributive lattice, and let $[-]: \L \to A$ be an injective 
+function. We say that $A$ is a 
+\emph{symmetric quantum graded algebra with a straightening law over $\L$}, or symmetric 
+quantum ASL for short, if the following hold.
+
+\begin{enumerate} 
+  \item The set $\{[x] \mid x \in \L\}$ consists of homogeneous elements of nonzero
+    degree that generate $A$ as an algebra.
+
+  \item The set of standard monomials is linearly independent.
+
+  \item For every $x,y \in \L$ there exist $\{c^{z,z'}_{x,y}\}_{(z,z') \in R(x,y)^*}
+  \subset \k$ and $c_{x,y} \in \k^\times$, such that 
+  \begin{align*} 
+    [y][x] = c_{x,y} [x][y] + \sum_{(z,z') \in R(x,y)^*} c^{z,z'}_{x,y} [z][z'].  
+  \end{align*}
+
+  \item For every pair of incomparable elements $x,y \in \L$ there exist
+  $\{d^{z,z'}_{x,y}\}_{(z,z') \in R(x,y)^*} \subset \k$ and $d_{x,y} \in \k^\times$, such
+  that
+  \begin{align*} 
+    [x][y] = d_{x,y} [x \meet y][x \join y] +
+    \sum_{(z,z') \in R(x,y)^*} d^{z,z'}_{x,y} [z][z'].  \end{align*}
+  \end{enumerate} 
+\end{Definition*}
+\begin{Remark*}
+The word \emph{symmetric} is there to distinguish this class from the more general class
+of quantum graded ASL's over a poset, defined in \cite{LR1}*{Definition 1.1.1}. Also
+notice that the definition of a symmetric quantum ASL over a general poset $P$ given in
+\cite{RZ}*{Definition 3.1} is slightly more general, as it does not require that 
+$d_{x,y} \neq 0$. This simple requirement is what takes the place of the much more 
+technical condition $(C)$.
+\end{Remark*}
+
+\begin{Theorem} 
+\label{T:ASL-are-dominated} 
+If $A$ is a symmetric quantum graded ASL over $\L$ then it has a quantum affine toric 
+degeneration with associated semigroup $S(\L)$.
+\end{Theorem} 
+\begin{proof} 
+Let $C = \{\iota(x) + \iota(y) \mid x,y \in \L\}$. This is a finite set, and so by 
+reasoning as in the proof of Proposition \ref{lex-degeneration} there is a morphism 
+$\phi: \NN_0^{\rk \L} \to \NN_0$ such that $\xi <_{\lex} \nu$ implies $\phi(\xi) < 
+\phi(\nu)$ for all $\xi, \nu \in C$. 
+
+Let $x,y \in \L$ and let $(z,z') \in R(x,y)^*$. Using Birkhoff's representation theorem, 
+it follows from the defintion of $\iota$ that $\iota(z') - \iota(y) <_{\lex} \iota(x) - 
+\iota(z)$, or equivalently $\iota(z) + \iota(z') <_{\lex} \iota(x) + \iota(y)$. Thus by 
+definition $A$ is of $(S,\phi)$-type with generators $b_i = [x_i]$. Also, by 
+\cite{LR1}*{Proposition 1.14}, standard monomials form a basis of $A$. The set of 
+standard monomials is the generating set associated to the standard section $t$ as 
+defined in \ref{P:equivalent-qatd}, so the proposition in that paragraph implies that
+$A$ has a quantum toric degeneration with associated semigroup $S(\L)$.
+\end{proof}
+
+%\newpage
+\begin{bibdiv} 
+\begin{biblist} 
+\bib{AZ}{article}{ 
+  author={Artin, M.}, 
+  author={Zhang, J. J.}, 
+  title={Noncommutative projective schemes}, 
+  journal={Adv. Math.}, 
+  volume={109}, 
+  date={1994}, 
+  number={2},
+  pages={228--287}, 
+}
+
+    
+\bib{BS}{book}{ 
+  author={Brodmann, M. P.}, 
+  author={Sharp, R. Y.}, 
+  title={Local cohomology: an algebraic introduction with geometric applications}, 
+  series={Cambridge Studies in Advanced Mathematics}, 
+  volume={60}, 
+  publisher={Cambridge University Press},
+  place={Cambridge}, 
+  date={1998}, 
+  pages={xvi+416}, 
+}
+
+\bib{BH}{book}{ 
+  author={Bruns, Winfried}, 
+  author={Herzog, J{\"u}rgen},
+  title={Cohen-Macaulay rings}, 
+  series={Cambridge Studies in Advanced Mathematics},
+  volume={39}, 
+  publisher={Cambridge University Press}, 
+  place={Cambridge}, 
+  date={1993},
+  pages={xii+403}, 
+}
+
+\bib{BB}{book}{
+   author={Bj{\"o}rner, Anders},
+   author={Brenti, Francesco},
+   title={Combinatorics of Coxeter groups},
+   series={Graduate Texts in Mathematics},
+   volume={231},
+   publisher={Springer},
+   place={New York},
+   date={2005},
+   pages={xiv+363},
+}
+
+\bib{C}{article}{ 
+  author={Caldero, Philippe}, 
+  title={Toric degenerations of Schubert varieties}, 
+  journal={Transform. Groups}, 
+  volume={7}, 
+  date={2002}, 
+  number={1},
+  pages={51--60}, 
+}
+
+
+
+\bib{RGS}{book}{
+   author={Rosales, J. C.},
+   author={Garc{\'{\i}}a-S{\'a}nchez, P. A.},
+   title={Finitely generated commutative monoids},
+   publisher={Nova Science Publishers, Inc., Commack, NY},
+   date={1999},
+   pages={xiv+185},
+}
+    
+
+
+
+\bib{GL}{article}{
+   author={Gonciulea, N.},
+   author={Lakshmibai, V.},
+   title={Degenerations of flag and Schubert varieties to toric varieties},
+   journal={Transform. Groups},
+   volume={1},
+   date={1996},
+   number={3},
+   pages={215--248},
+}
+
+\bib{Jan}{book}{ 
+  author={Jantzen, Jens Carsten}, 
+  title={Lectures on quantum groups},
+  series={Graduate Studies in Mathematics}, 
+  volume={6}, 
+  publisher={American Mathematical Society}, 
+  place={Providence, RI}, 
+  date={1996}, 
+  pages={viii+266}, 
+}
+
+\bib{JZ}{article}{ 
+  author={J{\o}rgensen, Peter}, 
+  author={Zhang, James J.},
+  title={Gourmet's guide to Gorensteinness}, 
+  journal={Adv. Math.}, 
+  volume={151},
+  date={2000}, 
+  number={2}, 
+  pages={313--345}, 
+}
+
+\bib{K1}{article}{ 
+  author={Kashiwara, Masaki}, 
+  title={The crystal base and Littelmann's refined Demazure character formula}, 
+  journal={Duke Math. J.}, 
+  volume={71}, 
+  date={1993},
+  number={3}, 
+  pages={839--858}, 
+}
+
+\bib{K}{article}{ 
+  author={Kashiwara, Masaki}, 
+  title={On crystal bases}, 
+  conference={
+    title={Representations of groups}, 
+    address={Banff, AB}, date={1994}, }, 
+  book={
+    series={CMS Conf. Proc.}, 
+    volume={16}, publisher={Amer. Math. Soc.},
+    place={Providence, RI}, 
+    }, 
+  date={1995}, 
+  pages={155--197}, 
+}
+
+
+\bib{qLR}{article}{ 
+  author={Lakshmibai, V.}, 
+  author={Reshetikhin, N.}, 
+  title={Quantum flag and Schubert schemes}, 
+  conference={ 
+    title={ physics}, 
+    address={Amherst, MA},
+    date={1990}, 
+  }, 
+  book={ 
+    series={Contemp. Math.}, 
+    volume={134}, 
+    publisher={Amer. Math. Soc.}, 
+    place={Providence, RI}, 
+    }, 
+  date={1992}, 
+  pages={145--181}, 
+}
+
+\bib{LR1}{article}{ 
+  author={Lenagan, T. H.}, 
+  author={Rigal, L.}, 
+  title={Quantum graded algebras with a straightening law and the AS-Cohen-Macaulay   
+    property for quantum determinantal rings and quantum Grassmannians}, 
+  journal={J. Algebra}, 
+  volume={301},
+  date={2006}, 
+  number={2}, 
+  pages={670--702}, 
+}
+
+\bib{Lit}{article}{ 
+  author={Littelmann, P.}, 
+  title={Cones, crystals, and patterns},
+  journal={Transform. Groups}, 
+  volume={3}, 
+  date={1998}, 
+  number={2}, 
+  pages={145--179}, 
+}
+
+\bib{Lu}{book}{ 
+  author={Lusztig, George}, 
+  title={Introduction to quantum groups},
+  series={Modern Birkh\"auser Classics}, 
+  note={Reprint of the 1994 edition},
+  publisher={Birkh\"auser/Springer, New York}, 
+  date={2010}, 
+  pages={xiv+346}, 
+}
+
+
+\bib{Mau}{book}{
+   author={Maury, Guy},
+   author={Raynaud, Jacques},
+   title={Ordres maximaux au sens de K. Asano},
+   language={French},
+   series={Lecture Notes in Mathematics},
+   volume={808},
+   publisher={Springer},
+   place={Berlin},
+   date={1980},
+   pages={viii+192},
+}
+
+\bib{MR}{book}{ 
+  author={McConnell, J. C.}, 
+  author={Robson, J. C.}, 
+  title={Noncommutative Noetherian rings}, 
+  series={Graduate Studies in Mathematics}, 
+  volume={30},
+  edition={Revised edition}, 
+  note={With the cooperation of L. W. Small},
+  publisher={American Mathematical Society}, 
+  place={Providence, RI}, 
+  date={2001},
+  pages={xx+636}, 
+}
+
+\bib{MS}{book}{ 
+  author={Miller, Ezra}, 
+  author={Sturmfels, Bernd}, 
+  title={Combinatorial commutative algebra}, 
+  series={Graduate Texts in Mathematics}, 
+  volume={227},
+  publisher={Springer-Verlag}, 
+  place={New York}, 
+  date={2005}, 
+  pages={xiv+417}, 
+}
+
+
+\bib{VO}{book}{ 
+  author={N{\u{a}}st{\u{a}}sescu, Constantin}, 
+  author={Van Oystaeyen, F.},
+  title={Graded and filtered rings and modules}, 
+  series={Lecture Notes in Mathematics},
+  volume={758}, 
+  publisher={Springer}, 
+  place={Berlin}, 
+  date={1979}, 
+  pages={x+148}, 
+}
+
+
+
+\bib{NV}{book}{ 
+  author={N{\u{a}}st{\u{a}}sescu, Constantin}, 
+  author={Van Oystaeyen, Freddy}, 
+  title={Methods of graded rings}, 
+  series={Lecture Notes in Mathematics},
+  volume={1836}, 
+  publisher={Springer-Verlag}, 
+  place={Berlin}, 
+  date={2004}, 
+  pages={xiv+304},
+}
+
+
+
+\bib{RZ}{article}{
+  author={Rigal, L.}, 
+  author={Zadunaisky, P.}, 
+  title={Quantum analogues of Richardson varieties in the grassmannian and their toric
+  degeneration},
+  journal={J. Algebra}, 
+  volume={372}, 
+  date={2012}, 
+  pages={293--317}, 
+}
+
+\bib{RZ2}{article}{
+  author={Rigal, L.}, 
+  author={Zadunaisky, P.}, 
+  title={Twisted Semigroup Algebras},
+  journal={Alg. Rep. Theory},
+  year={2015},
+  doi={10.1007/s10468-015-9525-z},
+}
+
+\bib{S}{article}{ 
+  author={So{\u\i}bel{\cprime}man, Ya. S.}, 
+  title={On the quantum flag manifold}, 
+  language={Russian}, 
+  journal={Funktsional. Anal. i Prilozhen.},
+  volume={26}, 
+  date={1992}, 
+  number={3}, 
+  pages={90--92}, 
+  translation={
+    journal={Funct. Anal. Appl.}, 
+    volume={26}, 
+    date={1992}, 
+    number={3},
+    pages={225--227}, 
+  }, 
+}
+
+
+\bib{W}{book}{ 
+  author={Weibel, Charles A.}, 
+  title={An introduction to homological algebra}, 
+  series={Cambridge Studies in Advanced Mathematics}, 
+  volume={38},
+  publisher={Cambridge University Press}, 
+  place={Cambridge}, 
+  date={1994}, 
+  pages={xiv+450}, 
+}
+\end{biblist} 
+\end{bibdiv}
+\end{document}
+
+
+
+
+
+Our objective in the present article is to adapt to the quantum setting a technique that 
+has been a staple of algebraic geometry during the last thirty years, namely that of 
+toric degenerations, and apply this technique to the study of quantum analogues of 
+Schubert varieties in arbitrary flag varieties. This statement is made in the spirit of 
+noncommutative algebraic geometry, in the sense that we see quantum varieties as defined 
+implicitly by a noncommutative deformation of the homogeneous coordinate ring of a 
+classical variety.
+
+By degeneration we refer to the process of deforming an algebraic variety $V$ over a 
+field $\k$ into a new variety $T$. In the simpler examples, this is done by finding a 
+flat regular map $p: W \to \AA^1(\k)$ such that a generic fiber is 
+isomorphic to $V$ but a special fiber, usually $p^{-1}(0)$, is isomorphic to $T$. If we 
+have such a flat deformation of $V$ into $T$, then we can show that $V$ has some nice 
+property by showing first that $T$ has the desired property, and then using flatness to 
+show that this proprety extends to all fibers. A \emph{toric} degeneration is one in
+which the target $T$ of the degeneration is a toric variety. The underlying combinatorial
+structure of toric varieties is well documented, see for example \cite{MS}*{section II}, 
+and has been aplied to study many of their homological and geometrical properties with 
+great success, which makes them an ideal target for a degeneration.
+
+The degeneration process can be carried out by purely algebraic means. In this case, the 
+transfer of properties from $T$ to $V$ can be understood in algebraic terms as the 
+classic idea of studying a ring $A$ by filtering it and passing to an associated graded 
+ring. Of course this idea is not new in noncommutative algebra. Our contribution is to 
+show that degeneration techniques are well suited to study the regularity properties of
+homological nature and geometrical flavor usually found in noncommutative algebraic 
+geometry, such as being AS-Cohen-Macaulay, having finite local dimension, etc. Once
+we have proved this, we introduce the notion of an algebra with a \emph{quantum affine 
+toric degeneration}, i.e. a graded algebra with a filtration by graded subspaces whose
+associated graded algebra is a quantum affine toric variety. These quantum varieties 
+were studied in our previous article \cite{RZ2}, where we showed that they share most 
+of the combinatorial and homological properties of their classical counterparts, and 
+hence are well-suited to be the target of a noncommutative degeneration. As an example, 
+we show that Schubert subvarieties of quantum flag varieties have quantum affine toric 
+degenerations and thus establish that they are AS-Cohen-Macaulay and maximal orders
+in their skew-fields of fractions.
+
+Since we were interested in applying these techniques to quantum flag and Schubert 
+varieties, the works of Gonciulea and Lakshmibai \cite{GL} and Caldero \cite{C} served 
+as guiding examples. In particular the last article uses techniques from quantum groups 
+to prove that Schubert subvarieties of flag varieties have toric degenerations, and 
+was the main inspiration to the present article.

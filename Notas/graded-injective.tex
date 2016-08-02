@@ -1,0 +1,595 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% esto tiene que estar, en este orden...
+\usepackage[small]{titlesec}
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8,latin1]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumerate}
+\usepackage{mathpazo}
+\usepackage{euler}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+%\swapnumbers
+
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposition, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Theorem, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corolllary, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definition, sibling=para, style=mystyle]{Definition}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\newcommand\KK{\mathbb K}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\eps{\varepsilon}
+\newcommand\uu[1]{\underline{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\A{\mathcal A}
+\newcommand\B{\mathcal B}
+\renewcommand\L{\mathcal L}
+\newcommand\R{\mathcal R}
+\newcommand\F{\mathcal F}
+\renewcommand\O{\mathcal O}
+\newcommand\I{\uu I}
+\renewcommand\b{\mathfrak{b}}
+\newcommand\g{\mathfrak{g}}
+\newcommand\h{\mathfrak h}
+\newcommand\sq{\square}
+\newcommand\n{\mathfrak{n}}
+\newcommand\co{\mathsf{co}}
+\DeclareMathOperator\Id{\mathsf{Id}}
+\DeclareMathOperator\st{\mathsf{st}}
+
+\newcommand\C{\mathsf C}
+\renewcommand\k{\Bbbk}
+\newcommand\D{\mathsf D}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+
+\DeclareMathOperator\Gr{\mathsf{Gr}}
+\DeclareMathOperator\GrHom{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\GrExt{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\GrTor{\underline{\mathsf{Tor}}}
+
+\DeclareMathOperator\Ab{\mathsf{Ab}}
+\DeclareMathOperator\ShHom{\mathcal Hom}
+\DeclareMathOperator\ShExt{\mathcal Ext}
+\DeclareMathOperator\ShTor{\mathcal Tor}
+
+\DeclareMathOperator\pd{pd}
+\DeclareMathOperator\id{id}
+\DeclareMathOperator\rank{rank}
+\DeclareMathOperator\Spec{Spec}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\ann{ann}
+\DeclareMathOperator\im{Im}
+\DeclareMathOperator\gr{gr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{On a pleasant exercise in homological algebra}
+\date{[graded-injective.tex]}
+\author{Pablo Zadunaisky}
+\begin{document}
+
+\maketitle
+\begin{quote}
+In \cite{vdB}, M. Van den Bergh states that if $A$ is a noetherian $\NN$-graded connected
+algebra over a field $\k$ and $I$ is an injective object in the category of $\ZZ$-graded
+$A$-modules, then $I$ has injective dimension at most one when considered as an
+$A$-module. He leaves the proof of this fact as ``a pleasant exercise in homological
+algebra''. An analogous result was proved for commutative algebras by Fossum and Foxby in
+their article \cite{FF}. In this note we prove a general version of this result.
+\end{quote}
+
+\section{Introduction}
+\paragraph
+Throughout this document $\k$ denotes a commutative ring. All unadorned tensor products
+are over $\k$. Given $A$-modules $I$ and $M$, we say that $M$ is $I$-acyclic if
+$\Ext^i_A(M,I) = 0$ for $i > 0$.
+
+\paragraph
+Let us look at a possible solution to the exercise. Let $A$ be a $\ZZ$-graded algebra and
+let $N$ be an $A$-module. We can turn $N \ot \k[t,t^{-1}]$ into a $\ZZ$-graded $A$-module,
+with the action of an element $a \in A$ of degree $l \in \ZZ$ given by $a \cdot (n \ot t^r)
+= an \ot t^{r+l}$ for all $n \in N$ and $r \in \ZZ$. There is an $A$-linear surjective map
+$N \ot \k[t,t^{-1}] \to N$, defined by $n \ot t \mapsto n$, with kernel $N \ot (t-1)
+\k[t,t^{-1}]$. Thus we obtain an exact sequence of $A$-modules
+\begin{align*}
+\xymatrix{
+	0 \ar[r] & N \ot\k[t,t^{-1}] \ar[r]^-{1 \ot (t-1)} & N \ot\k[t,t^{-1}] \ar[r] &N \ar[r]
+	&0.
+}
+\end{align*}
+If we only consider the underlying vector spaces in this sequence, this is the tensor
+product of $N$ with the minimal projective resolution of $\k \cong\k[t,t^{-1}]/(t-1)$ as a
+$\k[t,t^{-1}]$-module.
+
+Let $I$ be an injective object in the category of $\ZZ$-graded $A$-modules. Since $N \ot
+\k[t,t^{-1}]$ is a graded module, it is natural to ask whether the fact that $I$ is
+\emph{graded} injective implies that $\Ext_A(N \ot \k[t,t^{-1}]) = 0$; in Proposition
+\ref{acyclic} we show that this holds if $A$ is
+noetherian. Thus we have a resolution of length $1$ of $N$ by $I$-acyclic modules, which
+proves that $\Ext_A^2(N,I) = 0$. Since $N$ is arbitrary, this proves that the injective
+dimension of $I$ as an $A$-module is at most $1$.
+
+\paragraph
+In this note we try to put this result in a more general perspective, showing how
+injective dimension changes when we change the grading group over a fixed algebra.
+Surprisingly, the general case follows the same pattern as in the $\ZZ$-graded case, and
+requires little more than general homological algebra.
+
+\section{Graded algebras and modules:}
+Let $G, H$ be two groups. The letters $g, g', g'' \ldots$ will always denote elements of
+$G$, and $h, h', h''\ldots$ will always denote elements of $H$.
+	
+\paragraph
+Let $A$ be a $\k$-algebra. We say that $A$ is $G$-graded if it can be decomposed as the
+direct sum of subspaces $A_g$ indexed by $G$ such that $A_g A_{g'} \subset A_{gg'}$. A
+$G$-graded module over $A$ is an $A$-module with a decomposition as a direct sum of
+subspaces $M_g$ such that $A_g M_{g'} \subset M_{gg'}$. The vector space $M_g$ is called
+the \emph{homogeneous component} of degree $g$. We consider $\k$ to be a graded algebra
+with $\k_{1_G} =\k$.
+
+An $A$-linear morphism between graded modules $N, M$ is said to be homogeneous of degree $g$
+if we have $f(N_{g'}) \subset M_{g'g}$ for all $g'$. The category $\Mod^G_A$ has
+$G$-graded $A$-modules as objects and homogeneous $A$-linear morphisms of degree $1_G$ as
+morphisms. We write $\Hom^G_A(N,M)$ for $\Hom_{\Mod^G_A}(N,M)$, and for any $f \in
+\Hom^G_A(N,M)$ we write $f_g$ for the $\k$-linear function $f_g: N_g \to M_g$ induced by
+$f$ by restriction and correstriction.
+
+Given a $G$-graded $A$-module $M$, we denote by $M[g]$ the $G$-graded $A$-module whose
+homogeneous components are given by $M[g]_{g'} = M_{g'g}$. If $f: M \to M'$ is a morphism
+in $\Mod^G_A$ then defining $f[g]: M[g] \to M'[g]$ to be the morphism whose underlying
+function is the same as that of $f$, we obtain the \emph{$g$-suspension functor}, denoted by
+$\Sigma_g: \Mod^G_A \to \Mod^G_A$. One can check that $\Sigma_g \circ \Sigma_{g^{-1}} =
+\Id$, so the $g$-suspension functor is an automorphism of $\Mod^G_A$.
+
+\paragraph\textbf{Change of grading functors.}
+\label{change-of-grading-functors}
+Let $H$ be another group and let $\phi: G \to H$ be a group morphism. Any $G$-graded
+algebra $A$ can be given an $H$-grading by setting 
+\[
+  A_h = \bigoplus_{g \in \phi^{-1}(h)} A_g
+\]
+From this point on we fix such a morphism $\phi$, and we will consider $A$ to be an
+$H$-graded algebra with the induced grading.
+
+The morphism $\phi$ induces three functors 
+\begin{align*}
+  \phi_!, \phi_*: \Mod^G_A &\to \Mod^H_A & \phi^*: \Mod^H_A &\to \Mod^G_A
+\end{align*}
+Given a $G$-graded $A$-module $M$, the $H$-graded $A$-modules $\phi_!(M), \phi_*(M)$ have
+homogeneous components of degree $h$ given by
+\begin{align*}
+	\phi_!(M)_h &= \bigoplus_{g \in \phi^{-1}(h)} M_g; & \phi_*(M)_h &= \prod_{g \in
+\phi^{-1}(h)} M_g. 
+\end{align*}
+Notice that the underlying $A$-module of $\phi_!(M)$ is equal to that of $M$, so the
+action of $A$ on $\phi_!(M)$ is simply the same as that on $M$, which is compatible with
+the $H$-grading. In order to describe the action of $A$ on $\phi_*(M)$ it is enough to say
+how a $G$-homogeneous element acts on an $H$-homogeneous element of the module and extend
+the action by bilinearity: given $a \in A_g$ and $(m_{g'})_{g' \in \phi^{-1}(h)} \in
+\phi_*(M)_h$, we set $a(m_g)_{g \in \phi^{-1}(h)} = (am_{g'})_{g' \in \phi^{-1}(h)}$.
+
+If $f$ is a homogeneous morphism of $G$-graded modules (of arbitrary degree), then
+$\phi_!(f)_h = \bigoplus\limits_{g \in \phi^{-1}(h)} f_g$ and $\phi_*(f)_h =
+\prod\limits_{g \in \phi^{-1}(h)}f_g$.
+
+Given $N$ an object of $\Mod^H_A$, we set 
+\begin{align*}
+  \phi^*(N) = \bigoplus_{g \in G} N_{\phi(g)} u_g.
+\end{align*}
+The action of a homogeneous element $a \in A_g$ over an element $n u_{g'} \in
+\phi^*(N)_{g'}$ is given by $a(nu_{g'}) = (an) u_{gg'}$. Notice that $a \in A_{\phi(g)}$
+and $n \in N_{\phi(g')}$, so $an \in N_{\phi(gg')}$ and the action is well defined. Given
+a morphism of $H$-graded $A$-module $f: N \to N'$, we set $\phi^*(f): \phi^*(N) \to
+\phi^*(N')$ to be the morphism given by the assignation $n u_g \mapsto f(n)u_g$.
+
+Another way to understand this functor is as follows. Clearly $N \ot \k[G]$ is an $A \ot
+\k[G]$-module, and since $A$ is $G$-graded there is a ring morphism $A \to A \ot \k[G]$
+given by $a \in A_g \mapsto a \ot g$. Thus $N \ot \k[G]$ can be given an $A$-module
+structure, and $\phi^*(N)$ can be identified with the $A$-submodule of $N \ot \k[G]$
+generated by the elementary tensors of the form $n \ot g$ such that $\deg n = \phi(g)$.
+
+
+\paragraph
+\label{adjoint-functors}
+The support of any module ${}_! M$ is clearly contained in the image of $\phi$, and
+${}^*N$ depends only on the components of $N$ whose degree belongs to the image of
+$\phi$. Hence from now on we assume $\phi$ to be surjective. Put $L = \ker \phi$.
+
+\begin{Lemma*}
+  Let $M$ be an object in $\Mod^G_A$. There exist natural isomorphisms
+  \begin{align*}
+	  \phi^* \circ \phi_!(M) &\cong \bigoplus_{l \in L} M[l]; &
+	  \phi^* \circ \phi_*(M) &\cong \prod_{l \in L} M[l]
+ \end{align*}
+\end{Lemma*}
+\begin{proof}
+  Write $\equiv_L$ for congruence modulo $L$, that is, $g \equiv_L g'$ if and only if
+  $\phi(g) = \phi(g')$. From the definitions we get
+  \begin{align*}
+	  (\phi^*(\phi_!(M))_g &= \phi_!(M)_{\phi(g)} = \bigoplus_{g' \equiv_L g} M_{g'}u_{g} =
+	  \bigoplus_{g \in G} \bigoplus_{l \in L} M_{gl} u_{g},
+  \end{align*}
+  and a similar isomorphism for $\phi^* \circ \phi_*(M)$, so there are vector space
+  isomorphisms as in the statement. It is routine to check that they are also
+  $A$-linear and natural.
+\end{proof}
+
+\begin{Proposition*}
+\label{P:adjoint}
+  The functor $\phi^*$ is right adjoint to $\phi_!$ and left adjoint to $\phi_*$
+\end{Proposition*}
+\begin{proof}
+	By the previous lemma there exists a natural transformation $\iota_M: M \to
+	\phi^*(\phi_!(M))$, given by the inclusion of $M$ in the direct sum
+	$\bigoplus\limits_{l \in L} M[l]$. Also there is a natural transformation
+	$\eps_N: \phi_!(\phi^*(N)) \to N$ given by the assignation $n u_g \mapsto n$. These are
+	respectively the unit and the counit of the adjoint pair $(\phi_!, \phi^*)$.
+	There are also natural transformations $\tau_N: N \to \phi_*(\phi^*(N))$, given by $n
+	\in N_h \mapsto (nu_g)_{g \in \phi^{-1}(h)} \in \phi_*(\phi^*(N))_h$, and $\pi_M:
+	\phi^*(\phi_*(M)) \to M$,	given by the projection on to the factor $M$, which are the
+	unit and the counit of the	adjoint pair $(\phi^*, \phi_*)$.
+\end{proof}
+
+\paragraph
+By definition the functors $\phi_!, \phi_*$ and $\phi^*$ are exact. By the standard
+properties of adjoint functors, $\phi_!$ sends projective objects to projective objects
+and $\phi^*$ sends injective objects to injective objects. On a side note, $\phi^*$ also
+has a right adjoint $\phi_*$; it is similar to $\phi_!$, but uses direct products instead
+of direct sums.
+
+\paragraph
+\label{otimes-t}
+We fix $t: H \to G$ a right inverse of $\phi$ as a function and define the morphism
+\begin{align*}
+N \ot\k[L] &\to {}^* N \\
+n_h \ot l &\longmapsto n_hu_{t(h)l},
+\end{align*}
+which is clearly an isomorphism. We can pull back the $A$-module structure of ${}^*N$
+through this morphism and give $N \ot\k[L]$ a $G$-graded $A$-module structure with the
+action of $A$ given by
+\[
+  a_g(n_h \ot l) = a_g n_h \ot t(\phi(g)h)^{-1} g t(h) l
+\]
+Notice that $g^h := t(\phi(g)h)^{-1}g t(h) \in L$, and that since the action on $N \ot
+k[L]$ is induced by the action on ${}^*N$, it is $(g'g)^h = g'^{\phi(g)h} g^h$. 
+
+\paragraph
+\label{otimes-t-def}
+Now let $N$ be an object in $\Mod_A^H$. For any $\k[L]$-module $P$ we define a $G$-graded
+$A$-module $N \ot^t P$. Its underlying vector space is $N \ot P$, with an element $a \in
+A_g$ acting by
+\[  
+  a(n_h \ot p) = (a n_h) \ot g^h \cdot p.
+\]
+The homogeneous component of degree $g$ of $N \ot^t P$ is given by $N_{\phi(g)} \ot
+P_{t(\phi(g))^{-1}g}$. Notice that by definition $N \ot^t\k[L] \cong {}^* N$.
+
+For any $\k[L]$-linear morphism $f: P \to Q$ set $1 \ot^t f:= 1 \ot f : N \ot^t P \to N
+\ot^t Q$. This morphism is not $G$-homogeneous, but we do have the following result. Its
+proof follows immediately from the definitions.
+
+\begin{Lemma*}
+  For every object $N$ of $\Mod^H_A$ the assignation $\Mod\k[L] \to \Mod^H_A$ that maps
+  every object $P$ to $\phi_!(N \ot^t P)$ and every morphism $f$ to $1 \ot^t f$ is an
+  additive and exact functor.
+\end{Lemma*}
+
+We write $N \ot^t P$ instead of $\phi_!(N \ot^t P)$.
+
+\paragraph
+\label{acyclic}
+We are now ready to generalize the argument given in the introduction. The first step is
+proving the acyclicity result we mentioned there. Given objects $I, M$ of $\Mod^H_A$, we
+say that $M$ is $I$-acyclic if $\R^i \Hom_A^H(M,I) = 0$ for all $i > 0$.
+
+\begin{Proposition*}
+  Assume $A$ is a noetherian $G$-graded $\k$-algebra and let $I$ be an injective object in
+  $\Mod^G_A$. If $M$ is an object of $\Mod^G_A$, then $\phi_!(M)$ is $\phi_!(I)$-acyclic.
+\end{Proposition*}
+\begin{proof}
+  By Proposition \ref{P:adjoint} there is a natural equivalence
+  \[ 
+    \Hom_A^H(\phi_!(-),\phi_!(I)) \cong \Hom^G_A(-,\phi^*(\phi_!(I)).
+  \]
+  Now by Lemma \ref{L:unit} ${}^* {}_! I = \bigoplus_{l \in L} I[l]$ is a direct sum of
+  injective modules. Since $A$ is noetherian this is again an injective module, and so
+  $\Hom_A^H(\phi_!(-),\phi_!(I))$ is an exact functor. On the other hand, since $\phi_!$
+  is an exact functor that sends projective objects to projective objects,
+  $(\R^i\Hom_A^H)(\phi_!(-),\phi_!(I)) \cong \R^i(\Hom_A^H(\phi_!(-),\phi_!(I))) = 0$.
+\end{proof}
+
+\begin{Theorem}
+\label{injective-dimension}
+  Let $A$ be a noetherian $G$-graded $\k$-algebra and let $I$ be an injective object of
+  $\Mod^G_A$. The injective dimension of $\phi_!(I)$ is at most the projective dimension of
+  $\k$ as a $\k[L]$-module with trivial structure.
+\end{Theorem}
+\begin{proof}
+  Let $P_\bullet \to\k \to 0$ be a minimal projective resolution of $\k$ as a $\k[L]$-module
+  and let $N$ be any object of $\Mod^H_A$. Applying $N \ot^t -$ to this resolution we get
+  an exact complex in $\Mod^H_A$
+  \begin{align}
+  \label{c}
+    N \ot^t P_\bullet \to N \ot^t\k \to 0
+  \end{align}
+  Since $P_\bullet$ is a projective $\k[L]$ module, it is a direct summand of a free
+  $\k[L]$-module $F_\bullet$ of rank $n_\bullet$. Since $N \ot^t -$ is additive, this
+  implies that $N \ot^t P_\bullet$ is a direct summand of $N \ot^t F_\bullet \cong ({}_!
+  {}^*N)^{n_\bullet}$, which by Proposition \ref{acyclic} is $\phi_!(I)$-acyclic. Thus $N
+  \ot^t P_\bullet$ is also $\phi_!(I)$-acyclic, and \ref{c} is a resolution of $N$ by
+  $\phi_!(I)$-acyclic modules. Since its length is equal to the projective dimension of
+  $\k$ as a $\k[L]$-module, the result follows.
+\end{proof}
+
+\begin{bibdiv}
+\begin{biblist}
+
+\bib{Doi}{article}{
+   author={Doi, Yukio},
+   title={Homological coalgebra},
+   journal={J. Math. Soc. Japan},
+   volume={33},
+   date={1981},
+   number={1},
+   pages={31--50},
+}
+
+\bib{FF}{article}{
+   author={Fossum, Robert},
+   author={Foxby, Hans-Bj{\o}rn},
+   title={The category of graded modules},
+   journal={Math. Scand.},
+   volume={35},
+   date={1974},
+   pages={288--300},
+   issn={0025-5521},
+   review={\MR{0379473 (52 \#378)}},
+}
+
+\bib{M}{book}{
+   author={Montgomery, Susan},
+   title={Hopf algebras and their actions on rings},
+   series={CBMS Regional Conference Series in Mathematics},
+   volume={82},
+   publisher={Published for the Conference Board of the Mathematical
+   Sciences, Washington, DC},
+   date={1993},
+   pages={xiv+238},
+   isbn={0-8218-0738-2},
+   review={\MR{1243637 (94i:16019)}},
+}
+
+\bib{vdB}{article}{
+   author={van den Bergh, Michel},
+   title={Existence theorems for dualizing complexes over non-commutative
+   graded and filtered rings},
+   journal={J. Algebra},
+   volume={195},
+   date={1997},
+   number={2},
+   pages={662--679},
+}
+
+\end{biblist}
+\end{bibdiv}
+
+%\end{document}
+
+\section{An approach through Hopf algebras}
+\label{hopf}
+As is well known, a $G$-graded algebra is a comodule algebra over the Hopf algebra $\k[G]$,
+and a $G$-graded module is a $(A,k[G])$-Hopf module. In this section we try to recast
+Theorem \ref{injective-dimension} in terms of the theory of Hopf Algebras. For undefined
+terms and general results on Hopf algebras we refer to \cite{M}.
+
+\paragraph
+Let $G$ be Hopf algebra. We denote by $\Mod^G$ the category of right $G$-comodules. If $A$
+is a $G$-comodule algebra, we denote by $\Mod^G_A$ the category of $(A,G)$-Hopf modules.
+Give a $G$-comodule $M$ we denote by $\rho^G_M: M \to M \ot G$ the comodule structure map
+of $M$.
+
+\paragraph
+Let $M$ be a left $G$-comodule and $N$ a right $G$-comodule. Their \emph{cotensor product}
+$N \square_G M$ is defined as the cokernel of the map 
+\[
+  \rho^G(N)\ot 1 - 1 \ot \rho^G(M): N \ot M \to N \ot G \ot M
+\]
+Given a morphism $f: M \to M'$ of $G$-comodules, $N \sq_G f: N \sq_G M \to N \sq_G M'$ is
+the restriction of $1 \ot f$ to $N \square_G M$. The universal property of the
+cokernel guarantees that this morphism is well defined. 
+
+\paragraph
+Let $G, H$ be Hopf algebras and let $\phi: G \to H$ be a Hopf-algebra morphism. In
+particular $G$ is a left $H$-comodule with structure map $\rho^H_G = (\phi \ot 1) \circ
+\rho_G^G$. In \cite{Doi}, Y. Doi associates to any such morphism two functors
+\begin{align*}
+\xymatrix{
+ \Mod^G \ar@/^/[r]^{-_\phi} &\Mod^H \ar@/^/[l]^-{-^\phi}
+}
+\end{align*}
+defined as follows. For every $G$-comodule $M$, we set $M_\phi$ to be the $H$-comodule
+whose structure map is given by $\rho^H_{M_\phi} = (1 \ot \phi) \circ \rho^G_M$. On the
+other hand, for every $H$-comodule $N$, the $G$-comodule $N^\phi$ is equal to the vector
+space $N \sq_H G$, whose structure map $\rho^G_{N^\phi}$ is equal to the restriction $1
+\sq_H \rho^G_G$. By \cite{Doi}*{Proposition 6}, $-_\phi$ is left adjoint to $-^\phi$.
+
+
+\paragraph
+If $A$ is a $G$-comodule algebra then $A_\phi$ is an $(A,H)$-comodule algebra. We will
+usually omit the subindex. If $M$ is an object of $\Mod^G_A$, then $M_\phi$ has a natural
+$(A,H)$-Hopf module structure with the same $A$-module structure. On the other hand, for any
+object $N$ of $\Mod^H_A$, the $G$-comodule $N \sq_H G$ has the structure of an
+$(A,G)$-Hopf module, with the action of $a$ on an element $n \ot g$ given by $a (n \ot g) =
+a_0n \ot a_1 g$. Thus $-_\phi$ and $-^\phi$ induce functors
+\begin{align*}
+\xymatrix{
+ \Mod^G_A \ar@/^/[r]^{-_\phi} &\Mod^H_A \ar@/^/[l]^-{-^\phi}
+}
+\end{align*}
+If $G$ and $H$ are group algebras then $\phi$ induces a morphism between the underlying
+groups, and $-_\phi = \phi_!$ and $-^\phi = \phi^*$.
+
+\paragraph
+Let $L = G^{\co H}$ and assume that the extension $L \subset G$ is \emph{cleft}, that is,
+there exists $\gamma \in \Hom_k(H,G)$ which is convolution invertible and such that $\phi
+\circ \gamma = \id_H$. This plays the rôle of the section $t$ from \ref{otimes-t}. In that
+case, by \cite{Mon}*{Theorems 8.2.4, 8.5.6}, $G \cong H \ot L$ as a right
+$H$-comodule and a left $L$-module, and the functor $\Mod_G^H \to \Mod L$ defined by the
+assignation $T \mapsto T^{\co H}$ is an equivalence of categories. Thus for any
+$(A,H)$-Hopf module $N$, we see that $N \sq_H G \cong N \ot L$ as vector spaces, and we
+can pull back an $(A,G)$-Hopf module structure on $N \ot L$, or more generally, on any
+$L$-module.
+
+\paragraph
+We now fix a projective resolution of $H$ in $\Mod^H_G$, say $P_\bullet \to H$, and apply
+the functor $N \sq_H -$, thus obtaining an exact complex of $A$-modules $N \sq_H P_\bullet$. 
+This is equivalent to the procedure described in Theorem \ref{injective-dimension}. If $H$
+is cocommutative, then these are again $(A,H)$-Hopf modules. 
+
+In order to repeat the proof of the theorem, we would need to prove that if $I$ is an
+injective object of $\Mod^G_A$, then $I_\phi \sq_H G$ is again injective. This can be
+easily proved if $L$ is isomorphic to a group algebra, which we leave as a pleasant
+exercise in homological coalgebra.
+
+\end{document}
+
+
+\paragraph
+As is well known, a $G$-grading over a vector space $V$ is the same as a $\k[G]$-comodule
+structure over $V$. A $G$-graded $\k$-algebra is a $\k[G]$-comodule algebra and $G$-graded
+$A$-modules are $(k[G],A)$-Hopf modules. If we replace the group algebra $\k[G]$ by a
+Hopf algebra $G$, we have a category of $(G,A)$-Hopf modules $\Mod^G_A$. For any
+object $M$ in $\Mod^G_A$ write $\rho_M: M \to M \ot G$ for the vector space map giving its
+comodule structure.
+
+A group homomorphism $\phi: G \to H$ induces a morphism $\phi:\k[G] \to\k[H]$ in an
+obvious way. 
+Given two Hopf algebras $G, H$ and a morphism $\phi: G \to H$ between them, we get two
+functors $\phi_!: \Mod^G_A \to \Mod_A^H$ and $\phi^*: \Mod^H_A \to \Mod^G_A$, which we
+describe in the following paragraphs. The construction is taken from \cite{Doi}.
+
+\paragraph
+Let $M$ be an object in $\Mod_k^G$.
+The underlying vector space of ${}_!M$ is $M$. Its structure morphism is given by
+$$ M \to M \ot G \stackrel{\id \ot \phi}{\to} M \ot H$$
+In particular $A$ becomes a comodule algebra over $H$, and if $M$ had the extra structure
+of a relative $(A,G)$-module, then ${}_!M$ with its $A$-module structure is a relative
+$(A,H)$-module.
+
+Now let $N$ be an object of $\Mod^H_A$. The underlying vector space of ${}^* N$ is
+$$ N \square_H G = \ker (N \ot G \stackrel{\id \ot \phi - \rho_N \ot \id}{\to} N \ot H \ot G)$$
+and its $A$-module structure is induced by that of $N$. This induces a relative
+$(A,G)$-module structure on ${}^* N$. It is immidiate to check that this functors coincide
+with the ones defined in \ref{change-of-grading-functors}.
+
+\paragraph
+The operation $\square_H$ is called the \emph{cotensor product} of $H$-comodules. It was
+studied by Doi in the paper cited above. In Proposition 6. of this paper Doi proves that
+$\phi_!$ and $\phi^*$ are adjoints when $A = k$ and $G, H$ are coalgebras. The same proof
+works in this context since the isomorphisms he gives preserve $A$-linear morphisms. This
+is analogous to Lemma \ref{adjoint}.
+
+\paragraph
+The morphism $\phi$ gives us a structure of $H$-comodule over $G$, and the structure of a
+$G$-module over $H$. Thus it makes sense to consider $H$ as an object in the category
+$\Mod_G^H$. If we put $L = G^H$ the subalgebra of coinvariants of $G$ by the action of $H$
+then there is always a functor $\Mod^H_G \to \Mod L$ given by $M \mapsto M^H$. In certain
+cases this is an equivalence of categories, for example when $G, H$ are group algebras or
+envelopping algebras of Lie algebras. In this cases all Hopf algebra morphisms are induced
+by morphisms between the original objects, and the coinvariants correspond to the Hopf
+algebras associated to the\kernel of $\phi$.
+
+\paragraph
+Since $H^H = \k$, a projective resolution of $\k$ in $\Mod L$ corresponds to a projective
+resolution of $H$ in $\Mod^H_G$. In that case the construction $N \ot^t - :
+\Mod L \to \Mod^H_A$ is replaced by a \emph{twisted smash product} $N \#_\sigma -:
+\Mod^H_G \to \Mod^H_A$ (see \cite{M}*{chapter 8}), which is also additive and exact.
+
+\paragraph
+Since we have no general carachterization of ${}^* {}_! I$ for an injective object in
+$\Mod^G_A$, the best we can expect is that under the previous hypothesis the injective
+dimension of ${}_! I$ is bounded by $\pd_G^H H + \id^G_A {}^*{}_! I$.
+
+
+
+
+
+
+
+
+
+
+
+
+

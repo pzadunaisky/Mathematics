@@ -1,0 +1,482 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% esto tiene que estar, en este orden...
+\usepackage[small]{titlesec}
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8,latin1]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumerate}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+%\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+
+%\swapnumbers
+
+
+
+
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lema, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposici\'on, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Teorema, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corolario, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definici\'on, sibling=para, style=mystyle]{Definition}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\newcommand\KK{\mathbb K}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\stack[2]{\genfrac{}{}{0pt}{2}{#1}{#2}}
+\newcommand\uu[1]{\underline{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\A{\mathcal A}
+\newcommand\B{\mathcal B}
+\renewcommand\L{\mathcal L}
+\newcommand\M{\mathcal M}
+\newcommand\F{\mathcal F}
+\newcommand\G{\mathcal G}
+\newcommand\GG{\Gamma}
+\renewcommand\b{\mathfrak{b}}
+\newcommand\g{\mathfrak{g}}
+\newcommand\n{\mathfrak{n}}
+\newcommand\opp{\mathsf{opp}}
+\DeclareMathOperator\Id{\mathsf{Id}}
+\DeclareMathOperator\st{\mathsf{st}}
+
+\newcommand\C{\mathsf C}
+\newcommand\K{\mathsf K}
+\newcommand\D{\mathsf D}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+
+\DeclareMathOperator\GrMod{\mathsf{GrMod}}
+\DeclareMathOperator\GrHom{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\GrExt{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\GrTor{\underline{\mathsf{Tor}}}
+
+\DeclareMathOperator\Ab{\mathsf{Ab}}
+\DeclareMathOperator\ShHom{\mathcal Hom}
+\DeclareMathOperator\ShExt{\mathcal Ext}
+\DeclareMathOperator\ShTor{\mathcal Tor}
+
+\DeclareMathOperator\pd{pd}
+\DeclareMathOperator\id{id}
+\DeclareMathOperator\depth{depth}
+\DeclareMathOperator\Spec{Spec}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\ann{ann}
+\DeclareMathOperator\im{Im}
+\DeclareMathOperator\gr{gr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Toric Degenerations of Schubert Varieties [P. Caldero]}
+\author{[caldero.tex]}
+\date{26/7/12}
+\begin{document}
+\maketitle
+These are notes on P. Caldero's paper of the same title. We follow the enummeration of
+this paper.
+
+\section{Notation and recollection on the dual cannonical basis}
+\paragraph
+Standard notations on Lie Groups and their Lie algebras. $P$ is the weight lattice,
+$P^+ = \sum \NN \varpi_i$ is the semigroup of dominant weights. $W$ is the Weyl group, 
+$w_0 \in W$ is the longest word. $(,)$ is the $W$-invariant form on $P$
+
+\paragraph
+Defines $U_q(\g)$ over $\KK = \CC(q^{1/d})$. This is the algebra referred to as
+$U_q(\g,P)$ in Jantzen's book, chapter 4 (he writes $\Lambda$ for $P$). There is a
+diference in the definition of the Hopf algebra structure from the $U_q(\g)$ of Jantzen,
+possibly because of this. Thus in our case $U_q(\g)$ is generated over $\KK$ by
+$K_\lambda, E_i, F_i$, where $\lambda \in P$, $i = 1, \ldots n$ is the rank of $\mathfrak
+h$, and relations
+\begin{align*}
+	K_0 &= 1 & K_{\lambda}K_\mu &= K_{\lambda + \mu} \\
+	K_\lambda E_i K_{-\lambda} &= q^{(\lambda, \alpha_i)}E_i &
+	K_\lambda F_i K_{-\lambda} &= q^{-(\lambda, \alpha_i)}F_i \\
+				&&\mbox{ Quantum Serre Relations}
+\end{align*}
+It has a Hopf Algebra structure given by blah.
+
+\paragraph
+For every $\lambda \in P$, let $V_q(\lambda)$ be the simple module with highest weight =
+$\lambda$. There is an injective morphism $V_q(\lambda)^* \ot_k V_q(\lambda) \to
+U_q(\g)^*$ given by $\chi \ot v (u) = \chi(u.v)$. For every $\lambda \in P^+$, let
+$C(\lambda) \subset U_q(\g)^*$ be the the $\KK$-span of $\chi \ot v$ with $\chi \in
+V_q(\lambda)^*$ and $v \in V_q(\lambda)$. If we restrict to $v$ of highest weight, we
+write $C^+(\lambda)$.
+
+Set $\CC_q[G]= \bigoplus_{\lambda \in P^+} C(\lambda)$, $\CC_q[G/U] = \bigoplus_{\lambda
+\in P^+} C^+(\lambda)$. In the classic case, we have isomorphisms between these algebras
+and the algebras of regular functions over $G$ and $G/U$ respectively. By the product
+formula of $U_q(\g)^*$, $\CC_q[G/U]$ is a $P^+$-graded algebra.
+
+\paragraph
+There is a Hopf pairing between $U_q(\b)$ and $U_q(\b^-)$, given by
+\begin{align*}
+	(K_\lambda, K_\mu) &= q^{-(\lambda,mu)} & (K_\lambda,F_i) = (E_i,K_\lambda) &= 0\\
+		(E_i, F_j) &= \delta_{ij}(1-q^{*_i})^{-1} 
+\end{align*}
+If we denote by $\overline{-}$ the automorphism of $U_q(\g)$ sending $K_\lambda$ to
+$K_{-\lambda}$ and exchanging $E_i, F_i$, we see that $(X, \overline X) \neq 0$, so in
+fact for any positive weight $\beta$, $(,)$ restricted to $U_q(\b)_\beta \times
+U_q(\b^-)_\beta$ is nondegenerate.
+
+This can be extended to a nondegenerate bilinear form over $U_q(\g)$
+$$ \left\langle XK_\lambda Y, Y'K_\mu X' \right\rangle = (X,
+S^{-1}(Y'))(S^{-1}(X'),Y)q^{-(\lambda, \mu)/2}$$
+
+\paragraph
+Define the maps
+\begin{align*}
+	\beta&: U_q(\b) \rightarrow U_q(\b^-)^*, & \beta(u)(v) &= (u,v); &
+	\zeta&: U_q(\g) \rightarrow U_q(\g)^*, & \zeta(u)(v) &= \langle u, v \rangle
+\end{align*}
+Since the bilinear forms are nondegenerate, $\beta$ and $\zeta$ are injective. It follows
+from the axioms of a Hopf pairing that $\beta$ is an \emph{anti}-homomorphism of algebras.
+
+Denote by $\rho: U_q(\g)^* \to U_q(\b)^*$ the restriction morphism
+\begin{Proposition*}
+	The restriction of $\rho$ to $\CC_q[G/U]$ is injectve. Moreover, for all $\lambda
+\in P^+$ we have: $(i)$ for all $e \in U_q(\n)$, $\rho(\zeta(eK_{-2 \lambda})) =
+\beta(eK_{-\lambda})$, $(ii)$ There exists a unique subspace $E_\lambda$ of $U_q(\n)$ such
+that $\zeta(E_\lambda K_{-2\lambda}) = C^+(\lambda)$
+\end{Proposition*}
+
+\begin{proof}
+	Take a matrix coefficient $c = \xi \ot v_\lambda \in V(\lambda)^* \ot V(\lambda)$.
+If $\rho(c) = 0$ then $\xi = 0$ over $U_q(\b^-) v_\lambda = V(\lambda)$, so $c = 0$. Now
+let $c = \xi_1 \ot v_{\lambda_1} + \ldots + \xi_n \ot v_{\lambda_n}$ with $\rho(c) = 0$.
+Now $c$ can be seen as the matrix coefficient $\xi \ot v = \xi_1 \oplus \ldots \oplus \xi_n \ot
+(v_{\lambda_1} + \ldots + v_{\lambda_n}) \in V^* \ot V$, where $V = V(\lambda_1) \oplus
+\ldots \oplus V(\lambda_n)$. By hypothesis $U_q(\b^-) v$ is contained inside the kernel of
+$\xi$, so in particular $\xi (K_\lambda v) = 0$ for all $\lambda$. Now $K_\lambda v =
+\sum_i q^{(\lambda,\lambda_i)} v_{\lambda_i}$. Now think of something clever. 
+
+Item $(i)$ is simply replacing the values in the definitions. For item $(ii)$,
+see 2.1 \emph{Remark}.
+\end{proof}
+
+\paragraph
+The global/cannonical basis of Kashiwara/Lusztig is introduced. This is a basis $\B$ of
+$U_q(\n^-)$ with a lot of magical properties that Caldero quotes freely. It would be nice
+to see some proofs, but for the moment we repeat them
+
+Since we have a Hopf pairing $(-,-): U_q(\n) \times U_q(\n^-) \to \KK$, $\B$ induces a
+dual basis $\B^* \subset U_q(\n)$. 
+
+Kashiwara has defined operators $\tilde E_i, \tilde F_i:U_q(\n^-) \to U_q(\n^-)$, such
+that $\tilde E_i(b) = b' \in \B \cup \{0\} \mod q^{-1}\ZZ[q^{-1}]\B$, and similarly for
+$\tilde F_i$. There is an associated map $\tilde e_i : \B \to \B \cup \{0\}$ sending $b$ to
+$b'$, and analogously for $\tilde f_i$. For $i = 1, \ldots, n$ set $\varepsilon_i(b) =
+\max\{r|\tilde e_i^r(b) \neq 0\}$. This are positive integers by definition, see [K, 4.2].
+
+Let $L_i$ be the adjoint of left multiplication $u \mapsto F_iu$ for $(-,-)$, and denote
+by $L_i^{(r)}= \frac{1}{[r]_i !}L_i^r$. Then $L_i$
+is a quantum derivation in $U_q(\n)$, with $L_i(e_\alpha e_\beta) = L_i(e_\alpha)e_\beta +
+q^{(\alpha,\alpha_i)}e_\alpha L_i(e_\beta)$.
+\begin{proof}
+	Let $x \in U_q(\n)$, then $(x,F_i u) = (x_1 \ot x_2, F_i \ot u) = ((x_1,F_i)x_2,u)$
+so $L_i(x) = (x_1,F_i)x_2$. Hence if $e = e_\alpha$ 
+\begin{align*}
+	L_i(e u) 
+		&= ((e u)_1,F_i) (eu)_2 
+		 = (e_1 u_1, F_i) e_2 u_2
+		 = ((u_1, F_i)(e_1,K_{\alpha_i}^{-1}) + (u_1,1)(e_1,F_i))e_2 u_2 \\
+		&=(e_1,F_i)e_2 (u_1,1)u_2 + (e_1,K_{\alpha_i}^{-1})e_2 (u_1,F_i)u_2 
+		 = L_i(e)u + q^{(\alpha_i,\alpha)} e L_i(u)
+\end{align*}
+[Why is $(e_1,K_{\alpha_i}^{-1})= q^*$?]
+\end{proof}
+
+A few facts on cannonical bases:
+\begin{Theorem*}
+	For $b,b' \in \B$: $(i)$ $bb' \in \ZZ[q,q^{-1}]\B$, $(ii)$ $b^* b'^* \in
+\ZZ[q,q^{-1}]\B^*$, $(iii)$ $L_i^{(\varepsilon_i(b))}(b^*) = (\tilde
+e_i^{(\varepsilon_i(b))}(b))^*$, $(iv)$ $\overline b \in \B$.
+\end{Theorem*}
+The first fact is standard theory of crystal bases, and the second can be found in [L,
+14.4.3, 14.4.4]. According to Caldero, $(iii)$ is a consequence of [L, 14.3.2] by
+dualization, though I fail to see this. The fourth one is [14.4.3, (c)]. Caldero uses
+several times that (iii) also implies that $L^{(\varepsilon_i(b)+1)}(b^*) = 0$, which I
+don't see either.
+
+\begin{Theorem*}
+	Fix $\lambda \in P^+$, $\lambda = \sum \lambda_i \varpi_i$, and set
+		$$ \B_\lambda = \{b \in \B| \varepsilon_i(\overline b) \leq \lambda i\}$$
+	Then $\B_\lambda = \{b \in \B|bv_\lambda \neq 0\}$, the assignation $b_\lambda: e 
+\mapsto b v_\lambda$ is injective on $\B$, and its image is a basis of $V_q(\lambda)$.
+\end{Theorem*}
+
+\paragraph $\CC[q,q^{-1}]$-forms of modules
+
+Now we use the properties of the basis $\B$ to define similar objects over $A =
+\CC[q,q^{-1}]$. 
+
+Let $U_A(\n^-)$ be the $A$-submodule of $U_q(\n^-)$ generated by $\B$.
+Then by [J, Theorem 11.10(b)] this is the $A$-algebra generated by
+$F_i^{(m)}=\frac{1}{[m]_i!}F_i^m$. 
+
+Let $U_A$ be the $A$-subalgebra of $U_q(\g)$ generated by $E_i^{(m)}, F_i^{(m)}$.
+Set $V_A = U_A(\n^-) v_\lambda \subset V_q(\lambda)$. Then $V_A(\lambda)$ is a free module
+with basis $\B_\lambda v_\lambda$.
+
+By [J, Theorem 11.19] we get that $\B$ is compatible with speacilization, that is, seeing
+$\CC \cong_A A/(q-1)A$, we have $\CC \ot_A U_A(\n^-) \cong U(\n^-)$, $\CC \ot_A
+V_A(\lambda) = V(\lambda)$. Also $V_A(\lambda)^*$ has a natural $U_A(\n)$-module structe
+and it specializes to $V(\lambda)^*$.
+
+\paragraph
+Let $\lambda \in P^+$ and $w \in W$. $V_q(\lambda)$ verifies the Weyl character formula,
+or in other words, the $\KK$-dimension of each component agree with the $\CC$-dimension of
+the corresponding component of $V(\lambda)$, and in the classical case, $V(\lambda)_{w
+\lambda}$ has dimension one, so there is up to scalars a unique element $v_{w\lambda}$. 
+Set $V_{q,w}(\lambda)= U_q(\b)v_{w \lambda}$. From [K, Theorem 12.14] we get
+
+\begin{Theorem*}
+	There exists a subset $\B_w \subset \B$ such that $V_{q,w}(\lambda)$ is spanned by
+$\B_w v_{\lambda}$. Moreover, for all $b \in \B_\lambda$, $\delta(b) \in \langle \B_
+w\rangle \ot \langle K_\mu \B_w, \mu \in P\rangle$.
+\end{Theorem*}
+
+In particular, $V_{q,w}(\lambda)^\perp \subset V_q(\lambda)^*$ is generated by $B_\lambda
+\setminus \B_w$, and $V_{q,w}(\lambda)^*$ by the image of $\B_w^* \subset V_q(\lambda)$
+through the quotient morphism (Caldero insists on writing $\B_w \cap \B_\lambda$, but by
+definition $b \in \B_w \Rightarrow b v_\lambda \neq 0$, so $\B_w \subset \B_\lambda$).
+
+Set $V_{A,w}(\lambda)$ the $A$-module generated by $\B_\lambda \cap B_w$. It specialices
+at $q = 1$ to $V_w(\lambda)$
+
+\section{A multiplicaive property and string parametriations of the dual canonical basis}
+\paragraph
+For $\lambda \in P^+$, denote by $\pi_\lambda(b)^* \in V_q(\lambda)^*$ the element such
+that $\pi_\lambda(b)^*(b' v_\lambda) = \delta_{b,b'}$.
+
+\begin{Lemma*}
+For all $\lambda \in P^+$ and $b \in \B_\lambda$, $\zeta(b^* K_{-2\lambda}) =
+\pi_\lambda(b)^* \ot v_\lambda$, $\beta(b^*K_{-\lambda}) = \rho(\pi_\lambda(b)^* \ot
+v_\lambda)$.
+\end{Lemma*}
+\begin{proof}
+	There is a basis for $U_q(\b^-)$ formed by $\{b K_\mu| b \in \B, \mu \in P^+\}$.
+Now 
+\begin{align*}
+	\beta(b^*K_{-\lambda})(b' K_\mu) = (b^* K_{-\lambda}, b' K_\mu) =
+		(b^*,b')q^{(\lambda, \mu)} = \delta_{b,b'}q^{(\lambda,\mu)} =
+\pi_\lambda(b)^* (b'K_\mu v_\lambda).
+\end{align*}
+I can't prove the other claim.
+\end{proof}
+
+\emph{Remark.} The set $E_\lambda$ from 1.5 is thus seen to be $\B_\lambda^*$.
+
+Let $A_q[G/U]$ be the sub $A$-module of $\CC_q[G]$ generated by the $\pi_\lambda(b)^* \ot
+v_\lambda$. 
+
+Write $$b^* b'^* = \sum_{b'' \in \B} d_{b,b'}^{b''} b''^* $$.
+
+\begin{Proposition*}
+	\begin{enumerate}
+		\item $\KK \ot_A A_q[G/U] = \CC_q[G/U]$
+		\item $A_q[G/U]$ is an $A$-algebra.
+		\item If $b \in \B_{\lambda}, b' \in \B_{\lambda'}$, then $d_{b,b'}^{b''}
+			\neq 0$ implies $b'' \in \B_{\lambda + \lambda'}$
+		\item $A_q[G/U]/(q-1)A_q[G/U] \cong \CC[G/U]$.
+	\end{enumerate}
+\end{Proposition*}
+\begin{proof}
+	The first item is obvious since $A_q[G/U]$ has an $A$ basis which is a $\KK$-basis
+of $\CC_q[G/U]$.
+
+	Since $\beta$ is an injective antihomorphism of algebras, we have that
+	\begin{align*}
+		\beta^{-1}(\pi_\lambda(b)^* \ot v_\lambda \cdot \pi_{\lambda'}(b')^* \ot
+			v_{\lambda'}) &= b'^* K_{-\lambda'} \cdot b^* K_{-\lambda} = 
+			q^{-(\lambda',w(b*))}\sum d_{b',b}^{b''} b'' K_{- \lambda' - \lambda}
+	\end{align*}
+	As pointed out before, $\CC_q[G/U]$ is $P^+$-graded, and therefore this product is
+	in $C^+(\lambda + \lambda')$. By the previous remark, this implies 3. Applying
+	$\beta$ we see that the product $(\pi_\lambda(b)^* \ot v_\lambda \cdot
+	\pi_{\lambda'}(b')^* \ot v_{\lambda'}$ is in $A_q[G/U]$. Finally 4. follows from
+	1.7.
+\end{proof}
+
+\begin{Corollary*}
+	Suppose $d_{b,b'}^{b''} \neq 0$. Then $\varepsilon(b'') \leq \varepsilon(b) +
+\varepsilon(b')$.
+\end{Corollary*}
+\begin{proof}
+	Consider the antiautomorphism $\overline{(-)}$ defined by $K_\lambda \mapsto
+	K_{-\lambda}, E_i \mapsto E_i, F_i \mapsto F_i$. We have already mentioned than
+	$\B$ is stable by it. Applying it to the previous equality, we get $d_{\overline
+	b', \overline b}^{\overline b''} = d_{b,b'}^{b''}$. 
+
+	Put $\lambda = \sum \varepsilon_i(b) \varpi_i$ and $\lambda' = \sum
+	\varepsilon_i(b') \varpi_i$. From 1.6, Theorem 2 we get that $\overline b \in
+	\B_\lambda$ and $\overline b' \in \B_{\lambda'}$. Hence $\overline b'' \in
+	\B_{\lambda + \lambda'}$. Once again by 1.6 Theorem 2, we get our inequality.
+\end{proof}
+
+\paragraph
+Fix a reduced decomposition $\tilde w_0 = s_{i_1} s_{i_2} \ldots s_{i_N}$ of $w_0$, where
+$N = \dim \n$. For any $u \in U_q(\n)$, $1 \leq i \leq n$, set
+$$ a_i(u) = \max\{ r, L_i^r(u) \neq 0\}, \Lambda_i(u) = L_i^{(a_i(u))}(u)$$ 
+For any $b \in \B$ set
+$$ A_{\tilde w_0}(b) = (a_{i_N}(b^*), a_{i_{N-1}}(\Lambda_{i_N}(b^*)), \ldots,
+a_{i_1}(\Lambda_{i_2} \ldots \Lambda_{i_N}(b^*))) $$
+Caldero goes on to claim that this parametrization coincides with that of [Li], given just
+before \emph{Remark 1.4}. That this is true (even that the parametrized objects are the
+same!) requires a careful reading of [Li]. He also give a reference to a paper by
+Berenstein and Zelevinsky, which follows from the fact that $\varepsilon_i(b) = a_i(b^*)$.
+Next a proof of this:
+
+\begin{proof}
+	Remember from 1.6 that $L_i^{(\varepsilon_i(b))}(b^*) = \tilde
+e_i^{\varepsilon_i(b)}(b)^* \neq 0$. Hence $a_i(b^*) \leq \varepsilon_i(b)$. Now
+$(L^{(\varepsilon(b)+1)}(b^*),b') = c (\tilde e_i^{\varepsilon_i(b)}(b), F_i b')$, where
+$c \in \KK$. Now $F_i b' = c' \tilde f_i b'$, so this product is nonzer if and only if
+$\tilde f_i b' = \tilde e_i^{\varepsilon_i(b)}(b)$, in which case $b' = \tilde
+e_i^{\varepsilon_i(b) + 1}(b) = 0$, a contradiction. Hence $L^{(\varepsilon(b)+1)}(b^*) =
+0$, and we have the desired equality.
+\end{proof} 
+
+
+\begin{Theorem*}
+	The map $A_{\tilde w_0}$ is injective. Denote its image by $\mathcal C$. Then
+$\mathcal C$ is the set of integral points of a rational polyhedral cone in $\RR^N$.
+Moreover, if $\GG_{\tilde w_0}:= \{(\lambda, \psi) \in P^+ \times \mathcal C | \psi \in
+\A_{\tilde w_0}(\B_\lambda)\}$, the same is true of this new set.
+\end{Theorem*}
+Injectivity for the map $A_{\tilde w_0}$ is discussed in [Li, Remark 1.4], with an offhand
+reference to another papaer by Littelman. The statement for $\mathcal C$ is Proposition
+1.5 (a) of this same article. I have no idea how to prove the claim for $\GG_{\tilde w_0}$
+
+\paragraph
+For $\psi \in \mathcal C$ write $b^\psi = A_{\tilde w_0}^{-1}(\psi)$. Also $d_{\psi,
+\psi'}^{\psi''} = d_{b^{\psi}, b^{\psi'}}^{b^{\psi ''}}$. Put the total lexicographic
+order on $\NN^N$
+\begin{Theorem*}
+	
+\end{Theorem*}
+	Let $b,b', b'' \in \B$, $A_{\tilde w_0}(b) = \psi$, $A_{\tilde w_0}(b') = \psi'$.
+Then $d_{b,b'}^{b''} \neq 0$ implies $A_{\tilde w_0}(b'') \leq \psi + \psi'$. Furthermore,
+$d_{\psi,\psi'}^{\psi + \psi'} = q^*$.
+\begin{proof}
+	Since $L_i$ is a quantum derivation and $U_q(\n)$ is an integral domain, $a_i(uv) 
+= a_i(u) + a_i(v)$. By definition
+		$$ b^* b'^* = \sum d_{b,b'}^{b''} b''^*$$
+Now since $\varepsilon_{i_1}(b) = a_{i_1}(b) = \psi_1$ and idem for $b', b''$ [see the
+comentary right after Theorem 1.6], we have $\psi''_1 \leq \psi_1 + \psi'_1$ by
+Corollary 2.1. 
+
+Apply $L_{i_N}^{\psi_1 + \psi'_1}$ on both sides. On the left hand side, only one term
+survives, of the form $q^? \Lambda_{i_N}(b^*) \Lambda_{i_N}(b'^*)$. On the right, only the
+terms with $\psi_1'' = \psi_1 + \psi'_1$ survive, and so we have
+	$$ q^? \Lambda_{i_N}(b^*) \Lambda_{i_N}(b'^*) = \sum_{\psi_1 + \psi'_1 = \psi''_1} 
+		d^{b''}_{b,b'} \Lambda_{i_N}.$$
+Now by Theorem 1.6 (iii), $\Lambda_{i_N}(b^*)$ is an element of the dual canonical basis 
+[This one \emph{is} a clear consequence of 1.6 (iii)!]. Hence we may proceed by induction
+to prove that $\psi'' \leq \psi + \psi'$ in the lexicographic ordering.
+
+To finish, notice that at the end of the induction we are left with
+$$ q^? \Lambda_{i_1} \Lambda_{i_2} \ldots \Lambda_{i_N}(b) \Lambda_{i_1} \Lambda_{i_2}
+\ldots \Lambda_{i_N}(b') = \sum d_{b,b'}^{b''} \Lambda_{i_1} \Lambda_{i_2} \ldots
+\Lambda_{i_N}(b'').$$
+where the sum is taken over all terms such that $\psi''_k = \psi_k + \psi'_k$, that is,
+the only element on the rhs is $b^{\psi + \psi''}$ [!]. Now Caldero states that from [Li,
+par 1] we have that $\Lambda_{i_1} \ldots \Lambda_{i_N}(b^*) = 1$ for all elements $b^*$
+of the dual cannonical basis. Hence $d_{\psi,\psi'}^{\psi+\psi'} = q^?$. I don't know
+where in $[Li, par 1]$ this is result is hidden.
+\end{proof}
+
+\paragraph
+From 1.8 we can deduce that these results extend to the quotients of $\CC_q[G/U]$
+corresponding to Demazure modules. Let $w \in W$ and put $\B_{\overline w}$ as the
+complement of $\B_w$ in $\B$. Set
+	$$ I_{A,w}:= \bigoplus_{\stackrel{\lambda \in P^+}{b \in \B_{\overline w} \cap
+B_\lambda}} Ab^* \ot v_\lambda = \bigoplus_\lambda V_{A,w}(\lambda)^\perp \ot v_\lambda$$
+
+Now $I_{A,w}$ is the orthogonal of the $A$-module generated by $\B_\omega$. 1.8 Theorem
+implies that this is an ideal. The quotienta algebra can be decomposed as
+$$ A_q[G/U]/I_{A,w} = \bigoplus_\lambda V_{A,w}(\lambda)^* \ot v_\lambda$$
+
+
+\textbf{Bibliography}
+
+[J] Jantzen, \emph{Lectures on Quantum Groups.}
+
+[K] Kashiwara, \emph{On Crystal Basis}, Canadian Mathematical Society Conference
+Proceedings, 27/3/95.
+
+[L] Lusztig, \emph{Introduction to Quantum Groups}.
+
+[Li] Littelman, \emph{Cones, Crystals and Patterns}. Transformation Groups, vol. 3, No. 2,
+1998.
+
+\end{document}

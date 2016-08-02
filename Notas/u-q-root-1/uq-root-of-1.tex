@@ -1,0 +1,564 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{notas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\renewcommand\k{\Bbbk}
+
+\newcommand\A{\mathcal A}
+\newcommand\B{\mathcal B}
+\newcommand\Z{\mathsf Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\id{\mathsf{Id}}
+\newcommand\im{\mathsf{im}}
+\newcommand\coker{\mathsf{coker}}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\g{\mathfrak g}
+\renewcommand\sl{\mathfrak{sl}}
+
+\DeclareMathOperator\rep{\mathsf{rep}}
+\DeclareMathOperator\Rep{\mathsf{Rep}}
+
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\End{\mathsf{End}}
+
+\newcommand\qbinom[2]{\genfrac{[}{]}{0pt}{0}{#1}{#2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Álgebras envolventes cuantizadas en raices de la unidad}
+\date{[uq-root-of-1.tex]}
+\author{Pablo Zadunaisky}
+\begin{document}
+\maketitle
+
+El objetivo de estas notas es estudiar las álgebras $u_q(\g)$, donde $\g$ es un álgebra 
+de Lie semisimple sobre $\CC$ y $q \in \k$ es una raíz de la unidad. Hay mucho camino 
+por cubrir...
+
+Notamos $\A = \ZZ[v,v^{-1}]$. Dado $a \in \ZZ$ ponemos $[a] = 
+\frac{q^a - q^{-a}}{q-q^{-1}} = q^{a-1} + q^{a-3} + \cdots + q^{-a+1} \in A$. Notamos
+además $[a]^! = [1][2] \cdots [a]$ si $a \geq 0$, y $\qbinom{a}{n} = \frac{[a]^!}{[n]^!
+[a]^!}$. Notar que $\qbinom{a}{n} \in \A$.
+
+Fijamos un cuerpo $\k$, que eventualmente se convertirá en $\CC$ pero quiero ver hasta 
+donde llego sin pedir demasiado (así trabaja Jantzen). También fijamos $q \in \k^\times$
+tal que $q^2 \neq 1$. Evidentemente hay un morfismo $f: \A \to \k$ dado por $v \mapsto 
+q$. Por abuso de notación, para cada $a \in \ZZ$ notamos $[a] = f([a])$.
+
+
+\section{El álgebra $U_q(\sl(2))$}
+Esta sección está basda en \cite{Kas}*{Chapter VI}, con algunas ideas robadas de 
+\cite{Jan}*{Chapters 1, 2}.
+
+\paragraph
+\label{U-q-sl2}
+El álgebra $U_q(\sl_2)$ es la $\k$-álgebra generada por $K, K^{-1}, E, F$, con las 
+siguientes relaciones\note{Coincide con las definciones de Jantzen y Kassel.}
+\begin{align*}
+KK^{-1} &= K^{-1}K = 1 
+	&KE &= q^2EK 
+	&KF &= q^{-2}FK 
+  &[E,F] = \frac{K-K^{-1}}{q-q^{-1}}
+\end{align*}
+Por el resto de esta sección notamos $U = U_q(\sl_2)$. Observar que estas relaciones
+son homogéneas si fijamos $\deg(K,K^{-1},E,F) = (0,0,1,-1)$.
+
+\paragraph
+\label{omega-tau}
+Dada una $\k$-álgebra cualquiera $A$, decimos que $(a,b,c,d) \in A^4$ es un $U$-punto de 
+$A$ si al reemplazar $(K,K^{-1}, E, F) \mapsto (a,b,c,d)$ en las relaciones de $U$ 
+obtenemos una igualdad en $A$. En otras palabras, si existe un morfismo de álgebras $f: 
+U \to A$ tal que $f(K, K^{-1}, E, F) = (a,b,c,d)$.
+
+De la definición de $U$ se deduce inmediatamente la existencia de un automorfismo 
+$\omega: U \to U$ dado por $\omega(K, K^{-1}, E, F) = (K^{-1}, K, F, E)$. También es
+inmediato que existe un antiautomorfismo $\tau: U \to U$ dado por $\tau(K, K^{-1}, E, F) 
+= (K^{-1}, K, E, F)$. Ambos morfismos son su propia inversa.
+
+\paragraph
+\label{commutators}
+Para cada $a \in \ZZ$ notamos $[K; a] = \frac{q^aK - q^{-a}K^{-1}}{q - q^{-1}}$. 
+Observar que $\omega([K;a]) = -[K; -a]$
+\begin{Lemma*}
+Sean $r,t \in \NN, s \in \ZZ$.
+\begin{enumerate}[(a)]
+\item Las siguientes igualdades valen en $U$
+\begin{align*}
+K^sE^r &= q^{2rs} E^r K^s
+	& F^tK^s &= q^{2rs} K^s F^t\\
+[E, F^t] &= [t][K;t-1]F^{t-1}
+	& [E^r, F] &= [r]E^{r-1}[K;t-1]
+\end{align*}
+\item Los elementos de la forma $E^rK^sF^t$ con $r,t \in \NN, s \in \ZZ$ generan $U$.
+\end{enumerate}
+\end{Lemma*}
+\begin{proof}
+Veamos el punto (a).
+Las dos primeras identidades se deducen facilmente de las relaciones de $U$. Probamos la
+tercera igualdad por inducción. El caso $t = 1$ es $[E,F] = [K;0]$, que es la cuarta 
+relación de \ref{U-q-sl2}. Procedemos entonces por inducción, y tenemos
+\begin{align*}
+EF^{t+1} &= (EF^t)F = (F^tE + [t][K;t-1]F^{t-1})F \\
+	&= F^t(EF) + [t][K; t-1]F^t = F^{t+1}E + F^t[K;0] + [t][K;t-1]F^t.
+\end{align*}
+De las primeras relaciones se deduce que $F^t[K;0] = [K;2t]F^t$, de donde
+\begin{align*}
+[E,F^{t+1}] = ([K;2t] + [t][K;t-1])F^t.
+\end{align*}
+Ahora en $[K;2t] + [t][K;t-1]$ el número que multiplica a $K/(q-q^{-1})$ es 
+\begin{align*}
+q^{2t} + [t]q^{t-1} 
+	= q^{2t} + \frac{q^{2t-1} - q^{-1}}{q-q^{-1}} 
+	= \left( q^t + \frac{q^{t-1}- q^{-t-1}}{q-q^{-1}}\right)q^t
+	= [t+1]q^t,
+\end{align*}
+y análogamente el que multiplica a $K^{-1}$ es $[t+1]q^{-t}$. Luego $[K;2t] + [t][K;t-1] 
+= [t+1][K;t]$, y hemos terminado con esta identidad. La cuarta identidad se deduce de las
+anteriores aplicando $\omega$.
+
+Para el punto (b), usando las identidades de (a) y haciendo inducción se ve que los 
+elementos de la forma dada generan un espacio vectorial multiplicativamente cerrado 
+adentro de $U$ que contiene a $E, F, K$ y $K^{-1}$, que por definición debe ser todo $U$.
+\end{proof}
+
+\begin{Proposition}
+\label{PBW}
+El álgebra $U$ es noetheriana, íntegra, y el conjunto $\mathcal B = \{E^rK^sF^t: r,t 
+\in \NN, s \in \ZZ$ es una base de $U$.
+\end{Proposition}
+\begin{proof}
+Sea $A_0 = \k[K,K^{-1}]$. Esta álgebra es claramente noetheriana, íntegra, y tiene por 
+base las potencias enteras de $K$. Sea $\alpha: A_0 \to A_0$ el autmorfismo definido por
+$\alpha(K) = q^2K$, y sea $A_1$ la extensión de Ore $A_0[X, \alpha]$. El álgebra $A_1$ es
+noetheriana, íntegra, y con base dada por $X^rK^s$, con $r \in \NN$ y $s \in \ZZ$; por
+definición $KX = q^2XK$.
+
+Sea $\beta: A_1 \to A_1$ el automorfismo dado por $\beta(K, X) = (q^{-2}K, X)$. Tenemos
+entonces que existe una única $\beta$-derivación $\delta$ tal que $\delta(K,X) = \left(
+0, \frac{K-K^{-1}}{q-q^{-1}} \right)$. Obtenemos entonces una segunda extensión de Ore 
+$A_2 = A_1[Y, \beta, \delta]$, que es íntegra, noetheriana y con base dada por 
+$X^rK^sY^t$ para $r,t \in \NN$ y $s \in \ZZ$. 
+
+Es inmediato comprobar que $(K, K^{-1}, X, Y)$ es un $U$-punto de $A_2$, y que el 
+morfismo correspondiente $f: U \to A_2$ manda $\mathcal B$ a la base de monomios de 
+$A_2$. Esto implica que la image de $\mathcal B$ es linealmente independiente; ya vimos 
+en el Lema \ref{commutators} que genera $U$, con lo cual $\mathcal B$ es una base. Más
+aún, $f$ es un isomorfismo, con lo cual $U$ resulta noetheriana e íntegra.
+\end{proof}
+
+\section{El álgebra envolvente cuantizada con $q$ genérico}
+En esta sección $U = U_q(\sl_2)$, y suponemos que $q$ no es una raíz de la unidad.
+
+
+\subsection*{Representaciones de $U$ para $q$ genérico}
+Notamos por $\rep U$ a la categoría de representaciones de $U$ de dimensión finita. 
+\paragraph
+\label{vectores-de-peso}
+Sea $V$ un objeto de $\rep U$. Decimos que $\lambda \in \k$ es un \newterm{peso} de $V$ 
+si existe $v \in V$ no nulo tal que $Kv = \lambda v$; en ese caso decimos que $v$ es un 
+vector de peso $\lambda$. Notamos por $V^\lambda$ al subespacio generado 
+por todos los vectores de peso $\lambda$. Decimos que $\lambda$ es un \newterm{peso 
+máximo} si existe $v \in V^\lambda$ no nulo tal que $Ev = 0$. Finalmente $V$ se dice 
+\newterm{de peso máximo} si está generado como $U$-módulo por un vector de peso máximo.
+
+\begin{Lemma*}
+Sea $V$ un objeto de $\rep U$ y sea $\lambda \in \k$. 
+\begin{enumerate}[$a)$]
+	\item $E V^\lambda \subset E^{q^2\lambda}$ y $F V^\lambda \subset V^{q^{-2}\lambda}$.
+	\item Los endomorfismos $E, F$ de $V$ son nilpotentes.
+	\item Si $V \neq 0$ entonces tiene un vector de peso máximo $\pm q^n$ con $n \in \NN$.
+\end{enumerate}
+\end{Lemma*}
+\begin{proof}
+	Sea $v \in V^\lambda$. Entonces \[K(Ev) = (KE)v = (q^2EK)v = q^2E(Kv) = q^2 \lambda
+	(Ev).\] El otro caso es análogo.
+
+	Veamos el ítem $b)$. Supongamos primero que $\k$ es algebraicamente cerrado. En ese
+	caso para ver que $E$ es nilpotente alcanza con probar que su único autovalor es $0$.
+	Como $\k$ es algebraicamente cerrado $E$ tiene al menos un autovector $v \in V$, de
+	autovalor $\mu$, y una cuenta similar a la anterior muestra que $K^n v$ es autovector
+	de $E$ de autovalor $q^{-2n}\mu$. Como $q$ no es raíz de la unidad estos autovalores
+	son distintos entre sí si $\mu \neq 0$, con lo cual tendríamos un conjunto infinito
+	linealmente independiente dentro de $V$, y esto contradice que $\dim_\k V < \infty$.
+	Luego $\mu = 0$ y $E$ es nilpotente. Si $\k$ no es algebraicamente cerrado entonces
+	extendemos escalares a la clausura algebraica y entonces tenemos que $E$ se extiende a
+	un endomorfismo nilpotente, lo que implica que ya era nilpotente sobre $\k$. Un
+	razonamiento análogo funciona para $F$.
+
+	Finalmente veamos el ítem $c)$. Como $E$ es nilpotente el espacio $\ker E$ es no 
+   vacío, y además por un cuenta similar a la anterior es estable por la acción $K$. 
+   Pasando a la clausura algebraica por un momento, $K$ debe tener al menos un autovector
+   en $\ker E$ y por lo tanto $V$ tiene un vector de peso máximo al que llamamos $v$. 
+   Como $F$ actúa de forma nilpotente exsite $n \in \NN$ tal que $F^{n+1}v = 0$ pero 
+   $F^nv \neq 0$; además por el ítem $a)$ el conjunto$\{F^iv\mid 0 \leq i \leq n\}$ está 
+   formado por autovectores de $K$ de autovalores distintos, con lo cual es linealmente 
+   independiente. Ahora para cualquier $i \in \NN$ tenemos
+   \[
+      EF^iv = F^i Ev + [i][K;i-1]F^{i-1}v = [i]\frac{q^{i-1}q^{-2(i-1)} \lambda 
+      - q^{-(i-1)}q^{2(i-1)}\lambda^{-1}}{q-q^{-1}} F^{i-1} v.
+   \]
+   En particular tomando $i = n+1$ el lado izquierdo de la ecuación se anula, por lo que
+   \[
+   q^{i-1}q^{-2(i-1)} \lambda - q^{-(i-1)}q^{2(i-1)}\lambda^{-1} = 0.
+   \]
+   Despejando obtenemos $\lambda^2 = q^{2n}$, lo que implica $\lambda = \pm q^n \in \k$. 
+   Volviendo al cuerpo de base $\k$, el escalar $\lambda$ es raíz del polinomio 
+   característico del endomorfismo $K \in \End_\k(\ker E)$ y por lo tanto el vector $v$
+   está definido sobre $\k$ sin necesidad de pasar a la clausura algebraica.
+\end{proof}
+
+\paragraph
+\label{representaciones-simples}
+Por el Lema \ref{vectores-de-peso} toda representación de $U$ tiene un vector de peso 
+máximo, y por lo tanto una subrepresentación de peso máximo. De ahí se deduce que toda
+representación simple es de peso máximo. Supongamos que $V$ es una representación simple
+de peso máximo $\lambda$ y dimensión $n+1$, y sea $v$ un vector de peso máximo. Fijemos
+$v_i = \frac{1}{[i]!}F^iv$ para $i = 0, 1, \ldots, n$. Entonces por la demostración del 
+\ref{vectores-de-peso} el conjunto $\{v_i: 0 \leq i \leq n\}$ es un conjunto de 
+autovectores de $K$, y además $Ev_i = [n-i+1]v_{i-1}$. Esto demuestra que el espacio 
+generado por los $v_i$ es cerrado por la acción de $U$, y por ser $V$ simple debe ser 
+una base de este espacio. Equivalentemente, las matrices
+\begin{align*}
+k
+& = \pm \begin{pmatrix}
+q^n & 0 &  \cdots & 0 \\
+0 & q^{n-2} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 &0 &0 & q^{-n}
+\end{pmatrix}
+&k^{-1} & = \pm \begin{pmatrix}
+q^{-n} & 0 &  \cdots & 0 \\
+0 & q^{-n+2} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 &0 &0 & q^{n}
+\end{pmatrix} \\
+e &=
+\begin{pmatrix}
+0 & [n] & 0 & \cdots & 0 \\
+0 & 0 & [n-1] & \cdots & 0  \\
+\vdots & \vdots & \ddots & \ddots \\
+0 & 0 & 0 & \cdots & [1]  \\
+0 & 0 & 0 & \cdots & 0 
+\end{pmatrix} 
+&f&=
+\begin{pmatrix}
+0 &\cdots &0 & 0 &0 \\
+[1] & \cdots & 0  &0 &0  \\
+\vdots & \ddots & \ddots & \vdots \\
+0 & \cdots  &[n-1] & 0  & 0\\
+0 & \cdots &0  & [n] & 0
+\end{pmatrix} 
+\end{align*}
+son un $U$ punto de $M_n(\k)$. Dado $\varepsilon \in \{\pm 1\}$ y $n \in \NN_0$ notamos
+por $V(\varepsilon, n)$ a la representación de dimensión $n+1$ dada por estas matrices.
+
+\begin{Lemma*}
+Sea $V$ un objeto de $\rep V$.
+\begin{enumerate}
+\item $V$ es simple de dimensión $n+1$ si y solo si $V \cong V(\varepsilon, n)$, si y 
+solo si está generado por un único vector de peso máximo $\pm q^n$. 
+\item $V$ es la suma directa de sus espacios de peso.
+\end{enumerate}
+\end{Lemma*}
+\begin{proof}
+Veamos 1. Ya vimos que si $V$ es simple entonces es de la forma $V(\varepsilon, n)$, con 
+$\dim V = n+1$. Notar que el núcleo de la acción de $E$ sobre $V = V(\varepsilon, n)$ 
+tiene dimensión $1$, y que cualquier vector de peso máximo genera $V$. Ahora si $V' 
+\subset V$ es una subrepresentación no nula, por \ref{vectores-de-peso} debe tener un 
+vector de peso y por lo tanto $V' = V$. En ese caso la otra equivalencia es clara.
+
+Probamos 2. por inducción en $r = \dim V$. Si $r = 1$ entonces $V$ es simple y
+por lo tanto de la forma $V(\varepsilon, 0)$, en cuyo caso ya tenemos el resultado. 
+Si no, sea $v \in V$ un vector de peso máximo. Como vimos en la prueba de 
+\ref{vectores-de-peso} el espacio generado por $\{F^iv : i \in \NN_0\}$ es de la forma 
+$V(\varepsilon, n)$, y si $r = n+1$ hemos terminado. De lo contrario tenemos una 
+subrepresentación $V' \subset V$ en la cual $K$ es diagonalizable; si notamos $W = V/V'$ 
+tenemos un objeto de $\rep U$ con $\dim W < r$, y por hipótesis inductiva $K$ actúa de 
+manera diagonalizable sobre $W$. Si escribimos $V = V' \oplus W'$ entonces $K$ actúa por 
+una matriz de la forma $\begin{pmatrix} D & * \\ 0 & D'\end{pmatrix}$ con $D, D'$ 
+diagonales. Esto implica que $K$ actúa de manera diagonalizable sobre $V$ y por lo tanto 
+$V$ es suma de sus espacios de peso.
+\end{proof}
+
+\begin{Proposition}
+Todo objeto $V$ de $\rep U$ es suma directa de objetos simples. Si $w_1, \ldots, w_r$ es 
+una base de vectores de peso de $\ker E$ entonces $V = \bigoplus_{i = 1}^r Uw_i$.
+\end{Proposition}
+\begin{proof}
+Vemos primero un resultado auxiliar. Sea $v \in V$ un vector de peso máximo arbitrario, 
+y sea $V' = Uv \cong V(\varepsilon, n)$. Notamos $W = V/V'$ y elegimos $w\in V$ vector 
+de peso de forma que $[w] \in W$ sea de peso máximo; esto lo podemos hacer porque tanto 
+$V$ como $V'$ son suma directa de sus espacios de peso. Vamos a probar ahora que podemos 
+elegir $w$ de peso máximo. Como $E[w] = 0$ tenemos que $Ew \in V'$ y al ser $V'$ cerrado
+por la acción de $U$ también $EFEw \in V'$. Ahora ambos son vectores del mismo peso en 
+$V'$ y por lo tanto proporcionales, ya que las componentes de peso de $V'$ tienen 
+dimensión $1$. Así existe $\lambda \in \k$ tal que $0 = Ew - \lambda EFE w = E(w - 
+\lambda FEw)$, y al ser $[w-\lambda FEw] = [w]$ podemos tomar $w' = w-FEw$ como 
+representante de peso máximo de $[w]$.
+
+Sea entonces $w_1, \ldots, w_r$ una base de $\ker E$, cada uno de ellos de peso y por lo 
+tanto de peso máximo. Notamos $V_i = Uw_i$, que debe ser de la forma $V(\varepsilon_i, 
+\pm q^{n_i})$ y en particular simple. Esto implica que $V_{j+1} \cap \bigoplus_{i=1}^j 
+V_i$ es igual a $0$ o a $V_{j+1}$, y la segunda opción es imposible porque el vector de 
+peso máximo de $V_{j+1}$ es linealmente independiente de los vectores de peso máximo de 
+los $V_i$ con $i \leq j$. Así $V' = \bigoplus_{i=1}^r V_i \subset V$. Sea $[v] \in V/V'$
+de peso máximo. Por el resultado previo podemos levantarlo a $[v] \in V/ 
+\bigoplus_{i = 1}^{r-1} V_i$ de peso máximo, e inductivamente obtenemos $v \in V$ un 
+representante de $[v]$ de peso máximo. Por construcción $v$ es combinación lineal de los 
+$w_i$ y por lo tanto está en $V'$, así que $[v] = 0$, y por \ref{vectores-de-peso} $V/V' 
+= 0$, es decir $V = V'$ como queríamos.
+\end{proof}
+
+\paragraph
+\label{Verma}
+\about{Módulos de Verma}
+Ya vimos que un objeto de $\rep U$ solo puede tener pesos de la forma $\pm q^n$ con $n 
+\in \ZZ$. La demostración dependía fuertemente de que $F$ actuara de forma nilpotente, 
+lo que a su vez dependía de que la representación fuera de dimensión finita. Ahora vamos 
+a ver que si retiramos la restricción sobre la dimensión entonces existen 
+representaciones de peso máximo arbitrario.
+
+Llamemos $V(\lambda)$ a nuestra hipotética representación de peso máximo $\lambda$. 
+Debemos tener $v \in V(\lambda)$ de forma que $K^n v = \lambda^n v$ para todo $n \in \ZZ$
+y $Ev = 0$. Si además pedimos que sea simple debemos tener $V(\lambda) = Uv$, con lo cual
+$V(\lambda) \cong U/(K-\lambda, E)$, donde $(K-\lambda, E)$ es el ideal a izquierda
+generado por estos elementos.
+
+Sea pues $\lambda \in \k$ y sea $V(\lambda) = U/(K-\lambda, E)$. Por \ref{PBW} la imagen 
+del conjunto $\{F^i \mid i \geq 0\}$ es una base de vectores de peso de $V(\lambda)$, 
+con $[F^i]$ de peso $q^{-2i}\lambda$. Así $V(\lambda)$ es una representación de peso 
+máximo, y por definición posee la siguiente propiedad: dada cualquier representación $V$ 
+y $v \in V^\lambda$ es de peso máximo, existe un único morfismo $U$-lineal $V(\lambda) 
+\to V$ tal que $[1] \mapsto v$. Llamamos a cualquier representación isomorfa a 
+$V(\lambda)$ un \newterm{módulo de Verma}.
+
+\begin{Proposition*}
+Sea $\lambda \in \k$. El módulo de Verma $V(\lambda)$ es simple salvo cuando $\lambda = 
+\pm q^n$ con $n \in \NN$. Si $\lambda = \pm q^n$ entonces tenemos una sucesión exacta
+corta
+\[
+   0 \to V(\pm q^{-n-2}) \to V(\pm q^n) \to V(\pm, n) \to 0.
+\]
+\end{Proposition*}
+\begin{proof}
+Sea $V \subset V(\lambda)$. Al ser $V$ invariante por la acción de $K$ debe ser suma 
+directa de sus espacios de peso, y por lo tanto $V = \langle [F^i] \mid i \leq j\rangle$
+para algún $j \in \NN_0$. Si $j \geq 0$, o equivalentemente si $V$ es una 
+subrepresentación propia, entonces $V(\lambda)/V$ es una representación de dimensión 
+finita y peso máximo $\lambda$, lo cual solo es posible si $\lambda = \pm q^n$ para algún
+$n$. Por otro lado la propiedad universal de $V(\pm q^n)$ nos dice que existe un morfismo
+$V(\pm q^n) \to V(\pm, n)$ el cual evidentemente es sobreyectivo y tiene por núcleo a
+$V = \{[F^j] : j < -n \} \cong V(\pm q^{-n-2})$.
+\end{proof}
+
+\begin{Remark}
+---
+\begin{enumerate}
+\item Una forma alternativa de construir los módulos de Verma es la siguiente. Supongamos
+que buscamos una representación simple de peso máximo de dimensión infinita $V$. Fijemos 
+una base $\{v_p \mid p \geq 0\}$ de $V$, de forma que $Kv_0 = \lambda v_0$. 
+Entonces los vectores $F^i v$ son linealmente independientes y deben formar una base de
+nuestro espacio. Para simplificar cuentas podemos tomar entonces $v_p = \frac{F^p}{[p]!}
+v_0$ como en el caso de dimensión finita. La misma cuenta que hicimos en 
+\ref{vectores-de-peso} muestra que forzosamente 
+\[
+   Ev_p = \frac{q^{-p}\lambda - q^p\lambda^{-1}}{q-q^{-1}}v_p.
+\]
+Para concluir la cuenta resta verificar que los operadores así definidos forman un 
+$U$-punto de $\End_\k(V)$
+
+\item Toda la teoría puede hacerse empezando con representaciones de \newterm{peso 
+mínimo}. Por supuesto todo objeto de $\rep U$ es una representación de peso mínimo,
+pero esto no es cierto en dimensión infinita. Tenemos entonces módulos de Verma 
+\emph{de peso mínimo} $W(\lambda) = U/(K-\lambda, F)$ con la propiedad universal 
+correspondiente.
+\end{enumerate}
+\end{Remark}
+
+\subsection*{El centro de U}
+\label{centro-de-Uq}
+Nuestro siguiente objetivo es estudiar el centro de $U$, que notamos por $\Z$. 
+
+\paragraph
+Fijamos
+\[
+C_q 
+   = FE +\frac{qK+q^{-1}K^{-1}}{(q-q^{-1})^2}
+   = EF + \frac{q^{-1}K+qK^{-1}}{(q-q^{-1})^2}
+\]
+Con la graduación definida en \ref{U-q-sl2} este es un elemento de grado $0$. Además
+\begin{align*}
+KC_q 
+   &= KFE + K\frac{qK+q^{-1}K^{-1}}{(q-q^{-1})^2} 
+   = q^{2-2}EFK +\frac{qK+q^{-1}K^{-1}}{(q-q^{-1})^2}K = C_qK. \\
+FC_q 
+   &= FEF + F\frac{q^{-1}K+qK^{-1}}{(q-q^{-1})^2}
+   = FEF + \frac{qK+q^{-1}K^{-1}}{(q-q^{-1})^2}F = C_qF.
+\end{align*}
+y al ser $\omega(C_q) = C_q$ tenemos $EC_q = \omega(FC_q) = \omega(C_qF) = C_q E$. Así 
+$C_q \in \Z$. Este elemento se suele llamar el \newterm{elemento de Casimir cuantizado}.
+
+\begin{Lemma*}
+El elemento $C_q$ actúa sobre el módulo de Verma $V(\lambda)$ por la constante 
+$\frac{q\lambda -q^{-1}\lambda^{-1}}{(q-q^{-1})^2}$.
+\end{Lemma*}
+\begin{proof}
+Es claro de que $C_q[1] = \frac{q\lambda -q^{-1}\lambda^{-1}}{(q-q^{-1})^2}[1]$. Ahora 
+\[
+   C_q[F^i] 
+      = C_qF^i[1] 
+      = F^iC_q[1] 
+      = \frac{q\lambda -q^{-1}\lambda^{-1}}{(q-q^{-1})^2}[F^i].
+\]
+\end{proof}
+
+\paragraph
+\label{Harish-Chandra}
+Recordemos de \ref{U-q-sl2} que $U$ tiene es graduada con $\deg (K,K^{-1}, E, F) = 
+(0,0,,1,-1)$. Las componentes homogéneas de $U$ son espacios de peso, y dado que
+cualquier elemento que conmute con $K$ debe tener peso $0$ deducimos $\Z \subset U_0$.
+La base PBW obtenida en \ref{PBW} es una base de vectores de peso, con lo cual todo
+elemento de $\Z$ debe ser de la forma $\sum_{i\geq 0} F^i p_i E^i$, donde $p_i \in 
+\k[K^{\pm 1}]$. Esta escritura nos dice que $U_0 = \k[K,K^{-1}] \oplus I$, donde
+$I$ es el espacio generado por los elementos de $U_0$ con $p_0 = 0$; notar que $I = UE 
+\cap U_0 = FU \cap U_0$ con lo cual $I$ es un ideal bilátero de $U_0$. El morfismo 
+$\phi: U_0 \to \k[K,K^{-1}]$ dado por $\sum_{i\geq 0} F^i p_i E^i \mapsto p_0$ es así 
+un morfismo de álgebras, llamado \newterm{morfismo de Harish-Chandra}.
+
+\begin{Lemma*}
+Fijamos $z \in \Z$.
+\begin{enumerate}
+\item Si $V$ es una representación de peso máximo $\lambda$ entonces $z$ actúa en 
+$V$ por múltiplicación por el escalar $\phi(z)(\lambda)$.
+
+\item Si $\phi(z) = 0$ entonces $z = 0$.
+
+\item $\phi(z)(q^{-1}\lambda) = \phi(z)(q^{-1}\lambda^{-1})$.
+\end{enumerate}
+\end{Lemma*}
+\begin{proof}
+Veamos 1.
+Sea $v \in V$ el vector de peso máximo. Tenemos
+\[
+	z \cdot v = \phi(z)\cdot v + \sum_{i\geq 0}^n F^i p_i E^i \cdot v = \phi(z)\cdot v = 
+	\phi(z)(\lambda) v.
+\]
+Por definición una representación de peso máximo está generada por un único vector de 
+peso máximo, con lo cual todo $w \in V$ es de la forma $xv$ para algún $x \in U$, y por
+lo tanto
+\[
+	z \cdot w = z \cdot(xv) = x \cdot (z v) = x\cdot(\phi(z)(\lambda)v ) 
+		= \phi(z)(\lambda)w.
+\]
+
+Si $\phi(z) = 0$ entonces $z = \sum_{i=k}^n c_i F^ip_iE^i$ con cada $p_i \in 
+\k[K^{\pm 1}]$, $p_k \neq 0$ y cada $c_i \in \k$. Por el punto 1, $z$ actúa en cualquier 
+módulo de Verma $V(\lambda)$ por $0$; por otro lado tenemos
+\begin{align*}
+0 
+	&= z \cdot [F^k]
+	= \sum_{i= k} c_i F_i p_i [E^i F^k]
+	= c p_k(\lambda) [F^k]
+\end{align*}
+con $c \in \k^\times$. Esto implica que $p_k = 0$ lo que contradice nuestra hipótesis.
+
+Finalmente recordemos de \ref{Verma} que $V(q^{-n-2}) \subset V(q^{n})$. Por el ítem $1$
+$z$ actúa por multiplicación por $\phi(z)(q^n)$ en $V(q^n)$ y por multiplicación por 
+$\phi(z)(q^{-n-2})$ en $V(q^{-n-2})$, por lo cual $\phi(z)(q^n) = \phi(z)(q^{-2}q^{-n})$.
+Al ser las potencias de $q^n$ distintas entre sí tenemos que los polinomios $\phi(z)
+(\lambda)$ y $\phi(z)(q^{-2}\lambda^{-1})$ coinciden en infinitos valores de $\lambda$
+y por lo tanto son iguales. Reemplazando $\lambda$ por $q^{-1}\lambda$ obtenemos el
+resultado.
+\end{proof}
+
+\begin{Proposition}
+\label{centro-U}
+El álgebra $\Z$ está generada por $C_q$. 
+\end{Proposition}
+\begin{proof}
+Ya vimos que $\phi: \Z \to \k[K, K^{-1}]$ es inyectivo. Además la imagen de $\phi$ 
+consiste de polinomios tales que $\phi(q^{-1}\lambda) = \phi(q^{-1}\lambda^{-1})$.
+Esto implica que el polinomio de Laurent $\phi(q^{-1}K)$ es suma directa de polinomios
+de la forma $c_i(K^i - K^{-i})$ con $i \in \NN$, o equivalentemente $\phi(K)$ es 
+combinación lineal de polinomios de la forma $c_i(q^{-i} K^i + q^iK^{-i})$. Llamemos
+$R$ al álgebra de polinomios de esta forma; el conjunto $\{(q^{-1}K - qK^{-1})^i \mid 
+i \in \NN\}$ es una base de $R$. Ahora el álgebra $\k[C_q] \subset \Z$ está generada por 
+las potencias de $C_q$, y 
+\[
+	\phi(C_q^i) = \phi(C_q)^i = \frac{(q^{-1}K + qK^{-1})^i}{(q-q^{-1})^{2i}},
+\]
+con lo cual $R$ está contenida en, y por lo tanto es igual a, la imagen de $\phi$. 
+Además la restricción $\phi: \k[C_q] \to R$ manda un conjunto generador de $\k[C_q]$ en 
+una base de $R$. Al ser $\phi$ inyectiva sobre $\Z$ esto implica que $\Z = \k[C_q]$
+es el álgebra de polinomios sobre el elemento $C_q$.
+\end{proof}
+
+
+
+\newpage
+\begin{bibdiv}
+\begin{biblist}
+\bib{dCP}{article}{
+   author={De Concini, C.},
+   author={Procesi, C.},
+   title={Quantum groups},
+   conference={
+      title={$D$-modules, representation theory, and quantum groups (Venice,
+      1992)},
+   },
+   book={
+      series={Lecture Notes in Math.},
+      volume={1565},
+      publisher={Springer, Berlin},
+   },
+   date={1993},
+   pages={31--140},
+}
+
+\bib{Jan}{book}{
+   author={Jantzen, Jens Carsten},
+   title={Lectures on quantum groups},
+   series={Graduate Studies in Mathematics},
+   volume={6},
+   publisher={American Mathematical Society, Providence, RI},
+   date={1996},
+   pages={viii+266},
+}
+
+\bib{Kas}{book}{
+   author={Kassel, Christian},
+   title={Quantum groups},
+   series={Graduate Texts in Mathematics},
+   volume={155},
+   publisher={Springer-Verlag, New York},
+   date={1995},
+   pages={xii+531},
+}
+
+\bib{Lus}{book}{
+   author={Lusztig, George},
+   title={Introduction to quantum groups},
+   series={Modern Birkh\"auser Classics},
+   note={Reprint of the 1994 edition},
+   publisher={Birkh\"auser/Springer, New York},
+   date={2010},
+   pages={xiv+346},
+}
+\end{biblist}
+\end{bibdiv}
+\end{document}

@@ -1,0 +1,308 @@
+
+
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% esto tiene que estar, en este orden...
+\usepackage[small]{titlesec}
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8,latin1]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumerate}
+\usepackage{mathpazo}
+%\usepackage{euler}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{stmaryrd}
+\usepackage{showlabels}
+\usepackage{tikz}
+%\swapnumbers
+
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposition, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Theorem, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corolllary, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definition, sibling=para, style=mystyle]{Definition}
+%\declaretheorem[name=Example, sibling=para, style=mystyle]{Example}
+
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+%\declaretheorem[name=Example, style=mystyle-empty]{Example*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\newcommand\KK{\mathbb K}
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\blabla[1]{\noindent\framebox[1.05\width]{\texttt{Note: #1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand\k{\Bbbk}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+
+\DeclareMathOperator\Id{\mathsf{Id}}
+\DeclareMathOperator\Fun{\mathsf{Fun}}
+\DeclareMathOperator\TOR{\underline{\mathsf{Tor}}}
+
+\newcommand\join{\vee}
+\newcommand\meet{\wedge}
+\renewcommand\q{\mathbf{q}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Cycle set cohomology}
+\date{[cycle-set-cohomology.tex]}
+%\author{Pablo Zadunaisky}
+\begin{document}
+\maketitle
+
+\section{Cycle sets}
+\paragraph
+\label{cycle-set-def}
+A cycle set is a set $X$ with an binary operation $\cdot$ such that:
+\begin{enumerate}[(a)]
+\item for each $a \in X$ the operation $x \mapsto a \cdot x$ is bijective, and
+\item for all $a,b,c \in X$ the following relation holds:
+\[
+  (a \cdot b) \cdot (a \cdot c) = (b \cdot a) \cdot (b \cdot c).
+\]
+\end{enumerate}
+We denote by $a \ast -$ the inverse operation to $a \cdot -$, so $a \ast b = c$
+if and only if $b = a \cdot c$.
+
+\paragraph
+\label{cycle-set-ybe}
+Let $(X, \cdot)$ be a cycle set. Then 
+\begin{align*}
+\sigma: X \times X &\to X \times X \\
+(a,b) &\maps ((b \ast a) \cdot b, b \ast a)
+\end{align*}
+is a solution to the YBE.
+
+\begin{Lemma}
+\label{cycle-set-ybe-props}
+Let $(X, \cdot)$ be a cycle set, and let $\sigma$ be the associated solution to YBE.
+Then $\sigma^2 = \Id_{X \times X}$, and for each $b,d \in X$ there exist unique $a,c \in 
+X$ such that $\sigma(a,b) = (c,d)$. 
+\end{Lemma}
+\begin{proof}
+First
+\begin{align*}
+\sigma^2(a,b) 
+  &= \sigma((b \ast a) \cdot b, b \ast a) \\
+  &= (((b \ast a) \ast ((b \ast a) \cdot b)) \cdot (b \ast a), 
+    (b \ast a) \ast ((b \ast a) \cdot b)) \\
+  &= (b \cdot (b \ast a), b) = (a,b).
+\end{align*}
+
+To prove the second assertion we need to show that $b,d$ determine $a,c$ uniquely in the 
+equation $((b \ast a)\cdot b, b \ast a) = (c,d)$. Clearly $a = b \cdot d$ and $c = d 
+\cdot b$, so the result follows.
+\end{proof}
+
+\paragraph
+\label{ybe-semigroup}
+The associated semigroup to a solution of the YBE $\sigma: X^{\times 2} \to X^{\times 2}$
+is the quotient of the free semigroup on $X$ by the relations $ab = cd$ whenever 
+$\sigma(a,b) = (c,d)$. It is denoted by $S_\sigma$. Its enveloping group is denoted by 
+$G_\sigma$.
+\begin{Proposition*}
+Let $(X, \cdot)$ be a cycle-set and let $S_\sigma$ be the semigroup associated to the 
+corresponding solution of the YBE. Then the following hold.
+\begin{itemize}
+\item $S_\sigma$ is cancellative.
+\item The natural map $S_\sigma \hookrightarrow G_\sigma$ is injective. 
+\item $G_\sigma$ is a group of fractions of $S_\sigma$.
+\end{itemize}
+\end{Proposition*}
+\begin{proof}
+In view of Lemma \ref{cycle-set-ybe-props} and \cite{GIVdB}*{Theorem 1.4}, $S_\sigma$ is 
+a $I$-type semigroup in the sense defined below \cite{GIVdB}*{Theorem 1.2}. Then
+\cite{GIVdB}*{Corollary 1.6} says that $S_\sigma$ is cancellative. By 
+\cite{CP}*{Theorem 1.24} the next two items hold if and only if for each $s, s' \in 
+S_\sigma$ the right ideals $S_\sigma s$ and $S_\sigma s'$ have nonzero intersection.
+
+The semigroup $S_\sigma$ is naturally graded by length. The fact that it is a $I$-type
+semigroup implies that $(S_\sigma)_k = \binom{n+k-1}{n-1} = \frac{k^{n-1}}{(n-1)!} + 
+o(k^{n-2})$. Let $s, s' \in S_\sigma$, both of length $l$. Since $S$ is cancellative for 
+$k \geq l$ we get
+\begin{align*}
+(S_\sigma s)_k 
+  = (S_\sigma s')_k 
+  = \binom{n+k-l-1}{n-1} 
+  = \frac{k^{n-1}}{(n-1)!} + o(k^{n-2})
+\end{align*}
+Now $(S_\sigma s \cap S_\sigma s')_k \geq |S_\sigma s|_k + |S_\sigma s'|_k - |S|_k = 
+\frac{k^{n-1}}{(n-1)!} + o (k^{n-2})$ which is a positive number for $k \gg 0$, so 
+$S_\sigma s \cap S_\sigma s' \neq \emptyset$. If $s$ and $s'$ have diferent length,
+say $s$ is longer than $s'$, we find $s''$ such that $s''s'$ has the same length as $s$
+and since $S_\sigma s'' s' \cap S_\sigma s \subset S_\sigma s' \cap S_\sigma s$ the 
+result follows.
+\end{proof}
+
+\paragraph
+\label{h2-and-hh1}
+We recall some facts from \cite{LV}*{section 11}. Let $(X,\cdot)$ be a cycle set and 
+let $A$ be any abelian group. Denote by $\Fun(X,A)$ the set of all functions $X \to A$.
+Then $\Fun(X,A)$ is a $G_\sigma$-set with action defined by
+\begin{align*}
+f \cdot a (b) = f (a \ast b) 
+\end{align*}
+for all $a,b \in X$ and $f \in \Fun(X,A)$. Of course this also induces an $S_\sigma$ 
+action on $\Fun(X,A)$ by restriction. The main theorem of \cite{LV}*{section 11} states
+that
+\[
+  H^2(X, A) \cong H^1(G_\sigma, \Fun(X,A)).
+\]
+By Proposition \ref{ybe-semigroup} the map $S_\sigma \to G_\sigma$ is injective and 
+$G_\sigma$ is a group of fractions of $S_\sigma$. Thus we may apply 
+\cite{CE}*{Chapter XS, Proposition 4.1} and conclude that the group $H^1(S_X, \Fun(X,A))$
+is isomorphic to both cohomology groups above.
+
+Now let $R = \ZZ[S_X]$ be the semigroup ring of $S_X$. Then $\Fun(X,A)$ is an $R$-module
+with right action given as above, which can be turned into an $R$-bimodule by setting a 
+trivial left action. In that case, as shown in \cite{CE}*{Chapter X, section 2}, there is
+a further isomorphism $H^1(S_\sigma, \Fun(X,A)) \cong HH^1(\ZZ[S_\sigma], \Fun(X,A))$. 
+Thus we may apply techniques from Hochschild cohomology theory to calculate $H^2(X, A)$.
+This is particularly useful since $R$ is a homogeneous algebra, and hence the first 
+three terms of the minimal resolution of $R$ as $R$-bimodule are known, and these are 
+precisely the terms needed to calculate the first Hochschild cohomology group.
+
+\begin{bibdiv}
+\begin{biblist}
+\bib{CE}{book}{
+   author={Cartan, Henri},
+   author={Eilenberg, Samuel},
+   title={Homological algebra},
+   series={Princeton Landmarks in Mathematics},
+   note={With an appendix by David A. Buchsbaum;
+   Reprint of the 1956 original},
+   publisher={Princeton University Press},
+   place={Princeton, NJ},
+   date={1999},
+   pages={xvi+390},
+}
+
+\bib{CP}{book}{
+   author={Clifford, A. H.},
+   author={Preston, G. B.},
+   title={The algebraic theory of semigroups. Vol. I},
+   series={Mathematical Surveys, No. 7},
+   publisher={American Mathematical Society},
+   place={Providence, R.I.},
+   date={1961},
+   pages={xv+224},
+}
+
+\bib{GIVdB}{article}{
+   author={Gateva-Ivanova, Tatiana},
+   author={Van den Bergh, Michel},
+   title={Semigroups of $I$-type},
+   journal={J. Algebra},
+   volume={206},
+   date={1998},
+   number={1},
+   pages={97--112},
+}
+
+\bib{LV}{article}{
+  author={Lebed, V.},
+  author={Vendramin, L.},
+  title={Homology of left non-degenerate set-theoretic solutions to the Yang-Baxter Equation},
+  url={arXiv:1509.07067},
+}
+
+\end{biblist}
+\end{bibdiv}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

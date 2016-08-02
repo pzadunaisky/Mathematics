@@ -1,0 +1,197 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% esto tiene que estar, en este orden...
+\usepackage[small]{titlesec}
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+\usepackage[latin1,utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumerate}
+\usepackage{mathpazo}
+\usepackage{euler}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+%\swapnumbers
+
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposition, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Theorem, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corolllary, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definition, sibling=para, style=mystyle]{Definition}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\newcommand\KK{\mathbb K}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\stack[2]{\genfrac{}{}{0pt}{2}{#1}{#2}}
+\newcommand\uu[1]{\underline{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\A{\mathcal A}
+\newcommand\B{\mathcal B}
+\renewcommand\L{\mathcal L}
+\newcommand\R{\mathcal R}
+\newcommand\F{\mathcal F}
+\renewcommand\O{\mathcal O}
+\newcommand\I{\uu I}
+\renewcommand\b{\mathfrak{b}}
+\newcommand\g{\mathfrak{g}}
+\newcommand\h{\mathfrak h}
+\newcommand\sq{\square}
+\newcommand\n{\mathfrak{n}}
+\newcommand\opp{\mathsf{opp}}
+\DeclareMathOperator\Id{\mathsf{Id}}
+\DeclareMathOperator\st{\mathsf{st}}
+
+\newcommand\C{\mathsf C}
+\newcommand\K{\mathsf K}
+\newcommand\D{\mathsf D}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+
+\DeclareMathOperator\Gl{\mathsf{Gl}}
+\DeclareMathOperator\GrHom{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\GrExt{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\GrTor{\underline{\mathsf{Tor}}}
+
+\DeclareMathOperator\Ab{\mathsf{Ab}}
+\DeclareMathOperator\ShHom{\mathcal Hom}
+\DeclareMathOperator\ShExt{\mathcal Ext}
+\DeclareMathOperator\ShTor{\mathcal Tor}
+
+\DeclareMathOperator\pd{pd}
+\DeclareMathOperator\id{id}
+\DeclareMathOperator\rank{rank}
+\DeclareMathOperator\Spec{Spec}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\ann{ann}
+\DeclareMathOperator\im{Im}
+\DeclareMathOperator\gr{gr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{Sobre el cambio de programa de Álgebra I}
+\date{28/04/2013}
+\author{PZ}
+\begin{document}
+\maketitle
+
+El objetivo de este documento es dejar por escrito los puntos de acuerdo entre los
+graduados respecto del proyecto de cambio de programa de Álgebra I. En general estamos de
+acuerdo en agregar el taller de computación, pero estamos en contra de que saquen
+contenidos de la materia. 
+
+Quimey Vivas puso a disposición de los graduados el documento elaborado por la comisión
+encargada de estudiar el cambio de programa. La mayor parte del documento se refiere a
+problemas de implementación de la nueva modalidad, pero al principio se habla de
+"reorganizar" los contenidos, y en la última sección se propone un programa tentativo,
+detallando los contenidos por clas. 
+
+Los cambios respecto de la organización actual son: 
+\begin{enumerate}
+  \item Combinatoria deja de ser un capítulo de la materia, y sus temas se distribuyen entre
+  los demás. Una parte, bosones, pasa a formar parte de la introducción de la materia
+  Probabilidades y Estadística.
+
+  \item Números complejos deja de ser un capítulo de la materia y su contenido pasa a
+  formar parte de la introducción al capítulo de Polinomios. El tratamiento de raíces de
+  la unidad se deja para Álgebra II. 
+\end{enumerate}
+Los dos cambios presentan el mismo patrón, de tomar dos de los temas principales de la
+organización actual de la materia, y dividir sus contenidos específicos en "los que
+aparecen de forma natural" en los otros cuatro capítulos y "los que deberían dejarse para
+más adelante". En ambos casos el argumento para postergar contenidos a materias futuras es
+que los alumnos "tienen dificultad para comprender" estos temas, que requieren un poco más
+de madurez matemática, y que de esta forma se pierde tiempo en la materia.
+
+Nos resulta preocupante el hecho de que se proponga sacar contenidos de la materia sin una
+justificación más extensa. Los argumentos que sí están presentes en el documento nos
+parecen insuficientes.
+
+Sobre el argumento de pérdida de tiempo, la mayoría de los graduados coincidimos en que
+Álgebra I es una materia en la que el tiempo suele sobrar, y se dedican muchas clases a
+repasar temas y a comentar "curiosidades sobre los números primos" y "chismes sobre
+crterios de irreducibilidad". Por otro lado, Álgebra II y Probabilidades y Estadística son
+materias en las que en general el tiempo \emph{falta}, y nos parece poco aconsejable sumar
+temas a esas materias.
+
+Acerca de la dificultad que representan para los alumnos los temas de combinatoria, y en
+menor medida números complejos, no nos parece que esa sea una razón para evitar estos
+contenidos. En cambio se podría aprovechar el taller de computación para explorar ciertos
+temas de probabilidad, utilizando fuerza bruta, y no tan bruta, para hacer listas de
+casos, distinguir casos que cumplan ciertas características, etc. Por otro lado, los
+alumnos vienen trabajando con números complejos desde el CBC, así que no parece razonable
+suponer
+
+Finalmente queremos señalar que si bien muchos de los contenidos propuestos en el
+programa, como discutir algoritmos de sorting tipo Fibonacci, Hanoi, etc. o acerca de
+propiedades de los números primos, no figuran en el programa oficial de la materia, muchas
+veces forman parte de la discusión en las clases prácticas sin generar dificultades para
+terminar el programa a tiempo.
+\end{document}

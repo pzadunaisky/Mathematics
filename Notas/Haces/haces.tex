@@ -1,0 +1,541 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{notas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\id{\mathsf{Id}}
+\newcommand\im{\mathsf{im}}
+\newcommand\coker{\mathsf{coker}}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\U{\mathcal U}
+\newcommand\C{\mathcal C}
+\newcommand\F{\mathcal F}
+\newcommand\G{\mathcal G}
+\newcommand\GG{\Gamma}
+\renewcommand\O{\mathcal O}
+\newcommand\E{\mathcal E}
+
+\DeclareMathOperator\Sh{\mathfrak{Sh}}
+\DeclareMathOperator\PreSh{\mathfrak{PreSh}}
+\DeclareMathOperator\Et{\mathfrak{Et}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Notas sobre teoría de haces}
+\date{[haces.tex]}
+\author{Pablo Zadunaisky}
+
+\begin{document}
+\maketitle
+El objetivo de estas notas es dar las definiciones necesarias para comprender resultados sobre teoría de haces. Dos resultados a lso que apuntamos son el teorema de de Rham, que afirma que la cohomología de de Rham de una variedad diferenciable coincide con su cohomología simplicial a coeficientes en $\RR$, y la sucesión espectral de Leray.
+
+Doy por sentados resultados de álgebra homológica, donde siempre uso \cite{Wei}
+y \cite{Toh} como referencia, de topología donde cito a \cite{Mun}, y de 
+teoría de variedades diferenciables, donde cito a \cite{War}.
+
+Dos aclaraciones: la primera es que dado que estas notas tienen un objetivo muy concreto,
+no trabajo en total generalidad; en particular los haces considerados toman valores en
+categorías de grupos abelianos enriquecidas, mayormente módulos sobre un anillo. Otro
+detalle es que todos los anillos considerados tienen unidad, pero por cuestiones técnicas
+\emph{no} exijo que $1 \neq 0$. En particular considero al anillo $0$ como el objeto final
+de la categoría de anillos.
+
+\section{Definiciones generales}
+\label{definiciones-generales}
+A lo largo de toda esta sección $X$ es un espacio topológico Haussdorf. 
+Nuestros principales ejemplos van a ser variedades diferenciables, el lector 
+deberá asegurarse de entender las demostraciones al menos en estos casos.
+
+\paragraph
+\label{categoria-abiertos}
+Asociamos a $X$ su categoría de abiertos $\U(X)$, cuyos objetos son los abiertos de $X$, y
+ponemos una flecha $U \to V$ si $V \subset U$.
+
+\begin{Definition}
+\label{prehaz}
+Un \newterm{prehaz} $\F$ de grupos abelianos (o de anillos, módulos, o de objetos de una
+categoría cualquiera) sobre el espacio topológico $X$ es una asignación que:
+\begin{itemize}
+\item[-] a cada abierto $U \subset X$ le asigna un objeto $\F(U)$ en la categoría de
+	llegada;
+\item[-] a todo par de abiertos $U \subset V$ le asigna una función $\rho_{V,U}: \F(V) \to
+	\F(U)$, llamada \newterm{función de restricción},
+\end{itemize}
+sujetas a las siguientes condiciones:
+\begin{enumerate}
+\item $\F(\emptyset)$ es objeto final de la categoría de llegada ($\emptyset$ en
+	conjuntos, $0$ en la categoría de módulos, etc.);
+\item $\rho_{U,U} = \id_{\F(U)}$;
+\item dados tres abiertos $U \subset V \subset W$ el siguiente diagrama conmuta
+\begin{align*}
+\xymatrix{
+	\F(W) \ar[dr]_-{\rho_{W,V}} \ar[rr]^-{\rho_{W,U}}& {} & \F(U) \\
+	{} & \F(V) \ar[ur]_-{\rho_{V,U}}
+}
+\end{align*}
+\end{enumerate}
+En otras palabras, un prehaz a valores en una categoria $\C$ es un funtor de la categoría
+$\U(X)$ en $\C$ que respeta objetos finales.
+\end{Definition}
+
+\begin{Example}
+\label{ejemplos-de-prehaces}
+Algunos ejemplos de  prehaces:
+\begin{enumerate}
+\item Un ejemplo idiota: a cada $U \in \U(X)$ le asignamos el $\RR$-espacio vectorial
+	$\RR$, y las funciones de restricción son todas identidades.
+
+\item Tenemos el \newterm{prehaz de funciones continuas} $\C$, que a cada entorno $U$ le
+	asigna las funciones continuas $U \to \RR$. Las funciones de restricción  $\rho: \C(U)
+	\to \C(V)$ están dadas por la restricción. Este es un prehaz de $\RR$-espacios
+	vectoriales, y aún más de $\RR$-álgebras.
+
+\item Si $M$ es una variedad diferenciable, podemos considerar $\Omega^p$, el prehaz de
+	$p$-formas diferenciables, con funciones de restricción dadas por la restricción de
+	formas diferenciables.
+\end{enumerate}
+\end{Example}
+
+\paragraph
+\label{notacion-secciones}
+Introducimos un poco de notación. Dado un abierto $U$ de $X$ y un haz $\F$, los elementos de $\F(U)$ suelen llamarse \newterm{secciones} de $\F$ sobre $U$. Dados abiertos $V \subset U$ y una sección $s \in \F(U)$, a veces notamos por $s|_V$ al elemento $\rho_{U,V}(s) \in \F(V)$.
+
+\paragraph
+\label{haz}
+La idea de \emph{prehaz} intenta capturar la idea de información global que se
+restringe a espacios más pequeños: si tenemos información (funciones a valores reales,
+$p$-formas, etc.) sobre un abierto $U$ entonces restringiendo podemos obtener información
+acerca de los abiertos contenidos en $U$. Una propiedad importante que tienen ciertos
+prehaces es que permiten reconstruir la información global, es decir de todo $X$, a partir
+de información local, es decir a partir de la información que tenemos sobre un conjunto de
+abiertos que cubra a $X$. Motivamos esta idea con un ejemplo sencillo.
+
+Supongamos que tenemos un espacio $X = U \cup V$, con $U$ y $V$ abiertos. Una función
+continua sobre $X$ determina por restricción funciones continuas sobre $U$ y $V$. Al mismo
+tiempo, podemos recuperar la función a partir de sus valores sobre $U$ y $V$, y como $U$ y
+$V$ son abiertos, toda propiedad local queda determinada si conocemos nuestra función
+sobre estos abiertos. Supongamos ahora que tenemos dos funciones, $f_U,f_V$ definidas en
+los dos abiertos respectivos. ¿En qué caso son la restricción de una función definida
+globalmente sobre X? Claramente la condición necsearia y suficiente es que ambas deben
+coincidir en $U \cap V$, o en otras palabras $f_U|_{U \cap V} = f_V|_{U \cap V}$.
+
+Tomemos un abierto $U$ y un cubrimiento $\mathcal V$. Diremos que una colección de
+elementos $\{s_V \in \F(V) \mid V \in \mathcal V\}$ es \newterm{compatible} si ``sus
+restricciones coinciden'', es decir que dados $V, V' \in \mathcal V$ se tiene $s_V|_{V
+\cap V'} = s_{V'}|_{V \cap V'}$. Decimos que un prehaz $\F$ tiene la propiedad de
+levantado si dado cualquier abierto $U$, y cualquier cubrimiento $\mathcal V$ de $U$, para
+toda familia compatible $\{s_V \in \F(V) \mid V \in \mathcal V\}$ existe una sección $s
+\in \F(U)$ tal que $s|_V = s_V$.
+
+\begin{Definition*}
+Un \newterm{haz} es un prehaz tal que toda familia compatible de secciones tiene un único
+levantado.
+\end{Definition*}
+
+\begin{Example}
+\label{ejemplos-de-haces}
+Algunos ejemplos y no ejemplos de haces:
+\begin{enumerate}
+\item Tanto el prehaz de funciones continuas como el de $p$-formas diferenciables son haces. 
+
+\item El prehaz idiota de \ref{ejemplos-de-prehaces} es un haz solo si todo abierto de $X$
+	es conexo. En cambio, si $U = V \cup V'$ con la unión disjunta, no existe ningún
+	elemento en $\F(U) = \RR$ que se restrinja a la familia trivialmente coherente $1 \in
+	\F(V), -1 \in \F(V')$.
+
+\item Consideremos el siguiente prehaz sobre el conjunto $\{a,b\}$ con la topología
+	disceta: $\F(\{a\}) = \RR, \F(\{b\}) = \RR, \F(\{a,b\}) = \RR \times \RR \times \RR$, y
+	los morfismos de restricción a $\{a\}$, resp. $\{b\}$ están dados por la proyección a
+	la primer, resp. tercer, coordenada. Entonces $\F$ tiene la propiedad de levantado,
+	pero no es un haz porque el levantado no es único.
+
+\item Sea $\pi: Y \to X$ una función sobreyectiva (cualquiera, continua, diferenciable,
+	holomorfa...) con la siguiente propiedad: cada fibra $Y_x = \pi^{-1}(x)$ es un grupo
+	abeliano. Para cada $U \subset X$ notamos por $\GG(\pi, U)$ al grupo abeliano de
+	secciones de $\pi$ en $U$, es decir funciones (arbitrarias, continuas, diferenciables,
+	holomorfas...) $s: U \to Y$ tales que $\pi \circ s = \id_U$, con la operación definida
+	punto a punto. Entonces $\GG(\pi, -)$ es una haz de grupos abelianos sobre $X$.
+\end{enumerate}
+\end{Example}
+
+\paragraph
+\about{Fibras}
+\label{fibras}
+Dado $p \in X$, el conjunto de abiertos a los que pertenece $p$ forman un conjunto
+ordenado filtrante $\U(p)$, con lo cual tiene sentido calcular la \newterm{fibra} de $\F$
+en el punto $p$, definido como $\F_p = \varinjlim_{\U(p)} \F(U)$. Dado que un morfismo de
+prehaces es compatible con las restricciones, la propiedad universal del límite directo
+garantiza que todo morfismo de prehaces $\phi: \F \to \G$ induce un morfismo $\phi_p: \F_p
+\to \G_p$ en las fibras. Si esto no queda claro, medite sobre el siguiente diagrama:
+\begin{align*}
+\xymatrix{
+  \F(U) \ar[dd] \ar@/^6pt/[dr] \ar[rr]^-{\phi(U)}
+    &{} 
+    &\G(U) \ar[dd] \ar@/^6pt/[dr] 
+    &{} \\
+  {}
+    & \varinjlim \F(U) \ar@{-->}[rr] 
+    & {} 
+    & \varinjlim \G(U)\\
+  \F(V) \ar@/_6pt/[ur] \ar[rr]^-{\phi(V)}
+    &{} 
+    &\G(V) \ar@/_6pt/[ur] 
+    &{} 
+}
+\end{align*}
+Notar que esta construcción tiene sentido sobre grupos abelianos, o más en general para
+haces con valores en una categoría $\C$ con límites directos.
+
+\paragraph
+\about{Gérmenes}
+\label{germenes}
+Hay una construcción concreta de $\F_p$. Podemos considerarla como el conjunto de los 
+pares $\{(s, U) \mid s \in \F(U)\}$ dividido por la relación de equivalencia $(s,U) \sim 
+(t,V)$ si y solo si existe $W \subset U \cap V$ tal que $s|_W = t|_W$. Es un ejercicio 
+instructivo comprobar que este conjunto es efectivamente un objeto en la categoría 
+pertinente y que tiene la propiedad universal deseada. Notamos por $s_p$ o por $[(s,U)]$ 
+a la imagen de $(s,U)$ en $F_p$, también llamada \newterm{germen} de $s$. 
+
+\begin{Lemma*}
+Sea $\F$ un haz, $V \subset U$ abiertos y $s \in \F(U)$ una sección. Entonces $s|_V = 0$ si y solo si para todo $p \in V$ se tiene $s_p = 0$.
+\end{Lemma*}
+\begin{proof}
+Es claro que $s|_V = 0$ implica que $s_p = 0$ para todo $p \in V$. Por otro lado, si $s_p
+= 0$ entonces existe un entorno de $p$, digamos $V_p$, tal que $s|_{V_p} = 0$. Como los
+$V_p$ forman un cubrimiento de $V$, la propiedad de levantado único implica que $s|_V =
+0$.
+\end{proof}
+
+\section{Las categorías $\PreSh(X)$ y $\Sh(X)$}
+\paragraph
+\about{Morfismos de haces}
+\label{morfismos-de-haces}
+Dados $\F, \G$ prehaces sobre $X$, un morfismo de prehaces es una colección de morfismos
+$\phi(U): \F(U) \to \G(U)$ tales que conmuta el diagrama
+\begin{align*}
+\xymatrix{
+	\F(U) \ar[d]_-{\rho^F_{U,V}} \ar[r]^-{\phi(U)}& \G(U) \ar[d]^-{\rho^\G_{U,V}} \\
+	\F(V) \ar[r]^-{\phi(V)} & \G(V)
+}
+\end{align*}
+o en otras palabras una transformación natural entre los funtores $\F$ y $\G$. Un morfismo
+de haces es un morfismo de prehaces entre dos haces.
+
+Con estas definiciones tenemos categorías de prehaces y de haces sobre $X$ con valores en
+$\C$, que se suelen notar $\PreSh(X, \C)$ y $\Sh(X, \C)$, respectivamente.
+\begin{Example*}
+De morfismos de haces:
+\begin{itemize}
+\item $i: \C^\infty \to \C$, con $i(U): \C^\infty(U) \to \C(U)$ dada por la inclusión;
+\item $d: \C^\infty \to \Omega^1$, con $d(U): \C^\infty(U) \to \Omega^1(U)$ dada por la
+	diferencial exterior;
+\item Si $\pi: Y \to X$ y $\pi': Z \to X$ son dos funciones sobreyectivas como en
+	\ref{ejemplos-de-haces} y $f: Y \to Z$ es una función de la clase correspondiente que
+	hace conmutar el diagrama
+\begin{align*}
+\xymatrix{
+  Y \ar[dr] \ar[rr]^-f &{} & Z \ar[dl] \\
+  {} & X \ar@{..>}@/^12pt/[ul]^-s {}
+}
+\end{align*}
+entonces $f_*(U): \GG(\pi, U) \to \GG(\pi',U)$ dada por $s \mapsto f \circ s$ es un
+morfismo de haces.
+\end{itemize}
+\end{Example*}
+
+\begin{Proposition}
+\label{isomorfismo-de-haces}
+Un morfismo de haces $\phi: \F \to \G$ es un isomorfismo si y solo si para todo punto $p
+\in X$ el morfismo $\phi_p$ es un isomorfismo.
+\end{Proposition}
+\begin{proof}
+Supongamos que $\phi$ tiene una inversa $\psi$. Entonces la funtorialidad de los límites
+directos implica que $\psi_p = \phi_p^{-1}$.
+
+Para demostrar la implicación inversa veremos que si $\phi_p$ es un isomorfismo entonces
+cada $\phi(U)$ es un isomorfismo; en ese caso podemos definir $\phi^{-1}(U) =
+\phi(U)^{-1}$ que resulta automáticamente ser un morfismo de haces. Para ver que $\phi(U)$
+es inyectiva, observamos que si $s \in \ker \phi(U)$ entonces $s_p \in \ker \phi_p$ y por
+lo tanto $s_p = 0$ para todo $p \in X$, y por el lema \ref{germenes} $s = 0$.
+
+Resta ver que $\phi(U)$ es sobreyectiva. Sea entonces $t \in \G(U)$, la hipótesis dice 
+que para todo $p \in X$ existe $s^p \in \F_p$ tal que $\phi_p(s^p) = t_p$, es decir que 
+para todo $p \in X$ existen un abierto $V_p$ y una sección $s^p \in \F(V_p)$ tal que 
+$\phi (V_p)(s^p) = t|_{V_p}$. Nos gustaría que $s^p = s_p$ para algún $s \in \F(U)$, y
+\note{Atención con el abuso de notación: estamos llamando $s^p$ a una sección y también 
+a su gérmen en el punto $p$}
+para demostrar esto alcanza con ver que dados dos puntos $p, p'$, las secciones $s^p$ y 
+$s^{p'}$ coinciden en $V_p \cap V_{p'}$. Para aligerar notación ponemos $s = s^p, s' = 
+s^{p'}, V = V_p$ y $V' = V_{p'}$. Dado $x \in V \cap V'$, tanto $s_x$ y $s'_x$ van a 
+parar a $t_x$ por $\phi_x$, con lo cual $s_x = s'_x$, o en otras palabras $s|_W = s'|_W$ 
+para algún entorno $W$ de $x$, y al ser $x$ arbitrario esto vale para todo punto de 
+$V \cap V'$. Luego $s|_{V \cap V'}$ y $s'|_{V \cap V'}$ coinciden en un entorno de todo 
+punto, y la propiedad  de levantado único de los haces dice $s|_{V \cap V'} = s'|_{V \cap
+V'}$. Como $p, p'$ eran puntos arbitrarios, tenemos que la familia $\{s^p|_{V_p}\}$ se 
+levanta a una única sección $s \in \F(U)$. Además, sabemos que para todo punto $p$ se 
+tiene $\phi_p(s_p) = \phi(s^p) = t_p$, con lo cual $\phi(s)$ coincide con $t$ en algún 
+entorno de $p$. Una nueva aplicación de la propiedad del levantado único nos dice que 
+$\phi(s) = t$.
+\end{proof}
+
+\paragraph
+\about{Núcleos y conúcleos}
+\label{nucleos-y-conucleos}
+Dado un morfismo de prehaces $\phi: \F \to \G$, se definen el prehaz $\ker \phi$ dado 
+por $(\ker \phi)(U)= \ker \phi(U)$, con las funciones de restricción inducidas por las 
+de $\F$. Análogamente se definen los prehaces $\im \phi$ y $\coker \phi$ junto con sus 
+funciones de restricción inducidas. 
+
+\begin{Proposition*}
+Si $\phi: \F \to \G$ es un morfismo de haces entonces $\ker \phi$ es un haz. Se tiene que $\ker \phi$ es el haz identicamente nulo si y solo si $\phi_p$ es inyectiva para todo $p \in X$.
+\end{Proposition*}
+\begin{proof}
+Sea $U$ un abierto, $\U$ un cubrimiento de $U$, y supongamos que tenemos $\{s_V \in \ker 
+\phi(V) : V \in \U\}$ una familia compatible de secciones. Dado que $\F$ es un haz, 
+existe una única sección $s \in \F(U)$ tal que $s|_V = s_V$. Además se tiene que $\phi(s)
+|_V = \phi(s_V) = 0$, con lo cual $\phi(s) = 0$ por la unicidad de los levantados en 
+$\G$. Por otro lado, $s \in \ker \phi(U)$ si y solo si $\phi(s) = 0$, y esto es 
+equivalente a que $\phi_p(s_p) = \phi(s)_p = 0$ para todo $p \in U$.
+\end{proof}
+
+\begin{Remark}
+Sea $X = \CC$ con los haces $\F$ de funciones continuas a valores complejos con la 
+operación suma, $\G$ de funciones holomorfas nunca nulas con el producto, y $\exp: \F \to
+\G$ la exponencial. Dada una función nunca nula $g \in \G(U)$, tomemos un punto $p \in U$
+y elijamos $U' \subset U$ de forma que $g(U') \subset V'$, donde $V'$ es un entorno 
+simplemente conexo de $p$. Elegimos una rama del logaritmo complejo definida sobre $V'$ 
+y tomamos $f = \log \circ g \in \F(U')$, de forma que $\exp(f) = g$, es decir que $\exp(
+f_p) = \exp([(f,U')]) = [(g,U')] = g_p$ y la función $\exp$ es sobreyectiva en los 
+stalks. Sin embargo si tomamos $U = \CC^\times$ y $g(z) = z$ no existe ninguna función 
+$f$ tal que $\exp(f) = g$, justamente porque $U$ no es simplemente conexo. Así $\exp$ es
+sobreyectiva en los stalks pero no es cierto que $\exp(U)$ sea sobreyectiva en cualquier
+abierto.
+
+Esto muestra que la proposición análoga a \ref{nucleos-y-conucleos} para los prehaces
+$\im$ y $\coker$ es falsa, lo cual atenta contra la expectativa de que $\Sh(X)$ sea una
+categoría abeliana. Para solucionar este problema tenemos que tomar un pequeño desvío.
+\end{Remark}
+
+\paragraph
+\about{Haz asociado a un prehaz}
+\label{haz-asociado-a-un-prehaz}
+El ejemplo básico de un haz es el de haz de secciones de una proyección. Está claro que la
+colecciones de secciones de una función tienen la propeidad de levantado único. Ahora
+vamos a ver que a todo prehaz se le puede asociar un haz de funciones.
+
+A cada prehaz $\F$ le vamos a asociar un espacio topológico $E(\F)$. Como conjunto 
+$E(\F)$ está formado por la unión disjunta de las fibras $\bigsqcup_{x \in X} \F_x$. Hay 
+una función obvia $\pi: E(\F) \to X$, dada por $\pi(s_x) = x$, y muchas funciones en el 
+sentido inverso definidas localmente: para cada abierto $U \subset X$, y asociada a cada 
+sección $s \in \F(U)$, temenos una función $E(s): x \in U \mapsto s_x \in \bigsqcup_{x \
+in U} \F_x$. 
+\note{Notar que $\pi$ es continua porque su composición con todas las secciones $s$ lo es.}
+Le damos a $E(\F)$ la topología final respecto de todas las secciones, y llamamos $\F^+$ 
+al haz de secciones continuas de la función $\pi: E(\F) \to X$; como $\F_x$ es un grupo
+abeliano, este será un haz de grupos abelianos como el descrito en
+\ref{ejemplos-de-haces}.
+
+El espacio topológico $E(\F)$ es llamado el \newterm{espacio étale} de $\F$. A cada sección $s \in \F(U)$ le asociamos el conjunto $U_s = E(s)^{-1}(U) = \{s_x \mid x \in 
+U\}$ de los gérmenes de $s$ en $E(\F)$; por definición es abierto, y la colección de 
+todos los conjuntos $U_s$ con $U$ abierto de $X$ y $s \in \F(U)$ forman una base de la 
+topología de $E(\F)$. 
+
+Si $\phi: \F \to \G$ es un morfismo de haces entonces como vimos en \ref{germenes} induce
+una función en los gérmenes, y por lo tanto entre los espacios étale $E(\phi): E(\F) \to
+E(\G)$ dada por $E(\phi)(s_x) = \phi(s)_x$. Esta función es continua, para verlo alcanza
+con probar que para toda $s \in \F(U)$ la función $E(\phi) \circ s$ es continua. Ahora, de
+la definición se deduce que $E(\phi) \circ E(s) = E(\phi(s))$, que es continua también por
+definición. Así $\phi$ induce una función $\phi^+: \F^+ \to \G^+$ entre los haces
+asociados, que es verificablemente funtorial.
+
+\paragraph
+\about{La categoría de espacios étale}
+\label{espacios-etale}
+Podemos resumir la discusión del apartado \ref{haz-asociado-a-un-prehaz} de la siguiente
+forma. Un \newterm{espacio étale} sobre $X$ es una función $p: Y \to X$ de espacios
+topológicos que es un homeomorfismo local, y tal que toda fibra $U_x = p^{-1}(x)$ es un
+grupo abeliano. En otras palabras, todo punto $y \in Y$ tiene un entorno $U$ tal que la
+restricción $p: U \to p(U)$ es un homemorfismo. Si $p: Y \to X$ y $p': Z \to X$ son
+espacios étale sobre $X$ entonces un morfismo entre ellos es una función $f: Y \to Z$ que
+hace conmutar el diagrama
+\begin{align*}
+\xymatrix{
+  Y \ar[rr]^-f \ar[dr]_-p & {} & Z \ar[dl]^-{p'} \\
+  {} & X & {}
+}
+\end{align*}
+y tal que $f_x: Y_x \to Z_x$ es un morfismo de grupos abelianos.
+Tenemos entonces una categoría de espacios étale sobre $X$, que notamos $\Et(X)$.
+\note{Estoy inventando en este párrafo... ¿alguien conoce una notación estándar?}
+
+\begin{Lemma*}
+Sea $\pi: Y \to X$ un espacio étale y sea $\F$ el haz de secciones continuas de $\pi$. Para cada $x \in X$ se tiene un isomorfismo de grupos abelianos $\F_x \cong p^{-1}(x)$.
+\end{Lemma*}
+\begin{proof}
+Basta ver que $p^{-1}(x)$ tiene la propiedad universal de $\F_x$. En primer lugar, 
+existen morfismos $\F(U) \to p^{-1}(x)$, dados por $s \in \F(U) \mapsto s(x) \in 
+p^{-1(x)}$. Como la operación en $\F(U)$ está dada punto a punto, este es un morfismo de 
+grupos abelianos, y por definición es compatible con la restricción de secciones.
+
+Ahora supongamos que tenemos un grupo abeliano $A$ y una familia de morfismos $f(U): 
+\F(U) \to A$ para cada entorno $U$ de $x$, compatible con las restricciones. Sea $y \in 
+p^{-1}(x)$ y sea $V$ un entorno de $y$ tal que $p|_V: V \to p(V)$ es un homeomorfismo, 
+cuya inversa notamos por $s$. Por definición $s \in \F(V)$ y por lo tanto tiene sentido 
+tomar $f(V)(s)$. Además, cualquier otra sección $s': p(V') \to V'$ construida de la 
+misma manera cumple que $s|_{p(V) \cap p(V')} = s|_{p(V) \cap p(V')}$, porque ambas son 
+inversas de $p|_{V \cap V'}$, y por lo tanto $f(V)(s) = f(V \cap V')(s) = f(V \cap V')
+(s') = f(V')(s')$. Entonces $s \in \F(V)$, y podemos tomar $f: p^{-1}(x) \to A$ como 
+$f(y) = f(V)(s)$. Eso define una función $f: p^{-1}(x) \to A$, con lo cual $p^{-1}(x)$
+tiene la propiedad universal del limite, en particular es isomorfa a $\F_x$.
+\end{proof}
+
+\paragraph
+\about{Cuestiones de funtorialidad}
+\label{cuestiones-de-funtorialidad}
+En el aparatdo anterior definimos un funtor $E: \PreSh(X) \to \Et(X)$, y como vimos en 
+\ref{ejemplos-de-haces} existe un funtor $\GG: \Et(X) \to \Sh(X)$ que a cada espacio 
+étale le asigna el haz de sus secciones continuas. Por definición, $\F^+ = \GG \circ E(
+\F)$. Agregamos dos funtores a nuestra lista: primero el funtor olvido $\O: \Sh(X) \to 
+\PreSh(X)$ que envía un haz en sí mismo pensado como prehaz, y finalmente el funtor $\E: 
+\Sh(X) \to \Et(X)$ dado por $\E \circ \O$, es decir la construcción del espacio étale 
+restringida a la categoría de haces. 
+\note{La palabra ``restringida'' no es muy feliz, pero bueh}
+
+Tenemos un diagrama de funtores
+\begin{align*}
+\xymatrix{
+  \PreSh(X) \ar@/^10pt/[rr]^-E \ar@/^10pt/[dr]^-{-^+} & {} & \Et(X) \ar@/^10pt/[dl]^-{\GG} \\
+  {} & \Sh(X) \ar@/^10pt/[ul]^-\O \ar@/^10pt/[ur]^-\E& {}.
+}
+\end{align*}
+\begin{Proposition*}
+Los funtores $(-^+, \O)$ forman un par adjunto.
+\end{Proposition*}
+\begin{proof}
+Para demostrar el enunciado, vamos a construir la unidad y counidad de la adjunción. 
+
+Primero, para cada prehaz $\F$ construimos una transformación $\theta_\F: \F \to \F^+$.
+Para cada abierto $U \subset X$ definimos $\theta(U): \F(U) \to \F^+(U)$ por la 
+asignación $s \mapsto E(s)$; esto es un morfismo de prehaces. Si $\phi: \F \to \G$ es un morfismo de prehaces, entonces el diargama
+\begin{align*}
+\xymatrix{
+  \F \ar[r]^-\phi \ar[d]_-{\theta(\F)} & \G \ar[d]^-{\theta(\G)}\\
+  \F^+ \ar[r]^-{\phi^+} & \G^+
+}
+\end{align*}
+conmuta. Por lo tanto $\theta$ define una transformación natural $\theta: \id \Rightarrow
+\O \circ -^+$.
+
+Ahora, si $\theta(\F)$ es un isomorfismo entonces $\F$ es isomorfo como prehaz a un haz, 
+y por lo tanto un haz. Por otro lado $\theta_x: \F_x \to \F^+_x$ es la función inversa 
+del isomorfismo construido en el Lema \ref{espacios-etale}, y por lo tanto si $\F$ era 
+un haz entonces $\theta(\F): \F \to \O(\F)^+$ es un isomorfismo por 
+\ref{isomorfismo-de-haces}. Poniendo $\rho(\F) = \theta(\F)^{-1}$ para cada haz $\F$ obtenemos una transformación natural $\rho: -^+ \circ \O \Rightarrow \id$. En ese caso es claro que para cada prehaz $\F$ y cada haz $\G$ las composiciones
+\begin{align*}
+\xymatrix{
+  \F^+ \ar[r]^-{\theta(\F)^+} & \O(\F^+)^+ \ar[r]^-{\O(\rho(\F^+))} & \F^+ \\
+  \mbox{y} \\
+  \O(\G) \ar[r]^-{\O(\rho(\G))} & \O(\O(G)^+) \ar[r]^-{\theta(\O(G))} & \O(\G)
+}
+\end{align*}
+son identidades, en el primer caso porque lo son al nivel de las fibras, y en el segundo 
+por inspección directa.
+\end{proof}
+
+Resaltamos que de la construcción anterior se deduce el siguiente resultado.
+\begin{Corollary*}
+Para cada prehaz $\F$ hay un morfismo de prehaces $\theta(\F): \F \to \F^+$, que es un
+isomorfismo si y solo si $\F$ es un haz. Más aún, si $\phi: \F \to \G$ es un morfismo de
+prehaces y $\G$ es un haz, entonces $\phi$ se factoriza por $\theta(\F)$.
+\end{Corollary*}
+\begin{proof}
+La primera afirmación fue probada en la demostración anterior. Por otro 
+lado, dado un morfismo de prehaces $\phi$ como en el enunciado, sabemos que $\theta(\F) 
+\circ \phi^+ = \phi \circ \theta(\G)$ (ver el primer diagrama de la demostración 
+anterior), y como $\theta(\G)$ es un isomorfismo tenemos que $\phi = (\theta(\G)^{-1} 
+\circ \phi^+) \circ \theta(\F)$.
+\end{proof}
+
+\paragraph
+\about{La categoría $\Sh(X)$}
+\label{categoria-sh}
+Hemos construido para cada morfismo de haces $\phi: \F \to \G$ un núcleo $\ker \phi$ dado
+por la asignación $U \mapsto \ker \phi(U)$, una imagen que es el haz asociado al prehaz
+$U \mapsto \phi(U)$, y un conúcleo que es el haz asociado a $U \mapsto \coker \phi(U)$.
+En los tres casos, tenemos que la fibra en cada punto $x \in X$ es el objeto
+correspondiente al morfismo $\phi_x$. Con esto se puede probar que si $\phi$ es mono,
+entonces es el núcleo de su conúcleo, y viceversa. Por otro lado, dados dos haces $\F, \G$
+su suma directa está dada por $U \mapsto \F(U) \oplus \F(V)$, con lo cual $\Sh$ es una
+categoría abeliana.
+
+Sea $\{\F_i\}_{i \in I}$ un sistema codirigido de haces sobre $X$. Entonces la asignación
+$U \mapsto \varinjlim_I \F_i(U)$ define un prehaz, que tiene la propiedad universal de los
+colímites en la categoría $\PreSh(X)$; de esto se deduce que el haz asociado tiene la
+propiedad universal del colímite en la categoría $\Sh(X)$. Como normalmente trabajamos
+sobre la categoría de haces, notamos a este haz simplemente como $\varinjlim_I \F_i$. En
+cambio el prehaz de los límites resulta ser un haz, con lo cual $(\varprojlim_I \F_i)$
+existe y puede calcularse tomando límite sobre cada abierto.
+
+Veamos ahora que la categoría de haces tiene suficientes objetos inyectivos. Dado $\F$,
+consideremos para cada $x \in X$ la fibra $\F_x$, que es un grupo abeliano inyectivo y por
+lo tanto existe un morfismo de grupos $i_x: \F_x \to \mathcal I_x$ con $\mathcal I_x$ un
+grupo abeliano inyectivo. Consideramos $\prod_{x \in X} I_x \to X$ la función obvia, y
+llamamos $\mathcal I$ al haz de secciones (sin ninguna hipótesis de continuidad) de esta
+función. Tenemos una función $\F \to \mathcal I$ que envía cada $f \in \F(U)$ a la sección
+$x \mapsto i_x(f_x)$, que es un morfismo inyectivo de haces porque cada $i_x$ es
+inyectiva. 
+
+\begin{bibdiv}
+\begin{biblist}
+\bib{Mun}{book}{
+	author={Munkres},
+	title={Topology},
+}
+
+\bib{Toh}{article}{
+   author={Grothendieck, Alexander},
+   title={Sur quelques points d'alg\`ebre homologique},
+   language={French},
+   journal={T\^ohoku Math. J. (2)},
+   volume={9},
+   date={1957},
+   pages={119--221},
+}
+
+\bib{War}{book}{
+	author={Frank W. Warner},
+    title={Foundations of differentiable manifolds and Lie groups. Reprint.},
+    year={1983},
+    series={Graduate Texts in Mathematics},
+    publisher={Springer-Verlag},
+    pages={272},
+}
+
+\bib{Wei}{book}{
+   author={Weibel, Charles A.},
+   title={An introduction to homological algebra},
+   series={Cambridge Studies in Advanced Mathematics},
+   volume={38},
+   publisher={Cambridge University Press},
+   place={Cambridge},
+   date={1994},
+   pages={xiv+450},
+}
+\end{biblist}
+\end{bibdiv}
+
+\end{document}

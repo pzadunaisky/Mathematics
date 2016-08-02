@@ -1,0 +1,399 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% esto tiene que estar, en este orden...
+\usepackage[small]{titlesec}
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+%\linespread{1.2}
+%\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumerate}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+%\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+
+%\swapnumbers
+
+
+
+
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lema, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposici\'on, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Teorema, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corolario, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definici\'on, sibling=para, style=mystyle]{Definition}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lema, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposici\'on, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Teorema, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corolario, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definici\'on, style=mystyle-empty]{Definition*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\stack[2]{\genfrac{}{}{0pt}{2}{#1}{#2}}
+\newcommand\uu[1]{\underline{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\C{\mathcal C}
+\newcommand\B{\mathcal B}
+
+
+\DeclareMathOperator\Id{\mathsf{Id}}
+
+\DeclareMathOperator\im{Im}
+\DeclareMathOperator\GL{\mathsf{GL}}
+\DeclareMathOperator\SO{\mathsf{SO}}
+\DeclareMathOperator\sen{sen}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Grupos desde el \'algebra lineal}
+\author{[grupos.tex]}
+\date{17/02/2015}
+\begin{document}
+\maketitle
+\section{Grupos de matrices}
+\begin{Definition}
+	Un \emph{grupo de matrices} (de tamaño $n \in \NN$) es un conjunto $G \subset M_n(\CC)$
+	que cumple las siguientes condiciones:
+	\begin{enumerate}
+		\item La matriz identidad pertenece a $G$.
+		\item Si $A, B \in G$ entonces $AB \in G$.
+		\item Si $A \in G$ entonces $A^{-1} \in G$.
+	\end{enumerate}
+\end{Definition}
+Para que una idea se útil en matemáticas, tiene que tener a la vez muchos ejemplos
+interesantes (¿a quién le importa que el conjunto $\{\Id_n\}$ sea un grupo?), y a la vez
+tiene que permitir decir muchas cosas sobre todos los ejemplos a la vez (Podríamos definir
+un "grupex" como \emph{cualquier} subconjunto de matrices inversibles, pero entonces lo
+único que vamos a saber sobre un grupex es que es un conjunto de matrices
+inversibles\footnote{O no, como podría argumentar un reciente ganador del premio
+Ramanujan.}).
+
+
+\paragraph \textbf{Ejemplos:}
+\begin{enumerate}
+	\item Claramente $\GL_n(\CC)$ es un grupo, y por el punto 3 de la definición, todo
+		grupo está contenido en $\GL_n(\CC)$. Más en general, todos los conjuntos de la
+		siguiente cadena son grupos: $\GL_n(\ZZ) \subset \GL_n(\QQ) \subset \GL_n(\RR)
+		\subset \GL_n(\CC)$. ¿Es cierto que el conjunto de las matrices con coeficientes en
+		$\NN$ forma un grupo?
+
+	\item El conjunto de matrices de la forma 
+			$R_\theta = \begin{pmatrix} 
+								\cos \theta & -\sen \theta \\
+								\sen \theta & \cos \theta
+							\end{pmatrix}$
+			con $\theta \in \RR$ forma un grupo. Notar que $R_\theta R_\varphi = R_{\theta +
+			\varphi}$. Tradicionalmente este conjunto se denota $\SO(2)$.
+
+	\item Sea $A \in \GL_n(\CC)$. Entonces el conjunto $\langle A \rangle = \{A^n \mid n
+		\in \ZZ\}$ forma un grupo. Por ejemplo, si $\theta = \pi/2$, entonces $R_\theta^4 =
+		\Id_2$, así que
+		\begin{align*}
+			\langle R_\theta \rangle 
+				&= \{\Id_2, R_\theta, R_\theta^2, R_\theta^3\}
+				= \left\{ 
+						\begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix},
+						\begin{pmatrix} 0 & -1 \\ 1 & 0\end{pmatrix},						
+						\begin{pmatrix} -1 & 0 \\ 0 & -1\end{pmatrix},						
+						\begin{pmatrix} 0 & 1 \\ -1 & 0\end{pmatrix}
+					\right\}
+		\end{align*}
+
+	\item El conjunto de matrices de la forma
+			$T_n = \begin{pmatrix} 
+					1 & 0 \\
+					n & 1
+				 \end{pmatrix}$
+			con $n \in \ZZ$ es un grupo. Notar que $T_n T_m = T_{n+m}$.
+
+	\item Sea $G$ un grupo. Entonces $S(G) = \{A \in G \mid \det A = 1\}$ también es un
+		grupo. Como $S(G) \subset G$, decimos que $S(G)$ es un \emph{subgrupo} de $G$.
+\end{enumerate}
+
+Veamos una manera bastante barata de construir más ejemplos.
+\begin{Proposition*}
+	Sea $X \subset \CC^n$. Entonces el conjunto $\GL(X) = \{A \in \GL_n(\CC) \mid A.X =
+	X\}$ es un grupo.
+\end{Proposition*}
+\begin{proof}
+	Claramente $\Id_n \in E(X)$. Si $A,B \in E(X)$ entonces $(AB).X = A.(B.X) = A.X = X$.
+	Finalmente, si $A.X = X$ multiplicando a ambos lados por $A^{-1}$ tenemos que $X =
+	A^{-1}.X$.
+\end{proof}
+Por supuesto, podemos cambiar $\CC$ por $\RR$, o por $\QQ$ o por $\ZZ$ en el resultado
+anterior y todo funciona igual. \textbf{Moraleja:} Hay muchos conjuntos interesantes que
+son grupos.
+
+\paragraph
+Ya que vimos que hay muchos conjuntos interesantes que son grupos, vamos a ver qué
+propiedades interesantes tienen. Para eso vamos a hacer una pequeña simplificación; vamos
+a suponer que nuestros grupos de matrices son \emph{finitos}. Casi todos los ejemplos que
+dimos son infinitos, así que damos más y más ejemplos, ahora de grupos finitos.
+\\
+
+\noindent\textbf{Ejemplos}
+\begin{enumerate}
+	\item Si $\theta = \frac{2\pi}{n}$, entonces el grupo $\langle R_\theta \rangle$ es
+		finito.
+
+	\item Sea $\Delta \subset \RR^2$ un triángulo equilátero con centro en el orígen de
+		coordenadas. Entonces $\GL(\Delta) = \{\Id, R_{2\pi/3}, R_{4\pi/3}, S, S R_{2\pi/3},
+		SR_{2\pi/3}\}$, donde $S = \begin{pmatrix} 0 & 1 \\ 1 & 0\end{pmatrix}$. 
+
+	\item Más aún, si $\Delta \subset \RR^2$ es un $n$-ágono regular centrado en el orígen,
+		$\GL(\Delta) = \{R_{2\pi/n}^i, SR_{2\pi/n}^i \mid i = 0, 1, \ldots, n-1\}$.
+
+	\item El conjunto de matrices de $n \times n$ con exactamente un $1$ por fila y un $1$
+		por columna y ceros en el resto de sus entradas es un grupo finito, llamado el
+		\emph{grupo simétrico}. Si nos quedamos con las matrices de esta forma de
+		determinante $1$, obtenemos el \emph{grupo alternante}.
+
+	\item Si $Q \subset \RR^3$ es el cubo cuyos vértices son los puntos de la forma
+		$(a,b,c)$ con $a,b,c \in \{\pm 1\}$, entonces $\GL(Q)$ es un grupo de 48 elementos.
+
+	\item Si $G$ es un grupo finito y $T \in \GL_n(\CC)$ entonces $G^T = \{TAT^{-1} \mid A
+		\in G\}$ también es un grupo. Decimos que dos grupos $G, G'$ son \emph{conjugados}
+		si existe una matriz $T \in \GL_n(\CC)$ tal que $G' = G^T$.
+\end{enumerate}
+
+\paragraph
+Vamos a probar nuestro primer resultado general 
+\begin{Proposition*}
+	Sea $G \subset M_n(\CC)$ un grupo finito. Entonces para todo $A \in G$ existe $m \in
+	\NN$ tal que $A^m = \Id$.
+\end{Proposition*}
+\begin{proof}
+	Consideremos el conjunto $X = \{A^i \mid i \in \NN\}$. Como $G$ es un grupo, $X \subset
+	G$, en particular $X$ es finito. Eso quiere decir que existen $s \leq t$ tales que $A^s
+	= A^t$, y tomando $m = t-s$, tenemos que $A^m = A^{s}A^{-t} = A^t A^{-t} = \Id_n$.
+\end{proof}
+De esto se deduce que existe un entero $e$, llamado el \emph{exponente del grupo} tal que
+$A^e = \Id_n$ para todo $A \in G$. Basta con tomar $e$ igual al MCM de los órdenes de cada
+matriz. 
+
+\begin{Corollary*}
+	Si $G$ es un grupo finito entonces cada $A \in G$ es diagonalizable, y sus autovalores
+	son raíces $e$-ésimas de la unidad.
+\end{Corollary*}
+\begin{proof}
+	Cualquier $A \in G$ satisface el polinomio $X^e - 1$. Luego el polinomio minimal $m_A$
+	divide a $X^e - 1$, que por supuesto tiene como raíces a las raíces $e$-ésimas de la
+	unidad, todas simples. Luego las raíces de $m_A$ son simples, lo que implica que $A$ es
+	diagonalizable. Además son todas raíces de la unidad, así que los autovalores de $A$
+	son raíces de la unidad.
+\end{proof}
+
+\paragraph
+Acá reunimos varios hechos aislados sobre grupos. no son cosas particularmente importantes
+por sí mismas, simplemente son cosas que uno usa una y otra vez cuando habla de grupos.
+Pueden tomarse como ejercicios, y a partir de ahora vamos a dar estas cosas por sabidas.
+
+\begin{enumerate}
+	\item Si $G$ es un grupo y $A \in G$, entonces la función $f_A: G \to G$ dada por
+		$f_A(B) = AB$ es biyectiva. Lo mismo para la función $g_A(B) = BA$, y para $h_A(B) =
+		ABA^{-1}$.
+\end{enumerate}
+
+\paragraph
+\textbf{Grupos finitos conmutativos.}
+Recordemos que si $G$ es un grupo y $T \in \GL_n(\CC)$, entonces $G^T = \{TAT^{-1} \mid a
+\in G\}$ también es un grupo. El corolario anterior dice que si $G$ es finito, entonces
+para todo $A \in G$ podemos encontrar una matriz inversible $T$ tal que $TAT^{-1}$ es
+diagonal. Como las matrices diagonales son más fáciles de manipular que matrices
+cualquiera, sería interesante encontrar una matriz $T$ tal que $G^T$ consistiera solo de
+matrices diagonales.
+
+Una gran característica de las matrices diagonales es que conmutan entre sí, es decir, si
+$D, D'$ son matrices diagonales, entonces $DD' = D'D$. Ahora supongamos que $G$ es
+conjugado a un grupo de matrices diagonales, donde la conjugación está dad por una matriz
+inversible $T$. Entonces, dadas $A, B \in G$ tenemos que $D = TAT^{-1}$ y $D' = TBT^{-1}$
+conmutan, es decir que
+\begin{align*}
+	T(AB)T^{-1} 
+		&= (TAT^{-1})(TBT^{-1}) = DD' = D'D 
+		\\&= (TBT^{-1})(TAT^{-1}) = T(BA)T^{-1}.
+\end{align*}
+Conjugando a ambos lados por $T$, tenemos que $AB = BA$. Es decir que si $G$ es conjugado
+a un grupo de matrices diagonales, entonces las matrices de $G$ necesariamente conmutan
+entre sí; estos grupos se llaman \emph{conmutativos} o \emph{abelianos}. Resulta que
+también vale la vuelta, es decir, que si un grupo $G$ consiste de matrices que conmutan
+entre sí, entonces es conjugado a un grupo de matrices diagonales. Esto se deduce del
+siguiente resultado general.
+
+\begin{Proposition*}
+	Sea $X$ un conjunto de matrices que conmutan todas entre sí. Si toda matriz de $X$ es
+	diagonalizable, entonces existe una base de $\CC^n$ de formada por autovectores de
+	todas las matrices de $X$.
+\end{Proposition*}
+\begin{proof}
+	Ejercicio.
+\end{proof}
+Entre los grupos que mencionamos más arriba, el grupo de las rotaciones $\langle R_\theta
+\rangle$ cumple la hipótesis de la proposición (¡demostrarlo!). Entonces debe existir una
+base en la que todos sus miembros son diagonales. Esta no es dificil de encontrar, y es un
+buen ejercicio encontrar esa base.
+
+\paragraph
+
+\begin{Proposition*}
+	Sea $G$ un grupo finito. Entonces existe una matriz inversible $T$ tal que $G^T$
+	consiste de matrices ortogonales de determinante $1$.
+\end{Proposition*}
+\begin{proof}
+	Consideremos el producto interno habitual en $\CC^n$, que notamos por
+	$\alngle-,-\rangle$. Definimos un \emph{nuevo} producto interno, de la siguiente
+	manera: dados $v,w \in \CC^n$, tomamos
+	\begin{align*}
+		(v,w) &= \frac{1}{|G|} \sum_{A \in G} \langle Av, Aw\rangle.
+	\end{align*}
+	Es facil ver que $(-,-)$ define un nuevo producto interno. Además, vale que si $A \in
+	G$, entonces $(Av,Aw) = (v,w)$, o en otras palabras la adjunta de $A$ respecto de
+	este producto interno es $A^{-1}$. En otras palabras, la transformación lineal $L_A:
+	\CC^n \to \CC^n$ dada por $v \mapsto Av$ es ortogonal (es inversible y su inversa
+	coincide con su adjunta).
+	
+	Ahora sea $B$ una base ortonormal para el nuevo	producto interno, y sea $T$ la matriz
+	de cambio de base de la base canónica en $B$. La matriz $A^T$ es simplemente la matriz
+	de la transformación $L_A$ en la base $B$, por lo que $A^T$ debe ser una matriz
+	ortogonal.
+\end{proof}
+
+
+\section{Grupos de transformaciones lineales}
+
+\section{Grupos abstractos}
+
+\end{document}
+
+\textbf{Grupos finitos conmutativos II.}
+Nuestro objetivo ahora es entender \emph{todos} los grupos de matrices conmutativos. Para
+eso vamos a usar una idea muy común en matemática, y muy sencilla: vamos a dar una lista
+de grupos abelianos finitos, una lista ``corta'' en algún sentido, y vamos a mostrar que
+si queremos estudiar un grupo abeliano $G$ cualquiera, entonces alcanza con elegir el
+grupo correcto de nuestra lista, digamos $G'$, que es una copia fiel del grupo $G$
+original.
+
+La idea es muy parecida la de la forma de Jordan. Para saber si dos matrices son
+conjugadas, alcanza con llevar cada una a su forma de Jordan, y comparar ambas. Salvo
+permutación de bloques (que equivale a reordenar las bases), deben ser iguales. Esta
+condición es otra vez \emph{necesaria} y \emph{suficiente}. El procedimiento puede
+describirse así: a cada matriz le asignamos una, y solo una, matriz en forma de Jordan
+(digamos que ordenamos los bloques de mayor a menor, y bloques de igual tamaño según
+módulo y argumento del autovalor correspondiente); luego dos matrices son conjugadas si y
+solo si tienen la misma forma de Jordan.
+
+Vamos a llevar adelante un procedimiento parecido. Ya vimos que todo grupo finito abeliano
+es conjugado a un grupo de matrices diagonales con raíces de la unidad como autovalores.
+Ahora vamos a dar una lista de grupos de matrices que cumplan con esa característica, y de
+forma tal que todo grupo abeliano sea conjugado a \emph{uno y solo uno de ellos}. 
+
+\begin{Definition*}
+	Sean $n, d_1, d_2, \ldots, d_n \in \NN$. Llamamos $\C(d_1, \ldots, d_n)$ al conjunto de
+	matrices diagonales que tienen en el $i$-ésimo lugar de la diagonal una raíz
+	$d_i$-ésima de la unidad.
+\end{Definition*}
+Por ejemplo 
+\begin{align*}
+	\C(4,2) 
+		= \bigg\{ 
+			&\begin{pmatrix}
+				1 & 0 \\ 0 & 1
+			\end{pmatrix},
+			\begin{pmatrix}
+				1 & 0 \\ 0 & -1
+			\end{pmatrix},
+			\begin{pmatrix}
+				i & 0 \\ 0 & 1
+			\end{pmatrix},
+			\begin{pmatrix}
+				i & 0 \\ 0 & -1
+			\end{pmatrix},\\
+			&\begin{pmatrix}
+				-1 & 0 \\ 0 & 1
+			\end{pmatrix},
+			\begin{pmatrix}
+				-1 & 0 \\ 0 & -1
+			\end{pmatrix},
+			\begin{pmatrix}
+				-i & 0 \\ 0 & 1
+			\end{pmatrix},
+			\begin{pmatrix}
+				-i & 0 \\ 0 & -1
+			\end{pmatrix}
+		\bigg\}
+\end{align*}
+
+Nuestro resultado es el siguiente. Vamos a decir que una $n$-upla $(d_1, d_2 \ldots,
+d_n) \in \NN^n$ es decreciente si $d_1 \geq d_2 \geq \cdots \geq d_n$2.
+\begin{Theorem*}
+	Si $G \subset M_n(\CC)$ es un grupo abeliano de matrices, entonces existe una única
+	$n$-upla descendiente $(d_1, \ldots	d_n) \in \NN^n$ tal que $G$ es conjugado a $\C(d_1,
+	\ldots, d_n)$
+\end{Theorem*}
+\begin{proof}
+	Llamemos $d$ al menor número tal que $A^d = \Id_n$ para todo $A \in G$. Entonces
+	también vale que $A^d = \Id_n$ para todo $A \in G^T$, y como las matrices de $G^T$ son
+	diagonales, eso quiere decir que cada matriz tiene en su diagonal raíces $d$-ésimas de
+	la unidad. En otras palabras $G^T \subset \C(d, d, \ldots, d)$.
+\end{proof}
+
+
+

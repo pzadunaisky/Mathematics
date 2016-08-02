@@ -1,0 +1,28 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{paragraphs}[2011/02/25 Numbered paragraphs v3.4]
+
+\newskip\paraskip
+\paraskip=0.75ex plus .2ex minus .2ex
+
+\newcounter{para}[section]
+\setcounter{para}{0}
+\renewcommand\thepara{\thesection.\arabic{para}}
+\def\paragraph{%
+  \if@noskipsec \leavevmode \fi
+  \par
+  \if@nobreak
+    \everypar{}%
+  \else
+    \addpenalty{\@secpenalty}%
+    \addvspace{\paraskip}%
+  \fi
+  \noindent
+  \refstepcounter{para}%
+  \textbf{\thepara.}\hspace{1ex}%
+  \@nobreakfalse
+  \ignorespaces
+}
+
+\newcommand\pref[1]{\textbf{\ref{#1}}}
+
+\newcommand\theHpara{\theHsection.\arabic{para}}

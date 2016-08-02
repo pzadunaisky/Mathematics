@@ -1,0 +1,756 @@
+
+
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% esto tiene que estar, en este orden...
+\usepackage[small]{titlesec}
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8,latin1]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumerate}
+\usepackage{mathpazo}
+%\usepackage{euler}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{stmaryrd}
+\usepackage{showlabels}
+\usepackage{tikz}
+%\swapnumbers
+
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposition, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Theorem, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corolllary, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definition, sibling=para, style=mystyle]{Definition}
+%\declaretheorem[name=Example, sibling=para, style=mystyle]{Example}
+
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+%\declaretheorem[name=Example, style=mystyle-empty]{Example*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\newcommand\KK{\mathbb K}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\op{\mathsf{op}}
+\newcommand\blabla[1]{\noindent\framebox[1.05\width]{\texttt{Note: #1}}}
+\renewcommand\ll{\llbracket}
+\newcommand\rr{\rrbracket}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand\k{\Bbbk}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+
+\DeclareMathOperator\HOM{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\EXT{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\TOR{\underline{\mathsf{Tor}}}
+
+\newcommand\join{\vee}
+\newcommand\meet{\wedge}
+\renewcommand\q{\mathbf{q}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Hochschild cohomology for Koszul algebras}
+\date{[Hochschild-Koszul-complexes.tex]}
+\author{Pablo Zadunaisky}
+\begin{document}
+\maketitle
+
+In this note we follow \cite{VdB}
+and give a general construction for complexes that calculate Hochschild cohomology of
+Koszul algebras. We hope to apply this construction to study quantum graded ASLs.
+
+Throughout this document $\k$ is a field and all vector spaces and tensor products are 
+over $\k$ unless otherwise noted.
+
+\paragraph
+Let $A$ be a finitely generated Koszul algebra with quadratic dual $A^!$. Set $V = A_1$,
+and let $R \subset V \ot V$ the space of quadratic relations of $A$, so $A \cong T(V)/R$
+and $A^! \cong T(V^*)/R^\perp$.
+
+We consider $A \ot A^!$ as an algebra with the usual product. Notice that $A_1 \ot A_1^! 
+= V \ot V^* \cong \hom_\k(V,V)$, and hence there is a distinguished element $e \in A_1 
+\ot A^!_1$ corresponding to the identity of $V$. If $x_1, \ldots, x_n$ is a basis of $V$ 
+and $\zeta^1, \ldots, \zeta^n$ is the corresponding dual basis of $V^*$ then $e = 
+\sum_i e_i \ot \zeta^i$. Analogously we set $f = \sum_i \zeta^i \ot x_i \in A^! \ot A$. 
+Then $e^2 = 0$ and $f^2 = 0$.
+
+Let $M$ be a graded $A$-bimodule. Then $M \ot A^!$ is naturally an $A \ot A^!$-bimodule.
+Denote the graded dual of $A^!$ by $(A^!)^\#$. Then $M \ot (A^!)^\#$ is also an
+$A \ot A^!$-bimodule. For each $n \in \NN$ write
+\begin{align*}
+C^n(M) &= M \ot A^!_n \\
+C_n(M) &= M \ot (A^!)^\#_{-n} =  M \ot (A^!_n)^*
+\end{align*}
+Define $d^n: C^n(M) \to C^{n+1}(M)$ and $\delta_n: C_n(M) \to C_{n-1}(M)$ by the formulae
+\begin{align*}
+	d(x) &= e \cdot (x) + (-1)^n(x) \cdot e \\
+	\delta(y) &= e \cdot (y) + (-1)^n (y) \cdot e
+\end{align*}
+In other words, $d$ and $\delta$ are the super-commutators with the element $e$.
+
+Our aim is to prove the following results
+
+\begin{Theorem*}[A]
+The homology of the complex $(C^\bullet(M), d)$ is naturally isomorphic to 
+$HH^\bullet(A,M)$, while the homology of $(C_\bullet(M), \delta)$ is naturally 
+isomorphic to $HH_\bullet(A,M)$
+\end{Theorem*}
+
+Taking $M = A$ we see that $C_\bullet(A)$ is an $C^\bullet(A)$-bimodule in a natural way.
+\begin{Theorem*}[B]
+The action of $C^\bullet(A)$ on $C_\bullet(A)$ induces the natural action of 
+$HH^\bullet(A)$ on $HH_\bullet(A)$.
+\end{Theorem*}
+
+
+\section{Graded vector spaces and modules}
+Let $G$ be a commutative group, such that there exists a non-zero homomorphism $\phi: G 
+\to \ZZ$; equivalently $G \cong G' \times \ZZ$. We fix such an isomorphism and write 
+$g = (g', n)$. We work with $G$-graded vector spaces, and assume that $\k$ is
+concentrated in degree $0 = (0_{G'}, 0)$.
+
+\paragraph
+Let $M = \bigoplus_{g \in G} M_g$ be a $G$-graded vector space. Given an element $m \in 
+M_g$ with $g \in G$, we call $g$ the \emph{total degree} of $m$, while the \emph{degree} 
+of $m$ is $\phi(g)$; clearly this gives $M$ the structure of a $\ZZ$-graded vector space.
+
+\paragraph
+Given $g \in G$, we denote by $M[g]$ the $G$-graded vector space with the same 
+underlying vector space as $M$ and with homogeneous component of degree $h \in G$ given
+by $M[g]_h = M_{h+g}$. In case $n \in \ZZ$, we will write $M[n]$ instead of $M[(0_{G'}, 
+n)]$.
+
+\paragraph
+Let $N$ be a second $G$-graded module. A linear transformation $f: N \to M$ is 
+homogeneous of total degree $g \in G$ if $f(N_h) \subset M_{g+h}$ for all $h \in G$. By 
+definition a linear transformation $f: N \to M$ is homogeneous of degree $g$ if and only 
+if the linear transformation $f: N \to M[g]$ is homogeneous of total degree $0$. We 
+write $\Hom_k^G(N,M)$ for the family of all morphisms of total degree $0$, and set
+\begin{align*}
+	\HOM_k^G(N,M) = \bigoplus_{n \in \ZZ} \Hom_k^G(N,M[n]),
+\end{align*}
+which is a $\ZZ$-graded vector space in an obvious way.
+
+\paragraph
+Let $A$ be a $G$-graded algebra. We say that $A$ is connected if it is connected as a 
+$\ZZ$-graded algebra.
+
+\paragraph
+Let $P = (P_\bullet, d^P_\bullet)$ and $Q = (Q_\bullet, d^Q_\bullet)$ be complexes. Then 
+we set $P \ot Q = ((P \ot Q)_\bullet), D_\bullet)$, where
+\[
+	(P \ot Q)_n = \bigoplus_{i+j = n} P_i \ot Q_j \\
+	D_n = \bigoplus_{i + j = n} d^P_i + (-1)^i d^Q_j
+\]
+
+\section{The complexes}
+\paragraph
+\label{Algebras-setup}
+Let $A$ be a finitely generated quadratic algebra with quadratic dual $A^!$. 
+Set $V = A_1$, and let $R \subset V \ot V$ the space of quadratic relations of $A$, so 
+$A \cong T(V)/R$ and $A^! \cong T(V^*)/R^\perp$. With our conventions, $A^!$ is a 
+$\ZZ_{\leq 0}$-graded algebra, with $A^!_{-1} = V^*$.
+
+We consider $A \ot A^!$ as an algebra with the usual product. Notice that $A_1 \ot A_1^! 
+= V \ot V^* \cong \hom_\k(V,V)$, and hence there is a distinguished element $e \in A_1 
+\ot A^!_1$ corresponding to the identity of $V$. If $x_1, \ldots, x_n$ is a basis of $V$ 
+and $\zeta^1, \ldots, \zeta^n$ is the corresponding dual basis of $V^*$ then $e = 
+\sum_i e_i \ot \zeta^i$. Analogously we set $f = \sum_i \zeta^i \ot x_i \in A^! \ot A$.
+
+\paragraph
+\label{e^2=0}
+Fix $I \subset \ll n \rr^2$ such that for every $(k,l) \notin I$ there exist
+$(\lambda^{i,j}_{k,l})_{(i,j) \in I} \subset \k$ with
+\[
+	x_k x_l - \sum_{(i,j) \in I} \lambda_{k,l}^{i,j} x_i x_j \in R.
+\]
+Notice that $R$ is generated by all such elements, so $\dim R = n^2 - |I|$ and $\dim
+R^\perp = |I|$. Direct computation shows that for each $(i,j) \in I$ the element
+\[
+	\zeta^i \zeta^j + \sum_{(k,l) \notin I} \lambda^{i,j}_{k,l} \zeta^k \zeta^l
+\]
+is in $R^\perp$, and so $R^\perp$ is generated by these elements. Hence
+\begin{align*}
+	e^2 
+		&= \sum_{i,j \in \ll n \rr^2} x_i x_j \ot \zeta^i \zeta^j = \sum_{(i,j) \in I}
+			x_i x_j \ot \zeta^i \zeta^j + \sum_{(k,l) \notin I}  \sum_{(i,j) \in I}
+			\lambda^{i,j}_{k,l} x_i x_j \ot \zeta^k \zeta^l \\
+		&= \sum_{(i,j) \in I} x_i x_j \ot \left(\zeta^i \zeta^j + \sum_{(k,l) \notin I}
+		\lambda^{i,j}_{k,l} \zeta^k \zeta^l\right) = 0.
+\end{align*}
+An analogous argument shows that $f^2 = 0$.
+
+\paragraph
+\label{graded-dual-module}
+Let $C = (A^!)^\#$ be the graded dual of $A^!$, i.e. 
+\[
+	C_n = (A^!_{-n})^* = \hom_\k(A^!_{-n}, \k).
+\] 
+This is a graded $A^!$-bimodule, where for every $\xi, \zeta, \phi \in A^!$
+and every $\hat \psi \in C_n$, 
+\[
+	\xi \cdot \hat \psi \cdot \zeta (\phi) = \hat\psi(\zeta \phi \xi).
+\] 
+
+\paragraph
+\label{graded-dual-coalgebra}
+The $A^!$-module $C$ is also an $\NN_0$-graded coalgebra, whose comultiplication is 
+induced by the product of $A^!$. Let $n,i,j \in \NN_0$ with $n = i+j$. The 
+multiplication map $\mu_{i,j}: A^!_{-i} \ot A^!_{-j} \to A^!_{-n}$ induces a dual map 
+$\rho^{i,j}: C_n \to C_i \ot C_j$. We use Sweedler's notation and write 
+$\rho^{i,j}(\hat\phi) = \hat \phi^i_1 \ot  \hat \phi^j_2$. 
+
+\blabla{We are careful not to introduce signs!}
+
+
+\paragraph
+\label{K-complexes}
+We now define the complexes $K^L_\bullet(A) = (A \ot C_\bullet, d^L)$ and $K_\bullet^R(A)
+= (C_\bullet \ot A, d^R)$, where $d_L$ is multiplication by $e$ on the right and $d_R$ 
+given by multiplication with $f$ on the left. These are complexes since $e^2 = f^2 = 0$, 
+
+Set $K(A) = A \ot C \ot A$, which is naturally an $A \ot A^! \ot A$-module. We see this 
+as a complex with $K_\bullet(A) = A \ot C_\bullet \ot A$, and with differential $D^K$ 
+given by $x \in K_n(A) \mapsto x \cdot e \ot 1 + (-1)^n 1 \ot f \cdot x$. Notice that 
+$K^0(A) = A \ot A$, $K^1 = A \ot V \ot A$ and $D_1(1 \ot x\ot 1)= x \ot 1 - 1 \ot x$, so 
+we can augment this complex with the multiplication $\mu: A \ot A \to A$. We denote by 
+$\tilde K^\bullet (A)$ the augmented complex.
+
+\paragraph
+\label{iso-complex}
+Let $M$ be a graded $A$-bimodule. For every $n \in \NN_0$ set $T^n(M) = M \ot A^!_{-n}$, 
+and let $d^n: T^n(M) \to T^{n+1}(M)$ be the map $d^n(x) = e \cdot x + (-1)^{n+1} x \cdot 
+e$. Since $e^2 = 0$, we obtain a cochain complex $T(M) = (T^\bullet(M), d^\bullet)$.
+If we apply the functor $\HOM_{A^e}(-, M)$ to the complex $K(A)$, we obtain
+a cochain complex $(\HOM_{A^e}(K_\bullet(A), M), \delta^\bullet)$. 
+
+\begin{Lemma*}
+The complexes $(T^\bullet(M), d^\bullet)$ and $(\HOM_{A^e}(K_\bullet(A), M), 
+\delta^\bullet)$ are isomorphic.
+\end{Lemma*}
+\begin{proof}
+By the adjunction between graded tensor products and $\HOM$-spaces, there exists
+an isomorphism
+\begin{align*}
+\HOM_{A^e}(A^e \ot C, M) &\cong \HOM_\k(C,M),
+\end{align*}
+and for each $n \geq 0$ there exist isomorphisms
+\begin{align*}
+\HOM_{A^e}(K_n(A), M) = \HOM_{A^e}(A^e \ot C_n, M) & \cong \HOM_\k(C_n, M).
+\end{align*}
+We see $\HOM_\k(C_n, M)$ as a subspace of $\HOM_\k(C, M)$, extending functions by $0$.
+
+Now $\HOM_\k(C,M)$ is a $A \ot A^!$-bimodule in a natural way, and direct inspection 
+shows that 
+\begin{align*}
+\bigoplus_{n \geq 0} \HOM_\k(C_n,M) \subset \HOM_\k(C,M)
+\end{align*}
+is an $A \ot A^!$-sub-bimodule. Furthermore, if $\overline \delta^n: \HOM_\k(C_n, M) \to 
+\HOM_\k(C_{n+1}, M)$ is the map induced by $\delta^n$, then
+\begin{align*}
+	\overline\delta^n(x) = e \cdot x - (-1)^n x \cdot e.
+\end{align*}
+
+Since $M$ is an $A$-bimodule, $M \ot A^!$ is also an $A \ot A^!$-bimodule, and there is 
+a natural $A \ot A^!$-linear map
+\begin{align*}
+	E: M \ot A^! \to \HOM_\k(C,M)
+\end{align*}
+given by assigning to each elementary tensor $m \ot \phi \in M \ot A^!_{-n}$ the 
+$\k$-linear map $\hat \psi \in C_n \mapsto \hat\psi(\phi)m \in M$. Since $C_n = 
+(A_{-n}^!)^*$ is finite dimensional, the image of $T^n(M) = M \ot A^!_{-n}$ through this 
+map is precisely $\HOM_\k(C_n, M)$. Let $E^n: T^n(M) \to \HOM_\k(C_n, M)$ be the 
+isomorphism induced by $E$. The $A \ot A^!$-linearity of $E$ implies that the following 
+diagram commutes
+\begin{align*}
+\xymatrix{
+	T^n(M) 
+		\ar[d]_-{d^n} \ar[r]^-{E^n} 
+	& \HOM_\k(C_n, M) 
+		\ar[d]_-{\overline \delta^n} \ar[r]^-{\cong}
+	& \HOM_{A^e}(K_n(A), M) 
+		\ar[d]^-{\delta^n} \\
+	T^{n+1}(M) 
+		\ar[r]^-{E^{n+1}} 
+	& \HOM_\k(C_{n+1}, M) 
+		\ar[r]^-{\cong}
+	& \HOM_{A^e}(K_{n+1}(A), M) 
+}
+\end{align*}
+The horizontal arrows are the desired isomorphism.
+\end{proof}
+
+\begin{Theorem}
+Assume $A$ is a quadratic Koszul algebra. Then the cohomology of the complex $T(M)$ is
+naturally isomorphic to the Hochschild cohomology of $M$.
+\end{Theorem}
+
+\paragraph
+\label{diagonal-morphism-definition}
+We now look for a diagonal morphism $\Delta: K_\bullet(A) \to K_\bullet(A) \ot_A 
+K_\bullet(A)$. We will obtain it using the coalgebra structure of $C = (A^!)^\#$, 
+dual to the algebra structure of $A^!$. Set $S_\bullet(A) = K_\bullet(A) \ot_A 
+K_\bullet(A)$, and denote its differential by $D^{S}$. For each 
+$n \in \NN_0$
+\begin{align*}
+	S_n(A) 
+		&= \bigoplus_{i+j = n} A \ot C_i \ot A \ot_A A \ot C_j \ot A \\
+		&\cong \bigoplus_{i+j = n} A \ot C_i \ot A \ot C_j \ot A
+\end{align*}
+Put $S_{i,j}(A) = A \ot C_i \ot A \ot C_j \ot A$, and let $\Delta^{i,j}: K_n(A) \to 
+S_{i,j}(A)$ be the map $\Delta^{i,j}(1|\hat\phi|1) = 1|\hat\phi_1^i|1|\hat\phi^j_2|1$, 
+and $\Delta_n: K_n(A) \to S_n(A)$ be the map
+\[
+	\Delta_n(1|\hat\phi|1) 
+		= \sum_{i+j=n} \Delta^{i,j}(1|\hat\phi|1) 
+		= \sum_{i+j=n} 1|\hat\phi_1^i|1|\hat\phi^j_2|1
+\]
+
+\begin{Lemma*}
+Fix $i,j \in \NN_0$ and set $n = i + j$. Then for every $x \ot \gamma \in A \ot A^!_1$ 
+the following diagrams commute.
+\begin{align*}
+\xymatrix{
+	 K_{n+1}(A)
+		\ar[r]^-{\Delta^{i+1,j}} 
+		\ar[d]_-{- \cdot x | \gamma |1}
+	& S_{i+1,j}(A) 
+		\ar[d]^-{- \cdot x |\gamma| 1 | 1 | 1} 
+	&& K_{n+1}(A)
+		\ar[r]^-{\Delta^{i,j+1}} 
+		\ar[d]_-{1|\gamma|x \cdot -}
+	& S_{i, j+1}(A)
+		\ar[d]^-{ 1 | 1 |1| \gamma|x \cdot -}\\
+	K_n(A)
+		\ar[r]^-{\Delta^{i,j}} 
+	& S_{i,j}(A)
+	&& K_n(A)
+		\ar[r]^-{\Delta^{i,j}} 
+	& S_{i,j}(A)
+}
+\end{align*}
+
+\begin{align*}
+\xymatrix{
+	K_{n+1}(A) 
+		\ar[rr]^-{\Delta^{i+1,j}\oplus \Delta^{i,j+1}} \ar[d]_-0 
+	&& S_{i+1,j}(A) \oplus S_{i,j+1}(A)
+		\ar[d]^-{[1|\gamma|x|1|1 \cdot -] \oplus -[- \cdot 1|1|x|\gamma|1]} \\
+	K_{n}(A)
+		\ar[rr]^-{\Delta^{i,j}} 
+	&& S_{i,j}(A)
+}
+\end{align*}
+\end{Lemma*}
+\begin{proof}
+To prove that the first diagram commutes we begin with the trivial observation that the 
+following diagram commutes
+\begin{align*}
+\xymatrix{
+	A^!_{n+1} 
+	& A_{i+1}^! \ot A_j^! 
+		\ar[l]_-{\mu_{i+1,j}} \\
+	A_n^!
+		\ar[u]^-{\gamma \cdot -}
+	& A^!_i \ot A_j^!
+		\ar[u]_-{\gamma \ot 1 \cdot -}
+		\ar[l]_-{\mu_{i,j}} 
+}
+\end{align*}
+where $\mu$ is the product of $A^!$. Taking duals we see that the diagram
+\begin{align*}
+\xymatrix{
+	 C_{n+1} 
+		\ar[r]^-{\rho^{i+1,j}} 
+		\ar[d]_-{- \cdot \gamma}
+	& C_{i+1} \ot C_j 
+		\ar[d]^-{- \cdot \gamma \ot 1}\\
+	C_n
+		\ar[r]^-{\rho^{i,j}} 
+	& C_i \ot C_j
+}
+\end{align*}
+also commutes; notice that by taking duals, left actions turn into right actions. With 
+this the commutativity of the first diagram follows from the defintions. The 
+commutativity of the second diagram is proved in a similar fashion.
+
+Finally, since the diagram 
+\begin{align*}
+\xymatrix{
+	A^!_{n+1} 
+	& (A^!_{i+1} \ot A^!_j) \oplus (A^!_i \ot A^!_{j+1})
+		\ar[l]_-{\mu_{i+1,j} \oplus \mu_{i,j+1}} \\
+	A^!_{n} 
+		\ar[u]^-0
+	& A^!_i \ot A^!_j 
+		\ar[u]_-{[- \cdot \gamma \ot 1] \oplus [- 1 \ot \gamma \cdot -]} 
+		\ar[l]_-{\mu_{i,j}}
+}
+\end{align*}
+commutes, the dual diagram
+\begin{align*}
+\xymatrix{
+	C_{n+1} 
+		\ar[r]^-{[\rho^{i+,j}] \oplus [\rho^{i,j+1}]}
+		\ar[d]_-0
+	& (C_{i+1} \ot C_j) \oplus (C_i \ot C_{j+1})
+		\ar[d]^-{[\gamma \ot 1 \cdot -] \oplus [- \cdot (- 1 \ot \gamma)]}\\
+	C_n 
+		\ar[r]^-{\rho^{i,j}}
+	& C_i \ot C_j
+}
+\end{align*}
+also commutes, and the commutativity of the last diagram follows by definition.
+\end{proof}
+
+\begin{Proposition*}
+The map $\Delta_\bullet: K_\bullet(A) \to S_\bullet(A)$ is a morphism of complexes.
+\end{Proposition*}
+\begin{proof}
+Fix $i,j \in \NN_0$ and let $n = i+j$. Let $D_{i,j}: S_{i+1,j}(A) \oplus S_{i,j+1}(A) \to
+S_{i,j}(A)$ be the restriction and correstriction of the differential of $S_\bullet(A)$. 
+In order to prove that $\Delta_\bullet$ commutes with the differentials, it is enough to
+see that the diagram
+\begin{align*}
+\xymatrix{
+	K_{n+1}(A) 
+		\ar[rr]^-{\Delta^{i+1,j}\oplus \Delta^{i,j+1}} \ar[d]_-{D^K_n}
+	&& S_{i+1,j}(A) \oplus S_{i,j+1}(A)
+		\ar[d]^-{D_{i,j}} \\
+	K_{n}(A)
+		\ar[rr]^-{\Delta^{i,j}} 
+	&& S_{i,j}(A)
+}
+\end{align*}
+commutes for all $i,j$.
+
+Set
+\begin{align*}
+	e_1 &= \sum_i x_i| \zeta_i|1|1|1 
+	& f_1 &= \sum_i 1| \zeta_i |x_i|1|1 \\
+	e_2 &= \sum_i 1|1|x_i| \zeta_i|1 
+	& f_2 &= \sum_i 1|1|1| \zeta_i |x_i.
+\end{align*}
+Then for every $x \in S_{i+1,j}(A)$ and $y \in S_{i,j+1}(A)$
+\begin{align*}
+D_{i,j}(x) &= x \cdot e_1 + (-1)^{i+1} f_1 \cdot x \\
+D_{i,j}(y) &= (-1)^i y \cdot e_2 + (-1)^{i+1+j} f_2 \cdot y
+\end{align*}
+
+Let $a \in K_{n+1}(A)$. The commutativity of the third diagram implies that
+\begin{align*}
+f_1 \cdot \Delta^{i+1,j}(a) = \Delta^{i,j+1}(a) \cdot e_2,
+\end{align*}
+from which we get
+\begin{align*}
+D_{i,j}(\Delta^{i+1,j} \oplus \Delta^{i,j+1}(a)) 
+	&= \Delta^{i+1,j}(a) \cdot e_1 
+		+ (-1)^{n+1} f_2 \cdot \Delta^{i,j+1}(a).
+\end{align*}
+The commutativity of the first two diagrams of the lemma imply
+\begin{align*}
+\Delta^{i+1,j}&(a) \cdot e_1 
+		+ (-1)^{n+1} f_2 \cdot \Delta^{i,j+1}(a) \\
+	&= \Delta^{i,j}(a \cdot e \ot 1 + (-1)^{n+1} 1 \ot f \cdot a)\\
+	&= \Delta^{i,j} \circ D_{n+1}^K(a).
+\end{align*}
+This shows that $\Delta_\bullet$ is a morphism of complexes.
+\end{proof}
+
+\paragraph
+\label{Koszul-bimodule-complex-A}
+By \cite{PP}*{Corollary 3.2} the algebra $A$ is Koszul if and only if $K^L_\bullet(A)$ 
+is a minimal-free resolution of $\k$ as a left $A$-module, and a similar result holds for
+$K^R_\bullet(A)$.
+
+\begin{Proposition*}
+	The complex $K^\bullet(A)$ is the minimal projective resolution of $A$ as $A^e$-module.
+\end{Proposition*}
+\begin{proof}
+\blabla{Taken from \cite{VdB}*{Proposition 3.1}.}
+
+Since $A$ is connected, so is $A^e$, and hence every graded $A$-module $M$ with bounded
+left grading has a minimal projective resolution, consisting of free $A^e$-modules; a
+projective resolution $P^\bullet \to M$ is minimal if and only if $\k \ot_{A^e} 
+P^\bullet$ has zero differentials.
+
+Consider the complex $\tilde K^\bullet(A) \ot_A \k$. This is a complex of left 
+$A$-modules with $A \ot (A^!_n)^*$ in $n$-th homological degree, and since the action
+of $A_{\geq 1}$ on $\k$ is trivial, its differential is given by right multiplication
+by $e_L$. Hence $\tilde K^\bullet(A) \ot_A \k \cong K_L^\bullet(A)$ and since $A$ is 
+Koszul this complex is exact. The graded version of Nakayama's Lemma implies that $\k$ 
+is a faithfully flat graded $A$-module, so $\tilde K^\bullet(A)$ is exact, i.e. 
+$K^\bullet(A)$ is a projective resolution of $A$ as $A^e$-module. Furthermore 
+$\k \ot_{A^e} K(A) \cong \k \ot_A K_L(A)$ has zero differentials since $K_L(A)$ is a 
+minimal resolution of $\k$ as $A$-module, so $K(A)$ is minimal.
+\end{proof}
+
+\newpage
+\section{Twisted lattice algebras}
+
+\paragraph\textbf{General definitions.}
+\label{poset-defintions}
+A \emph{lattice} is a poset $L$ such that any two elements $x,y \in L$ have an infimum 
+$x \meet y$, also called their \emph{meet}, and a supremum $x \meet y$, also called 
+their \emph{join}. Clearly any finite subset $T \subset L$ has a supremum, which we 
+denote either by $\sup T$ or $\bigvee T$. An element $z \in L$ is called \emph{join 
+irreducible} if it is not the supremum of any finite subset; in particular, the infimum 
+of $L$ is the supremum of the empty set and hence is \emph{not} join-irreducible. 
+
+A lattice is said to be \emph{distributive} if the $\join$ distributes over $\meet$, 
+that is 
+\[
+	x \join (y \meet z) = (x \join y) \meet (x \join z)
+\]
+for all $x,y,z \in L$. 
+
+Let $P$ be any poset. A \emph{poset ideal} of $P$ is a subset $I \subset P$ such that
+if $x, y \in P$ with $x \in I$ and $y \leq x$ then $y \in I$. We denote by $J(P)$ the set
+of poset ideals of $P$; this is a distributive lattice with union as join and 
+intersection as meet. 
+
+\paragraph
+\label{Birkhoff}
+Let $L$ be a finite distributive lattice, and let $P$ be the subset of join irreducible 
+elements of $L$. Birkkhoff's representation theorem states that the map
+\begin{align*}
+T \in J(P) \mapsto \sup T \in L
+\end{align*}
+is a lattice isomorphism. Furthermore the cardinality of $P$ equals the rank of $L$, 
+which is also the length of any maximal chain in $L$.
+
+\paragraph
+\label{lattice-semigroup}
+Let $L$ be a distributive lattice of rank $n$. 
+If we extend the order in $P$ to a total order and write $P = \{p_1, p_2, \ldots, p_n\}$,
+we can define a map
+\begin{align*}
+\psi: J(P) & \to\NN_0^{n + 1} \\
+T &\mapsto e_0 + \sum_{\{i \mid p_i\}} e_i,
+\end{align*}
+where $e_i$ is the $i$-the element of the canonical basis of $\NN_0^{n+1}$. This is also
+a lattice isomorphism, with the added property that $\psi(T) + \psi(S) = \psi(T \cup S) 
++ \psi(T \cap S)$. Identifying $L$ with $J(P)$ through Birkhoff's isomorphism we obtain 
+a funcion $\iota: L \to \NN_0^{n+1}$ such that $\iota(x) + \iota(y) = \iota(x \join y) 
+\iota(x \meet y)$.
+
+We associate to $S$ a commutative semigroup $S(L)$
+\begin{align*}
+	S(L) &= \langle x \in L \mid x \cdot y = (x \meet y) \cdot (x \join y)\rangle.
+\end{align*}
+Each element of $S(L)$ can be written in a unique way as the product of an ascending
+sequence of elements of $L$ \cite{RZ15}*{}; any such product is called a \emph{standard
+monomial}.
+
+Clearly $\iota$ extends to a function $i: S(L) \to \NN_0^{n+1}$, which turns out to be
+injective. Setting $S_{i,j} = \{(a_0, a_1, \ldots, a_n) \in \NN_0^{n+1} \mid a_i 
+\geq a_j\}$, the image of $i$ can be written as
+\[
+	i(S(L)) = \bigcap_{i = 1}^n S_{0,i} \cap \bigcap_{p_i < p_j} S_{i,j}.
+\]
+The semigroup $i(S(L))$ is a full, normal and 
+positive subsemigroup of $\ZZ^{n+1}$. By definition this is the semigroup generated by
+The set $\{i(x) \mid x \in L \}$, and in fact this set is the Hilbert basis of the 
+affine semigroup $i(S(L))$. For the rest of this section we fix an embedding $i: S(L)
+\to \ZZ^{n+1}$ and identify the semigroup with its image.
+
+\paragraph
+The semigroup $S$ has two families of automorphisms. If $f: L \to L$ is a poset 
+automorphism, then by the universal property of $S(L)$ it extends to an automorphism of 
+$S(L)$. Furthermore since $S(L) \subset \ZZ^{n+1}$ is a full subsemigroup, $f$ extends 
+to a group automorphism of $\ZZ^{n+1}$. A simple way to see this is that $f$ must fix 
+the subposet $P$ of join-irreducible elements, and hence defines a permutation of $P$ so 
+there exists $\sigma \in S_n$ such that $f(p_i) = p_{\sigma(i)}$. Thus the automorphism 
+induced by $f$ on $\ZZ^{n+1}$, and by restriction on $S(L)$, is multiplication by 
+$\begin{pmatrix} 1 & 0 \\ 0 & [\sigma] \end{pmatrix}$, where $[\sigma]$ is the matrix 
+corresponding to the permutation. This takes into account the fact that we made an 
+arbitrary choice when we extended the order of $P$.
+
+On the other hand it is clear that $S(L) = S(L^{\op})$. Since join-irreducibles 
+in $L$ are meet-irreducibles in $L^\op$, the embedding corres
+
+
+\paragraph
+\label{twisted-lattice-algebra}
+Let $\alpha: S(L) \times S(L) \to \k^\times$ be a $2$-cocycle. The \emph{
+$\alpha$-twisted lattice algebra} $\k_\alpha[L]$ is the quotient of the free algebra on 
+$L$ by the relations
+\begin{align*}
+xy &= \alpha(x,y)(x\join y)(x \meet y) & x,y \in L
+\end{align*}
+By defintion $\k[L] = \k[S(L)]$, the classical semigroup algebra, and the 
+$\alpha$-twisted lattice algebra is the usual $2$-cocycle twist of the semigroup algebra 
+$\k[S(L)]$. Two twisted semigroup algebras are isomorphic if and only if their 
+respective cocycles are cohomologous, so the cohomology group $H^2(S, \k^\times)$ 
+parametrizes the isomorphism classes of twisted lattice algebras over $L$.
+
+The map $i: S(L) \to \ZZ^{n+1}$ induces a group isomorphism $i^*: H^2(S(L), \k^\times) 
+\to H^2(\ZZ^{n+1}, \k^\times) \cong \k^{\binom{n}{2}}$. Thus to each $2$-cocycle $\alpha$
+over $S(L)$ corresponds a family of parameters $i^*(\alpha) = \q = \{q_{i,j} \mid 1 
+\leq i < j \leq n \}$. It also induces an injective algebra morphism
+\begin{align*}
+	\k_\alpha[L] & \to \k_\q[X_0^{\pm 1}, \ldots, X_n^{\pm 1}].
+\end{align*}
+For this reason we will usually write $A(L; \q)$ instead of $\k_\alpha[L]$. We will also 
+write $T(L; \q)$ for $\k_\q[X_0^{\pm 1}, \ldots, X_n^{\pm 1}]$, and refer to it as the 
+\emph{quantum torus associated to $A(L; \q)$}.
+
+
+
+
+
+
+\newpage
+\begin{tikzpicture}
+\node (f) at (3,4) {$f$};
+\node (e) at (2,3) {$e$};
+\node (d) at (1,2) {$d$};
+\node (c) at (3,2) {$c$};
+\node (b) at (2,1) {$b$};
+\node (a) at (1,0) {$a$};
+\draw (a) -- (b) -- (c) -- (e) -- (d) -- (b) (e) -- (f);
+
+\node (6) at (7,4) {$\{f\}$};
+\node (5) at (6,3) {$\{c,d\}$};
+\node (4) at (5,2) {$\{d\}$};
+\node (3) at (7,2) {$\{c\}$};
+\node (2) at (6,1) {$\{b\}$};
+\node (1) at (5,0) {$\emptyset$};
+\draw (1) -- (2) -- (3) -- (5) -- (4) -- (2) (5) -- (6);
+
+\node (61) at (11,4) {$(1,1,1,1,1)$};
+\node (51) at (10,3) {$(1,1,1,1,0)$};
+\node (41) at (9,2) {$(1,1,0,1,0)$};
+\node (31) at (11,2) {$(1,1,1,0,0)$};
+\node (21) at (10,1) {$(1,1,0,0,0)$};
+\node (11) at (9,0) {$(1,0,0,0,0)$};
+\draw (11) -- (21) -- (31) -- (51) -- (41) -- (21) (51) -- (61);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\node (1) at (1,0) {$a$};
+\node (2) at (0,1) {$b$};
+\node (3) at (1,1) {$c$};
+\node (4) at (2,1) {$d$};
+\node (5) at (0,2) {$e$};
+\node (6) at (1,2) {$f$};
+\node (7) at (2,2) {$g$};
+\node (8) at (1,3) {$h$};
+\draw (6) -- (4) -- (1) -- (2) -- (6) (3) -- (7) -- (8) -- (5) -- (3) (1) -- (3)
+	(2) -- (5) (6) -- (8) (4) -- (7);
+
+\node (11) at (5,0) {$\emptyset$};
+\node (21) at (4,1) {$\{b\}$};
+\node (31) at (5,1) {$\{c\}$};
+\node (41) at (6,1) {$\{d\}$};
+\node (51) at (4,2) {$\{b,c\}$};
+\node (61) at (5,2) {$\{b,d\}$};
+\node (71) at (6,2) {$\{c,d\}$};
+\node (81) at (5,3) {$\{b,c,d\}$};
+\draw (61) -- (41) -- (11) -- (21) -- (61) (31) -- (71) -- (81) -- (51) -- (31) 
+	(11) -- (31) (21) -- (51) (61) -- (81) (41) -- (71);
+
+
+\node (12) at (11,-1) {$(1,0,0,0)$};
+\node (22) at (9,1) {$(1,1,0,0)$};
+\node (32) at (11,1) {$(1,0,1,0)$};
+\node (42) at (13,1) {$(1,0,0,1)$};
+\node (52) at (9,3) {$(1,1,1,0)$};
+\node (62) at (11,3) {$(1,1,0,1)$};
+\node (72) at (13,3) {$(1,0,1,1)$};
+\node (82) at (11,5) {$(1,1,1,1)$};
+\draw (62) -- (42) -- (12) -- (22) -- (62) (32) -- (72) -- (82) -- (52) -- (32) 
+	(12) -- (32) (22) -- (52) (62) -- (82) (42) -- (72);
+\end{tikzpicture}
+
+\newpage
+\begin{bibdiv}
+\begin{biblist}
+\bib{PP}{book}{
+	author={Polishchuk, Alexander},
+	author={Positselski, Leonid},
+	title={Quadratic algebras},
+	series={University Lecture Series},
+	volume={37},
+	publisher={American Mathematical Society, Providence, RI},
+	date={2005},
+	pages={xii+159},
+}
+
+\bib{VdB}{article}{
+   author={Van den Bergh, Michel},
+   title={Noncommutative homology of some three-dimensional quantum spaces},
+   booktitle={Proceedings of Conference on Algebraic Geometry and Ring
+	   Theory in honor of Michael Artin, Part III (Antwerp, 1992)},
+   journal={$K$-Theory},
+   volume={8},
+   date={1994},
+   number={3},
+   pages={213--230},
+}
+\end{biblist}
+\end{bibdiv}
+\end{document}

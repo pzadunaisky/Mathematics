@@ -1,0 +1,687 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%\linespread{1.2}
+%\setlength{\parskip}{1.2ex}
+% esto tiene que estar, en este orden...
+\usepackage[small]{titlesec}
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8,latin1]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumerate}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+
+%\swapnumbers
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% theorems et al. %%%%%%%%%%%%%%%%%%%%%%%%%%%
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposition, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Theorem, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corollary, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definition, sibling=para, style=mystyle]{Definition}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\stack[2]{\genfrac{}{}{0pt}{2}{#1}{#2}}
+\newcommand\uu[1]{\underline{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\A{\mathcal A}
+\newcommand\B{\mathcal B}
+\newcommand\C{\mathcal C}
+\newcommand\D{\mathcal D}
+\newcommand\R{\mathcal R}
+\renewcommand\L{\mathcal L}
+\newcommand\F{\mathcal F}
+\renewcommand\S{\mathcal S}
+\newcommand\I{\mathcal I}
+\newcommand\kk{\mathds{k}}
+\renewcommand\c{\textbf{c}}
+\newcommand\G{\mathcal G}
+\newcommand\GG{\Gamma}
+\newcommand\OO{\Phi}
+\newcommand\join{\vee}
+\newcommand\meet{\wedge}
+\renewcommand\a{\mathfrak{a}}
+\renewcommand\b{\mathfrak{b}}
+\newcommand\n{\mathfrak{n}}
+\newcommand\g{\mathfrak{g}}
+\newcommand\norm{\mathsf{norm}}
+\newcommand\opp{\mathsf{opp}}
+
+\DeclareMathOperator\Frac{Frac}
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Vect{\mathsf{Vect}}
+\DeclareMathOperator\Id{\mathsf{Id}}
+\DeclareMathOperator\im{\mathsf{im}}
+\renewcommand\ker{\mathsf{ker}}
+
+\title{Crystal Bases of finite dimensional representations of $U_q(\g)$}
+\date{7/8/2012}
+\author{[crysal-bases.tex]}
+
+\begin{document}
+\maketitle
+Notes based on [J], contents found in [K1]
+\section{General definitions}
+\paragraph \textbf{Notation}
+We work over the field $\kk = \QQ(q)$, all unadorned tensor products will be over this
+field. We denote by $\A^0$ the localization of $\QQ[q]$ at the maximal ideal of functions 
+which have a root at zero. We identify $\QQ$ and $\A^0/q\A^0$
+
+
+\paragraph  
+Let $\g$ denote a finite dimensional complex semisimple Lie algebra.
+We denote by $U_q = U_q(\g)$ the quantum envelopping algebra of $\g$ over $\QQ(q)$. Let
+$P$ be the weight lattice of $\g$, $\Pi$ be a basis of the root system with $n =
+|\Pi|$, $W$ its Weyl group and $(-,-)$ the $W$-invariant form over $P$. $U_q$ is the algebra 
+with generators $E_i, F_i, K_i^{\pm 1}$ for $i = 1, \ldots, n$ and relations
+\begin{align*}
+	K_i K_j &= K_j K_i & K_i^{-1} K_i &= 1 \\
+	K_i E_j K_i^{-1} &= q^{(\alpha_i, \alpha_j)} E_j
+	& K_i F_j K_i^{-1} &= q^{-(\alpha_i, \alpha_j)} F_j \\
+	[E_i, F_j] &= \delta_{ij} \frac{K_i - K_i^{-1}}{q_i-q_i^{-1}} 
+	&&\mbox{Quantum Serre Relations} 
+\end{align*}
+where $q_i = q^{(\alpha_i,\alpha_i)/2}$. For $X_i = F_i, E_i \in U_q(\g)$, we define the 
+divided powers as
+$$ X_i^{(r)} = \frac{1}{[r]_{q_i}!} X_i^r $$
+
+\paragraph
+$U_q$ is a Hopf algebra with comultiplication $\Delta$, antipode $S$ and counit
+$\varepsilon$ defined by
+\begin{align*}
+	\Delta(E_i) &= E_i \ot K_i^{-1} + E \ot 1
+&	\Delta(F_i) &= F_i \ot 1 + K_i \ot F_i 
+&	\Delta(K_i) &= K_i \ot K_i \\
+	S(E_i) &= -E_iK_i & S(F_i) &= -K_i^{-1}F_i & S(K_i) &= K_i^{-1} \\
+	\varepsilon(E_i) &= 0 & \varepsilon(F_i) &= 0 & \varepsilon(K_i) &= 1 \\
+\end{align*}
+
+\paragraph
+We denote by $U_i$ the sub-Hopf-algebra of $U_q$ generated by $E_i, F_i, K_i^{\pm 1}$.
+
+
+\section{Crystal Bases}
+\paragraph
+Let $V$ be a finite dimensional representation of $U_q$. Fix $i \in \{1, \ldots, n\}$.
+Then by the representation theory of $U_i$, $V$ can be decomposed as 
+$$ V = \bigoplus F_i^{(r)} (V_\lambda \cap \ker E_i)$$
+where the sum runs over pairs $(\lambda,r) \in P \times \NN$ such that $(\lambda,
+\alpha_i) \geq r (\alpha_i,\alpha_i) /2$. 
+
+Let $v \in V_\lambda \cap \ker E_i$. We define $\tilde e_i, \tilde f_i$ as
+\begin{align*}
+	\tilde e_i F_i^{(r)}v &= F_i^{(r-1)}v & \tilde f_i F_i^{(r)}v &= F_i^{(r+1)}v
+\end{align*}
+and extend by linearity to $V$.
+
+Notice that for any morphism of finite dimensional representations $\phi: V \to W$ and any
+element $v \in V$, we have $\phi(\tilde x_i v) = \tilde x_i \phi(v)$, where $x \in
+\{e,f\}$.
+
+\begin{Definition}
+	A \emph{crystal basis} of $V$ is a pair $(L,B)$ consisting of a free
+$\A^0$-module $L$ and a $\QQ$-basis of $L / qL$, such that
+	\begin{enumerate}[(a)]
+		\item $L$ generates $V$ over $Q(q)$.
+		\item $L = \bigoplus L_\lambda$ (where $L_\lambda = L \cap
+			V_\lambda$) and $B = \bigsqcup B_{\lambda}$ (where
+			$B_{\lambda} = B \cap L_\lambda / q L_\lambda$)
+		\item $\tilde x_i(L) \subset L$ for all $i = 1, \ldots, n$, $x = e,
+			f$, and furthermore, the induced morphisms on $L / q L$ send
+			$b \in B$ to an element of $B \cup \{0\}$.
+		\item For any $b,b' \in B$, we have that $\tilde e_i(b) = b'$ if and 
+			only if $\tilde f_i(b') = b$
+	\end{enumerate}
+\end{Definition}
+
+\begin{Lemma*}
+\label{sum}
+	Let $V_j$ be a $U_q$-module for $j = 1, \ldots, n$. Suppose that for each $j$ you
+have a pair $(L_j,B_j)$, where $L_j$ is an $\A^0$-submodule and $B_j$ is a basis of
+$L_j/qL_j$. Then $\bigoplus (L_j,B_j) := (\bigoplus L_j, \bigsqcup B_j)$ is a
+crystal basis of $\bigoplus_j V_j$ if and only if each $(L_j,B_j)$ is a crystal basis of
+$V_j$.
+\end{Lemma*}
+
+
+\begin{Example}
+\label{sl2}
+	Suppose $\g = \mathfrak{sl}_2(\CC)$ and $V = V_q(m)$. Then there is a basis
+$\B = \{v_0, \ldots, v_m\}$ of $V$ such that
+	\begin{align*}
+		K^{\pm 1} v_r &= q^{\pm(m - 2r)}v_r & 
+		F v_r &= [r+1]_q v_{r+1} &
+		E v_r &= [m-r+1]_q v_{r-1}.
+	\end{align*}
+	In this case, $\tilde f v_r = v_{r+1}$, $\tilde e v_r = v_{r-1}$. Set $L =
+\sum \A^0 v_i$, and $B$ equal to the image of $\B$ in the quotient $L / q L$. This is
+a crystal basis, so by \ref{sum}, any $U_q(\mathfrak{sl}_2)$-module has one.
+\end{Example}
+
+\paragraph 
+Take $\lambda \in P^+$, and set 
+\begin{align*}
+	\L(\lambda) 
+		&= \sum \A \tilde f_{i_1} \tilde f_{i_2} \ldots \tilde f_{i_n} v_\lambda 
+			\subset V_\lambda \\
+	\B(\lambda) 
+		&= \{\tilde f_{i_1} \tilde f_{i_2} \ldots \tilde f_{i_n} v_\lambda \neq 0 
+			\mod q\L(\lambda) \} \subset \L(\lambda)/q \L(\lambda)
+\end{align*}
+Let $C(\lambda)$ be the following statement:
+\begin{align*}
+	C(\lambda): (\L(\lambda),\B(\lambda)) \mbox{ is a crystal basis of } V_\lambda.
+\end{align*}
+
+We find the following three conjectures in [K1]
+
+\textbf{Conjecture 1:} Any integral $U_q$-module has a crystal basis.
+
+\textbf{Conjecture 2:} For any $\lambda \in P^+$, $C(\lambda)$ holds.
+
+\textbf{Conjecture 3:} For any crystal basis $(L,B)$ of an integrable $U_q$-module we have
+\begin{align*}
+	C(L,B):& 
+		\mbox{ for any $u \in B$ such that $\tilde e_i u = 0$ for all $i$, there} \\
+		& \mbox{exists $u' \in L$ such that $u = u' \mod qL$ and $e_i u' = 0$ for 
+			all $i$}
+\end{align*}
+Kashiwara's Theorem in [K1] states that Conjectures 1, 2, 3 are true in the $A, B, C$ and
+$D$ cases. This was later extended to the exceptional cases.
+
+\begin{Lemma}
+\label{C(L,B)}
+	$C(\lambda)$ implies $C(\L(\lambda), \B(\lambda))$
+\end{Lemma}
+\begin{proof}
+	Let $u \in \B(\lambda)_\mu = \B(\lambda) \cap V_q(\lambda)_\mu$. If $\lambda \neq
+\mu$, $u = \tilde f_{i_1} \tilde f_I v_\lambda$, su $\tilde e_{i_1}u = \tilde f_I
+v_\lambda \neq 0$. Therefore, the only way that $\tilde e_i u = 0$ for all $i$ is that $u 
+= \overline v_\lambda$, in which case $u' = v_\lambda$ works.
+\end{proof}
+
+
+\section{Polarization}
+$V, V_i$, etc. are always integrable representtions of $U_q$.
+
+\paragraph
+There is an antiautomorphism $\tau: U_q \to U_q$, defined by setting
+\begin{align*}
+	\tau(E_i) &= q_i F_i K_i^{-1}
+		& \tau(F_i) &= q_i^{-1} K_i E_i 
+		& \tau(K_i) = K_i
+\end{align*}
+
+\begin{Definition}
+\label{polarization}
+Let $(L,B)$ be a crystal basis for $V$. A \emph{polarization} of $(L,B)$ is a $\kk$
+valued bilinear form on satisfying
+\begin{align}
+	(x \cdot v,v') &= (v, \tau(x) \cdot v') & \mbox{for } v,v' \in V \  x \in U_q\\
+	(L,L) & \subset \A^0 \\
+	[u,v] &= \delta_{u,v} &\mbox{for } u,v \in B
+\end{align}
+where $[-,-]$ is the $\QQ$-bilinear form induced by $(-,-)$ on $L/qL$.
+\end{Definition}
+
+\begin{Lemma}
+\label{polarization-details}
+	Suppose $(L,B)$ is a crystal basis for $V$, and that $(-,-)$ is a polarization.
+Write $V = \bigoplus_{\lambda \in P} V_\lambda$.
+	\begin{itemize}
+		\item Let $v_? \in V_?$. Then $(v_\lambda, v_\mu) \neq 0$ implies $\lambda
+			= \mu$.
+		\item Suppose, $V_q(\lambda) \oplus V_q(\mu) \subset V$. If $\lambda \neq \mu$
+			then $V_q(\lambda) \perp V_q(\mu)$.
+		\item We have for all $v,v' \in V$ $[\tilde e_i v, v'] = [v, \tilde f_i v']$.
+		\item $L = \{v \in V| (L,v) \subset \A^0 \}$
+	\end{itemize}
+\end{Lemma}
+\begin{proof}
+	For the first item, we have $q^{(\rho,\lambda)} (v_\lambda, v_\mu) = (K_\rho
+v_\lambda, v_\mu) = (v_\lambda, K_\rho v_\mu) = q^{(\rho, \mu)} (v_\lambda,v_\mu)$ for all
+$\rho \in P$. Since $q$ is not a root of unity, this implies that $\lambda = \mu$.
+
+	By the first item, $(v_\lambda,v_\mu) = 0$. Now $V_\lambda = U_q(\n^-) v_\lambda$, 
+and $\tau(U_q(\n^-)) \subset U_q(\b^+)$, which immediately implies that $(v_\lambda,-) = 0$. 
+Now for any two $b,b' \in U_q(\n^-)$, $(bv_\lambda, b'v_\mu) = (v_\lambda, \tau(b)b'v_\mu)
+= 0$.
+
+	For the third item, fix $i$ and write $E = E_i$, etc. The elements $v, v'$ can be 
+decomposed as $v = \sum_{n,j} F^{(n)} x_j$, $v' =\sum_{n,j} F^{(n)} x'_j$, with $E x_j = 0
+= E x'_j$, thus we only have to analyze the case $v = F^{(n)}x_j, v' = F^{(m)}x'_j$. Now
+$x_j, x'_j$ generate each one a simple $U_q(\mathfrak{sl_2})$-module, which is stable by 
+$\tilde e$, and by the previous item we may and do assume that this two modules are 
+isomorphic. Hence the weight of $x_j$ and $x'_j$ are equal. Finally, $\tilde e F^{(n)}x_j$ 
+is a weight vector and so is $F^{(m)}x'_j$, so they must have the same weight, otherwise 
+both sides of the previous equality are zero by the first item. This implies that $m = n-1$. 
+
+Let $r$ be the weight of $x_j$. By the equality $ EF^{(n)} x_j = [r+1-n] F^{(n-1)} x_j$, we 
+have
+\begin{align*}
+	(\tilde e v,v')	&= (F^{(n-1)}x_j, v') = [r+1-n]^{-1}(EF^{(n)}x_j,v') \\
+			&= [r+1-n]^{-1}(v,\tau(E)F^{(n-1)}x'_j) =
+[r+1-n]^{-1}(v,qFK^{-1}F^{(n-1)}x'_j) \\
+			&= \frac{[n]q^{2n-r-1}}{[r+1-n]}(v,\tilde f v')
+= \frac{(q^n - q^{-n})q^{n}}{(q^{r+1-n}-q^{-r-1+n})q^{-n+r+1}}(v,\tilde f v') \\
+			&= \frac{1-q^{2n}}{1-q^{2r-2n+2}}(v,\tilde f v')
+\end{align*}
+and this implies the third item.
+
+In the last item, one inclusion is obvious by \ref{polarization} (2). On the other hand,
+assume $(L,u) \subset A$. By definition, there is a minimal $n \in \NN_0$ such that $q^n u
+\in L$. If $n > 0$ then $(L,q^n u) \subset q\A^0$, which implies that $[-,q^n u] = 0$. But
+by item 3., $[-,-]$ is non degenerate, and hence $q^n u \in q L$, that is, $q^{n-1} u \in
+L$, which contradicts the minimality of $n$. Hence $n = 0$ and $u \in L$
+\end{proof}
+
+\begin{Lemma}
+	Let $\lambda \in P^+$ and assume $C(\lambda)$. Then $(\L(\lambda), \B(\lambda))$
+is polarizable.
+\end{Lemma}
+\begin{proof}
+	By a reasoning analogous to the proof of the second item in the previous
+proposition, there is at most one $\tau$-symmetric bilinear form over $V_q(\lambda)$ such
+that $(v_\lambda,v_\lambda) = 1$. I haven't checked that it is well defined...
+
+	For (2), it is clear that $(\L(\lambda)_\lambda,\L(\lambda)_\lambda) \subset \A^0$.
+Now if $\mu \neq \lambda$, then
+$$ (\tilde f_i \L(\lambda)_{\mu + \alpha_i}, \L(\lambda)_\mu) \subset (1+q^*)(\L(\lambda)_
+{\mu + \alpha_i},\tilde e_i \L(\lambda)_\mu) \subset (1+q^*)(\L(\lambda)_{\mu + \alpha_i},
+\L(\lambda)_{\mu + \alpha_i}) $$
+(notice that in the proof of the third item of \ref{polarization-details}, we only used
+the $\tau$-symetry of the form).
+
+We may assume by inductive hypothesis that this last set is included in $(1+q^*) \A^0 \subset 
+\A^0$. Since $\L(\lambda)_\mu = \sum_i \tilde f_i \L(\lambda)_{\mu + \alpha_i}$, we are done.
+
+	Finally for (3), once again we have that $[v_\lambda, v_\lambda] = 1$. Now if $b
+\in \B(\lambda)_\mu$ with $\mu \neq \lambda$, there is an $i$ such that $\tilde e_i b \neq
+0$, so $b = \tilde f_i \tilde e_i b$. Hence $[b,b'] = [\tilde e_i b, \tilde e_i b']$. By
+inductive hypothesis, this will be nonzero if and only if $\tilde e_i b = \tilde e_i b'$,
+which is only possible if $b = b'$. This completes the proof.
+\end{proof}
+
+\begin{Proposition}
+\label{decomposition}
+	Let $\lambda \in P^+$ and assume $C(\lambda)$. Let $V$ be isomorphic to
+$V_q(\lambda)^{\oplus n}$ and $W$ a representation such that $W_\lambda = 0$. Suppose
+there is a crystal base $(L,B)$ of $V \oplus W$, and write $L^V = L \cap V$, $L^W = L \cap
+W$, $B^V = B \cap V$ and $B^W = B \cap W$. Then
+	\begin{enumerate}[(i)]
+		\item There is an isomorphism $V \cong V_q(\lambda)^{\oplus n}$ such that
+			$(L^V,B^V) \cong (\L(\lambda),\B(\lambda))^{\oplus n}$.
+		\item $L = L^V \oplus L^W$ and $B = B^V \sqcup B^W$.
+		\item $(L^V, B^V)$ is a crystal basis for $V$, idem $W$.
+	\end{enumerate}
+\end{Proposition}
+\begin{proof}
+	Since $W_\lambda = 0$, $B_\lambda = B^{V}_\lambda$. Thus there is a $\kk$-linear
+isomorphism $V_\lambda \cong V_q(\lambda)^{\oplus n}_\lambda$ such that $B^\lambda$ is sent 
+to $\B(\lambda)^{\oplus n}_\lambda$. By extending this morphism $U_q$-linearly, we have
+the desired isomorphism, say $\phi$. Denote by $(L',B')$ the preimage of $(\L(\lambda),
+\B(\lambda))$ in $V$ by $\phi$. We clearly have $B'_\lambda = B_\lambda$
+and $L_\lambda = L'_\lambda$. 
+
+By the preceeding lemma, there is a polarization $(-,-)$ over $(L',B')$, and
+it is clear that $(L'_\lambda,L^{V}_\lambda) \subset \A^0$. Now for any $i$, we have
+$$ (\tilde f_i L'_{\mu + \alpha_i}, L^{V}_\mu) = (L'_{\mu+\alpha_i}, \tilde e_i
+L^V_\mu) \subset (L'_{\mu + \alpha_i}, L^V_{\mu + \alpha_i}) $$
+and by inverse induction on the weights, this is contained in $\A^0$. Hence by 
+\ref{polarization-details} point 4., $L^V \subset L'$, and so $L^V / q L^V \subset L' / q L'$; 
+this implies that the cardinality of $B^{V}_\mu$ is less than or equal to that of $B'_\mu$ 
+(this is a finite number since each $L_\mu$ is finite dimensional) On the other hand 
+$B'_\lambda = B^{V}_\lambda$, and  since crystal bases are stable by $\tilde f_i$, we have $B' 
+\subset B \cap L^V$, which implies $B' = B^V$. Hence $L^V + q L^V =L'$, so by Nakayama's 
+lemma, we have equality. This is point $(i)$.
+
+It is clear that $L^V \cap L^W = \emptyset$ so we only have to prove that $L^V + L^W = L$. 
+If $l \in L$, then it can be written as $l = v + w$, with $v \in V, w \in W$. Since $L$
+generates $V\oplus W$ over $\QQ(q)$, there is a number $n \in \NN$ such that $q^nv, q^nw
+\in L$. Thus if we prove that $qL \cap (L^v + L^W) = qL^V + qL^W$, the minimal such $n$
+must be $0$, and hence $v,w \in L$.
+
+Suppose $v+w \in qL$. Then $v \equiv -w \mod qL$. Now since $(L^V,B^V)$ is a crystal
+basis of $V$ isomorphic to $(\L(\lambda),\B(\lambda))$, there is a unique expression 
+$v \equiv \sum_{I \in \mathcal I} \tilde f_I v_I \mod qL^V$ where $v_I$ is 
+of weight $\lambda$, $I = (i_1, \ldots, i_r)$ and $\mathcal I$ minimal. If we denote 
+$\tilde e_I = \tilde e_{i_r} \ldots \tilde e_{i_1}$, we have $\tilde e_I \tilde f_I v_I
+ = v_I$. Furthermore, we have that if $I \neq J, J \in \mathcal I$, then $\tilde e_J 
+\tilde f_I v_I = 0$. Otherwise, $v_I = \tilde f_J \tilde e_J \tilde f_I v_I$, and this
+contradicts the minimality of $\mathcal I$. Hence we have 
+$$ \sum_{J \in \mathcal I} \tilde f_J \tilde e_J v \equiv \sum_{J, I \mathcal I} \tilde
+f_J \tilde e_J \tilde f_I v_I \equiv \sum_{i \in \mathcal I} \tilde f_I v_I \equiv v \mod
+qL^V $$
+However, this equivalence implies equivalence $\mod qL$, and since $-v \equiv w \mod qL$,
+we also have $w \equiv \sum_{I \in \mathcal I} \tilde f_I \tilde e_I w \mod qL$. Since $v$ 
+and $w$ are in the same weight component, $\tilde e_I w \in L/qL^\lambda \cap W/qW = 0$. 
+Hence $v \equiv w \equiv 0 \mod qL$.
+
+Finally, we prove that $B^\mu = B^{V}_\mu + B^{W}_\mu$. If $\mu$ is not a weight of
+$V_q(\lambda)$, then the result is clear, and it is also clear for $\lambda = \mu$. By
+induction on the weights, we may assume the result is true for $\mu + \alpha_i$ for all
+$i$. Take $u \in B_\mu$, and suppose $\tilde e_i u \neq 0$. Then $u \tilde f_i \tilde e_i
+u \in \tilde f(B^V_{\mu+\alpha_i} \cup B^W_{\mu+\alpha_i}) \subset B^V_{\mu} \cup
+B^{W}_{\mu}$. Otherwise, $\tilde e_i u = 0$ for all $i$, and if we write $u = v + w$, this
+implies $\tilde e_i v = 0$ for all $i$. By lemma \ref{C(L,B)}, this implies that $v = 0$, and
+hence $u \in B_\mu$. This completes the proof of $(ii)$, and $(iii)$ follows immediately.
+\end{proof}
+
+\section{Tensor products of Crystal Bases}
+\paragraph
+Let $(L,B)$ be a crystal basis of $V$. For $u \in B$, we define $\varepsilon_i(u) =
+\max\{n|\tilde e_i^n(u) \neq 0\}$, $\varphi_i(u) = \max \{n| \tilde f_i^n(u) \neq 0\}$
+
+
+\begin{Proposition}
+\label{tensor-product}
+Let $(L_j,B_j)$ be crystal bases of $V_j$, and assume $C(\lambda)$ for every $\lambda$
+such that $(V_j)_\lambda \neq 0$.
+	\begin{enumerate}[a)]
+		\item Then $(L_1 \ot_{\A^0} L_2, B_1 \ot_\QQ B_2)$ is a crystal base of
+			$V_1 \ot V_2$.
+		\item For $u\in B_1, v \in B_2$ we have
+			\begin{align*}
+				\tilde f_i (u \ot v) &= 
+					\begin{cases}
+						\tilde f_i u \ot v &\mbox{if } \varphi_i(u)
+									> \varepsilon_i(v)\\
+						u \ot \tilde f_i v &\mbox{otherwise.}
+					\end{cases} \\
+				\tilde e_i (u \ot v) &=
+					\begin{cases}
+						u \ot \tilde e_i v &\mbox{if } \varepsilon(v)
+									> \varphi(u) \\
+						\tilde e_i u \ot v & \mbox{otherwise.}
+					\end{cases}
+			\end{align*}
+		\item If $(-,-)_j$ is a polarization for $(L_j,B_j)$, $(u_1 \ot u_2, v_1
+			\ot _2) = (u_1,v_1)_1(u_2,v_2)_2$ is a polarization of $V_1 \ot
+			V_2$ with the basis we have described.
+	\end{enumerate}	
+\end{Proposition}
+\begin{proof}
+The last item follows immediately from the previous two, so we only prove these. The
+hypothesis implies that we may apply repeatedly Proposition \ref{decomposition}, and so
+$V_j = \bigoplus_k V_q(\lambda_{j,k})$, $\L_j = \bigoplus_i \L_{j,k}$ $B = \bigsqcup
+B_{j,k}$. Hence $L_1 \ot L_2 = \bigoplus_{k,k'} L_{1,k} \ot L_{2,k'}$, $B_1 \times B_2 =
+\bigsqcup B_{1,k} \times B_{2,k'}$, and it is enough to check that for fixed $k, k'$ each
+component is a crystal basis. So, we reduce to the case where $V_j = V_q(\lambda_j)$.
+
+It is obvious that $L_1 \ot_{\A^0} L_2$ is an $\A^0$-module generating $V_1 \ot V_2$ over
+$\QQ(q)$. Also, since $(V_1 \ot V_2)_{\lambda} = \bigoplus_{\lambda_1 + \lambda_2 =
+\lambda} V_{1,\lambda_1} \ot V_{2,\lambda_2}$, we have $(L_1 \ot L_2)_\lambda =
+\bigoplus_{\lambda_ 1 + \lambda_2 = \lambda} L_{1,\lambda_1} \ot L_{2, \lambda_2}$, so we
+have points (1) and (2) of the definition.
+
+Now we want to study the action of the $\tilde f_i, \tilde e_i$. If we fix an $i$, we may
+consider the algebra $U_{q_i}(\mathfrak{sl}_2) \subset U_q$ generated by $E_i, F_i,
+K_i^{\pm 1}$, and regard the $V_j$ as modules over this algebra. By the discussion above,
+we may reduce the analysis of the tensor product to the case when each $V_j$ is an
+irreducible module over $U_{q_i}(\mathfrak{sl}_2)$. Hence from this point on we assume 
+$V_1 = V_q(m), V_2 = V_q(l)$, and prove the result by induction on $m$.
+
+We point out that from [J, 9.13 (8)] we have 
+$$ \Delta(F^{(r)}) = \sum_{j=0}^r q^{-j(r-j)}F^{(r-j)}K^{j} \ot F^{(j)}$$
+
+Let $u \in V_q(1)$, $v \in V_q(l)$ be highest weight vectors. By \ref{decomposition} (1) 
+we know that we may assume the bases to be $(\L(1),\B(1))$ and $(\L(m), \B(m))$, which we
+constructed explicitly for in Example \ref{sl2}. Now $V_q(1) \ot V_q(l) =
+V_q(l+1) \oplus V_q(l-1)$, with highest weight vectors $x=u \ot v$ and $y=u \ot Fv - q^m [m]
+Fu \ot v$. And once again we know how to contruct a crystal basis for highest weight modules 
+from Example \ref{sl2}. Simple calculations give us for $r > 0$
+	\begin{align*}
+		F^{(r)}(x) &= q^r u \ot F^{(r)}v + Fu \ot F^{(r-1)}v \\
+			&\equiv Fu \ot F^{(r-1)}v \mod q \L \\ 
+		F^{(r)}(y) &= q^r[r+1]u \ot F^{(r+1)}v + q^m[m-r]Fu \ot F^{(r)}v \\ 
+			&\equiv u \ot F^{(r+1)}v \mod q \L
+	\end{align*}
+Hence the $\A^0$-module $L'$ generated by $F^{(r)}(x), F^{(r)}(y)$ is contained in the
+$\A^0$-module generated by $F^{(r)}(u) \ot v, u \ot F^{(r)}(v)$, which is none other than
+$L_1 \ot L_2$. Plus, the basis $B'$ of $L'/qL'$ formed by the images of the generators of $L'$
+coincides with $B_1 \ot B_2$, which implies that in fact both lattices coincide, both
+bases coincide and from the formulas above we get the actions of $\tilde f$ and $\tilde e$
+on the elements of the $\QQ$-basis. This completes the case $m=1$.
+
+Now for the inductive step. Suppose we know the result is true for all weights up to
+$m-1$. Set $V = V_q(1), V' = V_q(m-1), V'' = V_q(l)$, and their corresponding bases
+$(L,B), (L',B'), (L'',B'')$. By inductive hypothesis, $(L \ot L' \ot L'', B \ot B' \ot
+B'')$ is a crystal basis of $V \ot V' \ot V''$. However we know that $(L \ot L', B \ot B')
+= (L_{m-2},B_{m-2})\oplus(L_{m},B_m)$, so $(L_{m-2},B_{m-2}) \ot (L_l,B_l) \oplus
+(L_m,B_m)\ot(L_l,B_l)$ is a crystal basis of $V_q(m-2) \ot V_q(l) \oplus V_q(m) \ot
+V_q(l)$. Hence each direct summand is a crystal basis of its corresponding direct summand
+by \ref{sum}.
+
+Let us now consider the formulas for the actions of $\tilde f, \tilde e$. It is easy to
+see from the formula in $2.$ that 
+\begin{align*}
+	\phi(u \ot v) &= \max\{\phi(u)-\varepsilon(v)+\phi(v),\phi(v)\}\\
+	\varepsilon(u \ot v) &=\max\{\varepsilon(v)-\phi(u)+\varepsilon(u), \varepsilon(u)\}
+\end{align*}
+Given a vector $v \ot v' \ot v'' \in B \ot_\QQ B' \ot_\QQ B''$, we can use the inductive
+hypothesis in the cases $1, m-1$ to find the action of $\tilde f$ on this element. This
+turns out to be
+\begin{align*}
+	\tilde f (v \ot v' \ot v'') &=
+		\begin{cases}
+			\tilde f v \ot v' \ot v'' & \mbox{if } \phi(v) >
+				\varepsilon(v'\ot v'') \ (1)\\
+			v \ot \tilde f(v' \ot v'') &=
+			\begin{cases}
+			v \ot \tilde f v' \ot v'' & \mbox{if not and } \phi(v') > 
+				\varepsilon(v'') \ (2)\\
+			v \ot v' \ot \tilde f v'' & \mbox{if not and } \phi(v') \leq 
+				\varepsilon(v'') \ (3)
+			\end{cases}
+		\end{cases}
+\end{align*}
+Condition (1) is equivalent to $(1)': \phi(v) + \phi(v') - \varepsilon(v')> 
+\varepsilon(v''), \ \phi(v) > \varepsilon(v')$. The second inequality implies that the
+first one is $\phi(v \ot v') > \varepsilon(v'')$. Condition (2) is equivalent to 
+$\varepsilon(v') \geq \phi(v), \  \phi(v') > \varepsilon(v'')$, which is in turn equivalent
+to $(2)': \varepsilon(v') \geq \phi(v), \  \phi(v \ot v') > \varepsilon(v'')$. Finally,
+condition (3) is equivalent to $\varepsilon(v'') \geq \phi(v'), \ \varepsilon(v'')
+\geq \phi(v) - \varepsilon(v') + \phi(v')$, which is $(3)' \varepsilon(v'') \geq \phi(v
+\ot v')$. Thus finally we have that
+\begin{align*}
+	\tilde f(v \ot v' \ot v'') &=
+		\begin{cases}
+			\tilde f(v \ot v') \ot v'' &=
+				 \begin{cases}
+					\tilde f v \ot v' \ot v'' &\mbox{in case }(1)'\\
+					v \ot \tilde f v' \ot v'' &\mbox{in case }(2)'
+				 \end{cases}\\
+			v \ot v' \ot \tilde f(v'') &\mbox{in case }(3)'
+		\end{cases}
+\end{align*}
+
+
+
+\end{proof}
+
+\paragraph
+The \emph{crystal graph} of a representation $V$ with crystal base $(L,B)$ is a colored 
+graph whose vertices are the elements of $B$, and an arrow of color $i$ goes from $b$ to
+$b'$ if and only if $b' = \tilde f_i b$. The previous Proposition shows how to construct the crystal graph of the tensor
+products of two representations $V_1, V_2$ with respective crystal bases $(L_1, B_1),
+(L_2, B_2)$. This graph, call it $G$, can be constructed as follows
+
+\begin{enumerate}
+	\item The vertices of $G$ are the elements of $B_1 \times B_2$.
+	\item For each $(b_1, b_2) \in B_1 \times B_2$ such that $\phi_i(b_1) >
+		\varepsilon_i(b_2)$, add an arrow of color $i$ from $(b_1, b_2)$ to 
+		$\tilde (f_i b_1, b_2)$.
+	\item For each $(b_1,b_2)$ such that $\phi_i(b_1) \leq \varepsilon_i(b_2)$ and
+		$\phi_i(b_2) > 0$, add an arrow of color $i$ from $(b_1,b_2)$ to $(b_1, 
+		\tilde f_i b_2)$. 
+\end{enumerate}
+
+\paragraph
+ As an example, the standard representation of
+$U_q(\sl_3)$ has a crystal graph given by $ v_1 \stackrel{1}{\to} v_2 \stackrel{2}{\to} 
+v_3$. The crystal graph of the tensor product is given by
+
+\begin{align*}
+\xymatrix{
+	{} & v_1 \ar[r]^-1 & v_2 \ar[r]^2 & v_3 \\
+	u_1 \ar[d]_-1 & u_1 \ot v_1 \ar[d]_-1 & u_1 \ot v_2 \ar[r]^-2 & u_1 \ot v_3
+\ar[d]_-1\\
+	u_2 \ar[d]_-2  & u_2 \ot v_1 \ar[r]^-1 \ar[d]_-2 & u_2 \ot v_2 \ar[d]_-2 & u_2 \ot v_3 \\
+	u_3  & u_3 \ot v_1 \ar[r]^-1 & u_3 \ot v_2 \ar[r]^-2 & u_3 \ot v_3 \\
+}
+\end{align*}
+Conjecture $C(\lambda)$ implies that the crystal graph of each indecomposable module is
+connected if we forget colors. Hence, from this we get the decomposition of $\CC^3 \ot_\CC
+\CC^3$ as a $U_q(\sl_3(\CC))$ module, as a sum of a representation of dimension $6$ and
+one of dimension $3$.
+
+
+\section{Existence of crystal bases for $V_q(\lambda)$}
+\begin{Lemma}
+	Let $\lambda, \mu \in P^+$, and suppose $C(\lambda)$ and $C(\mu)$ hold. Suppose
+furthremore that $\dim_{\QQ(q)} V_q(\lambda)_{\sigma} = 1$ for all weights $\sigma$ of
+$V_q(\lambda)$. Finally, suppose $V_q(\lambda) \ot V_q(\mu) = \sum_{\sigma \in S} V_q(\mu
++ \sigma)$, where $S = \{\sigma| u \in \B(\lambda)_\sigma \Rightarrow \tilde e_i^{1+ \langle
+h_i,\mu\rangle}u = 0 \mbox{ for all } i\}$. Then $C(\mu + \sigma)$ is true for all
+$\sigma \in S$
+\end{Lemma}
+\begin{proof}
+	From the hypothesis and Proposition \ref{tensor-product} we get that $V=V_q(\mu)
+\ot V_q(\lambda)$ has a crystal basis given by $(L,B) = (\L(\mu) \ot_{\A^0} \L(\lambda),
+\B(\mu) \ot_{\QQ} \B(\lambda))$. Furthermore, this tensor product has a polarization. Let $V =
+\bigoplus V_j$ be a decomposition in irreducible modules, and put $L_j = L \cap V_j$, $B_j
+= B \cap (L_j/qL_j)$. We will prove that $L = \bigoplus L_j, B = \bigsqcup B_j$, and this
+implies that $(L_j,B_j)$ is a crystal basis for each $M_j$.
+
+Once again, it is enough to prove that $q L \cap \bigoplus L_j \subset \bigoplus q L_j$. By 
+hypothesis each $V_j$ has a diferent highest weight, and so they are orthogonal for the
+polarization by \ref{polarization-details} (2). If $l \in qL \cap \bigoplus L_j$, then $l
+= \sum l_j$, so $0 = [\overline l,\overline l] = \sum_j [\overline l_j, \overline l_j]$,
+meaning $[\overline l_j,\overline l_j] = 0$. Since the bilinear form is non-degenerate,
+this implies $ \overline l_j = 0$, that is, $l_j \in q L_j$. This proves the first
+equality.
+
+Let $u \in B$; then $u = x \ot_{\QQ} y \in \B(\mu) \ot \B(\lambda)$. Suppose first that
+$\tilde e_i u = 0$ for all $i$. If $\varepsilon_i(y) > \phi_i(x) \geq 0$, then $\tilde e_i(
+x \ot y) = x \ot \tilde e_i y \neq 0$, wo we must have $\tilde e_i x = 0$, and
+$\varepsilon_i(y) \leq \phi_i(x) \leq \langle h_i,\lambda \rangle$, so $\tilde
+e_i^{\langle h_i,\lambda \rangle + 1} y = 0$. The first equality implies that $x = v_\mu$
+the highest weight vector, while, the other one implies the weight of $y$, say $\sigma$, 
+is in $S$. In particular $u \in L(\mu)/qL(\mu)_\mu \ot \L(\lambda)/q\L(\lambda)_{\sigma - \mu}$ 
+which is of dimension $1$. Write $u$ as a sum of elements of $L_j/qL_j$ of weight $\sigma$. 
+Since $L_j$ is stable by $\tilde e_i$, each element of this sum is in the kernel of
+$\tilde e_i$ which as we have proven has component $\sigma$ of dimension $1$. Hence $u \in
+B_j$ for some $j$. Now $B$ is generated the set of elements of the form $\tilde f_I u$
+with $\tilde e_i u = 0$ for all $i$, and since $B_j$ is stable by $\tilde f_i$, $B \subset
+\bigsqcup B_j$. Since both are basis for the same spaces, they hav the same cardinal and
+we have an equality.
+
+Clearly each $B_j$ cotains at least one element annihilated by all $\tilde e_i$. Since $j
+= 1, \ldots, |S|$, we see that there is exactly one in each. By the previous discussion,
+each $B_j = \B(\lambda')$, where $\lambda'$ is the weight of said element.
+\end{proof}
+
+\paragraph
+\label{existence}
+Kashiwara goes on to prove with a technical lemma that the standard and spin
+representations have propety $C$ \emph{and} comply with the hypothesis of the previous lemma. 
+Hence, we have $C(\lambda)$ for all $V_q(\lambda)$ that appear in the irreducible
+decomposition of arbitrary tensor products of said represntations. This proves
+$C(\lambda)$ for all weights in the cases $A, B, C$ and $D$ for all weights in the cases
+$A, B, C$ and $D$.
+
+\section{Bibliography}
+\noindent [J] Jantzen, Lectures on Quantum Groups.
+
+\noindent [K1] Kashiwara, Crystalizing the $q$-analogue of universal eneloping algebras. 
+
+\section{Notes}
+Some things to do or re do:
+
+- The proof that $C(\L(\lambda),\B(\lambda))$ is polarizable is missing.
+
+- The last part of the inductive step in \ref{tensor-product} should be written more
+  clearly.
+
+- Kashiwara's argument as mentioned in \ref{existence} is a technical matter using the
+  Weyl character function. I have not yet really undertood what he does.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

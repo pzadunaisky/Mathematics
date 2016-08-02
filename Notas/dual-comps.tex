@@ -1,0 +1,496 @@
+
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+%\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% esto tiene que estar, en este orden...
+\usepackage[small]{titlesec}
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+
+\usepackage{enumerate}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+%\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+
+%\swapnumbers
+
+
+
+
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lema, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposici\'on, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Teorema, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corolario, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definici\'on, sibling=para, style=mystyle]{Definition}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lema, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposici\'on, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Teorema, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corolario, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definici\'on, style=mystyle-empty]{Definition*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\stack[2]{\genfrac{}{}{0pt}{2}{#1}{#2}}
+\newcommand\uu[1]{\underline{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\V{\mathcal V}
+\newcommand\A{\mathcal A}
+\newcommand\B{\mathcal B}
+\renewcommand\L{\mathcal L}
+\newcommand\M{\mathcal M}
+\newcommand\F{\mathcal F}
+\newcommand\G{\mathcal G}
+\newcommand\GG{\Gamma}
+\newcommand\p{\mathfrak{p}}
+\newcommand\m{\mathfrak{m}}
+\newcommand\opp{\mathsf{opp}}
+\DeclareMathOperator\Id{\mathsf{Id}}
+\DeclareMathOperator\st{\mathsf{st}}
+
+\newcommand\C{\mathsf C}
+\newcommand\K{\mathsf K}
+\newcommand\D{\mathsf D}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+
+\DeclareMathOperator\GrMod{\mathsf{GrMod}}
+\DeclareMathOperator\GrHom{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\GrExt{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\GrTor{\underline{\mathsf{Tor}}}
+
+\DeclareMathOperator\Ab{\mathsf{Ab}}
+\DeclareMathOperator\Coh{\mathsf{Coh}}
+\DeclareMathOperator\ShHom{\mathcal Hom}
+\DeclareMathOperator\ShExt{\mathcal Ext}
+\DeclareMathOperator\ShTor{\mathcal Tor}
+
+\DeclareMathOperator\pd{pd}
+\DeclareMathOperator\id{id}
+\DeclareMathOperator\depth{depth}
+\DeclareMathOperator\Spec{Spec}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\ann{ann}
+\DeclareMathOperator\im{Im}
+\DeclareMathOperator\gr{gr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{Dualizing Complexes}
+\author{[dual-comps.tex]}
+\date{29/03/2012}
+\begin{document}
+\maketitle
+
+This notes are intended to introduce the concept of a dualizing complex over a
+(not necessarily commutative) graded algebra. We ommit most references except
+for papers where we found the results; they temselves provide the references.
+
+\section{Introducing the concept}
+
+\paragraph
+We start with an introduction wiht ideas taken from \cite{N}. As it
+seems, in the beginning, there was Serre's theorem
+
+\begin{Theorem*}
+ Le $X$ be a connected, $n$-dimensional compact complex manifold, and let $\V$
+be a holomorphic vector bundle on $X$. Then there are isomorphisms
+$H^i(X,\V)^* \cong H^{n-i}(X, \ShHom(\V, \Omega^n))$.
+\end{Theorem*}
+
+\paragraph 
+We explain the notation. For a vector space $V$, $V^*$ is just the
+usual vector-space dual. Given a manifold $X$ of dimension $n$, $\Omega^n(X)$
+is the vector space of holomorphic $n$-forms on $X$. In this case, cohomology
+of vector bundles (indeed, over sheaves), are simply the derived functors of
+the global section functor $\GG$.
+
+\paragraph
+We give a hint of the proof. First Serre proves that the module
+$H^n(\Omega^n)$ is of dimension $1$, based on the fact that $\Omega^n \cong
+\mathcal O(-n-1)$.
+
+After that, there is an obvious (?) map
+\begin{align*}
+  H^n(X, \V ) \ot \Hom_k(\V(X),\Omega^n(X)) \to H^n(X,\Omega^n) \cong k.
+\end{align*}
+Take $\phi \in \Hom_k(\V(X),\Omega^n(X))$. Cohomology induces a morphism
+$H^n(X,\phi):H^n(X, \V) \to H^n(X, \Omega^n)$, so we might as well define
+$$\phi \ot a \in H^n(X, \V ) \ot
+\Hom_k(\V(X),\Omega^n(X)) \mapsto H^n(X,\phi)(a) \in H^n(X,\Omega^n).$$
+
+Serre goes on to prove that this is a perfect pairing. Since this is the
+pairing of the theorem on degree $i = n$, some $\delta$-functor machinery
+allows to prove that this happens for lower $i$.
+
+\paragraph Serre's original proof was for $X = \mathbb P^n$, but the proof
+works just as fine under the stated hypothesis. If one tries to generalize
+this to more general varieties, an immediate problem is to find a suitable
+replacement for $\Omega^n$. Furthermore, the problem becomes more muddled when
+Algebraic geometry begins its usual tantrum of wanting what Differential
+geometry has. Grothendieck layed out a wish list in the more general,
+relative, algebraic-geometry setting: start with two varieties, $X$ and $Y$,
+and a proper morphism $F: X \to Y$:
+
+\begin{enumerate}
+ \item For all $X$  there should be a cannonical line bundle $\L$. This allows
+us to find the dual of any coherent sheaf $\V$ (this plays the role of
+the vector bundle), by taking $\V^* =
+\ShHom(\V,\L)$.
+
+ \item  The natural map $\V^{**} \to \V$ should be an isomorphism.
+
+ \item Given a sheaf $\V$ on $X$, $f$ should ``push-forward'' $\V$ to
+$Rf_*(\V)$ over $Y$ (this space intentionally left blank).
+
+\item There should be a natural isomorphism $(Rf_* \V)^* \cong Rf_* (\V^*)$
+(modulo some shifting, as usual).
+
+\item Serre's theorem should be a special case, taking $Y$ as the one-point set.
+\end{enumerate}
+
+Of course, this wish-list makes almost no sense if we restrict $\V$ to the
+category of sheaves. The functor $Rf_*$ is to be understood as a functor
+between derived categories, and it was the development of this abstract
+machinery which prevented for some time the publication of these results.
+
+\paragraph There is a natural pushforward functor $Rf_*: D^b(\Coh(X)) \to
+D^b(\Coh(Y))$, but the choice of the dualizing complex $\L$ is quite
+complicated, since there is no guarantee that $R\ShHom(\V,\L)$ is again an
+object in $D^b(\Coh(X))$.  Conditions $1, 2.$ have to be
+\emph{imposed} in the definition of a dualizing complex, and the problem thus
+becomes finding conditions under which such a complex exists. Its existence,
+plus the fact that condition $3.$ is automatically met, imply formally
+conditions $4.$ and $5.$. Grothendieck's answer on the subject is detailed on
+\cite{RD}; Serre's theorem is recovered from the statement that for a regular
+noetherian scheme, such as $\mathbb P^n$, the structure sheaf $\O$ is a
+dualizing complex, up to a certain shift. 
+
+\section{Dualizing complexes over algebras: a gentle introduction cf. \cite{Y}}
+
+\paragraph
+Denotemos por $B$ a $A, A^\opp$ o $k$. Si tomamos un complejo $R^\bullet \in
+\D^+(A^e)$, podemos entonces definir dos funtores:
+\begin{align*}
+ D
+  &:= R\GrHom_A(-,R^\bullet): \D(A \ot B^\opp) \to \D(A^\opp \ot B) \\
+ D^\opp
+  &:= R\GrHom_{A^\opp}(-,R^\bullet): \D(A \ot B^\opp) \to \D(A^\opp \ot B)
+\end{align*}
+
+Dado $M^\bullet \in \D(A \ot B^\opp)$, hay un morfismo natural $M \to D^\opp D
+(M^\bullet)$. Para ver esto, notamos que podemos suponer spg que $R^\bullet$ es
+un complejo de $A^e$-módulos inyectivos. Como el funtor de restricción $\GrMod
+A^e \to \GrMod A$ preserva inyectivos, esta es una resolución inyectiva de
+$R^\bullet$ tanto en $\D(A)$ como en $\D(A^\opp)$. Luego, $D^\opp D(M) =
+\Hom_{A^\opp}(\Hom_A(M^\bullet,R^\bullet),R^\bullet)$, y el morfismo es
+simplemente enviar cada elemento de $M$ en la evaluación correspondiente.
+
+\paragraph
+Denotamos por $\D_{fg}(B)$ la subcategoría de $\D(B)$ formada por los complejos
+cuyos grupos de cohomología son finitamente generados.
+
+\begin{Definition*}
+ Un complejo $R^\bullet \in \D(A^e)$ se dice \emph{dualizante} si cumple con
+las siguientes tres condiciones
+\begin{enumerate}
+ \item $\id_A R^\bullet$, $\id_{A^\opp} R^\bullet < \infty$.
+ \item $R^\bullet \in D^+_{fg}(A)$, $D^+_{fg}(A^\opp)$.
+ \item Los morfismos naturales $\Phi: A \to R\GrHom_A(R^\bullet,R^\bullet)$ y
+\\  $\Phi^\opp: A^\opp \to R\GrHom_{A^\opp}(R^\bullet,R^\bullet)$ son
+isomorfismos en $\D(A^e)$.
+\end{enumerate}
+
+
+\begin{Proposition}
+ Sea $R^\bullet \in D^+(A^e)$ un complejo que cumple con las condiciones $1.$ y
+$2.$ de la definición anterior. Entonces los funtores $D$ y $D^\opp$
+intercambian las categorías $\D^b_{fg}(A)$ y $D^b_{fg}(A^\opp)$
+\end{Proposition}
+\begin{proof}
+Tomemos una resolución inyectiva de $R^\bullet$ en $\D(A^e)$ y trunquémosla en
+el máximo entre $\id_A R^\bullet$ y $\id_{A^\opp} R^\bullet$. Esto nos da una
+resolución inyectiva acotada $I^\bullet$ de $R^\bullet$ tanto en $\D_{fg}^b(A)$
+como en $\D^b_{fg}(A^\opp)$. De esto se deduce que dado un complejo acotado
+$M^\bullet$, $R\GrHom_A(M^\bullet, R^\bullet) = \GrHom_A(M^\bullet, I^\bullet)$
+es un complejo acotado. 
+
+Supongamos además que $M^\bullet \in \D_{fg}^b(A)$. Podemos entonces reemplazar
+$M^\bullet$ por una resolución proyectiva $P^\bullet$ y tomar
+$R\GrHom_A(M^\bullet, R^\bullet) = \GrHom_A(P^\bullet,R^\bullet)$, y nos
+interesa ver que la homología de este complejo es finitamente generada. Como
+$M^\bullet$ es acotado, la cohomología de $P^\bullet$ es nula salvo para
+finitos términos. Suponemos sin pérdida de generalidad que
+$P^\bullet = 0$ para $\bullet > 0$. 
+
+Primero supongamos que $M^\bullet$ es un complejo concentrado en grado cero, y
+que además $M^0$ es proyectivo y finitamente generado. Entonces $M^0$ es un
+sumando directo de un módulo libre, por lo cual $R\Hom(M^0,R^\bullet) =
+\Hom_A(M^0,R^\bullet)$ es un sumando directo del complejo $\Hom(A^n,R^\bullet)
+\cong (R^\bullet)^n$, que evidentemente tiene homología finitamente generada. La
+noetherianidad de $A$ garantiza entonces que $R\Hom_{\C(A)}(M^\bullet,
+R^\bullet)$ tiene homología finitamente generada.
+
+Ahora tomemos $M^\bullet \in \D^b_{fg}(A)$, y sea $P^\bullet \in \C_{fg}^-(\A)$
+una resolución proyectiva de $M^\bullet$. Sea $\tau_n(P)$ el complejo
+$\tau_n(P)^\bullet = \begin{cases} P^\bullet & \bullet \leq n \\ 0 & \bullet >
+n\end{cases}$ con el diferencial obvio. Tenemos una sucesión exacta corta de
+complejos
+$$ 0 \to \tau_{-n}(P^\bullet) \to \tau_{-n-1}(P) \to P^{-n-1} \to 0$$
+
+La sucesión exacta larga de la homología inducida por el funtor
+$\GrHom(-,R^\bullet)$ nos da
+\begin{align*}
+ &H^{i-1}(\GrHom (\tau_{-n}(P^\bullet),R^\bullet) )
+    \to H^{i}(\GrHom (P^{-n-1},R^\bullet) )
+     \to H^{i}(\GrHom (\tau_{-n-1}(P^\bullet),R^\bullet) )
+    \\
+&\to H^{i}(\GrHom (\tau_{-n}(P^\bullet),R^\bullet)  )
+    \to H^{i+1}(\GrHom (P^{-n-1},R^\bullet))
+\end{align*}
+Ahora podemos probar por inducción en $n$ que $H^{i-1}(R\GrHom
+(\tau_{-n}(P^\bullet),R^\bullet)$ es finitamente generado. El paso $n = 0$ es
+justamente el caso en que el complejo consta de un Ãºnico módulo proyectivo, y
+el paso inductivo sale de que para un álgebra noetheriana la subcategoría de
+módulos finitamente generados es cerrada por extensiones.
+
+Finalmente, dado que la cohomología de $P^\bullet$ es finita, la inclusión
+$\tau_n(P) \to P^\bullet$ es un cuasi-isomorfismo para $n << 0$, de donde se
+obtiene que $H^i(\GrHom(\tau_n(P),R^\bullet)) \cong H^i(\GrHom(P^\bullet,
+R^\bullet)) = H^i(R\GrHom(M^\bullet, R^\bullet))$ [chequear!!!!].
+\end{proof}
+
+
+
+\end{Definition*}
+
+\subsection{Dualidad local para álgebras con complejos dualizantes}
+En este apartado suponemos que $A$ es un álgebra conexa noetheriana.
+
+\paragraph
+Para todo complejo $M^\bullet \in \D^+(A)$ se tiene un morfismo natural
+$$R\GG_\m(M^\bullet) \to R\GrHom_A(R\GrHom_A(M^\bullet,R^\bullet),R\GG_\m(R^\bullet))$$
+Para ver esto, reemplazamos $R^\bullet \cong I^\bullet$ por una resolución nyectiva, y hacemos lo propio con $M^\bullet \cong J^\bullet$. El diagrama anterior se convierte entonces en
+$$ \GG_\m(J^\bullet) \to R\GrHom_A(\GrHom_A(J^\bullet,I^\bullet),\GG_\m(I^\bullet)) $$
+Pero $\GG_\m(I)$ es inyectivo para un módulo inyectivo, y por lo tanto el último $R\GrHom_A$ es un $\GrHom_A$. El morfismo es entonces el ya discutido (la correstricción funciona).
+
+\paragraph
+Supongamos que $A$ tiene un complejo dualizante balanceado, denotado por $R^\bullet$, y fijemos un isomorfismo $R\GG_\m(R^\bullet) \cong A'$. Entones el morfismo del apartado anterior se puede escribir como
+$$ \theta: R\GG_\m(M^\bullet) \to R\GrHom_A(R\GrHom_A(M^\bullet,R^\bullet),A')$$
+Veremos que en caso de que $M^\bullet \in \D^b_{fg}(A)$, $\theta$ es un isomorfismo. 
+
+\begin{Lemma}
+Supongamos que $M^\bullet, N^\bullet \in \D^b(A)$. Si $q \in \NN_0$, entonces $\GrExt_{A}^q(M^\bullet,N^\bullet) \cong \GrExt_A^q(D(N^\bullet),D(M^\bullet))$ como espacios vectoriales.
+\end{Lemma}
+\begin{proof}
+La componente $i$ de $\GrExt_{A}^q(M^\bullet,N^\bullet)$ está dada por $\GrHom_{\D(A)}(M^\bullet,N^\bullet(i)[q])$ ($(i)$ denota el shift de la categoria $\GrMod A$, y $[q]$ el de $\C(A)$). Como $D$ es una equivalencia de categorías, se tiene que $\GrHom_{\D(A^\opp)}(D(N^\bullet),D(M^\bullet)(i)[q])$ es isomorfo como $k$-espacio-vectorial al espacio anterior. Esto completa la demostración 
+\end{proof}
+
+\begin{Lemma}
+$D(A/\m^n) \cong \GrHom_k(A / \m^n,k )$
+\end{Lemma}
+\begin{proof}
+$D(A/\m^n) = R\GrHom(A/\m^n, R^\bullet) \cong \GrHom_A(A/\m^n, I^\bullet) \cong \GrHom_A(A/\m^n, \GG_\m(I^\bullet)) \cong \GrHom_A(A/\m^n,A') \cong \GrHom_k(A/\m^n)$.
+\end{proof}
+
+\begin{Theorem}
+Para todo $M^\bullet \in \D_{fg}^b(A)$, el morfismo $\theta$ es un isomorfismo.
+\end{Theorem}
+\begin{proof}
+Vamos a demostrar que $H^q(\theta)$ es un isomorfismo para todo $q \in \ZZ$. Fijando un $n \geq 0$, tenemos un diagrama
+\begin{align*}
+\xymatrix{
+R\GrHom_A(A/\m^n,M^\bullet) \ar[r]^-{\theta_n} \ar[d] 
+	& R\GrHom_A(D(M^\bullet),(A/\m^n)') \ar[d] \\
+R\GG_\m(M^\bullet) \ar[r] 
+	& R\GrHom_A(D(M^\bullet),A')
+}
+\end{align*}
+donde la transformación vertical derecha es inducida por $A/\m^n \to \varinjlim_l (A/ \m^l)' = A'$. Tomando la $q$-ésima homología en este diagrama, y tomando límite inyectivo sobre $n$, tenemos
+\begin{align*}
+\xymatrix{
+\varinjlim \GrExt_A(A/\m^n,M^\bullet) \ar[r]^-{\varinjlim H^q(\theta_n)} \ar@{=}[d] 
+	& \varinjlim \GrExt_{A^\opp}(D(M^\bullet),(A/\m^n)') \ar[d]^-{\phi} \\
+H^q_\m(M^\bullet) \ar[r] 
+	& \GrExt_{A^\opp}(D(M^\bullet),A')
+}
+\end{align*}
+Por el lema anterior, sabemos que todas la $H^q(\theta_n)$ son isomorfismos, y por lo tanto su límite también. Alcanza entonces con verificar que $\phi$ es un isomorfismo.
+
+Si reemplazamos $D(M^\bullet) \in \D_{fg}^b(A)$ por un complejo de módulos proyecivos finitamente generados $P^\bullet \in D^-_{fg}(A)$, entonces $\phi$ es la cadena de isomorfismos
+\begin{align*}
+	\varinjlim \GrExt_{A^\opp}(D(M^\bullet),(A/\m^n)')
+		& \cong \varinjlim H^q(\GrHom_{A^\opp}(P^\bullet, (A/\m^n)')) &\mbox{[por definición]} \\
+		& \cong H^q(\varinjlim \GrHom_{A^\opp}(P^\bullet, (A/\m^n)')) &\mbox{[este es el límite categórico bueno]} \\
+		& \cong H^q(\GrHom_{A^\opp}(P^\bullet, A')) &\mbox{[los $P$'s son fg, así que metemos el límite en la segunda coordenada]} \\
+		& \Ext^q_{A^\opp}(D(M^\bullet),A')
+\end{align*}
+Esto completa la demostración.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{Homological properties of algebras with DC's cf. \cite{J1, WZ}}
+\section{Existence of DC's for connected algebras cf. \cite{VdB}}
+\begin{bibdiv}
+\begin{biblist}
+
+\bib{J2}{article}{
+   author={J{\o}rgensen, Peter},
+   title={Non-commutative graded homological identities},
+   journal={J. London Math. Soc. (2)},
+   volume={57},
+   date={1998},
+   number={2},
+   pages={336--350},
+}
+
+\bib{J1}{article}{
+   author={J{\o}rgensen, Peter},
+   title={Local cohomology for non-commutative graded algebras},
+   journal={Comm. Algebra},
+   volume={25},
+   date={1997},
+   number={2},
+   pages={575--591},
+}
+
+\bib{N}{article}{
+   author={Neeman, Amnon},
+   title={Derived categories and Grothendieck duality},
+   conference={
+      title={Triangulated categories},
+   },
+   book={
+      series={London Math. Soc. Lecture Note Ser.},
+      volume={375},
+      publisher={Cambridge Univ. Press},
+      place={Cambridge},
+   },
+   date={2010},
+   pages={290--350},
+}
+
+\bib{RD}{book}{
+   author={Hartshorne, Robin},
+   title={Residues and duality},
+   series={Lecture notes of a seminar on the work of A. Grothendieck, given
+   at Harvard 1963/64. With an appendix by P. Deligne. Lecture Notes in
+   Mathematics, No. 20},
+   publisher={Springer-Verlag},
+   place={Berlin},
+   date={1966},
+   pages={vii+423},
+}
+
+\bib{VdB}{article}{
+   author={van den Bergh, Michel},
+   title={Existence theorems for dualizing complexes over non-commutative
+   graded and filtered rings},
+   journal={J. Algebra},
+   volume={195},
+   date={1997},
+   number={2},
+   pages={662--679},
+}
+
+\bib{WZ}{article}{
+   author={Wu, Q.-S.},
+   author={Zhang, J. J.},
+   title={Applications of dualizing complexes},
+   conference={
+      title={Proceedings of the Third International Algebra Conference
+      (Tainan, 2002)},
+   },
+   book={
+      publisher={Kluwer Acad. Publ.},
+      place={Dordrecht},
+   },
+   date={2003},
+   pages={241--255},
+}
+
+\bib{Y}{article}{
+   author={Yekutieli, Amnon},
+   title={Dualizing complexes over noncommutative graded algebras},
+   journal={J. Algebra},
+   volume={153},
+   date={1992},
+   number={1},
+   pages={41--84},
+}
+
+
+\end{biblist}
+\end{bibdiv}
+
+\end{document}

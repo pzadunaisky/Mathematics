@@ -1,0 +1,272 @@
+
+
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% esto tiene que estar, en este orden...
+\usepackage[small]{titlesec}
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumerate}
+\usepackage{mathpazo}
+%\usepackage{euler}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{stmaryrd}
+\usepackage{showlabels}
+\usepackage{ulem}
+%\swapnumbers
+
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposition, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Theorem, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corolllary, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definition, sibling=para, style=mystyle]{Definition}
+%\declaretheorem[name=Example, sibling=para, style=mystyle]{Example}
+
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+%\declaretheorem[name=Example, style=mystyle-empty]{Example*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\newcommand\KK{\mathbb K}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\op{\mathsf{op}}
+\newcommand\blabla[1]{\noindent\framebox[1.05\width]{\texttt{Note: #1}}}
+\renewcommand\ll{\llbracket}
+\newcommand\rr{\rrbracket}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand\k{\Bbbk}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+
+\DeclareMathOperator\HOM{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\EXT{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\TOR{\underline{\mathsf{Tor}}}
+
+\newcommand\join{\vee}
+\newcommand\meet{\wedge}
+\renewcommand\q{\mathbf{q}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Tesis de Fernando Martin}
+\date{[TesisFernandoM.tex]}
+\author{Pablo Zadunaisky}
+\begin{document}
+\maketitle
+\section*{Introducción}
+\paragraph Linea 3, Pag. 5. La palabra "poder" está de más.
+
+\paragraph Penúltima linea del primer párrafo "computos" (o algo así...).
+
+\paragraph "finito-dimensionalidad", "remarcablemente", "concreniente" son todos
+anglicismos.
+
+\paragraph Varias palabras están mal separadas: "reescrit-ura", "pub-licación",
+"anál-ogo", etc.
+
+\section*{Introduction}
+
+\paragraph Pg. 7, Al principio del 4to párrafo. In most cases passive voice is avoided.
+
+\paragraph Mismo párrafo, última linea. "scalars", no "scalares".
+
+\section{Preliminaries}
+
+\paragraph Número del capítulo?
+
+\subsection{The path algebra of a quiver}
+\paragraph Hay dos pares de dos puntos en "$\alpha: 1 \to 1:$", pero el segundo confunde.
+De hecho puede ser eliminado. Más en general, uno no termina párrafos en dos puntos, 
+especialmente antes de enunciar un resultado; el clásico "Tenemos el siguiente: TEOREMA"
+should be avoided...
+
+\subsection{Completions}
+\paragraph Definición de $k$-algebra norm?
+
+\paragraph Qué es "$e$" en la definición de la norma?
+
+\paragraph "plays nicely"? Mejor "compatible with".
+
+\paragraph 1ra línea del 1er párrafo, "we have that" hay que eliminarlo.
+
+\paragraph Última linea de Example 1.6 "this \sout{may} can only happen"
+
+\paragraph Example 1.7, overflow.
+
+\subsection{The Jacobian algebra of a quiver with potetntial}
+
+\paragraph Example 1.10, además de los dos puntos innecesarios, donde dice "As any path
+of length $n$..." debería decir $2n$, ídem más adelante.
+
+\subsection{Ideal triangulations of surfaces}
+\paragraph en la definición de \emph{arc}, "contractible into $M$" es poco claro. En el
+copete de Figure 1.1 "contractible [...] to the set of marked points" no tiene sentido.
+
+\paragraph En la demostración de 1.13, no me queda claro por qué "any marked point must 
+be a vertex of the decomposition", muy posiblemente porque no estoy seguro de qué es una 
+\emph{cell decomposition} (no se lo digas a Gabriel que me saca el aprobado de TA).
+
+\subsection{The QP associated to an ideal triangulation}
+
+\paragraph En el segundo párrafo, "section 3 \sout{from} of [LF09]".
+
+\paragraph Ya lo hablamos, no me queda claro qué quiere decir que un ciclo "circle a 
+puncture".
+
+\section{The diamond lemma}
+
+\paragraph "Extendable" quiere decir "extensible" en el espacio o en el tiempo, como una 
+escalera o un permiso de recidencia, pero no a todos los elementos de un álgebra.
+
+\subsection{Bergman's diamond lemma}
+
+\paragraph Nunca definís $| \cdot |$. ES obvio que es la longitud, but still...
+
+\paragraph En la definición de ambiguity, una boludez es que $\hat r'$ debería ser 
+$\widehat{r'}$. Una no-boludez es que "resolvable" es un crimen de lesa humanidad. 
+Podés decir "solvable" o "soluble", pero cada vez que escribís resolvable Shakespeare 
+da media vuelta en su tumba. Sí, ya sé que Bergman usaba esa palabra. Bergman es un 
+criminal.
+
+\paragraph Tampoco es tan grave, pero Andrea me contagió su odio a la frase "we have 
+that". El 75\% de las veces la podés sacar y el significado es el mismo.
+
+\paragraph Example 2.4: "...our variables \sout{such} so that $x < y$...". También "the 
+\emph{set} of $S$-irreducible monomials \sout{are} is exactly...".
+
+\paragraph En los ejemplos muchas veces escribís tus relaciones en la forma 
+$f_\sigma - W_\sigma$, pero tu enunciado dice $W_\sigma - f_\sigma$.
+
+\paragraph Example 2.7, al pié de la página la igualdad $(xy-yx, yzx^n- zx^ny) = 
+(xy-yx, yz-zy)$ es falsa... hay que tomar todos los $n$ hasta un cierto punto.
+
+\paragraph Heuristic 2.8, al final del punto 3, "steps 1 and 2 \sout{as} to produce...". 
+Ídem al final de la heurística [por cierto, me cabe que heurística empiece a tomar un lugar junto a Lema, Corolario, Proposiición, Teorema, blah...].
+
+\subsection{A diamond lemma for path algebras}
+
+\paragraph "further relations in the path algebra \sout{a lot of} many rewriting rules...". También "in a similar vein \sout{as} to [FFG93]".
+
+\subsection{A topological diamond lemma}
+
+\paragraph En la última fórmula, el cociente final debería ser por $(x^{n-1} - 1)$. 
+
+\section{Jacobian algebras...}
+
+\paragraph Cuarto párrafo de la introducción, overflow.
+
+\subsection{Tetrahedron}
+
+\paragraph "...12 rewriting rules that overlap \sout{themselves} in various ways."
+
+\paragraph Las referencias de las imágenes faltan en todos los casos.
+
+\paragraph Pag. 36 "... a basis for the Jacobian algebra is given by the set of 
+irreducible paths". Creo que entendí algo mal, o falta algo. La frase es cierta si el 
+álgebra Jacobiana es de la forma $k\langle Q \rangle/ I$, pero al tomar completación 
+deja de ser cierto ¿no?. Siguiendo con el mismo argumento, en la pag. 37 
+hablás de que el álgebra Jacobiana hereda una graduación del álgebra de caminos, pero el 
+álgebra de caminos completada no es graduada, porque un camino infinito no tiene grado 
+bien definido. Finalmente en la página 38 llamás "The Jacobian algebra" al cociente
+
+\paragraph Hay un $-$ en la serie de Hilbert de la página 38 que sobra.
+
+\paragraph Aunque no es parte d ela definición, uno suele mencionar si la filtración 
+de un álgebra es completa o no, es decir si $A = \bigcup F_nA$. Si filtrás el álgebra 
+de caminos completada por el largo, los caminos de largo infinito no están en ninguna 
+capa de la filtración.
+
+\subsection{Polygonal subdivision of surfaces}
+\paragraph Por su estructura, la oración "With the sole exception of Ladkani's paper 
+covered" tiene por sujeto a "Ladkani's paper"; parece que estuvieras diciendo que el 
+artículo de Ladkani es una excepción a algo. Si entiendo bien, quisiste decir algo así 
+como "Having covered the only case not considered in [Lad]...".
+
+\paragraph "...this situation and \sout{lets us produce} produces..."
+
+\subsection{A family of infinite-dimensional examples}
+
+\paragraph ¿Qué es $\Omega(n^2)$?
+
+\paragraph No entiendo el ejemplo 3.1 En particular no entiendo el rol que juega $K_8$.
+
+\subsection{A family of finite-dimensional examples}
+
+Esta sección es MUY linda.
+
+\paragraph "the classification theorem" Agregar referencia.
+
+\paragraph Proposition 3.3: "The loops (¿cuáles? $R$, $B$ o $R \cup B$?) divide the 
+surface into a disjoint (non-overlapping??) family of regions...". En la demostracíón 
+LaTeX te pasó una mala jugada con la ubicación de las imagenes... 
+
+\paragraph "where each \sout{$S_i$} $C_i$...". Pag 48. "in the same band are 
+\sout{distanced} separated by at least..." Pag. 49 "contained in \sout{a} the same 
+region".
+
+
+\end{document}

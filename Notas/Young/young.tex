@@ -1,0 +1,97 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{notas}
+
+\usepackage[centertableaux]{ytableau}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\eps{\varepsilon}
+
+
+\DeclareMathOperator\Sym{\mathsf{Sym}}
+\DeclareMathOperator\Alt{\mathsf{Alt}}
+\DeclareMathOperator\sg{\mathsf{sg}}
+\DeclarePairedDelimiter\gen{\langle}{\rangle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Tableros de Young}
+\date{[young.tex]}
+\author{Pablo Zadunaisky}
+
+\begin{document}
+\maketitle
+
+Estas notas siguen los capítulos 4 y 6 del libro de Fulton y Harris sobre teoría de
+representaciones.
+
+\section{Definiciones generales}
+Notamos por $\SS_d$ al $d$-ésimo grupo de permutaciones. Dado $\sigma \in \SS_d$ notamos
+por $e_\sigma$ al elemento correspondiente en el álgebra $\CC[\SS_d]$.
+\begin{align*}
+	a &= \sum_{\sigma \in S_d} e_\sigma & b &= \sum_{\sigma \in S_d} \sg(\sigma) e_\sigma
+\end{align*}
+
+\begin{Definition}
+	Sea $V$ un espacio vectorial. Dado $d \in \NN$ definimos los siguientes subespacios de
+	la potencia tensorial $V^{\ot d}$
+	\begin{align*}
+		\Sym^n(V) &= \gen{\sum_{\sigma \in S_d} v_{\sigma(1)} \ot \ldots \ot v_{\sigma(d)}
+	\mid v_1 \ot \ldots \ot v_d \in V^{\ot d}}\\
+	\Alt^n(V) &= \gen{\sum_{\sigma \in S_d} \sg(\sigma) v_{\sigma(1)} \ot \ldots \ot
+	v_{\sigma(d)} \mid v_1 \ot \ldots \ot v_d \in V^{\ot d}}
+	\end{align*}
+\end{Definition}
+
+\paragraph
+Una observación interesante es que si hacemos a $S_d$ actuar sobre $V^{\ot d}$ permutando
+los tensores, y ponemos $a = \sum_{\sigma \in S_d} e_\sigma$ y $b = \sum_{\sigma \in S_d}
+\sg(\sigma) e_\sigma$ entonces $\Sym^d V = a\cdot V^{\ot d}$ y $\Alt^d V = b \cdot V^{\ot
+d}$.
+
+\paragraph
+\label{diagramas-de-young}
+\about{Diagramas de Young}
+Fijemos $n \in \NN$. Una \newterm{partición} de $n$ es una $d$-upla de enteros $\lambda =
+(\lambda_1, \ldots, \lambda_d)$ con $\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_d$
+tal que $n = \lambda_ 1 + \cdots + \lambda_d$. En este caso escribimos $|\lambda| = n$ o
+$\lambda \vdash n$.
+
+A cada partición le asociamos su \newterm{diagrama de Young}, que es un diagrama con $d$
+filas de casilleros cuya $i$-ésima fila tiene $\lambda_i$ casilleros. Abajo mostramos
+tres ejemplos de particiones con sus respectivos diagramas de Young.
+\begin{align*}
+	(2,1) & \ \ydiagram{2,1} 
+		& (3,3,1) & \ \ydiagram{3, 3, 1} 
+		& (5,3,2)\  & \ydiagram{5, 3, 2}
+\end{align*}
+Muchas veces identificamos una partición $\lambda$ con su diagrama de Young.
+
+\begin{Proposition}
+\label{hook-length-formula}
+Sea $\lambda = (\lambda_1, \ldots, \lambda_k)$ una partición de $n$. Sea $\ell(i,j)$ la
+longitud del gancho correspondiente al lugar $(i,j)$ en $\lambda$, y sea $l_i = \ell(i,1)
+= \lambda_i + k - i$ para todo $1 \leq i \leq k$. Se tiene entonces que
+\begin{align*}
+	\prod_{(i,j) \in \lambda} \ell(i,j) &= \frac{l_1! l_2! \ldots l_k!}{\prod_{i<j} (l_i -
+		l_j)}.
+\end{align*}
+\end{Proposition}
+\end{document}

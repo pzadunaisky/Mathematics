@@ -1,0 +1,465 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% esto tiene que estar, en este orden...
+\usepackage[small]{titlesec}
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8,latin1]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumerate}
+\usepackage{mathpazo}
+\usepackage{euler}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+%\swapnumbers
+
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposition, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Theorem, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corolllary, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definition, sibling=para, style=mystyle]{Definition}
+%\declaretheorem[name=Example, sibling=para, style=mystyle]{Example}
+
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+%\declaretheorem[name=Example, style=mystyle-empty]{Example*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\newcommand\KK{\mathbb K}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\eps{\varepsilon}
+\newcommand\uu[1]{\underline{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\A{\mathcal A}
+\newcommand\B{\mathcal B}
+\renewcommand\L{\mathcal L}
+\newcommand\R{\mathcal R}
+\newcommand\F{\mathcal F}
+\renewcommand\O{\mathcal O}
+\newcommand\I{\uu I}
+\renewcommand\b{\mathfrak{b}}
+\newcommand\g{\mathfrak{g}}
+\newcommand\h{\mathfrak h}
+\newcommand\sq{\square}
+\newcommand\vep{\varepsilon}
+\newcommand\co{\mathsf{co}}
+\DeclareMathOperator\Id{\mathsf{Id}}
+\DeclareMathOperator\st{\mathsf{st}}
+
+\newcommand\C{\mathsf C}
+\renewcommand\k{\Bbbk}
+\newcommand\D{\mathsf D}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+
+\DeclareMathOperator\HOM{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\EXT{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\TOR{\underline{\mathsf{Tor}}}
+
+\DeclareMathOperator\Ab{\mathsf{Ab}}
+\DeclareMathOperator\ShHom{\mathcal Hom}
+\DeclareMathOperator\ShExt{\mathcal Ext}
+\DeclareMathOperator\ShTor{\mathcal Tor}
+
+\DeclareMathOperator\pd{pd}
+\DeclareMathOperator\id{id}
+\DeclareMathOperator\rank{rank}
+\DeclareMathOperator\Spec{Spec}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\ann{ann}
+\DeclareMathOperator\im{Im}
+\DeclareMathOperator\gr{gr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Comodule structure on hom's}
+\date{[hom-comodule.tex]}
+\author{Pablo Zadunaisky}
+
+\begin{document}
+\maketitle
+We fix a field $\k$. All algebras and tensor products
+are over $\k$ unless otherwise stated. Given a coalgebra $G$ we denote by $\Mod^G$ the
+category of right $G$-comodules and write $\Hom^G$ for $\Hom_{\Mod^G}$.
+
+\section{Hom comodules}
+\paragraph
+Let $G$ be a Hopf algebra and let $M, N$ be $G$-comodules. We define the $G$-comodule-hom
+space $\HOM^{G}(M, N)$ as the pull-back
+\begin{align*}
+	\xymatrix{
+		\Hom_\k(M, N) \ar[r]^-{\rho^{N}_*} & \Hom_\k(M, N \ot G) \\
+		\HOM^{G}(M, N) \ar@{-->}[u]^-\alpha \ar@{-->}[r]^-\rho & \Hom_\k(M, N) \ot G 
+		\ar[u]_-{\Gamma}
+	}
+\end{align*}
+where for each $n \in N$ we define $\Gamma(f \ot g)(n) = f(n_0) \ot g n_1$.
+
+Since
+\[ 
+	(1 \ot \vep)_* \circ \rho^{N}_* = (1 \ot \vep \circ \rho^{N})_* = (\Id_{N})_*
+\]
+we know that $\rho^{N}_*$ is injective, and hence so is $\rho$. 
+
+It is also true that $\Gamma$ is injective. Let $T: \Hom(M,N \ot G) \to \Hom_\k(M,N \ot
+G)$ be defined by $T(F)(m) = f(m_0) \cdot 1 \ot S(m_1)$. Thus we get a commutative diagram
+\begin{align*}
+	\xymatrix{
+		\Hom_\k(M, N \ot G) \ar[dr]^-T \\
+		\Hom_\k(M, N) \ot G \ar[u]^\Gamma \ar[r]^-i & \Hom_\k(M,N \ot G)
+	}
+\end{align*}
+where $i(f \ot g)(m) = f(m) \ot g$. Since $i$ is injective, so is $\Gamma$.
+
+Hence $\HOM^G(M,N) \subset \Hom_\k(M,N)$ consists of those functions $f: M \to N$ for
+which there exist $f_1, \ldots, f_r \in \Hom_\k(M,N)$ and $g_1, \ldots, g_r
+\in G$ such that for every $m \in M$ we get $f(m)_0 \ot f(m)_1 = \sum_{i = 1}^r f_i(m_0)
+\ot g_i m_i$. Notice that the submodule of coinvariants of $\HOM^G(M,N)$ is $\Hom^G(M,N)$.
+
+\paragraph
+For example, suppose $G$ is the group algebra of $\hat G$, in which case $M, N$ are
+$\hat G$-graded modules. Then $\HOM^G(M,N)$ consists of those morphisms which are
+finite sums of homogeneous morphisms of arbitrary degree, i.e. $\HOM^G(M,N) =
+\bigoplus_{g \in \hat G}\Hom^G(M,N[g])$. It is a well-known result that if $M$ is finite
+dimensional then $\HOM^G(M,N) = \Hom_\k(M,N)$.
+
+On the other hand, suppose $\k$ has characteristic zero and let $G$ be the enveloping
+algebra of the one dimensional Lie algebra with basis $X$. A $G$-comodule is a vector
+space $M$ with a locally nilpotent endomorphism $t: M \to M$ such that $\rho^M(m) = \sum_n
+\frac{t^n(m)}{n!} \ot X^n$. Suppose $M, N$ are $G$-comodules with structure maps given by
+endomorphisms $t, u$. Take $F \in \Hom_\k(M,N)$, and set
+\[
+	F_n = \sum_{i + j = n} \frac{(-1)^{i}}{i!j!} u^{j} \circ F \circ t^i.
+\]
+Then $F \in \HOM^G(M, N)$ if and only if $F_n = 0$ for $n \gg 0$. In that case $\rho(F) =
+\sum_n F_n \ot X^n$. Notice that $F_1 = u \circ F - F \circ t$ is zero if and only if $F$
+is a comodule morphism. If $M$ is finite dimensional then so is $F(M)$; hence both $s$ and
+the restriction of $t$ to the image of $F$ are nilpotent, and $F_n = 0$ for $n > 2 \dim
+M$. Thus if $M$ is finite dimensional $\HOM^G(M,N) = \Hom_\k(M,N)$
+
+\paragraph
+\label{hom-G-comodule}
+The $\k$-vector space $\HOM^{G}(M,N)$ is a $G$-comodule. Indeed, consider the following
+diagram
+\begin{align*}
+	\xymatrix{
+		\Hom_\k(M,N) \ar[r]^{\rho^{N}_*}
+		& \Hom_\k(M,N \ot G) \ar[r]^-{(\rho^{N} \ot 1)_*}
+			& \Hom_\k(M,N \ot G \ot G)\\
+		\HOM^G(M,N) \ar[r]^-\rho \ar[u]^-\alpha
+			&\Hom_\k(M,N) \ot G \ar[r]^-{\rho^{N}_* \ot 1} \ar[u]^-\Gamma \ar[dr]^-{1
+				\ot \Delta}
+			& \Hom_\k(M, N \ot G) \ot G \ar[u]_-\Gamma \\
+		{} 
+		&\HOM^{G}(M,N) \ot G \ar[u]^-{\alpha \ot 1} \ar[r]^-{\rho \ot 1}
+			& \Hom_\k(M,N) \ot G \ot G \ar[u]_-{\Gamma \ot 1}\\
+	}
+\end{align*} 
+Let $T = \rho_*^{N} \ot 1 \circ \rho$ and $U = \Gamma \ot 1 \circ 1 \ot \Delta \circ
+\rho$. Since the lower-right square is a pull-back diagram, in order to show that the
+image of $\rho$ is contained in $\HOM^G(M,N) \ot G$ it is enough to show that $T = U$.
+Since $\Gamma$ is injective this is equivalent to showing that $\Gamma \circ T = \Gamma
+\circ U$. By the commutativity of the first two rows of the diagram
+\begin{align*}
+	\Gamma \circ T(f) = \rho^{N} \ot 1 \circ \rho^{N} \circ f = 1 \ot \Delta \circ
+	\rho^{N} \circ f.
+\end{align*}
+Using the fact that $\rho^N \circ f(m) = \sum_{i = 1}^r f_i(m_0) \ot g_im_1$, we see that
+\begin{align*}
+	\Gamma(T(f(m))) = \sum_i f_i(m_0) \ot (g_i)_0m_1 \ot (g_i)_1m_2 = \Gamma \circ U(f)(m), 
+\end{align*}
+which completes the proof.
+
+\begin{Proposition}
+	Let $M,N$ be objects of $\Mod^G$. If $M$ is finitely generated then $\HOM^G(M,N) =
+	\Hom_\k(M,N)$.
+\end{Proposition}
+\begin{proof}
+	Fix $f \in \Hom_\k(M,N)$. Choose a basis $\B$ of $G$ and for each $m \in M$ and $g \in
+	\B$ let $f_g(m) \in M$ be the element uniquely determined by the formula
+	\[
+		\rho^M (f(m_0)) S(m_1)  = \sum_{g \in \B} f_g(m) \ot g,
+	\]
+	which defines linear functions $f_g: M \to N$; since $M$ is finite dimensional there
+	are at most finitely many $g$ such that $f_g \neq 0$.	Now for every $m \in M$ we get
+	\begin{align*}
+		\Gamma(\sum_g f_g \ot g)(m) 
+			&= \sum_g f_g(m_0) \ot g m_1 
+		= \rho^M(f(m_0)) (S(m_1)m_2) \\
+			&= \rho^M(f(m_0)) \eps(m_1) = \rho^M(f(m)),
+	\end{align*}
+	which shows that $f \in \HOM^G(M,N)$.
+\end{proof}
+
+\section{Relative Hom}
+We now generalize the previous construction.
+
+\paragraph
+Let $G, H$ be Hopf-algebras and let $\phi: G \to H$ be a Hopf-algebra morphism. We see $G$
+as a left $H$-comodule with structure morphism $\rho^G = \phi \ot 1 \circ \Delta_G: G \to
+H \ot G$. Let $L = {}^{\co H} G \subset G$ be the subalgebra of coinvariants. Suppose $L
+\subset G$ is cleft, i.e. there exists a convolution invertible morphism of left
+$H$-comodules $\gamma: H \to G$. The fact that $\gamma$ is a comodule morphism implies
+that 
+\begin{align}
+	\label{gamma}
+	\phi(\gamma(h)_1) \ot \gamma(h)_2 = h_1 \ot \gamma(h_2)
+\end{align}
+Let $\gamma^{-1}$ be the convolution-inverse of $\gamma$. Since $\rho^G$ is an algebra
+morphism, $\rho^G \circ \gamma$ is convolution invertible with inverse given by $\rho^G
+\circ \gamma^{-1}$. On the other hand, setting $\sigma = S \ot 1 \circ \tau \circ
+\Delta_H$ where $\tau$ is the flip, we see that
+\begin{align*}
+	\rho^G \circ \gamma * \sigma (h) 
+		&= \rho^G \circ \gamma(h_1)\sigma(h_2) \\
+		&= h_1 \ot \gamma(h_2) \cdot S(h_4) \ot \gamma^{-1}(h_3) \\
+	 	&= h_1 S(h_4) \ot \gamma(h_2)\gamma^{-1}(h_3) = h_1 S(h_3) \eps(h_2) \ot 1 = \eps(h)
+			(1 \ot 1).
+\end{align*}
+Since inverses are unique we get
+\begin{align}
+	\label{gamma-inverse}
+	\rho^G \circ \gamma^{-1}(h) =  S(h_2) \ot \gamma^{-1}(h_1).
+\end{align}
+
+%\begin{Lemma}
+%	For every $h \in H$ and every $l \in L$, the element $\gamma^{-1}(h_1) \gamma(h_2)_1
+%	l_1 \ot \gamma(h_2)_2 l_2$ belongs to $L \ot G$.
+%\end{Lemma}
+%\begin{proof}
+%	Consider $G \ot G$ as a left $H$-comodule with structure map $\rho^G \ot 1$. Suppose
+%	$\sum g \ot g' \in {}^{\co H} G \ot G$ and assume the set of all $g'$ is linearly
+%	independent. Then clearly each $g$ is in $L$, and hence ${}^{\co H}(G \ot G) = L \ot
+%	G$. Thus it is enough to show that the element lies in the coinvariants of $G \ot G$.
+%	
+%	Notice that
+%	\[
+%		\gamma^{-1}(h_1) \gamma(h_2)_1 l_1 \ot \gamma(h_2)_2l_2 = \gamma^{-1}(h_1)\ot 1 \cdot
+%		\Delta_G(\gamma(h_2)l)
+%	\]
+%	Using	\ref{gamma-inverse} we get $\rho^G \ot 1 (\gamma^{-1}(h_1)) = S(h_2) \ot
+%	\gamma^{-1}(h_1) \ot 1$. On the other hand, using \ref{gamma}
+%	\begin{align*}
+%		\rho^G\ot 1( \Delta_G(\gamma(h_3)l)) 
+%		&= \phi(\gamma(h_3)_1) \phi(l_1) \ot \gamma(h_3)_2 l_2 \ot \gamma(h_3)_3 l_3 \\
+%		&= 1 \ot \Delta_G(\phi(\gamma(h_3)_1) \phi(l_1) \ot \gamma(h_3)_2 l_2)\\
+%		&= 1 \ot \Delta_G(h_3 \ot \gamma(h_4)l) = h_3 \ot \gamma(h_4)_1 l_1 \ot
+%		\gamma(h_4)_2 l_2.
+%	\end{align*}
+%	Hence
+%	\begin{align*}
+%		\rho^G \ot 1 &(\gamma^{-1}(h_1) \gamma(h_2)_1 l_1 \ot \gamma(h_2)_2l_2 )) \\
+%		&= \rho^G \ot 1(\gamma^{-1}(h_1) \ot 1) \cdot \rho^G \ot 1(\Delta_G(\gamma(h_2)l)) \\
+%		&= S(h_2) \ot \gamma^{-1}(h_1) \ot 1 \cdot h_3 \ot \gamma(h_4)_1l_1 \ot
+%		\gamma(h_4)_2 l_2\\
+%		&= S(h_2)h_3 \ot \gamma^{-1}(h_1)\gamma(h_4)_1l_1 \ot \gamma(h_4)_2l_2 \\
+%		&= 1 \ot \gamma^{-1}(h_1) \gamma(h_2)_1 l_1 \ot \gamma(h_2)_2l_2
+%	\end{align*}
+%\end{proof}
+
+\begin{Lemma}
+	For every $h \in H$ the element $\gamma^{-1}(h_1) \gamma(h_2)_1\ot \gamma(h_2)_2$ lies
+	in $L \ot G$.
+\end{Lemma}
+\begin{proof}
+	Consider $G \ot G$ as a left $H$-comodule with structure map $\rho^G \ot 1$. Suppose
+	$\sum g \ot g' \in {}^{\co H} G \ot G$ and assume the set of all $g'$ is linearly
+	independent. Then clearly each $g$ is in $L$, and hence ${}^{\co H}(G \ot G) = L \ot
+	G$. Thus it is enough to show that the element lies in the coinvariants of $G \ot G$.
+
+	Notice that
+	\[
+		\gamma^{-1}(h_1) \gamma(h_2)_1 \ot \gamma(h_2)_2 = \gamma^{-1}(h_1)\ot 1 \cdot
+		\Delta_G(\gamma(h_2))
+	\]
+	Using	\ref{gamma-inverse} we get $\rho^G \ot 1 (\gamma^{-1}(h_1) \ot 1) = S(h_2) \ot
+	\gamma^{-1}(h_1) \ot 1$. On the other hand, using \ref{gamma}
+	\begin{align*}
+		\rho^G\ot 1(\Delta_G(\gamma(h_3))) 
+		&= \phi(\gamma(h_3)_1) \ot \gamma(h_3)_2 \ot \gamma(h_3)_3 \\
+		&= 1 \ot \Delta_G(\phi(\gamma(h_3)_1) \ot \gamma(h_3)_2)\\
+		&= 1 \ot \Delta_G(h_3 \ot \gamma(h_4)) = h_3 \ot \gamma(h_4)_1 \ot \gamma(h_4)_2.
+	\end{align*}
+	Hence
+	\begin{align*}
+		\rho^G \ot 1 &(\gamma^{-1}(h_1) \gamma(h_2)_1 \ot \gamma(h_2)_2)) \\
+		&= \rho^G \ot 1(\gamma^{-1}(h_1) \ot 1) \cdot \rho^G \ot 1(\Delta_G(\gamma(h_2))) \\
+		&= S(h_2) \ot \gamma^{-1}(h_1) \ot 1 \cdot h_3 \ot \gamma(h_4)_1 \ot
+		\gamma(h_4)_2 \\
+		&= S(h_2)h_3 \ot \gamma^{-1}(h_1)\gamma(h_4)_1 \ot \gamma(h_4)_2 \\
+		&= 1 \ot \gamma^{-1}(h_1) \gamma(h_2)_1  \ot \gamma(h_2)_2
+	\end{align*}
+\end{proof}
+
+\paragraph
+Given a $G$-comodule $M$, we define a map $\Gamma: \hom_\k(L,M) \ot H \to \hom_\k(L, M \ot
+G)$ by
+\begin{align*}
+	\Gamma(f \ot h)(l) = f \ot 1 ((\gamma^{-1}(h_1)\gamma(h_2)_1 \ot \gamma(h_2)_2) \cdot
+	(l_1 \ot l_2)).
+\end{align*}
+By the previous lemma, the argument of the function lies in $L \ot G$ so this is
+well-defined. We define $\phi_*(M)$ to be the pull-back of the following diagram
+\begin{align*}
+	\xymatrix{
+		\hom_\k(L,M) \ar[r]^-{\rho^M_*} & \hom_\k(L, M \ot G) \\
+		\phi_*(M) \ar@{-->}[u] \ar@{-->}[r] & \hom_\k(L,M) \ot H \ar[u]_-\Gamma
+	}
+\end{align*}
+In principle $\phi_*(M)$ is only a vector-space. We will show that under an extra
+hypothesis it is in fact an $H$-comodule, and that the assignation is functorial.
+Recall that a \emph{cross-section} of $\phi: G \to H$ is a co-algebra morphism $\gamma: H
+\to G$ such that $\phi \circ \gamma = \Id_H$.
+\begin{Proposition*}
+	Suppose $\gamma: H \to G$ is a cross-section of $\phi$. Then for every $G$-comodule $M$
+	the vector space $\phi_*(M)$ has an $H$-comodule structure.
+\end{Proposition*}
+\begin{proof}
+	Under the hypothesis, $\Gamma(f \ot h)(l) = f(l_1) \ot \gamma(h)l_2$.
+	Consider the following diagram
+	\begin{align*}
+	\xymatrix{	
+		\hom_\k(L,M \ot G) \ar[r]^-T 
+			& \hom_\k(L, M \ot G) \ar[d]^-{(1\ot \phi)_*} \\
+		\hom_\k(L,M) \ot H \ar[u]^-\Gamma \ar[r]^-{i} 
+			& \hom_\k(L,M \ot H) 
+	}
+	\end{align*}
+	where $T(f)(l) = f(l_1)S(l_2)$ and $i(f \ot h)(l) = f(l) \ot h$. The fact that $\gamma$
+	is a	coalgebra morphism and $\phi \circ \gamma = \Id_H$ implies that the diagram
+	commutes. Since $i$ is injective, so is $\Gamma$. The rest follows as in
+	\ref{hom-G-comodule}.
+\end{proof}
+This shows that $\phi_*(M)$ can be seen as the set of $\k$-linear morphisms $f: L \to M$
+such that there exists an element $\rho^{\phi_*(M)}(f) = \sum_i f_i \ot h_i \in
+\hom_\k(L,M) \ot H$ with $\rho^M(f(l)) = \sum_i f_i(l_1) \ot \gamma(h_i)l_2$.
+
+\paragraph
+Before proving that $\phi_*$ is adjoint to $\phi^*$, we make the follwoing observation: if
+$\gamma: H \to G$ is a cross-section of $\phi$, then it is convolution invertible with
+inverse $\gamma^{-1} = S \circ \gamma$; in particular $\gamma^{-1}$ is an anti co-algebra
+morphism, i.e. $\gamma^{-1}(h)_1 \ot \gamma^{-1}(h)_2 = \gamma^{-1}(h_2) \ot
+\gamma^{-1}(h_1)$.
+\begin{Theorem*}
+	Suppose $\phi: G \to H$ has a cross-section $\gamma$. Then the functor $\phi_*: \Mod^G
+	\to \Mod^H$ is left adjoint to $\phi^*: \Mod^H \to \Mod^G$.
+\end{Theorem*}
+\begin{proof}
+	We wish to find for every $N$ in $\Mod^H$ and every $M$ in $\Mod^G$ isomorphisms
+	\begin{align*}
+	\xymatrix{
+		\hom^H(N, \phi_*(M)) \ar@/^18pt/[rr]^-{\alpha} 
+			&{}
+			& \hom^G(\phi^*(N), M) \ar@/^15pt/[ll]^-\beta.
+	}
+	\end{align*}
+	Suppose we are given an $H$-comodule morphism $f: N \to \phi_*(M)$, i.e., for every $n
+	\in N$ we get a function $f(n) \in \phi^*(M) \subset \hom_\k(L, M)$. We set $\alpha(f):
+	\phi^*(N) \to M$ as 
+	\[
+		\alpha(f)(n \ot g) = f(n_0)(\gamma^{-1}(n_1)g) = f(n)(\gamma^{-1}(\phi(g_1))g_2).
+	\]
+	We must prove that $\alpha(f)$ is a $G$-module morphism, that is $\rho^M \circ
+	(\alpha(f)) = \alpha(f) \ot 1 \circ \rho^{\phi^*(N)}$. By hypothesis $f(n) \in
+	\phi^*(M)$, and since $f$ is an $H$-comodule morphism we get $\rho(f(n_0)) = f(n_0) \ot
+	n_1$. We fix $n \ot g \in \phi^*(N)$, so
+	\begin{align*}
+		\rho^M(\alpha(f)(n \ot g)) 
+			&= \rho^M(f(n_0)(\gamma^{-1}(n_1)g)) \\
+			&= f(n_0)(\gamma^{-1}(n_2)_1g_1) \ot \gamma(n_1)\gamma^{-1}(n_2)_2g_2\\
+			&= f(n_0)(\gamma^{-1}(n_3)g_1) \ot \gamma(n_1)\gamma^{-1}(n_2)g_2 \\
+			&= f(n_0)(\gamma^{-1}(n_1)g_1) \ot g_2 \\
+			&= \alpha(f)(n \ot g_1) \ot g_2.
+	\end{align*}
+ 	Hence $\alpha$ is well-defined.
+
+	Now given $f: \phi^*(N) \to M$ we set 
+	\[
+		\beta(f)(n)(l) = f(n_0 \ot \gamma(n_1)l)
+	\]
+	so $\beta(f)(n) \in \hom_\k(L,M)$. Since $f$ and $\gamma$ are comodule morphisms, 
+	\begin{align*}
+		\rho^M(\beta(f)(n)(l)) 
+		&= \rho^M(f(n_0 \ot \gamma(n_1)l)) \\
+		&= f(n_0 \ot \gamma(n_1)l_1) \ot \gamma(n_2)l_2\\
+		&= \Gamma(\beta(f)(n_0) \ot n_1)(l)
+	\end{align*}
+	which shows that the image of $\beta(f)$ is contained in $\phi_*(M)$ and that
+	$\rho(\beta(f)(n)) = \beta(f)(n_0) \ot n_1$, so it is an $H$-comodule morphism.
+
+	The fact that $\alpha$ and $\beta$ are inverses is a straightforward computation.
+\end{proof}
+
+
+
+\paragraph
+\begin{enumerate}
+	\item OK for now. It should work with $\gamma$ an $H$-comodule section, i.e. $G$ an
+		$H$-cleft extension.
+\end{enumerate}
+
+\end{document}

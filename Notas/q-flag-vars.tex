@@ -1,0 +1,1760 @@
+%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%
+\documentclass[11pt,fleqn]{article}
+
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%\linespread{1.2}
+\setlength{\parskip}{1.1ex}
+
+\usepackage[latin1,utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{euler}
+\usepackage[osf,noBBpl]{mathpazo}
+\usepackage{enumerate}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{hyperref}
+\usepackage{amsfonts,amssymb,amsmath,amsthm}
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+\usepackage{xcomment}
+%\swapnumbers
+\hyphenation{ca-te-go-ry gene-rated}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Theorems et al. %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{plain}
+\newtheorem{Theorem}{Theorem}[section]
+\newtheorem{Proposition}[Theorem]{Proposition}
+\newtheorem{Excercise}[Theorem]{Excercise}
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Corollary}[Theorem]{Corollary}
+
+\newtheorem*{Theorem*}{Theorem}
+\newtheorem*{Proposition*}{Proposition}
+\newtheorem*{Excercise*}{Excercise}
+\newtheorem*{Lemma*}{Lemma}
+\newtheorem*{Corollary*}{Corollary}
+
+
+\theoremstyle{remark}
+\newtheorem{Remark}[Theorem]{Remark}
+\newtheorem{Example}[Theorem]{Example}
+
+\theoremstyle{definition}
+\newtheorem{Definition}[Theorem]{Definition}
+\renewcommand\proofname{proof}
+
+\newcommand\note[1]{\marginpar{{
+\begin{flushleft}
+\footnotesize#1
+\end{flushleft}
+}}}
+\renewcommand\labelitemi{-}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\stack[2]{\genfrac{}{}{0pt}{2}{#1}{#2}}
+\newcommand\lin[1]{\left\langle #1 \right\rangle}
+
+
+\newcommand\good{good }
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\A{A}
+\newcommand\D{\mathcal D}
+\newcommand\B{\mathcal B}
+\renewcommand\S{\mathcal S}
+\newcommand\F{\mathcal F}
+\newcommand\I{\mathcal I}
+\newcommand\GG{\Gamma}
+\renewcommand\O{\mathcal O}
+\newcommand\R{\mathcal R}
+\newcommand\G{\mathcal G}
+\newcommand\U{\mathcal U}
+\renewcommand\a{\mathfrak a}
+\renewcommand\b{\mathfrak b}
+\newcommand\g{\mathfrak g}
+\newcommand\p{p}
+\newcommand\m{\mathfrak m}
+\newcommand\n{\mathfrak n}
+\newcommand\opp{\mathsf{opp}}
+\newcommand\pdim{\mathsf{pdim}}
+
+\DeclareMathOperator\im{Im}
+\DeclareMathOperator\Ab{\mathsf{Ab}}
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Vect{\mathsf{Vect}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+\DeclareMathOperator\Gr{\mathsf{GrMod}}
+\DeclareMathOperator\grmod{\mathsf{grmod}}
+\DeclareMathOperator\GrHom{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\GrExt{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\GrTor{\underline{\mathsf{Tor}}}
+
+\DeclareMathOperator\id{\mathsf{id}}
+\DeclareMathOperator\pd{\mathsf{pd}}
+\DeclareMathOperator\gr{\mathsf{gr}}
+\DeclareMathOperator\ldim{\mathsf{ldim}}
+\DeclareMathOperator\injdim{\mathsf{injdim}}
+\DeclareMathOperator\st{\mathsf{st}}
+\DeclareMathOperator\depth{\mathsf{depth}}
+\DeclareMathOperator\Spec{Spec}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\Id{Id}
+\DeclareMathOperator\rk{rk}
+\DeclareMathOperator\GKdim{\mathsf{GKdim}}
+
+\title{Quantum Schubert varieties are AS-Cohen Macaulay}
+\author{[q-flag-vars.tex]}
+\date{6/2/2013}
+\xcomment{Theorem,Lemma,Corollary,Proposition,section}
+\begin{document}
+\maketitle
+In this note we prove that quantum flag varieties and their Schubert cells
+are AS Cohen Macaulay (see Definition \ref{as-regularity}). The plan of the proof
+is as follows: first we show that if a connected graded algebra $A$ has a
+filtration such that its associated graded ring is graded connected and AS Cohen
+Macaulay, then the same holds for $A$. Afterwards we introduce a family of algebras 
+which can be equipped with such a filtration. This family includes quantum flag varieties
+and their Schubert cells.
+
+Throughout this document $k$ denotes a field and $A$ a $k$-algebra. All ideals will be
+two-sided ideals unless specified. Unadorned tensor products are tensor products over $k$.
+
+\section{Graded algebras}
+In this section we present some technical results on graded $k$-algebras that also have a
+filtration by graded subspaces. For general reference and defintions on $\ZZ$-graded and
+filtered rings see \cite{VO}. For rings graded by arbitrary groups see \cite{NV}.
+
+Let $n \in \NN_0$ and let $A$ be an $\NN_0^n$-graded $k$-algebra. The algebra $A$ is said 
+to be \emph{connected} if its component of degree $(0, \ldots, 0)$ is equal to $k$. We
+denote by $\Gr A$ the category whose objects are $\ZZ^n$-graded $A$-modules and whose
+morphisms are homogeneous $A$-linear morphisms of degree $(0, \ldots, 0)$. We denote by 
+$\grmod A$ the full subcategory of $\Gr A$ whose objects are finitely generated graded
+modules. Given two $\ZZ^n$-graded $A$-modules $N$ and $M$, we denote by $\GrHom_A(N,M)$
+the $\ZZ^n$-graded vector space of homogeneous morphisms from $N$ to $M$ of arbitrary
+degree. For every $i \in \NN_0$ we denote by $\GrExt^i$ the $i$-th derived functor of
+$\GrHom_A$. For every $d \in \NN_0^n$ we denote by $M_d$ the $k$-vector subspace of $M$ 
+formed by its homogeneous elements of degree $d$, and for every element $m \in M$ we
+denote by $m_d$ its homogeneous component of degree $d$. 
+
+A $\ZZ^n$-graded $A$-module $F$ is said to be \emph{graded-free} if it is free over $A$ and 
+has a basis
+consisting of homogeneous elements. The same argument as in the ungraded case shows that 
+any projective object in $\Gr A$ is a direct summand of a graded-free object. Since
+graded-free modules are free as $A$-modules, projective objects in $\Gr A$ are projective
+$A$-modules.
+
+The following is a standard result which we include for completeness.
+\begin{Proposition}\cite{NV}*{Corollary 2.4.4}
+\label{grhom-hom}
+	Given $n \in \NN_0$, let $A$ be an $\NN_0^n$-graded algebra and let $N, M$ be
+	$\ZZ^n$-graded $A$-modules, with $N$ finitely generated. Then
+	$$ \GrHom_A(N,M) = \Hom_A(N,M).$$
+	If $A$ is noetherian, then for all $i \geq 0$ there is a natural $k$-vector 
+	space isomorphism
+	$$ \GrExt_A^i(N,M) \cong \Ext_A^i(N,M).$$
+\end{Proposition}
+\begin{proof}
+	Let $f \in \Hom_A(N,M)$, and for each $d,e \in \ZZ^n$ and $x \in N_{e}$ set
+	$f_d(x) = f(x)_{e+d}$. This defines a homogeneous $A$-linear morphism $f_d: 
+	N \to M$ of degree $d$. For every homogeneous element $x \in N$ there are finitely
+	many $d$'s such that $f_d(x) \neq 0$, and $f(x) = \sum_{d \in \ZZ^n}f_d(x)$.
+	
+	Let $n_1, \ldots, n_r$ be a finite set of homogeneous generators of $N$, and let
+	$D$ be the set of $d \in \ZZ^n$ such that there exists $1 \leq i \leq r$ for which
+	$f_d(n_i) \neq 0$. The set $D$ is finite, and
+	\begin{align*}
+		f(n_i) &= \sum_{d \in D} f_d(n_i) & \mbox{ for all } 1 \leq i \leq r 
+	\end{align*}
+	which implies that $f = \sum_D f_d \in \GrHom_A(N,M)$.
+
+	Now suppose $A$ is noetherian and let $P_\bullet \to N$ be a projective resolution
+	of $N$ in $\Gr A$. Since projective objects of $\Gr A$ are also projective in 
+	$\Mod A$, $P_\bullet$ is also a projective resolution of $N$ in $\Mod A$. By the first
+	part of the proposition, $\GrHom_A (P_\bullet,M) = \Hom_A(P_\bullet,M)$ and hence 
+	the homologies of these	two complexes coincide. 
+\end{proof}
+
+The category $\Gr A$ has arbitrary direct sums and products, and hence arbitrary direct
+and inverse limits. If $\{M^i\}_{i \in \NN_0}$ is directed system in $\Gr A$, the
+underlying $A$-module of its direct limit is equal to the limit of the underlying
+$A$-modules. In a more categorical language, the  forgetful functor $\O: \Gr A \to
+\Mod A$ commutes with direct limits. In particular, direct limits are exact over $\Gr A$.
+
+We recall that for evey object $M$ in $\Gr A$, its graded projective dimension, denoted by
+$\gr \pdim~M$, is the minimal length of a projective resolution of $M$ in $\Gr A$. The
+graded injective dimension of $M$, denoted by $\gr \injdim~M$, is defined analogously. The
+\emph{graded global dimension} of $A$ is the supremum of all projective dimensions of
+finitely generated graded $A$-modules. If $A$ is a noetherian connected algebra, then its
+global dimension is equal to the graded projective dimension of the trivial module $k$,
+see \cite{RZ2}.
+
+\subsection{Local cohomology and homological regularity}
+Let $r \in \NN_0$. Throughout this section $A$ denotes a noetherian connected 
+$\NN_0^r$-graded algebra. When talking about $A$-modules we will write ``graded'' instead
+of ``$\ZZ^r$-graded''.
+We denote by $\m$ the ideal generated by the elements of nonzero degree of $A$. Notice
+that this is the only maximal graded ideal of $A$.
+
+The torsion functor $\GG_\m: \Mod A \to \Mod A$ is defined as 
+\begin{align*}
+\GG_\m(M) = \{m \in M \mid \m^n m = 0 \mbox{ for } n \gg 0\} \cong \varinjlim_n
+\Hom_A(A/\m^n,M)
+\end{align*}
+on objects and by restriction and corestriction on morphisms. This functor
+is left exact so we can consider its right derived functor $\R \GG_\m : \D(\Mod A) \to
+\D(\Mod A)$.
+
+For every $i \in \NN_0$ the $i$-th \emph{local cohomology functor} of $A$ is $H_\m^i :=
+\R^i \GG_\m$. Since direct limits are exact in $\Mod A$, there is a natural isomorphism
+\begin{align*}
+H_\m^i \cong \varinjlim_n \Ext_A^i(A/\m^n,-).
+\end{align*}
+We denote by $\GG_{\m^\opp}$ and $H_{\m^\opp}^i$ the torsion and local cohomology
+functors of the opposite algebra $A^\opp$, respectively.
+
+Let $M$ be a graded $A$-module. Since $\m$ is a graded ideal, $\GG_\m(M) \subset M$ is a
+graded submodule. Thus the torsion functor induces a graded torsion functor $\GG_\m^{\gr}:
+\Gr A \to \Gr A$. By the same argument as in the ungraded case, there is a natural
+isomorphism
+\begin{align*}
+\GG_\m^{\gr}(M) \cong \varinjlim_n \GrHom_A(A/\m^n, M).
+\end{align*}
+The following lemma aims to clarify the relation between the derived functors of the
+graded torsion functor and their ungraded counterparts.
+\begin{Lemma}
+\label{graded-torsion}
+  Let $\O: \Gr A \to \Mod A$ be the  forgetful functor. Then for every $i \geq 0$
+  the following diagram commutes
+  \begin{align*}
+  \xymatrix{
+    \Gr A \ar[r]^-{\R^i \GG_\m^{\gr}} \ar[d]_-\O
+      & \Gr A \ar[d]^-\O \\
+    \Mod A \ar[r]^-{H^i_\m} 
+      & \Mod A
+  }
+  \end{align*}
+\end{Lemma}
+\begin{proof}
+  Recall that direct limits are exact in $\Gr A$, so there is a natural isomorphism
+  \begin{align*}
+  \R^i \GG_\m^{\gr} &\cong \varinjlim_n \GrExt^i_A(A/\m^n,-)
+  \end{align*}
+  Since the forgetful functor $\O$ commutes with direct limits and $A/\m^n$ is finitely
+  generated for every $n \in \NN_0$, Proposition \ref{grhom-hom} implies that for every $i \geq
+  0$ there is a natural isomorphism
+  \begin{align*}
+    \O(\varinjlim_n \GrExt^i_A(A/\m^n,M)) \cong \varinjlim_n \Ext^i_A(A/\m^n,\O(M)).
+  \end{align*}
+  This completes the proof.
+\end{proof}
+In view of Lemma \ref{graded-torsion}, we make a slight abuse of notation and write
+$\GG_\m$ for the graded torsion functor and $H_\m^i$ for its $i$-th derived functor. The
+context will always make it clear if we are considering the graded or ungraded versions.
+
+Suppose $A$ is commutative of finite Krull dimension $n$. By \cite{BH}*{Excercise 2.1.27},
+$A$ is Cohen Macaulay if and only if the  local algebra $A_\m$ is Cohen Macaulay. By 
+Grothendieck's vanishing theorem \cite{BH}*{Theorem 3.5.7} and \cite{BH}*{Remark 3.6.18},
+the local algebra $A_\m$ is Cohen Macaulay if and only if the local cohomology modules
+$H^i_\m (A)$ are zero except for $i = n$. This equivalence can be used to transfer the
+notion of being Cohen Macaulay to the  noncommutative setting, where it is known as AS
+Cohen Macaulay. The following defintions are taken from the introduction of \cite{JZ}.
+\begin{Definition} 
+\label{as-regularity}
+Let $A$ be a noetherian connected $\NN_0^r$-graded algebra.
+\begin{enumerate}
+  \item $A$ is called \emph{AS Cohen Macaulay} if there exists an $n \in \NN_0$ such that
+  \begin{align*}
+    H^i_{\m}(A) &= H_{\m^\opp}^i(A) = 0 &\mbox{for all } i \neq n.
+  \end{align*}
+	
+  \item $A$ is called \emph{AS Gorenstein} if there exist $n \in \NN_0$ and $\ell \in
+  \ZZ^r$ such that $\gr \injdim A= \gr \injdim A^\opp = n$ and
+  \begin{align*}
+    \GrExt_{A}^i(k,A) \cong \GrExt_{A^\opp}^i(k,A^\opp) 
+      &\cong \begin{cases} k[\ell] & \mbox{ for } i = n \\ 0 & \mbox{ for } i
+		\neq n,\end{cases}
+  \end{align*}
+  where the isomorphisms are of graded bimodules. Notice that it is enough to check that
+  they are vector space isomorphisms.
+
+  \item $A$ is called \emph{AS regular} if it is AS Gorenstein and it has finite left and
+  right global dimensions.
+\end{enumerate}
+\end{Definition}
+
+The conditions of Definition \ref{as-regularity} are usually introduced in the context
+of connected $\NN_0$-graded algebras. The following remark aims to clarify the relation
+between this case and the multigraded one.
+\begin{Remark}
+\label{AS-phi}
+Let $\phi: \ZZ^r \to \ZZ$ be a group morphism such that $\phi(\NN_0^r) \subset \NN_0$. We
+define $\phi_!(A)$ to be the $\NN_0$-graded algebra with underlying $k$-algebra equal to
+$A$, and homogeneous components given by
+\begin{align*}
+\phi_!(A)_n &= \bigoplus_{\{\xi \in \ZZ^r \mid \phi(\xi) = n\}} A_\xi &\mbox{for every } n
+\in \NN_0.
+\end{align*}
+Suppose $\phi_!(A)$ is connected. Since $A$ and $\phi_!(A)$ have the same underlying
+algebra, Lemma \ref{graded-torsion} implies that for every $i \geq 0$, the $i$-th local 
+cohomology modules of $A$ and $\phi_!(A)$ have the same underlying $A$-module. In
+particular, one of them is zero if and only if the other is zero, so $A$ is AS Cohen
+Macaulay if and only if $\phi_!(A)$ is AS Cohen Macaulay. 
+
+By Proposition \ref{grhom-hom}, for every $i \geq 0$ the underlying $A$-modules of
+$\GrExt^i_A(k,A)$ and $\GrExt^i_{\phi_!(A)}(k,\phi_!(A))$ coincide, and by \cite{RZ2} the
+graded injective dimension of $A$ and that of $\phi_!(A)$ are the same, so $A$ is AS
+Gorenstein if and only if $\phi_!(A)$ is AS Gorenstein. By \cite{RZ2}, the global dimension
+of $A$ is equal to that of $\phi_!(A)$, so $A$ is AS regular if and only if $\phi_!(A)$ is
+AS regular.
+\end{Remark}
+
+Next we define two invariants associated to local cohomology.
+\begin{Definition}
+Let $M$ be a graded $A$-module. The \emph{depth} of $M$ is the least integer such that
+$\GrExt^i_A(k,M)$ is nonzero.
+\end{Definition}
+
+\begin{Definition}
+The \emph{local dimension} of $M$, denoted $\ldim M$, is the supremum of the $i \in \NN_0$
+such that $H^i_\m(M)$ is nonzero. We say that $A$ has \emph{finite local dimension as a
+graded algebra} if the set 
+\begin{align*}
+\{\ldim M | M \mbox{ is an object of } A\} \subset \NN_0
+\end{align*}
+is bounded. 
+\end{Definition}
+
+The next lemma summarizes various results about the local cohomology functors.
+\begin{Lemma}
+\label{lc-varia}
+Let $M$ be an object in $\Gr A$.
+\begin{enumerate}
+\item We have $\depth M = \inf \{i \in \NN_0 \mid H_\m^i(M) \neq 0\}$.
+
+\item If $A$ is noetherian then local cohomology functors and direct limits commute.
+
+\item If $A$ is noetherian and has finite local dimension as a graded algebra, then 
+$\ldim M \leq \ldim A$.
+
+\item Suppose $A$ is $\NN_0$-graded, and for every $n \in \NN_0$ denote by $A_{\geq n}$
+the ideal generated by homogeneous elements of degree larger than or equal to $n$.
+For every $d_0 \in \ZZ$ and every $i \geq 0$ there exists $n_0 \in \NN$ such that 
+\begin{align*}
+H^i_\m(M)_d &\cong \GrExt_A^i(A/A_{\geq n},M)_d & \mbox{for all } n \geq n_0,\ d \geq d_0.
+\end{align*}
+\end{enumerate}
+\end{Lemma}
+\begin{proof}
+\begin{enumerate}
+\item See \cite{W}*{4.6.3}.
+
+\item See \cite{vdB}*{Lemma 4.3}.
+
+\item Since $A$ has finite local dimension as a graded algebra, there is an object $N$ in
+$\grmod A$ such that $n = \ldim N$ is an upper bound for the local dimensions of all
+objects in $\grmod A$. Since $A$ is noetherian, there exists a finitely generated
+graded-free $A$-module $F$ and an epimorphism $p: F \to N$ with finitely generated kernel
+$K$. By looking at the long exact sequence for local cohomology associated to the short
+exact sequence $0 \to K \to F \to N \to 0$ we obtain
+\begin{align*}
+H_\m^n(F) \to H_\m^n(N) \to H^{n+1}_\m(K) = 0.
+\end{align*}
+In particular $H_\m^n(F) \neq 0$, and since local cohomology functors commute with finite
+direct sums, $\ldim F = \ldim A = n$. Thus the result is valid for finitely generated graded
+$A$-modules. In particular $H^i_\m(M') = 0$ for any finitely generated graded submodule
+$M' \subset M$ and any $i > \ldim A$. Since $M$ is the direct limit of its finitely generated 
+graded submodules, the previous item implies that $H^i_\m(M)=0$ for $i > \ldim A$.
+
+\item See \cite{AZ}*{Proposition 3.5 and Corollary 3.6}.
+\end{enumerate}
+\end{proof}
+
+The following definition was introduced by Artin and Zhang in \cite{AZ}*{Section 3}.
+It appears as a natural condition when transfering notions from algebraic
+geometry to the study of connected graded algebras.
+
+\begin{Definition}
+Let $M$ be a graded $A$-module. We say that $M$ has \emph{property $\chi$} if for all $i
+\in \NN_0$ the vector space $\GrExt_A^i(k,M)$ is finite dimensional. We say that $A$ has
+\emph{property $\chi$ as a graded algebra} if all finitely generated graded modules have
+property $\chi$.
+\end{Definition}
+	
+Balanced dualizing complexes were introduced by A. Yekutieli in \cite{Ye} to answer a
+question posed by M. Artin on the local cohomology modules of AS regular algebras. They
+have proven to be a very useful tool for the study of graded connected algebras and their
+homological properties.
+\begin{Definition}
+	Let $A^e = A \ot A^{\opp}$. A \emph{dualizing complex} $R^\bullet$ is
+	an object of the derived category $\D(\Gr A^e)$ such that:
+	\begin{enumerate}
+		\item Its homology modules are finitely generated both as left and right
+			$A$-modules.
+		\item It has finite injective dimension as a complex of both left and
+			right $A$-modules.
+		\item The natural morphisms
+		\begin{align*}
+			A^\opp &\to \R\GrHom_A(R^\bullet, R^\bullet) & \mbox{and}&&  A
+			&\to \R\GrHom_{A^\opp}(R^\bullet, R^\bullet)
+		\end{align*}
+	are isomorphisms in $\D(\Gr A^e)$.
+	\end{enumerate}
+	A dualizing complex is said to be \emph{balanced} if $\R\GG_\m(R^\bullet) \cong
+	A'$, where $A' = \GrHom_k(A,k)$ is the Matlis dual of $A$.
+\end{Definition}
+
+The main result on the existence of balanced dualizing complexes is the following:
+
+\begin{Proposition}\cite{vdB}*{Proposition 6.3}
+\label{vdb-criterion}
+  A connected $\NN_0$-graded noetherian $k$-algebra $B$ has a balanced dualizing complex
+  if and only if $B$ and $B^\opp$ have property $\chi$ and finite local dimension as
+  graded algebras.
+\end{Proposition}
+
+\begin{Remark}
+  We keep the notation from Remark \ref{AS-phi}. As proved in \cite{RZ2}, if $A$ has
+  finite local dimension as a graded algebra, then $\phi_!(A)$ has property $\chi$ as a
+  graded algebra if and only if $A$ does. In particular, $\phi_!(A)$ has a dualizing
+  complex if and only if $A$ and $A^\opp$ have finite local dimension as graded algebras
+  and property $\chi$ as graded algebras.
+\end{Remark}
+
+\section{GF-rings and modules}
+\begin{Definition}
+	A \emph{GF-algebra} (as in ``graded \emph{and} filtered'') is an $\NN_0$-graded
+	$k$-algebra $A$ with a filtration $\F= \{F_pA\}_{p \in \NN_0}$ such that each
+	$F_pA$ is a graded $k$-subspace of $A$. We say that an $A$-module $M$ is a
+	\emph{GF-module} over $A$ if it is both a $\ZZ$-graded and a $\ZZ$-filtered module 
+	in the usual sense, and each layer of its filtration is a graded $k$-subspace of
+	$M$.
+\end{Definition}
+As a trivial example we consider $k$ to be a GF-algebra with $k_0 = F_0k = k$. A GF-vector 
+space is a $\ZZ$-graded vector space with a filtration by graded subspaces.
+
+\begin{Definition}
+A filtration on a vector space $M$ is said to be
+\begin{enumerate}
+	 \item[(E)] \emph{exhaustive} if $\displaystyle \bigcup_{p \in \ZZ}
+	 	F_p M = M$.
+	 \item[(B)] \emph{bounded below} if there is a $q \in \ZZ$ such that
+		 $F_p M = \{0\}$ for all $p < q$.
+	 \item[(D)] \emph{discrete} if $\displaystyle \bigcap_{p \in \ZZ}
+	 	F_p M = \{0\}$.
+\end{enumerate}
+\end{Definition}
+Let $A$ be a GF-algebra and let $M$ be a GF-module over $A$. Given a vector subspace $V
+\subset M$, the filtration on $M$ induces a filtration on $V$ by setting $F_pV =
+V \cap F_pM$ for every $p \in \ZZ$. In particular every homogeneous component of $M$ is a
+filtered subspace. If the filtration on $M$ is exhaustive and discrete then for each $m \in M$
+there exists $p(m) \in \ZZ$ such that $m \in F_{p(m)}M$ and $m \notin F_q M$ for $q < p(m)$.
+Given a homogeneous element $m \in M$ we denote by $\delta(m)$ the ordered pair $(p(m),
+\deg m)$.
+
+We say that $M$ is a \emph{GF-free} module if it is a free $A$-module with a homogeneous 
+basis $\{e_i\}_{i \in I}$ and a discrete filtration such that if $\delta(e_i) = (p_i,d_i)$
+then
+$$ F_p M_d = \sum_{i \in I} F_{p-p_i}A_{d-d_i} e_i.$$ 
+The GF-module $M$ is \emph{locally finite} if $F_pM_d$ is a finite dimensional vector space
+for all $p,d \in \ZZ$. Finally $M$ is \emph{GF-finite} if it is generated by a
+finite set of homogeneous elements $m_1, \ldots, m_r$ with $\delta(m_i) = (p_i,d_i)$
+such that  
+$$ F_p M_d = \sum_{i = 1}^r F_{p-p_i}A_{d-d_i} m_i.$$ 
+
+Given two GF-modules $M$ and $N$, the vector space $\Hom_A(N,M)$ is filtered in the following
+way: for every $p \in \ZZ$, set
+\begin{align*}
+F_p\Hom_A(N,M) &= \{f \in \Hom_A(N,M)| f(F_qN) \subset F_{q+p} M \mbox{ for all }
+q \in \ZZ\}.
+\end{align*}
+This induces a filtration on the $k$-vector subspace $\GrHom_A(N,M) \subset \Hom_A(N,M)$.
+With this filtration the $\ZZ$-graded vector space $\GrHom_A(N,M)$ becomes a GF-vector
+space. 
+
+A morphism $f \in \GrHom_A(N,M)$ which is homogeneous of degree $0$ and such that $f(F_pN) 
+\subset F_pM$ for every $p \in \ZZ$ is called a \emph{GF-morphism}.
+Equivalently, $f$ is a GF-morphism if and only if $f \in F_0\GrHom_A(N,M)_0$. We say that
+a GF-morphism $f$ is \emph{strict} if $f(F_p N) = \im f \cap F_p M$ for all $p \in \ZZ$.
+Notice that this condition is strictly stronger than that of being a GF-morphism. A
+GF-module $M$ is finite if and only if there is a GF-finite and free module $F$ and a
+strict epimorphism $F \to M$.
+
+Since the GF-algebra $A$ is filtered, we may consider its associated graded algebra 
+	$$\gr A = \bigoplus_{p = 0}^{\infty} \frac{F_{p}A}{F_{p-1}} A = \bigoplus_{(p,d) \in
+	\NN_0^2} \frac{F_pA_d}{F_{p-1}A_d}.$$
+This decomposition gives $\gr A$ the structure of an $\NN_0^2$-graded algebra.
+Analogously, given a GF-module $M$, its associated graded module
+	$$\gr M = \bigoplus_{p \in \ZZ} \frac{F_pM}{F_{p-1}M} = \bigoplus_{(p,d) \in \ZZ^2}
+	\frac{F_pM_d}{F_{p-1}M_d}$$ 
+is a $\ZZ^2$-graded $\gr A$-module. If the filtration on
+$M$ is exhaustive and discrete, a homogeneous element $m \in M$ defines a nonzero class
+in $(\gr M)_{\delta(m)}$ which we denote by $\gr m$. If $f \in \Hom_A(N,M)$ with $\delta(f)
+= (p,d)$ then $\gr f: \gr N \to \gr M$ is a homogeneous $\gr A$-linear morphism of degree
+$(p,d)$. 
+
+Now we present some technical results on GF-modules to be used in the sequel.
+\begin{Lemma}
+\label{filtered-complex}
+Let $A$ be a GF-algebra and let $K, M$ and $N$ be GF-modules. Suppose the filtrations
+on $A$ and $M$ are exhaustive and discrete. 
+\begin{enumerate}
+	\item Let $(*): K \stackrel{f}{\to} M \stackrel{g}{\to} N$ be a complex with $f$ and
+	$g$ GF-morphisms. Its associated graded complex $\gr K \stackrel{\gr f}{\to} \gr
+	M \stackrel{\gr g}{\to} \gr N$ is exact if and only if $(*)$ is exact and
+	$f, g$ are strict.
+
+	\item If $M$ is GF-free with basis $\{m_i\}_{i \in I}$ then $\gr M$ is a 
+	$\ZZ^2$-graded $\gr A$-free module with basis $\{\gr m_i\}_{i \in I}$.
+
+	\item If $\gr M$ is generated over $\gr A$ by the set $\{\gr m_i|i \in
+	I\}$, then $M$ is generated over $A$ by the set $\{m_i|i \in I\}$. 
+	Moreover, $M$ is GF-finite if and only if $\gr M$ is finitely generated.
+
+	\item There exists a resolution of $M$ by GF-free modules with exact
+	differentials. Furthermore, if $\gr A$ is noetherian and $\gr M$ is
+	finitely generated over $\gr A$, the GF-free modules in the resolution can
+	be chosen to be GF-finite.
+\end{enumerate}
+\end{Lemma}
+\begin{proof}
+\begin{enumerate}
+	\item Notice that the gradings play no role in this statement, so we may
+	refer to the filtered case, proven in \cite{VO}*{4.4, item 5.}.
+
+	\item Let $p_i = p(m_i)$ and $d_i = \deg m_i$. By definition, for every $(p,d) \in 
+	\ZZ^2$ 
+	\begin{align*}
+	  F_pM_d = \bigoplus_{i \in I} F_{p -p_i}A_{d-d_i} m_i
+	\end{align*}
+	so
+	\begin{align*}
+ 	  \gr M_{(p,d)} = \bigoplus_{i \in I} \frac{F_{p-p_i}A_{d-d_i}
+	  m_i}{F_{p-p_i-1}A_{d-d_i}{m_i}} \cong \bigoplus_{i \in I} (\gr
+	  A)_{(p-p_i,d-d_i)} \gr m_i. 
+	\end{align*}
+	Thus $\gr M$ is a graded-free $\gr A$-module with basis $\{\gr m_i|i \in I\}$.
+
+	\item Let $L$ be a GF-free module with basis $\{e_i|i \in I\}$ and
+	$\delta(e_i) = \delta(m_i)$. Since the filtration on $A$ is exhaustive and
+	discrete, the same holds for the filtration on $L$. Let $f: L \to M$ be the map
+	defined by setting $f(e_i) = m_i$ and consider its associated graded map $\gr f: \gr
+	L \to \gr M$. Since $\gr f(\gr e_i) = \gr m_i$, the map $\gr f$ is surjective by 
+	hypothesis, so item 1. implies that $f$ is a strict epimorphism. In particular $M$
+	is generated by the set $\{m_i|i \in I\}$. 
+		
+	If $\gr M$ is finitely generated then $L$ can be taken to be GF-finite and free in
+	the previous argument, and so there exists a strict epimorphism from a GF-finite and 
+	free module onto $M$. This is equivalent to the fact that $M$ is a GF-finite module. 
+	Conversely suppose we have a GF-finite and free module $L$ and a strict epimorphism $L
+	\to M$. By passing to the associated graded modules we get an epimorphism
+	from $\gr L$ to $\gr M$, and since $\gr L$ is finitely generated and free by item
+	2., $\gr M$ is finitely generated.
+
+	\item The first part of item 3. shows that for every GF-module $M$ there
+	exists a GF-free module $L$ and a strict epimorhism $L \to M$, so applying the
+	usual procedure to construct a free resolution we obtain a resolution by GF-free
+	modules with exact differentials. 
+	
+	If $\gr A$ is noetherian and $\gr M$ is finitely generated then $A$ is a
+	noetherian algebra\footnote{The previous item has a ''filtered version'', namely
+	if $A$ is a filtered algebra, $M$ is an $A$-filtered module, and $\gr M$ is finitely
+	generated, then $M$ is finitely generated. Any ideal $I\subset A$ is a filtered
+	ideal with the induced filtration, and if $\gr A$ is noetherian, $\gr I \subset
+	\gr A$ is finitely generated, so $I$ is finitely generated, i.e. $A$ is
+	noetherian} and $M$ a  	finitely generated $A$-module. The second part of item 	3.
+	shows that every finitely generated module has a GF-finite and free cover, so we
+	may apply the usual procedure to construct finite and free resolutions over
+	noetherian algebras to obtain the desired result.
+	\end{enumerate}
+\end{proof}
+
+\begin{Lemma}
+\label{filtered-hom}
+Let $A$ be a GF-algebra and let $M$ and $N$ be two GF-modules. Assume all
+filtrations are exhaustive and discrete. 
+\begin{enumerate}
+	\item If $N$ is GF-finite then $\{F_p\Hom_A(N,M)\}_{p \in \ZZ}$ is an exhaustive
+	filtration on $\Hom_A(N,M)$. If the filtration on $M$ is bounded below then the
+	filtration on $\Hom_A(N,M)$ is also bounded below.
+
+	\item If $N$ is GF-finite and free then there is a natural $\ZZ^2$-graded
+	vector space isomorphism
+	\begin{align*}
+		\phi: \gr \Hom_A(N,M) \to  \GrHom_{\gr A}(\gr N, \gr M)
+	\end{align*}
+	given by the following assignation: for every $f \in F_{p(f)}\Hom_A(N,M)$
+	and $x \in F_{p(x)}N$
+	\begin{align*}
+		\phi(\gr f)(\gr x) = \overline{f(x)} \in F_{p(f) + p(x)}M /
+		F_{p(f)+p(x)-1} M.
+	\end{align*}
+\end{enumerate}
+\end{Lemma}
+\begin{proof}
+\begin{enumerate}
+	\item Let $n_1, \ldots, n_r$ be a finite set of generators of $N$ and set $p_i =
+	p(n_i)$ for $1 \leq i \leq r$. Let $f \in \Hom_A(N,M)$ and let $q_i = p(f(n_i))$. 
+	If $t =	\max_i\{q_i - p_i\}$ then
+	\[
+		f(F_pN) = \sum_i f(F_{p - p_i}A n_i) = \sum_i F_{p -p_i}A
+		f(n_i) \subset \sum_i F_{p - p_i + q_i}M \subset F_{p +
+		t}M.
+	\]
+	Hence $f \in F_t\Hom(N,M)$. If we assume the filtration on $M$ is bounded below
+	there exists $q \in \ZZ$ such that $F_q M = 0$. Let $p_0 = \max\{p_i, 1 \leq i
+	\leq r\}$ If $f \in F_{q - p_0}\Hom_A(N,M)$ then $f(n_i) \in F_{q - p_0 + p_1}M =
+	0$, so $F_{q-p_0}\Hom_A(N,M) = 0$ and the filtration on $\Hom_A(N,M)$ is bounded
+	below.
+
+	\item It is clear from the definition that $\phi$ is a graded morphism. Since 
+	GF-free modules are filtered projective in the sense of \cite{VO}*{Section I.5},
+	$\phi$ is an isomorphism by \cite{VO}*{Lemma 6.4}.
+\end{enumerate}
+\end{proof}
+
+The following theorem relates the $\ZZ$-graded $\Ext$-modules over $A$ with the
+$\ZZ^2$-graded $\Ext$-modules over $\gr A$. It is a generalization of the spectral
+sequence described in \cite{B}*{section 3}, which deals with filtered algebras. We will
+use this result in section 2. to transfer some homological properties from $\gr A$ to $A$.
+
+\begin{Theorem}
+\label{ext-ss}
+	 Let $A$ be a GF-algebra, and let $M$ and $N$ be two GF-modules with $N$ GF-finite.
+	 Suppose that all filtrations are exhaustive and discrete, that the filtration on
+	 $M$ is bounded below, and that $\gr A$ is noetherian. Then for each $d \in \ZZ$ 
+	 there is a convergent spectral sequence:
+	\begin{align*}
+		E(N,M)_d: E_{p,q}^1 &= \GrExt_{\gr A}^{-p-q}(\gr N, \gr
+		M)_{(p,d)} \Rightarrow \GrExt_A^{-p-q}(N,M)_d &p,q \in \ZZ,
+	\end{align*}
+	and the filtration of the $\GrExt$-group on the right hand side is
+	bounded below and exhaustive. 
+\end{Theorem}
+\begin{proof}
+ 	By item 4. of Lemma \ref{filtered-complex} there is a GF-free and finite
+	resolution of $N$ with exact differentials
+	\begin{align*}
+		 \ldots \to P_{-2} \to P_{-1} \to P_{0} \to N \to 0
+	\end{align*}
+	In particular each $P_i$ has a finite and bounded below filtration, so item 1. of
+	Lemma \ref{filtered-hom} implies that $\GrHom_A(P_{i},M)$ is a filtered	GF-vector
+	space for all $i \leq 0$, and its filtration is exhaustive and bounded below. 
+	
+	Fix $d \in \ZZ$. Since the differentials in the resolution of $N$ are strict
+	GF-morphisms, $\GrHom_A(P_\bullet,M)_d$ is a complex of filtered vector spaces. By
+	\cite{W}*{5.5.1.2} there is a spectral sequence with page $1$ equal to
+	\begin{align*}
+		 E_{p,q}^1 &= H_{p+q}(F_p \GrHom_A(P_\bullet,M)_d / F_{p-1}
+		 \GrHom_A(P_\bullet,M)_d) & p,q \in \ZZ
+	\end{align*}
+	that converges to 	
+	\begin{align*}
+		 H_{p+q}(\GrHom_{A}(P_\bullet,M)_d) = \GrExt^{-p-q}_A(N,M)_d.
+	\end{align*}
+	
+	By item 1. of Lemma \ref{filtered-complex} the complex
+	\begin{align*}
+		 \ldots \to \gr P_{-2} \to \gr P_{-1} \to \gr P_{0} \to \gr N \to 0
+	\end{align*}
+	is exact, and by item 2. of the same Lemma it is a free resolution of $\gr N$ as a
+	$\ZZ^2$-graded $\gr A$-module. Finally by item 2. of Lemma \ref{filtered-hom}
+	there is a natural isomorphism
+	$$F_p\GrHom_A(P_\bullet,M)_d/F_{p-1}\GrHom_A(P_\bullet,M)_d \cong \GrHom_{\gr A}
+	(\gr P_\bullet,\gr M)_{(p,d)}$$ 
+	and so $E_1^{p,q} \cong \GrExt_{\gr A}^{-p-q}(\gr N, \gr M)_{(p,d)}$. This
+	completes the proof.
+\end{proof}
+
+The following is an immediate corollary of the previous result
+\begin{Corollary}
+\label{zero-lemma}
+	Suppose $M$ and $N$ are GF-modules over $A$ satisfying the hypotheses of
+	Theorem \ref{ext-ss}. Fix $d \in \ZZ$ and $i \in \NN_0$. If $\GrExt_{\gr A}^i(\gr N, 
+	\gr M)_{(p,d)} = 0$ for all $p \in \ZZ$, then $\GrExt_A^i(N,M)_d = 0$.
+\end{Corollary}
+\begin{proof}
+	By hypothesis the $i$-th diagonal in the first page of $E(N,M)_d$
+	has no nonzero entry and so the same is true for the infinity page. By Theorem
+	\ref{ext-ss} $\GrExt_A^i(N,M)_d$ has a bounded below and exhaustive filtration such 
+	that its associated graded module is zero. Hence by item 3. of Lemma
+	\ref{filtered-complex}, $\GrExt_A^i(N,M)_d = 0$.
+\end{proof}
+
+
+\subsection{Transfer of homological properties}
+We say that an algebra $A$ is \emph{GF-connected} if it is a GF-algebra and $\gr A$ is
+connected. Throughout this section $A$ denotes a GF-connected algebra. Our aim is to prove
+that the homological regularity properties discussed in subsection 1.2 transfer from $\gr
+A$ to $A$.
+
+Given a graded $A$-module $M$ and a set of homogeneous generators $\{m_i\}_{i \in I}$ of
+$M$ we can give $M$ the structure of a GF-module, setting $F_pM = \sum_{i \in I} F_pA
+m_i$ for all $p \in \ZZ$. If $M$ is finitely generated and $I$ is a finite set, the
+filtration we obtain is exhaustive and discrete and $M$ is a GF-finite module. By item 3.
+of Lemma \ref{filtered-complex}, $\gr M$ will be a finitely generated $\gr A$-module. This 
+simple result will be important in the sequel, so we write it down as a lemma.
+\begin{Lemma}
+\label{GF-structure}
+  Assume $A$ is GF-connected and let $M$ be a finitely generated graded $A$-module. Then
+  $M$ can be given the structure of a GF-finite module and its associated graded module is
+  finitely generated over $\gr A$.
+\end{Lemma}
+
+This result is used to prove the next lemma, which is the crucial step in the proof of the
+transfer of homological regularity properties from $\gr A$ to $A$. 
+\begin{Lemma}
+\label{varia-modules}
+	Let $A$ be a GF-connected algebra such that $\gr A$ is noetherian, and let $M$ be
+	a finitely generated graded $A$-module. Suppose $M$ has a GF-module structure as
+	in Lemma \ref{GF-structure}. The following hold:
+	\begin{enumerate}
+		\item $\depth \gr M \leq \depth M$.
+		\item $\gr\pdim~M \leq \gr\pdim \gr M$ and $\gr\injdim M \leq \gr\injdim
+			\gr M$.	
+		\item If $\gr M$ has property $\chi$ then so does $M$. 
+		\item If $\gr M$ has property $\chi$ then $\ldim M \leq \ldim \gr M$. 
+	\end{enumerate}
+\end{Lemma}
+\begin{proof} Recall from Theorem \ref{ext-ss} that under the hypotheses of the lemma, for
+	any finite GF-module $N$ and any $d \in \ZZ$ there is a spectral sequence 
+	\begin{align*}
+	E(N,M)_d: E^1_{p,q} &= \GrExt_{\gr A}^{-p-q}(\gr N, \gr M)_{(p,d)} \Rightarrow
+	\GrExt_A^{-p-q}(N,M)_d & p,q \in \ZZ.
+	\end{align*}
+
+	\begin{enumerate}
+	\item Let $i < \depth \gr M$. By defintion $\GrExt^i_{\gr A}(k,\gr M) = 0$,
+	and since $\gr k = k$, applying Corollary \ref{zero-lemma} we see that
+	$\GrExt_A^i(k,M) = 0$, so $i < \depth M$. This proves the desired inequality.
+
+	\item Let $M$ be any finite GF-module and let $m_1, \ldots, m_r$ be a minimal set
+	of generators of $M$. Let $F$ be the GF-finite and free module with basis $e_1,
+	\ldots, e_r$, such that $\delta(e_i) = \delta(n_i)$ for $1 \leq i \leq r$. By
+	Nakayama's Lemma for connected graded algebras, the map $p: F \to M$ given by 
+	$p(e_i) = m_i$ for all $i$ is the minimal projective cover of $M$, and it is also 
+	a strict morphism by definition. Thus we may repeat the construction described in
+	item 4. of Lemma \ref{filtered-complex} and obtain a resolution $P_\bullet \to M$
+	by GF-finite and free modules that is also a minimal resolution of $M$. In
+	particular $P_i = 0$ for $i > \gr\pdim~M$, so by item 1. of the same lemma, $\gr
+	P_\bullet$ is a free resolution of $\gr M$, which implies that $\gr\pdim M \leq
+	\gr\pdim \gr M$.
+	
+	Let $N$ be a finitely generated graded $A$-module, and give it a GF-module
+	struture as in Lemma \ref{GF-structure}. If $i > \gr\injdim \gr M$ then
+	$\GrExt_{\gr A}^i(\gr N, \gr M) = 0$, and again by Corollary \ref{zero-lemma},
+	$\GrExt_A^i(M,N) = 0$, so $\injdim~M \leq i$.
+	
+	\item Suppose $\gr M$ has property $\chi$, i.e. $\GrExt_{\gr A}^i(k,\gr M)$ is
+	finite dimensional for all $i \geq 0$. Fix $i\in \NN_0$. By hypothesis, for all $d
+	\in \ZZ$ the $i$-th diagonal of the first page of $E(k,M)_d$ has at most a finite
+	number of nonzero entries, each of finite dimension. Furthermore, there are 
+	\emph{no} nonzero entries except for finitely many $d$'s. The same is true of the 
+	infinity page, so the associated graded vector space of $\GrExt_A^i(k,M)_d$ is
+	finite dimensional, and equal to zero for all but finitely many $d$'s. By
+	item 3. of Lemma \ref{filtered-complex} the same is true for $\GrExt_A^i(k,M)$,
+	which implies this is a finite dimensional $k$-vector space.
+
+
+	\item Let $i > \ldim \gr M$ and let $d \in \ZZ$. We will prove that $H_\m^i(M)_d =
+	0$. By item 4. of Lemma \ref{lc-varia}, there exists $n_0 \in \NN$ such that 
+	\begin{align*}
+	  H_\m^i(M)_d &\cong \GrExt^i_A(A/A_{\geq n}, M)_d &\mbox{for all } n \geq n_0,
+	\end{align*}
+	so it is enough to prove that $\GrExt^i_A(A/A_{\geq n},M)_d = 0$ for $n$ large
+	enough. 
+	
+	Let $\pi: \ZZ^2 \to \ZZ$ be the projection on the second coordinate. Then using
+	the notation of Remark \ref{AS-phi}, the algebra $B= \pi_!(\gr A)$ is a connected
+	$\NN_0$-graded algebra. Let $\pi_!(M)$ be the graded $B$-module with
+	underlying $\gr A$-module equal to $\gr M$, and homogeneous components given by
+	\begin{align*}
+	  \pi_!(M)_d &= \bigoplus_{p \in \ZZ} M_{p,d} & \mbox{for every } d \in \ZZ.
+	\end{align*}
+
+	By hypothesis, $H^i_\m(\gr M) = 0$ and since $\gr M$ and $\pi_!(\gr M)$ have the
+	same underlying $\gr A$-module, by Lemma \ref{graded-torsion} their cohomology
+	modules have the same underlying $\gr A$-modules. Once again by item 4. of Lemma
+	\ref{lc-varia}, there exists $n_1 \in \NN_0$ such that
+	\begin{align*}
+	  0 = H^i_\m(\pi_!(M))_d &\cong \GrExt_{B}^i(B/B_{\geq n}, \pi_!(\gr M)) &\mbox{for
+	  all } n \geq n_1.
+	\end{align*}
+	By definition $B_{\geq n} = \gr (A_{\geq n})$, and since $\gr A / \gr (A_{\geq n})
+	\cong \gr (A/A_{\geq n})$, Proposition \ref{grhom-hom} implies that
+	\begin{align*}
+	  \GrExt^i_{\gr A}(\gr(A/A_{\geq n}), \gr M)_d &= 0 &\mbox{for all } n \geq n_1.
+	\end{align*}
+	Taking $n$ larger than both $n_0$ and $n_1$, the result follows from Corollary
+	\ref{zero-lemma}.
+\end{enumerate}
+\end{proof}
+
+Now we prove our main transfer result. 
+\begin{Theorem}
+\label{AS-transfer}
+Assume $\gr A$ has property $\chi$ as a graded algebra. Then $A$ has property $\chi$ as
+a graded algebra, and if $\gr A$ has any of the following properties, so does $A$:
+	\begin{enumerate}
+		\item Having finite local dimension.
+		\item Having a balanced dualizing complex.
+		\item Being AS Cohen Macaulay.
+		\item Being AS Gorenstein.
+ 		\item Being AS regular.
+	\end{enumerate}
+\end{Theorem}
+\begin{proof}
+  Let $M$ be a finitely generated graded $A$-module. Since $\gr A$ has property $\chi$ as
+  an algebra, $\gr M$ has property $\chi$ and by item 3. of Lemma \ref{varia-modules}, so
+  does $M$. This proves that $A$ has property $\chi$ as an algebra.
+  \begin{enumerate}
+    \item Since $\gr A$ has property $\chi$ as an algebra, this follows from item 4. of 
+    Lemma \ref{varia-modules}. 
+	
+    \item By Proposition \ref{vdb-criterion} $A$ has a balanced dualizing complex if and
+    only if $A$ and $A^\opp$ have property $\chi$ as graded algebras and finite local 
+    dimension as graded algebras. Since $\gr A^\opp = (\gr A)^\opp$, the result follows
+    from the previous item.
+
+    \item Since the $\gr A$-modules $\gr A$ and $\gr A^\opp$ have property $\chi$ over
+    $\gr A$ we apply items 1. and 4. of Lemma \ref{varia-modules} to get the series of
+    inequalities
+    \begin{align*} 
+      \depth \gr A \leq \depth A &\leq \ldim A \leq \ldim \gr A,\\
+      \depth \gr A^\opp \leq \depth A^\opp &\leq \ldim A^\opp \leq \ldim \gr A^\opp.
+    \end{align*}
+    If $\gr A$ is AS Cohen Macaulay then all these numbers are equal, so $A$ is AS Cohen
+    Macaulay.
+
+  \item Since $\gr A$ is AS Gorenstein, it has finite injective dimension, and there
+  are vector space isomorphisms
+  \begin{align*}
+    \GrExt_{\gr A}^i(k,\gr A) &\cong
+    \begin{cases} 
+      k & \mbox{ if } i = \gr \injdim \gr A, \\ 0 & \mbox{ otherwise.}
+    \end{cases}
+  \end{align*}
+  By Corollary \ref{zero-lemma} and item 2. of Lemma \ref{filtered-complex}, 
+  \begin{align*}
+    \GrExt_{A}^i(k,A) &\cong
+    \begin{cases} 
+      k & \mbox{ if } i = \gr \injdim \gr A, \\ 0 & \mbox{ otherwise.}
+    \end{cases}
+  \end{align*}
+  This and item 2. of Lemma \ref{varia-modules} imply $\gr \injdim A = \gr \injdim
+  \gr A$.
+
+  \item This follows immediately from item 2. of Lemma \ref{varia-modules} and the fact
+  that the global dimension of $A$ is equal to ts graded global dimension.\footnote{This
+  is proved in Paul Smith's book, Theorem 2.7 of chapter 14. It will probably also be in
+  \cite{RZ2}.}
+  \end{enumerate}
+\end{proof}
+
+\begin{Remark}
+	By \cite{Ye}*{Proposition 4.4 and Corollary 4.10}, any AS Gorenstein
+	algebra has a dualizing complex and therefore has proprety $\chi$. Thus
+	for the last two items one may ommit the hypothesis that $\gr A$ has
+	property $\chi$.
+\end{Remark}
+
+\section{Algebras with $(\S,\alpha)$-bases}
+In \cite{C} P. Caldero proved that Schubert subvarieties of full flag varieties over the
+complex numbers degenerate to toric varieties. To prove this he introduces a $k$-basis
+for the homogeneous coordinate ring of any such variety with good multiplicative
+properties, and uses this basis to define a filtration such that its
+associated graded ring is a semigroup algebra. In this section we define a class of
+algebras having a basis with similar multiplicative properties,
+and prove that all algebras in this class have a filtration such that their associated
+graded rings are \emph{twisted} semigroup algebras, as studied by the authors in
+\cite{RZ2}. We then use results due to Caldero \cite{C} and Littelmann \cite{Lit} to prove 
+that \emph{quantum} Schubert
+varieties, or rather quantum deformations of their homogeneous coordinate rings, lie in
+this class. Finally we use the tools developed in section 2. to investigate their
+homological regularity properties.
+
+A \emph{positive affine semigroup} is a semigroup with a zero element that is isomorphic
+to a finitely generated subsemigroup of $\NN_0^N$ for some $N \in \NN$. For simple facts
+on positive affine semigroups the reader is refered to \cite{BH}*{chapter 6}. From now on 
+we fix a positive affine semigroup $\S$ and an embedding of $\S$ in $\NN_0^N$. The
+lexicographic order of $\NN_0^N$ induces a total order on $\S$, which we will denote by
+$\leq$.  We say that a $k$-algebra $A$ is \emph{$\S$-graded} if it is an
+$\NN_0^N$-graded algebra and $A_d = 0$ for all $d \in \NN_0^N \setminus \S$. 
+
+An $\S$-filtration on a $k$-algebra $A$ is a family of $k$-subvector spaces of
+$A$, $\F = \{F_sA\}_{s \in \S}$, such that $F_s A \cdot F_{s'}A \subset F_{s+s'} A$ for 
+all $s,s' \in \S$, and $F_{s'} A \subset F_sA$ whenever $s' \leq s$. We write $F_{<s} A$
+for  $\sum_{s'<s} F_{s'} A$. The associated $\S$-graded algebra of an $\S$-filtered
+algebra is $\gr_\F A = \bigoplus_{s \in \S} \frac{F_sA}{F_{<s}A}$. One may define
+$\S$-filtered modules and their associated $\S$-graded modules in an analogous way. We
+consider $k$ to be an $\S$-filtered $k$-algebra with the trivial filtration $F_sk = k$ for
+all $s \in \S$. 
+
+Let $A$ be an $\S$-filtered $k$-algebra and let $M$ be an $\S$-filtered $A$-module, with
+filtration $\G = \{G_sM\}_{s \in \S}$. For every $s \in \S$ we define $G_{<s}M = \sum_{s'
+< s} G_{s'}M$. Given an element $m \in G_sM \setminus G_{<s}M$, its class in $G_sM /
+G_{<s}M$ defines an element in the homogeneous component $\gr_\G M_s$, which we denote by
+$\gr m$.
+
+The following result is a refinement of item 2. of Lemma \ref{filtered-complex}.
+\begin{Lemma}
+\label{s-filtered-basis}
+	Let $\S$ be an affine semigroup, let $V$ be an $\S$-filtered $k$-vector space 
+	with an	exhaustive filtration $\F$, and let $\{v_i |i \in I\}$ be a subset of $V$.
+	If $\{\gr v_i\}_{i \in I}$ is a homogeneous basis of $\gr_\F V$, then for
+	every $s \in \S$ the set $\{v_i|i \in I\} \cap F_sV$ is a basis of $F_sV$.
+\end{Lemma}
+\begin{proof}
+  First we set some notation. For each $s \in \S$ let $I_{s} = \{i \in I| v_i \in
+  F_{s}V\}$, $I_{<s} = \cup_{s'<s} I_{s'}$ and $I_s^\circ = I_s \setminus I_{<s}$. We
+  point out that the hypothesis implies that the set $\{\gr v_i| i
+  \in I^\circ_s\}$ is a basis of the homogeneous component $(\gr_\F V)_s$. We will
+  prove that $\{v_i|i \in I_s\}$ is a basis of $F_{s}V$ by induction on the totally
+  ordered set\footnote{Induction on ordered sets is one of \emph{those}
+  pieces of mathematical folklore. The Wikipedia entry for \emph{well-founded relations}
+  includes a proof that it is valid in the present case.} $\S$. The case $s = 0$ is clear 
+  since $\gr V_0 = F_0 V$.
+
+  Let $s \in \S$ and suppose the result holds for all $s'<s$ and that there are 
+  scalars $\lambda_i$ for every $i \in I_s$ such that
+  \begin{align*}
+    0 = \sum_{i \in I_s} \lambda_i v_i = \sum_{i \in I_{<s}} \lambda_i v_i + \sum_{i \in
+    I_s^\circ} \lambda_i v_i.
+  \end{align*}
+  Reducing this equality modulo $F_{<s}V$ we get
+  \begin{align*}
+    0 = \sum_{i \in I_s^\circ} \lambda_i \gr v_i
+  \end{align*}
+  which implies that $\lambda_i = 0$ for $i \in I_s^\circ$. On the other hand, there are
+  at most finitely many $i \in I_{<s}$ such that $\lambda_i \neq 0$, so
+  there exists $s' < s$ such that $\lambda_i \neq 0$ implies $i \in I_{s'}$. By the
+  inductive hypothesis the set $\{v_i| i \in I_{s'}\}$ is linearly independent, so
+  $\lambda_i = 0$ for all $i \in I_s$, and $\{v_i|i \in I_s\}$ is linearly independent.
+
+  Let $v \in F_sV$. If $v \in F_{s'}V$ for some $s'<s$ then the inductive hypothesis
+  guarantees that it is in the $k$-vector space generated by $\{v_i|i \in I_{s'}\}$. If
+  not, then $\gr v  \in (\gr_\F V)_s$, and there are scalars $\lambda_i$ for $i \in
+  I_s^\circ$ such that 
+  \begin{align*}
+    \gr v = \sum_{i \in I_s^\circ} \lambda_i \gr v_i
+  \end{align*}
+  or equivalently, such that $v - \sum_{i \in I_s^\circ} \lambda_i v_i \in F_{s'}V$ for 
+  some $s' < s$. By the previous observation, this difference lies in the $k$-vector space
+  generated by $\{v_i|i \in I_{s'}\}$, so $v$ is in the $k$-vector space generated by
+  $\{v_i|i  \in I_s\}$. This completes the proof.  
+\end{proof}
+
+Given a $2$-cocycle $\alpha: \S \times \S \to k^\times$, the \emph{$\alpha$-twisted
+semigroup algebra} of $\S$, denoted by $k^\alpha[\S]$, is the algebra with underlying
+vector space generated by the set $\{x^s|s \in \S\}$ and product defined over
+generators by $x^s x^{s'} = \alpha(s,s') x^{s+s'}$ and extended bilinearly. The fact that
+$\alpha$ is a 2-cocycle implies that this product is associative. These algebras are
+studied by the authors in \cite{RZ2}, were it is proved that for any completely ordered
+semigroup $\S$ and any 2-cocycle $\alpha$, the algebra $k^\alpha[\S]$ is integral.
+
+We now turn to the problem of giving a presentation of $k^\alpha[\S]$.
+Let $\{s_1, \ldots, s_r\}$ be a minimal set of generators of $\S$. There is an obvious
+surjective semigroup morphism $\pi: \NN_0^r \rightarrow \S$ induced by the assignation $e_i
+\mapsto s_i$ for $1 \leq i \leq r$, where $e_i$ denotes the $i$-th element of the
+canonical basis of $\NN_0^r$. Since $\S$ is commutative and finitely generated, it is also
+finitely presented, i.e. the semigroup 
+\begin{align*}
+  L = L(\S) = \{(p,p') \in \NN_0^r \times \NN_0^r| \pi(p) = \pi(p')\}
+\end{align*}
+is also finitely generated. Let $\{(p_1,p'_1), \ldots, (p_{r'},p'_{r'})\}$ be a minimal
+set of generators of $L$.
+
+Let $T$ be the free algebra with generators $X_1, \ldots, X_r$. There is a surjective
+algebra morphism $\phi: T \to k^\alpha[\S]$ sending $X_i$ to $x^{s_i}$. If we set the
+degree of $X_i$ as $s_i$ then the free algebra $T$ becomes an $\S$-graded algebra, and
+$\phi$ is an $\S$-graded algebra morphism.
+
+Given $p = (p^1, \ldots, p^r) \in \NN_0^r$, we write $X^p$ for the monomial $X_1^{p^1}
+X_2^{p^2} \ldots X_n^{p^n} \in T$. For every $1 \leq i<j\leq r$ the element
+\begin{align*}
+C_{i,j}: =\alpha(s_j,s_i) X_i X_j - \alpha(s_i,s_j)X_j X_i
+\end{align*}
+is in the kernel of $\phi$. Also, for any $s \in \S$ and $p \in \pi^{-1}(s)$ there exists 
+$c_p \in k^\times$ such that $\phi(X^p) = \prod_i (x^{s_i})^{p_i} = c_p x^s$. For each $1
+\leq l \leq r'$ write $c_l = c_{p_l}$ and $c'_l = c_{p'_l}$ and put
+\begin{align*}
+S_l:= c'_l X^{p_l} - c_l X^{p_l'}.
+\end{align*}
+These elements also belong to the kernel of $\phi$. 
+
+\begin{Lemma}
+\label{semigroup-presentation}
+Keep the notation from the previous paragraph. Let $I \subset T$ be the ideal generated by
+the elements $C_{i,j}$ and $S_l$, with $1 \leq i < j \leq r$ and $1 \leq l \leq r'$. The
+twisted semigroup algebra $k^\alpha[\S]$ is isomorphic to $A = T / I$.
+\end{Lemma}
+\begin{proof}
+We make a slight abuse of notation and for all $1 \leq i \leq r$ and all $p \in \NN_0^r$
+we denote by $X_i$ and $X^p$ the class of $X_i$ and $X^p$ in $T/I$ respectively. Denote by
+$\tilde \phi: A \to k^\alpha[\S]$ the morphism induced by $\phi$. Since the generators of
+the ideal $I$ are $\S$-homogeneous, $A$ is an $\S$-graded algebra and $\tilde \phi$ is a
+homogeneous morphism of $\S$-graded algebras. 
+
+The algebra $A$ is a quotient of a quantum affine space, so $\{X^p|p \in \NN_0^r\}$ is a
+set of homogeneous generators of $A$ as a $k$-vector space. Furthermore $\deg X^p =
+\pi(p)$, so for every $s \in \S$ the set $\{X^p|\pi(p) = s\}$ generates the homogeneous 
+component $A_s$.
+
+Given $(p,p') \in L$ there exist $n_1, \ldots, n_r \in \NN_0$ such that $(p,p')
+= \sum_l n_l (p_l,p_l')$. Since $A$ is a quotient of an affine space and $X^{p_l} =
+\frac{c_l}{c'_l} X^{p_l'}$, there exist nonzero scalars $d, d', d''$ such that
+\begin{align*}
+X^p = d \prod_l (X^{p_l})^{n_l} = d \prod_l \left(\frac{c_l}{c'_l} X^{p_l'}\right)^{n_l}
+= d'\prod_l X^{n_l p_l'} = d'' X^{p'}.
+\end{align*}
+This implies that any two monomials of degree $s \in \S$ are nonzero multiples of each
+other, so $\dim_k A_s = 1$. Since $\tilde \phi$ is an epimorphism of $\S$-graded
+$k$-vector spaces, its homogeneous component $\tilde \phi_s: A_s \to k^\alpha[\S]_s$ is
+also surjective. This is a linear transformation between one dimensional $k$-vector
+spaces, so it is an isomorphism, which implies that $\tilde \phi$ is an isomorphism.
+\end{proof}
+
+We now define the class of algebras on which we will focus.
+\begin{Definition}
+Let $A$ be a $k$-algebra, $\S$ an affine semigroup and $\alpha: \S \times \S \to k^\times$ 
+a function. We say that $A$ has an $(\S,\alpha)$-basis if:
+\begin{enumerate}
+ \item There is an injective map $\S \to A$, $s \in \S \mapsto b_s \in
+A$, with $b_0 = 1$. We call $b_s$ the \emph{standard $s$-element} of $A$.
+
+ \item The set $\{b_s|s \in \S\}$ is a $k$-basis of $A$, called the \emph{standard basis}.
+
+ \item For all $s,s',s'' \in \S$ with $s'' < s+ s'$ there exists $d_{s,s'}^{s''} \in k$
+ such that
+\begin{align*}
+b_s b_{s'} = \alpha(s,s') b_{s+s'} + \sum_{s'' < s+s'} d_{s,s'}^{s''} b_{s''}
+\end{align*}
+\end{enumerate}
+\end{Definition}
+From now on we fix an algebra $A$ with an $(\S,\alpha)$-basis. For every $1 \leq i \leq r$ 
+denote $b_i = b_{s_i}$, and for every $p = (p^1, \ldots, p^r) \in \NN_0^r$ denote $b^p =
+b_1^{p^1} b_2^{p^2}\ldots b_r^{p^r}$.
+
+Let $s, s', s'' \in \S$. By comparing the two associators $(b_s b_{s'})b_{s''}$ and $ b_s 
+(b_{s'}b_{s''})$, we see that for every $t < s + s' + s''$ there exist $d_t, d'_t \in k$
+such that
+\begin{align*}
+ \alpha(s,s')&\alpha(s + s',s'') b_{s+s'+s''} + \sum_{t < s+s'+s''} d_t b_t \\
+  &=  \alpha(s,s'+s'')\alpha(s',s'') b_{s+s'+s''} + \sum_{t< s+s'+s''} d'_t b_t.
+\end{align*}
+Since the standard elements are linearly independent, $\alpha$ must be a
+$2$-cocyle. 
+
+Next we prove that $A$ can be given an $\S$-filtration such that its associated graded
+algebra is isomorphic to the twisted semigroup algebra $k^\alpha[\S]$.
+\begin{Lemma}
+\label{varia-dominated} 
+For each $s \in \S$ set $F_sA = \langle b_{s'}|s'\leq s \rangle$.
+The set $\F= \{F_sA\}_{s \in \S}$ is an exhaustive $\S$-filtration of $A$, and its
+associated graded algebra $\gr_\F A$ is isomorphic to $k^\alpha[\S]$ as an $\S$-graded
+$k$-algebra.
+\end{Lemma}
+\begin{proof}
+By hypothesis, the product of two elements $b_{t}$ and $b_{t'}$ with $t \leq s$ and $t' \leq
+s'$ is a linear combination of standard elements $b_{s''}$ with $s'' \leq t + t' \leq s +
+s'$ and hence lies in $F_{s+s'}A$. This proves that $\F$ is an $\S$-filtration on $A$, and
+since the standard elements form a $k$-basis of $A$, it is exhaustive.
+
+Let $B = \gr_\F A$. This is an $\S$-graded $k$-algebra, and $B_s = F_sA /F_{ < s}A$ for
+each $s \in \S$. Since $F_sA = \langle b_s \rangle \oplus F_{<s}A$, the component $B_s$ is 
+generated by $\gr b_s$, so $\{\gr b_s| s \in \S\}$ generates $B$ over $k$. Furthermore,
+\begin{align*}
+b_s b_{s'} \equiv \alpha(s,s') b_{s+s'} \mod F_{<s+s'}A
+\end{align*}
+so $\gr b_s \gr b_{s'} = \alpha(s,s') \gr b_{s+s'}$. Thus the vector space morphism
+$k^\alpha[\S] \to A$ induced by the map $x^s \mapsto \gr b_s$ is an isomorphism of
+$\S$-graded algebras.
+\end{proof}
+
+For the rest of this section $\F = \{F_sA\}$ denotes the filtration defined in Lemma
+\ref{varia-dominated} 
+\begin{Lemma}
+\label{monomial-basis}
+  For every $p = (p^1, \ldots, p^r) \in \NN_0^r$ the element $b^p$ belongs to $F_{\pi(p)}A
+  \setminus F_{<\pi(p)}A$. If for every $s \in \S$ we choose an element $p_s \in
+  \pi^{-1}(s)$ then the set $\{b^{p_t}|t \leq s\}$ is a basis of $F_{s}A$.
+\end{Lemma}
+\begin{proof}
+  Let $B = \gr_\F A \cong k^\alpha[\S]$. We prove the first statement by induction on $n =
+  p^1 + \ldots + p^r$, with the case $n = 0$ being obvious. Let $l = \max \{p^i \neq 0
+  \mid 1 \leq i \leq r \}$ and let $q = p - e_l$. By
+  the inductive hypothesis $b^q \in F_{\pi(q)}A \setminus F_{< \pi(q)}A$, which implies
+  that $\gr b^q \in B_{\pi(q)}$. Since $B$ is integral, $(\gr b^q) (\gr b_l)
+  \in B_{\pi(p)} \setminus 0$, or equivalently $b^p = b^q b_l \in F_{\pi(p)}A \setminus
+  F_{<\pi(p)}A$. 
+  
+  Since the homogeneous components of $B$ are one dimensional, $\gr b^p$ generates
+  $B_{\pi(p)}$ and so $\{\gr b^{p_s}|s \in \S\}$ is a homogeneous basis of $B$. By Lemma
+  \ref{s-filtered-basis} the set $\{b^{p_t}|t \leq s\}$ is a basis of $F_sA$.
+\end{proof}
+
+For every $1 \leq l \leq r'$ let $c_l$ and $c'_l$ be as in the preamble to Lemma
+\ref{semigroup-presentation}. The fact that the map $\phi: k^\alpha[\S] \to \gr_\F A$ from
+the aforementioned lemma is an isomorphism implies 
+\begin{align*}
+\alpha(s_j,s_i) b_i b_j - \alpha(s_i,s_j) b_j b_i &\equiv 0 \mod F_{<s_i + s_j}A &
+\mbox{for } 1 &\leq i < j \leq r,\\
+c'_l b^{p_l} - c_l b^{p'_l} &\equiv 0 \mod F_{<\pi(p_l)}A &\mbox{for } 1 &\leq l \leq r'.
+\end{align*}
+Now choose for every $s \in \S$ an element $p_s \in \pi^{-1}(s)$. Lemma
+\ref{monomial-basis} guarantees that for all $1 \leq i < j \leq r$ and $s < s_i + s_j$
+there exist scalars $d^s_{i,j}$ such that 
+\begin{align*}
+\alpha(s_j, s_i)b_i b_j - \alpha(s_i,s_j)b_j b_i &= \sum_{s < s_i + s_j} d_{i,j}^{s}
+b^{p_s},
+\end{align*}
+and for all $1 \leq l \leq r'$ and $t < \pi(p_l)$ there exist scalars $c^t_l$ such that
+\begin{align*}
+c'_l b^{p_l} - c_l b^{p_l'} &= \sum_{t < \pi(p_l)} c_l^{t} b^{p_t}.
+\end{align*}
+
+\begin{Theorem}
+\label{deformation}
+Let $\S$ be a positive affine semigroup and let $A$ be a $k$-algebra with an
+$(\S,\alpha)$-basis. There exists an $\NN_0$-filtration on $A$ such that its associated
+graded algebra is isomorphic to $k^\alpha[\S]$.
+\end{Theorem}
+\begin{proof}
+Keeping the notation from the previous paragraph, let $\Sigma \subset \S$ be the set
+formed by:
+\begin{itemize}
+	\item the elements $s_i + s_j$, for $1 \leq i < j \leq r$,
+	\item the elements of the form $\pi(p_l)$ for $1 \leq l \leq r'$,
+	\item the elements $s \in \S$ such that $d_{i,j}^s \neq 0$ for some $1 \leq i < j
+		\leq r$,
+	\item the elements $t \in \S$ such that $c_l^t \neq 0$ for some $1 \leq l \leq
+		r'$.
+\end{itemize}
+For any $s = (s^1, \ldots, s^N) \in \NN_0^N$ let $||s||_\infty$ denote the
+maximum of the $s^i$'s. We fix
+$$K = \max \{||s||_{\infty}, s \in \Sigma\} + 1,$$ 
+which makes sense because $\Sigma$ is a finite set. Let $\gamma: \NN_0^N \to \NN_0$ be the
+semigroup morphism defined by $e_i \mapsto K^{N-i}$ for $1 \leq i \leq N$. The image of
+any element $s \in \Sigma$ is the integer with $K$-adic expansion $s$. In particular if $s, 
+s' \in \Sigma$ then $s' < s$ if and only if $\gamma(s') < \gamma(s)$.
+
+Given $n \in \NN_0$ let 
+\begin{align*}
+G_nA &= \sum_{\{s \in \S| \gamma(s) \leq n\}} F_sA.
+\end{align*}
+Lemma \ref{varia-dominated} together with the fact that $\gamma$ is a semigroup morphism 
+imply that $\mathcal G = \{G_nA\}_{n \in \NN_0}$ is an exhaustive $\NN_0$-filtration on 
+$A$. Let $B = \gr_\G A$, and for every $p = (p^1, \ldots, p^r) \in \NN_0^r$ let $(\gr b)^p
+= (\gr b_1)^{p^1} \ldots (\gr b_r)^{p^r}$. 
+
+Since $\gamma$ is strictly increasing over $\Sigma$, 
+\begin{align*}
+\label{pre-eq}
+\tag{$\dagger$}
+  \alpha(s_j,s_i) b_i b_j - \alpha(s_i,s_j) b_j b_i &\equiv 0 \mod G_{\gamma(s_i + s_j)-1}A &
+ \mbox{for } 1 \leq i < j \leq r\\
+ c'_l b^{p_l} - c_l b^{p_l'} &\equiv 0 \mod G_{\gamma(\pi(p_l))-1}A & \mbox{for } 1 \leq l
+ \leq r'.
+\end{align*}
+
+Also $G_{\gamma(s)}A = F_sA$ for every $s \in \Sigma$. In particular $G_{\gamma(s)-1}A
+\subset F_{<s}A$, and by Lemma \ref{monomial-basis} the following hold:
+\begin{align*}
+b_i b_j, b_j b_i &\in F_{s_i + s_j}A \setminus F_{<s_i + s_j}A \subset G_{\gamma(s_i +
+s_j)}A \setminus G_{\gamma(s_i + s_j)-1}A &\mbox{for every } 1 &\leq i < j \leq r \\
+b^{p_l}, b^{p'_l} & \in F_{\pi(p_l)}A \setminus F_{<\pi(p_l)}A \subset G_{\gamma(\pi(p_l))}A
+\setminus G_{\gamma(\pi(p_l)) -1}A & \mbox{for every } 1 &\leq l \leq r'.\\
+\end{align*}
+From this and the congruences in (\ref{pre-eq}) the following equalities hold in $B$:
+\begin{align*}
+  \alpha(s_j,s_i) \gr b_i \gr b_j - \alpha(s_i,s_j) \gr b_j \gr b_i &= 0 \\
+ c'_l (\gr b)^{p_l} - c_l (\gr b)^{p'_l} &= 0.
+\end{align*}
+
+By Lemma \ref{semigroup-presentation} there is a surjective $k$-algebra morphism $\psi: 
+k^\alpha[\S] \to B$ with $\psi(x^{s_i}) = \gr b_{i}$. We now put an $\NN_0$-grading on
+$k^\alpha[\S]$, setting $\deg x^s = \gamma(s)$. With this grading $\psi$ is an
+$\NN_0$-graded algebra morphism. Since $\S \subset \NN_0^N$, we know that $\dim_k 
+k^\alpha[\S]_n = \#\{s \in \S|\gamma(s) = n\}$ is finite for every $n \in \NN_0$. On the
+other hand Lemma \ref{monomial-basis} implies that $G_nA = \langle b^{p_s}|\gamma(s) \leq
+n \rangle$ for every $n \in \NN_0$, so $B_n = \langle \gr b^{p_s}| \gamma(s) = n \rangle$. 
+Since $\psi_n: k^\alpha[\S]_n \to B_n$ is a surjective morphism between $k$-vector spaces
+of the same dimension, it is an isomophism, and the same holds for $\psi$.
+\end{proof}
+
+We recall that $\S \subset \NN_0^N$ is said to be \emph{normal} if whenever
+there exist $n \in \NN$ and $s \in \NN_0^N$ such that $n s \in \S$, then $s \in \S$. The
+previous Theorem has the following consequence:
+\begin{Corollary}
+\label{transfer-regularity}
+	Let $\S$ be a positive affine semigroup and let $\alpha: \S \times \S \to
+	k^\times$ be a $2$-cocycle. Suppose $A$ is a connected $\NN_0$-graded
+	$k$-algebra with an $(\S,\alpha)$-basis, and that the standard elements of this
+	basis are homogeneous. Then $A$ has proprety $\chi$ and finite local dimension as
+	an algebra and it has a dualizing complex. Furthermore, if $\S$ is normal, then
+	$A$ is AS Cohen Macaulay.
+\end{Corollary}
+\begin{proof}
+	Since for every $n \in \NN_0$, $G_n A$ as defined in Theorem \ref{deformation} is
+	generated by homogeneous elements, it is clear that it is a graded vector space,
+	so $A$ is a GF-algebra and by the same theorem its associated graded ring is
+	isomorphic to $k^\alpha[\S]$. 
+	
+	On the other hand, as proved in \cite{RZ2}, twisted semigroup algebras have
+	property $\chi$ and finite local dimension as algebras , and also have balanced 
+	dualizing complexes for any connected $\NN_0$-grading on them, so by items 1. and 
+	2. of Theorem \ref{AS-transfer}, $A$ has these properties too.
+
+	Finally, in \cite{RZ2} it is proven that if $\S$ is a normal affine semigroup then
+	$k^\alpha[\S]$ is AS Cohen Macaulay, so by item 3. of Theorem \ref{AS-transfer},
+	so is $A$.
+\end{proof}
+
+As another application of Theorem \ref{deformation}, we prove that algebras with an
+$(\S,\alpha)$-basis are finitely presented. We carry over the notation for the elements
+$\{p_s \in \NN_0^r| s \in \S|\}$ and the constants $d_{i,j}^s$ and $c_l^t$ defined just
+before Theorem \ref{deformation}.
+\begin{Corollary}
+Consider in $T = k\langle X_i | i=1, \ldots, r\rangle$ the elements
+\begin{align*}
+\tilde C_{i,j}&=  \alpha(s_j, s_i)X_i X_j - \alpha(s_i,s_j)X_j X_i - \sum_{s < s_i +
+s_j} d_{i,j}^{s} X^{p_s} &(1 \leq i,j \leq r)\\
+\tilde S_l&= c'_l X^{p_l} - c_l X^{p_l'} -
+\sum_{s < \pi(\p)} c_l^{t} X^{p_s} &(1 \leq l \leq r')
+\end{align*}
+and let $\I$ be the ideal generated by $\tilde C_{i,j}, \tilde S_l$, with $1 \leq i < j \leq
+r$, $1 \leq l \leq r'$. The natural map $\rho :T/\I \to A$ is an isomorphism
+\end{Corollary}
+\begin{proof}
+	By abuse of notation we write $X_i$ for the image of the generator $X_i$ of $T$ in
+	the quotient $B = T/\I$.
+
+	For each $n \in \NN_0$ let $G_nB = \rho^{-1}(G_nA)$. The set $\tilde \G =
+	\{G_nB\}_{n \in \NN_0}$ is an $\NN_0$-filtration of $B$. By construction $\rho$ is
+	a filtered strict morphism and it induces a morphism $\gr \rho: \gr_{\tilde \G} B
+	\to \gr_\G A \cong k^\alpha[\S]$ that sends $\gr X_i$ to $x^{s_i}$.
+	
+	On the other hand, since for each $s \in \S$ the element $\rho(X^{p_s})$ is in
+	$G_{\gamma(s)}A$,
+	\begin{align*}
+ 		\alpha(s_i,s_j)X_j X_i &\equiv \alpha(s_j, s_i)X_i X_j \mod
+		G_{\gamma(s_i + s_j)-1}B
+		&\mbox{for } 1 &\leq i<j \leq r \mbox{ and}\\
+		c'_l X^{p_l} &\equiv c_l X^{p_l'} \mod G_{\gamma(\pi(p_l))-1}B & \mbox{for
+		} 1 &\leq l \leq r'
+	\end{align*}
+	so by Lemma \ref{semigroup-presentation} the assignation $x^{s_i} \in
+	k^\alpha[\S]  \mapsto \gr X_i \in \gr_{\tilde \G} B$ defines a morphism of
+	$k$-algebras $\tau: k^\alpha[\S] \to \gr_{ \tilde \G} B$, which is clearly an
+	inverse to $\gr \rho$, so $\gr \rho$ is an isomorphism. Finally from item 1. of
+	Lemma \ref{filtered-complex} we deduce that $\rho$ is also an isomorphism.
+\end{proof}
+
+\subsection{Quantum Flag varieties and Schubert cells}
+In this subsection we adapt Caldero's arguments from \cite{C} to show that Schubert cells
+of arbitrary quantum flag varieties have $(\S,\alpha)$-bases, and that in each case $\S$
+is a normal affine semigroup.
+
+We review the definitions which are relevant to our purpose. Let $\g$ be a semisimple Lie
+algebra over $k$ and let $G$ be its Lie group. Write $P$ for the weight lattice of $\g$, 
+$\{p_1, \ldots, p_n\}$ for its
+fundamental weights, $P^+ = \sum_i \NN_0 p_i$ for the set of dominant weights, and
+$\alpha_1, \ldots,\alpha_n$ for the positive roots of $P$. Let $W$ be the Weyl group of
+$\g$, and $s_i \in W$ the reflection corresponding to the $i$-th root. Given an element $w
+\in W$ we denote its length by $\ell(w)$; let $N$ be the length of the longest word of
+$W$. A \emph{decomposition} of $w \in W$ is a word on the generators $s_i$ that equals $w$
+in $W$. A decomposition of the longest word of $W$ is said to be \emph{adapted} to $w$ if
+it is of the form $s_{i_1} \ldots s_{i_N}$ with $s_{i_1} \ldots s_{i_{\ell(w)}} = w$. For
+every element $w \in W$ there is a decomposition of the longest word of $W$ adapted to
+$w$.
+
+Fix $q \in k^\times$. Let $U_q(\g)$ be the quantum enveloping algebra of $\g$ as in
+\cite{J}*{Definition 4.3}. The algebra $U_q(\g)$ is generated by elements $\{E_i, F_i,
+K_i^{\pm 1}|i = 1, \ldots, n \}$ where $n$ is the rank of $P$. Denote by $U_q(\mathfrak b)$,
+resp. $U_q(\mathfrak n)$, the subalgebra of $U_q(\g)$ generated by the elements $E_i, K_i$,
+resp. $E_i$. For each $\lambda \in P^+$ there is an irreducible highest-weight
+representation of $U_q(\g)$ which we denote by $V_q(\lambda)$. Each $V_q(\lambda)$
+decomposes as the direct sum of weight spaces $\bigoplus_{\mu \in \Lambda}
+V_q(\lambda)_\mu$, where $\Lambda$ is a finite subset of $P^+$. We fix a highest-weight 
+vector $v_\lambda \in V_q(\lambda)_\lambda$. For proofs of these facts the reader is
+refered to \cite{J}*{chapters 4,5}.
+
+Let $I$ be a subset of the set of fundamental weights and set $\mathcal J(I) = \sum_{p_i
+\notin I} \NN_0 p_i$. Denote by $W_I \subset W$ the subgroup generated by reflections
+$s_{\alpha_i}$ with $p_i \in I$, and for each class in $W/W_I$ pick a representative of
+smallest length. We call $W^I$ the set of these representatives. For each $w \in W^I$ and
+$\lambda \in \mathcal J(I)$ the vector space $V_q(\lambda)_{w\lambda}$ has dimension $1$.
+The \emph{Demazure module} $V_q(\lambda)_w$ is the $U_q(\mathfrak b)$-submodule of
+$V_q(\lambda)$ generated by a vector of  weight $w\lambda$ in $V_q(\lambda)$.
+
+Given a $k$-vector space $V$ we denote its dual space by $V^*$. Since $U_q(\g)$ is a Hopf
+algebra, its dual is an algebra with convolution product induced by the coproduct of
+$U_q(\g)$. There is a map $V_q(\lambda)^* \ot V_q(\lambda) \to U_q(\g)^*$ defined by
+sending $\xi \ot v \in V_q(\lambda)^* \ot V_q(\lambda)$ to the linear functional
+$c^\lambda_{\xi,v}$, defined by assigning to each $u \in U_q(\g)$ the scalar
+$c^\lambda_{\xi,v}(u) = \xi(uv)$. Functionals of type $c^\lambda_{\xi,v}$ are called
+\emph{matrix coefficients}.
+
+
+We now review the definitions of quantum flag varieties. They were first defined by
+Soibelman in \cite{S} and by Lakshmibai and Reshetkin in \cite{LR}.
+If $U$ is the maximal borel subgroup of $G$ then $G/U$ is the full flag variety of $G$.
+Let $C^+(\lambda)$ be the vector space of matrix coefficients of the form
+$c^\lambda_{\xi,v_{\lambda}}$ in $U_q(\g)^*$ and set 
+$$\O_q[G/U] := \bigoplus_{\lambda \in P^+} C^+(\lambda) \subset U_q(\g)^*.$$
+This is a subalgebra of $U_q(\g)$, called the \emph{quantum full flag variety} of $G$. The 
+above decomposition as a direct sum gives $\O_q[G/U]$ the structure of a $P^+$-graded
+algebra.
+
+To every subset $I$ of the set of fundamental weights corresponds a parabolic subgroup
+$P_I$, and the variety $G/P_I$ is the corresponding generalized flag variety. To this data 
+we associate the $P^+$-graded subalgebra of $\O_q[G/U]$
+$$\O_q[G/P_I]:= \bigoplus_{\lambda \in \mathcal J(I)} C^+(\lambda)$$
+called \emph{quantum flag variety associated to $I$}. The case $I = \emptyset$
+corresponds to the full flag variety.
+
+Given vector spaces $V_2 \subset V_1$, we denote by $V_2^\perp \subset V_1^*$ the set of
+linear functionals over $V_1$ which are zero over $V_2$. For every $w \in W^I$ the vector
+space 
+$$J_w^I = \bigoplus_{\lambda \in \mathcal J(I)} k-\mathsf{span}\{c_{\xi,v_\lambda}^\lambda \in C^+(\lambda)|\xi  \in V_q(\lambda)_w^\perp \} \subset \O_q[G/P_I]$$ 
+is an ideal of $\O_q[G/P_I]$ called the \emph{Schubert ideal} associated to $w$. The
+quotient algebra $\O_q[G/P_I]_w = \O_q[G/P_I]/J^I_w$ is called the \emph{quantum Schubert
+variety} associated to $w$.
+
+We assume from now on that $\mathsf{char}\ k = 0$ and that $q$ is not a root of unity.
+The subalgebra $U_q(\n) \subset U_q(\g)$ has a so called \emph{canonical basis} $\B$,
+discovered by Lusztig and Kashiwara. For each $\lambda \in P^+$ there is a subset
+$\B_\lambda \subset \B$ such that $\# \B_\lambda = \dim V_q(\lambda)$ and $\B_\lambda
+v_\lambda \subset V_q(\lambda)$ is a basis of $V_q(\lambda)$. Denote by $\B_\lambda^*$ the
+basis of $V_q(\lambda)^*$ dual to $B_\lambda v_\lambda$, and by $\xi_b$ the element of
+$\B_\lambda^*$ defined by the formula $\xi_b(b'v_\lambda) = \delta_{bb'}$ for all $b' \in
+\B_\lambda$. The reader is refered to \cite{K}*{sections 8 and 12} for proofs of these facts
+and further references. We recall the following result:
+
+\begin{Theorem}\cite{C}*{Theorem 1.8}
+\label{Demazure-basis}
+	For every $w \in W^I$ there is a set $\B_w \subset \B$ such that $(\B_w \cap
+	\B_\lambda)v_\lambda$ is a basis of $V_q(\lambda)_w$. Furthermore the set
+	$\{\xi_b| b \in \B_\lambda \setminus \B_w \}$ is a basis of
+	$V_q(\lambda)_w^\perp$, and the restrictions of the functionals $\{\xi_b|b \in B_w \cap
+	B_\lambda\}$ to the Demazure submodule $V_q(\lambda)_w$ form a basis of $V_q(\lambda)_w^*$.
+\end{Theorem}
+
+Littelman proved in \cite{Lit}*{Proposition 1.5, a)} that for every decomposition
+$w_0$ of the longest word of $W$ there is a parametrizaton of the canonical basis $\B$ by a
+set $\S_{w_0} \subset \NN_0^N$, where $N$ is the length of the longest word of $W$. 
+For each $s \in \S_{w_0}$ let $b_s$ denote the corresponding element in the canonical basis.
+
+Let $w \in W^I$, and let $w_0$ be a decomposition of the longest word of $W$ adapted to
+$w$. Following Caldero we set
+\begin{align*}
+	\tilde \S_{w_0} &:= \{(s,\lambda)| s \in \mathcal \S_{w_0}, b_s \in \B_\lambda\} 
+		\subset \NN_0^N \times P^+ \cong \NN_0^{N+n},\\
+	\tilde \S_{w_0}^w &:= \{(s,\lambda) \in \tilde \S_{w_0} |b_s \in \B_\lambda \cap
+		\B_w\},  \\
+	\tilde \S_{w_0,I}^w &:= \{(s,\lambda) \in \tilde S_{w_0}^w| \lambda \in \mathcal
+		J(I)\} = \tilde S_{w_0}^w \cap \mathcal J(I).
+\end{align*}
+\begin{Lemma}
+\label{are-semigroups}
+	The sets $\tilde \S_{w_0}, \tilde \S_{w_0}^w$ and $\tilde \S_{w_0, I}^w$ are
+	normal affine semigroups.
+\end{Lemma}
+\begin{proof}
+	For $\tilde \S_{w_0}$ and $\tilde \S_{w_0}^w$ see \cite{C}*{Theorem 2.2 and
+	Theorem 2.4} respectively. Now, $\tilde \S_{w_0,I}^w$ is by definition $\tilde
+	S_{w_0}^w \cap \mathcal J(I)$ and $\mathcal J(I) \subset P^+$ is a normal affine
+	subsemigroup. Since the intersection of normal semigroups is normal, we are done.
+\end{proof}
+
+The following Theorem is a reformulation of results of \cite{C}, adapted to our needs:
+\begin{Theorem}
+\label{full-flag-basis}
+Given $(s,\lambda) \in \tilde S_{w_0}$ set $b_s^\lambda := c^\lambda_{\xi_{b_s},v_\lambda} \in
+C^+(\lambda)$. The set $\B_{w_0} := \{b_s^\lambda|(s,\lambda)\in \S_{w_0}\}$ is a basis of
+$\O_q[G/U]$. Furthermore, given $(s,\lambda)$ and $(s',\lambda')$ in $\tilde S_{w_0}$, for every
+$s < s+s'$ there exist $\alpha((s,\lambda), (s',\lambda')) \in k^\times$ and $d_{s,s'}^{s''}
+\in k$ such that
+		\begin{align}
+		\label{product-formula}
+		b_{s}^\lambda b_{s'}^{\lambda'} = \alpha((s,\lambda),(s',\lambda'))
+		b_{s+s'}^{\lambda + \lambda'} + \sum_{s'' < s+s'} d_{s,s'}^{s''}
+		b_{s''}^{\lambda + \lambda'}.
+		\end{align}
+\end{Theorem}
+\begin{proof}
+	If we fix a dominant weight $\lambda$, then $\{\xi_{b_s} |(s,\lambda) \in \tilde
+	S_{w_0}\} = \B_\lambda^*$, and  hence $\{b_s^{\lambda} =
+	c_{\xi_{b_s},v_\lambda}^\lambda| (s,\lambda) \in \tilde S_{w_0}\}$ is a basis of
+	$C^+(\lambda)$. The union of these bases is a basis of
+	$\O_q[G/U] = \bigoplus_{\lambda \in P^+}C^+(\lambda)$ and it is equal to $\B_{w_0}$. 
+	Formula (1) is \cite{C}*{formula 2.1.1}. The fact
+	that $\alpha((s,\lambda),(s',\lambda'))$ is nonzero, in fact a power of $q$, is a
+	consequence of this formula and \cite{C}*{Theorem 2.3}.
+\end{proof}
+We now use Theorem \ref{full-flag-basis} to prove the result announced in the introduction:
+\begin{Corollary}
+Given $I$ a subset of the set of fundamental weights, $w \in W^I$ and $w_0$ a
+decomposition of the longest word of $W$ adapted to $w$, the quantum Schubert variety
+$\O_q[G/P_I]_w$ has an $(\tilde S_{w_0,I}^w, \alpha)$-basis $\B_{w_0,I}^w =
+\{\overline{b_s^\lambda}|(s,\lambda) \in \S_{w_0,I}^w\}$, where $\overline b_s^\lambda$
+denotes the class of $b_s^\lambda$ in the quotient. In particular, quantum Schubert
+varieties are AS Cohen Macaulay and have dualizing complexes.
+\end{Corollary}
+\begin{proof}
+	By Theorem \ref{Demazure-basis}, for every $\lambda \in P$ the vector space
+	$C^+(\lambda)/(J^I_w \cap C^+(\lambda))$ is generated by the set
+	$\{b^\lambda_s|(s,\lambda) \in \tilde S_{w_0,I}^w\}$. This proves that
+	$B_{w_0,I}^w$ is a basis of $\O_q[G/P_I]_w$. The fact that it has the desired
+	multiplicative property follows from formula \ref{product-formula} of Theorem
+	\ref{full-flag-basis}. The last statement is a direct application of Corollary
+	\ref{transfer-regularity}.
+\end{proof}
+
+
+
+\begin{bibdiv}
+\begin{biblist}
+\bib{AZ}{article}{
+   author={Artin, M.},
+   author={Zhang, J. J.},
+   title={Noncommutative projective schemes},
+   journal={Adv. Math.},
+   volume={109},
+   date={1994},
+   number={2},
+   pages={228--287},
+}
+
+\bib{B}{article}{
+   author={Bj{\"o}rk, Jan-Erik},
+   title={The Auslander condition on Noetherian rings},
+   conference={title={ Ann\'ee},
+	       address={Paris},
+	       date={1987/1988},
+	      },
+   book={
+       series={Lecture Notes in Math.},
+       volume={1404},
+       publisher={Springer},
+       place={Berlin},
+     },
+   date={1989},
+   pages={137--173},
+}
+
+\bib{BH}{book}{
+   author={Bruns, Winfried},
+   author={Herzog, J{\"u}rgen},
+   title={Cohen-Macaulay rings},
+   series={Cambridge Studies in Advanced Mathematics},
+   volume={39},
+   publisher={Cambridge University Press},
+   place={Cambridge},
+   date={1993},
+   pages={xii+403},
+}
+
+
+\bib{C}{article}{
+   author={Caldero, Philippe},
+   title={Toric degenerations of Schubert varieties},
+   journal={Transform. Groups},
+   volume={7},
+   date={2002},
+   number={1},
+   pages={51--60},
+}
+
+\bib{J}{book}{
+   author={Jantzen, Jens Carsten},
+   title={Lectures on quantum groups},
+   series={Graduate Studies in Mathematics},
+   volume={6},
+   publisher={American Mathematical Society},
+   place={Providence, RI},
+   date={1996},
+   pages={viii+266},
+}
+
+\bib{JZ}{article}{
+   author={J{\o}rgensen, Peter},
+   author={Zhang, James J.},
+   title={Gourmet's guide to Gorensteinness},
+   journal={Adv. Math.},
+   volume={151},
+   date={2000},
+   number={2},
+   pages={313--345},
+}
+
+\bib{K}{article}{
+   author={Kashiwara, Masaki},
+   title={On crystal bases},
+   conference={
+      title={Representations of groups},
+      address={Banff, AB},
+      date={1994},
+	      },
+   book={
+      series={CMS Conf. Proc.},
+      volume={16},
+      publisher={Amer. Math. Soc.},
+      place={Providence, RI},
+              },
+   date={1995},
+   pages={155--197},
+}
+
+\bib{Lit}{article}{
+   author={Littelmann, P.},
+   title={Cones, crystals, and patterns},
+   journal={Transform. Groups},
+   volume={3},
+   date={1998},
+   number={2},
+   pages={145--179},
+}
+
+\bib{LR}{article}{
+   author={Lakshmibai, V.},
+   author={Reshetikhin, N.},
+   title={Quantum flag and Schubert schemes},
+   conference={
+      title={ physics},
+      address={Amherst, MA},
+      date={1990},
+      },
+   book={
+      series={Contemp. Math.},
+      volume={134},
+      publisher={Amer. Math. Soc.},
+      place={Providence, RI},
+      },
+   date={1992},
+   pages={145--181},
+}
+
+\bib{RZ2}{article}{
+  author={Rigal, L.},
+  author={Zadunaisky, P.},
+  title={Quantum Toric varieties (?)},
+}
+
+\bib{VO}{book}{
+   author={N{\u{a}}st{\u{a}}sescu, Constantin},
+   author={Van Oystaeyen, F.},
+   title={Graded and filtered rings and modules},
+   series={Lecture Notes in Mathematics},
+   volume={758},
+   publisher={Springer},
+   place={Berlin},
+   date={1979},
+   pages={x+148},
+}
+
+\bib{NV}{book}{
+   author={N{\u{a}}st{\u{a}}sescu, Constantin},
+   author={Van Oystaeyen, Freddy},
+   title={Methods of graded rings},
+   series={Lecture Notes in Mathematics},
+   volume={1836},
+   publisher={Springer-Verlag},
+   place={Berlin},
+   date={2004},
+   pages={xiv+304},
+}
+
+\bib{S}{article}{
+   author={So{\u\i}bel{\cprime}man, Ya. S.},
+   title={On the quantum flag manifold},
+   language={Russian},
+   journal={Funktsional. Anal. i Prilozhen.},
+   volume={26},
+   date={1992},
+   number={3},
+   pages={90--92},
+   translation={
+       journal={Funct. Anal. Appl.},
+       volume={26},
+       date={1992},
+       number={3},
+       pages={225--227},
+ 	},
+}
+
+
+\bib{vdB}{article}{
+   author={van den Bergh, Michel},
+   title={Existence theorems for dualizing complexes over non-commutative
+   graded and filtered rings},
+   journal={J. Algebra},
+   volume={195},
+   date={1997},
+   number={2},
+   pages={662--679},
+}
+
+\bib{W}{book}{
+   author={Weibel, Charles A.},
+   title={An introduction to homological algebra},
+   series={Cambridge Studies in Advanced Mathematics},
+   volume={38},
+   publisher={Cambridge University Press},
+   place={Cambridge},
+   date={1994},
+   pages={xiv+450},
+}
+
+\bib{Ye}{article}{
+   author={Yekutieli, Amnon},
+   title={Dualizing complexes over noncommutative graded algebras},
+   journal={J. Algebra},
+   volume={153},
+   date={1992},
+   number={1},
+   pages={41--84},
+}
+\end{biblist}
+\end{bibdiv}
+
+
+
+\end{document}
+
+Fix $n \in \NN$ and let $\phi: \ZZ^n \to \ZZ$ be a group morphism such that $\phi(\NN_0^n)
+\subset \NN_0$. For every $\NN_0^n$ graded $k$-algebra $B$ we define $\phi_!(B)$ to be the 
+$\NN_0$-graded algebra with the same underlying algebra as $B$, and homogeneous components
+given by
+\begin{align*}
+  \phi_!(B)_m &= \bigoplus_{\{\xi \in \NN_0^n | \phi(\xi) = m\}} B_\xi & \mbox{for any } m
+  \in \NN_0.
+\end{align*}
+We write ${}_!B$ instead of $\phi_!(B)$ to lighten up notation.
+We say that $B$ is \emph{$\phi$-connected} if ${}_!B$ is a connected $\NN_0$-graded
+algebra. This is equivalent to the fact that $B$ is a connected $\NN_0^n$-graded algebra
+and that $\supp B \cap \ker \phi = \{(0, \ldots, 0)\}$. 
+
+If $M$ is an object in $\Gr B$ then we define $\phi_!(M)$ to be the object in $\Gr {}_!B$
+with the same underlying $B$-module structure as $M$ and homogeneous components given by
+\begin{align*}
+  \phi_!(M)_m &= \bigoplus_{\{\xi \in \ZZ^n | \phi(\xi) = m\}} M_\xi & \mbox{for any } m 
+  \in \ZZ.
+\end{align*}
+We also write ${}_!M$ instead of $\phi_!(M)$.
+If $N$ is another object in $\Gr B$ and $f \in \GrHom_B(N,M)$ is a homogeneous morphism
+of degree $\xi \in \ZZ^n$, then $f: {}_!N \to {}_!M$ is homogeneous of degree $\phi(\xi)$,
+so there is a functor $\phi_!: \Gr B \to \Gr {}_!B$ that sends an object $M$ to ${}_!M$ 
+and an homogeneous $B$-linear morphism to itself. Since $\phi_!$ leaves the underlying 
+$B$-linear structures intact and only changes the gradings, it is an additive and exact
+functor. 
+
+\begin{Lemma}
+\label{phi-functor}
+ Let $\phi: \ZZ^n \to \ZZ$ be a group morphism such that $\phi(\NN_0^n) \subset \NN_0$, and 
+ let $B$ be a noetherian $\phi$-connected $\NN_0^n$-graded algebra. Given an object $M$ in
+ $\Gr B$, the following hold:
+ \begin{enumerate}
+   \item For every object $N$ in $\Gr B$ and every $i \geq 0$ there exists a natural morphism 
+   $\GrExt^i_B(N,M) \to \GrExt^i_{{}_! B}({}_!N,{}_!M)$. If $N$ is finitely generated, 
+   this is an isomorphism.
+
+   \item The torsion submodule $\GG_\m({}_!M)$ can be given the structure of a
+   $\ZZ^n$-graded $B$-submodule of $M$. Thus the torsion functor $\GG_\m: \Gr {}_! B \to \Gr {}_!B$ 
+   induces a functor $\GG_\m: \Gr B \to \Gr B$ such that for every $i \geq 0$ the following 
+   diagrams of functors commute:
+   \begin{align*}
+  \xymatrix{
+	\Gr B \ar[r]^-{\GG_\m} \ar[d]_-{\phi_!}& \Gr B\ar[d]^-{\phi_!} & &
+	\Gr B \ar[r]^-{\R^i \GG_\m} \ar[d]_-{\phi_!}& \Gr B\ar[d]^-{\phi_!} \\
+	\Gr {}_!B \ar[r]^-{\GG_{\m}} & \Gr {}_!B & &
+	\Gr {}_!B \ar[r]^-{H^i_{\m}} & \Gr {}_!B
+  }	
+   \end{align*}
+
+   \item The graded injective dimension of $B$ is equal to the graded injective 
+   dimension of ${}_!B$. 
+   
+   \item If $M$ is finitely generated, then its graded projective dimension is equal to
+   the projective dimension of ${}_!M$. The global dimension of ${}_!B$ is equal to the 
+   graded projective dimension of the trivial graded $B$-module $k$.
+
+  \item The algebra ${}_!B$ has finite local dimension as an algebra if and only if the
+   set $$\{\ldim {}_! M | M \mbox{ is an object of $\grmod B$}\} \subset \NN_0$$ is bounded.
+
+   \item If ${}_!B$ has finite local dimension, then ${}_!B$ has property $\chi$ as an
+   algebra if and only if every graded ${}_!B$-module of the form ${}_!M$ for some object
+   $M$ in $\Gr B$ has property $\chi$.
+ \end{enumerate}
+\end{Lemma}
+\begin{proof}
+All of these items should be proved in \cite{RZ2}.
+\end{proof}
+
+
+
+The following remark is the following remark
+\begin{Remark}
+\label{multigraded-regularity}. 
+Suppose $B$ is a noetherian connected $\NN_0^n$-graded algebra.
+
+\begin{itemize}
+\item
+Let $\phi: \ZZ^n \to \ZZ$ be the group morphism that sends each element $\xi = (\xi^1, 
+\ldots, \xi^n) \in \ZZ^n$ to $\xi^1 + \ldots + \xi^n$. Then $B$ is $\phi$-connected, in
+particular there is always a group morphism $\phi$ such that $B$ is $\phi$-connected.
+
+\item
+By item 2. of the previous lemma,
+the local cohomology modules of ${}_!B$ and ${}_!B^\opp$ are independent of the chosen
+morphism $\phi$, so it makes sense to say that $B$ is AS Cohen Macaulay if an only if
+$\phi_!(B)$ is AS Cohen Macaulay for some, or any, group morphism $\phi$ such that $B$ is
+$\phi$-connected.
+
+\item
+By items 1. and 3. of the lemma, it makes sense to say that $B$ is AS Gorenstein if and
+only if ${}_!B$ is AS Gorenstein for some (or any) morphism $\phi$ such that $B$ is
+$\phi$-connected. 
+
+\item
+Being AS regular is also independent of $\phi$, since the global dimension of $B$ and
+${}_!B$ coincide (after all they are the same algebra with different gradings). Item
+4. of the lemma shows that AS regularity can be detected simply by looking at
+$\ZZ^n$-graded $B$-modules.
+
+\item
+By item 1. of the lemma, given an object $M$ in $\Gr B$, for every $i \geq 0$ there is a 
+vector space isomorphism $\GrExt_B^i(k,M) \cong \GrExt_{{}_!B}^i(k,M)$, so the graded 
+${}_!B$-module 
+${}_!M$ has property $\chi$ if and only if $\GrExt^i_B(k,M)$ is finite dimensional for
+every $i \geq 0$. In that case we simply say that $M$ has property $\chi$. Also we may set
+$\depth M = \depth {}_!M$.
+
+\item
+Finally by Proposition \ref{vdb-criterion} and items 5. and 6. of the lemma, ${}_!B$ has a 
+balanced dualizing complex if and only if all $\ZZ^n$-graded modules have property $\chi$
+and there is a global bound for their local dimensions.
+\end{itemize}
+\end{Remark}
+
+
+
+
+

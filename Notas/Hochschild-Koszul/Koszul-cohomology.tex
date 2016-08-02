@@ -1,0 +1,85 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{notas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\renewcommand\P{\BbbP}
+
+\newcommand\A{\mathcal A}
+\newcommand\B{\mathcal B}
+\newcommand\Z{\mathsf Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\id{\mathsf{Id}}
+\newcommand\im{\mathsf{im}}
+\newcommand\coPer{\mathsf{coPer}}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\g{\mathfraP g}
+\renewcommand\sl{\mathfraP{sl}}
+
+\DeclareMathOperator\rep{\mathsf{rep}}
+\DeclareMathOperator\Rep{\mathsf{Rep}}
+
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\End{\mathsf{End}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Cohomología de Koszul}
+\date{[Koszul-cohomology.tex]}
+\author{21/04/16}
+\begin{document}
+\maketitle
+\paragraph 
+Sea $A$ un álgebra cuadrática $A = T(V)/(R)$, con $R \subset V \ot V$. El álgebra es 
+graduada y notamos su componente de grado $t$ por $A^t$
+
+\paragraph
+El álgebra $A^e$ es graduada y conexa, por lo tanto $A$ tiene una resolución minimal 
+como $A^e$-módulo. Notamos esta resolución por $P_\bullet(A) = (A \ot P_\bullet \ot A, 
+d^P)$. Como $A$ es graduada también lo es $P_p$ para cada $p \geq 0$ y $P_p^q = 0$ si 
+$q < p$.
+
+\paragraph
+Cada módulo del complejo es trigraduado con $P_\bullet(A)^{(r,s,t)} = A^r \ot 
+P_\bullet^s \ot A^t$. Llamamos \emph{peso} a $(r,s,t)$ y \emph{grado total} a $r+s+t$.
+El diferencial $d^P$ respeta el grado total,
+\[
+d^P(1 \ot P^n_p \ot 1) \subset \bigoplus_{i+j+k = n} A^i \ot P^j_{p-1} \ot A^k
+\]
+con lo cual $j \leq n$. Por bilinealidad de $d^P$ obtenemos que $d^P(A \ot P_p^n \ot A)$
+está contenido en $\bigoplus_{j \leq n} A \ot P_p^j \ot A$.
+
+\paragraph
+Sea $F_q P_\bullet(A) = \bigoplus_{n \leq q} A \ot P_\bullet^n \ot A$. Esta es
+una filtración de $A \ot P_\bullet \ot A$ por espacios trigraduados y $d^P$ es filtrado
+para esta graduación. El complejo graduado asociado es un complejo de $A$-bimódulos 
+$\tilde P_\bullet(A)$ con $\tilde P(A)_p = A \ot P_p \ot A$ y diferencial $\tilde d^P$ 
+que respeta la graduación por peso. Explícitamente, dado $x \in A^r \ot P_p^s \ot A^t$ 
+tenemos $\tilde d^P(x) = d^P(x)^{(r,s,t)}$.
+
+\paragraph
+Dado $p \geq 0$ sea $W_p$ como en \emph{Koszul calculus}.
+En este caso $W_p = P_p^{p}$ y $d^P(A \ot W_p \ot A) \subset A \ot W_{p-1} \ot A$.
+Notamos $d^W$ a la restricción de $d^P$ a $A \ot W_\bullet \ot A$ y así tenemos un 
+complejo $K_\bullet(A) = (A\ot W_\bullet \ot A, d^W)$. Este complejo también es 
+trigraduado, y $K_q(A)^{(r,s,t)} = 0$ si $q \neq s$. Además
+$K_s(A)^{(r,s,t)} = P_s(A)^{(r,s,t)}$ y la inclusón $K_\bullet(A) \to P_\bullet(A)$ es un
+morfismo de complejos.
+
+
+\end{document}

@@ -1,0 +1,369 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% esto tiene que estar, en este orden...
+\usepackage[small]{titlesec}
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8,latin1]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumerate}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+%\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+
+%\swapnumbers
+
+
+
+
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lema, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposici\'on, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Teorema, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corolario, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definici\'on, sibling=para, style=mystyle]{Definition}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lema, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposici\'on, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Teorema, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corolario, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definici\'on, style=mystyle-empty]{Definition*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\stack[2]{\genfrac{}{}{0pt}{2}{#1}{#2}}
+\newcommand\uu[1]{\underline{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\A{\mathcal A}
+\newcommand\B{\mathcal B}
+\renewcommand\L{\mathcal L}
+\newcommand\M{\mathcal M}
+\newcommand\F{\mathcal F}
+\newcommand\G{\mathcal G}
+\newcommand\GG{\Gamma}
+\newcommand\p{\mathfrak{p}}
+\newcommand\m{\mathfrak{m}}
+\newcommand\opp{\mathsf{opp}}
+\DeclareMathOperator\Id{\mathsf{Id}}
+\DeclareMathOperator\st{\mathsf{st}}
+
+\newcommand\C{\mathsf C}
+\newcommand\K{\mathsf K}
+\newcommand\D{\mathsf D}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+
+\DeclareMathOperator\GrMod{\mathsf{GrMod}}
+\DeclareMathOperator\GrHom{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\GrExt{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\GrTor{\underline{\mathsf{Tor}}}
+
+\DeclareMathOperator\Ab{\mathsf{Ab}}
+\DeclareMathOperator\ShHom{\mathcal Hom}
+\DeclareMathOperator\ShExt{\mathcal Ext}
+\DeclareMathOperator\ShTor{\mathcal Tor}
+
+\DeclareMathOperator\pd{pd}
+\DeclareMathOperator\id{id}
+\DeclareMathOperator\depth{depth}
+\DeclareMathOperator\Spec{Spec}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\ann{ann}
+\DeclareMathOperator\im{Im}
+\DeclareMathOperator\gr{gr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Categorias de complejos}
+\author{[cat-comp.tex]}
+\date{29/03/2012}
+\begin{document}
+\maketitle
+
+En este documento vamos a reunir algunos hechos aislados sobre las categorías de
+complejos relacionadas con las categorías de módulos sobre un anillo. Esto no
+pretende ser una colección de definciones precisas y exhaustivas. Quizás con el
+tiempo estas notas se completen, pero el objetivo \emph{no es} escribir en
+$n+1$-ésimo libro sobre categorias derivadas, sino dejar demostraciones
+escritas de algunos resultados generales y dar alguna intuición sobre cómo se
+hacen cuentas en las categorías derivadas. En ese espíritu, no nos ocupamos en
+detalle de verificar que las categorías definidas a continuación estén bien
+definidas, sino que lo damos por sentado y nos ponemos a trabajar en ellas. Con
+esto en mente, muchas veces demostramos resultados al nivel de la categoría de
+complejos $\K(\A)$ y mágicamente concluímos traducimos el resultado a la
+categoría derivada.
+
+\section{Categorías de complejos y homología}
+\paragraph
+Sea $\A$ una categoría abeliana. Un \emph{complejo sobre $\A$} es una familia de
+objetos de $\A$, $(X^i)_{i \in \ZZ}$, junto con morfismos $d^i: X^i \to X^{i+1}$
+tales que $d^i d^{i-1} = 0$ para todo $i \in \ZZ$. Podemos formar la
+categoría de complejos sobre $\A$, que denotamos por $\C(\A)$, cuyos objetos son
+los complejos de cocadenas sobre $\A$, y los morfismos son morfismos de
+complejos; la categoría homotópica $\K(\A)$, que se obtiene a partir de la
+anterior identificando dos morfismos cuando estos son homotópicos; y finalmente
+la \emph{categoría derivada} $\D(\A)$, que se obtiene invirtiendo \emph{todos}
+los morfismos de $\C(\A)$ que inducen isomorfismos a nivel de los grupos de
+homología (ver más abajo). Es importante notar que $\C(\A)$ es una categoría
+abeliana, pero $\K(\A)$ y $\D(\A)$ en general no lo son.
+
+\paragraph
+Dado un complejo de cadenas $X \in \C(\A)$ definimos su trasladado como $TX =
+(X^{i+1},-d^{i+1})$. Claramente $T$ define una autoequivalencia en $\C(\A)$,
+$\K(\A)$ y $\D(\A)$. Notamos por $X[n]:= T^n X$
+
+\paragraph 
+Podemos considerar distintas variantes de estas categorías. Por ejemplo
+$\C^{\diamondsuit}(\A)$ con $\diamondsuit \in \{\!,+,-,b\}$ representan la
+categoría de complejos, complejos acotados a izquierda (es decir, tales que $X^i
+= 0$ para $i << 0$), a derecha ($X^i = 0$ si $i >> 0$) o a ambos lados (hay
+finitos $X^i$ no nulos). Combinamos libremente todas estas restricciones, y las
+aplicamos asimismo a la categoría homotópica y a la categoría derivada de $\A$. 
+
+\paragraph
+En todos los casos están definidos los funtores de cohomología $h^i$ con $i \in \ZZ$ con valores en la categoría de grupos abelianos (o alguna más específica, dependiendo de la naturaleza de los objetos de $\A$). Dado un complejo $X$, $h^i(X) = \ker d^i / \im d^{i-1}$, y es estándar comprobar que un morfismo de complejos induce morfismos entre los grupos de cohomología; la definición de $\D(\A)$ es justamente la localización de $\C(\A)$ en los morfismos que inducen isomorfismos en los grupos de cohomología. 
+
+Notar que $h^i(X[n]) = h^{i+n}(X)$
+
+\paragraph
+Si $\B \subset \A$ es una subcategoría abeliana cerrada por extensiones, podemos
+considerar $\C_\B(\A)$ formada por los complejos de $\C(\A)$ cuyos grupos de
+homología caen en $\B$. 
+
+\paragraph
+Definimos dos constantes asociadas a cada complejo de cadenas $X$:
+\begin{align*}
+\sup X &:= \sup \{i| X \neq 0\} \\
+\inf X &:= \inf \{i| X \neq 0\} 
+\end{align*}
+
+\paragraph
+Dado un objeto $X \in \C(\A)$, una resolución proyectiva de $X$ es un complejo $P$ formado por objetos proyectivos de $\A$ y un cuasi-isomorfismo $P \to X$. Análogamente, una resolución inyectiva de $X$ es un complejo $I$ formado por inyectivos junto con un cuasi-isomorfismo $X \to I$.
+
+Definimos la dimensión proyectiva $\pd X$ y la dimensión inyectiva $\id X$ como
+\begin{align*}
+\pd X &:= \inf \{-\inf P | P \mbox{ es una resolución proyectiva de } X\} \\
+\id X &:= \inf \{\sup I | I \mbox{ es una resolución inyectiva de } X\}
+\end{align*} 
+
+\paragraph
+Decimos que $\A$ tiene suficientes proyectivos si para todo objeto $M$ de $\A$, existe un proyectivo $P$ y un epimorfismo $P \twoheadrightarrow M$.
+\begin{Proposition*}
+Sea $X \in C^-(\A)$. Si $\A$ tiene suficientes proyectivos entonces $X$ tiene
+una resolución proyectiva $P$. Análogamente, si
+$N^\bullet \in \D^+(\B)$ y $\B$ tiene suficientes inyectivos, existe una
+resolución inyectiva de $N^\bullet$.
+\end{Proposition*}
+\begin{proof}
+Demostramos únicamente la primera afirmación. Cambiando $X$ por algún trasladado
+adecuado, podemos suponer que $X^i = 0$ para $i > 0$. Buscamos entonces
+construir un complejo $P = (P^\bullet,\delta)$ y un morfismo de complejos $\phi:
+P \to X$ de forma que $h^i(\phi)$ sea siempre un isomorfismo, y podemos tomar
+$P^i = 0$ para $i > 0$. Construimos el complejo $P$ por inducción.
+
+\emph{Paso 0.} Por hipótesis, $X^0$ puede ser cubierto por un objeto proyectivo $P^0$ y un morfismo $\phi_0 : P^0 \to X^0$. Tomamos entonces esto como primer paso en la construcción, y tenemos
+\begin{align*}
+\xymatrix{
+	{} & {} & P^0 \ar[r]^-{\delta^0} \ar[d]^-{\phi_0} & 0 \\
+	X^{-2} \ar[r] &X^{-1} \ar[r] &X^0 \ar[r]^-{d^0} & 0
+}
+\end{align*}
+Quedamos entonces en la siguiente condición: Tenemos un morfismo $\phi_0 : P^0 \to M^0$, que además envía el núcleo de $\delta^0$ en el de $d^0$. En este caso ambas afirmaciones coinciden, pero se verá en el paso inductivo que es necesario distinguirlas.
+
+\emph{Paso inductivo.} Supongamos entonces que tenemos una sucesión de módulos proyectivos $P^\bullet$, morfismos $\delta^\bullet$ tales que $\delta^\bullet \delta^{\bullet-1} = 0$, y morfismos $\phi^\bullet$ con $\bullet \in \{-n, -n + 1, \ldots, 0\}$ de forma que el diagrama
+\begin{align*}
+\xymatrix{
+	{} & {} & P^{-n} \ar[r]^{\delta^{-n}} \ar[d]^-{\phi_{-n}} & P^{-n+1} \ar[r]^-{\delta^{-n+1}} \ar[d]^-{\phi_{-n+1}} & \ldots  \\
+	\ldots \ar[r] & X^{-n-1} \ar[r] &X^{-n} \ar[r]^-{d^{-n}} &X^{-n+1} \ar[r]^-{d^{-n+1}} & \ldots
+}
+\end{align*}
+conmuta. Más aún, tenemos que $\phi_\bullet$ induce un cuasi-isomorfismo para $\bullet >-n$, y que $\phi_{-n}(\ker \delta^{-n}) = \ker d^{-n}$. Consideremos el siguiente diagrama
+\begin{align*}
+\xymatrix{
+0 \ar[r] 
+	& Y \ar@{-->}[r] \ar@{-->}[d] 
+	&\ker \delta^{-n} \ar[r] \ar[d]^-{\phi_n} 
+	&\ker \delta^{-n} / Y \ar[d]^-{\cong} \ar[r] 
+	& 0 \\
+0 \ar[r]
+	& \im d^{-n-1} \ar[r]^-{i}
+	& \ker d^{-n} \ar[r]
+	& h^{-n}(X) \ar[r]
+	& 0
+}
+\end{align*}
+donde $Y$ es el pullback del par $(\phi_{-n}, i)$. Como el pullback respeta núcleos y conúcleos, tenemos que la sucesión de arriba es exacta y que la flecha inducida por $\phi_{-n}$ y adornada con un ``$\cong$'' es efectivamente un isomorfismo. Ahora tomamos $\tilde{P}^{-n-1}$ un cubrimiento proyectvo del pullback $Y$, y construimos el diferencial de complejo $P$ como la flecha punteada
+\begin{align*}
+\xymatrix{
+\tilde P^{-n-1} \ar@{->>}[dr] \ar@{.>}[rrr]
+	& {}
+	& {}
+	& P^{-n}
+	& {} \\
+0 \ar[r] 
+	& Y \ar@{-->}[r] \ar@{-->}[d] 
+	&\ker \delta^{-n} \ar[r] \ar[d]^-{\phi_n} \ar@{^{(}->}[ur] 
+	&\ker \delta^{-n} / Y \ar[d]^-{\cong} \ar[r] 
+	& 0 \\
+0 \ar[r]
+	& \im d^{-n-1} \ar[r]^-{i}
+	& \ker d^{-n} \ar[r]
+	& h^{-n}(X) \ar[r]
+	& 0
+}
+\end{align*}
+Las felchas verticales son sobreyectivas: la del medio por hipótesis, la primera por definición de pullback y la última por el lema de los cinco. Notar que \emph{cualquier} cubrimiento proyectivo de $Y$ puede colocarse en lugar de $\tilde P^{-n-1}$. 
+
+Finalmente, dado que $\tilde P^{-n-1}$ es proyectivo, existe un morfismo $\tilde \phi: \tilde P^{-n-1} \to X^{-n-1}$ que hace conmutar el diagrama
+\begin{align*}
+\xymatrix{
+	0 \ar[r]
+		& \ker \pi \ar[r] \ar[d]
+		& \tilde P^{-n-1} \ar[r]^-{\pi} \ar[d]^-{\tilde \phi}
+		& \im d^{-n-1} \ar[r] \ar@{=}[d]
+		& 0 \\
+	0 \ar[r]
+		& \ker d^{-n-1} \ar[r]
+		& X^{-n-1} \ar[r]
+		& \im d^{-n-1} \ar[r]
+		& 0
+}
+\end{align*}
+donde $\pi$ es la composición de los morfismos sobreyectivos $\tilde P^{-n-1} \twoheadrightarrow Y \to \im d^{-n-1}$
+
+El único problema es que quizás la flecha entre los núcleos no es sobreyectiva. Para resolver el problema, tomamos una cubierta proyectiva $P' \twoheadrightarrow \ker d^{-n-1} / \phi(\ker \pi)$ y levantamos el morfismo de cubrimiento a $\rho: P' \to \ker d^{-n-1}$. Claramente podemos reemplazar $\tilde P^{-n-1}$ por $P^{-n-1} = P' \oplus P^{-n-1}$ en todos los diagramas anteriores, extendiendo el cubrimiento $\tilde P^{-n-1} \to Y$ por cero a todo $P^{-n-1}$ y reemplazado $\tilde \phi$ por $\phi = \tilde \phi \oplus \rho$. 
+
+HACER UN RESUMEN CON LAS CONCLUSIONES. 
+\end{proof}
+
+\section{Funtores y sus derivados}
+\paragraph 
+Dados dos complejos de cadena $M^\bullet, N^\bullet \in \D(\A)$, definimos el
+complejo
+$\Hom_{\C(\A)}(M^\bullet, N^\bullet)$ con $\displaystyle
+\Hom_{\C(\A)}(M^\bullet, N^\bullet)^n = \bigoplus_n \left[\prod_{q = p +
+n}\Hom_\A(M^p,N^q)\right]$ y diferencial 
+$$d^n = \prod_{q = p + n}
+\Hom_\A (d^{p-1}_M, N^\bullet) + \Hom_\A(M^\bullet,(-1)^{n+1} d_N^q)$$
+
+De manera análoga si $N \in \D(\A^\opp)$ y si tenemos un producto tensorial
+bien definido en $\A$, definimos $M^\bullet \ot_\A N^\bullet$ como el compejo
+total asociado al complejo doble.
+
+\begin{Definition}
+ Sea $F: \A \to \B$ un funtor exacto a izquierda (resp. derecha). Su funtor
+derivado $RF: \D(\A) \to \D(\B)$ está definido de la siguiente manera:
+$RF(M^\bullet) = F(I^\bullet)$ (resp. $RF(M^\bullet) = F(P^\bullet)$) donde
+$I^\bullet$ (resp. $P^\bullet$) es una resolución inyectiva (resp. proyectiva)
+de $M^\bullet$. Denotamos por $R^i F(M^\bullet)$ al objeto $H^i(F(I^\bullet))$.
+\end{Definition}
+Esta definición enquilombada está justificada por la versión dual de
+\cite{RD}*{Theorem I.5.1} y la proposición anterior. El resultado de \cite{RD}
+dice que hay un isomorfismo natural entre $Q [F(I^\bullet)]$ y $(RF) Q
+(I^\bullet)$, pero $Q (I^\bullet) \cong M^\bullet$.
+
+\begin{Definition}
+ Un funtor aditivo $F: \A \to \B$ se dice \emph{way-out a
+derecha} (sugerencias?) si para todo $n \in \ZZ$ existe un $m \in \ZZ$ con la
+siguiente propiedad: dado un complejo $M^\bullet$ con $h^i(M^\bullet) = 0$ para
+todo $i < m$, entonces $h^i(F(M^\bullet)) = 0$ para todo $i < n$.
+\end{Definition}
+
+\begin{Lemma}[El lema sobre los funtores way-out]
+ Sean $\A$ y $\B$ dos categorías abelianas, $\A'$ una subcategoría cerrada
+por extensiones. Dados $F, G: \D_{\A'}^{+}(\A) \to \D(\B)$ dos
+$\partial$-funtores, y una transformación natural $\eta: F \to G$
+  \begin{enumerate}[i)]
+   \item Si $\eta(X)$ es un isomorfismo para todo $X \in \A'$,
+$\eta(X^\bullet)$ es una isomorfismo para todo $X^\bullet \in \D_{\A'}^b(\A)$.
+   \item Si además $F$ y $G$ son way-out a derecha, $\eta(X^\bullet)$ es una
+isomorfismo para todo $X^\bullet \in \D_{\A'}^+(\A)$.
+   \item Si además son way-out a derecha y a izquierda, $\eta(X^\bullet)$ es una
+isomorfismo para todo $X^\bullet \in \D_{\A'}(\A)$.
+   \item Supongamos que $\mathcal I$ es una subclase de $\A'$ tal que para todo
+objeto de $\A'$ hay una inyección en un objeto de $\mathcal I$. Si $\eta(X)$ es
+un isomorfismo para cada $X \in \mathcal I$ y $F, G$ son way-out a derecha,
+entonces $\eta(X)$ es un isomorfismo para cada $X \in \A'$.
+  \end{enumerate}
+
+\end{Lemma}
+
+
+\begin{bibdiv}
+\begin{biblist}
+
+
+\bib{RD}{book}{
+   author={Hartshorne, Robin},
+   title={Residues and duality},
+   label={RD66},
+   series={Lecture notes of a seminar on the work of A. Grothendieck, given
+   at Harvard 1963/64. With an appendix by P. Deligne. Lecture Notes in
+   Mathematics, No. 20},
+   publisher={Springer-Verlag},
+   place={Berlin},
+   date={1966},
+   pages={vii+423},
+}
+\end{biblist}
+\end{bibdiv}
+\end{document}
