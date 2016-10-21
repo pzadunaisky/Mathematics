@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{amsmath,amsthm,amssymb}
+
+\newtheorem*{Theorem}{Theorem}
+\DeclareMathOperator\Hom{Hom}
+\DeclareMathOperator\Mod{Mod}
+
+\begin{document}
+It is a well known fact that a finite dimensional Hopf algebra is self injective. 
+This is a simple consequence of the classical theorem of Larson and Sweedler
+that any such Hopf algebra is Frobenius. Below we offer an alternative proof,
+based on the fact that the category $\mathcal M^H_H$ of left Hopf modules is 
+semisimple and abstract nonsense regarding adjoint functors.
+
+\begin{Theorem}
+Let $k$ be a field and let $H$ be a finite dimensional Hopf algebra over $k$. 
+Then $H$ is injective as $H$-module.
+\end{Theorem}
+\begin{proof}
+There is an obvious functor $O: \mathcal M^H_H \to \Mod H$, which simply forgets
+about the comodule structure. On the other hand we have a functor in the opposite
+direction $T: \Mod H \to \mathcal M^H_H$, which sends an $H$-module $M$ to $H
+\otimes_k M$ with the $H$-module structure of a tensor product, and comodule
+structure induced by $H$. These functors are clearly exact, and it is easy
+to check that they are both left and right adjoint of each other. Hence
+we get a natural isomorphism
+\begin{align*}
+\Hom_H(-,O(H)) \cong \Hom^H_H(T(-),H).
+\end{align*}
+Since $T$ is exact and $H$ is trivially injective in $\mathcal M^H_H$, the
+functor on the right is exact, which implies that $H$ is injective as an
+object in $\Mod H$.
+\end{proof}
+
+
+\end{document}
