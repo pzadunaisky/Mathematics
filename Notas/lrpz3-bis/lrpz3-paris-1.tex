@@ -169,7 +169,7 @@ bodyfont=\itshape]{mystyle-empty-plain}
 Quantum toric degeneration of quantum Schubert varieties
 \footnote{file:[lrpz3-paris-1.tex]}
 }
-\date{27-09-16}
+\date{25-10-16}
 \author{Pablo Zadunaisky}
 
 \begin{document}
@@ -1281,54 +1281,58 @@ an isomorphism.
 %\newpage 
 \section{Quantum affine toric degeneration of quantum Schubert varieties}
 \label{q-flag-schubert}
-In this section we apply the rsults in the previous section to study Schubert varieties 
+In this section we apply the results in the previous section to study Schubert varieties 
 of quantum flag varieties. We recall the definitions of quantum flag and Schubert 
 varieties found with some detail in order to establish notation, and following 
-Littelmann we associate to each a an affine semigroup $S$. We then use a result due to
-Caldero to show that each quantum Schubert variety has an $(S, <)$-basis in the sense of 
+Littelmann we associate to each a an affine semigroup $S$. We then use an argument due to
+P. Caldero to show that each quantum Schubert variety has an $(S, <)$-basis in the sense of 
 \ref{lex-degeneration}, and hence has a quantum toric degeneration with associated 
-semigroup $S$.
+semigroup $S$. The main ingredient for the construction of this basis is the canonical
+or global basis of $U_q^-(\g)$, discovered independently by Lusztig and Kashiwara, so we
+recall its main properties.
 
 \subsection*{Quantum flag and Schubert varieties}
 
 \paragraph
 \label{lie-algebra-notation}
 Let $\g$ be a complex semisimple Lie algebra and let $G$ be the corresponding simply 
-connected Lie group. We denote by $\Lambda$ the weight lattice of $\g$, and write 
-$\{\varpi_1, \ldots, \varpi_n\}$ for its set of fundamental weights. Let $\Lambda^+ =
-\sum_i \NN \varpi_i$ be the set of dominant weights, and $\alpha_1, \ldots,\alpha_n$ 
-the positive roots of $\g$. Let $W$ be the Weyl group of $\g$, and $s_i \in W$ the
-reflection corresponding to the $i$-th positive root. Given an element $w \in W$ we 
-denote its length by $\ell(w)$, and set $N$ to be the length of the longest word of $W$. 
-A \emph{decomposition} of $w \in W$ is a word on the generators $s_i$ that equals $w$ in 
-$W$. A decomposition of the longest word of $W$ is said to be \emph{adapted} to $w$ if
-it is of the form $s_{i_1} \ldots s_{i_N}$ with $s_{i_1} \ldots s_{i_{\ell(w)}} = w$.
-For every element $w \in W$ there exists a decomposition of the longest word of $W$ 
-adapted to $w$. In other words the longest word of $W$ is the maximum for the weak right 
-Bruhat order on $W$, see \cite{BB}*{Proposition 3.1.2}.
+connected Lie group. We denote by $\Phi = \{\alpha_1, \ldots,\alpha_n\}$ the set simple 
+roots of $\g$; by $\ZZ\Phi$ be the root lattice; by $\{\varpi_1, \ldots, \varpi_n\}$ be 
+the set of fundamental weights; and by $\Lambda$ the weight lattice of $\g$. Set
+$\Lambda^+ = \sum_i \NN \varpi_i$ be the set of dominant weights. 
+
+Let $W$ be the Weyl group of $\g$, and $s_i \in W$ the reflection corresponding to the 
+$i$-th simple root. Given an element $w \in W$ we denote its length by $\ell(w)$, and set 
+$N$ to be the length of the longest word of $W$. A \emph{decomposition} of $w \in W$ is a 
+word on the generators $s_i$ that equals $w$ in $W$. A decomposition of the longest word of 
+$W$ is said to be \emph{adapted} to $w$ if it is of the form $s_{i_1} \ldots s_{i_N}$ with 
+$s_{i_1} \ldots s_{i_{\ell(w)}} = w$. For every element $w \in W$ there exists a 
+decomposition of the longest word of $W$ adapted to $w$. In other words the longest word of 
+$W$ is the maximum for the weak right Bruhat order on $W$, see 
+\cite{BB}*{Proposition 3.1.2}.
 
 \paragraph
 \label{quantized-enveloping-algebra}
 Fix $q \in \k^\times$ not a root of unity. Let $U_q(\g)$ be the quantum enveloping 
-algebra of $\g$ as defined in \cite{Jan}*{Definition 4.3}. Let $U_q^+(\g), U_q^-(\g)$ be 
-the positive and negative parts of $U_q(\g)$ as defined in \cite{Jan}*{4.4}. Recall that 
-for each $\lambda \in \Lambda^+$ there is an irreducible highest-weight representation 
-of $U_q(\g)$ of type $\mathbf{1}$, which we denote by $V_q(\lambda)$.
-Each $V_q(\lambda)$ decomposes as the direct sum of weight spaces $\bigoplus_{\mu \in 
-L(\lambda)} V_q(\lambda)_\mu$, where $L(\lambda)$ is a finite subset of $\Lambda$; the 
-dimensions of the weight spaces are the same as in the classical case, so the Weyl and 
-Demazure character formulas hold for these representations, see \cite{K}*{section 12.4}, 
-or \cite{Jan}*{subsection 5.15} for the Weyl formula.
+algebra of adjoint type of $\g$ as defined in \cite{Jan}*{Definition 4.3 and paragraph 
+4.5}. Let $U_q^+(\g), U_q^-(\g)$ be the positive and negative parts of $U_q(\g)$ as defined 
+in \cite{Jan}*{4.4}. Recall that for each $\lambda \in \Lambda^+$ there is an irreducible 
+highest-weight representation of $U_q(\g)$ of type $\mathbf{1}$, which we denote by 
+$V_q(\lambda)$. Each $V_q(\lambda)$ decomposes as the direct sum of weight spaces 
+$\bigoplus_{\mu \in L(\lambda)} V_q(\lambda)_\mu$, where $L(\lambda)$ is a finite subset of 
+$\Lambda$; the dimensions of the weight spaces are the same as in the classical case, so 
+the Weyl character formulas holds for these representations, see 
+\cite{Jan}*{subsection 5.15}.
 
 \paragraph
-Since $U_q(\g)$ is a Hopf
-algebra, its dual is an algebra with convolution product induced by the coproduct of
-$U_q(\g)$. There is a map $V_q(\lambda)^* \ot V_q(\lambda) \to U_q(\g)^*$ defined by
+Since $U_q(\g)$ is a Hopf algebra, its Hopf dual $U_q(\g)^{\circ}$ is an algebra with 
+convolution product induced by the coproduct of $U_q(\g)$. There is a map 
+$V_q(\lambda)^* \ot V_q(\lambda) \to U_q(\g)^\circ$ defined by
 sending $\phi \ot v \in V_q(\lambda)^* \ot V_q(\lambda)$ to the linear functional
 $c^\lambda_{\phi, v}$, which assigns to each $u \in U_q(\g)$ the scalar $c^\lambda_{\phi,
 v}(u) = \phi(uv)$. Functionals of type $c^\lambda_{\phi, v}$ are called \emph{matrix
 coefficients}. The $\k$-linear span of the matrix coefficients is a subalgebra of 
-$U_q(\g)^*$ denoted by $\O_q[G]$, called the quantized algebra of coordinate functions 
+$U_q(\g)^\circ$ denoted by $\O_q[G]$, called the quantized algebra of coordinate functions 
 over the group $G$. 
 
 \paragraph
@@ -1383,45 +1387,118 @@ variety} associated to $w$.
 %\newpage 
 \subsection*{Degeneration of quantum Schubert varieties}
 %\label{qtad-flag}
-
-\paragraph
 In this subsection we assume that $\k$ is of characteristic zero and that $q \in 
-\k^\times$ 
-is trascendental over $\QQ$. Our aim is to show that under these conditions quantum 
-Schubert varieties have quantum affine toric degenerations. In order to do so we work 
-for a moment over the field $\QQ(v)$, where $v$ is an indeterminate over $\QQ$, and 
+\k^\times$ is trascendental over $\QQ$. Our aim is to show that under these conditions 
+quantum Schubert varieties have quantum affine toric degenerations. In order to do so we 
+work for a moment over the field $\QQ(v)$, where $v$ is an indeterminate over $\QQ$, and 
 consider the $\QQ(v)$-algebra $U = U_v(\g)$. The general case will follow by extension 
 of scalars. 
 
+We now review Caldero's argument on the existence of an $(S,<)$-basis of $\O_q[G/B]$,
+and its natural extension to arbitrary partial flag and Schubert varieties. Since he
+was interested in classical flag varieties, Caldero works with a large base field 
+$\CC(q)$ that allows him to specialize at $q=1$ and still get algebraic varieties over
+the complex numbers. His arguments go through almost word by word in our context, but we 
+believe it is worthwhile to retrace it in some detail.
+
+\paragraph
 We denote by $U^+$ and $U^-$ the algebras $U^+_v(\g)$ and $U^-_v(\g)$, respectively. Let 
 $\A = \ZZ[v, v^{-1}] \subset \QQ(v)$. The algebra $U$ has an $\A$-form, defined 
-equivalently in \cite{Lu}*{paragraph 3.1.13} and \cite{Jan}*{section 11.1}, which we 
-denote by $U_\A$. This is a graded subring of $U$, and the algebras $U^+$ and $U^-$ also 
-have $\A$-forms which we denote by $U_\A^+$ and $U_\A^-$, respectively. By definition 
-$U \cong \QQ(v) \ot_\A U_\A$, and analogous results hold for $U_\A^+$ and $U_\A^-$.
+equivalently in \cite{Jan}*{section 11.1}, which we denote by $U_\A$. This is a 
+subring of $U$, and the algebras $U^+$ and $U^-$ also have $\A$-forms which we denote by 
+$U_\A^+$ and $U_\A^-$, respectively, and all these $\A$-forms are compatible with the
+weight decomposition of $U$. By construction $U \cong \QQ(v) \ot_\A U_\A$, and 
+analogous results hold for $U_\A^+$ and $U_\A^-$. Furthermore the highest weight modules 
+$V_v(\lambda)$ have corresponding $\A$-forms which we denote by $V_\A(\lambda)$. All these 
+$\A$-forms are compatible with the weight decompositions of the original objects, see 
+\cite{Jan}*{chapters 9,10}. 
+Now let $\lambda$ be a dominant weight and fix $w \in W$. The $\A$-form of the Demazure 
+module $V_q(\lambda)_{w}$ is defined as $V_\A(\lambda)_{w} = U^+ V_\A(\lambda)_{w\lambda}$.
 
-The algebra $U_\A^-$ has a homogeneous $\A$-basis $\B$, called the \emph{canonical 
-basis} of $U^-$, discovered independently by Lusztig and Kashiwara.
-For a general overview of the theory we refer to \cite{K}, and for proofs and details to
-\cite{Lu}*{section II} and \cite{Jan}*{chapters 9 - 11}. The $\A$-form $U_\A^-$ is
-compatible with the coalgebra structure of $U$, in the sense that $\Delta(U_\A^-) \subset
-U_\A^- \ot_\A U_\A^-$, where $\Delta$ is the comultiplication of $U$, see 
-\cite{Lu}*{Proposition 14.2.6 (a)}. Furthermore the highest weight modules 
-$V_v(\lambda)$ have corresponding $\A$-forms, which we denote by $V_\A(\lambda)$. All 
-these $\A$-forms are compatible with the weight decompositions of the original objects.
-
-\begin{Theorem} 
+\paragraph
 \label{T:A-crystal-basis} 
-Let $\lambda \in \Lambda^+$, let $I$ be a subset of the fundamental weights and let 
-$w \in W^I$. There exists $\B_\lambda \subset \B$ such that $\B_\lambda v_\lambda 
-\subset V_\A(\lambda)$ is a basis of weight vectors of $V_\A(\lambda)$, and furthermore, 
-there exists a subset $\B_w \subset \B$ such that $(\B_w \cap \B_\lambda)v_\lambda$ is a 
-basis of the Demazure module $V_\A(\lambda)_w$.
-\end{Theorem} 
-\begin{proof} 
-See \cite{K1}*{Theorem 3.2.5}. Remark 3.2.6 of the same reference states that this
-decomposition induces a decomposition of the corresponding $\A$-forms.  
+The algebra $U_\A^-$ has a homogeneous $\A$-basis, called the \emph{canonical 
+basis} of $U^-$, discovered independently by Lusztig and Kashiwara. Its contruction
+is the subject of \cite{Jan}*{chapters 9 - 11}, and we will use the notation from this
+source to recapitulate some relevant facts. 
+
+Set $A_0 \subset \QQ(v)$ to be the ring of rational functions without a pole at $0$, define 
+the operators $\tilde F_\alpha: U_\A^- \to U_\A^-$ as in \cite{Jan}*{10.2}, and 
+let $\L(\infty)$ be the $A_0$-lattice generated by all elements of the form
+$\tilde F_{i_1} \tilde F_{i_2} \cdots \tilde F_{i_r}(1)$; by definition
+these are weight elements, so setting $\L(\infty)_{-\nu} = \L(\infty) \cap U^-_{-\nu}$, we
+get $\L(\infty) = \bigoplus_{\nu \geq 0} \L(\infty)_{-\nu}$, and furthermore each
+$\L(\infty)_{-\nu}$ is a finitely generated $A_0$-module that generates $U^-_\nu$ over 
+$\QQ(q)$. By definition, $\B(\infty)_{-\nu} \subset \L(\infty)_{-\nu} / q 
+\L(\infty)_{-\nu}$ is the set of all $\tilde F_{i_1} \tilde F_{i_2} \cdots 
+\tilde F_{i_r}(1) + q\L(\infty)$ such that $\sum_i \alpha_i = \nu$, and 
+$\B(\infty) = \bigsqcup_{\nu \geq 0} \B_{-\nu}$ \cite{Jan}*{10.3}. Although it is not 
+obvious, $\B(\infty)_{-\nu}$ is a basis of $\L(\infty)_{-\nu} / q \L(\infty)_{-\nu}$ 
+\cite{Jan}*{Proposition 10.11}. It turns out that each $b \in \B(\infty)_{-\nu}$ has a 
+unique lift $G(b) \in \L(\infty)_{-\nu} \cap (U_\A^-)_{-\nu}$, which is invariant under the 
+action of certain automorphisms of $U$. \cite{Jan}*{Theorem 11.10 a)}. The set of all 
+$G(b)$ with $b \in \B(\infty)$ is called the global basis of $U_\A^-$.
+
+Let $w \in W$, and let $w = s_{i_1}\cdots s_{i_r}$ be a reduced decomposition of $w$. 
+Set $\B_w(\infty)$ as the set of elements in $B(\infty)$ of the form $\tilde 
+F_{\alpha_{i_1}}^{k_1} \tilde F_{\alpha_{i_2}}^{k_2} \cdots \tilde 
+F_{\alpha_{i_r}}^{k_r}(1) + q\L(\infty)$. This set does not depend on the decomposition 
+\cite{K1}*{Proposition 3.2.5}.
+
+\begin{Theorem*}
+Let $\nu \in \ZZ \Phi$ with $\nu \geq 0$.
+\begin{enumerate}[label=(\alph*)]
+\item The set $\{G(b) \mid b \in \B_{-\nu}\}$ is an $\A$ basis of $(U_\A^-)_{- \nu}$.
+
+\item Let $\lambda$ be a dominant weight and let $v_\lambda$ be a highest weight vector of 
+$V_\A(\lambda)$. The set $\{G(b)v_\lambda \mid b \in \B(\infty)_{-\nu}\} \setminus \{0\}$
+is an $\A$-basis of $V_\A(\lambda)_{\lambda - \nu}$. Furthermore, if $G(b)v_\lambda = 
+G(b')v_\lambda \neq 0$ then $b = b'$.
+
+\item Let $w \in W$. The set $\{G(b)v_\lambda \mid b \in \B_w(\infty)\} \setminus \{0\}$
+is an $\A$-basis of $V_\A(\lambda)_{w}$. 
+\end{enumerate}
+\end{Theorem*}
+\begin{proof}
+The first two items are part of \cite{Jan}*{Theorem 11.10}. The third is 
+\cite{K1}*{Proposition 3.2.5 (vi)}.
 \end{proof}
+
+
+Since $\B$ consists of weight elements, setting $\B_\nu = 
+\B \cap (U_\A^-)_{-\nu}$ for each $\nu \in \ZZ \Phi$, $\nu \geq 0$, we get $\B = 
+\bigsqcup_\nu \B_\nu$.
+\begin{Theorem*} 
+Let $\nu \in \ZZ\Phi$ with $\nu \geq 0$. 
+\begin{enumerate}
+\item Let $\lambda \in \Lambda^+$, let $v_\lambda \in V_\A(\lambda)$ be a highest 
+weight vector, and let $\B_\nu(\lambda) = \{b \in \B_\nu \mid b v_\lambda \neq 0\}$. Then 
+$B_\nu(\lambda) v_\lambda = \{b v_\lambda \mid b \in \B_\nu(\lambda)\}$ is an $\A$-basis
+of the weight component $V_\A(\lambda)_{\lambda - \nu}$.
+
+\item Let $w \in W$. There exists $\B_{w} \subset \B$, independent of $\lambda$,
+such that $\B_{w} \cap \B_\nu(\lambda)v_\lambda$ is an $\A$-basis of the weight component 
+$(V_\A(\lambda)_w)_{\lambda - \nu}$.
+\end{enumerate}
+\end{Theorem*} 
+\begin{proof} 
+The first item is part of \cite{Jan}*{Theorem 11.10}. The second one is essentially 
+\cite{K1}*{Remark 3.2.6}; notice that there is a typo in this remark: where Kashiwara 
+writes $U_q^\ZZ(\g)$ he should write $U_q^+(\g)_\ZZ$, or in our case $U_\A^+$. It also 
+follows from \cite{Lit}*{Theorem 10.2 and Proposition 10.3}.
+\end{proof}
+The set $\B_w$ can be described explicitly, or at least as explicitly as the set $\B$.
+The basis $\B_\nu$ consists of elements of $U_\A^- \subset U^-$. 
+
+
+\paragraph
+
+
+
+
+
+
+
 
 \paragraph
 \label{L:are-semigroups}
