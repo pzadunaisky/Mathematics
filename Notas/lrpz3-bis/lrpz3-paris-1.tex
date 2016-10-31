@@ -173,7 +173,7 @@ bodyfont=\itshape]{mystyle-empty-plain}
 Quantum toric degeneration of quantum Schubert varieties
 \footnote{file:[lrpz3-paris-1.tex]}
 }
-\date{25-10-16}
+\date{31-10-16}
 \author{Pablo Zadunaisky}
 
 \begin{document}
@@ -183,20 +183,23 @@ Quantum toric degeneration of quantum Schubert varieties
 %\newpage 
 \section{Introduction}
 
-The article is organized as follows: section \ref{graded-connected-algebras} contains
-general material on connected $\NN^r$-graded algebras. We adapt some well-known 
-defintions for connected $\NN$-graded algebras to the $\NN^r$-graded context. The 
-regularity properties of $\NN^r$-graded algebras are defined in terms of its category 
-of $\ZZ^r$-graded modules, and since an algebra may posses several diferent gradings we 
-study how these properties change when the grading changes. In the last subsection we 
-prove our main transfer result: if a connected $\NN^r$-graded has a filtration by 
-finite dimensional graded subspaces then, under mild technical conditions, the original 
-algebra inherits the regularity properties of the associated graded ring, see Theorem 
-\ref{transfer}. The key result is Proposition \ref{P:ext-ss}, which is an $\NN^r$-
-graded version of the classical spectral sequence relating $\Ext$-spaces of a filtered 
-algebra with those of its associated graded algebra. However the finer grading forces us 
-to do some careful bookkeeping, and it turns out that property $\chi$, or rather its 
-$\NN^{r+1}$-graded analogue, plays a delicate role, see Corollary \ref{ldim}.
+The article is organized as follows: section \ref{graded-connected-algebras} 
+contains general material on connected $\NN^r$-graded algebras. We adapt some 
+well-known defintions for connected $\NN$-graded algebras to the 
+$\NN^r$-graded context. The regularity properties of $\NN^r$-graded algebras 
+are defined in terms of its category of $\ZZ^r$-graded modules, and since an 
+algebra may posses several diferent gradings we study how these properties 
+change when the grading changes. In the last subsection we 
+prove our main transfer result: if a connected $\NN^r$-graded has a filtration 
+by finite dimensional graded subspaces then, under mild technical conditions, 
+the original algebra inherits the regularity properties of the associated 
+graded ring, see Theorem \ref{transfer}. The key result is Proposition 
+\ref{P:ext-ss}, which is an $\NN^r$-graded version of the classical spectral 
+sequence relating $\Ext$-spaces of a filtered algebra with those of its 
+associated graded algebra. However the finer grading forces us 
+to do some careful bookkeeping, and it turns out that property $\chi$, or 
+rather its $\NN^{r+1}$-graded analogue, plays a delicate role, see Corollary 
+\ref{ldim}.
 
 In section \ref{qatv} we review the basic theory of affine semigroups and recall some 
 results from our previous article \cite{RZ2} on semigroup algebras twisted by a cocycle, 
@@ -1285,181 +1288,212 @@ an isomorphism.
 %\newpage 
 \section{Quantum affine toric degeneration of quantum Schubert varieties}
 \label{q-flag-schubert}
-In this section we apply the results in the previous section to study Schubert varieties 
-of quantum flag varieties. We recall the definitions of quantum flag and Schubert 
-varieties found with some detail in order to establish notation, and following 
-Littelmann we associate to each a an affine semigroup $S$. We then use an argument due to
-P. Caldero to show that each quantum Schubert variety has an $(S, <)$-basis in the sense of 
-\ref{lex-degeneration}, and hence has a quantum toric degeneration with associated 
-semigroup $S$. The main ingredient for the construction of this basis is the canonical
-or global basis of $U_q^-(\g)$, discovered independently by Lusztig and Kashiwara, so we
-recall its main properties.
+We apply the results in the previous section to study Schubert varieties 
+of quantum flag varieties. We recall the definitions of quantum flag and 
+Schubert varieties with some detail in order to establish notation. We then
+use an argument due to P. Caldero to show that these algebras have 
+$(S,<)$-bases for adequate semigroups $S$. The main ingredient in the 
+construction of these bases is the canonical or global basis of $U_q^-(\g)$ 
+discovered independently by Lusztig and Kashiwara. The semigroup arises out
+of Littelman's string parametrization of this basis.
+
+While Caldero's argument is based on a diferent definition of the quantized 
+enveloping algebra, and he works over the trascendental extension $\CC(q)$ 
+while we work over $\QQ(v)$, his argument works \emph{mutatis mutandis}. We 
+believe it is worthwhile to retrace it in some detail, as the ingredients 
+mentioned above are quite technical. 
 
 \subsection*{Quantum flag and Schubert varieties}
 
 \paragraph
 \label{lie-algebra-notation}
-Let $\g$ be a complex semisimple Lie algebra and let $G$ be the corresponding simply 
-connected Lie group. We denote by $\Phi = \{\alpha_1, \ldots,\alpha_n\}$ the set simple 
-roots of $\g$; by $\ZZ\Phi$ be the root lattice; by $\{\varpi_1, \ldots, \varpi_n\}$ be 
-the set of fundamental weights; and by $\Lambda$ the weight lattice of $\g$. Set
-$\Lambda^+ = \sum_i \NN \varpi_i$ be the set of dominant weights. 
+Let $\g$ be a semisimple complex Lie algebra. We denote by $\Phi = \{\alpha_1, 
+\ldots, \alpha_n\}$ the set of simple roots of $\g$, by $\ZZ\Phi$ its root 
+lattice, by $P = \{\varpi_1, \ldots, \varpi_n\}$ the set of fundamental 
+weights, and by $\Lambda$ its weight lattice. Set $\Lambda^+ = \sum_i 
+\NN \varpi_i$, the set of dominant weights. 
 
-Let $W$ be the Weyl group of $\g$, and $s_i \in W$ the reflection corresponding to the 
-$i$-th simple root. Given an element $w \in W$ we denote its length by $\ell(w)$, and set 
-$N$ to be the length of the longest word of $W$. A \emph{decomposition} of $w \in W$ is a 
-word on the generators $s_i$ that equals $w$ in $W$. 
+Let $W$ be the Weyl group of $\g$, and $s_i \in W$ the reflection 
+corresponding to the $i$-th simple root. Given an element $w \in W$ we denote 
+its length by $\ell(w)$, and set $N$ to be the length of $w_0$, the longest 
+element of $W$. A \emph{decomposition} of $w \in W$ is a word on the 
+generators $s_i$ that equals $w$ in $W$. The decomposition is \emph{reduced}
+if it is of minimal length, i.e. its length equals $\ell(w)$. We denote by 
+$(-,-)$ the standard $W$-invariant pairing between $\ZZ\Phi$ and $\Lambda^+$,
+and write $\langle \lambda, \alpha\rangle = 
+\frac{2(\lambda,\alpha)}{(\alpha,\alpha)}$ for all $\lambda \in \Lambda^+$ and
+$\alpha \in \Phi$, so if $\lambda = \sum_i r_i \varpi_i$ then $\langle \lambda,
+\varpi_k \rangle = r_k$.
+
 
 \paragraph
 \label{quantized-enveloping-algebra}
-Fix $q \in \k^\times$ not a root of unity. Let $U_q(\g)$ be the quantum enveloping 
-algebra of $\g$ as defined in \cite{Jan}*{Definition 4.3}. Let $U_q^+(\g), U_q^-(\g)$ be 
-the positive and negative parts of $U_q(\g)$ as defined in \cite{Jan}*{4.4}. Recall that 
-for each $\lambda \in \Lambda^+$ there is an irreducible highest-weight representation of 
-$U_q(\g)$ of type $\mathbf{1}$, which we denote by $V_q(\lambda)$. Each $V_q(\lambda)$ 
-decomposes as the direct sum of weight spaces $\bigoplus_{\mu \in L(\lambda)} 
-V_q(\lambda)_\mu$, where $L(\lambda)$ is a finite subset of $\Lambda$; the dimensions of 
-the weight spaces are the same as in the classical case, so the Weyl character formulas 
-holds for these representations, see \cite{Jan}*{subsection 5.15}.
+Fix $q \in \k^\times$. Let $U_q(\g)$ be the quantum enveloping 
+algebra of $\g$ as defined in \cite{Jan}*{Definition 4.3}. Let $U_q^+(\g), 
+U_q^-(\g)$ be the positive and negative parts of $U_q(\g)$ as defined in 
+\cite{Jan}*{4.4}. If $q$ is not a root of unity then by \cite{Jan}*{chapter 5} 
+for each $\lambda \in \Lambda^+$ there is an irreducible highest-weight 
+representation of $U_q(\g)$ of type $\mathbf{1}$, which we denote by 
+$V_q(\lambda)$. Each $V_q(\lambda)$ decomposes as the direct sum of weight 
+spaces $\bigoplus_{\mu \in L(\lambda)} V_q(\lambda)_\mu$, where $L(\lambda)$ 
+is a finite subset of $\Lambda$; the dimensions of the weight spaces are the 
+same as in the classical case, so the Weyl character formulas holds for these 
+representations, see \cite{Jan}*{subsection 5.15}. 
 
 \paragraph
-Since $U_q(\g)$ is a Hopf algebra, its Hopf dual $U_q(\g)^{\circ}$ is an algebra with 
-convolution product induced by the coproduct of $U_q(\g)$. There is a map 
-$V_q(\lambda)^* \ot V_q(\lambda) \to U_q(\g)^\circ$ defined by
-sending $\phi \ot v \in V_q(\lambda)^* \ot V_q(\lambda)$ to the linear functional
-$c^\lambda_{\phi, v}$, which assigns to each $u \in U_q(\g)$ the scalar $c^\lambda_{\phi,
-v}(u) = \phi(uv)$. Functionals of type $c^\lambda_{\phi, v}$ are called \emph{matrix
-coefficients}. The $\k$-linear span of the matrix coefficients is a subalgebra of 
-$U_q(\g)^\circ$ denoted by $\O_q[G]$, called the quantized algebra of coordinate functions 
-over the group $G$. 
+Let $G$ be the simply connected Lie group corresponding to $\g$. Since 
+$U_q(\g)$ is a Hopf algebra, its dual $U_q(\g)^*$ is an algebra 
+with convolution product induced by the coproduct of $U_q(\g)$. There is a map 
+$V_q(\lambda)^* \ot V_q(\lambda) \to U_q(\g)^*$ defined by
+sending $\phi \ot v \in V_q(\lambda)^* \ot V_q(\lambda)$ to the linear 
+functional $c^\lambda_{\phi, v}$, which assigns to each $u \in U_q(\g)$ the 
+scalar $c^\lambda_{\phi, v}(u) = \phi(uv)$. Functionals of the form 
+$c^\lambda_{\phi, v}$ are called \emph{matrix coefficients}. The $\k$-linear 
+span of the matrix coefficients is a subalgebra of $U_q(\g)^*$ denoted by 
+$\O_q[G]$, called the quantized algebra of coordinate functions over the group 
+$G$ \cite{Jan}*{7.11}.
 
 \paragraph
 \label{q-full-flag-varieties}
-Quantum flag varieties were introduced by Soibelman in \cite{S} and by Lakshmibai and 
-Reshetikhin in \cite{qLR}; we review their definition. 
-Fix a maximal Borel subgroup $B$ of $G$. The \emph{full flag variety} associated to $G$ 
-is $G/B$. Let $C^+_q(\lambda)$ be the vector space of matrix coefficients of the form
-$c^\lambda_{\phi,v_{\lambda}}$ in $U_q(\g)^*$, where $v_\lambda$ is a highest weight
-vector in $V_q(\lambda)$, and set 
+Quantum flag varieties were introduced by Soibelman in \cite{S} and by 
+Lakshmibai and Reshetikhin in \cite{qLR}; we review their definition. 
+We assume that $q$ is not a root of unity. Fix a maximal Borel subgroup $B$ of
+$G$. The \emph{full flag variety} associated to $G$ is $G/B$. Let 
+$C^+_q(\lambda)$ be the vector space of matrix coefficients of the form 
+$c^\lambda_{\phi,v_{\lambda}}$ in $U_q(\g)^*$, where $v_\lambda$ is a highest 
+weight vector in $V_q(\lambda)$, and set 
 \[ 
   \O_q[G/B] = \bigoplus_{\lambda \in \Lambda^+} C^+_q(\lambda) \subset \O_q[G] 
     \subset U_q(\g)^*.  
 \] 
-This is called the \emph{quantum full flag variety} of $G$. By definition the product of 
-two matrix coefficients in $\O_q[G/B]$ is again in $\O_q[G/B]$, and its decomposition 
-as a direct sum gives $\O_q[G/B]$ the structure of a $\Lambda^+$-graded 
-algebra. 
+This is called the \emph{quantum full flag variety} of $G$. The product of two 
+matrix coefficients in $\O_q[G/B]$ is again in $\O_q[G/B]$, and its 
+decomposition as a direct sum gives $\O_q[G/B]$ the structure of a 
+$\Lambda^+$-graded algebra. 
 
 \paragraph
 \label{q-partial-flag-varieties}
 Let $I$ be a subset of the set of fundamental weights and set $\mathcal J(I) = 
 \sum_{\varpi_i \notin I} \NN \varpi_i$. Denote by $W_I \subset W$ the subgroup 
-generated by the reflections $s_i$ with $\varpi_i \in I$, and for each class in 
-$W/W_I$ pick a representative of minimal length. We denote by $W^I$ the set of these 
-representatives. Since the Demazure character formula holds, for each $w \in W^I$ and 
-each $\lambda \in \mathcal J(I)$ the vector space $V_q(\lambda)_{w\lambda}$ has 
-dimension $1$. The \emph{Demazure module} $V_q(\lambda)_{w}$ is the 
-$U_q^+(\g)$-submodule of $V_q(\lambda)$ generated by a vector of weight $w\lambda$
-in $V_q(\lambda)$.
+generated by the reflections $s_i$ with $\varpi_i \in I$, and for each class 
+in $W/W_I$ pick a representative of minimal length. We denote by $W^I$ the set 
+of these representatives. Since the Weyl character formula holds, for each 
+$w \in W$ and each $\lambda \in \mathcal J(I)$ the vector space 
+$V_q(\lambda)_{w\lambda}$ has dimension $1$. The \emph{Demazure module} 
+$V_q(\lambda)_{w}$ is the $U_q^+(\g)$-submodule of $V_q(\lambda)$ generated by 
+a vector of weight $w\lambda$ in $V_q(\lambda)$.
 
-The set $I$ determines a Lie subalgebra $\mathfrak p \subset \g$, and a parabolic 
-subgroup $P_I \subset G$. The variety $G/P_I$ is the corresponding generalized flag 
-variety. To this datum we associate the $\Lambda^+$-graded subalgebra of $\O_q[G/B]$ 
+The set $I$ determines a Lie subalgebra $\mathfrak p \subset \g$, and a 
+parabolic subgroup $P_I \subset G$. The variety $G/P_I$ is the corresponding 
+generalized flag variety. To this datum we associate the $\Lambda^+$-graded 
+subalgebra of $\O_q[G/B]$ 
 \[ 
   \O_q[G/P_I]:= \bigoplus_{\lambda \in \mathcal J(I)} C_q^+(\lambda) 
 \] 
 called the \emph{quantum partial flag variety associated to $I$}. The case 
-$I = \emptyset$ corresponds to the full flag variety.
+$I = \emptyset$ corresponds to the full flag variety, while $I = P \setminus 
+\{\varpi_k\}$ corresponds to the $(k,n)$-grassmannian.
 
 \paragraph
 \label{q-Schubert-varieties}
-Given vector spaces $V_2 \subset V_1$, we denote by $V_2^\perp$ the set of linear
-functionals over $V_1$ which are zero on $V_2$. For every $w \in W^I$, the vector space 
+Given vector spaces $V_2 \subset V_1$, we denote by $V_2^\perp$ the set of 
+linear functionals over $V_1$ which are zero on $V_2$. For every $w \in W^I$ 
+the vector space 
 \[
   J_w^I = \bigoplus_{\lambda \in \mathcal J(I)} \vspan{c_{\phi,v_\lambda}^\lambda
   \in C_q^+(\lambda) \mid \phi  \in V_q(\lambda)_w^\perp } \subset \O_q[G/P_I] 
 \] 
-is an ideal of $\O_q[G/P_I]$ called the \emph{Schubert ideal} associated to $w$. The
-quotient algebra $\O_q[G/P_I]_w = \O_q[G/P_I]/J^I_w$ is called the \emph{quantum Schubert
-variety} associated to $w$.
+is an ideal of $\O_q[G/P_I]$ called the \emph{Schubert ideal} associated to 
+$w$. The quotient algebra $\O_q[G/P_I]_w = \O_q[G/P_I]/J^I_w$ is called the 
+\emph{quantum Schubert variety} associated to $w$.
 
 %\newpage 
 \subsection*{Degeneration of quantum Schubert varieties}
 %\label{qtad-flag}
-In this subsection we assume that $\k$ is of characteristic zero and that $q \in 
-\k^\times$ is trascendental over $\QQ$. Our aim is to show that under these conditions 
-quantum Schubert varieties have quantum affine toric degenerations. In order to do so we 
-work for a moment over the field $\QQ(v)$, where $v$ is an indeterminate over $\QQ$, and 
-consider the $\QQ(v)$-algebra $U = U_v(\g)$. The general case will follow by extension 
-of scalars. 
+In this subsection we assume that $\k$ is of characteristic zero and that 
+$q \in \k^\times$ is trascendental over $\QQ$. Our aim is to show that under 
+these conditions quantum Schubert varieties have quantum affine toric 
+degenerations. In order to do so we work for a moment over the field $\QQ(v)$, 
+where $v$ is an indeterminate over $\QQ$, and consider the $\QQ(v)$-algebra 
+$U = U_v(\g)$. The general case will follow by extension of scalars. 
 
-We now review Caldero's argument on the existence of an $(S,<)$-basis of $\O_q[G/B]$,
-and its natural extension to arbitrary partial flag and Schubert varieties. Since he
-was interested in classical flag varieties, Caldero works with a large base field 
-$\CC(q)$ that allows him to specialize at $q=1$ and still get algebraic varieties over
-the complex numbers. His arguments go through almost word by word in our context, but we 
-believe it is worthwhile to retrace it in some detail.
+We now review Caldero's argument on the existence of an $(S,<)$-basis of 
+$\O_q[G/B]$, and its natural extension to arbitrary partial flag and Schubert 
+varieties. Since he was interested in classical flag varieties, Caldero works 
+with a large base field $\CC(q)$ that allows him to specialize at $q=1$ and 
+still get algebraic varieties over the complex numbers. His arguments go 
+through almost word by word in our context, but we believe it is worthwhile to 
+retrace it in some detail.
 
 \paragraph
-We denote by $U^+$ and $U^-$ the algebras $U^+_v(\g)$ and $U^-_v(\g)$, respectively. Let 
-$\A = \ZZ[v, v^{-1}] \subset \QQ(v)$. The algebra $U$ has an $\A$-form, defined 
-in \cite{Jan}*{section 11.1}, which we denote by $U_\A$, this simply the $\A$-algebra 
-generated by the $K_\lambda$. This is a 
-subring of $U$, and the algebras $U^+$ and $U^-$ also have $\A$-forms which we denote by 
-$U_\A^+$ and $U_\A^-$, respectively, and all these $\A$-forms are compatible with the
-weight decomposition of $U$. By construction $U \cong \QQ(v) \ot_\A U_\A$, and 
-analogous results hold for $U_\A^+$ and $U_\A^-$. Furthermore the highest weight modules 
-$V_v(\lambda)$ have corresponding $\A$-forms which we denote by $V_\A(\lambda)$. All these 
-$\A$-forms are compatible with the weight decompositions of the original objects, see 
-\cite{Jan}*{chapters 9,10}. 
-Now let $\lambda$ be a dominant weight and fix $w \in W$. The $\A$-form of the Demazure 
-module $V_q(\lambda)_{w}$ is defined as $V_\A(\lambda)_{w} = U^+ V_\A(\lambda)_{w\lambda}$.
+We work with $\k = \QQ(v)$ and $q = v$. We denote by $U^+$ and $U^-$ the 
+algebras $U^+_v(\g)$ and $U^-_v(\g)$, respectively. Let $\A = \ZZ[v, v^{-1}] 
+\subset \QQ(v)$. The algebra $U$ has an $\A$-form, defined in 
+\cite{Jan}*{section 11.1}, which we denote by $U_\A$. This is a subring of 
+$U$. The algebras $U^+$ and $U^-$ also have $\A$-forms which we denote by 
+$U_\A^+$ and $U_\A^-$ respectively, and all these $\A$-forms are compatible 
+with the weight decomposition of $U$. By construction $U \cong \QQ(v) \ot_\A 
+U_\A$, and analogous results hold for $U_\A^+$ and $U_\A^-$. Furthermore the 
+highest weight modules $V_v(\lambda)$ have corresponding $\A$-forms which we 
+denote by $V_\A(\lambda)$. All these $\A$-forms are compatible with the weight 
+decompositions of the original objects, see \cite{Jan}*{chapters 9,10}. 
+Now let $\lambda$ be a dominant weight and fix $w \in W$. The $\A$-form of the 
+Demazure module $V_q(\lambda)_{w}$ is defined as $V_\A(\lambda)_{w} = U^+ 
+V_\A(\lambda)_{w\lambda}$.
 
 \paragraph
 \label{T:A-crystal-basis} 
-The algebra $U_\A^-$ has a homogeneous $\A$-basis, called the \emph{canonical 
-basis} of $U^-$, discovered independently by Lusztig and Kashiwara. Its contruction
-is the subject of \cite{Jan}*{chapters 9 - 11}, and we will use the notation from this
-source to recapitulate some relevant facts. 
+The algebra $U_\A^-$ has a homogeneous $\A$-basis, called the \emph{canonical}
+or \emph{global} basis of $U^-$, discovered independently by Lusztig and 
+Kashiwara. Its contruction is the subject of \cite{Jan}*{chapters 9 - 11}, and 
+we will use the notation from this source to recapitulate some relevant facts. 
 
-Set $A_0 \subset \QQ(v)$ to be the ring of rational functions without a pole at $0$, 
-define the operators $\tilde F_\alpha: U_\A^- \to U_\A^-$ as in \cite{Jan}*{10.2}, and 
-let $\L(\infty)$ be the $A_0$-lattice generated by all elements of the form
-$\tilde F_{i_1} \tilde F_{i_2} \cdots \tilde F_{i_r}(1)$; by definition
-these are weight elements, so setting $\L(\infty)_{-\nu} = \L(\infty) \cap U^-_{-\nu}$, we
-get $\L(\infty) = \bigoplus_{\nu \geq 0} \L(\infty)_{-\nu}$, and furthermore each
-$\L(\infty)_{-\nu}$ is a finitely generated $A_0$-module that generates $U^-_\nu$ over 
-$\QQ(q)$. Set
+Set $A_0 \subset \QQ(v)$ to be the ring of rational functions without a pole 
+at $0$. For each $1 \leq i \leq n$ define the operators $\tilde F_i = \tilde 
+F_{\alpha_i}: U^- \to U^-$ as in \cite{Jan}*{10.2}, and let $\L(\infty)$ be 
+the $A_0$-lattice generated by all elements of the form $\tilde F_{i_1} \tilde 
+F_{i_2} \cdots \tilde F_{i_r}(1)$; by definition these are weight elements, so 
+setting $\L(\infty)_{-\nu} = \L(\infty) \cap U^-_{-\nu}$ for each $\nu \in \ZZ
+\Phi$ with $\nu \geq 0$, we get $\L(\infty) = \bigoplus_{\nu \geq 0} 
+\L(\infty)_{-\nu}$, and furthermore each $\L(\infty)_{-\nu}$ is a finitely 
+generated $A_0$-module that generates $U^-_\nu$ over $\QQ(v)$. 
+
+Set
 \begin{align*}
 \B(\infty)_{-\nu} 
-  &=  \left\{\tilde F_{i_1} \tilde F_{i_2} \cdots \tilde F_{i_r}(1) + q\L(\infty) 
-    \in \L(\infty)_{-\nu} / q \L(\infty)_{-\nu} \mid \sum_{j} \alpha_{i_j} = \nu\right\}
+  &=  \left\{\tilde F_{i_1} \tilde F_{i_2} \cdots 
+    \tilde F_{i_r}(1) + q\L(\infty) \in \L(\infty)_{-\nu} / q \L(\infty)_{-\nu}
+     \mid \sum_{j} \alpha_{i_j} = \nu\right\}
 \end{align*}
-and set $\B(\infty) = \bigsqcup_{\nu \geq 0} \B_{-\nu}$ \cite{Jan}*{10.3}. Although it is
-not obvious, $\B(\infty)_{-\nu}$ is a basis of $\L(\infty)_{-\nu} / q \L(\infty)_{-\nu}$ 
-\cite{Jan}*{Proposition 10.11}. It turns out that each $b \in \B(\infty)_{-\nu}$ has a 
-unique lift $G(b) \in \L(\infty)_{-\nu} \cap (U_\A^-)_{-\nu}$, which is invariant under 
-the action of certain automorphisms of $U$. \cite{Jan}*{Theorem 11.10 a)}. The set $G(\B)$ 
-of all $G(b)$ with $b \in \B(\infty)$ is called the \emph{global basis} of $U_\A^-$.
+and set $\B(\infty) = \bigsqcup_{\nu \geq 0} \B(\infty)_{-\nu}$. Although it is
+not obvious, $\B(\infty)_{-\nu}$ is a basis of $\L(\infty)_{-\nu} / 
+q \L(\infty)_{-\nu}$ \cite{Jan}*{Proposition 10.11}; this is the \emph{crystal}
+basis of $U^-$ at $q = 0$. It turns out that each 
+$b \in \B(\infty)_{-\nu}$ has a unique lift $G(b) \in \L(\infty)_{-\nu} \cap 
+(U_\A^-)_{-\nu}$, which is invariant under the action of certain automorphisms 
+of $U$ \cite{Jan}*{Theorem 11.10 a)}. The set $G(\B)$ of all $G(b)$ with $b 
+\in \B(\infty)$ is the global basis of $U_\A^-$.
 
-Let $w \in W$, and let $w = s_{i_1}\cdots s_{i_r}$ be a reduced decomposition of $w$. 
-Set $\B_w(\infty)$ as the set of elements in $\B(\infty)$ of the form $\tilde 
-F_{\alpha_{i_1}}^{k_1} \tilde F_{\alpha_{i_2}}^{k_2} \cdots \tilde 
-F_{\alpha_{i_r}}^{k_r}(1) + q\L(\infty)$. This set does not depend on the decomposition 
-\cite{K1}*{Proposition 3.2.5}.
+Let $w \in W$, and let $w = s_{i_1}\cdots s_{i_r}$ be a reduced decomposition 
+of $w$. Set $\B_w(\infty)$ as the set of elements in $\B(\infty)$ of the form 
+$\tilde F_{i_1}^{k_1} \tilde F_{i_2}^{k_2} \cdots \tilde 
+F_{i_r}^{k_r}(1) + q\L(\infty)$ with $k_j \geq 0$. This set does not depend on 
+the decomposition of $w$ \cite{K1}*{Proposition 3.2.5}.
 
 \begin{Theorem*}
 Let $\nu \in \ZZ \Phi$ with $\nu \geq 0$.
 \begin{enumerate}[label=(\alph*)]
-\item The set $\{G(b) \mid b \in \B_{-\nu}\}$ is an $\A$ basis of $(U_\A^-)_{- \nu}$.
+\item The set $\{G(b) \mid b \in \B_{-\nu}\}$ is an $\A$ basis of 
+$(U_\A^-)_{- \nu}$.
 
-\item Let $\lambda$ be a dominant weight and let $v_\lambda$ be a highest weight vector of 
-$V_\A(\lambda)$. The set $\{G(b)v_\lambda \mid b \in \B(\infty)_{-\nu}\} \setminus \{0\}$
-is an $\A$-basis of $V_\A(\lambda)_{\lambda - \nu}$. Furthermore, if $G(b)v_\lambda = 
+\item Let $\lambda$ be a dominant weight and let $v_\lambda$ be a highest 
+weight vector of $V_\A(\lambda)$. The set $\{G(b)v_\lambda \mid b \in 
+\B(\infty)_{-\nu}\} \setminus \{0\}$ is an $\A$-basis of 
+$V_\A(\lambda)_{\lambda - \nu}$. Furthermore, if $G(b)v_\lambda = 
 G(b')v_\lambda \neq 0$ then $b = b'$.
 
-\item Let $w \in W$. The set $\{G(b)v_\lambda \mid b \in \B_w(\infty)\} \setminus \{0\}$
-is an $\A$-basis of $V_\A(\lambda)_{w}$. 
+\item Let $w \in W$. The set $\{G(b)v_\lambda \mid b \in \B_w(\infty)\} 
+\setminus \{0\}$ is an $\A$-basis of $V_\A(\lambda)_{w}$. 
 \end{enumerate}
 \end{Theorem*}
 \begin{proof}
@@ -1470,143 +1504,169 @@ The first two items are part of \cite{Jan}*{Theorem 11.10}. The third is
 \paragraph
 \label{q-var-bases}
 We now use the crystal basis to produce bases for quantum Schubert varieties.
-For each dominant weight $\lambda$ we fix a highest weight vector $v_\lambda \in 
-V_v(\lambda)$ and write $\B(\lambda) = \{b \in \B(\infty) \mid G(b)v_\lambda \neq 0\}$.
-By the previous theorem the set $\{G(b) v_\lambda \mid b \in \B(\lambda)\}$ is a basis
-of $V_v(\lambda)$, so we can take its dual basis. Given $b \in \B(\lambda)$, we denote by 
-$b_\lambda^*$ the unique element of $V_v(\lambda)^*$ such that $b^*_\lambda(G(b')
-v_\lambda) = \delta_{b,b'}$ for all $b' \in \B(\lambda)$. Thus to each element $b \in 
+For each dominant weight $\lambda$ we fix a highest weight vector $v_\lambda 
+\in V_v(\lambda)$ and write $\B(\lambda) = \{b \in \B(\infty) \mid G(b)
+v_\lambda \neq 0\}$. By the previous theorem the set $\{G(b) v_\lambda \mid b 
+\in \B(\lambda)\}$ is a basis of $V_v(\lambda)$, so we can take its dual 
+basis. Given $b \in \B(\lambda)$, we denote by $b_\lambda^*$ the unique 
+element of $V_v(\lambda)^*$ such that $b^*_\lambda(G(b') v_\lambda) = 
+\delta_{b,b'}$ for all $b' \in \B(\lambda)$. Thus to each element $b \in 
 \B(\lambda)$ we can associate the matrix coefficient $b_\lambda = 
-c^{\lambda}_{b^*_\lambda,v_\lambda} \in C^+_v(\lambda)$, and the set $\{b_\lambda \mid b 
-\in \B(\lambda)\}$ is a basis of $C^+_v(\lambda)$. Since the quantum flag variety is the 
-direct sum of all these spaces with $\lambda$ running over all dominant weights, we obtain 
-a basis of $\O_v[G/B]$
+c^{\lambda}_{b^*_\lambda,v_\lambda} \in C^+_v(\lambda)$, and the set 
+$\{b_\lambda \mid b \in \B(\lambda)\}$ is a basis of $C^+_v(\lambda)$. Since 
+the quantum flag variety is the direct sum of all these spaces with $\lambda$ 
+running over all dominant weights, we obtain a basis of $\O_v[G/B]$
 \[
   \flagbasis = \{b_\lambda \mid b \in \B(\lambda), \lambda \in \Lambda^+\}.
 \]
-If $I$ is a subset of the fundamental weights, then we obtain a basis of the partial 
-flag variety $\O_v[G/P_I]$ defined in \ref{q-partial-flag-varieties} by taking
+If $I$ is a subset of the fundamental weights, then we obtain a basis of the 
+partial flag variety $\O_v[G/P_I]$ defined in \ref{q-partial-flag-varieties} 
+by taking
 \[
-  \flagbasis_I = \{b_\lambda \mid b \in \B(\lambda), \lambda \in \mathcal J(I)\}.
+  \flagbasis_I = \{b_\lambda \mid b \in \B(\lambda), \lambda \in \mathcal 
+    J(I)\}.
 \]
-Finally, the third item of the previous theorem implies that the ideal $J^I_w$ defined
-in \ref{q-Schubert-varieties} is spanned over $\QQ(v)$ by all elements of the form 
-$b_\lambda$ with $b \in \B(\lambda) \setminus \B_w(\infty)$. Thus we can obtain a basis 
-for the quantum Schubert variety $\O_v[G/P_I]_w$ by taking the image of
+Finally, the third item of the previous theorem implies that the ideal $J^I_w$ 
+defined in \ref{q-Schubert-varieties} is spanned over $\QQ(v)$ by all elements 
+of the form $b_\lambda$ with $b \in \B(\lambda) \setminus \B_w(\infty)$. Thus 
+we can obtain a basis for the quantum Schubert variety $\O_v[G/P_I]_w$ by 
+taking the image of
 \[
-  \schubertbasis_I(w) = \{b_\lambda \mid b \in \B(\lambda) \cap \B_w(\infty), \lambda \in 
-  \mathcal J(I) \}.
+  \schubertbasis_I(w) 
+    = \{b_\lambda \mid b \in \B(\lambda) \cap \B_w(\infty), \lambda \in 
+    \mathcal J(I) \}.
 \]
 in the quotient.
 
 \paragraph
 \label{Littelman-parametrizations}
-The operators $\tilde F_i, \tilde E_i$ of \cite{Jan}*{10.2} induce operators $\tilde E_i, 
-\tilde F_i: \B \to \B \cup \{0\}$. These in turn induce the \emph{Kashiwara operators}
-$\tilde e_i, \tilde f_i: G(\B) \to G(\B) \cup \{0\}$. The operators $\tilde E_i$ are 
-locally nilpotent, and hence so are the $\tilde e_i$, so it makes sense to set 
-$\varepsilon_i(b) = \max \{k \in \NN \mid \tilde e_i(b) \neq 0\}$ for each $b \in \B$.
-Write $\overline e_i(b)$ for $e_i^{\varepsilon_i(b)}(b)$.
+The operators $\tilde E_i, \tilde F_i$ of \cite{Jan}*{10.2} induce operators 
+$\tilde E_i, \tilde F_i: \B \to \B \cup \{0\}$. These in turn induce the 
+\emph{Kashiwara operators} $\tilde e_i, \tilde f_i: G(\B) \to G(\B) \cup 
+\{0\}$. The operators $\tilde E_i$ are locally nilpotent, and hence so are the 
+$\tilde e_i$, so it makes sense to set $\varepsilon_i(b) = \max \{k \in \NN 
+\mid \tilde e_i(b) \neq 0\}$ for each $b \in \B$. Write $\overline e_i(b)$ for 
+$\tilde e_i^{\varepsilon_i(b)}(b)$.
 
-Fix $w \in W$. In \cite{Lit}, P. Littelman proves that to each reduced decomposition of 
-$w$ we can associate a parametrization of $B_w(\infty)$ as follows. If $\tilde w = 
-s_{i_1} \cdots s_{i_r}$ is the chosen decomposition then set $\Lambda_{\tilde w}: 
-\B \to \NN^r$ to be 
+Fix $w \in W$. In \cite{Lit}, P. Littelman proves that to each reduced 
+decomposition of $w$ we can associate a parametrization of $B_w(\infty)$ as 
+follows. If $\tilde w = s_{i_1} \cdots s_{i_r}$ is the chosen decomposition 
+then we define $\Lambda_{\tilde w}: \B \to \NN^r$ by the formula
 \[
   \Lambda_{\tilde w}(b) 
     = (\varepsilon_{i_1}(b), \varepsilon_{i_{2}}(\overline e_{i_1}(b)), \ldots,
     \varepsilon_{i_r}(\overline e_{i_{r-1}} \cdots \overline e_{i_1}(b))).
 \]
-Now according to \cite{Lit}*{Proposition 1.5, Theorem 1.7 and Corollary 1}, the set 
-$S_\{\tilde w\} = \Lambda_{\tilde w}(\B_w(\infty))$ is the set of integral points of a 
-convex polyhedral cone, and hence by Gordan's lemma a normal affine semigroup. 
+Now according to \cite{Lit}*{Proposition 1.5, Theorem 1.7 and Corollary 1}, 
+the set $S_{\tilde w} = \Lambda_{\tilde w}(\B_w(\infty))$ is the set of 
+integral points of a convex polyhedral cone, and hence by Gordan's lemma a 
+normal affine semigroup. 
 
-A decomposition of $w_0$, the longest word of $W$, is said to be \emph{adapted} to $w$ if 
-it is of the form $s_{i_1} \ldots s_{i_N}$ with $s_{i_1} \ldots s_{i_{\ell(w)}} = w$. For 
-every element $w \in W$ there exists a decomposition of the longest word of $W$ adapted to 
-$w$. In other words the longest word of $W$ is the maximum for the weak right Bruhat order 
-on $W$, see \cite{BB}*{Proposition 3.1.2}. Fix $\tilde w_0$ a decomposition of $w_0$ adapted
-to $w$, and set
+A decomposition of $w_0$, the longest word of $W$, is said to be \emph{adapted}
+to $w$ if it is of the form $s_{i_1} \ldots s_{i_N}$ with $s_{i_1} \ldots 
+s_{i_{\ell(w)}} = w$. For every element $w \in W$ there exists a decomposition 
+of the longest word of $W$ adapted to $w$, or in other words the longest word 
+of $W$ is the maximum for the weak right Bruhat order on $W$, see 
+\cite{BB}*{Proposition 3.1.2}. Fix $\tilde w_0$ a decomposition of $w_0$ 
+adapted to $w$, and set
 \begin{align*}
 \Gamma_{\tilde w_0}:
    FB &\to \NN^{N} \times \NN^n \\
-   b_\lambda & \longmapsto \Lambda_{\tilde w_0}(b) \times (\langle \lambda, \alpha_1 \rangle, 
-   \ldots, \langle \lambda, \alpha_n \rangle),
+   b_\lambda & \longmapsto \Lambda_{\tilde w_0}(b) \times 
+   (\langle \lambda, \alpha_1 \rangle, \ldots, \langle \lambda, \alpha_n 
+   \rangle).
 \end{align*}
-where $\langle -,- \rangle$ is the standard Killing form over $\mathfrak h^*$, so the 
-entries of the second component are the coordinates of $\lambda$ in the basis of 
-fundamental weights. This map is also injective, and gives a parametrization of 
-$\flagbasis$. 
+Now the entries of the second component are the coordinates of $\lambda$ in 
+the basis of fundamental weights, so if $\Gamma_{\tilde w_0}(b_\lambda) = 
+\Gamma_{\tilde w_0}(b'_{\lambda'})$ then $\lambda = \lambda'$ and 
+$\Lambda_{\tilde w_0}(b) = \Lambda_{\tilde w_0}(b')$, which implies 
+$b_\lambda = b'_{\lambda'}$. Thus $\Gamma_{\tilde w_0}$ is injective and gives 
+a parametrization of $\flagbasis$. 
 
-Write $\tilde S_{\tilde w_0}$ for the image of $\Gamma_{\tilde w_0}$. According to 
-\cite{Lit}*{Proposition 1.5}, this is the set of all $a \in S_{\tilde w_0}$ such that
+Write $\tilde S_{\tilde w_0}$ for the image of $\Gamma_{\tilde w_0}$. 
+According to \cite{Lit}*{Proposition 1.5}, this is the set of all 
+$a \times (r_1, \ldots, r_n) \in S_{\tilde w_0} \times \NN^n$ such that
 \begin{align*}
-a_r 
-  &\leq \left\langle \lambda - \sum_{j=1}^{r-1} a_{N-r+j} \alpha_{i_{N-r+j}}, \alpha_{i_r} 
-  \right\rangle
-& (1 \leq i \leq N-1)
+a_l 
+  &\leq \left\langle \lambda - \sum_{j=1}^{r-1} a_{N-r+j} \alpha_{i_{N-r+j}}, 
+  \alpha_{i_r} \right\rangle
+& (1 \leq l \leq N-1)
 \end{align*}
-Thus $S_{\tilde w_0}$ is the set of integral points which lie in $S_{\tilde w_0}$ and 
-comply with these inequalities, and hence it is also a normal affine semigroup. 
-Furthermore, $S_{\tilde w_0}^I = \Gamma_{\tilde w_0}(\flagbasis_I)$ is the intersection of 
-$S_{\tilde w_0}$ with the hyperplanes defined by the equations $a_{N+i} = 0$ for all $i$ 
-such that $\varpi_i \in I$, and hence is also a normal affine semigroup. Finally, the fact 
-that the decomposition $\tilde w_0$ is adapted to $w$ implies that 
-$\Gamma_{\tilde w_0}(\schubertbasis_I(w))$ is the intersection of $S_{\tilde w_0}^I$ with 
-the hyperplanes defined by $a_i = 0$ for all $\ell(w) < i \leq N$, and is also a normal 
-affine semigroup.
+where $\lambda = \sum_i r_i \varpi_i$. Thus $\tilde S_{\tilde w_0}$ is the set 
+of points of $S_{\tilde w_0} \times \NN^n$ that comply with these 
+inequalities, and hence it is also a normal affine semigroup. 
+
+Furthermore, $\tilde S_{\tilde w_0}^I = \Gamma_{\tilde w_0}(\flagbasis_I)$ is 
+the intersection of $\tilde S_{\tilde w_0}$ with the hyperplanes defined by 
+the equations $a_{N+i} = 0$ for all $i$ such that $\varpi_i \in I$, and hence 
+is also a normal affine semigroup. Finally, the fact that the decomposition 
+$\tilde w_0$ is adapted to $w$ implies that 
+$\tilde S_{\tilde w_0, w}^I = \Gamma_{\tilde w_0}(\schubertbasis_I(w))$ is the 
+intersection of $\tilde S_{\tilde w_0}^I$ with the hyperplanes defined by 
+$a_i = 0$ for all $\ell(w) < i \leq N$, and hence it is also a normal affine 
+semigroup.
 
 \paragraph
-We have just shown that the bases of quantum flag varieties and quantum Schubert varieties 
-defined in \ref{q-var-bases} are parametrized by normal semigroups. All that is left is to 
-check that they have the multiplicative property of $(S,<)$-bases, where $<$ is the 
-lexicographic order of $\NN^N \times \NN^n$.
+We have just shown that the bases of quantum flag varieties and quantum 
+Schubert varieties defined in \ref{q-var-bases} are parametrized by normal 
+semigroups. All that is left is to check that they have the multiplicative 
+property of $(S,<)$-bases, where $<$ is the lexicographic order of $\NN^N 
+\times \NN^n$.
 
-Let $\lambda, \lambda' \in \Lambda^+$ while $b \in \B(\lambda), b' \in \B(\lambda')$.
-Recall that $b_\lambda^*$ denotes the element in the dual basis of $V_v(\lambda)^*$
-as defined in \ref{q-var-bases}. The product $b_\lambda b'_{\lambda'b}$ is by definition
-the matrix coefficient corresponding to the functional $b_\lambda^* \ot b'_{\lambda'}$ 
-and the vector $v_\lambda \ot v_{\lambda'}$ over $V(\lambda) \ot V(\lambda')$. Now the 
-$U$-module generated by $v_\lambda \ot v_{\lambda'}$ is isomorphic to 
-$V_v(\lambda + \lambda')$, so $b_\lambda^* \ot b'_{\lambda'}$ naturally induces an element
-in $C^+(\lambda + \lambda')$, and the product $b_\lambda b'_{\lambda'}$ is a linear
+Let $\lambda, \lambda' \in \Lambda^+$ while $b \in \B(\lambda), b' \in
+\B(\lambda')$. Recall that $b_\lambda^*$ denotes the element in the dual basis 
+of $V_v(\lambda)^*$ as defined in \ref{q-var-bases}. The product $b_\lambda 
+b'_{\lambda'b}$ is by definition the matrix coefficient corresponding to the 
+functional $b_\lambda^* \ot b'_{\lambda'}$ and the vector $v_\lambda \ot 
+v_{\lambda'}$ over $V(\lambda) \ot V(\lambda')$. Now the $U$-module generated 
+by $v_\lambda \ot v_{\lambda'}$ is isomorphic to $V_v(\lambda + \lambda')$, so 
+$b_\lambda^* \ot b'_{\lambda'}$ naturally induces an element in $C^+(\lambda 
++ \lambda')$, and the product $b_\lambda b'_{\lambda'}$ is a linear 
 combination of matrix coefficients in $C^+_v(\lambda + \lambda')$
 \[
   b_\lambda b'_{\lambda'} 
-    = \sum_{b'' \in \B(\lambda + \lambda')} c^{b''}_{b,b'} b''_{\lambda + \lambda'}
+    = \sum_{b'' \in \B(\lambda + \lambda')} c^{b''}_{b,b'} b''_{\lambda + 
+    \lambda'}
 \]
-with $c^{b''}_{b,b'} \in \QQ(v)$. By definition the number $c_{b,b'}^{b''}$ is the 
-value $b_\lambda b'_{\lambda'}(b'')$; in particular it depends on $\lambda$ and 
-$\lambda'$. On the other hand, by the definition of the product of matrix coefficients
+with $c^{b''}_{b,b'} \in \QQ(v)$. By definition the scalar $c_{b,b'}^{b''}$ is 
+the value $b_\lambda b'_{\lambda'}(G(b''))$; in particular it depends on 
+$\lambda$ and $\lambda'$. On the other hand, by the definition of the product 
+of matrix coefficients
 \[
-  b_\lambda b'_{\lambda'}(b'') 
-    = b_\lambda \ot b'_{\lambda'}(\Delta(b'') \cdot v_\lambda \ot v_{\lambda'}),
+  b_\lambda b'_{\lambda'}(G(b''))
+    = b_\lambda^* \ot b_{\lambda'}'^*(\Delta(G(b'')) \cdot 
+      v_\lambda \ot v_{\lambda'}),
 \]
-So we need to study the corproduct $\Delta(b'')$.
+so we need to study the corproduct $\Delta(G(b''))$.
 
-It follows easily from \cite{Jan}*{4.9 (4)} that $\Delta(F_i^{(r)}) = \sum_{j=0}^r
-q_i^{j(r-j)} F^{(j)}_i \ot F^{(r-j)}_i K_i^{-j}$. Since $b'' \in \B$ implies that
-$b'' \in U_\A$, it follows that $\Delta(b'')$ is a sum of terms of the form $p (b_{(1)} 
-\ot b_{(2)} K_\mu)$ with $p \in \A$ and $\mu$ the weight of $b_{(1)}$. Among all these 
-terms there is one of the form $d_{b,b'}^{b''} (b \ot b' K_\lambda)$, perhaps with 
-$d_{b,b'}^{b''} = 0$, and from the reasoning above we get that $c_{b,b'}^{b''} = 
-q^{(\lambda, \lambda')} d_{b,b'}^{b''}$. Notice that unlike before, the element 
-$d_{b,b'}^{b''}$ is independent of $\lambda$ and $\lambda'$.
+It follows easily from \cite{Jan}*{4.9 (4)} that $\Delta(F_i^{(r)}) = 
+\sum_{j=0}^r q_i^{j(r-j)} F^{(j)}_i \ot F^{(r-j)}_i K_i^{-j}$. Since the 
+canonical basis is contained in $U_\A$, it follows that $\Delta(G(b''))$ is a 
+sum of terms of the form $p (G(b_{(1)}) \ot G(b_{(2)}) K_\mu)$ with $p \in \A, 
+b_{(1)}, b_{(2)} \in \B(\infty)$, and $\mu$ the weight of $b_{(1)}$. Among all 
+these terms there is one of the form $d_{b,b'}^{b''} (b \ot b' K_\lambda)$, 
+perhaps with $d_{b,b'}^{b''} = 0$, and from the reasoning above we get that 
+$c_{b,b'}^{b''} = q^{(\lambda, \lambda')} d_{b,b'}^{b''}$. Notice that unlike 
+before, the element $d_{b,b'}^{b''}$ is independent of $\lambda$ and 
+$\lambda'$.
 
-The problem of showing that our basis is indeed an $(S_{\tilde w_0}, <_{\lex})$-basis
-thus reduces to the follwing: show that if $d_{b,b'}^{b''} \neq 0$ then 
-$\Lambda_{\tilde w_0}(b'') \leq \Lambda_{\tilde w_0}(b) + \Lambda_{\tilde w_0}(b')$.
-Caldero shows that this is indeed the case in \cite{C}*{Theorem 2.3}. In order to state
-more precisely his result, we make a slight change of notation. For each $s$ in the image 
-of $\Lambda_{\tilde w_0}$ and each $\lambda \in \Lambda^+$ such that 
-$\Lambda_{\tilde w_0}^{-1}(s) \in \B(\lambda)$, we write $b_{(s,\lambda)}$ for 
-$\Lambda_{\tilde w_0}^{-1}(s)_\lambda$. Then Caldero's result can be restated as follows.
+The problem of showing that $\flagbasis$ is indeed an $(\tilde S_{\tilde w_0}, 
+<_{\lex})$-basis thus reduces to the follwing: show that if $d_{b,b'}^{b''} 
+\neq 0$ then $\Lambda_{\tilde w_0}(b'') \leq_{\lex} \Lambda_{\tilde w_0}(b) + 
+\Lambda_{\tilde w_0}(b')$. Caldero shows that this is indeed the case in 
+\cite{C}*{Theorem 2.3}. In order to state more precisely his result, we make a 
+slight change of notation. For each $s$ in the image of $\Lambda_{\tilde w_0}$ 
+and each $\lambda \in \Lambda^+$ such that $s \in \Lambda_{\tilde w_0}(
+\B(\lambda))$, we write $b_{(s,\lambda)}$ for the unique element $b_\lambda 
+\in C^+(\lambda)$ such that $\Lambda_{\tilde w_0}(b) = s$. Then Caldero's 
+result can be stated as follows.
 
 \begin{Proposition*}
-Let $\lambda, \lambda' \in \Lambda^+$ and let $s \in \Lambda_{\tilde w_0}(\B(\lambda)),
-s' \in \Lambda_{\tilde w_0}(\B(\lambda'))$. Then for all $s'' \in 
-\Lambda_{\tilde w_0}(\B(\lambda + \lambda'))$ with $s'' <_{\lex} s+ s'$ there exist 
-$c_{s, s'}^{s''} \in \A$ and $c = c((s,\lambda),(s',\lambda')) \in \ZZ$ such that 
+Let $\lambda, \lambda' \in \Lambda^+$ and let $s \in \Lambda_{\tilde w_0}
+(\B(\lambda)), s' \in \Lambda_{\tilde w_0}(\B(\lambda'))$. Then there exist 
+$c = c((s,\lambda),(s',\lambda')) \in \ZZ$ and $c_{s, s'}^{s''} \in \A$ 
+for all $s'' \in \Lambda_{\tilde w_0}(\B(\lambda + \lambda'))$ with $s'' 
+<_{\lex} s+ s'$ such that 
 \begin{align*}
 \label{product-formula} 
 b_{(s, \lambda)} b_{(s', \lambda')}
@@ -1614,6 +1674,27 @@ b_{(s, \lambda)} b_{(s', \lambda')}
     + \sum_{s'' <_{\lex} s+s'} c_{s,s'}^{s''} b_{(s'', \lambda + \lambda')}.b
 \end{align*} 
 \end{Proposition*} 
+\begin{proof}[Sketch of the proof]
+As stated above, the main point is to prove that
+the coefficient $d_{b,b'}^{b''}$ is zero if $\Lambda_{\tilde w_0}(b) + 
+\Lambda_{\tilde w_0}(b') <_{\lex} \Lambda_{\tilde w_0}(b'')$. Let $(-,-): U^- 
+\times U^+ \to \QQ(v)$ the pairing defined in \cite{Jan}*{Proposition 6.12}. 
+Fix $\nu \in \ZZ\Phi$ with $\nu \geq 0$. By \cite{Jan}*{Proposition 6.18} this 
+pairing is non-degenerate when restricted to $U^-_{-\nu} \times U^+_{\nu}$, 
+and hence $U^+_{\nu}$ has basis $\{G(b)^* \mid b \in \B(\infty)_{-\nu}\}$ 
+uniquely defined by the property that $(G(b'),G(b)^*) = \delta_{b,b'}$ for all
+$b' \in \B(\infty)_{-\nu}$. Now it follows from \cite{Jan}*{Proposition 6.12 
+(1) and 6.13 (1)} that $d_{b,b'}^{b''}$ is the coefficient of $G(b'')^*$
+in the product $G(b')^*G(b)^*$. 
+
+Since multiplication by $F_i$ sends $U^-_{-\nu}$ to $U^-_{-\nu - \alpha_i}$, 
+we obtain a transpose morphism $L_i: U^+_{\nu + \alpha_i} \to U^+_{\nu}$, which
+is a $q$-derivation, since it is a multiple of the map $r'_{\alpha_i}$ defined 
+in \cite{Jan}*{6.14}. We thus have all the ingredients to follow the reasoning 
+presented in \cite{C}*{Theorem 2.3}.
+\end{proof}
+
+
 
 
 \begin{Theorem}
