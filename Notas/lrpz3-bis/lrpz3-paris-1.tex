@@ -1541,12 +1541,10 @@ in the quotient.
 \paragraph
 \label{Littelman-parametrizations}
 The operators $\tilde E_i, \tilde F_i$ of \cite{Jan}*{10.2} induce operators 
-$\tilde E_i, \tilde F_i: \B \to \B \cup \{0\}$. These in turn induce the 
-\emph{Kashiwara operators} $\tilde e_i, \tilde f_i: G(\B) \to G(\B) \cup 
-\{0\}$. The operators $\tilde E_i$ are locally nilpotent, and hence so are the 
-$\tilde e_i$, so it makes sense to set $\varepsilon_i(b) = \max \{k \in \NN 
-\mid \tilde e_i(b) \neq 0\}$ for each $b \in \B$. Write $\overline e_i(b)$ for 
-$\tilde e_i^{\varepsilon_i(b)}(b)$.
+$\tilde E_i, \tilde F_i: \B \to \B \cup \{0\}$. The operators $\tilde E_i$ are 
+locally nilpotent, so it makes sense to set $e_{\alpha_i} = e_i(b) = \max 
+\{k \in \NN \mid \tilde E_i(b) \neq 0\}$ for each $b \in \B$. Write 
+$\overline E_i(b)$ for $\tilde E_i^{e_i(b)}(b)$.
 
 Fix $w \in W$. In \cite{Lit}, P. Littelman proves that to each reduced 
 decomposition of $w$ we can associate a parametrization of $B_w(\infty)$ as 
@@ -1554,8 +1552,8 @@ follows. If $\tilde w = s_{i_1} \cdots s_{i_r}$ is the chosen decomposition
 then we define $\Lambda_{\tilde w}: \B \to \NN^r$ by the formula
 \[
   \Lambda_{\tilde w}(b) 
-    = (\varepsilon_{i_1}(b), \varepsilon_{i_{2}}(\overline e_{i_1}(b)), \ldots,
-    \varepsilon_{i_r}(\overline e_{i_{r-1}} \cdots \overline e_{i_1}(b))).
+    = (e_{i_1}(b), e_{i_{2}}(\overline E_{i_1}(b)), \ldots,
+    e_{i_r}(\overline E_{i_{r-1}} \cdots \overline E_{i_1}(b))).
 \]
 Now according to \cite{Lit}*{Proposition 1.5, Theorem 1.7 and Corollary 1}, 
 the set $S_{\tilde w} = \Lambda_{\tilde w}(\B_w(\infty))$ is the set of 
@@ -1674,7 +1672,9 @@ b_{(s, \lambda)} b_{(s', \lambda')}
     + \sum_{s'' <_{\lex} s+s'} c_{s,s'}^{s''} b_{(s'', \lambda + \lambda')}.b
 \end{align*} 
 \end{Proposition*} 
-\begin{proof}[Sketch of the proof]
+We give a sketch of the proof in the following paragraphs.
+
+\paragraph
 As stated above, the main point is to prove that
 the coefficient $d_{b,b'}^{b''}$ is zero if $\Lambda_{\tilde w_0}(b) + 
 \Lambda_{\tilde w_0}(b') <_{\lex} \Lambda_{\tilde w_0}(b'')$. Let $(-,-): U^- 
@@ -1687,12 +1687,17 @@ $b' \in \B(\infty)_{-\nu}$. Now it follows from \cite{Jan}*{Proposition 6.12
 (1) and 6.13 (1)} that $d_{b,b'}^{b''}$ is the coefficient of $G(b'')^*$
 in the product $G(b')^*G(b)^*$. 
 
+Now in order to prove this result about the dual of the canonical basis, we 
+need to understand the string parametrization in terms of it.
 Since multiplication by $F_i$ sends $U^-_{-\nu}$ to $U^-_{-\nu - \alpha_i}$, 
 we obtain a transpose morphism $L_i: U^+_{\nu + \alpha_i} \to U^+_{\nu}$, which
 is a $q$-derivation, since it is a multiple of the map $r'_{\alpha_i}$ defined 
-in \cite{Jan}*{6.14}. We thus have all the ingredients to follow the reasoning 
-presented in \cite{C}*{Theorem 2.3}.
-\end{proof}
+in \cite{Jan}*{6.14}. Set $L_i^{(n)} = \frac{1}{[n]!} L_i^n$. Fixing $b \in 
+\B(\infty)$ we get that
+\begin{align*}
+1 = (G(b), G(b)^*) = ()
+\end{align*}
+
 
 
 
