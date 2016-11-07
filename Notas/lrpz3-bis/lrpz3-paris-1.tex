@@ -1426,19 +1426,21 @@ through almost word by word in our context, but we believe it is worthwhile to
 retrace it in some detail.
 
 \paragraph
-We work with $\k = \QQ(v)$ and $q = v$. We denote by $U^+$ and $U^-$ the 
-algebras $U^+_v(\g)$ and $U^-_v(\g)$, respectively. Let $\A = \ZZ[v, v^{-1}] 
-\subset \QQ(v)$. The algebra $U$ has an $\A$-form, defined in 
-\cite{Jan}*{section 11.1}, which we denote by $U_\A$. This is a subring of 
-$U$. The algebras $U^+$ and $U^-$ also have $\A$-forms which we denote by 
-$U_\A^+$ and $U_\A^-$ respectively, and all these $\A$-forms are compatible 
-with the weight decomposition of $U$. By construction $U \cong \QQ(v) \ot_\A 
-U_\A$, and analogous results hold for $U_\A^+$ and $U_\A^-$. Furthermore the 
-highest weight modules $V_v(\lambda)$ have corresponding $\A$-forms which we 
-denote by $V_\A(\lambda)$. All these $\A$-forms are compatible with the weight 
-decompositions of the original objects, see \cite{Jan}*{chapters 9,10}. 
+We work with $\k = \QQ(v)$ and $q = v$, and set $U=U_v(\G)$. We denote by 
+$U^+$ and $U^-$ the algebras $U^+_v(\g)$ and $U^-_v(\g)$, respectively. Let 
+$\A = \ZZ[v, v^{-1}] \subset \QQ(v)$. The algebra $U$ has an $\A$-form, 
+defined in \cite{Jan}*{section 11.1}, which we denote by $U_\A$. This is a 
+subring of $U$. The algebras $U^+$ and $U^-$ also have $\A$-forms which we 
+denote by $U_\A^+$ and $U_\A^-$ respectively, and all these $\A$-forms are 
+compatible with the weight decomposition of $U$. By construction $U \cong 
+\QQ(v) \ot_\A U_\A$, and analogous results hold for $U_\A^+$ and $U_\A^-$. 
+Furthermore the highest weight modules $V_v(\lambda)$ have corresponding 
+$\A$-forms which we denote by $V_\A(\lambda)$; these are obtained by fixing a 
+highest weight vector $v_\lambda$ and looking at the $\A$-lattice $U^-_\A 
+v_\lambda \subset V_v(\lambda)$. These $\A$-forms are compatible with the 
+weight decompositions of the original objects, see \cite{Jan}*{chapters 9,10}. 
 Now let $\lambda$ be a dominant weight and fix $w \in W$. The $\A$-form of the 
-Demazure module $V_q(\lambda)_{w}$ is defined as $V_\A(\lambda)_{w} = U^+ 
+Demazure module $V_q(\lambda)_{w}$ is defined as $V_\A(\lambda)_{w} = U_\A^+ 
 V_\A(\lambda)_{w\lambda}$.
 
 \paragraph
@@ -1462,8 +1464,7 @@ Set
 \begin{align*}
 \B(\infty)_{-\nu} 
   &=  \left\{\tilde F_{i_1} \tilde F_{i_2} \cdots 
-    \tilde F_{i_r}(1) + q\L(\infty) \in \L(\infty)_{-\nu} / q \L(\infty)_{-\nu}
-     \mid \sum_{j} \alpha_{i_j} = \nu\right\}
+    \tilde F_{i_r}(1) + q\L(\infty) \mid \sum_{j} \alpha_{i_j} = \nu\right\}
 \end{align*}
 and set $\B(\infty) = \bigsqcup_{\nu \geq 0} \B(\infty)_{-\nu}$. Although it is
 not obvious, $\B(\infty)_{-\nu}$ is a basis of $\L(\infty)_{-\nu} / 
@@ -1540,11 +1541,11 @@ in the quotient.
 
 \paragraph
 \label{Littelman-parametrizations}
-The operators $\tilde E_i, \tilde F_i$ of \cite{Jan}*{10.2} induce operators 
-$\tilde E_i, \tilde F_i: \B \to \B \cup \{0\}$. The operators $\tilde E_i$ are 
-locally nilpotent, so it makes sense to set $e_{\alpha_i} = e_i(b) = \max 
-\{k \in \NN \mid \tilde E_i(b) \neq 0\}$ for each $b \in \B$. Write 
-$\overline E_i(b)$ for $\tilde E_i^{e_i(b)}(b)$.
+The operators $\tilde E_i, \tilde F_i$ induce operators $\tilde E_i, 
+\tilde F_i: \B(\infty) \to \B(\infty) \cup \{0\}$ \cite{Jan}*{10.12}. The 
+operators $\tilde E_i$ are locally nilpotent, so it makes sense to set 
+$e_{\alpha_i} = e_i(b) = \max \{k \in \NN \mid \tilde E_i^k(b) \neq 0\}$ for 
+each $b \in \B$. 
 
 Fix $w \in W$. In \cite{Lit}, P. Littelman proves that to each reduced 
 decomposition of $w$ we can associate a parametrization of $B_w(\infty)$ as 
@@ -1586,8 +1587,8 @@ According to \cite{Lit}*{Proposition 1.5}, this is the set of all
 $a \times (r_1, \ldots, r_n) \in S_{\tilde w_0} \times \NN^n$ such that
 \begin{align*}
 a_l 
-  &\leq \left\langle \lambda - \sum_{j=1}^{r-1} a_{N-r+j} \alpha_{i_{N-r+j}}, 
-  \alpha_{i_r} \right\rangle
+  &\leq \left\langle \lambda - \sum_{j=1}^{N-l} a_{N-j+1} \alpha_{i_{N-j+1}}, 
+  \alpha_{i_l} \right\rangle
 & (1 \leq l \leq N-1)
 \end{align*}
 where $\lambda = \sum_i r_i \varpi_i$. Thus $\tilde S_{\tilde w_0}$ is the set 
@@ -1596,29 +1597,29 @@ inequalities, and hence it is also a normal affine semigroup.
 
 Furthermore, $\tilde S_{\tilde w_0}^I = \Gamma_{\tilde w_0}(\flagbasis_I)$ is 
 the intersection of $\tilde S_{\tilde w_0}$ with the hyperplanes defined by 
-the equations $a_{N+i} = 0$ for all $i$ such that $\varpi_i \in I$, and hence 
+the equations $x_{N+i} = 0$ for all $i$ such that $\varpi_i \in I$, and hence 
 is also a normal affine semigroup. Finally, the fact that the decomposition 
 $\tilde w_0$ is adapted to $w$ implies that 
 $\tilde S_{\tilde w_0, w}^I = \Gamma_{\tilde w_0}(\schubertbasis_I(w))$ is the 
 intersection of $\tilde S_{\tilde w_0}^I$ with the hyperplanes defined by 
-$a_i = 0$ for all $\ell(w) < i \leq N$, and hence it is also a normal affine 
-semigroup.
+$x_i = 0$ for all $\ell(w) < i \leq N$, and hence it is also a normal affine 
+semigroup. 
 
 \paragraph
 We have just shown that the bases of quantum flag varieties and quantum 
 Schubert varieties defined in \ref{q-var-bases} are parametrized by normal 
-semigroups. All that is left is to check that they have the multiplicative 
-property of $(S,<)$-bases, where $<$ is the lexicographic order of $\NN^N 
-\times \NN^n$.
+semigroups. All that is left to check is that they have the multiplicative 
+property of $(S,<_{\lex})$-bases, where $<_{\lex}$ is the lexicographic order 
+of $\NN^N \times \NN^n$.
 
-Let $\lambda, \lambda' \in \Lambda^+$ while $b \in \B(\lambda), b' \in
+Let $\lambda, \lambda' \in \Lambda^+$ and $b \in \B(\lambda), b' \in
 \B(\lambda')$. Recall that $b_\lambda^*$ denotes the element in the dual basis 
 of $V_v(\lambda)^*$ as defined in \ref{q-var-bases}. The product $b_\lambda 
-b'_{\lambda'b}$ is by definition the matrix coefficient corresponding to the 
-functional $b_\lambda^* \ot b'_{\lambda'}$ and the vector $v_\lambda \ot 
+b'_{\lambda'}$ is by definition the matrix coefficient corresponding to the 
+functional $b_\lambda^* \ot b_{\lambda'}'^*$ and the vector $v_\lambda \ot 
 v_{\lambda'}$ over $V(\lambda) \ot V(\lambda')$. Now the $U$-module generated 
 by $v_\lambda \ot v_{\lambda'}$ is isomorphic to $V_v(\lambda + \lambda')$, so 
-$b_\lambda^* \ot b'_{\lambda'}$ naturally induces an element in $C^+(\lambda 
+$b_\lambda^* \ot b_{\lambda'}'^*$ naturally induces an element in $C^+(\lambda 
 + \lambda')$, and the product $b_\lambda b'_{\lambda'}$ is a linear 
 combination of matrix coefficients in $C^+_v(\lambda + \lambda')$
 \[
@@ -1652,12 +1653,39 @@ The problem of showing that $\flagbasis$ is indeed an $(\tilde S_{\tilde w_0},
 <_{\lex})$-basis thus reduces to the follwing: show that if $d_{b,b'}^{b''} 
 \neq 0$ then $\Lambda_{\tilde w_0}(b'') \leq_{\lex} \Lambda_{\tilde w_0}(b) + 
 \Lambda_{\tilde w_0}(b')$. Caldero shows that this is indeed the case in 
-\cite{C}*{Theorem 2.3}. In order to state more precisely his result, we make a 
-slight change of notation. For each $s$ in the image of $\Lambda_{\tilde w_0}$ 
-and each $\lambda \in \Lambda^+$ such that $s \in \Lambda_{\tilde w_0}(
-\B(\lambda))$, we write $b_{(s,\lambda)}$ for the unique element $b_\lambda 
-\in C^+(\lambda)$ such that $\Lambda_{\tilde w_0}(b) = s$. Then Caldero's 
-result can be stated as follows.
+\cite{C}*{Theorem 2.3}. We give a sketch of the proof in the following paragraphs.
+
+\paragraph
+As stated above, the main point is to prove that
+the coefficient $d_{b,b'}^{b''}$ is zero if $\Lambda_{\tilde w_0}(b) + 
+\Lambda_{\tilde w_0}(b') <_{\lex} \Lambda_{\tilde w_0}(b'')$. Let $(-,-): U^- 
+\times U^+ \to \QQ(v)$ the pairing defined in \cite{Jan}*{Proposition 6.12}. 
+Fix $\nu \in \ZZ\Phi$ with $\nu \geq 0$. By \cite{Jan}*{Proposition 6.18} this 
+pairing is non-degenerate when restricted to $U^-_{-\nu} \times U^+_{\nu}$, 
+and hence $U^+_{\nu}$ has basis $\{G(b)^* \mid b \in \B(\infty)_{-\nu}\}$ 
+uniquely defined by the property that $(G(b'),G(b)^*) = \delta_{b,b'}$ for all
+$b' \in \B(\infty)_{-\nu}$. Now it follows from \cite{Jan}*{Proposition 6.12 
+(1) and 6.13 (1)} that $d_{b,b'}^{b''}$ is the coefficient of $G(b'')^*$
+in the product $G(b')^*G(b)^*$, and this is what we prove.
+
+In order to prove this result about the dual of the canonical basis, we 
+need to understand the string parametrization in terms of it.
+Since multiplication by $F_i$ sends $U^-_{-\nu}$ to $U^-_{-\nu - \alpha_i}$, 
+we obtain a transpose morphism $L_i: U^+_{\nu + \alpha_i} \to U^+_{\nu}$, which
+is a $q$-derivation, since it is a multiple of the map $r'_{\alpha_i}$ defined 
+in \cite{Jan}*{6.14}; we write $L_i^{(n)} = \frac{1}{[n]!} L_i^n$. 
+
+Fix $b \in \B(\infty)_{-\nu}$ with $e = e_i(b)$; by \cite{Jan}*{10.15} we have 
+$e = \max \{k \in \NN \mid b \in \tilde F_i^k \B(\infty)\}$. We claim that 
+$e = \max \{k \mid L_i^{(k)}G(b)^* \neq 0\}$. Suppose that $t > e$. Then by 
+definition $L_i^{(t)}(G(b)^*)$ lies in $U^+_{\nu - t \alpha_i}$. Let $b' \in 
+\B(\infty)_{-\nu + t \alpha_i}$, so $(G(b'), L_i^{(t)} G(b)^*) = (F^{(t)} 
+G(b'), G(b)^*)$. Now $F^{(t)}(U^-) = \tilde F^t(U^-)$ by 
+\cite{Jan}*{Lemma 11.3 (2)}, and since $b \notin \tilde F^t(U^-)$ we get that 
+$(G(b'), L^{(i)} G(b)^*) = 0$ for all $b' \in 
+\B(\infty)_{-\nu + t \alpha_i}$, which implies $L_i^{(t)}G(b)^* = 0$.
+
+
 
 \begin{Proposition*}
 Let $\lambda, \lambda' \in \Lambda^+$ and let $s \in \Lambda_{\tilde w_0}
@@ -1672,33 +1700,6 @@ b_{(s, \lambda)} b_{(s', \lambda')}
     + \sum_{s'' <_{\lex} s+s'} c_{s,s'}^{s''} b_{(s'', \lambda + \lambda')}.b
 \end{align*} 
 \end{Proposition*} 
-We give a sketch of the proof in the following paragraphs.
-
-\paragraph
-As stated above, the main point is to prove that
-the coefficient $d_{b,b'}^{b''}$ is zero if $\Lambda_{\tilde w_0}(b) + 
-\Lambda_{\tilde w_0}(b') <_{\lex} \Lambda_{\tilde w_0}(b'')$. Let $(-,-): U^- 
-\times U^+ \to \QQ(v)$ the pairing defined in \cite{Jan}*{Proposition 6.12}. 
-Fix $\nu \in \ZZ\Phi$ with $\nu \geq 0$. By \cite{Jan}*{Proposition 6.18} this 
-pairing is non-degenerate when restricted to $U^-_{-\nu} \times U^+_{\nu}$, 
-and hence $U^+_{\nu}$ has basis $\{G(b)^* \mid b \in \B(\infty)_{-\nu}\}$ 
-uniquely defined by the property that $(G(b'),G(b)^*) = \delta_{b,b'}$ for all
-$b' \in \B(\infty)_{-\nu}$. Now it follows from \cite{Jan}*{Proposition 6.12 
-(1) and 6.13 (1)} that $d_{b,b'}^{b''}$ is the coefficient of $G(b'')^*$
-in the product $G(b')^*G(b)^*$. 
-
-Now in order to prove this result about the dual of the canonical basis, we 
-need to understand the string parametrization in terms of it.
-Since multiplication by $F_i$ sends $U^-_{-\nu}$ to $U^-_{-\nu - \alpha_i}$, 
-we obtain a transpose morphism $L_i: U^+_{\nu + \alpha_i} \to U^+_{\nu}$, which
-is a $q$-derivation, since it is a multiple of the map $r'_{\alpha_i}$ defined 
-in \cite{Jan}*{6.14}. Set $L_i^{(n)} = \frac{1}{[n]!} L_i^n$. Fixing $b \in 
-\B(\infty)$ we get that
-\begin{align*}
-1 = (G(b), G(b)^*) = ()
-\end{align*}
-
-
 
 
 
