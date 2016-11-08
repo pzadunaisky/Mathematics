@@ -1675,15 +1675,61 @@ we obtain a transpose morphism $L_i: U^+_{\nu + \alpha_i} \to U^+_{\nu}$, which
 is a $q$-derivation, since it is a multiple of the map $r'_{\alpha_i}$ defined 
 in \cite{Jan}*{6.14}; we write $L_i^{(n)} = \frac{1}{[n]!} L_i^n$. 
 
-Fix $b \in \B(\infty)_{-\nu}$ with $e = e_i(b)$; by \cite{Jan}*{10.15} we have 
-$e = \max \{k \in \NN \mid b \in \tilde F_i^k \B(\infty)\}$. We claim that 
-$e = \max \{k \mid L_i^{(k)}G(b)^* \neq 0\}$. Suppose that $t > e$. Then by 
-definition $L_i^{(t)}(G(b)^*)$ lies in $U^+_{\nu - t \alpha_i}$. Let $b' \in 
-\B(\infty)_{-\nu + t \alpha_i}$, so $(G(b'), L_i^{(t)} G(b)^*) = (F^{(t)} 
-G(b'), G(b)^*)$. Now $F^{(t)}(U^-) = \tilde F^t(U^-)$ by 
-\cite{Jan}*{Lemma 11.3 (2)}, and since $b \notin \tilde F^t(U^-)$ we get that 
-$(G(b'), L^{(i)} G(b)^*) = 0$ for all $b' \in 
-\B(\infty)_{-\nu + t \alpha_i}$, which implies $L_i^{(t)}G(b)^* = 0$.
+\begin{Lemma*}
+Fix $b \in \B(\infty)_{\nu}$. The following formulas hold.
+\begin{enumerate}
+\item For all $r \geq 0$,
+\[
+  F_i^{(r)}G(b) 
+    \equiv G(\tilde F_i^r b) \mod 
+    \sum_{s \geq 0} F_i^{(r+s+1)}(U^-_\A)_{-\nu+(r+s+1)\alpha_i}.
+\]
+
+\item We have $e_i(b) = \max \{k \mid L_i^{(k)}G(b)^* \neq 0\}$ and
+$L_i^{(e_i(b))}(G(b)^*) = G(\overline E_i(b))^*$.
+
+\item Put $a_i = \max \{k \mid L_i^{(k)}(G(b)^*)\}$ and fix $\tilde w_0
+=s_{i_1}, \cdots s_{i_N}$ a decomposition of the longest word in the Weyl 
+group. Then
+\[
+  \Lambda_{\tilde w_0}(b)
+    = (a_{i_N}(G(b)^*), a_{i_{N-1}}(\overline L_N(G(b)^*)), \ldots, 
+    a_{i_i}(\overline L_{i_2} \overline L_{i_3} \cdots \overline L_{i_N}
+    (G(b)^*)))
+\]
+
+\item $\overline L_{i_1} \overline L_{i_2} \overline L_{i_3} \cdots \overline 
+L_{i_N} (G(b)^*)) = 1$.
+\end{enumerate}
+\end{Lemma*}
+\begin{proof}
+By \cite{Jan}*{11.12, p. 249}, the $G(b)$ have the property that
+\[
+  G(\tilde F_i^r b) \equiv \tilde F_i^r G(b) \mod 
+    \tilde F_i^{r+1}(U_\A)_{-\nu + (r+1) \alpha_i}.
+\]
+The first item follows from \cite{Jan}*{Lemma 11.3 (1) and (2)}.
+
+Put $e = e_i(b)$. Clearly $L_i^{(t)}(G(b)) = 0$ for $t \gg e$. Now assume this 
+holds for some $t+1$ with $t \geq e$. By definition we get
+\[
+  (G(b'), L^{(t)}_i G(b)^*) = (F_i^{(t)}G(b'), G(b)^*)
+\]
+By the previous item, $F_i^{(t)}G(b') = G(\tilde F_i^t b') + F_i^{(t+1)}u$ 
+for some $u \in U^-_\A$, so assuming $t \geq e$
+\[
+  (G(b'), L^{(t)}_i G(b)^*) = (G(\tilde F_i^t b'), G(b)^*) = 
+  \delta_{\tilde F_i^t(b'), b}.
+\]
+Thus $(-, L_i^{(t)}(G(b)^*)) = (-,G(\overline E_i(b)))$, which implies the 
+desired equality. Item three follows immediately from this and the definition
+of $\Lambda_{\tilde w_0}$.
+
+In view of the previous items, the last one follows from the fact that 
+$\overline E_{i_N} \cdots \overline E_{i_1} (b) = 1$, or equivalently
+that $b = \tilde F_{i_1} \cdots \tilde F_{i_N}^{}$
+\end{proof}
+
 
 
 
@@ -1697,7 +1743,7 @@ for all $s'' \in \Lambda_{\tilde w_0}(\B(\lambda + \lambda'))$ with $s''
 \label{product-formula} 
 b_{(s, \lambda)} b_{(s', \lambda')}
   = v^c b_{(s+s', \lambda + \lambda')} 
-    + \sum_{s'' <_{\lex} s+s'} c_{s,s'}^{s''} b_{(s'', \lambda + \lambda')}.b
+    + \sum_{s'' <_{\lex} s+s'} c_{s,s'}^{s''} b_{(s'', \lambda + \lambda')}
 \end{align*} 
 \end{Proposition*} 
 
