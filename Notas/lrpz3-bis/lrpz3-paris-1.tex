@@ -1656,27 +1656,37 @@ The problem of showing that $\flagbasis$ is indeed an $(\tilde S_{\tilde w_0},
 paragraphs, begining with the following lemma.
 
 \begin{Lemma}
+Fix $b \in \B(\infty)$. Let $i \in \{1, \ldots, n\}$ and let $e = e_i(b)$.
 \begin{enumerate}
-\item For each $i = 1, \ldots, n$ and each $b \in \B(\infty)$ we get $F_i^{(r)}
-G(b) = \qbinom{r+ e_i(b)}{r} G(\tilde F_i^r b) + \sum_{e_i(b') > r + e_i(b)} 
-a_{b'} G(b')$.
+\item For each $r \geq 0$ we have $\tilde F_i^r G(b) \equiv G(\tilde F_i^r b)
+\mod \tilde F^{r+1} U_\A^-$  
+
+\item For each $r \geq 0$ we have $F_i^{(r)} G(b) \equiv \qbinom{r+e}{e} 
+G(\tilde F_i^r b) \mod \tilde F^{r+e} U_\A^-$.
 
 \item If $d_{b,b'}^{b''} \neq 0$ then for all $1 \leq i \leq n$ we have 
 $e_i(b'') \leq e_i(b) + e_i(b')$.
 \end{enumerate}
 \end{Lemma}
 \begin{proof}
+The statements are obvious if $r = 0$ so take $r > 0$.
+As stated in the proof of \cite{Jan}*{Lemma 11.12}, page 249, $G^\alpha(b') 
+\equiv \tilde F_i^r  G(\tilde E_i^r b') \mod \tilde F_i^{r+1} U^-_\A$ whenever
+$e_i(b') > r$; notice that $G^\alpha(b') = G(b')$ by \cite{Jan}*{11.15}. 
+Taking $b' = \tilde F_i^r b$, we get $G(\tilde F_i^r b) \equiv \tilde F_i^r 
+G(b) \mod \tilde F_i^{r+1}U_\A^-$, which is item 1.
+
+
+
+, so
+$F_i^{(r)} G(b) = G(\tilde F_i^r b) + \tilde F_i^{r+1}u''$.
+
+
 First by \cite{Jan}*{Lemma 11.3} we have that
 \begin{align*}
 F_i^{(r)} G(b) = \tilde F_i^r G(b) + \tilde F_i^{r+1}u 
 \end{align*}
-for some $u \in U_\A^-$. Now as stated in the proof of 
-\cite{Jan}*{Lemma 11.12}, page 249, $\tilde G^\alpha(b') = 
-G(\tilde F_i^r \tilde E_i^r b') + \tilde F_i^{r+1} u'$ for some 
-$u' \in U_\A^-$ whenever $e_i(b') > 0$; notice that $G^\alpha(b') = 
-G(b')$ by \cite{Jan}*{11.15}. Taking $b' = \tilde F_i^r b$, we get
-$\tilde F_i^r G(b) = G(\tilde F_i^r b) - \tilde F_i^{r+1}u'$, so
-$F_i^{(r)} G(b) = G(\tilde F_i^r b) + \tilde F_i^{r+1}u''$.
+for some $u \in U_\A^-$. Now 
 Thus by \cite{Jan}*{Lemma 11.12 (b)}
 \begin{align}
 F^{(r)}G(b) = G(\tilde F_i^r b) + \sum_{e_i(b') > r} a_{b'} 
