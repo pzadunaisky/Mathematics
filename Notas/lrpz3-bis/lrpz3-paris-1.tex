@@ -1605,6 +1605,7 @@ $x_i = 0$ for all $\ell(w) < i \leq N$, and hence it is also a normal affine
 semigroup. 
 
 \paragraph
+\label{coproduct-coefficients}
 We have just shown that the bases of quantum flag varieties and quantum 
 Schubert varieties defined in \ref{q-var-bases} are parametrized by normal 
 semigroups. All that is left to check is that they have the multiplicative 
@@ -1638,13 +1639,13 @@ of matrix coefficients
 so we need to study the corproduct $\Delta(G(b''))$.
 
 It follows easily from \cite{Jan}*{4.9 (4)} that $\Delta(F_i^{(r)}) = 
-\sum_{j=0}^r q_i^{j(r-j)} F^{(j)}_i \ot F^{(r-j)}_i K_i^{-j}$. Since the 
+\sum_{j=0}^r v_i^{j(r-j)} F^{(j)}_i \ot F^{(r-j)}_i K_i^{-j}$. Since the 
 canonical basis is contained in $U_\A$, it follows that $\Delta(G(b''))$ is a 
 sum of terms of the form $p (G(b_{(1)}) \ot G(b_{(2)}) K_\mu)$ with $p \in \A, 
 b_{(1)}, b_{(2)} \in \B(\infty)$, and $\mu$ the weight of $b_{(1)}$. Among all 
 these terms there is one of the form $d_{b,b'}^{b''} (G(b) \ot G(b') 
-K_\lambda)$, perhaps with $d_{b,b'}^{b''} = 0$, and from the reasoning above 
-we get that $c_{b,b'}^{b''} = q^{(\lambda, \lambda')} d_{b,b'}^{b''}$. Notice 
+K_{wt(b)})$, perhaps with $d_{b,b'}^{b''} = 0$, and from the reasoning above 
+we get that $c_{b,b'}^{b''} = v^{(wt(b), \lambda')} d_{b,b'}^{b''}$. Notice 
 that unlike before, the element $d_{b,b'}^{b''}$ is independent of $\lambda$ 
 and $\lambda'$.
 
@@ -1652,182 +1653,95 @@ The problem of showing that $\flagbasis$ is indeed an $(\tilde S_{\tilde w_0},
 <_{\lex})$-basis thus reduces to the follwing: show that if $d_{b,b'}^{b''} 
 \neq 0$ then $\Lambda_{\tilde w_0}(b'') \leq_{\lex} \Lambda_{\tilde w_0}(b) + 
 \Lambda_{\tilde w_0}(b')$. Caldero shows that this is indeed the case in 
-\cite{C}*{Theorem 2.3}. We give a sketch of the proof in the following 
-paragraphs, begining with the following lemma.
-
-\begin{Lemma}
-Fix $b \in \B(\infty)$. Let $i \in \{1, \ldots, n\}$ and let $e = e_i(b)$.
-\begin{enumerate}
-\item For each $r \geq 0$ we have $\tilde F_i^r G(b) \equiv G(\tilde F_i^r b)
-\mod \tilde F^{r+1} U_\A^-$  
-
-\item For each $r \geq 0$ we have $F_i^{(r)} G(b) \equiv \qbinom{r+e}{e} 
-G(\tilde F_i^r b) \mod \tilde F^{r+e} U_\A^-$.
-
-\item If $d_{b,b'}^{b''} \neq 0$ then for all $1 \leq i \leq n$ we have 
-$e_i(b'') \leq e_i(b) + e_i(b')$.
-\end{enumerate}
-\end{Lemma}
-\begin{proof}
-The statements are obvious if $r = 0$ so take $r > 0$.
-As stated in the proof of \cite{Jan}*{Lemma 11.12}, page 249, $G^\alpha(b') 
-\equiv \tilde F_i^r  G(\tilde E_i^r b') \mod \tilde F_i^{r+1} U^-_\A$ whenever
-$e_i(b') > r$; notice that $G^\alpha(b') = G(b')$ by \cite{Jan}*{11.15}. 
-Taking $b' = \tilde F_i^r b$, we get $G(\tilde F_i^r b) \equiv \tilde F_i^r 
-G(b) \mod \tilde F_i^{r+1}U_\A^-$, which is item 1.
-
-
-
-, so
-$F_i^{(r)} G(b) = G(\tilde F_i^r b) + \tilde F_i^{r+1}u''$.
-
-
-First by \cite{Jan}*{Lemma 11.3} we have that
-\begin{align*}
-F_i^{(r)} G(b) = \tilde F_i^r G(b) + \tilde F_i^{r+1}u 
-\end{align*}
-for some $u \in U_\A^-$. Now 
-Thus by \cite{Jan}*{Lemma 11.12 (b)}
-\begin{align}
-F^{(r)}G(b) = G(\tilde F_i^r b) + \sum_{e_i(b') > r} a_{b'} 
-G(b')
-\end{align}
-This proves the statment when $e_i(b) = 0$. Now set $e = e_i(b)$, so 
-$b = \tilde F_i^e \tilde E_i^e (b)$. Then $G(b) \equiv \tilde F_i^e 
-G(\tilde E_i^e b) \equiv F_i^{(e)} G(\tilde E_i^r b) \mod \tilde F_i^{e+1} 
-U_\A^-$. Now using that $\tilde F_i^{e+1} U_\A^- = \sum_{s>0} F^{(s)} 
-U_\A^-$ we get
-\begin{align*}
-F^{(r)}_i G(b) = \qbinom{r+e}{e} F^{(r+e)} G(\tilde E_i^e b) +
-\sum_{b' \in \B(\infty)} a_{b'} F_i^{(r+s)} G(b').
-\end{align*}
-Now applying (1) to each term in the right hand side we get that the first 
-item holds.
-
-For the second, write $b = \tilde F_i^e b'$
-\end{proof}
-
-\paragraph
-As stated above, the main point is to prove that
-the coefficient $d_{b,b'}^{b''}$ is zero if $\Lambda_{\tilde w_0}(b) + 
-\Lambda_{\tilde w_0}(b') <_{\lex} \Lambda_{\tilde w_0}(b'')$. Let $(-,-): U^- 
-\times U^+ \to \QQ(v)$ the pairing defined in \cite{Jan}*{Proposition 6.12}. 
-Fix $\nu \in \ZZ\Phi$ with $\nu \geq 0$. By \cite{Jan}*{Proposition 6.18} this 
-pairing is non-degenerate when restricted to $U^-_{-\nu} \times U^+_{\nu}$, 
-and hence $U^+_{\nu}$ has basis $\{G(b)^* \mid b \in \B(\infty)_{-\nu}\}$ 
-uniquely defined by the property that $(G(b'),G(b)^*) = \delta_{b,b'}$ for all
-$b' \in \B(\infty)_{-\nu}$. Now it follows from \cite{Jan}*{Proposition 6.12 
-(1) and 6.13 (1)} that $d_{b,b'}^{b''}$ is the coefficient of $G(b'')^*$
-in the product $G(b')^*G(b)^*$, and this is what we prove.
-
-In order to prove this result about the dual of the canonical basis, we 
-need to understand the string parametrization in terms of it.
-Since multiplication by $F_i$ sends $U^-_{-\nu}$ to $U^-_{-\nu - \alpha_i}$, 
-we obtain a transpose morphism $L_i: U^+_{\nu + \alpha_i} \to U^+_{\nu}$, which
-is a $q$-derivation, since it is a multiple of the map $r'_{\alpha_i}$ defined 
-in \cite{Jan}*{6.14}; we write $L_i^{(n)} = \frac{1}{[n]!} L_i^n$. 
+\cite{C}*{Theorem 2.3}. We give a different shorter proof, based on the
+following lemma.
 
 \begin{Lemma*}
-Fix $b \in \B(\infty)_{\nu}$ and set $\Delta(G(b)) = 
-\sum_{b',b'' \in \B(\infty)} d_{b',b''}^{b} G(b') \ot G(b'')K_{wt(G(b'))}$. 
-The following hold.
-\begin{enumerate}
-\item If $d_{b,b'}^{b''} \neq 0$, then $e_i(b'')$
-
-\item For all $r \geq 0$,
-\[
-  F_i^{(r)}G(b) 
-    \equiv G(\tilde F_i^r b) \mod 
-    \sum_{s \geq 0} F_i^{(r+s+1)}(U^-_\A)_{-\nu+(r+s+1)\alpha_i}.
-\]
-
-\item We have $e_i(b) = \max \{k \mid L_i^{(k)}G(b)^* \neq 0\}$ and
-$L_i^{(e_i(b))}(G(b)^*) = G(\overline E_i(b))^*$.
-
-\item Put $a_i = \max \{k \mid L_i^{(k)}(G(b)^*)\}$ and fix $\tilde w_0
-=s_{i_1}, \cdots s_{i_N}$ a decomposition of the longest word in the Weyl 
-group. Then
-\[
-  \Lambda_{\tilde w_0}(b)
-    = (a_{i_N}(G(b)^*), a_{i_{N-1}}(\overline L_N(G(b)^*)), \ldots, 
-    a_{i_i}(\overline L_{i_2} \overline L_{i_3} \cdots \overline L_{i_N}
-    (G(b)^*)))
-\]
-
-\item $\overline L_{i_1} \overline L_{i_2} \overline L_{i_3} \cdots \overline 
-L_{i_N} (G(b)^*)) = 1$.
-\end{enumerate}
+Fix $\tilde w_0 = s_{i_1} \cdots s_{i_N}$ a decomposition of the longest word 
+of $W$. For each $s$ in the image of $\Lambda_{\tilde w_0}$ we write $b_s = 
+\Lambda_{\tilde w_0}^{-1}(s)$, and $F^{(s)} = F_{i_1}^{s_1} \cdots 
+F_{i_N}^{s_N}$. If $b_s \in \B(\infty)_{-\nu}$ then for each $s' \in 
+\Lambda_{\tilde w_0} (\B(\infty)_{-\nu})$ with $s' >_{\lex} s$ there exist 
+$x_{s,s'}, y_{s,s'} \in \A$ such that
+\begin{align*}
+F^{(s)}
+  &= G(b_s) + \sum_{s' >_{\lex} s} x_{s,s'} G(b_{s'})\\
+G(b_s) 
+  &= F^{(s)} + \sum_{s' >_{\lex} s} y_{s,s'} F^{(s')}
+\end{align*}
 \end{Lemma*}
 \begin{proof}
-By \cite{Jan}*{11.12, p. 249}, the $G(b)$ have the property that
-\[
-  G(\tilde F_i^r b) \equiv \tilde F_i^r G(b) \mod 
-    \tilde F_i^{r+1}(U_\A)_{-\nu + (r+1) \alpha_i}.
-\]
-The first item follows from \cite{Jan}*{Lemma 11.3 (1) and (2)}.
-
-Put $e = e_i(b)$. Clearly $L_i^{(t)}(G(b)) = 0$ for $t \gg e$. Now assume this 
-holds for some $t+1$ with $t \geq e$. By definition we get
-\[
-  (G(b'), L^{(t)}_i G(b)^*) = (F_i^{(t)}G(b'), G(b)^*)
-\]
-By the previous item, $F_i^{(t)}G(b') = G(\tilde F_i^t b') + F_i^{(t+1)}u$ 
-for some $u \in U^-_\A$, so assuming $t \geq e$
-\[
-  (G(b'), L^{(t)}_i G(b)^*) = (G(\tilde F_i^t b'), G(b)^*) = 
-  \delta_{\tilde F_i^t(b'), b}.
-\]
-Thus $(-, L_i^{(t)}(G(b)^*)) = (-,G(\overline E_i(b)))$, which implies the 
-desired equality. Item three follows immediately from this and the definition
-of $\Lambda_{\tilde w_0}$.
-
-\textcolor{red}{
-In view of the previous items, the last one follows from the fact that 
-$\overline E_{i_N} \cdots \overline E_{i_1} (b) = 1$. Now Caldero claims that 
-this follows from \cite{Lit}*{section 1}. Littelmann says in the intro to 
-that article that this is efectively what he does, and claims it follows from 
-Kashiwara's work. And so on, and so on. The only point where this is relevant
-is to prove that the coefficient of $b_{(s+s',\lambda+\lambda')}$ in the next 
-formula is $v^c$.
-}
+Let $\lambda$ be a dominant weight and let $v_\lambda \in V_\A(\lambda)$ be a  
+highest weight vector. The statement of \cite{Lit}*{Proposition 10.3} says that
+if $b_s v_{\lambda} \neq 0$ then there exis $x_{s,s'}$ as in the statement
+such that
+\begin{align*}
+F^{(s)}v_\lambda
+  &= G(b_s)v_\lambda + \sum_{s' >_{\lex} s} x_{s,s'} G(b_{s'})v_\lambda.
+\end{align*}
+As shown in the proof of \cite{Jan}*{Theorem 10.10}, there exists a dominant
+wieght $\lambda$ such that the map $U^-_{-\nu} \to 
+V_q(\lambda)_{\lambda - \nu}$ given by $G(b) \mapsto G(b)v_\lambda$ is an 
+isomorphism, so the first formula is proved. The second follows from the first
+since there is only a finite number of elements $s' >_{\lex} s$ such that 
+$b_{s'} \in \B(\infty)_{-\nu}$.
 \end{proof}
-
-
-
 
 \begin{Proposition*}
-Let $\lambda, \lambda' \in \Lambda^+$ and let $s \in \Lambda_{\tilde w_0}
-(\B(\lambda)), s' \in \Lambda_{\tilde w_0}(\B(\lambda'))$. Then there exist 
-$c = c((s,\lambda),(s',\lambda')) \in \ZZ$ and $c_{s, s'}^{s''} \in \A$ 
-for all $s'' \in \Lambda_{\tilde w_0}(\B(\lambda + \lambda'))$ with $s'' 
-<_{\lex} s+ s'$ such that 
-\begin{align*}
-\label{product-formula} 
-b_{(s, \lambda)} b_{(s', \lambda')}
-  = v^c b_{(s+s', \lambda + \lambda')} 
-    + \sum_{s'' <_{\lex} s+s'} c_{s,s'}^{s''} b_{(s'', \lambda + \lambda')}
-\end{align*} 
-\end{Proposition*} 
+Fix $\tilde w_0 = s_{i_1} \cdots s_{i_N}$ a decomposition of the longest word 
+of $W$. Let $b,b',b'' \in \B(\infty)$. If $d_{b,b'}^{b''} \neq 0$ then 
+$\Lambda_{\tilde w_0}(b'') \leq_{\lex} \Lambda_{\tilde w_0}(b) + 
+\Lambda_{\tilde w_0}(b')$, and if equality holds then $d_{b,b'}^{b''}$
+is a power of $v$.
+\end{Proposition*}
 \begin{proof}
-We have already oberved that $c_{s,s'}^{s'} = q^{(\lambda, \lambda')} 
-d_{b',b}^{b''}$. 
+We have already observed that $\Delta(F_i^{(r)}) = \sum_{j+k = r} v_i^{jk} 
+F_i^{(j)} \ot F_i^{(k)} K^{-j}_i$. A simple induction shows that for each
+$s \in \NN^N$ we get $\Delta(F^{(s)}) = \sum_{t+u = s} v^{z(t,u)} F^{(t)}
+\ot F^{(u)}K_{wt(F^{(t)})}$. Now the previous lemma implies that
+\begin{align*}
+\Delta(G(b_s))
+  &= \Delta(F^{(s)}) + \sum_{s' >_{\lex}} y_{s,s'} \Delta(F^{s'}) \\
+  &= \sum_{t+u = s} v^{z(t,u)} F^{(t)} \ot F^{(u)}K_{wt(F^{(t)})} 
+  + \sum_{s' >_{\lex} s} \sum_{t+u = s'} y_{s,s'} v^{z(t,u)} F^{(t)}
+    \ot F^{(u)}K_{wt(F^{(t)})}\\
+  &= \sum_{t+u = s} v^{z(t,u)} G(b_t) \ot G(b_u) K_{wt(b_t)}
+    + \sum_{t+u >_{\lex} s} y'_{t,u} G(b_t) \ot G(b_u) K_{wt(b_t)},
+\end{align*}
+where $z(t,u) \in \ZZ$ and $y'_{t,u} \in \A$. The result follows by taking 
+$b_s = b''$.
 \end{proof}
-
 
 \begin{Theorem}
 \label{Schubert-deg}
-Let $I \subset P$ be a set of fundamental weights, and let $w \in W$.
-The quantum Schubert variety $\O_q[G/P_I]_w$ degenerates to a quantum affine toric 
-variety with associated semigroup $\tilde S^I_{\tilde w_0, \tilde w}$. 
+Let $\k$ be a field of characteristic $0$ and let $q$ be trascendental over 
+$\QQ$. Let $I \subset P$ be a set of fundamental weights, and let $w \in W$.
+Let $\tilde w_0$ be a reduced decomposition of $w_0$ adapted to $w$.
 
-In particular any quantum Schubert variety has property $\chi$, finite local dimension, 
-the AS-Cohen-Macaulay property, and is a maximal order in its skew-field of fractions.
+The quantum Schubert variety $\O_q[G/P_I]_w$ degenerates to a quantum affine 
+toric variety with associated semigroup $\tilde S^I_{\tilde w_0, \tilde w}$. 
+In particular any quantum Schubert variety has property $\chi$, finite local 
+dimension, the AS-Cohen-Macaulay property, and is a maximal order in its 
+skew-field of fractions.
 \end{Theorem}
 \begin{proof}
-As discussed in \ref{Littelman-parametrizations} the basis of $\O_q[G/P_I]_w$ described
-in \ref{q-var-bases} is parametrized by $\tilde S^I_{\tilde w_0, w}$. The previous theorem
-guarantees that this basis is a $(\tilde S^I_{\tilde w_0, w},<_{\lex})$-basis, so we
-only need to apply \ref{lex-degeneration} to get the first part of the statement.
+For each dominant weight $\lambda$ and each $s \in \Lambda_{\tilde w_0}
+(\B(\lambda))$, we denote by $b_{s,\lambda}$ the matrix coefficient in 
+$C^+(\lambda)$ correspoding to the only element $b \in \B(\lambda)$ such that 
+$\Lambda_{\tilde w_0}(b) = s$. 
+
+It follows from \ref{coproduct-coefficients} that for each pair of dominant 
+weights $\lambda, \lambda'$ and each $s \in \Lambda_{\tilde w_0}(\B(\lambda)), 
+s' \in \Lambda_{\tilde w_0}(\B(\lambda')), s'' \in 
+\Lambda_{\tilde w_0}(\B(\lambda + \lambda'))$ such that $s'' \geq_{\lex} 
+s + s'$, there exist $x_{s''} \in \A$ such that 
+\begin{align*}
+b_{s,\lambda} b_{s',\lambda'} = \sum_{s'' \geq s+s'} x_{s''} 
+  b_{s'',\lambda + \lambda'},
+\end{align*}
+with $x_{s+s'}$ a power of $v$. This shows that the bases defined in
+\ref{Littelman-parametrizations} are $(\tilde S^I_{\tilde w_0, \tilde w}, 
+\leq_{\lex})$ bases.
 
 Since $\tilde S^w_{w_0, I}$ is a normal semigroup, we know by Proposition 
 \ref{properties-of-qatv} that the associated graded ring of the quantum Schubert variety
@@ -2291,6 +2205,154 @@ $A$ has a quantum toric degeneration with associated semigroup $S(\L)$.
 
 \item $\NN$ includes $0$, while $\NN^*$ does not. Make sure everything makes sense!
 \end{enumerate}
+
+\newpage
+\section{How to complete the details of Caldero's argument with
+Janzen's definition}
+
+
+
+\begin{Lemma}
+Let $b,b',b'' \in \B(\infty)$. Let $i \in \{1, \ldots, n\}$ and let 
+$e = e_i(b)$.
+\begin{enumerate}
+\item For each $r \geq 0$ we have $\tilde F_i^r G(b) \equiv G(\tilde F_i^r b)
+\mod \tilde F^{r+1} U_\A^-$  
+
+\item For each $r \geq 0$ we have $F_i^{(r)} G(b) \equiv \qbinom{r+e}{e} 
+G(\tilde F_i^r b) \mod \tilde F^{r+e+1} U_\A^-$.
+
+\item If $d_{b,b'}^{b''} \neq 0$ then $e_i(b'') \leq e_i(b) + e_i(b')$.
+\end{enumerate}
+\end{Lemma}
+\begin{proof}
+The statements are obvious if $r = 0$ so take $r > 0$.
+As stated in the proof of \cite{Jan}*{Lemma 11.12}, page 249, $G^\alpha(b') 
+\equiv \tilde F_i^r  G(\tilde E_i^r b') \mod \tilde F_i^{r+1} U^-_\A$ whenever
+$e_i(b') > r$; notice that $G^\alpha(b') = G(b')$ by \cite{Jan}*{11.15}. 
+Taking $b' = \tilde F_i^r b$, we get $G(\tilde F_i^r b) \equiv \tilde F_i^r 
+G(b) \mod \tilde F_i^{r+1}U_\A^-$, which is item 1. 
+
+Now by \cite{Jan}*{Lemma 11.3} we get
+\begin{align*}
+G(b) 
+  \equiv \tilde F_i^e G(\tilde E_i^e b) 
+  \equiv F_i^{(e)} G(\tilde E_i^e b) 
+  \mod \sum_{s > 0} F_i^{(r+s)} U_\A^-,
+\end{align*}
+and hence multplying by $F^{(r)}$ we get
+\begin{align*}
+F^{(r)} G(b) 
+  \equiv \qbinom{r+e}{e} F_i^{(r+e)} G(\tilde E_i^e b) 
+  \mod \sum_{s > 0} F_i^{(r+s+e)} U_\A^-.
+\end{align*}
+By the same lemma, $\sum_{s > 0} F_i^{(r+s+e)} U_\A^- = \tilde F_i^{r+e+1} 
+U_\A^-$, so item 2 is proved. 
+
+For each $r \geq 0$ we have
+\begin{align*}
+\Delta(F_i^{(r)}G(b))
+  &= \Delta(F^{(r)}) \Delta(G(b))
+  &= \sum_{s+t = r} \sum_{c,c' \in \B(\infty)} 
+    d_{c,c'}^b F_i^{(s)} G(c) \ot F_i^{(t)} G(c') K_{wt(c)}
+\end{align*}
+By item 2, each element of the form $F_i^{(s)} G(c) \ot F_i^{(t)} G(c')$
+lies in $\tilde F_i^s U_\A^- \ot \tilde F_i^t U_\A^-$, and by 
+\cite{Jan}*{Lemma 11.12(b)} the elements of the form $G(c) \ot G(c')$ with 
+$e_i(c) \geq s, e_i(c') \geq t$ are a basis of this space. Now $G(b'') = 
+F_i^{(e'')} G(\tilde E_i^{e''} b'') + \sum_{s>0} F_i^{(e''+s)} u_s$ and each 
+$u_s$ is an $\A$-linear combination of elements in the canonical basis, so 
+applying $\Delta$ we obtain an $\A$ linear combination of elements of the form 
+$G(c)\ot G(c')K_{wt(c)}$ with $e_i(c) + e_i(c') \geq e''$. This completes the 
+proof of item 3.
+\end{proof}
+
+\paragraph
+As stated above, the main point is to prove that
+the coefficient $d_{b,b'}^{b''}$ is zero if $\Lambda_{\tilde w_0}(b) + 
+\Lambda_{\tilde w_0}(b') <_{\lex} \Lambda_{\tilde w_0}(b'')$. Let $(-,-): U^- 
+\times U^+ \to \QQ(v)$ the pairing defined in \cite{Jan}*{Proposition 6.12}. 
+Fix $\nu \in \ZZ\Phi$ with $\nu \geq 0$. By \cite{Jan}*{Proposition 6.18} this 
+pairing is non-degenerate when restricted to $U^-_{-\nu} \times U^+_{\nu}$, 
+and hence $U^+_{\nu}$ has basis $\{G(b)^* \mid b \in \B(\infty)_{-\nu}\}$ 
+uniquely defined by the property that $(G(b'),G(b)^*) = \delta_{b,b'}$ for all
+$b' \in \B(\infty)_{-\nu}$. Now it follows from \cite{Jan}*{Proposition 6.12 
+(1) and 6.13 (1)} that $d_{b,b'}^{b''}$ is the coefficient of $G(b'')^*$
+in the product $G(b')^*G(b)^*$, and this is what we prove.
+
+In order to prove this result about the dual of the canonical basis, we 
+need to understand the string parametrization in terms of it.
+Since multiplication by $F_i$ sends $U^-_{-\nu}$ to $U^-_{-\nu - \alpha_i}$, 
+we obtain a transpose morphism $L_i: U^+_{\nu + \alpha_i} \to U^+_{\nu}$, which
+is a $q$-derivation, since it is a multiple of the map $r'_{\alpha_i}$ defined 
+in \cite{Jan}*{6.14}; we write $L_i^{(n)} = \frac{1}{[n]!} L_i^n$. 
+
+\begin{Lemma*}
+Fix $b \in \B(\infty)_{\nu}$ and set $\Delta(G(b)) = 
+\sum_{b',b'' \in \B(\infty)} d_{b',b''}^{b} G(b') \ot G(b'')K_{wt(G(b'))}$. 
+The following hold.
+\begin{enumerate}
+
+\item For all $r \geq 0$,
+\[
+  F_i^{(r)}G(b) 
+    \equiv G(\tilde F_i^r b) \mod 
+    \sum_{s \geq 0} F_i^{(r+s+1)}(U^-_\A)_{-\nu+(r+s+1)\alpha_i}.
+\]
+
+\item We have $e_i(b) = \max \{k \mid L_i^{(k)}G(b)^* \neq 0\}$ and
+$L_i^{(e_i(b))}(G(b)^*) = G(\overline E_i(b))^*$.
+
+\item Put $a_i = \max \{k \mid L_i^{(k)}(G(b)^*)\}$ and fix $\tilde w_0
+=s_{i_1}, \cdots s_{i_N}$ a decomposition of the longest word in the Weyl 
+group. Then
+\[
+  \Lambda_{\tilde w_0}(b)
+    = (a_{i_N}(G(b)^*), a_{i_{N-1}}(\overline L_N(G(b)^*)), \ldots, 
+    a_{i_i}(\overline L_{i_2} \overline L_{i_3} \cdots \overline L_{i_N}
+    (G(b)^*)))
+\]
+
+\item $\overline L_{i_1} \overline L_{i_2} \overline L_{i_3} \cdots \overline 
+L_{i_N} (G(b)^*)) = 1$.
+\end{enumerate}
+\end{Lemma*}
+\begin{proof}
+By \cite{Jan}*{11.12, p. 249}, the $G(b)$ have the property that
+\[
+  G(\tilde F_i^r b) \equiv \tilde F_i^r G(b) \mod 
+    \tilde F_i^{r+1}(U_\A)_{-\nu + (r+1) \alpha_i}.
+\]
+The first item follows from \cite{Jan}*{Lemma 11.3 (1) and (2)}.
+
+Put $e = e_i(b)$. Clearly $L_i^{(t)}(G(b)) = 0$ for $t \gg e$. Now assume this 
+holds for some $t+1$ with $t \geq e$. By definition we get
+\[
+  (G(b'), L^{(t)}_i G(b)^*) = (F_i^{(t)}G(b'), G(b)^*)
+\]
+By the previous item, $F_i^{(t)}G(b') = G(\tilde F_i^t b') + F_i^{(t+1)}u$ 
+for some $u \in U^-_\A$, so assuming $t \geq e$
+\[
+  (G(b'), L^{(t)}_i G(b)^*) = (G(\tilde F_i^t b'), G(b)^*) = 
+  \delta_{\tilde F_i^t(b'), b}.
+\]
+Thus $(-, L_i^{(t)}(G(b)^*)) = (-,G(\overline E_i(b)))$, which implies the 
+desired equality. Item three follows immediately from this and the definition
+of $\Lambda_{\tilde w_0}$.
+
+\textcolor{red}{
+In view of the previous items, the last one follows from the fact that 
+$\overline E_{i_N} \cdots \overline E_{i_1} (b) = 1$. Now Caldero claims that 
+this follows from \cite{Lit}*{section 1}. Littelmann says in the intro to 
+that article that this is efectively what he does, and claims it follows from 
+Kashiwara's work. And so on, and so on. The only point where this is relevant
+is to prove that the coefficient of $b_{(s+s',\lambda+\lambda')}$ in the next 
+formula is $v^c$.
+}
+\end{proof}
+
+
+
 \end{document}
 
 
