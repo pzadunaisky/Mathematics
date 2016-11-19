@@ -592,7 +592,7 @@ Let $A$ be an $\NN^r$-graded algebra with a connected filtration, and
 assume $\gr A$ is noetherian. Let $M, N$ be filtered $\ZZ^r$-graded 
 $A$-modules, with $N$ finitely generated, and suppose that the filtration on 
 $N$ is standard and the filtration on $M$ is discrete. Then the following hold.
-\begin{enumerate}
+\begin{enumerate}[label=(\alph*)]
 \item \label{I:dims} For each $i \geq 0$ and each $\xi \in \ZZ^{r}$
 \[
  \dim_\k \GrExt^i_A(N,M)_\xi 
@@ -688,7 +688,7 @@ We are now ready to prove the main result of this section.
 Suppose $A$ is a connected $\NN^r$-graded algebra endowed with a connected 
 filtration, and that $\gr A$ is noetherian and has property $\chi$. Then the 
 following hold.
-\begin{enumerate}
+\begin{enumerate}[label=(\alph*)]
 \item $A$ has property $\chi$.
 \item $\lcd_\m A \leq \lcd_{\gr \m} \gr A$.
 \item If $\gr A$ is AS-Cohen-Macaulay, AS-Gorenstein or AS-Regular, so is $A$.
@@ -1721,7 +1721,7 @@ of matrix coefficients
 so we need to study the corproduct $\Delta(G(b''))$.
 
 It follows easily from \cite{Jan}*{4.9 (4)} that $\Delta(F_\alpha^{(r)}) = 
-\sum_{i+j=r}^r v_i^{ji)} F^{(i)}_\alpha \ot F^{(j)}_\alpha K_\alpha^{-j}$. 
+\sum_{i+j=r}^r v_i^{ji} F^{(i)}_\alpha \ot F^{(j)}_\alpha K_\alpha^{-j}$. 
 Since the canonical basis is contained in $U_\A^-$, it follows that 
 $\Delta(G(b''))$ is a sum of terms of the form $p (G(b_{(1)}) \ot 
 G(b_{(2)}) K_\mu)$ with $p \in \A, b_{(1)}, b_{(2)} \in \B(\infty)$, and $\mu 
@@ -1740,18 +1740,40 @@ following lemma.
 
 \begin{Lemma*}
 Fix $\tilde w_0 = s_{\alpha_1} \cdots s_{\alpha_N}$ a decomposition of the 
-longest word of $W$. For each $a$ in the image of $\Lambda_{\tilde w_0}$ we 
-write $b_a = \Lambda_{\tilde w_0}^{-1}(a)$, and $F^{(a)} = 
-F_{\alpha_1}^{(a_1)} \cdots F_{\alpha_N}^{(a_N)}$. If $b_a \in 
-\B(\infty)_{-\nu}$ then for each $a' \in \Lambda_{\tilde w_0} 
-(\B(\infty)_{-\nu})$ with $a' >_{\lex} a$ there exist $x_{a,a'}, y_{a,a'} \in 
-\A$ such that
+longest word of $W$. For each $a \in \NN^N$ we write $F^{(a)} = 
+F_{\alpha_1}^{(a_1)} \cdots F_{\alpha_N}^{(a_N)}$ and $\tilde F^{a} = 
+\tilde F_{\alpha_1}^{a_1} \cdots \tilde F_{\alpha_N}^{a_N}$. If $a$ lies in 
+the image of $\Lambda_{\tilde w_0}$ the we write $b_a = 
+\Lambda_{\tilde w_0}^{-1}(a)$. Let $\nu \in \ZZ \Phi$ with $\nu \geq 0$.
+\begin{enumerate}[label=(\alph*)]
+\item If $b_a \in \B(\infty)_{-\nu}$ then for each $a' \in 
+\Lambda_{\tilde w_0} (\B(\infty)_{-\nu})$ with $a' >_{\lex} a$ there exist 
+$x_{a,a'}, y_{a,a'} \in \A$ such that
 \begin{align*}
 F^{(a)}
-  &= G(b_a) + \sum_{a' >_{\lex} a} x_{a,a'} G(b_{a'})\\
+  &= G(b_a) + \sum_{a' >_{\lex} a} x_{a,a'} G(b_{a'}), &
 G(b_a) 
-  &= F^{(a)} + \sum_{a' >_{\lex} a} y_{a,a'} F^{(a')}
+  &= F^{(a)} + \sum_{a' >_{\lex} a} y_{a,a'} F^{(a')}.
 \end{align*}
+
+\item Let $\alpha \in \Pi$ and $r > 0$. Let $b \in \B(\infty)_{-\nu}$. Then
+for each $b' \in \B(\infty)_{-\nu - r\alpha}$ there exists $x_{b'} \in \A$ 
+such that
+\begin{align*}
+F^{(r)}_\alpha G(b) 
+  &= G(\tilde F_{\alpha}^r b) + \sum_{e_{\alpha}(b') > r} x_{b'} G(b')
+\end{align*}
+
+\item If $a \in \NN^N$ and $F^{(a)} \in U^-_{-\nu}$, then for each $a'\in 
+\Lambda_{\tilde w_0} (\B(\infty)_{-\nu})$ with $a' >_{\lex} a$ there exists 
+$z_{a,a'} \in \A$ such that
+\begin{align*}
+F^{(a)}
+  &= G(\tilde F^a 1) + \sum_{a' >_\lex a} z_{a,a'} G(b_{a'}).
+\end{align*}
+Furthermore $\Lambda_{\tilde w_0}(\tilde F^a 1) >_{\lex} a$.
+\end{enumerate}
+
 \end{Lemma*}
 \begin{proof}
 Let $\lambda$ be a dominant weight and let $v_\lambda \in V_\A(\lambda)$ be a  
@@ -1767,7 +1789,32 @@ wieght $\lambda$ such that the map $U^-_{-\nu} \to
 V_q(\lambda)_{\lambda - \nu}$ given by $G(b) \mapsto G(b)v_\lambda$ is an 
 isomorphism, so the first formula is proved. The second follows from the first
 since there is only a finite number of elements $a' >_{\lex} a$ such that 
-$b_{a'} \in \B(\infty)_{-\nu}$.
+$b_{a'} \in \B(\infty)_{-\nu}$. This completes the proof of the first item.
+
+By \cite{Jan}*{Lemma 11.3} we get that $F_\alpha^{(r)} G(b) \equiv 
+F_\alpha^{(r)} G(b) \mod \tilde F_\alpha^{r+1} U^-_\A$. Now as shown in the 
+proof of \cite{Jan}*{Lemma 11.12 (b), page 249}, $\tilde F_\alpha^r G(b) 
+\equiv G(\tilde F_\alpha^r b) \mod \tilde F_\alpha^{r+1}U^-_\A$; the same 
+lemma states that $F_\alpha^{r+1}U^-_\A$ is generated over $\A$ by the $G(b')$
+with $e_{\alpha}(b) \geq r+1$, so the second item follows.
+
+For the last item, let $j = \max\{i \mid a_i \neq 0\}$, so $F^{(a)} = 
+F_{\alpha_j}^{(a_j)} \cdots F_{\alpha_N}^{(a_N)}$. Induction using the previous
+item shows that
+\begin{align*}
+F^{(a)} 
+  &= G(\tilde F^a 1) + \sum_{e_{\alpha_j}(b') > a_j} z_{b,b'} G(b').
+\end{align*}
+Notice that the condition $e_{\alpha_j}(b') > a_j$ automatically implies that
+$\Lambda_{\tilde w_0}(b') >_{\lex} a$. Let $b$ be the element of the crystal
+basis corresponding to $\tilde F^a 1$, and let $s = \Lambda_{w_0}(b)$. If 
+$s_i \neq 0$ for some $i < j$ then $s > a$ and we are finished. Now if this
+is not the case, then since $\tilde E_{\alpha_j}^{a_j} b = \tilde 
+E_{\alpha_j}^{a_j} \tilde F^a 1 \neq 0$ implies that $s_j \geq a_j$. If $s_j
+> a_j$ then $s > a$, otherwise we may repeat the reasoning with $\tilde 
+E_{\alpha_j}^{a_j} b$ to show that $s_{j+1} \geq a_{j+1}$, etc. Since $a$
+is not in the image of $\Lambda_{\tilde w_0}$, we must eventually reach a
+strict inequality which shows that $s > a$.
 \end{proof}
 
 \begin{Proposition*}
@@ -1781,15 +1828,20 @@ is a power of $v$.
 We have already observed that $\Delta(F_\alpha^{(r)}) = \sum_{i+j = r} v_i^{ij}
 F_\alpha^{(i)} \ot F_\alpha^{(j)} K^{-j}_\alpha$. A simple induction shows 
 that for each $a \in \NN^N$ we get $\Delta(F^{(a)}) = \sum_{t+u = a} v^{z(t,u)}
-F^{(t)} \ot F^{(u)}K_{\wt(F^{(t)})}$, with $z(t,u) \in \ZZ$. Now the previous 
-lemma implies that
+F^{(t)} \ot F^{(u)}K_{\wt(F^{(t)})}$, with $z(t,u) \in \ZZ$. Now the first 
+item of the previous lemma implies that
 \begin{align*}
 \Delta(G(b_a))
   &= \Delta(F^{(a)}) + \sum_{a' >_{\lex} a} y_{a,a'} \Delta(F^{a'}) \\
   &= \sum_{t+u = a} v^{z(t,u)} F^{(t)} \ot F^{(u)}K_{\wt(F^{(t)})} 
   + \sum_{a' >_{\lex} a} \sum_{t+u = a'} y_{a,a'} v^{z(t,u)} F^{(t)}
-    \ot F^{(u)}K_{\wt(F^{(t)})}\\
-  &= \sum_{t+u = a} v^{z(t,u)} G(b_t) \ot G(b_u) K_{\wt(b_t)}
+    \ot F^{(u)}K_{\wt(F^{(t)})}
+\end{align*}
+and using the third item we can restrict the sum to the $s,t$ in the
+image of $\Lambda_{\tilde w_0}$, so the element in the last display
+equals
+\begin{align*}
+\sum_{t+u = a} v^{z(t,u)} G(b_t) \ot G(b_u) K_{\wt(b_t)}
     + \sum_{t+u >_{\lex} a} y'_{t,u} G(b_t) \ot G(b_u) K_{\wt(b_t)},
 \end{align*}
 where $z(t,u) \in \ZZ$ and $y'_{t,u} \in \A$. The result follows by taking 

@@ -142,43 +142,47 @@ bodyfont=\itshape]{mystyle-empty}
 
 \begin{document}
 \maketitle
-We fix a field $\k$. All algebras and tensor products
-are over $\k$ unless otherwise stated. Given a coalgebra $G$ we denote by $\Mod^G$ the
-category of right $G$-comodules and write $\Hom^G$ for $\Hom_{\Mod^G}$.
+We fix a field $\k$. All algebras and tensor products are over $\k$ unless 
+otherwise stated. Given a coalgebra $H$ we denote by $\Mod^H$ the
+category of right $H$-comodules and write $\Hom^H$ for $\Hom_{\Mod^H}$.
 
 \section{Hom comodules}
 \paragraph
-Let $G$ be a Hopf algebra and let $M, N$ be $G$-comodules. We define the $G$-comodule-hom
-space $\HOM^{G}(M, N)$ as the pull-back
+Let $H$ be a Hopf algebra over $\k$ and let $M, N$ be $H$-comodules. We define 
+the $H$-comodule-hom space $\HOM^{G}(M, N)$ as the pull-back
 \begin{align*}
-	\xymatrix{
-		\Hom_\k(M, N) \ar[r]^-{\rho^{N}_*} & \Hom_\k(M, N \ot G) \\
-		\HOM^{G}(M, N) \ar@{-->}[u]^-\alpha \ar@{-->}[r]^-\rho & \Hom_\k(M, N) \ot G 
-		\ar[u]_-{\Gamma}
-	}
+\xymatrix{
+	\Hom_\k(M, N) \ar[r]^-{\rho^{N}_*} 
+		& \Hom_\k(M, N \ot H) \\
+	\HOM^{H}(M, N) \ar@{-->}[u]^-\alpha \ar@{-->}[r]^-\rho 
+		& \Hom_\k(M, N) \ot H \ar[u]_-{\Gamma}
+}
 \end{align*}
-where for each $n \in N$ we define $\Gamma(f \ot g)(n) = f(n_0) \ot g n_1$.
+where for each $m \in M$ we define $\Gamma(f \ot h)(m) = f(m_0) \ot g m_1$.
 
 Since
 \[ 
-	(1 \ot \vep)_* \circ \rho^{N}_* = (1 \ot \vep \circ \rho^{N})_* = (\Id_{N})_*
+	(1 \ot \vep)_* \circ \rho^{N}_* 
+		= (1 \ot \vep \circ \rho^{N})_* = (\Id_{N})_*
 \]
 we know that $\rho^{N}_*$ is injective, and hence so is $\rho$. 
 
-It is also true that $\Gamma$ is injective. Let $T: \Hom(M,N \ot G) \to \Hom_\k(M,N \ot
-G)$ be defined by $T(F)(m) = f(m_0) \cdot 1 \ot S(m_1)$. Thus we get a commutative diagram
+It is also true that $\Gamma$ is injective. Let $T: \Hom(M,N \ot H) \to 
+\Hom_\k(M,N \ot H)$ be defined by $T(F)(m) = F(m_0) \cdot 1 \ot S(m_1)$. Thus 
+we get a commutative diagram
 \begin{align*}
-	\xymatrix{
-		\Hom_\k(M, N \ot G) \ar[dr]^-T \\
-		\Hom_\k(M, N) \ot G \ar[u]^\Gamma \ar[r]^-i & \Hom_\k(M,N \ot G)
-	}
+\xymatrix{
+	\Hom_\k(M, N \ot H) \ar[dr]^-T \\
+	\Hom_\k(M, N) \ot H \ar[u]^\Gamma \ar[r]^-i 
+		& \Hom_\k(M,N \ot H)
+}
 \end{align*}
-where $i(f \ot g)(m) = f(m) \ot g$. Since $i$ is injective, so is $\Gamma$.
+where $i(f \ot h)(m) = f(m) \ot h$. Since $i$ is injective, so is $\Gamma$.
 
-Hence $\HOM^G(M,N) \subset \Hom_\k(M,N)$ consists of those functions $f: M \to N$ for
-which there exist $f_1, \ldots, f_r \in \Hom_\k(M,N)$ and $g_1, \ldots, g_r
-\in G$ such that for every $m \in M$ we get $f(m)_0 \ot f(m)_1 = \sum_{i = 1}^r f_i(m_0)
-\ot g_i m_i$. Notice that the submodule of coinvariants of $\HOM^G(M,N)$ is $\Hom^G(M,N)$.
+Hence $\HOM^G(M,N) \subset \Hom_\k(M,N)$ consists of those functions $f: M 
+\to N$ for which there exist $f_1, \ldots, f_r \in \Hom_\k(M,N)$ and $h_1, 
+\ldots, h_r \in H$ such that for every $m \in M$ we get $f(m)_0 \ot f(m)_1 = 
+\sum_{i = 1}^r f_i(m_0) \ot h_i m_i$. 
 
 \paragraph
 For example, suppose $G$ is the group algebra of $\hat G$, in which case $M, N$ are
