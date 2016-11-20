@@ -94,7 +94,7 @@ bodyfont=\itshape]{mystyle-empty-plain}
 \newcommand\ot{\otimes}
 \renewcommand\to{\longrightarrow}
 \renewcommand\phi{\varphi}
-\newcommand\qbinom[2]{\genfrac{[}{]}{0pt}{1}{#1}{#2}}
+\newcommand\qbinom[2]{\genfrac{[}{]}{0pt}{0}{#1}{#2}}
 \newcommand\vspan[1]{\left\langle #1 \right\rangle}
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1129,34 +1129,33 @@ homogeneous, so this algebra is indeed a quantum positive affine toric variety.
 \paragraph
 \label{lex-degeneration}
 We now introduce a second notion related to quantum toric degenerations. 
-Recall that a semigroup $S$ is said to be well-ordered if there exists a 
-well-order $<$ on $S$ compatible with the additive structure, i.e. such that 
-for all $s,s',s'' \in S$ the inequality $s<s'$ implies $s+s'' < s'+s''$. 
+Recall that a commutative semigroup $S$ is said to be well-ordered if there 
+exists a well-order $<$ on $S$ compatible with the additive structure, i.e. 
+such that for all $s,s',s'' \in S$ the inequality $s<s'$ implies $s+s'' < 
+s'+s''$. 
 
 \begin{Definition*}
-Let $S$ be a semigroup, and let $<$ be a well-order on $S$ compatible 
-with the semigroup structure. Let $A$ be a connected $\NN^r$-graded algebra. 
-An \emph{$(S,<)$-basis} for $A$ is an ordered basis $\{b_s \mid s \in S\}$ 
-consisting of homogeneous elements, such that for all $s,s',s'' \in S$ with 
-$s'' < s+s'$ there exist $c_{s,s'} \in \k^\times$ and $c_{s,s'}^{s''} \in \k$ 
-such that
+Let $S$ be a commutative semigroup, and let $<$ be a well-order on $S$ 
+compatible with the semigroup structure. Let $A$ be a connected $\NN^r$-graded 
+algebra. An \emph{$(S,<)$-basis} for $A$ is an ordered basis $\{b_s \mid s 
+\in S\}$ consisting of homogeneous elements, such that for all $s,s',s'' \in 
+S$ with $s'' < s+s'$ there exist $c_{s,s'} \in \k^\times$ and $c_{s,s'}^{s''} 
+\in \k$ such that
 \[
   b_s b_{s'} = c_{s,s'} b_{s+s'} + \sum_{s'' < s+s'} c_{s,s'}^{s''} b_{s''}.
 \]
 \end{Definition*}
-This definition is inspired in the results of \cite{C}, where P. Caldero finds
-an $(S,<)$-basis for quantum flag varieties for appropriate $S$ and $<$.
 
 \paragraph
 \label{S-order-bases}
-Let $S$ be a semigroup. Assume $<$ is a well-order on $S$ compatible with its 
-additive structure, and let $A$ be an algebra. An $(S,<)$-filtration on $A$ is 
-a collection of vector spaces $\F = \{F_sA \mid s \in S\}$, such that $F_sA 
-\cdot F_{s'} A \subset F_{s+s'}A$ for all $s,s' \in S$, and such that $F_sA 
-\subset F_{s'}A$ whenever $s < s'$. The standard notions related to 
-$\NN$-filtrations translate easily to the context of $(S,<)$-filtrations. In 
-particular, one can define the associated graded algebra $\gr_\F A$ by setting 
-$F_{<s}A = \sum_{t<s} F_tA$ and taking
+Let $S$ be a commutative semigroup. Assume $<$ is a well-order on $S$ 
+compatible with its additive structure, and let $A$ be an algebra. An 
+$(S,<)$-filtration on $A$ is a collection of vector spaces $\F = \{F_sA \mid 
+s \in S\}$, such that $F_sA \cdot F_{s'} A \subset F_{s+s'}A$ for all $s,s' 
+\in S$, and such that $F_sA \subset F_{s'}A$ whenever $s < s'$. The standard 
+notions related to $\NN$-filtrations translate easily to the context of 
+$(S,<)$-filtrations. In particular, one can define the associated graded 
+algebra $\gr_\F A$ by setting $F_{<s}A = \sum_{t<s} F_tA$ and taking
 \[
   \gr_\F A = \bigoplus_{s \in S} \frac{F_sA}{F_{<s}A}.
 \] 
@@ -1360,11 +1359,11 @@ a basis, so it is an isomorphism.
 We apply the results in the previous section to study Schubert varieties 
 of quantum flag varieties. We recall the definitions of quantum flag and 
 Schubert varieties with some detail in order to establish notation. We then
-use an argument due to P. Caldero to show that these algebras have 
+adapt an argument due to P. Caldero to show that these algebras have 
 $(S,<)$-bases for adequate semigroups $S$. The main ingredient in the 
 construction of these bases is the canonical or global basis of $U_q^-(\g)$ 
 discovered independently by Lusztig and Kashiwara. The semigroup arises out
-of Littelman's string parametrization of this basis.
+of the string parametrization of this basis.
 
 \subsection*{Quantum flag and Schubert varieties}
 
@@ -1373,13 +1372,13 @@ of Littelman's string parametrization of this basis.
 Let $\g$ be a complex semisimple Lie algebra. We denote by $\Phi$ the root
 system of $\g$ with respect to a fixed Cartan subalgebra, and by $\ZZ\Phi$ its 
 root lattice. We also fix a basis $\Pi \subset \Phi$ of positive roots, and 
-write $P = \{\varpi_\alpha \mid \alpha \in \Pi\}$ for the corresponding set of 
-fundamental weights. We denote by $\Lambda$ the weight lattice $\sum_{\alpha 
-\in \Pi} \ZZ \varpi_\alpha$ and by $\Lambda^+$ the set of dominant weights 
-$\sum_{\alpha \in \Pi} \NN \varpi_\alpha$. 
+write $P = \{\varpi_\alpha \mid \alpha \in \Pi\}$ for the set of 
+corresponding fundamental weights. We denote by $\Lambda$ the weight lattice 
+$\sum_{\alpha \in \Pi} \ZZ \varpi_\alpha$ and by $\Lambda^+$ the set of 
+dominant weights $\sum_{\alpha \in \Pi} \NN \varpi_\alpha$. 
 
 Let $W$ be the Weyl group of $\g$, and $s_\alpha \in W$ the reflection 
-corresponding to the $\alpha \in \Pi$. Given an element $w \in W$ we denote 
+corresponding to $\alpha \in \Pi$. Given an element $w \in W$ we denote 
 its length by $\ell(w)$, and set $N$ to be the length of $w_0$, the longest 
 element of $W$. A \emph{decomposition} of $w \in W$ is a word on the 
 generators $s_\alpha$ that equals $w$ in $W$. The decomposition is 
@@ -1393,16 +1392,21 @@ $\alpha \in \Phi$, so if $\lambda = \sum_{\alpha \in \Pi} r_\alpha
 
 \paragraph
 \label{quantized-enveloping-algebra}
-Fix $q \in \k^\times$. Let $U_q(\g)$ be the quantum enveloping 
-algebra of $\g$ as defined in \cite{Jan}*{Definition 4.3}. Let $U_q^+(\g), 
-U_q^-(\g)$ be the positive and negative parts of $U_q(\g)$ as defined in 
-\cite{Jan}*{4.4}. If $q$ is not a root of unity then by \cite{Jan}*{chapter 5} 
-for each $\lambda \in \Lambda^+$ there is an irreducible highest-weight 
-representation of $U_q(\g)$ of type $\mathbf{1}$, which we denote by 
-$V_q(\lambda)$. Each $V_q(\lambda)$ decomposes as the direct sum of weight 
-spaces $\bigoplus_{\mu \in \Lambda} V_q(\lambda)_\mu$; the dimensions of the 
-weight spaces are the same as in the classical case, so the Weyl character 
-formulas holds for these representations, see \cite{Jan}*{5.15}. 
+Fix $q \in \k^\times$. Let $U_q(\g)$ be the quantum enveloping algebra of 
+$\g$; this is an algebra generated by elements $F_\alpha, E_\alpha, K_\alpha$
+for $\alpha \in \Pi$, with the relations given in \cite{Jan}*{Definition 4.3}. 
+We denote by $U_q^+(\g), U_q^-(\g)$ the subalgebras generated by the 
+$F_\alpha$'s and the $E_\alpha$'s, which are respectively called the positive 
+and negative parts of $U_q(\g)$ \cite{Jan}*{4.4}. As shown in 
+\cite{Jan}*{Proposition 4.11}, these are all Hopf algebras.
+
+If $q$ is not a root of unity then by \cite{Jan}*{chapter 5} for each $\lambda 
+\in \Lambda^+$ there is an irreducible highest-weight representation of 
+$U_q(\g)$ of type $\mathbf{1}$, which we denote by $V_q(\lambda)$. Each 
+$V_q(\lambda)$ decomposes as the direct sum of weight spaces $\bigoplus_{\mu 
+\in \Lambda} V_q(\lambda)_\mu$; the dimensions of the weight spaces are the 
+same as the corresponding representation over $\g$, so the Weyl character 
+formula holds for these representations, see \cite{Jan}*{5.15}. 
 
 \paragraph
 Let $G$ be the connected and simply connected Lie group corresponding to $\g$. 
@@ -1419,8 +1423,9 @@ $G$ \cite{Jan}*{7.11}.
 
 \paragraph
 \label{q-full-flag-varieties}
-Quantum flag varieties were introduced by Soibelman in \cite{S} and by 
-Lakshmibai and Reshetikhin in \cite{qLR}; we review their definition. 
+Quantum analogiues of flag varieties and their Schubert subvarieties were 
+introduced by Soibelman in \cite{S} and by Lakshmibai and Reshetikhin in 
+\cite{qLR}; we review their definition. 
 We assume that $q$ is not a root of unity. Fix a maximal Borel subgroup $B$ of
 $G$. The \emph{full flag variety} associated to $G$ is $G/B$. Let 
 $C^+_q(\lambda)$ be the vector space of matrix coefficients of the form 
@@ -1435,8 +1440,6 @@ matrix coefficients in $\O_q[G/B]$ is again in $\O_q[G/B]$, and its
 decomposition as a direct sum gives $\O_q[G/B]$ the structure of a 
 $\Lambda^+$-graded algebra. 
 
-\paragraph
-\label{q-partial-flag-varieties}
 Let $I$ be a subset of the set of fundamental weights and set $\mathcal J(I) = 
 \sum_{\varpi \notin I} \NN \varpi$. Denote by $W_I \subset W$ the subgroup 
 generated by the reflections $s_\alpha$ with $\varpi_\alpha \in I$, and for 
@@ -1456,8 +1459,6 @@ subalgebra of $\O_q[G/B]$
 \] 
 called the \emph{quantum partial flag variety associated to $I$}. 
 
-\paragraph
-\label{q-Schubert-varieties}
 Given vector spaces $V_2 \subset V_1$, we denote by $V_2^\perp$ the set of 
 linear functionals over $V_1$ which are zero on $V_2$. For every $w \in W^I$ 
 the vector space 
@@ -1487,13 +1488,13 @@ at $q=1$ and still get algebraic varieties over the complex numbers. We give a
 simplified version of his argument which works over $\QQ(v)$.
 
 \paragraph
-We work with $\k = \QQ(v)$ and $q = v$, and set $U=U_v(\G)$. We denote by 
+Fix as our base field $\QQ(v)$, and set $U=U_v(\G)$. We denote by 
 $U^+$ and $U^-$ the algebras $U^+_v(\g)$ and $U^-_v(\g)$, respectively. 
+
 Let $\A = \ZZ[v, v^{-1}] \subset \QQ(v)$. For each $n \in \NN$ we write
 $[n] = \frac{v^n - v^{-n}}{v-v^{-1}}$, and $[n]! = [1][2] \cdots [n]$. For 
 each $\alpha \in \Pi$ we denote by $F_\alpha^{(n)} = \frac{1}{[n]!} 
 F_\alpha^n$ and $E_\alpha^{(n)} = \frac{1}{[n]!} E_\alpha^n$. 
-
 The algebra $U$ has an $\A$-form which we denote by $U_\A$; it is the 
 $\A$-subalgebra of $U$ generated by the elements of the form $F_\alpha^{(n)}, 
 E_\alpha^{(n)}, K_\alpha^{\pm 1}$ for all $\alpha \in \Pi$ and all $n \geq 0$ 
@@ -1588,22 +1589,23 @@ element of $V_v(\lambda)^*$ such that $b^*_\lambda(G(b') v_\lambda) =
 c^{\lambda}_{b^*_\lambda,v_\lambda} \in C^+_v(\lambda)$, and the set 
 $\{b_\lambda \mid b \in \B(\lambda)\}$ is a basis of $C^+_v(\lambda)$. Since 
 the quantum flag variety is the direct sum of all these spaces with $\lambda$ 
-running over all dominant weights, we obtain a basis of $\O_v[G/B]$
+running over all dominant weights, we obtain a basis of $\O_v[G/B]$ as defined
+in \ref{q-full-flag-varieties} by taking
 \[
   \flagbasis = \{b_\lambda \mid b \in \B(\lambda), \lambda \in \Lambda^+\}.
 \]
+
 If $I$ is a subset of the fundamental weights, then we obtain a basis of the 
-partial flag variety $\O_v[G/P_I]$ defined in \ref{q-partial-flag-varieties} 
-by taking
+partial flag variety $\O_v[G/P_I]$ by taking
 \[
   \flagbasis_I = \{b_\lambda \mid b \in \B(\lambda), \lambda \in \mathcal 
     J(I)\}.
 \]
 Finally, the third item of the previous theorem implies that the ideal $J^I_w$ 
-defined in \ref{q-Schubert-varieties} is spanned over $\QQ(v)$ by all elements 
-of the form $b_\lambda$ with $b \in \B(\lambda) \setminus \B_w(\infty)$. Thus 
-we can obtain a basis for the quantum Schubert variety $\O_v[G/P_I]_w$ by 
-taking the image of
+defined in \ref{q-full-flag-varieties} is spanned over $\QQ(v)$ by all 
+elements of the form $b_\lambda$ with $b \in \B(\lambda) \setminus 
+\B_w(\infty)$. Thus we can obtain a basis for the quantum Schubert variety 
+$\O_v[G/P_I]_w$ by taking the image of
 \[
   \schubertbasis_I(w) 
     = \{b_\lambda \mid b \in \B(\lambda) \cap \B_w(\infty), \lambda \in 
@@ -1617,7 +1619,8 @@ The operators $\tilde E_\alpha, \tilde F_\alpha$ induce operators $\tilde
 E_\alpha, \tilde F_\alpha: \B(\infty) \to \B(\infty) \cup \{0\}$ 
 \cite{Jan}*{10.12}. The operators $\tilde E_\alpha$ are locally nilpotent, so 
 it makes sense to set $e_{\alpha}(b) = \max \{k \in \NN \mid \tilde 
-E_\alpha^k(b) \neq 0\}$ for each $b \in \B$. 
+E_\alpha^k(b) \neq 0\}$ for each $b \in \B$. We write $\overline E_\alpha(b)
+= \tilde E_{\alpha}^{e_\alpha(b)}(b)$.
 
 In \cite{Lit}, P. Littelman proves that to each reduced decomposition of 
 $w \in W$ we can associate a parametrization of $B_w(\infty)$ as 
@@ -1634,11 +1637,11 @@ integral points of a convex polyhedral cone, and hence by Gordan's lemma a
 normal affine semigroup. 
 
 A decomposition of $w_0$, the longest word of $W$, is said to be \emph{adapted}
-to $w$ if it is of the form $s_{\alpha_1} \cdots s_{\alpha_N}$ with $s_{i_1} 
-\cdots s_{\alpha_{\ell(w)}} = w$. For every element $w \in W$ there exists a 
-decomposition of the longest word of $W$ adapted to $w$, or in other words the 
-longest word of $W$ is the maximum for the weak right Bruhat order on $W$, see 
-\cite{BB}*{Proposition 3.1.2}. 
+to $w$ if it is of the form $s_{\alpha_1} \cdots s_{\alpha_N}$ with 
+$s_{\alpha_1} \cdots s_{\alpha_{\ell(w)}} = w$. For every element $w \in W$ 
+there exists a decomposition of the longest word of $W$ adapted to $w$, or in 
+other words the longest word of $W$ is the maximum for the weak right Bruhat 
+order on $W$, see \cite{BB}*{Proposition 3.1.2}. 
 \begin{Lemma*}
 Set $\Pi = \{\alpha_1, \ldots, \alpha_n\}$ and set $\varpi_i = 
 \varpi_{\alpha_i}$. Fix $w \in W$ and fix $\tilde w_0$ a decomposition of 
@@ -1721,13 +1724,14 @@ of matrix coefficients
 so we need to study the corproduct $\Delta(G(b''))$.
 
 It follows easily from \cite{Jan}*{4.9 (4)} that $\Delta(F_\alpha^{(r)}) = 
-\sum_{i+j=r}^r v_i^{ji} F^{(i)}_\alpha \ot F^{(j)}_\alpha K_\alpha^{-j}$. 
+\sum_{i+j=r}^r v_\alpha^{ji} F^{(i)}_\alpha \ot F^{(j)}_\alpha K_\alpha^{-j}$,
+where $v_\alpha = v^{(\alpha,\alpha)/2}$. 
 Since the canonical basis is contained in $U_\A^-$, it follows that 
 $\Delta(G(b''))$ is a sum of terms of the form $p (G(b_{(1)}) \ot 
 G(b_{(2)}) K_\mu)$ with $p \in \A, b_{(1)}, b_{(2)} \in \B(\infty)$, and $\mu 
 = \wt(b_{(1)})$, the weight of $b_{(1)}$. Among all these terms there is one 
-of the form $d_{b,b'}^{b''} (G(b) \ot G(b') K_{\wt(b)})$, perhaps with 
-$d_{b,b'}^{b''} = 0$, and from the reasoning above we get that $c_{b,b'}^{b''} 
+of the form $d_{b,b'}^{b''} (G(b) \ot G(b') K_{\wt(b)})$ with $d_{b,b'}^{b''} 
+\in \A$, and from the reasoning above we get that $c_{b,b'}^{b''} 
 = v^{(\wt(b), \lambda')} d_{b,b'}^{b''}$. Notice that unlike before, the 
 element $d_{b,b'}^{b''}$ is independent of $\lambda$ and $\lambda'$.
 
@@ -1735,86 +1739,125 @@ The problem of showing that $\flagbasis$ is indeed an $(\tilde S_{\tilde w_0},
 <_{\lex})$-basis thus reduces to the follwing: show that if $d_{b,b'}^{b''} 
 \neq 0$ then $\Lambda_{\tilde w_0}(b'') \leq_{\lex} \Lambda_{\tilde w_0}(b) + 
 \Lambda_{\tilde w_0}(b')$. Caldero shows that this is indeed the case in 
-\cite{C}*{Theorem 2.3}. We give a different shorter proof, based on the
-following lemma.
+\cite{C}*{Theorem 2.3}. We give a shorter proof in the following paragraph.
+
+\paragraph
+\label{coproduct-coefficients-convex}
+We first fix some notation. Given a decomposition of the longest word of $W$
+$\tilde w_0 = s_{\alpha_1} \cdots s_{\alpha_N}$, for each $a \in \NN^N$ we 
+write $F^{(a)} = F_{\alpha_1}^{(a_1)} \cdots F_{\alpha_N}^{(a_N)}$ and 
+$\tilde F^{a} = \tilde F_{\alpha_1}^{a_1} \cdots \tilde F_{\alpha_N}^{a_N}$. 
+If $a$ lies in the image of $\Lambda_{\tilde w_0}$ then we write $b^a = 
+\Lambda_{\tilde w_0}^{-1}(a)$.
 
 \begin{Lemma*}
 Fix $\tilde w_0 = s_{\alpha_1} \cdots s_{\alpha_N}$ a decomposition of the 
-longest word of $W$. For each $a \in \NN^N$ we write $F^{(a)} = 
-F_{\alpha_1}^{(a_1)} \cdots F_{\alpha_N}^{(a_N)}$ and $\tilde F^{a} = 
-\tilde F_{\alpha_1}^{a_1} \cdots \tilde F_{\alpha_N}^{a_N}$. If $a$ lies in 
-the image of $\Lambda_{\tilde w_0}$ the we write $b_a = 
-\Lambda_{\tilde w_0}^{-1}(a)$. Let $\nu \in \ZZ \Phi$ with $\nu \geq 0$.
+longest word of $W$. Let $a \in \NN^N$, and let $\nu \in \ZZ\Phi, \nu \geq 0$ 
+be such that $F^{(a)} \in U^-_{-\nu}$.
 \begin{enumerate}[label=(\alph*)]
-\item If $b_a \in \B(\infty)_{-\nu}$ then for each $a' \in 
-\Lambda_{\tilde w_0} (\B(\infty)_{-\nu})$ with $a' >_{\lex} a$ there exist 
-$x_{a,a'}, y_{a,a'} \in \A$ such that
-\begin{align*}
-F^{(a)}
-  &= G(b_a) + \sum_{a' >_{\lex} a} x_{a,a'} G(b_{a'}), &
-G(b_a) 
-  &= F^{(a)} + \sum_{a' >_{\lex} a} y_{a,a'} F^{(a')}.
-\end{align*}
-
-\item Let $\alpha \in \Pi$ and $r > 0$. Let $b \in \B(\infty)_{-\nu}$. Then
+\item 
+\label{pre}
+Let $\alpha \in \Pi$ and $r > 0$. Let $b \in \B(\infty)_{-\nu}$. Then
 for each $b' \in \B(\infty)_{-\nu - r\alpha}$ there exists $x_{b'} \in \A$ 
 such that
 \begin{align*}
 F^{(r)}_\alpha G(b) 
-  &= G(\tilde F_{\alpha}^r b) + \sum_{e_{\alpha}(b') > r} x_{b'} G(b')
+  &= \qbinom{r+e_\alpha(b)}{r} G(\tilde F_{\alpha}^r b) 
+  	+ \sum_{e_{\alpha}(b') > r + e_\alpha(b)} x_{b'} G(b').
 \end{align*}
 
-\item If $a \in \NN^N$ and $F^{(a)} \in U^-_{-\nu}$, then for each $a'\in 
+\item 
+\label{in-image}
+Suppose $a$ lies in the image of $\Lambda_{\tilde w_0}$. Then for each $a' \in 
+\Lambda_{\tilde w_0} (\B(\infty)_{-\nu})$ with $a' >_{\lex} a$ there exist 
+$x_{a,a'}, y_{a,a'} \in \A$ such that
+\begin{align*}
+F^{(a)}
+  &= G(b^a) + \sum_{a' >_{\lex} a} x_{a,a'} G(b^{a'}), &
+G(b^a) 
+  &= F^{(a)} + \sum_{a' >_{\lex} a} y_{a,a'} F^{(a')}.
+\end{align*}
+
+\item 
+\label{not-in-image}
+Suppose $a$ does not lie in the image of $\Lambda_{\tilde w_0}$. Let $b = 
+\tilde F^a 1 + q\L(\infty) \in \B(\infty)_{-\nu}$ and let $s = 
+\Lambda_{\tilde w_0}(b)$. Then $s >_{\lex} a$, and for each $a'\in 
 \Lambda_{\tilde w_0} (\B(\infty)_{-\nu})$ with $a' >_{\lex} a$ there exists 
 $z_{a,a'} \in \A$ such that
 \begin{align*}
-F^{(a)}
-  &= G(\tilde F^a 1) + \sum_{a' >_\lex a} z_{a,a'} G(b_{a'}).
+	F^{(a)} &= \sum_{a' >_\lex a} z_{a,a'} G(b^{a'}).
 \end{align*}
-Furthermore $\Lambda_{\tilde w_0}(\tilde F^a 1) >_{\lex} a$.
+Furthermore $z_{a,s} \neq 0$.
 \end{enumerate}
-
 \end{Lemma*}
 \begin{proof}
-Let $\lambda$ be a dominant weight and let $v_\lambda \in V_\A(\lambda)$ be a  
-highest weight vector. The statement of \cite{Lit}*{Proposition 10.3} says that
-if $b_a v_{\lambda} \neq 0$ then there exist $x_{a,a'}$ as in the statement
-such that
+Let us prove item \ref{pre}. Put $e = e_\alpha(b)$, and for each $n \geq 0$
+set $M_{n} = \tilde F_\alpha^{n}U^-_{-\nu+(n)\alpha}$. As shown in the proof
+of \cite{Jan}*{Lemma 11.12, p. 249}, 
+\begin{align}
+\label{1}
+G(b) 
+	\equiv \tilde F_\alpha^e(G(\tilde E_\alpha^e b))
+	\mod M_{e+1}
+\end{align}
+Now applying \cite{Jan}*{Lemma 11.3} repeatedly we get
+\begin{align*}
+F_\alpha^{(r)} G(b) 
+	&\equiv F_\alpha^{(r)} \tilde F_\alpha^{e} G(\tilde E_\alpha^e b) 
+	\equiv F_\alpha^{(r)} F_\alpha^{(e)} G(\tilde E_\alpha^e b) \\
+	&\equiv \qbinom{r+e}{r} F_\alpha^{(r+e)} G(\tilde E_\alpha^e b) 
+	\equiv \qbinom{r+e}{r} \tilde F_\alpha^{r+e} G(\tilde E_\alpha^e b) 
+	\mod M_{e+r+1}.
+\end{align*}
+Finally
+\begin{align*}
+\tilde F_\alpha^{r+e} G(\tilde E_\alpha^e b)
+	&= \tilde F_\alpha^{r+e} G(\tilde E_\alpha^{r+e} \tilde F_\alpha^r b)
+	\equiv G(\tilde F_\alpha^r b) \mod M_{r+e+1}
+\end{align*}
+where the last congruence follows from \ref{1}. Thus $F_\alpha^{(r)}G(b) 
+\equiv \qbinom{r+e}{r} G(\tilde F_\alpha^rb) \mod M_{r+e+1}$. By 
+\cite{Jan}*{Lemma 11.12 (b)} the $G(b')$ with $e_\alpha(b') > e+r$ form
+an $\A$-basis of $M_{r+e+1}$, so item \ref{pre} follows.
+
+Item \ref{in-image} is a simple consequence of \cite{Lit}*{Proposition 10.3},
+which states that given $\lambda$ be a dominant weight and $v_\lambda \in 
+V_\A(\lambda)$, then if $b^a v_{\lambda} \neq 0$ there exist $x_{a,a'}$ as in 
+the statement such that
 \begin{align*}
 F^{(a)}v_\lambda
-  &= G(b_a)v_\lambda + \sum_{a' >_{\lex} a} x_{a,a'} G(b_{a'})v_\lambda.
+  &= G(b^a)v_\lambda + \sum_{a' >_{\lex} a} x_{a,a'} G(b^{a'})v_\lambda.
 \end{align*}
 As shown in the proof of \cite{Jan}*{Theorem 10.10}, there exists a dominant
-wieght $\lambda$ such that the map $U^-_{-\nu} \to 
-V_q(\lambda)_{\lambda - \nu}$ given by $G(b) \mapsto G(b)v_\lambda$ is an 
-isomorphism, so the first formula is proved. The second follows from the first
-since there is only a finite number of elements $a' >_{\lex} a$ such that 
-$b_{a'} \in \B(\infty)_{-\nu}$. This completes the proof of the first item.
+weight $\lambda$ such that the map $U^-_{-\nu} \to V_q(\lambda)_{\lambda - 
+\nu}$ given by $G(b) \mapsto G(b)v_\lambda$ is an isomorphism, so the first 
+formula is proved. The second follows from the first since there is only a 
+finite number of elements $a' >_{\lex} a$ such that $b^{a'} \in 
+\B(\infty)_{-\nu}$. 
 
-By \cite{Jan}*{Lemma 11.3} we get that $F_\alpha^{(r)} G(b) \equiv 
-F_\alpha^{(r)} G(b) \mod \tilde F_\alpha^{r+1} U^-_\A$. Now as shown in the 
-proof of \cite{Jan}*{Lemma 11.12 (b), page 249}, $\tilde F_\alpha^r G(b) 
-\equiv G(\tilde F_\alpha^r b) \mod \tilde F_\alpha^{r+1}U^-_\A$; the same 
-lemma states that $F_\alpha^{r+1}U^-_\A$ is generated over $\A$ by the $G(b')$
-with $e_{\alpha}(b) \geq r+1$, so the second item follows.
+Let us prove the last item. Suppose that $s <_\lex a$. Then by definition 
+$s_1 = a_1, \ldots, s_j = a_j, s_{j+1} < a_{j+1}$ for some $1 \leq j \leq N$. 
+This implies that 
+\begin{align*}
+	\tilde E_{\alpha_{j+1}}^{s_{j+1}+1} 
+		\tilde E_{\alpha_j}^{s_j} \cdots \tilde E_{\alpha_1}^{s_1}(b) 
+		= \tilde F_{\alpha_{j+1}}^{a_j-s_j-1} \cdots \tilde 
+			F_{\alpha_N}^{a_N}1 + q\L(\infty) \neq 0,
+\end{align*}
+which contradicts the definition of $\Lambda_{\tilde w_0}(b)$. Thus $s 
+\geq_{\lex} a$, and the hypothesis implies that the inequality is strict.
 
-For the last item, let $j = \max\{i \mid a_i \neq 0\}$, so $F^{(a)} = 
-F_{\alpha_j}^{(a_j)} \cdots F_{\alpha_N}^{(a_N)}$. Induction using the previous
-item shows that
+Now let $j = \min \{i \mid a_i \neq 0\}$, so $F^{(a)} = F_{\alpha_j}^{(a_j)} 
+\cdots F_{\alpha_N}^{(a_N)}$. Item \ref{pre} and a simple induction shows that
 \begin{align*}
 F^{(a)} 
-  &= G(\tilde F^a 1) + \sum_{e_{\alpha_j}(b') > a_j} z_{b,b'} G(b').
+  &= z_{a,s} G(b) 
+  	+ \sum_{e_{\alpha_j}(b') > a_j} z_{b,b'} G(b')
 \end{align*}
-Notice that the condition $e_{\alpha_j}(b') > a_j$ automatically implies that
-$\Lambda_{\tilde w_0}(b') >_{\lex} a$. Let $b$ be the element of the crystal
-basis corresponding to $\tilde F^a 1$, and let $s = \Lambda_{w_0}(b)$. If 
-$s_i \neq 0$ for some $i < j$ then $s > a$ and we are finished. Now if this
-is not the case, then since $\tilde E_{\alpha_j}^{a_j} b = \tilde 
-E_{\alpha_j}^{a_j} \tilde F^a 1 \neq 0$ implies that $s_j \geq a_j$. If $s_j
-> a_j$ then $s > a$, otherwise we may repeat the reasoning with $\tilde 
-E_{\alpha_j}^{a_j} b$ to show that $s_{j+1} \geq a_{j+1}$, etc. Since $a$
-is not in the image of $\Lambda_{\tilde w_0}$, we must eventually reach a
-strict inequality which shows that $s > a$.
+with $z_{a,s} \neq 0$. Notice that the condition $e_{\alpha_j}(b') > a_j$ 
+automatically implies that $\Lambda_{\tilde w_0}(b') >_{\lex} a$, so we are 
+finished.
 \end{proof}
 
 \begin{Proposition*}
@@ -1825,34 +1868,35 @@ $\Lambda_{\tilde w_0}(b'') \leq_{\lex} \Lambda_{\tilde w_0}(b) +
 is a power of $v$.
 \end{Proposition*}
 \begin{proof}
-We have already observed that $\Delta(F_\alpha^{(r)}) = \sum_{i+j = r} v_i^{ij}
-F_\alpha^{(i)} \ot F_\alpha^{(j)} K^{-j}_\alpha$. A simple induction shows 
-that for each $a \in \NN^N$ we get $\Delta(F^{(a)}) = \sum_{t+u = a} v^{z(t,u)}
-F^{(t)} \ot F^{(u)}K_{\wt(F^{(t)})}$, with $z(t,u) \in \ZZ$. Now the first 
-item of the previous lemma implies that
+We have already observed that $\Delta(F_\alpha^{(r)}) = \sum_{i+j = r} 
+v_\alpha^{ij} F_\alpha^{(i)} \ot F_\alpha^{(j)} K^{-j}_\alpha$, and it follows 
+that for each $a \in \NN^N$ we get $\Delta(F^{(a)}) = 
+\sum_{t+u = a} v^{z(t,u)} F^{(t)} \ot F^{(u)}K_{\wt(F^{(t)})}$, with $z(t,u) 
+\in \ZZ$. By item \ref{in-image} of the previous lemma 
 \begin{align*}
-\Delta(G(b_a))
-  &= \Delta(F^{(a)}) + \sum_{a' >_{\lex} a} y_{a,a'} \Delta(F^{a'}) \\
+\Delta(G(b^a))
+  &= \Delta(F^{(a)}) + \sum_{a' >_{\lex} a} y_{a,a'} \Delta(F^{(a')}) \\
   &= \sum_{t+u = a} v^{z(t,u)} F^{(t)} \ot F^{(u)}K_{\wt(F^{(t)})} 
-  + \sum_{a' >_{\lex} a} \sum_{t+u = a'} y_{a,a'} v^{z(t,u)} F^{(t)}
-    \ot F^{(u)}K_{\wt(F^{(t)})}
+  + \sum_{t+u >_\lex a} y_{a,t+u} v^{z(t,u)} F^{(t)}
+    \ot F^{(u)}K_{\wt(F^{(t)})},
 \end{align*}
-and using the third item we can restrict the sum to the $s,t$ in the
-image of $\Lambda_{\tilde w_0}$, so the element in the last display
-equals
+and using item \ref{not-in-image} of the lemma we get that the element in the 
+last display equals
 \begin{align*}
-\sum_{t+u = a} v^{z(t,u)} G(b_t) \ot G(b_u) K_{\wt(b_t)}
-    + \sum_{t+u >_{\lex} a} y'_{t,u} G(b_t) \ot G(b_u) K_{\wt(b_t)},
+\sum_{t+u = a} v^{z(t,u)} G(b^t) \ot G(b^u) K_{\wt(b^t)}
+    + \sum_{t+u >_{\lex} a} y'_{t,u} G(b^t) \ot G(b^u) K_{\wt(b^t)},
 \end{align*}
-where $z(t,u) \in \ZZ$ and $y'_{t,u} \in \A$. The result follows by taking 
-$b_a = b''$.
+where $t,u$ run over the image of $\Lambda_{\tilde w_0}$, and $z(t,u) \in \ZZ$
+and $y'_{t,u} \in \A$ for each such pair $(t,u)$. The result follows by taking 
+$b^a = b''$.
 \end{proof}
 
 \begin{Theorem}
 \label{Schubert-deg}
-Let $\k$ be a field of characteristic $0$ and let $q$ be trascendental over 
-$\QQ$. Let $I \subset P$ be a set of fundamental weights, and let $w \in W$.
-Let $\tilde w_0$ be a reduced decomposition of $w_0$ adapted to $w$.
+Let $\k$ be a field of characteristic $0$ and let $q \in \k^\times$ be 
+trascendental over $\QQ$. Let $I \subset P$ be a set of fundamental weights, 
+and let $w \in W$. Let $\tilde w_0$ be a reduced decomposition of $w_0$ 
+adapted to $w$.
 
 The quantum Schubert variety $\O_q[G/P_I]_w$ degenerates to a quantum affine 
 toric variety with associated semigroup $\tilde S^I_{\tilde w_0, \tilde w}$. 
@@ -1865,27 +1909,27 @@ We put on $\k$ the right $\A$-module structure given by $1_\k \cdot v = q$.
 Thus $\O_q[G/P_I]_w \cong \k \ot_\A \O_v[G/P_I]_w$. 
 
 For each dominant weight $\lambda$ and each $a \in \Lambda_{\tilde w_0}
-(\B(\lambda))$, we denote by $b_{(a,\lambda)}$ the element $1 \ot_\A b_\lambda
+(\B(\lambda))$, we denote by $b^a_\lambda$ the element $1 \ot_\A b_\lambda
 \in \k \ot_\A \O_v[G/P_I]_w$ where $b = \GG_{\tilde w_0}^{-1}(a)$.
-With this notation, it follows from \ref{coproduct-coefficients} that for each 
-pair of dominant weights $\lambda, \lambda'$ and each $a \in 
+With this notation, it follows from \ref{coproduct-coefficients-convex} that 
+for each pair of dominant weights $\lambda, \lambda'$ and each $a \in 
 \Lambda_{\tilde w_0}(\B(\lambda)), a' \in \Lambda_{\tilde w_0}(\B(\lambda')), 
 a'' \in \Lambda_{\tilde w_0}(\B(\lambda + \lambda'))$ such that $a'' 
-\geq_{\lex} a + a'$, there exist $x_{a''} \in \A$ such that 
+\geq_{\lex} a + a'$, there exists $x_{a''} \in \A$ such that 
 \begin{align*}
-b_{(a,\lambda)} b_{(a',\lambda')} = \sum_{a'' \geq a+a'} x_{a''} 
-  b_{(a'',\lambda + \lambda')},
+b^a_{\lambda} b^{a'}_{\lambda'} = \sum_{a'' \geq a+a'} x_{a''} 
+  b^{a''}_{\lambda + \lambda'},
 \end{align*}
 with $x_{a+a'}$ a power of $v$. This implies that the basis 
-$\{1 \ot b_\lambda \mid b_\lambda \in \schubertbasis_I(w)\}$ defined in 
-\ref{Littelman-parametrizations} is a 
-$(\tilde S^I_{\tilde w_0, \tilde w}, \leq_{\lex} )$ basis. Thus by Proposition 
+$\{1 \ot b \mid b \in \schubertbasis_I(w)\}$ is a $(\tilde S^I_{\tilde w_0, 
+\tilde w}, \leq_{\lex}~)$ basis. Thus by Proposition 
 \ref{S-ordered-basis-degeneration} we get the degeneration result.
 
 Since $\tilde S^w_{w_0, I}$ is a normal semigroup, we know by Proposition 
 \ref{properties-of-qatv} that the associated graded ring of the quantum 
-Schubert variety has property $\chi$, finite local dimension and the AS-Cohen-
-Macaulay property, which $\O_q[G/P_I]_w$ inherits by Theorem \ref{transfer}. 
+Schubert variety has property $\chi$, finite local dimension and the 
+AS-Cohen-Macaulay property, which $\O_q[G/P_I]_w$ inherits by Theorem 
+\ref{transfer}. 
 Also by Proposition \ref{properties-of-qatv}, a quantum affine toric variety 
 whose underlying semigroup is normal is a maximal order in its ring of 
 fractions, and it follows from \cite{Mau}*{Chapitre IV, Proposition 2.1 and 
@@ -1894,8 +1938,8 @@ Chapitre V, Corollaire 2.6} that $\O_q[G/P_I]_w$ is also a maximal order.
 
 
 %\newpage 
-\section{Quantum affine toric degeneration of an algebras with a straightening law over 
-a distributive lattice}
+\section{Quantum affine toric degeneration of an algebras with a straightening 
+law over a distributive lattice}
 \label{richardson}
 
 We finish this article by relating our previous work \cite{RZ} with the material found 
