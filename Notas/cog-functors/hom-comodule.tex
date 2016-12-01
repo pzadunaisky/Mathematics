@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%% Heneralities %%%%%%%%%%%%%%%%%%5
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
 \documentclass[11pt,fleqn]{article}
 \usepackage[paper=a4paper]
   {geometry}
@@ -142,123 +142,86 @@ bodyfont=\itshape]{mystyle-empty}
 
 \begin{document}
 \maketitle
-<<<<<<< HEAD
 We fix a field $\k$. All algebras and tensor products
-are over $\k$ unless otherwise stated. Hiven a coalgebra $H$ we denote by $\Mod^H$ the
-=======
-We fix a field $\k$. All algebras and tensor products are over $\k$ unless 
-otherwise stated. Given a coalgebra $H$ we denote by $\Mod^H$ the
->>>>>>> fe01f5c2424d7badfb9128ab4741dd41320e69dd
-category of right $H$-comodules and write $\Hom^H$ for $\Hom_{\Mod^H}$.
+are over $\k$ unless otherwise stated. Given a coalgebra $G$ we denote by $\Mod^G$ the
+category of right $G$-comodules and write $\Hom^G$ for $\Hom_{\Mod^G}$.
 
 \section{Hom comodules}
 \paragraph
-<<<<<<< HEAD
-Let $H$ be a Hopf algebra and let $M, N$ be $H$-comodules. We define the $H$-comodule-hom
-space $\HOM^{H}(M, N)$ as the pull-back
+Let $G$ be a Hopf algebra and let $M, N$ be $G$-comodules. We define the $G$-comodule-hom
+space $\HOM^{G}(M, N)$ as the pull-back
 \begin{align*}
 	\xymatrix{
-		\Hom_\k(M, N) \ar[r]^-{\rho^{N}_*} & \Hom_\k(M, N \ot H) \\
-		\HOM^{H}(M, N) \ar@{-->}[u]^-\alpha \ar@{-->}[r]^-\rho & \Hom_\k(M, N) \ot H 
+		\Hom_\k(M, N) \ar[r]^-{\rho^{N}_*} & \Hom_\k(M, N \ot G) \\
+		\HOM^{G}(M, N) \ar@{-->}[u]^-\alpha \ar@{-->}[r]^-\rho & \Hom_\k(M, N) \ot G 
 		\ar[u]_-{\Gamma}
 	}
-=======
-Let $H$ be a Hopf algebra over $\k$ and let $M, N$ be $H$-comodules. We define 
-the $H$-comodule-hom space $\HOM^{G}(M, N)$ as the pull-back
-\begin{align*}
-\xymatrix{
-	\Hom_\k(M, N) \ar[r]^-{\rho^{N}_*} 
-		& \Hom_\k(M, N \ot H) \\
-	\HOM^{H}(M, N) \ar@{-->}[u]^-\alpha \ar@{-->}[r]^-\rho 
-		& \Hom_\k(M, N) \ot H \ar[u]_-{\Gamma}
-}
->>>>>>> fe01f5c2424d7badfb9128ab4741dd41320e69dd
 \end{align*}
-where for each $m \in M$ we define $\Gamma(f \ot h)(m) = f(m_0) \ot g m_1$.
+where for each $n \in N$ we define $\Gamma(f \ot g)(n) = f(n_0) \ot g n_1$.
 
 Since
 \[ 
-	(1 \ot \vep)_* \circ \rho^{N}_* 
-		= (1 \ot \vep \circ \rho^{N})_* = (\Id_{N})_*
+	(1 \ot \vep)_* \circ \rho^{N}_* = (1 \ot \vep \circ \rho^{N})_* = (\Id_{N})_*
 \]
 we know that $\rho^{N}_*$ is injective, and hence so is $\rho$. 
 
-<<<<<<< HEAD
-It is also true that $\Gamma$ is injective. Let $T: \Hom(M,N \ot H) \to \Hom_\k(M,N \ot
-H)$ be defined by $T(F)(m) = f(m_0) \cdot 1 \ot S(m_1)$. Thus we get a commutative diagram
+It is also true that $\Gamma$ is injective. Let $T: \Hom(M,N \ot G) \to \Hom_\k(M,N \ot
+G)$ be defined by $T(F)(m) = f(m_0) \cdot 1 \ot S(m_1)$. Thus we get a commutative diagram
 \begin{align*}
 	\xymatrix{
-		\Hom_\k(M, N \ot H) \ar[dr]^-T \\
-		\Hom_\k(M, N) \ot H \ar[u]^\Gamma \ar[r]^-i & \Hom_\k(M,N \ot H)
+		\Hom_\k(M, N \ot G) \ar[dr]^-T \\
+		\Hom_\k(M, N) \ot G \ar[u]^\Gamma \ar[r]^-i & \Hom_\k(M,N \ot G)
 	}
-=======
-It is also true that $\Gamma$ is injective. Let $T: \Hom(M,N \ot H) \to 
-\Hom_\k(M,N \ot H)$ be defined by $T(F)(m) = F(m_0) \cdot 1 \ot S(m_1)$. Thus 
-we get a commutative diagram
-\begin{align*}
-\xymatrix{
-	\Hom_\k(M, N \ot H) \ar[dr]^-T \\
-	\Hom_\k(M, N) \ot H \ar[u]^\Gamma \ar[r]^-i 
-		& \Hom_\k(M,N \ot H)
-}
->>>>>>> fe01f5c2424d7badfb9128ab4741dd41320e69dd
 \end{align*}
-where $i(f \ot h)(m) = f(m) \ot h$. Since $i$ is injective, so is $\Gamma$.
+where $i(f \ot g)(m) = f(m) \ot g$. Since $i$ is injective, so is $\Gamma$.
 
-<<<<<<< HEAD
-Hence $\HOM^H(M,N) \subset \Hom_\k(M,N)$ consists of those functions $f: M \to N$ for
+Hence $\HOM^G(M,N) \subset \Hom_\k(M,N)$ consists of those functions $f: M \to N$ for
 which there exist $f_1, \ldots, f_r \in \Hom_\k(M,N)$ and $g_1, \ldots, g_r
-\in H$ such that for every $m \in M$ we get $f(m)_0 \ot f(m)_1 = \sum_{i = 1}^r f_i(m_0)
-\ot g_i m_i$. Notice that the submodule of coinvariants of $\HOM^H(M,N)$ is $\Hom^H(M,N)$.
-=======
-Hence $\HOM^G(M,N) \subset \Hom_\k(M,N)$ consists of those functions $f: M 
-\to N$ for which there exist $f_1, \ldots, f_r \in \Hom_\k(M,N)$ and $h_1, 
-\ldots, h_r \in H$ such that for every $m \in M$ we get $f(m)_0 \ot f(m)_1 = 
-\sum_{i = 1}^r f_i(m_0) \ot h_i m_i$. 
->>>>>>> fe01f5c2424d7badfb9128ab4741dd41320e69dd
+\in G$ such that for every $m \in M$ we get $f(m)_0 \ot f(m)_1 = \sum_{i = 1}^r f_i(m_0)
+\ot g_i m_i$. Notice that the submodule of coinvariants of $\HOM^G(M,N)$ is $\Hom^G(M,N)$.
 
 \paragraph
-For example, suppose $H$ is the group algebra of $\hat H$, in which case $M, N$ are
-$\hat H$-graded modules. Then $\HOM^H(M,N)$ consists of those morphisms which are
-finite sums of homogeneous morphisms of arbitrary degree, i.e. $\HOM^H(M,N) =
-\bigoplus_{g \in \hat H}\Hom^H(M,N[g])$. It is a well-known result that if $M$ is finite
-dimensional then $\HOM^H(M,N) = \Hom_\k(M,N)$.
+For example, suppose $G$ is the group algebra of $\hat G$, in which case $M, N$ are
+$\hat G$-graded modules. Then $\HOM^G(M,N)$ consists of those morphisms which are
+finite sums of homogeneous morphisms of arbitrary degree, i.e. $\HOM^G(M,N) =
+\bigoplus_{g \in \hat G}\Hom^G(M,N[g])$. It is a well-known result that if $M$ is finite
+dimensional then $\HOM^G(M,N) = \Hom_\k(M,N)$.
 
-On the other hand, suppose $\k$ has characteristic zero and let $H$ be the enveloping
-algebra of the one dimensional Lie algebra with basis $X$. A $H$-comodule is a vector
+On the other hand, suppose $\k$ has characteristic zero and let $G$ be the enveloping
+algebra of the one dimensional Lie algebra with basis $X$. A $G$-comodule is a vector
 space $M$ with a locally nilpotent endomorphism $t: M \to M$ such that $\rho^M(m) = \sum_n
-\frac{t^n(m)}{n!} \ot X^n$. Suppose $M, N$ are $H$-comodules with structure maps given by
+\frac{t^n(m)}{n!} \ot X^n$. Suppose $M, N$ are $G$-comodules with structure maps given by
 endomorphisms $t, u$. Take $F \in \Hom_\k(M,N)$, and set
 \[
 	F_n = \sum_{i + j = n} \frac{(-1)^{i}}{i!j!} u^{j} \circ F \circ t^i.
 \]
-Then $F \in \HOM^H(M, N)$ if and only if $F_n = 0$ for $n \gg 0$. In that case $\rho(F) =
+Then $F \in \HOM^G(M, N)$ if and only if $F_n = 0$ for $n \gg 0$. In that case $\rho(F) =
 \sum_n F_n \ot X^n$. Notice that $F_1 = u \circ F - F \circ t$ is zero if and only if $F$
 is a comodule morphism. If $M$ is finite dimensional then so is $F(M)$; hence both $s$ and
 the restriction of $t$ to the image of $F$ are nilpotent, and $F_n = 0$ for $n > 2 \dim
-M$. Thus if $M$ is finite dimensional $\HOM^H(M,N) = \Hom_\k(M,N)$
+M$. Thus if $M$ is finite dimensional $\HOM^G(M,N) = \Hom_\k(M,N)$
 
 \paragraph
-\label{hom-H-comodule}
-The $\k$-vector space $\HOM^{H}(M,N)$ is a $H$-comodule. Indeed, consider the following
+\label{hom-G-comodule}
+The $\k$-vector space $\HOM^{G}(M,N)$ is a $G$-comodule. Indeed, consider the following
 diagram
 \begin{align*}
 	\xymatrix{
 		\Hom_\k(M,N) \ar[r]^{\rho^{N}_*}
-		& \Hom_\k(M,N \ot H) \ar[r]^-{(\rho^{N} \ot 1)_*}
-			& \Hom_\k(M,N \ot H \ot H)\\
-		\HOM^H(M,N) \ar[r]^-\rho \ar[u]^-\alpha
-			&\Hom_\k(M,N) \ot H \ar[r]^-{\rho^{N}_* \ot 1} \ar[u]^-\Gamma \ar[dr]^-{1
+		& \Hom_\k(M,N \ot G) \ar[r]^-{(\rho^{N} \ot 1)_*}
+			& \Hom_\k(M,N \ot G \ot G)\\
+		\HOM^G(M,N) \ar[r]^-\rho \ar[u]^-\alpha
+			&\Hom_\k(M,N) \ot G \ar[r]^-{\rho^{N}_* \ot 1} \ar[u]^-\Gamma \ar[dr]^-{1
 				\ot \Delta}
-			& \Hom_\k(M, N \ot H) \ot H \ar[u]_-\Gamma \\
+			& \Hom_\k(M, N \ot G) \ot G \ar[u]_-\Gamma \\
 		{} 
-		&\HOM^{H}(M,N) \ot H \ar[u]^-{\alpha \ot 1} \ar[r]^-{\rho \ot 1}
-			& \Hom_\k(M,N) \ot H \ot H \ar[u]_-{\Gamma \ot 1}\\
+		&\HOM^{G}(M,N) \ot G \ar[u]^-{\alpha \ot 1} \ar[r]^-{\rho \ot 1}
+			& \Hom_\k(M,N) \ot G \ot G \ar[u]_-{\Gamma \ot 1}\\
 	}
 \end{align*} 
 Let $T = \rho_*^{N} \ot 1 \circ \rho$ and $U = \Gamma \ot 1 \circ 1 \ot \Delta \circ
 \rho$. Since the lower-right square is a pull-back diagram, in order to show that the
-image of $\rho$ is contained in $\HOM^H(M,N) \ot H$ it is enough to show that $T = U$.
+image of $\rho$ is contained in $\HOM^G(M,N) \ot G$ it is enough to show that $T = U$.
 Since $\Gamma$ is injective this is equivalent to showing that $\Gamma \circ T = \Gamma
 \circ U$. By the commutativity of the first two rows of the diagram
 \begin{align*}
@@ -272,11 +235,11 @@ Using the fact that $\rho^N \circ f(m) = \sum_{i = 1}^r f_i(m_0) \ot g_im_1$, we
 which completes the proof.
 
 \begin{Proposition}
-	Let $M,N$ be objects of $\Mod^H$. If $M$ is finitely generated then $\HOM^H(M,N) =
+	Let $M,N$ be objects of $\Mod^G$. If $M$ is finitely generated then $\HOM^G(M,N) =
 	\Hom_\k(M,N)$.
 \end{Proposition}
 \begin{proof}
-	Fix $f \in \Hom_\k(M,N)$. Choose a basis $\B$ of $H$ and for each $m \in M$ and $g \in
+	Fix $f \in \Hom_\k(M,N)$. Choose a basis $\B$ of $G$ and for each $m \in M$ and $g \in
 	\B$ let $f_g(m) \in M$ be the element uniquely determined by the formula
 	\[
 		\rho^M (f(m_0)) S(m_1)  = \sum_{g \in \B} f_g(m) \ot g,
@@ -289,30 +252,30 @@ which completes the proof.
 		= \rho^M(f(m_0)) (S(m_1)m_2) \\
 			&= \rho^M(f(m_0)) \eps(m_1) = \rho^M(f(m)),
 	\end{align*}
-	which shows that $f \in \HOM^H(M,N)$.
+	which shows that $f \in \HOM^G(M,N)$.
 \end{proof}
 
 \section{Relative Hom}
 We now generalize the previous construction.
 
 \paragraph
-Let $H, H$ be Hopf-algebras and let $\phi: H \to H$ be a Hopf-algebra morphism. We see $H$
-as a left $H$-comodule with structure morphism $\rho^H = \phi \ot 1 \circ \Delta_H: H \to
-H \ot H$. Let $L = {}^{\co H} H \subset H$ be the subalgebra of coinvariants. Suppose $L
-\subset H$ is cleft, i.e. there exists a convolution invertible morphism of left
-$H$-comodules $\gamma: H \to H$. The fact that $\gamma$ is a comodule morphism implies
+Let $G, H$ be Hopf-algebras and let $\phi: G \to H$ be a Hopf-algebra morphism. We see $G$
+as a left $H$-comodule with structure morphism $\rho^G = \phi \ot 1 \circ \Delta_G: G \to
+H \ot G$. Let $L = {}^{\co H} G \subset G$ be the subalgebra of coinvariants. Suppose $L
+\subset G$ is cleft, i.e. there exists a convolution invertible morphism of left
+$H$-comodules $\gamma: H \to G$. The fact that $\gamma$ is a comodule morphism implies
 that 
 \begin{align}
 	\label{gamma}
 	\phi(\gamma(h)_1) \ot \gamma(h)_2 = h_1 \ot \gamma(h_2)
 \end{align}
-Let $\gamma^{-1}$ be the convolution-inverse of $\gamma$. Since $\rho^H$ is an algebra
-morphism, $\rho^H \circ \gamma$ is convolution invertible with inverse given by $\rho^H
+Let $\gamma^{-1}$ be the convolution-inverse of $\gamma$. Since $\rho^G$ is an algebra
+morphism, $\rho^G \circ \gamma$ is convolution invertible with inverse given by $\rho^G
 \circ \gamma^{-1}$. On the other hand, setting $\sigma = S \ot 1 \circ \tau \circ
 \Delta_H$ where $\tau$ is the flip, we see that
 \begin{align*}
-	\rho^H \circ \gamma * \sigma (h) 
-		&= \rho^H \circ \gamma(h_1)\sigma(h_2) \\
+	\rho^G \circ \gamma * \sigma (h) 
+		&= \rho^G \circ \gamma(h_1)\sigma(h_2) \\
 		&= h_1 \ot \gamma(h_2) \cdot S(h_4) \ot \gamma^{-1}(h_3) \\
 	 	&= h_1 S(h_4) \ot \gamma(h_2)\gamma^{-1}(h_3) = h_1 S(h_3) \eps(h_2) \ot 1 = \eps(h)
 			(1 \ot 1).
@@ -320,37 +283,37 @@ morphism, $\rho^H \circ \gamma$ is convolution invertible with inverse given by 
 Since inverses are unique we get
 \begin{align}
 	\label{gamma-inverse}
-	\rho^H \circ \gamma^{-1}(h) =  S(h_2) \ot \gamma^{-1}(h_1).
+	\rho^G \circ \gamma^{-1}(h) =  S(h_2) \ot \gamma^{-1}(h_1).
 \end{align}
 
 %\begin{Lemma}
 %	For every $h \in H$ and every $l \in L$, the element $\gamma^{-1}(h_1) \gamma(h_2)_1
-%	l_1 \ot \gamma(h_2)_2 l_2$ belongs to $L \ot H$.
+%	l_1 \ot \gamma(h_2)_2 l_2$ belongs to $L \ot G$.
 %\end{Lemma}
 %\begin{proof}
-%	Consider $H \ot H$ as a left $H$-comodule with structure map $\rho^H \ot 1$. Suppose
-%	$\sum g \ot g' \in {}^{\co H} H \ot H$ and assume the set of all $g'$ is linearly
-%	independent. Then clearly each $g$ is in $L$, and hence ${}^{\co H}(H \ot H) = L \ot
-%	H$. Thus it is enough to show that the element lies in the coinvariants of $H \ot H$.
+%	Consider $G \ot G$ as a left $H$-comodule with structure map $\rho^G \ot 1$. Suppose
+%	$\sum g \ot g' \in {}^{\co H} G \ot G$ and assume the set of all $g'$ is linearly
+%	independent. Then clearly each $g$ is in $L$, and hence ${}^{\co H}(G \ot G) = L \ot
+%	G$. Thus it is enough to show that the element lies in the coinvariants of $G \ot G$.
 %	
 %	Notice that
 %	\[
 %		\gamma^{-1}(h_1) \gamma(h_2)_1 l_1 \ot \gamma(h_2)_2l_2 = \gamma^{-1}(h_1)\ot 1 \cdot
-%		\Delta_H(\gamma(h_2)l)
+%		\Delta_G(\gamma(h_2)l)
 %	\]
-%	Using	\ref{gamma-inverse} we get $\rho^H \ot 1 (\gamma^{-1}(h_1)) = S(h_2) \ot
+%	Using	\ref{gamma-inverse} we get $\rho^G \ot 1 (\gamma^{-1}(h_1)) = S(h_2) \ot
 %	\gamma^{-1}(h_1) \ot 1$. On the other hand, using \ref{gamma}
 %	\begin{align*}
-%		\rho^H\ot 1( \Delta_H(\gamma(h_3)l)) 
+%		\rho^G\ot 1( \Delta_G(\gamma(h_3)l)) 
 %		&= \phi(\gamma(h_3)_1) \phi(l_1) \ot \gamma(h_3)_2 l_2 \ot \gamma(h_3)_3 l_3 \\
-%		&= 1 \ot \Delta_H(\phi(\gamma(h_3)_1) \phi(l_1) \ot \gamma(h_3)_2 l_2)\\
-%		&= 1 \ot \Delta_H(h_3 \ot \gamma(h_4)l) = h_3 \ot \gamma(h_4)_1 l_1 \ot
+%		&= 1 \ot \Delta_G(\phi(\gamma(h_3)_1) \phi(l_1) \ot \gamma(h_3)_2 l_2)\\
+%		&= 1 \ot \Delta_G(h_3 \ot \gamma(h_4)l) = h_3 \ot \gamma(h_4)_1 l_1 \ot
 %		\gamma(h_4)_2 l_2.
 %	\end{align*}
 %	Hence
 %	\begin{align*}
-%		\rho^H \ot 1 &(\gamma^{-1}(h_1) \gamma(h_2)_1 l_1 \ot \gamma(h_2)_2l_2 )) \\
-%		&= \rho^H \ot 1(\gamma^{-1}(h_1) \ot 1) \cdot \rho^H \ot 1(\Delta_H(\gamma(h_2)l)) \\
+%		\rho^G \ot 1 &(\gamma^{-1}(h_1) \gamma(h_2)_1 l_1 \ot \gamma(h_2)_2l_2 )) \\
+%		&= \rho^G \ot 1(\gamma^{-1}(h_1) \ot 1) \cdot \rho^G \ot 1(\Delta_G(\gamma(h_2)l)) \\
 %		&= S(h_2) \ot \gamma^{-1}(h_1) \ot 1 \cdot h_3 \ot \gamma(h_4)_1l_1 \ot
 %		\gamma(h_4)_2 l_2\\
 %		&= S(h_2)h_3 \ot \gamma^{-1}(h_1)\gamma(h_4)_1l_1 \ot \gamma(h_4)_2l_2 \\
@@ -360,31 +323,31 @@ Since inverses are unique we get
 
 \begin{Lemma}
 	For every $h \in H$ the element $\gamma^{-1}(h_1) \gamma(h_2)_1\ot \gamma(h_2)_2$ lies
-	in $L \ot H$.
+	in $L \ot G$.
 \end{Lemma}
 \begin{proof}
-	Consider $H \ot H$ as a left $H$-comodule with structure map $\rho^H \ot 1$. Suppose
-	$\sum g \ot g' \in {}^{\co H} H \ot H$ and assume the set of all $g'$ is linearly
-	independent. Then clearly each $g$ is in $L$, and hence ${}^{\co H}(H \ot H) = L \ot
-	H$. Thus it is enough to show that the element lies in the coinvariants of $H \ot H$.
+	Consider $G \ot G$ as a left $H$-comodule with structure map $\rho^G \ot 1$. Suppose
+	$\sum g \ot g' \in {}^{\co H} G \ot G$ and assume the set of all $g'$ is linearly
+	independent. Then clearly each $g$ is in $L$, and hence ${}^{\co H}(G \ot G) = L \ot
+	G$. Thus it is enough to show that the element lies in the coinvariants of $G \ot G$.
 
 	Notice that
 	\[
 		\gamma^{-1}(h_1) \gamma(h_2)_1 \ot \gamma(h_2)_2 = \gamma^{-1}(h_1)\ot 1 \cdot
-		\Delta_H(\gamma(h_2))
+		\Delta_G(\gamma(h_2))
 	\]
-	Using	\ref{gamma-inverse} we get $\rho^H \ot 1 (\gamma^{-1}(h_1) \ot 1) = S(h_2) \ot
+	Using	\ref{gamma-inverse} we get $\rho^G \ot 1 (\gamma^{-1}(h_1) \ot 1) = S(h_2) \ot
 	\gamma^{-1}(h_1) \ot 1$. On the other hand, using \ref{gamma}
 	\begin{align*}
-		\rho^H\ot 1(\Delta_H(\gamma(h_3))) 
+		\rho^G\ot 1(\Delta_G(\gamma(h_3))) 
 		&= \phi(\gamma(h_3)_1) \ot \gamma(h_3)_2 \ot \gamma(h_3)_3 \\
-		&= 1 \ot \Delta_H(\phi(\gamma(h_3)_1) \ot \gamma(h_3)_2)\\
-		&= 1 \ot \Delta_H(h_3 \ot \gamma(h_4)) = h_3 \ot \gamma(h_4)_1 \ot \gamma(h_4)_2.
+		&= 1 \ot \Delta_G(\phi(\gamma(h_3)_1) \ot \gamma(h_3)_2)\\
+		&= 1 \ot \Delta_G(h_3 \ot \gamma(h_4)) = h_3 \ot \gamma(h_4)_1 \ot \gamma(h_4)_2.
 	\end{align*}
 	Hence
 	\begin{align*}
-		\rho^H \ot 1 &(\gamma^{-1}(h_1) \gamma(h_2)_1 \ot \gamma(h_2)_2)) \\
-		&= \rho^H \ot 1(\gamma^{-1}(h_1) \ot 1) \cdot \rho^H \ot 1(\Delta_H(\gamma(h_2))) \\
+		\rho^G \ot 1 &(\gamma^{-1}(h_1) \gamma(h_2)_1 \ot \gamma(h_2)_2)) \\
+		&= \rho^G \ot 1(\gamma^{-1}(h_1) \ot 1) \cdot \rho^G \ot 1(\Delta_G(\gamma(h_2))) \\
 		&= S(h_2) \ot \gamma^{-1}(h_1) \ot 1 \cdot h_3 \ot \gamma(h_4)_1 \ot
 		\gamma(h_4)_2 \\
 		&= S(h_2)h_3 \ot \gamma^{-1}(h_1)\gamma(h_4)_1 \ot \gamma(h_4)_2 \\
@@ -393,26 +356,26 @@ Since inverses are unique we get
 \end{proof}
 
 \paragraph
-Hiven a $H$-comodule $M$, we define a map $\Gamma: \hom_\k(L,M) \ot H \to \hom_\k(L, M \ot
-H)$ by
+Given a $G$-comodule $M$, we define a map $\Gamma: \hom_\k(L,M) \ot H \to \hom_\k(L, M \ot
+G)$ by
 \begin{align*}
 	\Gamma(f \ot h)(l) = f \ot 1 ((\gamma^{-1}(h_1)\gamma(h_2)_1 \ot \gamma(h_2)_2) \cdot
 	(l_1 \ot l_2)).
 \end{align*}
-By the previous lemma, the argument of the function lies in $L \ot H$ so this is
+By the previous lemma, the argument of the function lies in $L \ot G$ so this is
 well-defined. We define $\phi_*(M)$ to be the pull-back of the following diagram
 \begin{align*}
 	\xymatrix{
-		\hom_\k(L,M) \ar[r]^-{\rho^M_*} & \hom_\k(L, M \ot H) \\
+		\hom_\k(L,M) \ar[r]^-{\rho^M_*} & \hom_\k(L, M \ot G) \\
 		\phi_*(M) \ar@{-->}[u] \ar@{-->}[r] & \hom_\k(L,M) \ot H \ar[u]_-\Gamma
 	}
 \end{align*}
 In principle $\phi_*(M)$ is only a vector-space. We will show that under an extra
 hypothesis it is in fact an $H$-comodule, and that the assignation is functorial.
-Recall that a \emph{cross-section} of $\phi: H \to H$ is a co-algebra morphism $\gamma: H
-\to H$ such that $\phi \circ \gamma = \Id_H$.
+Recall that a \emph{cross-section} of $\phi: G \to H$ is a co-algebra morphism $\gamma: H
+\to G$ such that $\phi \circ \gamma = \Id_H$.
 \begin{Proposition*}
-	Suppose $\gamma: H \to H$ is a cross-section of $\phi$. Then for every $H$-comodule $M$
+	Suppose $\gamma: H \to G$ is a cross-section of $\phi$. Then for every $G$-comodule $M$
 	the vector space $\phi_*(M)$ has an $H$-comodule structure.
 \end{Proposition*}
 \begin{proof}
@@ -420,8 +383,8 @@ Recall that a \emph{cross-section} of $\phi: H \to H$ is a co-algebra morphism $
 	Consider the following diagram
 	\begin{align*}
 	\xymatrix{	
-		\hom_\k(L,M \ot H) \ar[r]^-T 
-			& \hom_\k(L, M \ot H) \ar[d]^-{(1\ot \phi)_*} \\
+		\hom_\k(L,M \ot G) \ar[r]^-T 
+			& \hom_\k(L, M \ot G) \ar[d]^-{(1\ot \phi)_*} \\
 		\hom_\k(L,M) \ot H \ar[u]^-\Gamma \ar[r]^-{i} 
 			& \hom_\k(L,M \ot H) 
 	}
@@ -429,7 +392,7 @@ Recall that a \emph{cross-section} of $\phi: H \to H$ is a co-algebra morphism $
 	where $T(f)(l) = f(l_1)S(l_2)$ and $i(f \ot h)(l) = f(l) \ot h$. The fact that $\gamma$
 	is a	coalgebra morphism and $\phi \circ \gamma = \Id_H$ implies that the diagram
 	commutes. Since $i$ is injective, so is $\Gamma$. The rest follows as in
-	\ref{hom-H-comodule}.
+	\ref{hom-G-comodule}.
 \end{proof}
 This shows that $\phi_*(M)$ can be seen as the set of $\k$-linear morphisms $f: L \to M$
 such that there exists an element $\rho^{\phi_*(M)}(f) = \sum_i f_i \ot h_i \in
@@ -437,21 +400,21 @@ such that there exists an element $\rho^{\phi_*(M)}(f) = \sum_i f_i \ot h_i \in
 
 \paragraph
 Before proving that $\phi_*$ is adjoint to $\phi^*$, we make the follwoing observation: if
-$\gamma: H \to H$ is a cross-section of $\phi$, then it is convolution invertible with
+$\gamma: H \to G$ is a cross-section of $\phi$, then it is convolution invertible with
 inverse $\gamma^{-1} = S \circ \gamma$; in particular $\gamma^{-1}$ is an anti co-algebra
 morphism, i.e. $\gamma^{-1}(h)_1 \ot \gamma^{-1}(h)_2 = \gamma^{-1}(h_2) \ot
 \gamma^{-1}(h_1)$.
 \begin{Theorem*}
-	Suppose $\phi: H \to H$ has a cross-section $\gamma$. Then the functor $\phi_*: \Mod^H
-	\to \Mod^H$ is left adjoint to $\phi^*: \Mod^H \to \Mod^H$.
+	Suppose $\phi: G \to H$ has a cross-section $\gamma$. Then the functor $\phi_*: \Mod^G
+	\to \Mod^H$ is left adjoint to $\phi^*: \Mod^H \to \Mod^G$.
 \end{Theorem*}
 \begin{proof}
-	We wish to find for every $N$ in $\Mod^H$ and every $M$ in $\Mod^H$ isomorphisms
+	We wish to find for every $N$ in $\Mod^H$ and every $M$ in $\Mod^G$ isomorphisms
 	\begin{align*}
 	\xymatrix{
 		\hom^H(N, \phi_*(M)) \ar@/^18pt/[rr]^-{\alpha} 
 			&{}
-			& \hom^H(\phi^*(N), M) \ar@/^15pt/[ll]^-\beta.
+			& \hom^G(\phi^*(N), M) \ar@/^15pt/[ll]^-\beta.
 	}
 	\end{align*}
 	Suppose we are given an $H$-comodule morphism $f: N \to \phi_*(M)$, i.e., for every $n
@@ -460,7 +423,7 @@ morphism, i.e. $\gamma^{-1}(h)_1 \ot \gamma^{-1}(h)_2 = \gamma^{-1}(h_2) \ot
 	\[
 		\alpha(f)(n \ot g) = f(n_0)(\gamma^{-1}(n_1)g) = f(n)(\gamma^{-1}(\phi(g_1))g_2).
 	\]
-	We must prove that $\alpha(f)$ is a $H$-module morphism, that is $\rho^M \circ
+	We must prove that $\alpha(f)$ is a $G$-module morphism, that is $\rho^M \circ
 	(\alpha(f)) = \alpha(f) \ot 1 \circ \rho^{\phi^*(N)}$. By hypothesis $f(n) \in
 	\phi^*(M)$, and since $f$ is an $H$-comodule morphism we get $\rho(f(n_0)) = f(n_0) \ot
 	n_1$. We fix $n \ot g \in \phi^*(N)$, so
@@ -495,7 +458,7 @@ morphism, i.e. $\gamma^{-1}(h)_1 \ot \gamma^{-1}(h)_2 = \gamma^{-1}(h_2) \ot
 
 \paragraph
 \begin{enumerate}
-	\item OK for now. It should work with $\gamma$ an $H$-comodule section, i.e. $H$ an
+	\item OK for now. It should work with $\gamma$ an $H$-comodule section, i.e. $G$ an
 		$H$-cleft extension.
 \end{enumerate}
 

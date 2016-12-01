@@ -174,7 +174,7 @@ bodyfont=\itshape]{mystyle-empty-plain}
 Quantum toric degeneration of quantum Schubert varieties
 \footnote{file:[lrpz3-paris-1.tex]}
 }
-\date{11-11-16}
+\date{28-11-16}
 \author{L. Rigal, P. Zadunaisky}
 
 \begin{document}
@@ -1724,7 +1724,7 @@ of matrix coefficients
 so we need to study the corproduct $\Delta(G(b''))$.
 
 It follows easily from \cite{Jan}*{4.9 (4)} that $\Delta(F_\alpha^{(r)}) = 
-\sum_{i+j=r}^r v_\alpha^{ji} F^{(i)}_\alpha \ot F^{(j)}_\alpha K_\alpha^{-j}$,
+\sum_{i+j=r}^r v_\alpha^{ji} F^{(i)}_\alpha \ot F^{(j)}_\alpha K_\alpha^{-i}$,
 where $v_\alpha = v^{(\alpha,\alpha)/2}$. 
 Since the canonical basis is contained in $U_\A^-$, it follows that 
 $\Delta(G(b''))$ is a sum of terms of the form $p (G(b_{(1)}) \ot 
@@ -1739,7 +1739,7 @@ The problem of showing that $\flagbasis$ is indeed an $(\tilde S_{\tilde w_0},
 <_{\lex})$-basis thus reduces to the follwing: show that if $d_{b,b'}^{b''} 
 \neq 0$ then $\Lambda_{\tilde w_0}(b'') \leq_{\lex} \Lambda_{\tilde w_0}(b) + 
 \Lambda_{\tilde w_0}(b')$. Caldero shows that this is indeed the case in 
-\cite{C}*{Theorem 2.3}. We give a shorter proof in the following paragraph.
+\cite{C}*{Theorem 2.3}. We give a shorter proof in the following paragraphs.
 
 \paragraph
 \label{coproduct-coefficients-convex}
@@ -1758,8 +1758,8 @@ be such that $F^{(a)} \in U^-_{-\nu}$.
 \item 
 \label{pre}
 Let $\alpha \in \Pi$ and $r > 0$. Let $b \in \B(\infty)_{-\nu}$. Then
-for each $b' \in \B(\infty)_{-\nu - r\alpha}$ there exists $x_{b'} \in \A$ 
-such that
+for each $b' \in \B(\infty)_{-\nu - r\alpha}$ with $e_\alpha(b') > r + 
+e_\alpha(b)$ there exists $x_{b'} \in \A$ such that
 \begin{align*}
 F^{(r)}_\alpha G(b) 
   &= \qbinom{r+e_\alpha(b)}{r} G(\tilde F_{\alpha}^r b) 
@@ -1793,15 +1793,16 @@ Furthermore $z_{a,s} \neq 0$.
 \end{Lemma*}
 \begin{proof}
 Let us prove item \ref{pre}. Put $e = e_\alpha(b)$, and for each $n \geq 0$
-set $M_{n} = \tilde F_\alpha^{n}U^-_{-\nu+(n)\alpha}$. As shown in the proof
+set $M_{n} = \tilde F_\alpha^{n}U^-_{-\nu+n\alpha}$. As shown in the proof
 of \cite{Jan}*{Lemma 11.12, p. 249}, 
 \begin{align}
 \label{1}
 G(b) 
 	\equiv \tilde F_\alpha^e(G(\tilde E_\alpha^e b))
-	\mod M_{e+1}
+	\mod M_{e+1}.
 \end{align}
-Now applying \cite{Jan}*{Lemma 11.3} repeatedly we get
+This plus \cite{Jan}*{Lemma 11.3} and the definition of the divided powers 
+imply that
 \begin{align*}
 F_\alpha^{(r)} G(b) 
 	&\equiv F_\alpha^{(r)} \tilde F_\alpha^{e} G(\tilde E_\alpha^e b) 
@@ -1822,9 +1823,9 @@ where the last congruence follows from \ref{1}. Thus $F_\alpha^{(r)}G(b)
 an $\A$-basis of $M_{r+e+1}$, so item \ref{pre} follows.
 
 Item \ref{in-image} is a simple consequence of \cite{Lit}*{Proposition 10.3},
-which states that given $\lambda$ be a dominant weight and $v_\lambda \in 
-V_\A(\lambda)$, then if $b^a v_{\lambda} \neq 0$ there exist $x_{a,a'}$ as in 
-the statement such that
+which states that given a dominant weight $\lambda$ and a highest weight 
+$v_\lambda \in V_\A(\lambda)$, then if $G(b^a) v_{\lambda} \neq 0$ there exist 
+$x_{a,a'}$ as in the statement such that
 \begin{align*}
 F^{(a)}v_\lambda
   &= G(b^a)v_\lambda + \sum_{a' >_{\lex} a} x_{a,a'} G(b^{a'})v_\lambda.
@@ -1869,7 +1870,7 @@ is a power of $v$.
 \end{Proposition*}
 \begin{proof}
 We have already observed that $\Delta(F_\alpha^{(r)}) = \sum_{i+j = r} 
-v_\alpha^{ij} F_\alpha^{(i)} \ot F_\alpha^{(j)} K^{-j}_\alpha$, and it follows 
+v_\alpha^{ij} F_\alpha^{(i)} \ot F_\alpha^{(j)} K^{-i}_\alpha$, and it follows 
 that for each $a \in \NN^N$ we get $\Delta(F^{(a)}) = 
 \sum_{t+u = a} v^{z(t,u)} F^{(t)} \ot F^{(u)}K_{\wt(F^{(t)})}$, with $z(t,u) 
 \in \ZZ$. By item \ref{in-image} of the previous lemma 
