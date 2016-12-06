@@ -132,7 +132,7 @@ bodyfont=\itshape]{mystyle-empty-plain}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{
-A functor triple for categories of Hopf modules over comodule algebras
+A functor triple for categories of Hopf-Doi modules
 \footnote{file:[com-functor-triple.tex]}
 }
 \date{01-12-16}
@@ -143,18 +143,53 @@ A functor triple for categories of Hopf modules over comodule algebras
 
 \section{General definitions}
 Throughout this document $\k$ denotes a field. Unadorned tensor products $\ot$
-will always be over this field.
+will always be over this field, and given two vector spaces $V,W$, we will 
+denote by $\hom(V,W)$ the vector space of all $k$-linear maps from $V$ to $W$.
 
+\paragraph
+\label{H-comodules-category}
 Given a Hopf algebra $H$ over $\k$, we will denote by $\Mod^H$ the category
-of $H$-comodules. If $A$ is a comodule algebra over $H$, then $\Mod_A^H$ 
-denotes the category of $(A,H)$-Hopf modules.
+of right $H$-comodules, and by ${}^H \Mod$ the category of left $H$-comodules. 
+Given an $H$-comodule $M$, we will denote its structural map by $\rho^M$.
+By \cite{Wis-survey}*{3} this is a Gorthendieck category with enough 
+injectives.
 
-Define cotensor product. Notation: $n \sq m$ means $n \ot m \in N \sq_K M$,
-i.e. by writing $n \sq m$ we are affirming that $n_{(0)} \ot n_{(1)} \ot m = 
-n \ot m_{(1)} \ot m_{(2)}$. We use a sort of Sweedler notation, where $n \ot m$
-stands for a \emph{linear combination} of elementary tensors in $N \ot M$.
+Let $M, N$ be two objects in $\Mod^H$; we denote by $\Hom^K(M,N)$ the space
+of all $H$-comodule maps from $M$ to $N$. Now let $f: M \to N$ be a $k$-linear 
+map. Set $\rho(f) \in \hom(M, N \ot H)$ to be $\rho(f)(m) = f(m_{(0)})_{(0)} 
+\ot f(m_{(0)})_{(1)} S(m_{(1)})$. Now since $\k$ is a field there is an 
+injective map $i: \hom(M,N) \ot H \to \hom(M, N \ot H)$ given by $i(f \ot h)
+(m) = f(m) \ot h$. The map $f$ is called \emph{rational} if $\rho(f) \in 
+\hom(M,N) \ot H$, and the space of all rational maps from $M$ to $N$ is 
+denoted by $\HOM^K(M,N)$. If $f$ is rational then $\rho(f) \in \HOM^K(M,N)$
+and $(\HOM^K(M,N), \rho)$ is an $H$-comodule. By definition $\rho(f) = f_{(0)} 
+\ot f_{(1)}$ if and only if $f_{(0)}(m) \ot f_1 = f(m_{(0)})_{(0)} \ot 
+f(m_{(0)})_{(1)} S(m_{(1)})$. If $M$ is finite dimensional then $\HOM^K(M,N)
+= \hom(M,N)$; in general, $\HOM^K(M,N)$ is the largest subspace of $\hom(M,N)$
+with an $H$-comodule structure given by $\rho$.
 
-\section{The functor triple}
+Given $N$ a left $H$-comodule and $M$ a right $H$-comodule, their cotensor 
+product $N \sq_H M$ is defined as the kernel of the map $M \ot N \to M \ot H 
+\ot N$ given by $n \ot m \mapsto n_{(0)} \ot n_{(1)} \ot m - n \ot m_{(0)} \ot 
+m_{(1)}$. In other words $M \sq_H N$ consists of all elements $\sum_i n^i \ot 
+m^i \in N \ot M$ such that $\sum_i n^i_{(0)} \ot n^i_{(1)} \ot m^i = \sum_i 
+n^i \ot m^i_{(0)} \ot m^i_{(1)}$. It follows from the definitions that $N 
+\sq_K -$ and $-\sq_H M$ are right exact functors with values in the category 
+of vector spaces, and that they respect arbitrary direct sums.
+
+\paragraph
+\label{A-H-hd-modules-categories}
+Let $H$ be a Hopf algebra and let $A$ be a comodule algebra over $H$. We 
+denote by $\Mod_A^H$ the category of $(A,H)$-Doi-Hopf modules. This too is a 
+Grothendieck category with enough injectives \cite{Wis-survey}*{5.1}. 
+
+Let $M,N$ be two $(A,H)$-Doi-Hopf modules. The space of all $A$-linear 
+rational modules is denoted by $\HOM^K_A(M,N)$. It is a $K$-comodule, and
+if $M$ is finitely generated as $A$-module then $\HOM^K_A(M,N) = \Hom_A(M,N)$
+as vector spaces.
+
+
+\section{An adjoint triple for Hopf-Doi modules}
 
 \paragraph
 Let $H,K$ be Hopf algebras over $\k$ and let $\phi: H \to K$ be a Hopf-algebra
@@ -230,10 +265,28 @@ obtain a $K$-comodule algebra $\phi_!(A)$; by abuse of notation we denote
 $\phi_!(A)$ whenever the context makes it clear whether we are seeing it as an 
 $H$-comodule or a $K$-comodule.
 
+\end{document}
+
 \begin{bibdiv}
 \begin{biblist}
 
 \bibselect{biblio}
+
+\bib{Wis-survey}{article}{
+   author={Wisbauer, Robert},
+   title={Module and comodule categories---a survey},
+   conference={
+      title={Proceedings of the Mathematics Conference},
+      address={Birzeit/Nablus},
+      date={1998},
+   },
+   book={
+      publisher={World Sci. Publ., River Edge, NJ},
+   },
+   date={2000},
+   pages={277--304},
+}
+
 
 \end{biblist}
 \end{bibdiv}
