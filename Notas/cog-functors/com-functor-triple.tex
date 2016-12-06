@@ -1,0 +1,241 @@
+\documentclass[11pt,fleqn]{article}
+
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumitem}
+\usepackage[osf,noBBpl]{mathpazo}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{helvet}
+\usepackage{stmaryrd}
+\usepackage{showlabels}
+
+
+%%%%%%%%%%%%Theorems, for paragraphs package%%%%%%%%%%%%%%%%%%%%%%%%%%
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\normalfont]{mystyle-plain}
+\declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposition, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Theorem, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corollary, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definition, sibling=para, style=mystyle]{Definition}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty-plain}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+\declaretheorem[name=Remark, style=mystyle-empty]{Remark*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+
+\makeatletter
+\renewenvironment{proof}[1][\textit{Proof}]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\newcommand\note[1]{\marginpar{{
+\begin{flushleft}
+\tiny#1
+\end{flushleft}
+}}}
+
+\renewcommand\labelitemi{-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\newcommand\sq{\square}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\renewcommand\k{\Bbbk}
+\newcommand\vspan[1]{\left\langle #1 \right\rangle}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\mmod{\mathsf{mod}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+\DeclareMathOperator\HOM{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\EXT{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\TOR{\underline{\mathsf{Tor}}}
+
+\DeclareMathOperator\gr{\mathsf{gr}}
+\DeclareMathOperator\im{Im}
+\DeclareMathOperator\id{injdim}
+\DeclareMathOperator\pd{pdim}
+\DeclareMathOperator\ldim{ldim}
+\DeclareMathOperator\height{\mathsf{ht}}
+\DeclareMathOperator\st{\mathsf{st}}
+\DeclareMathOperator\depth{depth}
+\DeclareMathOperator\lcd{lcd}
+\DeclareMathOperator\Spec{Spec}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\Id{Id}
+\DeclareMathOperator\rank{rk}
+\DeclareMathOperator\rk{rk}
+\DeclareMathOperator\irr{irr}
+\DeclareMathOperator\GKdim{\mathsf{GKdim}}
+\DeclareMathOperator\relint{\mathsf{relint}}
+\DeclareMathOperator\coker{\mathsf{coker}}
+\DeclareMathOperator\tr{\mathsf{tr}}
+\DeclareMathOperator\SL{\mathsf{SL}}
+\DeclareMathOperator\ev{\mathsf{ev}}
+\DeclareMathOperator\wt{\mathsf{wt}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{
+A functor triple for categories of Hopf modules over comodule algebras
+\footnote{file:[com-functor-triple.tex]}
+}
+\date{01-12-16}
+\author{A. Solotar, P. Zadunaisky}
+
+\begin{document}
+\maketitle
+
+\section{General definitions}
+Throughout this document $\k$ denotes a field. Unadorned tensor products $\ot$
+will always be over this field.
+
+Given a Hopf algebra $H$ over $\k$, we will denote by $\Mod^H$ the category
+of $H$-comodules. If $A$ is a comodule algebra over $H$, then $\Mod_A^H$ 
+denotes the category of $(A,H)$-Hopf modules.
+
+Define cotensor product. Notation: $n \sq m$ means $n \ot m \in N \sq_K M$,
+i.e. by writing $n \sq m$ we are affirming that $n_{(0)} \ot n_{(1)} \ot m = 
+n \ot m_{(1)} \ot m_{(2)}$. We use a sort of Sweedler notation, where $n \ot m$
+stands for a \emph{linear combination} of elementary tensors in $N \ot M$.
+
+\section{The functor triple}
+
+\paragraph
+Let $H,K$ be Hopf algebras over $\k$ and let $\phi: H \to K$ be a Hopf-algebra
+morphism. The map $\phi$ induces a functor $\phi_!: \Mod^H \to \Mod^K$, which 
+sends an object $(M, \rho^M)$ to $(M, 1 \ot \phi \circ \rho^M)$; in other 
+words, given a right $H$-comodule $M$, we can see it as a $K$-comodule whose 
+structural map is given by $m \mapsto m_{(0)} \ot \phi(m_{(1)})$. This is an 
+exact functor. Of course the same applies for left comodules; in particular we 
+can see $H$ as either a left or a right $K$-comodule. We will denote by
+$L \subset H$ the subalgebra of left coinvariants of $H$.
+
+Now consider $H$ as a left $K$-comodule with the structure induced by $\phi$, 
+and a right $H$-comodule in the obvious way; then for each $K$-comodule $N$ 
+the cotensor product $N \sq_K H$ is a right $H$-comodule, with structural map 
+$n \sq h \mapsto n \sq h_{(0)} \ot h_{(1)}$. By 
+\cite{Doi-coalg}*{Proposition 6} the functor $\phi^*: \Mod^K \to \Mod^H$ given 
+by $\phi^* = - \sq_K H$ is right adjoint to $\phi_!$. 
+
+\begin{Lemma*}
+The functor $\phi^*: \Mod^K \to \Mod^H$ has a right adjoint if and only if
+$H$ is injective as $K$-comodule.
+\end{Lemma*}
+\begin{proof}
+Since $\Mod^K$ and $\Mod^H$ are Grothendieck categories, by Fryed's adjoint 
+functor theorem $\phi^*$ has a left adjoint if and only if it is right exact 
+and preserves arbitrary direct sums. Now cotensor products commute with 
+arbitrary direct sums, and by \cite{Doi-coalg}*{Proposition 5} $\phi^*$ is 
+exact if and only if $H$ is injective as $K$-comodule.
+\end{proof}
+
+\paragraph
+We give an explicit characterization of $\phi^*$ in a special case. 
+
+\begin{Proposition*}
+Let $\phi: H \to K$ be a Hopf-algebra map, and let $L$ be the subalgebra of 
+right coinvariants of $H$ as $K$-comodule. Suppose that there exists a 
+coalgebra map $\gamma: K \to H$ such that $\phi \circ \gamma = \Id_K$. Then
+$H$ is free as $K$-comodule, and $\phi_* \cong \HOM^K(L,\phi_!(-))$.
+\end{Proposition*}
+\begin{proof}
+Since $\gamma$ is a coalgebra map, it is in particular a cleft map in the 
+sense of \cite{Mont-hopf-book}*{Definition 7.2.1}, its convolution inverse 
+being $S \circ \gamma$. In the language of the reference, we get that $L 
+\subset H$ is a $K$-extension, and so by \cite{Mont-hopf-book}*{Theorem 7.2.2} 
+$H$ is isomorphic to $K \ot L$ as left $K$-comodule, so it is free and hence 
+injective \cite{Doi-coalg}*{Corollary 1}, so $\phi^*$ has a right adjoint.
+
+We now wish to see that there is a natural isomorphism
+\begin{align*}
+\Hom^H(N \sq_K H, M) \cong \Hom^K(N, \HOM^K(\phi_!(L),\phi_!(M)))
+\end{align*}
+\end{proof}
+
+
+\begin{Lemma}
+Let $H,K$ be Hopf algebras, $\phi: H \to K$ a Hopf algebra morphism. 
+Assume $\gamma: K \to H$ is a cleft map with convolution inverse $\gamma^{-1}$.
+\begin{enumerate}
+\item $\gamma^{-1}(\phi(h_{(1)}) h_{(2)} \in L$ for each $h \in H$.
+
+\item $n \sq h = n_{(0)} \ot \gamma(n_{(1)}) \gamma^{-1}(\phi(h_{(1)})) 
+h_{(2)}$. In particular $N \sq_K H = \{n_{(0)} \ot \gamma(n_{(1)})l \mid n 
+\in N, l \in L\}$.
+
+\item For each $n \in N$ we have $\gamma^{-1}(n_{(1)})\gamma(n_{(2)})_{(1)} 
+  \ot \gamma(n_{(2)})_{(2)} \in L \ot H$.
+\end{enumerate}
+\end{Lemma}
+
+\paragraph
+Let $A$ be an $H$-comodule algebra. We can apply the functor $\phi_!$ and thus 
+obtain a $K$-comodule algebra $\phi_!(A)$; by abuse of notation we denote 
+$\phi_!(A)$ whenever the context makes it clear whether we are seeing it as an 
+$H$-comodule or a $K$-comodule.
+
+\begin{bibdiv}
+\begin{biblist}
+
+\bibselect{biblio}
+
+\end{biblist}
+\end{bibdiv}
+
+\end{document}
