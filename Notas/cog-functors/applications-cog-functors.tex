@@ -96,6 +96,8 @@ bodyfont=\itshape]{mystyle-empty-plain}
 \renewcommand\phi{\varphi}
 \renewcommand\k{\Bbbk}
 \newcommand\vspan[1]{\left\langle #1 \right\rangle}
+\renewcommand\O{\mathcal O}
+\newcommand\R{\mathcal R}
 
 \DeclareMathOperator\Mod{\mathsf{Mod}}
 \DeclareMathOperator\Vect{\mathsf{Vect}}
@@ -106,28 +108,16 @@ bodyfont=\itshape]{mystyle-empty-plain}
 \DeclareMathOperator\EXT{\underline{\mathsf{Ext}}}
 \DeclareMathOperator\TOR{\underline{\mathsf{Tor}}}
 
-\DeclareMathOperator\gr{\mathsf{gr}}
 \DeclareMathOperator\im{Im}
-\DeclareMathOperator\id{injdim}
-\DeclareMathOperator\pd{pdim}
+\DeclareMathOperator\injdim{injdim}
+\DeclareMathOperator\projdim{pdim}
 \DeclareMathOperator\ldim{ldim}
-\DeclareMathOperator\height{\mathsf{ht}}
-\DeclareMathOperator\st{\mathsf{st}}
-\DeclareMathOperator\depth{depth}
-\DeclareMathOperator\lcd{lcd}
-\DeclareMathOperator\Spec{Spec}
 \DeclareMathOperator\supp{supp}
 \DeclareMathOperator\Id{Id}
-\DeclareMathOperator\rank{rk}
 \DeclareMathOperator\rk{rk}
-\DeclareMathOperator\irr{irr}
-\DeclareMathOperator\GKdim{\mathsf{GKdim}}
-\DeclareMathOperator\relint{\mathsf{relint}}
-\DeclareMathOperator\coker{\mathsf{coker}}
 \DeclareMathOperator\tr{\mathsf{tr}}
 \DeclareMathOperator\SL{\mathsf{SL}}
-\DeclareMathOperator\ev{\mathsf{ev}}
-\DeclareMathOperator\wt{\mathsf{wt}}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -166,7 +156,9 @@ $G$-graded vector space $V$ and $g \in G$, we denote by $V[g]$ the graded
 vector space whose homgeneous component of degree $g'$ is $V[g]_{g'} = 
 V_{g'g}$. By definition, a homogeneous map $f: V \to W$ induces maps $f_g: 
 V_g \to W_g$, and $f = \bigoplus_{g \in G} f_g$ for each $g \in G$; we refer 
-to $f_g$ as the homogeneous component of degree $g$ of $f$.
+to $f_g$ as the homogeneous component of degree $g$ of $f$. The \emph{support}
+of a $G$-graded vector space $V$ is the set $\supp V = \{g \in G \mid V_g 
+\neq 0\}$.
 
 The category $\Vect^G \k$ has $G$-graded vector spaces as objects and 
 homogeneous linear maps as morphisms. Kernels and cokernels of homogeneous
@@ -177,7 +169,11 @@ maps are $G$-graded vector spaces in a natural way, so a complex
 in $\Vect^G \k$ forms a short exact sequence if and only if it is a short
 exact sequence of vector spaces, or equivalently if for each $g \in G$
 the sequence formed by taking $g$-homogeneous components is exact.
-Finally, $\Vect^G V$ has arbitrary direct sums and products. The direct sum
+Given an object $V$ in $\Vect^G \k$ and $g \in G$, we denote by $V[g]$ the
+$G$-graded vector space whose homogeneous component of degree $g'$ is
+$V[g]_{g'} = V_{g'g}$.
+
+The category $\Vect^G V$ has arbitrary direct sums and products. The direct sum
 of $G$-graded vector spaces is again $G$-graded in an obvious way, but this is 
 not the case for direct products. Given a collection of $G$-graded vector 
 spaces $\{V^i \mid i \in I\}$, their direct product is the $G$-graded vector 
@@ -188,22 +184,56 @@ space whose homogeneous decomposition is given by
 In other words, the forgetful functor $\O: \Vect^G \k \to \Vect \k$ preserves
 direct sums, but not direct products.
 
+\paragraph
+A $G$-graded $\k$-algebra is a $\k$-algebra $A$ which is also a $G$-graded
+vector space such that for all $g,g' \in G$ and all $a \in A_g, a' \in A_{g'}$
+it happens that $aa' \in A_{gg'}$. A $G$-graded (left) $A$-module is a (left)
+$A$-module $M$ which is also a $G$-graded vector space such that for each 
+$g,g' \in G$ and all $a \in A_g, m \in M_{g'}$ it happens that $am \in 
+M_{gg'}$. Notice also that if $M$ is a $G$-graded $A$-module then the 
+$G$-graded vector space $M[g]$ is also a $G$-graded $A$-module, with the same 
+underlying $A$-module structure. We say that $A$ is $G$-graded noetherian if
+every left $G$-graded $A$-submodule of $A$ is finitely generated, or 
+equivalently if every $G$-graded $A$-submodule of a finitely generated 
+$G$-graded $A$-module is also finitely generated.
+
+We denote by $\Mod^G A$ the category whose objects are $G$-graded
+$A$-modules and whose morphisms are $G$-homogeneous $A$-linear maps. It is a 
+Grothendieck category with enough projective and injective objects; The reader 
+is refered to \cite{NV-book-3}*{Chapter 2} for proofs and details. Given an 
+object $M$ of $\Mod^G A$, we will denote by $\projdim_A^G M$ and $\injdim_A^G 
+M$ its projective and injective dimension, respectively. Given two $G$-graded
+$A$-modules $M, N$ we denote by $\Hom^G_A(M,N)$ the vector space of all 
+$G$-homogeneous $A$-linear morphisms from $M$ to $N$. Since $\Mod^G A$ has 
+enough injectives, we can define for each $i \geq 0$ the $i$-th right derived 
+functor of $\Hom^G_A$, which we denote by $\R^i\Hom^G_A$. 
 
 \paragraph
+Let $A$ be a $G$-graded $\k$-algebra.
 Any group homomorphism $\phi: G \to H$ induces functors $\phi_!, \phi_*: 
-\Vect^G \k \to \Vect^H \k$ and $\phi^*: \Vect^H \k \to \Vect^G \k$ as follows.
+\Mod^G A \to \Mod^H \k$ and $\phi^*: \Mod^H A \to \Mod^G A$ as follows.
 
 Let $V,W$ be $G$-graded vector spaces and let $f: V \to W$ be a homogeneous 
 map. We define $\phi_!(V)$, resp. $\phi_!(f)$, to be the $H$-graded vector 
 space, resp. $H$-homogeneous map, whose homogeneous components of degree
 $h \in H$ are given by
 \begin{align*}
-\phi_!(M)_h
+\phi_!(V)_h
   &= \bigoplus_{\{g \in G \mid \phi(g) = h\}} V_g,
 &\phi_!(f)_h
   &= \bigoplus_{\{g \in G \mid \phi(f) = h\}} f_g.
 \end{align*}
-Analogously, we define $\phi_!(V)$, resp. $\phi_!(f)$, to be the $H$-graded 
+Notice that $\phi_!(V)$ has the same underlying vector space as $V$, we are
+only changing its grading. In particular, $\phi_!(A)$ is an $H$-graded 
+$\k$-algebra, and if $V$ was a $G$-graded $A$-module then $\phi_!(V)$ is also 
+an $H$-graded $\phi_!(A)$-module, with the same underlying action; since the
+action of $A$ remains unchanged, if $f$ is $A$-linear then so is $\phi_!(f)$.
+
+From now on we usually write $A$ instead of $\phi_!(A)$ to lighten up the 
+notation, since the context will make it clear whether we are considering it 
+as $G$-graded or as $H$-graded algebra.
+
+We define $\phi_*(V)$, resp. $\phi_*(f)$, to be the $H$-graded 
 vector space, resp. $H$-homogeneous map, whose homogeneous components of degree
 $h \in H$ are given by
 \begin{align*}
@@ -212,8 +242,10 @@ $h \in H$ are given by
 &\phi_*(f)_h
   &= \prod_{\{g \in G \mid \phi(f) = h\}} f_g.
 \end{align*}
-Since direct sums and products reflect exactness in the catgory of vector 
-spaces
+If $V$ is also an $A$-module, we define the action of a homogeneous element 
+$a \in A_{g'}$ with $g' \in G$ over an element $(v_g)_{g \in \phi^{-1}(h)}$
+as $a(v_g) = (av_g)$. With this action $\phi_*(V)$ becomes an $H$-graded $A$-
+module.
 
 Now let $V',W'$ be $H$-graded vector spaces and let $f': V' \to W'$ be an 
 $H$-homogeneous map. We set $\phi^*(V') \subset V' \ot \k[G]$ to be the 
@@ -227,56 +259,186 @@ and $\phi(f')$ are given by
   &f_g
   &= f_{\phi(g)} \ot 1.
 \end{align*}
+If $V'$ is an $H$-graded $A$-module, then we can endow $V' \ot \k[G]$ with
+the structure of a $G$-graded $A$-module as follows. Take $g,g' \in G$ and  
+for each $a \in A_{g'}$ and each $v \ot g \in V' \ot \k[G]$ set $a \cdot 
+(v \ot g) = (an) \ot g'g$. Then $\phi^*(V') \subset V' \ot \k[G]$ is a
+$G$-graded $A$-submodule. It is easy to check that if $f'$ is homogeneous and 
+$A$-linear then so is $\phi^*(f)$.
+
+
+\begin{Remark*}
+The functors $\phi_!$ and $\phi_*$ are exact and reflect 
+exactness. The functor $\phi^*$ is exact, and it reflects exactness if 
+and only if $\phi$ is surjective.
+\end{Remark*}
+
+\begin{Proposition}[\cite{RZ-twisted}*{Proposition 3.2.1}]
+\label{P:adjoint}
+Let $\phi: G \to H$ be a group morphism and let $A$ be a $G$-graded $\k$-
+algebra. The functor $\phi^*$ is right adjoint to $\phi_!$ and left adjoint to 
+ $\phi_*$. 
+\end{Proposition}
+Let $M$ be a $G$-graded $A$-module. There are natural isomorphisms
+\begin{align*}
+\phi^*\phi_!(M) 
+  &\cong \bigoplus_{l \in L} M[l]
+  &\phi^*\phi_*(M) 
+  &\cong \prod_{l \in L} M[l]
+\end{align*}
+
+
+\section{Injective dimension and change of grading}
+Throughout this section $\phi: G \to H$ denotes a group morphism and we set 
+$L = \ker \phi$. Also $A$ denotes a $G$-graded $\k$-algebra.
 
 \paragraph
-A $G$-graded $\k$-algebra is a $\k$-algebra $A$ which is also a $G$-graded
-vector space such that for all $g,g' \in G$ and all $a \in A_g, a' \in A_{g'}$
-it happens that $aa' \in A_{gg'}$. A $G$-graded (left) $A$-module is a (left)
-$A$-module $M$ which is also a $G$-graded vector space such that for each 
-$g,g' \in G$ and all $a \in A_g, m \in M_{g'}$ it happens that $am \in 
-M_{gg'}$. We denote by $\Mod^G A$ the category whose objects are $G$-graded
-$A$-modules and whose morphisms are $G$-homogeneous $A$-linear maps.
+It is a well known fact that an object $M$ of $\Mod^G A$ is projective if and 
+only if it is projective as $A$-module, i.e. $\phi_!(M)$ is projective. The
+following proposition is a refined version of this result.
 
+\begin{Proposition*}[\cite{RZ-twisted}*{Corollaries 3.2.2, 3.2.3}]
+Let $\phi: G \to H$ be a group morphism and let $A$ be a $G$-graded $\k$-
+algebra. Let $M$ be an object of $\Mod^G A$. Then the following hold.
+\begin{enumerate}
+\item  $\projdim^G_A M = \projdim^H_A \phi_!(M)$ and $\injdim^G_A M \leq 
+\injdim^H_A \phi_!(M)$. 
+
+\item $\projdim^G_A M \leq \projdim^H_A \phi_*(M)$ and $\injdim^G_A M = 
+\injdim^H_A \phi_*(M)$. 
+\end{enumerate}
+\end{Proposition*}
+
+\paragraph
+As is well known, an injective object $I$ in $\Mod^G A$ need not be injective
+as $A$-module. Our next objective is to give a bound to the injective dimension
+of $\phi_!(I)$. 
+
+We begin with the following observation. The natural inclusion of the direct 
+sum of a family of vector spaces into its product gives rise to a natural 
+transformation $\eta: \phi_! \to \phi_*$. Notice that $\eta(M): \phi_!(M) \to
+\phi_*(M)$ is an isomorphism if and only if for each $h \in H$ the set 
+$\supp M \cap \phi^{-1}(h)$ is finite. 
+
+\begin{Definition*}
+An object $M$ of $\Mod^G A$ is called \emph{$\phi$-finite} if for each $h \in 
+H$ the set $\supp M \cap \phi^{-1}(h)$ is finite. 
+\end{Definition*}
+The following lemma is an immediate consequence of Proposition \ref{P:adjoint}.
 \begin{Lemma*}
-Let $\phi: G \to H$ be a group morphism, and $A$ a $G$-graded $\k$-algebra.
-Then the following hold.
-\begin{enumerate}
-\item The $H$-graded vector space $\phi_!(A)$ is an $H$-graded $\k$-algebra.
-\item There exist functors $\phi_!, \phi_* : \Mod^G A \to \Mod^H \phi_!(A)$
-and $\phi^*: \Mod^H \phi_!(A) \to \Mod^G A$ which make the following diagrams
-commute
-\begin{align*}
-\xymatrix{
-  \Mod^G A 
-    & \Mod^H \phi_!(A) 
-    & \Mod^H \phi_!(A)  
-    & \Mod^G A
-    & \Mod^G A 
-    & \Mod^H \phi_!(A) \\
-  \Vect^G \k 
-    & \Vect^H \k
-    & \Vect^H \k  
-    & \Vect^G \k
-    & \Vect^G \k
-    & \Vect^H \k
-}
-\end{align*}
-\end{enumerate}
+If $M$ is $\phi$-finite then $\injdim^G_A M = \injdim_A^H \phi_!(M)$. 
 \end{Lemma*}
+In particular, if $A$ is $\phi$-finite then every finitely generated $G$-graded
+$A$-module is $\phi$-finite, and hence $\phi_!$ preserves the injective 
+dimension of all finitely generated $G$-graded $A$-modules.
 
+\paragraph
+As we noted before, the algebra $\k[G]$ is a $G$-graded $\k$-algebra, and hence
+through $\phi$ it is also an $H$-graded algebra, so we may consider the 
+category of $H$-graded right $\k[G]$-modules $\Mod^H \k[G]$. The algebra 
+$\k[H]$ is an object in this category with its usual $H$-grading and the 
+action of $G$ on $H$ induced by $\phi$. By 
+\cite{Mont-hopf-book}*{Theorem 8.5.6}, the functor $- \ot \k[H]: \Mod \k[L] \to
+\Mod^H \k[G]$ is an equivalence of categories. In particular the 
+projective dimension of $\k[H]$ in $\Mod^H \k[G]$ equals 
+$\projdim_{\k[L]} \k$ the cohomological dimension of $L$.
 
-\begin{Proposition}
-Let $\phi: G \to H$ be a group morphism. 
-\begin{enumerate}
-\item The functors $\phi_!$ and $\phi_*$ are exact and reflect exactness.
-\item The functor $\phi^*$ is exact, and it reflects exactness if and only if
-  $\phi$ is surjective.
-\item The functor $\phi^*$ is right adjoint to $\phi_!$ and left adjoint to 
-  $\phi_*$.
-\end{enumerate}
-\end{Proposition}
+\paragraph
+\label{P:resolution}
+\begin{Definition*}
+Let $N$ be an $H$-graded $A$-module. We say that $N$ is \emph{stably 
+$G$-graded} if there exist an $H$-graded $A$-module $N'$ and a $G$-graded 
+$A$-module $M$ such that $N \oplus N' \cong \phi_!(M)$ as $H$-graded 
+$A$-modules.
+\end{Definition*}
+
+\begin{Proposition*}
+Set $l = \projdim_{\k[G]}^H \k[H] = \projdim_{\k[L]} \k$.
+For every object $N$ of $\Mod^H A$ there exists a resolution of length $l$ of 
+$N$ by stably $G$-graded modules.
+\end{Proposition*}
 \begin{proof}
+We define a functor $D_N: \Mod^H \k[G] \to \Mod^H A$ as follows. Given
+objects $V, W$ and a morphism $f: V \to W$ in $\Mod^H \k[G]$, set 
+$D_N(V) = \bigoplus_{h \in H} N_h \ot V_h$ with the obvious $H$-grading,
+and set $D_N(f)$ as the resitriction and correstriction of $1 \ot f$.
+Now $A \ot \k[G]$ acts on $D_N(V)$, and the action of $A$ on $D_N(V)$ is
+given by correstriction through the map $\rho: A \to A \ot G$, defined as
+$\rho(a) = a \ot g$ for each $g \in G$. The functor $D_N$ is exact and 
+commutes with arbitrary direct sums. 
 
+Notice that $N \cong D_N(\k[H])$ through the map that sends $n \in N_h$ to
+$n \ot h \in D_N(\k[H])_h$ for each $h \in H$. Also it follows from the
+definitions that $D_N(\k[G]) \cong \phi_!(\phi^*(N))$. Taking a projective
+resolution $P^\bullet$ of $\k[H]$ of length $l$ and applying $D_N$, we obtain
+an exact complex $D_N(P^\bullet) \to D_N(\k[H]) \cong N$. Now for each $i 
+\geq 0$ there exists a projective object $Q^i$ in $\Mod^H \k[G]$ such that
+$P^i \oplus Q^i$ is free of rank $r_i$. Thus $D_N(P^i)$ is a direct summand
+of $D_N(P^i \oplus Q^i)$, which isomorphic to the direct sum of $r_i$ copies
+of $\phi_!(\phi^*(N))$. Since $\phi_!$ is has a right adjoint, it commutes 
+with arbitrary direct sums, so $D_N(P^i)$ is stably $G$-graded for each $i$.
 \end{proof}
+
+\paragraph
+\label{L:acyclic}
+\begin{Lemma}
+Assume $A$ is left $G$-noetherian. Let $I$ be an injective object of 
+$\Mod^G A$. If $N$ is stably $G$-graded then $\R^i\Hom_A^H(N, \phi_!(I)) = 0$
+for all $i > 0$.
+\end{Lemma}
+\begin{proof}
+Clearly it is enough to show that the result holds for $N = \phi_!(M)$ where
+$M$ is a $G$-graded $A$-module. In that case we have isomorphisms
+\begin{align*}
+\Hom_A^H(\phi_!(M), \phi_!(I)) 
+  &\cong \Hom_A^G(M, \phi^*(\phi_!(I)))
+  \cong \Hom_A^G\left(M, \bigoplus_{l \in L} I[l] \right).
+\end{align*}
+Since this isomorphism is natural in the first variable, we obtain for each 
+$i \geq 0$ natural isomorphisms between the derived functors
+\begin{align*}
+\R^i \Hom_A^H(\phi_!(M), \phi_!(I)) 
+  &\cong\R^i\Hom_A^G\left(M, \bigoplus_{l \in L} I[l] \right).
+\end{align*}
+Now by the graded version of the Bass-Papp theorem (see \cite for a proof in 
+the ungraded case, which adapts easily to the graded context), the fact that 
+$A$ is left $G$-noetherian implies that $\bigoplus_{l \in L} I[l]$ is 
+injective, and hence the last isomorphism implies $\R^i \Hom_A^H(\phi_!(M), 
+\phi_!(I)) = 0$.
+\end{proof}
+
+\begin{Theorem}
+Assume $A$ is left $G$-noetherian.
+Set $l = \projdim_{\k[L]} \k$ and let $M$ be an object of $\Mod^G A$. Then 
+$\injdim^H_A \phi_!(M) \leq \injdim^G_A M + l$.
+\end{Theorem}
+\begin{proof}
+The case where $M$ is of finite injective dimension is trivially true, so let
+us consider the case where $n = \injdim_A^G M$ is finite. 
+
+If $n = 0$ then $M$ is injective in $\Mod^G A$. Let $N$ be an object of 
+$\Mod^H A$, and let $P^\bullet \to N$ be a resolution of $N$ by stably 
+$G$-graded objects of $\Mod^H A$ of length $l$, as in \ref{P:resolution}.
+By Lemma \ref{L:acyclic}, $P^\bullet$ is a resolution of $N$ by objects which 
+are acyclic for the functor $\Hom_A^H(-,\phi_!(I))$, so 
+\begin{align*}
+\R^i\Hom_A^H(N, \phi_!(M)) 
+  &\cong H^i(P^\bullet, \phi_!(M))
+\end{align*}
+for each $i \geq 0$. In particular, if $i > l$ then $\R^i\Hom_A^H(N, 
+\phi_!(M)) = 0$ which implies that $\injdim_A^H \phi_!(M) \leq l$.
+
+Now assume that the result holds for all objects of $\Mod^G A$ with
+injective dimension inferior to $n$. Let $M \to I$ be an injective hull
+of $M$ in $\Mod^G A$, and let $M'$ be its cokernel. Then $\injdim^G_A M' = 
+n-1$, and so $\injdim^H_A \phi_!(M') \leq n-1+l$. Now we have in $\Mod^H A$
+an exact sequence of the form
+\begin{align*}
+0 \to \phi_!(M) \to \phi_!(I) \to \phi_!(M')  \to 0.
+\end{align*}
+By standard homological algebra the injective dimension of $\phi_!(M)$ is bounded above by the maximum between $\injdim_A^H \phi_!(I) + 1 \leq l+1$ and 
+$\injdim_A^H \phi_!(M') + 1 \leq n+l$. This gives us the desired inequality.
+\end{proof}
+
 
 \end{document}
