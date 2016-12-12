@@ -1,0 +1,282 @@
+\documentclass[11pt,fleqn]{article}
+
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+
+\usepackage{paragraphs}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,english]{babel}
+\usepackage{enumitem}
+\usepackage[osf,noBBpl]{mathpazo}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{helvet}
+\usepackage{stmaryrd}
+\usepackage{showlabels}
+
+
+%%%%%%%%%%%%Theorems, for paragraphs package%%%%%%%%%%%%%%%%%%%%%%%%%%
+% numbered versions
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\normalfont]{mystyle-plain}
+\declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposition, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Theorem, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corollary, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definition, sibling=para, style=mystyle]{Definition}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty-plain}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+\declaretheorem[name=Remark, style=mystyle-empty]{Remark*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{\itshape\NAME}\NOTE\ignorespaces},
+        spaceabove=\paraskip, 
+        headpunct={.},
+        headfont=\itshape,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[sibling=para, style=mystyle-plain]{Remark}
+
+% proofs, just as in amsthm but with adapted spacing
+
+\makeatletter
+\renewenvironment{proof}[1][\textit{Proof}]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\newcommand\note[1]{\marginpar{{
+\begin{flushleft}
+\tiny#1
+\end{flushleft}
+}}}
+
+\renewcommand\labelitemi{-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\newcommand\sq{\square}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\renewcommand\k{\Bbbk}
+\newcommand\vspan[1]{\left\langle #1 \right\rangle}
+
+\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\Vect{\mathsf{Vect}}
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\Ext{\mathsf{Ext}}
+\DeclareMathOperator\Tor{\mathsf{Tor}}
+\DeclareMathOperator\HOM{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\EXT{\underline{\mathsf{Ext}}}
+\DeclareMathOperator\TOR{\underline{\mathsf{Tor}}}
+
+\DeclareMathOperator\gr{\mathsf{gr}}
+\DeclareMathOperator\im{Im}
+\DeclareMathOperator\id{injdim}
+\DeclareMathOperator\pd{pdim}
+\DeclareMathOperator\ldim{ldim}
+\DeclareMathOperator\height{\mathsf{ht}}
+\DeclareMathOperator\st{\mathsf{st}}
+\DeclareMathOperator\depth{depth}
+\DeclareMathOperator\lcd{lcd}
+\DeclareMathOperator\Spec{Spec}
+\DeclareMathOperator\supp{supp}
+\DeclareMathOperator\Id{Id}
+\DeclareMathOperator\rank{rk}
+\DeclareMathOperator\rk{rk}
+\DeclareMathOperator\irr{irr}
+\DeclareMathOperator\GKdim{\mathsf{GKdim}}
+\DeclareMathOperator\relint{\mathsf{relint}}
+\DeclareMathOperator\coker{\mathsf{coker}}
+\DeclareMathOperator\tr{\mathsf{tr}}
+\DeclareMathOperator\SL{\mathsf{SL}}
+\DeclareMathOperator\ev{\mathsf{ev}}
+\DeclareMathOperator\wt{\mathsf{wt}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{
+Further applications of change of grading functors
+\footnote{file:[applications-cog-functors.tex]}
+}
+\date{01-12-16}
+\author{A. Solotar, P. Zadunaisky}
+
+\begin{document}
+\maketitle
+
+Throughout this document $\k$ is a field, and unadorned $\hom$ and tensor 
+products are always over $\k$. 
+
+\section{The change of grading functors}
+
+\paragraph
+\label{G-graded-vector-spaces}
+Let $G$ be a group.
+A $G$-graded vector space is a vector space $V$ with a fixed decomposition
+$V = \bigoplus_{g \in G} V_g$; elements in $V_g$ are called homogeneous of
+degree $g$, and $V_g$ is called the $g$-homogeneous component of $V$. Given 
+two $G$-graded vector spaces $V, W$, their tensor product is also a $G$-graded 
+vector space, where for each $g \in G$ 
+\begin{align*}
+(V \ot W)_g = \bigoplus_{g' \in G} V_ {g'} \ot W_{(g')^{-1}g}
+\end{align*}
+The group algebra $\k[G]$ is a $G$-graded vector space in an obvious way.
+
+A map between graded vector spaces $f: V \to W$ is said to be 
+\emph{$G$-homogeneous}, or simply homogeneous if the groups is clear from the 
+context, if $f(V_g) \subset W_g$ for all $g \in G$. Given a 
+$G$-graded vector space $V$ and $g \in G$, we denote by $V[g]$ the graded 
+vector space whose homgeneous component of degree $g'$ is $V[g]_{g'} = 
+V_{g'g}$. By definition, a homogeneous map $f: V \to W$ induces maps $f_g: 
+V_g \to W_g$, and $f = \bigoplus_{g \in G} f_g$ for each $g \in G$; we refer 
+to $f_g$ as the homogeneous component of degree $g$ of $f$.
+
+The category $\Vect^G \k$ has $G$-graded vector spaces as objects and 
+homogeneous linear maps as morphisms. Kernels and cokernels of homogeneous
+maps are $G$-graded vector spaces in a natural way, so a complex
+\[
+  0 \to V' \to V \to V'' \to 0
+\]
+in $\Vect^G \k$ forms a short exact sequence if and only if it is a short
+exact sequence of vector spaces, or equivalently if for each $g \in G$
+the sequence formed by taking $g$-homogeneous components is exact.
+Finally, $\Vect^G V$ has arbitrary direct sums and products. The direct sum
+of $G$-graded vector spaces is again $G$-graded in an obvious way, but this is 
+not the case for direct products. Given a collection of $G$-graded vector 
+spaces $\{V^i \mid i \in I\}$, their direct product is the $G$-graded vector 
+space whose homogeneous decomposition is given by
+\begin{align*}
+\bigoplus_{g \in G} \prod_{i \in I} V^i_g.
+\end{align*}
+In other words, the forgetful functor $\O: \Vect^G \k \to \Vect \k$ preserves
+direct sums, but not direct products.
+
+
+\paragraph
+Any group homomorphism $\phi: G \to H$ induces functors $\phi_!, \phi_*: 
+\Vect^G \k \to \Vect^H \k$ and $\phi^*: \Vect^H \k \to \Vect^G \k$ as follows.
+
+Let $V,W$ be $G$-graded vector spaces and let $f: V \to W$ be a homogeneous 
+map. We define $\phi_!(V)$, resp. $\phi_!(f)$, to be the $H$-graded vector 
+space, resp. $H$-homogeneous map, whose homogeneous components of degree
+$h \in H$ are given by
+\begin{align*}
+\phi_!(M)_h
+  &= \bigoplus_{\{g \in G \mid \phi(g) = h\}} V_g,
+&\phi_!(f)_h
+  &= \bigoplus_{\{g \in G \mid \phi(f) = h\}} f_g.
+\end{align*}
+Analogously, we define $\phi_!(V)$, resp. $\phi_!(f)$, to be the $H$-graded 
+vector space, resp. $H$-homogeneous map, whose homogeneous components of degree
+$h \in H$ are given by
+\begin{align*}
+\phi_*(V)_h
+  &= \prod_{\{g \in G \mid \phi(g) = h\}} V_g,
+&\phi_*(f)_h
+  &= \prod_{\{g \in G \mid \phi(f) = h\}} f_g.
+\end{align*}
+Since direct sums and products reflect exactness in the catgory of vector 
+spaces
+
+Now let $V',W'$ be $H$-graded vector spaces and let $f': V' \to W'$ be an 
+$H$-homogeneous map. We set $\phi^*(V') \subset V' \ot \k[G]$ to be the 
+subspace generated by all elements of the form $v \ot g$ with $v \in V'$ 
+homogeneous of degree $\phi(g)$, and $\phi^*(f)(v \ot g) = f(v) \ot g$. In 
+other words, for each $g \in G$ the homogeneous components of $\phi^*(V')$
+and $\phi(f')$ are given by
+\begin{align*}
+\phi^*(V')_g 
+  &=  V'_{\phi(g)} \ot \langle g \rangle,
+  &f_g
+  &= f_{\phi(g)} \ot 1.
+\end{align*}
+
+\paragraph
+A $G$-graded $\k$-algebra is a $\k$-algebra $A$ which is also a $G$-graded
+vector space such that for all $g,g' \in G$ and all $a \in A_g, a' \in A_{g'}$
+it happens that $aa' \in A_{gg'}$. A $G$-graded (left) $A$-module is a (left)
+$A$-module $M$ which is also a $G$-graded vector space such that for each 
+$g,g' \in G$ and all $a \in A_g, m \in M_{g'}$ it happens that $am \in 
+M_{gg'}$. We denote by $\Mod^G A$ the category whose objects are $G$-graded
+$A$-modules and whose morphisms are $G$-homogeneous $A$-linear maps.
+
+\begin{Lemma*}
+Let $\phi: G \to H$ be a group morphism, and $A$ a $G$-graded $\k$-algebra.
+Then the following hold.
+\begin{enumerate}
+\item The $H$-graded vector space $\phi_!(A)$ is an $H$-graded $\k$-algebra.
+\item There exist functors $\phi_!, \phi_* : \Mod^G A \to \Mod^H \phi_!(A)$
+and $\phi^*: \Mod^H \phi_!(A) \to \Mod^G A$ which make the following diagrams
+commute
+\begin{align*}
+\xymatrix{
+  \Mod^G A 
+    & \Mod^H \phi_!(A) 
+    & \Mod^H \phi_!(A)  
+    & \Mod^G A
+    & \Mod^G A 
+    & \Mod^H \phi_!(A) \\
+  \Vect^G \k 
+    & \Vect^H \k
+    & \Vect^H \k  
+    & \Vect^G \k
+    & \Vect^G \k
+    & \Vect^H \k
+}
+\end{align*}
+\end{enumerate}
+\end{Lemma*}
+
+
+\begin{Proposition}
+Let $\phi: G \to H$ be a group morphism. 
+\begin{enumerate}
+\item The functors $\phi_!$ and $\phi_*$ are exact and reflect exactness.
+\item The functor $\phi^*$ is exact, and it reflects exactness if and only if
+  $\phi$ is surjective.
+\item The functor $\phi^*$ is right adjoint to $\phi_!$ and left adjoint to 
+  $\phi_*$.
+\end{enumerate}
+\end{Proposition}
+\begin{proof}
+
+\end{proof}
+
+\end{document}
