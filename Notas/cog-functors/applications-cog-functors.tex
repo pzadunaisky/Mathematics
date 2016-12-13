@@ -98,6 +98,9 @@ bodyfont=\itshape]{mystyle-empty-plain}
 \newcommand\vspan[1]{\left\langle #1 \right\rangle}
 \renewcommand\O{\mathcal O}
 \newcommand\R{\mathcal R}
+\newcommand\op{\mathsf{op}}
+\newcommand\D{\mathcal D}
+
 
 \DeclareMathOperator\Mod{\mathsf{Mod}}
 \DeclareMathOperator\Vect{\mathsf{Vect}}
@@ -115,7 +118,7 @@ bodyfont=\itshape]{mystyle-empty-plain}
 \DeclareMathOperator\supp{supp}
 \DeclareMathOperator\Id{Id}
 \DeclareMathOperator\rk{rk}
-\DeclareMathOperator\tr{\mathsf{tr}}
+
 \DeclareMathOperator\SL{\mathsf{SL}}
 
 
@@ -185,6 +188,7 @@ In other words, the forgetful functor $\O: \Vect^G \k \to \Vect \k$ preserves
 direct sums, but not direct products.
 
 \paragraph
+\label{G-graded-algebras}
 A $G$-graded $\k$-algebra is a $\k$-algebra $A$ which is also a $G$-graded
 vector space such that for all $g,g' \in G$ and all $a \in A_g, a' \in A_{g'}$
 it happens that $aa' \in A_{gg'}$. A $G$-graded (left) $A$-module is a (left)
@@ -200,8 +204,9 @@ $G$-graded $A$-module is also finitely generated.
 We denote by $\Mod^G A$ the category whose objects are $G$-graded
 $A$-modules and whose morphisms are $G$-homogeneous $A$-linear maps. It is a 
 Grothendieck category with enough projective and injective objects; The reader 
-is refered to \cite{NV-book-3}*{Chapter 2} for proofs and details. Given an 
-object $M$ of $\Mod^G A$, we will denote by $\projdim_A^G M$ and $\injdim_A^G 
+is refered to \cite{NV-graded-book3}*{Chapter 2} for proofs and details. Given 
+an object $M$ of $\Mod^G A$, we will denote by $\projdim_A^G M$ and 
+$\injdim_A^G 
 M$ its projective and injective dimension, respectively. Given two $G$-graded
 $A$-modules $M, N$ we denote by $\Hom^G_A(M,N)$ the vector space of all 
 $G$-homogeneous $A$-linear morphisms from $M$ to $N$. Since $\Mod^G A$ has 
@@ -209,6 +214,7 @@ enough injectives, we can define for each $i \geq 0$ the $i$-th right derived
 functor of $\Hom^G_A$, which we denote by $\R^i\Hom^G_A$. 
 
 \paragraph
+\label{cog-functors}
 Let $A$ be a $G$-graded $\k$-algebra.
 Any group homomorphism $\phi: G \to H$ induces functors $\phi_!, \phi_*: 
 \Mod^G A \to \Mod^H \k$ and $\phi^*: \Mod^H A \to \Mod^G A$ as follows.
@@ -293,6 +299,7 @@ Throughout this section $\phi: G \to H$ denotes a group morphism and we set
 $L = \ker \phi$. Also $A$ denotes a $G$-graded $\k$-algebra.
 
 \paragraph
+\label{hom-dim-inequalities}
 It is a well known fact that an object $M$ of $\Mod^G A$ is projective if and 
 only if it is projective as $A$-module, i.e. $\phi_!(M)$ is projective. The
 following proposition is a refined version of this result.
@@ -310,6 +317,7 @@ algebra. Let $M$ be an object of $\Mod^G A$. Then the following hold.
 \end{Proposition*}
 
 \paragraph
+\label{phi-finite}
 As is well known, an injective object $I$ in $\Mod^G A$ need not be injective
 as $A$-module. Our next objective is to give a bound to the injective dimension
 of $\phi_!(I)$. 
@@ -333,6 +341,7 @@ $A$-module is $\phi$-finite, and hence $\phi_!$ preserves the injective
 dimension of all finitely generated $G$-graded $A$-modules.
 
 \paragraph
+\label{dim-L}
 As we noted before, the algebra $\k[G]$ is a $G$-graded $\k$-algebra, and hence
 through $\phi$ it is also an $H$-graded algebra, so we may consider the 
 category of $H$-graded right $\k[G]$-modules $\Mod^H \k[G]$. The algebra 
@@ -400,7 +409,8 @@ $i \geq 0$ natural isomorphisms between the derived functors
 \R^i \Hom_A^H(\phi_!(M), \phi_!(I)) 
   &\cong\R^i\Hom_A^G\left(M, \bigoplus_{l \in L} I[l] \right).
 \end{align*}
-Now by the graded version of the Bass-Papp theorem (see \cite for a proof in 
+Now by the graded version of the Bass-Papp theorem (see 
+\cite{GW-noetherian-book}*{Theorem 5.23} for a proof in 
 the ungraded case, which adapts easily to the graded context), the fact that 
 $A$ is left $G$-noetherian implies that $\bigoplus_{l \in L} I[l]$ is 
 injective, and hence the last isomorphism implies $\R^i \Hom_A^H(\phi_!(M), 
@@ -408,6 +418,7 @@ injective, and hence the last isomorphism implies $\R^i \Hom_A^H(\phi_!(M),
 \end{proof}
 
 \begin{Theorem}
+\label{T:main-theorem}
 Assume $A$ is left $G$-noetherian.
 Set $l = \projdim_{\k[L]} \k$ and let $M$ be an object of $\Mod^G A$. Then 
 $\injdim^H_A \phi_!(M) \leq \injdim^G_A M + l$.
@@ -436,9 +447,120 @@ an exact sequence of the form
 \begin{align*}
 0 \to \phi_!(M) \to \phi_!(I) \to \phi_!(M')  \to 0.
 \end{align*}
-By standard homological algebra the injective dimension of $\phi_!(M)$ is bounded above by the maximum between $\injdim_A^H \phi_!(I) + 1 \leq l+1$ and 
+By standard homological algebra the injective dimension of $\phi_!(M)$ is 
+bounded above by the maximum between $\injdim_A^H \phi_!(I) + 1 \leq l+1$ and 
 $\injdim_A^H \phi_!(M') + 1 \leq n+l$. This gives us the desired inequality.
 \end{proof}
 
+
+\section{Dualizing complexes and change of grading}
+We finish with a short section on the effect of change of grading on dualizing
+complexes. 
+
+\paragraph
+In this section we denote by $A$ an $\NN^r$-graded algebra and use
+the usual notation $A^e = A \ot A^\op$; under this hypothesis $A$ is 
+noetherian if and only if it is $\ZZ^r$-noetherian. We also assume that $A_0 = 
+\k$. We denote by $\D^{\ZZ^r}(A), \D^{\ZZ^r}(A^\op)$ and $\D^{\ZZ^r}(A^e)$ the 
+derived 
+categories of $\Mod^{\ZZ^r} A$, $\Mod^{\ZZ^r} A^{\op}$ and $\Mod^{\ZZ^r} A^e$,
+respectively. We write $\R\HOM^{\ZZ^r}_A$ for the right derived functor of the 
+internal $\HOM$ functor of the category of complexes of $\ZZ^r$-graded 
+bimodules, as defined in \cite{Yek-dc}*{section 2}. Recall that an injective 
+resolution of a complex $R^\bullet$ is an isomorphism $R^\bullet \to I^\bullet$
+in $\D^{\ZZ^r}(A)$ where all the modules of the complex $I^\bullet$ are 
+injective $\ZZ^r$-graded modules, and that the injective dimension of 
+$R^\bullet$ is the minimal length of an injective resolution. We write 
+$\injdim^{\ZZ^r}_A R^\bullet$ for the injective dimension of $R^\bullet$.
+
+\paragraph
+\label{dc}
+The following definition is adapted from \cite{Yek-dc}*{Definition 3.3}
+\begin{Definition*}
+A \emph{$\ZZ^r$-graded dualizing complex} is a bounded complex $R^\bullet$ in 
+$\D^{\ZZ^r}(A^e)$ such that:
+\begin{enumerate}
+\item its cohomology modules are finitely generated as left and right 
+  $\ZZ^r$-graded $A$-modules;
+
+\item it has finite injective dimension as a complex of left or right 
+  $\ZZ^r$-graded $A$-modules;
+
+\item the natural maps $A^\op \to \mathcal R\HOM_{A} (R^\bullet, R^\bullet)$
+  and $A \to \mathcal R\HOM_{A^\op}(R^\bullet, R^\bullet)$ are isomorphisms
+  in $\D^{\ZZ^r}(A^e)$.
+\end{enumerate}
+\end{Definition*}
+In particular a \emph{dualizing complex in the ungraded sense} is an object in 
+the derived category of $\Mod A$ which complies with the ungraded analogues of 
+properties (1), (2) and (3). Van den Bergh's excercise was originally stated 
+while discussing whether a $\ZZ$-graded dualizing complex is also a dualizing 
+complex in the ungraded sense. We will give a proof of this result for 
+$\ZZ^r$-graded dualizing complexes. 
+
+\paragraph
+Let $\phi: \ZZ^r \to \{0\}$ be the trivial morphism. Since $\phi_!: 
+\Mod^{\ZZ^r} A \to \Mod A$ is exact, it induces an exact functor $\O: 
+\D^{\ZZ^r}(A) \to \D(A)$. The other change of grading functors also induce 
+functors between the corresponding derived categories. We will need the 
+following lemma, which is a derived version of Theorem 
+\ref{T:main-theorem}. 
+\begin{Lemma*}
+\label{derived-inj-dim}
+Assume $A$ is left noetherian. If $R^\bullet$ is an object of $\D^{\ZZ^r}(A)$ then
+\[
+  \injdim_A^{\ZZ^r} R^\bullet 
+    \leq \injdim_A \O(R^\bullet) 
+    \leq \injdim_A^{\ZZ^r} R^\bullet +r
+\]
+\end{Lemma*}
+\begin{proof}
+Both inequalities are proved as in Theorem \ref{T:main-theorem}. The syzygy 
+argument for the second inequality is adapted by taking a minimal injective 
+resolution of $R^\bullet$ and, assuming it starts in homological degree $0$, 
+using the exact sequence 
+\[
+  0 \to I^{\geq 1} \to I^\bullet \to I^0 \to 0.
+\]
+\end{proof}
+
+\begin{Proposition}
+Suppose $A$ is a noetherian connected $\NN^r$-graded algebra.
+An object $R^\bullet$ in $\D^{\ZZ^r}(A^e)$ is a $\ZZ^r$-graded dualizing 
+complex if and only if $\O(R^\bullet)$ is a dualizing complex in the ungraded 
+sense.
+\end{Proposition}
+\begin{proof}
+Since $\O(H^n(R^\bullet)) = H^n(\O(R^\bullet))$, it follows that condition 1 
+of Definition \ref{dc} holds for $R^\bullet$ if and only if it holds for 
+$\O(R^\bullet)$. By Lemma \ref{derived-inj-dim} $R^\bullet$ has finite 
+injective dimension if and only if $\O(R^\bullet)$ has finite injective 
+dimension, so condition 2 holds for $R^\bullet$ if and only if it holds for 
+$\O(R^\bullet)$.
+
+Since $A$ is noetherian, for any $\ZZ^r$-graded $A$-modules $M,N$ with $M$ 
+finitely generated there exist natural isomorphisms
+\[
+  \O(\R^i\HOM_A^{\ZZ^r}(M,N)) \to \Ext^i_A(\O(M),\O(N)),
+\]
+see \cite{NV-graded-book3}*{Corollary 2.4.7}. A standard devissage argument 
+extends this to a natural isomorphism
+\[
+  \O(\R\HOM_A^{\ZZ^r}(M^\bullet, N^\bullet)) 
+    \to \R\Hom_A(\O(M^\bullet), \O(N^\bullet))
+\]
+whenever $M^\bullet, N^\bullet$ are bounded complexes of $\ZZ^r$-graded 
+$A$-modules and $M^\bullet$ having finitely generated cohomology modules. 
+Assume conditions 1 and 2 hold for either $R^\bullet$ or $\O(R^\bullet)$ (and 
+hence for both). Then $R^\bullet$ is isomorphic to a bounded complex with 
+finitely generated cohomology modules, and so condition 3 holds for $R^\bullet$
+if and only if it holds for $\O(R^\bullet)$.
+\end{proof}
+
+\begin{bibdiv}
+\begin{biblist}
+\bibselect{biblio}
+\end{biblist}
+\end{bibdiv}
 
 \end{document}

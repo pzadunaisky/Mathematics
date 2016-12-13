@@ -1,0 +1,445 @@
+\documentclass{article}
+\usepackage{amsrefs}
+\begin{document}
+\begin{bibdiv}
+\begin{biblist}
+\bib{AZ-nc-schemes}{article}{ 
+  author={Artin, M.}, 
+  author={Zhang, J. J.}, 
+  title={Noncommutative projective schemes}, 
+  journal={Adv. Math.}, 
+  volume={109}, 
+  date={1994}, 
+  number={2},
+  pages={228--287}, 
+}
+
+    
+\bib{BS-lc-book}{book}{ 
+  author={Brodmann, M. P.}, 
+  author={Sharp, R. Y.}, 
+  title={Local cohomology: an algebraic introduction with geometric applications}, 
+  series={Cambridge Studies in Advanced Mathematics}, 
+  volume={60}, 
+  publisher={Cambridge University Press},
+  place={Cambridge}, 
+  date={1998}, 
+  pages={xvi+416}, 
+}
+
+\bib{BH-cm-book}{book}{ 
+  author={Bruns, Winfried}, 
+  author={Herzog, J{\"u}rgen},
+  title={Cohen-Macaulay rings}, 
+  series={Cambridge Studies in Advanced Mathematics},
+  volume={39}, 
+  publisher={Cambridge University Press}, 
+  place={Cambridge}, 
+  date={1993},
+  pages={xii+403}, 
+}
+
+\bib{BG-polytopes-book}{book}{
+   author={Bruns, Winfried},
+   author={Gubeladze, Joseph},
+   title={Polytopes, rings, and $K$-theory},
+   series={Springer Monographs in Mathematics},
+   publisher={Springer, Dordrecht},
+   date={2009},
+   pages={xiv+461},
+}
+
+\bib{BB-coxeter-book}{book}{
+   author={Bj{\"o}rner, Anders},
+   author={Brenti, Francesco},
+   title={Combinatorics of Coxeter groups},
+   series={Graduate Texts in Mathematics},
+   volume={231},
+   publisher={Springer},
+   place={New York},
+   date={2005},
+   pages={xiv+363},
+}
+
+\bib{Cal-toric}{article}{ 
+  author={Caldero, Philippe}, 
+  title={Toric degenerations of Schubert varieties}, 
+  journal={Transform. Groups}, 
+  volume={7}, 
+  date={2002}, 
+  number={1},
+  pages={51--60}, 
+}
+
+\bib{RGS-monoids-book}{book}{
+   author={Rosales, J. C.},
+   author={Garc{\'{\i}}a-S{\'a}nchez, P. A.},
+   title={Finitely generated commutative monoids},
+   publisher={Nova Science Publishers, Inc., Commack, NY},
+   date={1999},
+   pages={xiv+185},
+}
+    
+\bib{GL-toric-deg}{article}{
+   author={Gonciulea, N.},
+   author={Lakshmibai, V.},
+   title={Degenerations of flag and Schubert varieties to toric varieties},
+   journal={Transform. Groups},
+   volume={1},
+   date={1996},
+   number={3},
+   pages={215--248},
+}
+
+\bib{Jan-q-book}{book}{ 
+  author={Jantzen, Jens Carsten}, 
+  title={Lectures on quantum groups},
+  series={Graduate Studies in Mathematics}, 
+  volume={6}, 
+  publisher={American Mathematical Society}, 
+  place={Providence, RI}, 
+  date={1996}, 
+  pages={viii+266}, 
+}
+
+\bib{JZ-gorenstein}{article}{ 
+  author={J{\o}rgensen, Peter}, 
+  author={Zhang, James J.},
+  title={Gourmet's guide to Gorensteinness}, 
+  journal={Adv. Math.}, 
+  volume={151},
+  date={2000}, 
+  number={2}, 
+  pages={313--345}, 
+}
+
+\bib{K-demazure-formula}{article}{ 
+  author={Kashiwara, Masaki}, 
+  title={The crystal base and Littelmann's refined Demazure character formula}, 
+  journal={Duke Math. J.}, 
+  volume={71}, 
+  date={1993},
+  number={3}, 
+  pages={839--858}, 
+}
+
+\bib{K-crystal-bases}{article}{ 
+  author={Kashiwara, Masaki}, 
+  title={On crystal bases}, 
+  conference={
+    title={Representations of groups}, 
+    address={Banff, AB}, date={1994}, }, 
+  book={
+    series={CMS Conf. Proc.}, 
+    volume={16}, publisher={Amer. Math. Soc.},
+    place={Providence, RI}, 
+    }, 
+  date={1995}, 
+  pages={155--197}, 
+}
+
+\bib{LR-q-flag}{article}{ 
+  author={Lakshmibai, V.}, 
+  author={Reshetikhin, N.}, 
+  title={Quantum flag and Schubert schemes}, 
+  conference={ 
+    title={ physics}, 
+    address={Amherst, MA},
+    date={1990}, 
+  }, 
+  book={ 
+    series={Contemp. Math.}, 
+    volume={134}, 
+    publisher={Amer. Math. Soc.}, 
+    place={Providence, RI}, 
+    }, 
+  date={1992}, 
+  pages={145--181}, 
+}
+
+\bib{LR-qgasl}{article}{ 
+  author={Lenagan, T. H.}, 
+  author={Rigal, L.}, 
+  title={Quantum graded algebras with a straightening law and the AS-Cohen-Macaulay   
+    property for quantum determinantal rings and quantum Grassmannians}, 
+  journal={J. Algebra}, 
+  volume={301},
+  date={2006}, 
+  number={2}, 
+  pages={670--702}, 
+}
+
+\bib{Lit-cones}{article}{ 
+  author={Littelmann, P.}, 
+  title={Cones, crystals, and patterns},
+  journal={Transform. Groups}, 
+  volume={3}, 
+  date={1998}, 
+  number={2}, 
+  pages={145--179}, 
+}
+
+\bib{Lu-q-book}{book}{ 
+  author={Lusztig, George}, 
+  title={Introduction to quantum groups},
+  series={Modern Birkh\"auser Classics}, 
+  note={Reprint of the 1994 edition},
+  publisher={Birkh\"auser/Springer, New York}, 
+  date={2010}, 
+  pages={xiv+346}, 
+}
+
+
+\bib{MR-ordres-book}{book}{
+   author={Maury, Guy},
+   author={Raynaud, Jacques},
+   title={Ordres maximaux au sens de K. Asano},
+   language={French},
+   series={Lecture Notes in Mathematics},
+   volume={808},
+   publisher={Springer},
+   place={Berlin},
+   date={1980},
+   pages={viii+192},
+}
+
+\bib{MR-rings-book}{book}{ 
+  author={McConnell, J. C.}, 
+  author={Robson, J. C.}, 
+  title={Noncommutative Noetherian rings}, 
+  series={Graduate Studies in Mathematics}, 
+  volume={30},
+  edition={Revised edition}, 
+  note={With the cooperation of L. W. Small},
+  publisher={American Mathematical Society}, 
+  place={Providence, RI}, 
+  date={2001},
+  pages={xx+636}, 
+}
+
+\bib{MS-cocoa-book}{book}{ 
+  author={Miller, Ezra}, 
+  author={Sturmfels, Bernd}, 
+  title={Combinatorial commutative algebra}, 
+  series={Graduate Texts in Mathematics}, 
+  volume={227},
+  publisher={Springer-Verlag}, 
+  place={New York}, 
+  date={2005}, 
+  pages={xiv+417}, 
+}
+
+
+\bib{NV-graded-book1}{book}{ 
+  author={N{\u{a}}st{\u{a}}sescu, Constantin}, 
+  author={Van Oystaeyen, F.},
+  title={Graded and filtered rings and modules}, 
+  series={Lecture Notes in Mathematics},
+  volume={758}, 
+  publisher={Springer}, 
+  place={Berlin}, 
+  date={1979}, 
+  pages={x+148}, 
+}
+
+\bib{NV-graded-book3}{book}{ 
+  author={N{\u{a}}st{\u{a}}sescu, Constantin}, 
+  author={Van Oystaeyen, Freddy}, 
+  title={Methods of graded rings}, 
+  series={Lecture Notes in Mathematics},
+  volume={1836}, 
+  publisher={Springer-Verlag}, 
+  place={Berlin}, 
+  date={2004}, 
+  pages={xiv+304},
+}
+
+\bib{RZ-richardson}{article}{
+  author={Rigal, L.}, 
+  author={Zadunaisky, P.}, 
+  title={Quantum analogues of Richardson varieties in the grassmannian and 
+  their toric degeneration},
+  journal={J. Algebra}, 
+  volume={372}, 
+  date={2012}, 
+  pages={293--317}, 
+}
+
+\bib{RZ-twisted}{article}{
+  author={Rigal, L.}, 
+  author={Zadunaisky, P.}, 
+  title={Twisted Semigroup Algebras},
+  journal={Alg. Rep. Theory},
+  year={2015},
+}
+
+\bib{Soi-q-flag}{article}{ 
+  author={So{\u\i}bel{\cprime}man, Ya. S.}, 
+  title={On the quantum flag manifold}, 
+  language={Russian}, 
+  journal={Funktsional. Anal. i Prilozhen.},
+  volume={26}, 
+  date={1992}, 
+  number={3}, 
+  pages={90--92}, 
+  translation={
+    journal={Funct. Anal. Appl.}, 
+    volume={26}, 
+    date={1992}, 
+    number={3},
+    pages={225--227}, 
+  }, 
+}
+
+\bib{Str-grobner-book}{book}{
+   author={Sturmfels, Bernd},
+   title={Gr\"obner bases and convex polytopes},
+   series={University Lecture Series},
+   volume={8},
+   publisher={American Mathematical Society, Providence, RI},
+   date={1996},
+   pages={xii+162},
+}
+
+\bib{Weibel-h-book}{book}{ 
+  author={Weibel, Charles A.}, 
+  title={An introduction to homological algebra}, 
+  series={Cambridge Studies in Advanced Mathematics}, 
+  volume={38},
+  publisher={Cambridge University Press}, 
+  place={Cambridge}, 
+  date={1994}, 
+  pages={xiv+450}, 
+}
+
+\bib{Ek}{article}{ 
+	author={Ekstr{\"o}m, Eva Kristina}, 
+	title={The Auslander condition on graded and filtered Noetherian rings}, 
+	conference={ 
+		title={ Ann\'ee}, 
+		address={Paris},
+		date={1987/1988}, }, 
+		book={ series={Lecture Notes in Math.}, 
+		volume={1404},
+		publisher={Springer}, 
+		place={Berlin}, 
+		}, 
+	date={1989}, 
+	pages={220--245}, 
+}
+
+\bib{GW}{book}{ 
+	author={Goodearl, K. R.}, 
+	author={Warfield, R. B., Jr.}, 
+	title={An introduction to noncommutative Noetherian rings}, 
+	series={London Mathematical Society	Student Texts}, 
+	volume={61}, 
+	edition={2}, 
+	publisher={Cambridge University Press, Cambridge}, 
+	date={2004}, 
+	pages={xxiv+344}, 
+}
+
+
+\bib{Lev}{article}{ 
+	author={Levasseur, Thierry}, 
+	title={Some properties of noncommutative regular graded rings}, 
+	journal={Glasgow Math. J.}, 
+	volume={34}, 
+	date={1992}, 
+	number={3},
+	pages={277--300}, 
+}
+
+\bib{PP-secondHH}{article}{
+   author={Polishchuk, Alexander},
+   author={Positselski, Leonid},
+   title={Hochschild (co)homology of the second kind I},
+   journal={Trans. Amer. Math. Soc.},
+   volume={364},
+   date={2012},
+   number={10},
+   pages={5311--5368}, 
+}
+
+\bib{Sch-hopfGalois}{article}{ 
+	author={Schneider, Hans-J{\"u}rgen}, 
+	title={Representation theory of Hopf Galois extensions}, 
+	journal={Israel J. Math.}, 
+	volume={72}, 
+	date={1990},
+	number={1-2}, 
+	pages={196--231}, 
+}
+
+\bib{Wis-survey}{article}{ 
+	author={Wisbauer, Robert}, 
+	title={Module and comodule categories---a survey}, 
+	conference={ 
+		title={Proceedings of the Mathematics Conference},
+		address={Birzeit/Nablus}, 
+		date={1998}, 
+	}, 
+	book={ 
+		publisher={World Sci. Publ., River Edge, NJ}, }, 
+		date={2000}, 
+		pages={277--304}, 
+	}
+}
+
+\bib{Yek-note}{article}{ 
+	author={Yekutieli, A.}, 
+	title={Another proof of a theorem of Van den Bergh about graded-injective 
+		modules}, 
+	date={2014}, 
+	note={Available at \url{http://arxiv.org/abs/1407.5916}}, 
+}
+
+\bib{Doi-coalg}{article}{
+   author={Doi, Yukio},
+   title={Homological coalgebra},
+   journal={J. Math. Soc. Japan},
+   volume={33},
+   date={1981},
+   number={1},
+   pages={31--50},
+}
+
+\bib{FF-graded}{article}{
+   author={Fossum, Robert},
+   author={Foxby, Hans-Bj{\o}rn},
+   title={The category of graded modules},
+   journal={Math. Scand.},
+   volume={35},
+   date={1974},
+   pages={288--300},
+   issn={0025-5521},
+   review={\MR{0379473 (52 \#378)}},
+}
+
+\bib{Mont-hopf-book}{book}{
+   author={Montgomery, Susan},
+   title={Hopf algebras and their actions on rings},
+   series={CBMS Regional Conference Series in Mathematics},
+   volume={82},
+   publisher={Published for the Conference Board of the Mathematical
+   Sciences, Washington, DC},
+   date={1993},
+   pages={xiv+238},
+   isbn={0-8218-0738-2},
+   review={\MR{1243637 (94i:16019)}},
+}
+
+\bib{vdB-existence-dc}{article}{
+   author={van den Bergh, Michel},
+   title={Existence theorems for dualizing complexes over non-commutative
+   graded and filtered rings},
+   journal={J. Algebra},
+   volume={195},
+   date={1997},
+   number={2},
+   pages={662--679},
+}
+\end{biblist}
+\end{bibdiv}
+\end{document}
