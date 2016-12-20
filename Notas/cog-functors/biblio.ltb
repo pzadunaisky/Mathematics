@@ -328,7 +328,7 @@
 	pages={220--245}, 
 }
 
-\bib{GW}{book}{ 
+\bib{GW-noetherian-book}{book}{ 
 	author={Goodearl, K. R.}, 
 	author={Warfield, R. B., Jr.}, 
 	title={An introduction to noncommutative Noetherian rings}, 
@@ -439,6 +439,19 @@
    date={1997},
    number={2},
    pages={662--679},
+}
+
+\bib{Yek-dc}{article}{
+   author={Yekutieli, Amnon},
+   title={Dualizing complexes over noncommutative graded algebras},
+   journal={J. Algebra},
+   volume={153},
+   date={1992},
+   number={1},
+   pages={41--84},
+   issn={0021-8693},
+   review={\MR{1195406}},
+   doi={10.1016/0021-8693(92)90148-F},
 }
 \end{biblist}
 \end{bibdiv}

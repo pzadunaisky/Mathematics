@@ -208,84 +208,86 @@ $n \sq h \mapsto n \sq h_{(0)} \ot h_{(1)}$. By
 \cite{Doi-coalg}*{Proposition 6} the functor $\phi^*: \Mod^K \to \Mod^H$ given 
 by $\phi^* = - \sq_K H$ is right adjoint to $\phi_!$. 
 
-\begin{Lemma*}
-The functor $\phi^*: \Mod^K \to \Mod^H$ has a right adjoint if and only if
-$H$ is injective as $K$-comodule.
-\end{Lemma*}
-\begin{proof}
-Since $\Mod^K$ and $\Mod^H$ are Grothendieck categories, by Fryed's adjoint 
-functor theorem $\phi^*$ has a left adjoint if and only if it is right exact 
-and preserves arbitrary direct sums. Now cotensor products commute with 
-arbitrary direct sums, and by \cite{Doi-coalg}*{Proposition 5} $\phi^*$ is 
-exact if and only if $H$ is injective as $K$-comodule.
-\end{proof}
-
-\paragraph
-We give an explicit characterization of $\phi^*$ in a special case. 
-
-\begin{Proposition*}
-Let $\phi: H \to K$ be a Hopf-algebra map, and let $L$ be the subalgebra of 
-right coinvariants of $H$ as $K$-comodule. Suppose that there exists a 
-coalgebra map $\gamma: K \to H$ such that $\phi \circ \gamma = \Id_K$. Then
-$H$ is free as $K$-comodule, and $\phi_* \cong \HOM^K(L,\phi_!(-))$.
-\end{Proposition*}
-\begin{proof}
-Since $\gamma$ is a coalgebra map, it is in particular a cleft map in the 
-sense of \cite{Mont-hopf-book}*{Definition 7.2.1}, its convolution inverse 
-being $S \circ \gamma$. In the language of the reference, we get that $L 
-\subset H$ is a $K$-extension, and so by \cite{Mont-hopf-book}*{Theorem 7.2.2} 
-$H$ is isomorphic to $K \ot L$ as left $K$-comodule, so it is free and hence 
-injective \cite{Doi-coalg}*{Corollary 1}, so $\phi^*$ has a right adjoint.
-
-We now wish to see that there is a natural isomorphism
-\begin{align*}
-\Hom^H(N \sq_K H, M) \cong \Hom^K(N, \HOM^K(\phi_!(L),\phi_!(M)))
-\end{align*}
-\end{proof}
-
-
-\begin{Lemma}
-Let $H,K$ be Hopf algebras, $\phi: H \to K$ a Hopf algebra morphism. 
-Assume $\gamma: K \to H$ is a cleft map with convolution inverse $\gamma^{-1}$.
-\begin{enumerate}
-\item $\gamma^{-1}(\phi(h_{(1)}) h_{(2)} \in L$ for each $h \in H$.
-
-\item $n \sq h = n_{(0)} \ot \gamma(n_{(1)}) \gamma^{-1}(\phi(h_{(1)})) 
-h_{(2)}$. In particular $N \sq_K H = \{n_{(0)} \ot \gamma(n_{(1)})l \mid n 
-\in N, l \in L\}$.
-
-\item For each $n \in N$ we have $\gamma^{-1}(n_{(1)})\gamma(n_{(2)})_{(1)} 
-  \ot \gamma(n_{(2)})_{(2)} \in L \ot H$.
-\end{enumerate}
-\end{Lemma}
 
 \paragraph
 Let $A$ be an $H$-comodule algebra. We can apply the functor $\phi_!$ and thus 
-obtain a $K$-comodule algebra $\phi_!(A)$; by abuse of notation we denote 
-$\phi_!(A)$ whenever the context makes it clear whether we are seeing it as an 
-$H$-comodule or a $K$-comodule.
+obtain a $K$-comodule algebra $\phi_!(A)$. We will often write $A$ instead of
+$\phi_!(A)$, as the context will make it clear whether we are considering $A$ 
+as an $H$-comodule or as a $K$-comodule algebra.
 
-\end{document}
+Suppose $(M, \cdot_A, \rho^M)$ is an object of $\Mod^H_A$; then $(M, \cdot_A,
+1 \ot \phi \circ \rho^M)$ is an object of $\Mod^K_A$. This gives us a functor,
+which by analogy we denote by $\phi_!$. We will make the usual abuse of 
+notation, and when we write $M$ instead of $(M, \cdot_A, \rho^M)$ we will also
+write $\phi_!(M)$ instead of $(M, \cdot_A, 1 \ot \phi \rho^M)$. The functor 
+$\phi_!$ reflects exactness.
+
+Now let $(N, \cdot_A, \rho^N)$ be an object of $\Mod^K_A$. We can then define 
+a right $A$-module structure on the $H$-comodule $N \sq_K H$ as follows.
+Clearly $N \ot H$ is a right $A \ot H$-module, so it is also an $A$-module
+through the map $\rho^A: A \to A \ot H$; it is then easy to check that $N 
+\sq_K H \subset N \ot H$ is a right $A$-submodule of $N \ot H$. We thus
+obtain a functor $\phi^*: \Mod^K_A \ot \Mod^H_A$. 
+
+\begin{Proposition*}
+The functor $\phi_!: \Mod^H_A \to \Mod^K_A$ is left adjoint to $\phi_!: 
+\Mod^K_A \to \Mod^H_A$.
+\end{Proposition*}
+\begin{proof}
+This is the $A$-linear version of \cite{Doi-coalg}*{Proposition 6}. There
+it is shown that 
+\begin{itemize}
+\item for each $K$-colinear map $f: \phi_!(M) \to N$ we get
+an $H$-colinear map $\alpha(f): M \to N \sq_K H$ setting $\alpha(f) = f \ot 1 
+\circ \rho^M$;
+
+\item for each $K$-colinear map $g: M \to N \sq_K H$ we get a $K$-colinear map 
+$\beta(g): \phi_!(M) \to N$ setting $\beta(g) = 1 \ot \phi \circ g$ and 
+identifying $N \sq_K K$ with $N$;
+
+\item and $\alpha \circ \beta(g) = g, \beta \circ \alpha (f) = f$.
+\end{itemize}
+Notice also that if $f$ and $g$ are $A$-linear then so are $\alpha(f)$ and 
+$\beta(g)$. Thus the restriction and correstriction of $\alpha$ and $\beta$
+give us bijections between $\Hom^H_A(M, \phi^*(N))$ and $\Hom_A^K(\phi_!(M), 
+N)$. Naturallity of the bijections is easy to check.
+\end{proof}
+
+The following is an easy consequence of the Proposition.
+\begin{Corollary*}
+The functor $\phi^*$ sends injective objects to injective objects.
+\end{Corollary*}
+
+\paragraph
+We now explore under which conditions $\phi^*$ has a right adjoint. Since 
+$\Mod^K_A$ and $\Mod^H_A$ are Grothendieck categories, by Fryed's adjoint 
+functor theorem $\phi^*$ has a right adjoint if and only if it is right exact 
+and preserves arbitrary direct sums. 
+
+Let $\{N_i: i \in I\}$ be an arbitrary family of objects in $\Mod^K_A$. Their
+direct sum in the category $\Mod^K_A$ is simply their direct sum as vector
+spaces with the obvious $A$-module and $K$-comodule structures. Now cotensor 
+products commute with arbitrary direct sums. In other words, the obvious map 
+\[
+  \left( 
+    \bigoplus_{i \in I} N_i
+  \right) \sq_K H \to
+  \left( 
+    \bigoplus_{i \in I} N_i \sq_K H
+  \right)  
+\]
+is an isomorphism of $H$-comodules, and it is easy to check that it is also 
+$A$-linear, so $\phi^*$ always commutes with direct sums. Thus $\phi^*$
+has a right adjoint if and only if it is exact. Since $- \sq_K H$ is exact as
+a functor from $K$-comodules to $H$-comodules if and only if $H$ is injective
+as $K$-comodule \cite{Doi-coalg}*{Proposition 5}, we see that if $H$ is 
+injective as left $K$-comodule, then $\phi^*$ has a right adjoint.
+
 
 \begin{bibdiv}
 \begin{biblist}
 
 \bibselect{biblio}
-
-\bib{Wis-survey}{article}{
-   author={Wisbauer, Robert},
-   title={Module and comodule categories---a survey},
-   conference={
-      title={Proceedings of the Mathematics Conference},
-      address={Birzeit/Nablus},
-      date={1998},
-   },
-   book={
-      publisher={World Sci. Publ., River Edge, NJ},
-   },
-   date={2000},
-   pages={277--304},
-}
 
 
 \end{biblist}

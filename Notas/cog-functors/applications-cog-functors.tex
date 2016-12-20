@@ -460,16 +460,16 @@ complexes.
 \paragraph
 In this section we denote by $A$ an $\NN^r$-graded algebra and use
 the usual notation $A^e = A \ot A^\op$; under this hypothesis $A$ is 
-noetherian if and only if it is $\ZZ^r$-noetherian. We also assume that $A_0 = 
-\k$. We denote by $\D^{\ZZ^r}(A), \D^{\ZZ^r}(A^\op)$ and $\D^{\ZZ^r}(A^e)$ the 
-derived 
+noetherian if and only if it is $\ZZ^r$-noetherian. We will say that $A$ is 
+connected if $A_0 = \k$. We denote by $\D^{\ZZ^r}(A), \D^{\ZZ^r}(A^\op)$ and 
+$\D^{\ZZ^r}(A^e)$ the derived 
 categories of $\Mod^{\ZZ^r} A$, $\Mod^{\ZZ^r} A^{\op}$ and $\Mod^{\ZZ^r} A^e$,
 respectively. We write $\R\HOM^{\ZZ^r}_A$ for the right derived functor of the 
 internal $\HOM$ functor of the category of complexes of $\ZZ^r$-graded 
 bimodules, as defined in \cite{Yek-dc}*{section 2}. Recall that an injective 
-resolution of a complex $R^\bullet$ is an isomorphism $R^\bullet \to I^\bullet$
-in $\D^{\ZZ^r}(A)$ where all the modules of the complex $I^\bullet$ are 
-injective $\ZZ^r$-graded modules, and that the injective dimension of 
+resolution of a left bounded complex $R^\bullet$ is an isomorphism $R^\bullet 
+\to I^\bullet$ in $\D^{\ZZ^r}(A)$, where $I^\bullet$ is a left bounded complex
+of injective $\ZZ^r$-graded modules, and that the injective dimension of 
 $R^\bullet$ is the minimal length of an injective resolution. We write 
 $\injdim^{\ZZ^r}_A R^\bullet$ for the injective dimension of $R^\bullet$.
 
@@ -477,6 +477,7 @@ $\injdim^{\ZZ^r}_A R^\bullet$ for the injective dimension of $R^\bullet$.
 \label{dc}
 The following definition is adapted from \cite{Yek-dc}*{Definition 3.3}
 \begin{Definition*}
+Let $A$ be an $\NN^r$-graded connected algebra.
 A \emph{$\ZZ^r$-graded dualizing complex} is a bounded complex $R^\bullet$ in 
 $\D^{\ZZ^r}(A^e)$ such that:
 \begin{enumerate}
@@ -507,7 +508,8 @@ following lemma, which is a derived version of Theorem
 \ref{T:main-theorem}. 
 \begin{Lemma*}
 \label{derived-inj-dim}
-Assume $A$ is left noetherian. If $R^\bullet$ is an object of $\D^{\ZZ^r}(A)$ then
+Assume $A$ is a connected $\NN^r$-graded left noetherian algebra. If 
+$R^\bullet$ is an object of $\D^{\ZZ^r}(A)$ then
 \[
   \injdim_A^{\ZZ^r} R^\bullet 
     \leq \injdim_A \O(R^\bullet) 
@@ -525,7 +527,7 @@ using the exact sequence
 \end{proof}
 
 \begin{Proposition}
-Suppose $A$ is a noetherian connected $\NN^r$-graded algebra.
+Assume $A$ is a connected $\NN^r$-graded left noetherian algebra.
 An object $R^\bullet$ in $\D^{\ZZ^r}(A^e)$ is a $\ZZ^r$-graded dualizing 
 complex if and only if $\O(R^\bullet)$ is a dualizing complex in the ungraded 
 sense.
