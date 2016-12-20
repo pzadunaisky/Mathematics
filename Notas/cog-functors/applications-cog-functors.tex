@@ -103,7 +103,6 @@ bodyfont=\itshape]{mystyle-empty-plain}
 
 
 \DeclareMathOperator\Mod{\mathsf{Mod}}
-\DeclareMathOperator\Vect{\mathsf{Vect}}
 \DeclareMathOperator\Hom{\mathsf{Hom}}
 \DeclareMathOperator\Ext{\mathsf{Ext}}
 \DeclareMathOperator\Tor{\mathsf{Tor}}
@@ -134,68 +133,73 @@ Further applications of change of grading functors
 \begin{document}
 \maketitle
 
-Throughout this document $\k$ is a field, and unadorned $\hom$ and tensor 
-products are always over $\k$. 
+Throughout this document $\k$ is a commutative ring, and unadorned $\hom$ and 
+tensor products are always over $\k$. 
 
 \section{The change of grading functors}
 
 \paragraph
 \label{G-graded-vector-spaces}
-Let $G$ be a group.
-A $G$-graded vector space is a vector space $V$ with a fixed decomposition
-$V = \bigoplus_{g \in G} V_g$; elements in $V_g$ are called homogeneous of
-degree $g$, and $V_g$ is called the $g$-homogeneous component of $V$. Given 
-two $G$-graded vector spaces $V, W$, their tensor product is also a $G$-graded 
-vector space, where for each $g \in G$ 
+Let $G$ be a group. A $G$-graded $\k$-module is a $\k$-module $V$ with a fixed 
+decomposition $V = \bigoplus_{g \in G} V_g$; elements in $V_g$ are called 
+homogeneous of degree $g$, and $V_g$ is called the $g$-homogeneous component 
+of $V$. We usually say graded instead of $G$-graded if the groups is clear 
+from the context.
+
+Given two $G$-graded vector spaces $V, W$, their tensor product is 
+also a $G$-graded vector space, where for each $g \in G$ 
 \begin{align*}
 (V \ot W)_g = \bigoplus_{g' \in G} V_ {g'} \ot W_{(g')^{-1}g}
 \end{align*}
-The group algebra $\k[G]$ is a $G$-graded vector space in an obvious way.
+A map between graded $\k$-modules $f: V \to W$ is said to be 
+\emph{$G$-homogeneous}, or simply homogeneous, if $f(V_g) \subset W_g$ for all 
+$g \in G$.  By definition, a 
+homogeneous map $f: V \to W$ induces maps $f_g: V_g \to W_g$, and 
+$f = \bigoplus_{g \in G} f_g$ for each $g \in G$; 
+we refer to $f_g$ as the homogeneous component of degree $g$ of $f$. The 
+\emph{support} of a $G$-graded $\k$-module $V$ is the set $\supp V = \{g \in 
+G \mid V_g \neq 0\}$.
 
-A map between graded vector spaces $f: V \to W$ is said to be 
-\emph{$G$-homogeneous}, or simply homogeneous if the groups is clear from the 
-context, if $f(V_g) \subset W_g$ for all $g \in G$. Given a 
-$G$-graded vector space $V$ and $g \in G$, we denote by $V[g]$ the graded 
-vector space whose homgeneous component of degree $g'$ is $V[g]_{g'} = 
-V_{g'g}$. By definition, a homogeneous map $f: V \to W$ induces maps $f_g: 
-V_g \to W_g$, and $f = \bigoplus_{g \in G} f_g$ for each $g \in G$; we refer 
-to $f_g$ as the homogeneous component of degree $g$ of $f$. The \emph{support}
-of a $G$-graded vector space $V$ is the set $\supp V = \{g \in G \mid V_g 
-\neq 0\}$.
-
-The category $\Vect^G \k$ has $G$-graded vector spaces as objects and 
+The category $\Mod^G \k$ has $G$-graded vector spaces as objects and 
 homogeneous linear maps as morphisms. Kernels and cokernels of homogeneous
 maps are $G$-graded vector spaces in a natural way, so a complex
 \[
   0 \to V' \to V \to V'' \to 0
 \]
-in $\Vect^G \k$ forms a short exact sequence if and only if it is a short
+in $\Mod^G \k$ forms a short exact sequence if and only if it is a short
 exact sequence of vector spaces, or equivalently if for each $g \in G$
 the sequence formed by taking $g$-homogeneous components is exact.
-Given an object $V$ in $\Vect^G \k$ and $g \in G$, we denote by $V[g]$ the
-$G$-graded vector space whose homogeneous component of degree $g'$ is
-$V[g]_{g'} = V_{g'g}$.
 
-The category $\Vect^G V$ has arbitrary direct sums and products. The direct sum
+Given an object $V$ in $\Mod^G \k$ and $g \in G$, we denote by $V[g]$ the
+$G$-graded $\k$-module whose homogeneous component of degree $g'$ is
+$V[g]_{g'} = V_{g'g}$. This gives a natural autoequivalence of $\Mod^G \k$
+with itself.
+
+The category $\Mod^G V$ has arbitrary direct sums and products. The direct sum
 of $G$-graded vector spaces is again $G$-graded in an obvious way, but this is 
-not the case for direct products. Given a collection of $G$-graded vector 
-spaces $\{V^i \mid i \in I\}$, their direct product is the $G$-graded vector 
-space whose homogeneous decomposition is given by
+not the case for direct products. Given a collection of $G$-graded 
+$\k$-modules $\{V^i \mid i \in I\}$, their direct product is the $G$-graded 
+$\k$-module whose homogeneous decomposition is given by
 \begin{align*}
 \bigoplus_{g \in G} \prod_{i \in I} V^i_g.
 \end{align*}
-In other words, the forgetful functor $\O: \Vect^G \k \to \Vect \k$ preserves
+In other words, the forgetful functor $\O: \Mod^G \k \to \Mod \k$ preserves
 direct sums, but not direct products.
 
 \paragraph
 \label{G-graded-algebras}
 A $G$-graded $\k$-algebra is a $\k$-algebra $A$ which is also a $G$-graded
-vector space such that for all $g,g' \in G$ and all $a \in A_g, a' \in A_{g'}$
-it happens that $aa' \in A_{gg'}$. A $G$-graded (left) $A$-module is a (left)
-$A$-module $M$ which is also a $G$-graded vector space such that for each 
+$\k$-module such that for all $g,g' \in G$ and all $a \in A_g, a' \in A_{g'}$
+we have that $aa' \in A_{gg'}$. If $A$ is a $G$-graded algebra then its
+\emph{structural map} $A \to A \ot \k[G]$ is defined as $a \in A_g \mapsto a 
+\ot g \in A_g \ot \k[G]_g$ for each $g \in G$; the fact that $A$ is a 
+$G$-graded algebra implies that this is an algebra map.
+
+A $G$-graded left $A$-module is a left
+$A$-module $M$ which is also a $G$-graded $\k$-module such that for each 
 $g,g' \in G$ and all $a \in A_g, m \in M_{g'}$ it happens that $am \in 
-M_{gg'}$. Notice also that if $M$ is a $G$-graded $A$-module then the 
-$G$-graded vector space $M[g]$ is also a $G$-graded $A$-module, with the same 
+M_{gg'}$. Notice that if $M$ is a $G$-graded $A$-module then the 
+$G$-graded $\k$-module $M[g]$ is also a $G$-graded $A$-module, with the same 
 underlying $A$-module structure. We say that $A$ is $G$-graded noetherian if
 every left $G$-graded $A$-submodule of $A$ is finitely generated, or 
 equivalently if every $G$-graded $A$-submodule of a finitely generated 
@@ -203,15 +207,14 @@ $G$-graded $A$-module is also finitely generated.
 
 We denote by $\Mod^G A$ the category whose objects are $G$-graded
 $A$-modules and whose morphisms are $G$-homogeneous $A$-linear maps. It is a 
-Grothendieck category with enough projective and injective objects; The reader 
+Grothendieck category with enough projective and injective objects; the reader 
 is refered to \cite{NV-graded-book3}*{Chapter 2} for proofs and details. Given 
 an object $M$ of $\Mod^G A$, we will denote by $\projdim_A^G M$ and 
-$\injdim_A^G 
-M$ its projective and injective dimension, respectively. Given two $G$-graded
-$A$-modules $M, N$ we denote by $\Hom^G_A(M,N)$ the vector space of all 
-$G$-homogeneous $A$-linear morphisms from $M$ to $N$. Since $\Mod^G A$ has 
-enough injectives, we can define for each $i \geq 0$ the $i$-th right derived 
-functor of $\Hom^G_A$, which we denote by $\R^i\Hom^G_A$. 
+$\injdim_A^G M$ its projective and injective dimension, respectively. Given 
+two $G$-graded $A$-modules $M, N$ we denote by $\Hom^G_A(M,N)$ the $\k$-module 
+of all $G$-homogeneous $A$-linear morphisms from $M$ to $N$. Since $\Mod^G A$ 
+has enough injectives, we can define for each $i \geq 0$ the $i$-th right 
+derived functor of $\Hom^G_A$, which we denote by $\R^i\Hom^G_A$. 
 
 \paragraph
 \label{cog-functors}
@@ -219,9 +222,9 @@ Let $A$ be a $G$-graded $\k$-algebra.
 Any group homomorphism $\phi: G \to H$ induces functors $\phi_!, \phi_*: 
 \Mod^G A \to \Mod^H \k$ and $\phi^*: \Mod^H A \to \Mod^G A$ as follows.
 
-Let $V,W$ be $G$-graded vector spaces and let $f: V \to W$ be a homogeneous 
-map. We define $\phi_!(V)$, resp. $\phi_!(f)$, to be the $H$-graded vector 
-space, resp. $H$-homogeneous map, whose homogeneous components of degree
+Let $V,W$ be $G$-graded $\k$-modules and let $f: V \to W$ be a homogeneous 
+map. We define $\phi_!(V)$, resp. $\phi_!(f)$, to be the $H$-graded 
+$\k$-module, resp. $H$-homogeneous map, whose homogeneous components of degree
 $h \in H$ are given by
 \begin{align*}
 \phi_!(V)_h
@@ -229,12 +232,12 @@ $h \in H$ are given by
 &\phi_!(f)_h
   &= \bigoplus_{\{g \in G \mid \phi(f) = h\}} f_g.
 \end{align*}
-Notice that $\phi_!(V)$ has the same underlying vector space as $V$, we are
+Notice that $\phi_!(V)$ has the same underlying $\k$-module as $V$, we are
 only changing its grading. In particular, $\phi_!(A)$ is an $H$-graded 
-$\k$-algebra, and if $V$ was a $G$-graded $A$-module then $\phi_!(V)$ is also 
+$\k$-algebra, and if $V$ was a $G$-graded $A$-module then $\phi_!(V)$ is  
 an $H$-graded $\phi_!(A)$-module, with the same underlying action; since the
 action of $A$ remains unchanged, if $f$ is $A$-linear then so is $\phi_!(f)$.
-
+This defines the functor $\phi_!: \Mod^G A \to \Mod^H \phi_!(A)$.
 From now on we usually write $A$ instead of $\phi_!(A)$ to lighten up the 
 notation, since the context will make it clear whether we are considering it 
 as $G$-graded or as $H$-graded algebra.
@@ -250,10 +253,10 @@ $h \in H$ are given by
 \end{align*}
 If $V$ is also an $A$-module, we define the action of a homogeneous element 
 $a \in A_{g'}$ with $g' \in G$ over an element $(v_g)_{g \in \phi^{-1}(h)}$
-as $a(v_g) = (av_g)$. With this action $\phi_*(V)$ becomes an $H$-graded $A$-
-module.
+as $a(v_g) = (av_g)$. With this action $\phi_*(V)$ becomes an $H$-graded 
+$A$-module, and we have defined the functor $\phi_*: \Mod^G A \to \Mod^H A$.
 
-Now let $V',W'$ be $H$-graded vector spaces and let $f': V' \to W'$ be an 
+Now let $V',W'$ be $H$-graded $\k$-modules and let $f': V' \to W'$ be an 
 $H$-homogeneous map. We set $\phi^*(V') \subset V' \ot \k[G]$ to be the 
 subspace generated by all elements of the form $v \ot g$ with $v \in V'$ 
 homogeneous of degree $\phi(g)$, and $\phi^*(f)(v \ot g) = f(v) \ot g$. In 
@@ -265,12 +268,14 @@ and $\phi(f')$ are given by
   &f_g
   &= f_{\phi(g)} \ot 1.
 \end{align*}
-If $V'$ is an $H$-graded $A$-module, then we can endow $V' \ot \k[G]$ with
-the structure of a $G$-graded $A$-module as follows. Take $g,g' \in G$ and  
-for each $a \in A_{g'}$ and each $v \ot g \in V' \ot \k[G]$ set $a \cdot 
-(v \ot g) = (an) \ot g'g$. Then $\phi^*(V') \subset V' \ot \k[G]$ is a
+If $V'$ is an $H$-graded $A$-module, then $V' \ot \k[G]$ is an 
+$A \ot \k[G]$-module, and it becomes an $A$-module through the structure map 
+$\rho: A \to A \ot \k[G]$; it is immediate to check that it is a $G$-graded 
+$A$-module with $(V' \ot \k[G])_g = V' \ot \vspan{g}$ for each $g \in G$.
+With these definitions in place, $\phi^*(V') \subset V' \ot \k[G]$ is a
 $G$-graded $A$-submodule. It is easy to check that if $f'$ is homogeneous and 
-$A$-linear then so is $\phi^*(f)$.
+$A$-linear then so is $\phi^*(f)$. Thus we have defined a functor $\phi^*: 
+\Mod^H A \to \Mod^G A$.
 
 
 \begin{Remark*}
@@ -279,19 +284,18 @@ exactness. The functor $\phi^*$ is exact, and it reflects exactness if
 and only if $\phi$ is surjective.
 \end{Remark*}
 
-\begin{Proposition}[\cite{RZ-twisted}*{Proposition 3.2.1}]
+\paragraph
 \label{P:adjoint}
+The following result can be found in \cite{RZ-twisted}*{Proposition 3.2.1}. In 
+that reference the groups are assumed to be commutative, but this is not used
+in the proof.
+\begin{Proposition}
 Let $\phi: G \to H$ be a group morphism and let $A$ be a $G$-graded $\k$-
 algebra. The functor $\phi^*$ is right adjoint to $\phi_!$ and left adjoint to 
  $\phi_*$. 
 \end{Proposition}
-Let $M$ be a $G$-graded $A$-module. There are natural isomorphisms
-\begin{align*}
-\phi^*\phi_!(M) 
-  &\cong \bigoplus_{l \in L} M[l]
-  &\phi^*\phi_*(M) 
-  &\cong \prod_{l \in L} M[l]
-\end{align*}
+
+
 
 
 \section{Injective dimension and change of grading}
@@ -301,8 +305,9 @@ $L = \ker \phi$. Also $A$ denotes a $G$-graded $\k$-algebra.
 \paragraph
 \label{hom-dim-inequalities}
 It is a well known fact that an object $M$ of $\Mod^G A$ is projective if and 
-only if it is projective as $A$-module, i.e. $\phi_!(M)$ is projective. The
-following proposition is a refined version of this result.
+only if it is projective as $A$-module, i.e. $\phi_!(M)$ is projective. On the 
+other hand, an injective object $I$ in $\Mod^G A$ need not be injective as 
+$A$-module. Our next objective is to clarify how $\phi_!$ affects injective dimension. We begin by recalling a previous result.
 
 \begin{Proposition*}[\cite{RZ-twisted}*{Corollaries 3.2.2, 3.2.3}]
 Let $\phi: G \to H$ be a group morphism and let $A$ be a $G$-graded $\k$-
@@ -318,27 +323,24 @@ algebra. Let $M$ be an object of $\Mod^G A$. Then the following hold.
 
 \paragraph
 \label{phi-finite}
-As is well known, an injective object $I$ in $\Mod^G A$ need not be injective
-as $A$-module. Our next objective is to give a bound to the injective dimension
-of $\phi_!(I)$. 
-
-We begin with the following observation. The natural inclusion of the direct 
-sum of a family of vector spaces into its product gives rise to a natural 
-transformation $\eta: \phi_! \to \phi_*$. Notice that $\eta(M): \phi_!(M) \to
-\phi_*(M)$ is an isomorphism if and only if for each $h \in H$ the set 
-$\supp M \cap \phi^{-1}(h)$ is finite. 
+The natural inclusion of the direct sum of a family of vector spaces into its 
+product gives rise to a natural transformation $\eta: \phi_! \to \phi_*$. 
+Notice that $\eta(M): \phi_!(M) \to \phi_*(M)$ is an isomorphism if and only 
+if for each $h \in H$ the set $\supp M \cap \phi^{-1}(h)$ is finite. 
 
 \begin{Definition*}
 An object $M$ of $\Mod^G A$ is called \emph{$\phi$-finite} if for each $h \in 
 H$ the set $\supp M \cap \phi^{-1}(h)$ is finite. 
 \end{Definition*}
-The following lemma is an immediate consequence of Proposition \ref{P:adjoint}.
-\begin{Lemma*}
+
+For example, if $|L| < \infty$ then every $G$-graded $A$-module is 
+$\phi$-finite. Also, if $A$ is $\phi$-finite then every finitely generated 
+$G$-graded $A$-module is $\phi$-finite. In view of this, the following obvious 
+consequence of Proposition \ref{hom-dim-inequalities} applies in all these 
+situations.
+\begin{Theorem*}
 If $M$ is $\phi$-finite then $\injdim^G_A M = \injdim_A^H \phi_!(M)$. 
-\end{Lemma*}
-In particular, if $A$ is $\phi$-finite then every finitely generated $G$-graded
-$A$-module is $\phi$-finite, and hence $\phi_!$ preserves the injective 
-dimension of all finitely generated $G$-graded $A$-modules.
+\end{Theorem*}
 
 \paragraph
 \label{dim-L}
@@ -354,17 +356,17 @@ $\projdim_{\k[L]} \k$ the cohomological dimension of $L$.
 
 \paragraph
 \label{P:resolution}
-\begin{Definition*}
-Let $N$ be an $H$-graded $A$-module. We say that $N$ is \emph{stably 
-$G$-graded} if there exist an $H$-graded $A$-module $N'$ and a $G$-graded 
+Let $N$ be an $H$-graded $A$-module. Let us say that $N$ is almost $G$-graded
+if there exist an $H$-graded $A$-module $N'$ and a $G$-graded 
 $A$-module $M$ such that $N \oplus N' \cong \phi_!(M)$ as $H$-graded 
-$A$-modules.
-\end{Definition*}
+$A$-modules. The following Proposition states that every $H$-graded module 
+has a resolution by almost $G$-graded modules, and gives a uniform bound for 
+the length of that resolution.
 
 \begin{Proposition*}
 Set $l = \projdim_{\k[G]}^H \k[H] = \projdim_{\k[L]} \k$.
 For every object $N$ of $\Mod^H A$ there exists a resolution of length $l$ of 
-$N$ by stably $G$-graded modules.
+$N$ by almost $G$-graded modules.
 \end{Proposition*}
 \begin{proof}
 We define a functor $D_N: \Mod^H \k[G] \to \Mod^H A$ as follows. Given
@@ -385,16 +387,26 @@ an exact complex $D_N(P^\bullet) \to D_N(\k[H]) \cong N$. Now for each $i
 $P^i \oplus Q^i$ is free of rank $r_i$. Thus $D_N(P^i)$ is a direct summand
 of $D_N(P^i \oplus Q^i)$, which isomorphic to the direct sum of $r_i$ copies
 of $\phi_!(\phi^*(N))$. Since $\phi_!$ is has a right adjoint, it commutes 
-with arbitrary direct sums, so $D_N(P^i)$ is stably $G$-graded for each $i$.
+with arbitrary direct sums, so $D_N(P^i)$ is almost $G$-graded for each $i$.
 \end{proof}
 
 \paragraph
+Let $M$ be a $G$-graded $A$-module. For each $l \in L$ we have a map $M[l] \to 
+\phi^*\phi_!(M)$ whose homogeneous component of degree $g \in G$ is given by 
+$m \in M[l]_g \mapsto m \ot gl \in \phi^*\phi_!(M)$. Taking the direct sum 
+over all $M$ we obtain a natural isomorphism
+\begin{align*}
+\phi^*\phi_!(M) 
+  &\cong \bigoplus_{l \in L} M[l].
+\end{align*}
+This observation is used in the following lemma.
+
 \label{L:acyclic}
-\begin{Lemma}
-Assume $A$ is left $G$-noetherian. Let $I$ be an injective object of 
-$\Mod^G A$. If $N$ is stably $G$-graded then $\R^i\Hom_A^H(N, \phi_!(I)) = 0$
+\begin{Lemma*}
+Assume $A$ is left $G$-graded noetherian. Let $I$ be an injective object of 
+$\Mod^G A$. If $N$ is almos $G$-graded then $\R^i\Hom_A^H(N, \phi_!(I)) = 0$
 for all $i > 0$.
-\end{Lemma}
+\end{Lemma*}
 \begin{proof}
 Clearly it is enough to show that the result holds for $N = \phi_!(M)$ where
 $M$ is a $G$-graded $A$-module. In that case we have isomorphisms
@@ -412,14 +424,14 @@ $i \geq 0$ natural isomorphisms between the derived functors
 Now by the graded version of the Bass-Papp theorem (see 
 \cite{GW-noetherian-book}*{Theorem 5.23} for a proof in 
 the ungraded case, which adapts easily to the graded context), the fact that 
-$A$ is left $G$-noetherian implies that $\bigoplus_{l \in L} I[l]$ is 
+$A$ is left $G$-graded noetherian implies that $\bigoplus_{l \in L} I[l]$ is 
 injective, and hence the last isomorphism implies $\R^i \Hom_A^H(\phi_!(M), 
 \phi_!(I)) = 0$.
 \end{proof}
 
 \begin{Theorem}
 \label{T:main-theorem}
-Assume $A$ is left $G$-noetherian.
+Assume $A$ is left $G$-graded noetherian.
 Set $l = \projdim_{\k[L]} \k$ and let $M$ be an object of $\Mod^G A$. Then 
 $\injdim^H_A \phi_!(M) \leq \injdim^G_A M + l$.
 \end{Theorem}
@@ -428,7 +440,7 @@ The case where $M$ is of finite injective dimension is trivially true, so let
 us consider the case where $n = \injdim_A^G M$ is finite. 
 
 If $n = 0$ then $M$ is injective in $\Mod^G A$. Let $N$ be an object of 
-$\Mod^H A$, and let $P^\bullet \to N$ be a resolution of $N$ by stably 
+$\Mod^H A$, and let $P^\bullet \to N$ be a resolution of $N$ by almost 
 $G$-graded objects of $\Mod^H A$ of length $l$, as in \ref{P:resolution}.
 By Lemma \ref{L:acyclic}, $P^\bullet$ is a resolution of $N$ by objects which 
 are acyclic for the functor $\Hom_A^H(-,\phi_!(I))$, so 
@@ -455,31 +467,34 @@ $\injdim_A^H \phi_!(M') + 1 \leq n+l$. This gives us the desired inequality.
 
 \section{Dualizing complexes and change of grading}
 We finish with a short section on the effect of change of grading on dualizing
-complexes. 
+complexes. Throughout this section $\k$ is a field.
 
 \paragraph
-In this section we denote by $A$ an $\NN^r$-graded algebra and use
-the usual notation $A^e = A \ot A^\op$; under this hypothesis $A$ is 
-noetherian if and only if it is $\ZZ^r$-noetherian. We will say that $A$ is 
-connected if $A_0 = \k$. We denote by $\D^{\ZZ^r}(A), \D^{\ZZ^r}(A^\op)$ and 
-$\D^{\ZZ^r}(A^e)$ the derived 
-categories of $\Mod^{\ZZ^r} A$, $\Mod^{\ZZ^r} A^{\op}$ and $\Mod^{\ZZ^r} A^e$,
-respectively. We write $\R\HOM^{\ZZ^r}_A$ for the right derived functor of the 
-internal $\HOM$ functor of the category of complexes of $\ZZ^r$-graded 
-bimodules, as defined in \cite{Yek-dc}*{section 2}. Recall that an injective 
-resolution of a left bounded complex $R^\bullet$ is an isomorphism $R^\bullet 
-\to I^\bullet$ in $\D^{\ZZ^r}(A)$, where $I^\bullet$ is a left bounded complex
-of injective $\ZZ^r$-graded modules, and that the injective dimension of 
-$R^\bullet$ is the minimal length of an injective resolution. We write 
-$\injdim^{\ZZ^r}_A R^\bullet$ for the injective dimension of $R^\bullet$.
+
+In this section we denote by $A$ an $\NN^r$-graded algebra and write $A^e = A 
+\ot A^\op$. We will also assume that $A$ is $\ZZ^r$-graded left noetherian. By 
+\cite{CQ-polycylic}*{Theorem 2.2} this is equivalent to $A$ being noetherian.
+We say that $A$ is connected if $A_0 = \k$.
+
+We denote by $\D^{\ZZ^r}(A), \D^{\ZZ^r}(A^\op)$ and $\D^{\ZZ^r}(A^e)$ the 
+derived categories of $\Mod^{\ZZ^r} A$, $\Mod^{\ZZ^r} A^{\op}$ and 
+$\Mod^{\ZZ^r} A^e$, respectively. We write $\R\HOM^{\ZZ^r}_A$ for the right 
+derived functor of the internal $\HOM$ functor of the category of complexes of 
+$\ZZ^r$-graded bimodules, as defined in \cite{Yek-dc}*{section 2}. Recall that 
+an injective resolution of a complex $R^\bullet$ is an isomorphism $R^\bullet 
+\to I^\bullet$ in $\D^{\ZZ^r}(A)$ where all the modules of the complex 
+$I^\bullet$ are injective $\ZZ^r$-graded modules, and that the injective 
+dimension of $R^\bullet$ is the minimal length of an injective resolution. We 
+write $\injdim^{\ZZ^r}_A R^\bullet$ for the injective dimension of $R^\bullet$.
 
 \paragraph
 \label{dc}
 The following definition is adapted from \cite{Yek-dc}*{Definition 3.3}
 \begin{Definition*}
-Let $A$ be an $\NN^r$-graded connected algebra.
-A \emph{$\ZZ^r$-graded dualizing complex} is a bounded complex $R^\bullet$ in 
-$\D^{\ZZ^r}(A^e)$ such that:
+Let $A$ be a connected $\NN^r$-graded noetherian algebra. A 
+\emph{$\ZZ^r$-graded dualizing complex} for $A$ is a bounded complex 
+$R^\bullet$ in $\D^{\ZZ^r}(A^e)$ such that:
+
 \begin{enumerate}
 \item its cohomology modules are finitely generated as left and right 
   $\ZZ^r$-graded $A$-modules;
@@ -487,43 +502,72 @@ $\D^{\ZZ^r}(A^e)$ such that:
 \item it has finite injective dimension as a complex of left or right 
   $\ZZ^r$-graded $A$-modules;
 
-\item the natural maps $A^\op \to \mathcal R\HOM_{A} (R^\bullet, R^\bullet)$
+\item the natural maps $A^\op \to \R\HOM_{A} (R^\bullet, R^\bullet)$
   and $A \to \mathcal R\HOM_{A^\op}(R^\bullet, R^\bullet)$ are isomorphisms
   in $\D^{\ZZ^r}(A^e)$.
 \end{enumerate}
 \end{Definition*}
-In particular a \emph{dualizing complex in the ungraded sense} is an object in 
+A \emph{dualizing complex in the ungraded sense} is an object in 
 the derived category of $\Mod A$ which complies with the ungraded analogues of 
 properties (1), (2) and (3). Van den Bergh's excercise was originally stated 
 while discussing whether a $\ZZ$-graded dualizing complex is also a dualizing 
 complex in the ungraded sense. We will give a proof of this result for 
 $\ZZ^r$-graded dualizing complexes. 
 
+\begin{Remark*}
+The natural maps from item 3 of the previous definition can be understood as 
+follows. First, any complex complying $R^\bullet$ with conditions 1 and 2
+is isomorphic to a bounded complex of bimodules $I^\bullet$ such that each
+$I^i$ is injective as left and right $\ZZ^r$-graded injective module. Hence
+there exist isomorphisms
+\begin{align*}
+\R\HOM_{A} (R^\bullet, R^\bullet) 
+  &\cong \HOM_{A} (I^\bullet, I^\bullet), \\
+\R\HOM_{A^\op} (R^\bullet, R^\bullet) 
+  &\cong \HOM_{A^\op} (I^\bullet, I^\bullet).
+\end{align*}
+Thus the natural map $A^\op \to \HOM_{A} (I^\bullet, I^\bullet)$ is the map
+that assings to each $a \in A$ the $A$-linear morphism given by right 
+multiplication by $a$. This is an endomorphism of $I^\bullet$ because the 
+differentials of this complex are bimodule morphisms.
+\end{Remark*}
+
 \paragraph
+\label{derived-inj-dim}
 Let $\phi: \ZZ^r \to \{0\}$ be the trivial morphism. Since $\phi_!: 
-\Mod^{\ZZ^r} A \to \Mod A$ is exact, it induces an exact functor $\O: 
-\D^{\ZZ^r}(A) \to \D(A)$. The other change of grading functors also induce 
-functors between the corresponding derived categories. We will need the 
-following lemma, which is a derived version of Theorem 
+\Mod^{\ZZ^r} A \to \Mod A$ is exact, it induces an exact functor at the 
+derived level $\phi_!: \D^{\ZZ^r}(A) \to \D(A)$. The other change of grading 
+functors also induce functors between the corresponding derived categories. We 
+will need the following lemma, which is a derived version of Theorem 
 \ref{T:main-theorem}. 
+
 \begin{Lemma*}
 \label{derived-inj-dim}
-Assume $A$ is a connected $\NN^r$-graded left noetherian algebra. If 
-$R^\bullet$ is an object of $\D^{\ZZ^r}(A)$ then
+Assume $A$ is left noetherian. Let $R^\bullet$ be complex in $\D^{\ZZ^r}(A)$
+with finite injective dimension. The following inequalities hold.
+
 \[
   \injdim_A^{\ZZ^r} R^\bullet 
     \leq \injdim_A \O(R^\bullet) 
-    \leq \injdim_A^{\ZZ^r} R^\bullet +r
+    \leq \injdim_A^{\ZZ^r} R^\bullet +r.
 \]
 \end{Lemma*}
 \begin{proof}
-Both inequalities are proved as in Theorem \ref{T:main-theorem}. The syzygy 
-argument for the second inequality is adapted by taking a minimal injective 
-resolution of $R^\bullet$ and, assuming it starts in homological degree $0$, 
-using the exact sequence 
-\[
-  0 \to I^{\geq 1} \to I^\bullet \to I^0 \to 0.
-\]
+We may replace $R^\bullet$ by an isomorphic bounded complex of injective 
+$A$-modules $I^\bullet$. We proceed by induction on $\ell$, the length of 
+$I^\bullet$. The case $\ell = 0$ is a special case of Theorem 
+\ref{T:main-theorem}. Now let $t \in \ZZ$ be the minimal homological degree
+such that $I^t \neq 0$, and consider the exact sequence of complexes
+\begin{align*}
+0 \to I^{> t} \to I^\bullet \to I^t \to 0,
+\end{align*}
+where $I^t$ is seen as a complex concentrated in homological degree $t$ and
+$I^{> t}$ is the subcomplex of $I^\bullet$ formed by all components in 
+homological degree larger than $t$. Thus there is a distinguished triangle
+$\O(I^{> t}) \to \O(I^\bullet) \to \O(I^t) \to$ in $\D(\Mod A)$.
+Since by induction the stated inequality holds for the first and third 
+complexes of the triangle, a simple argument with long exact sequences shows 
+that the corresponding inequality holds for $\O(I^\bullet)$.
 \end{proof}
 
 \begin{Proposition}
