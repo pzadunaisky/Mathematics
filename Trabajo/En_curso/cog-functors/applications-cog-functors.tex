@@ -123,8 +123,7 @@ bodyfont=\itshape]{mystyle-empty-plain}
 \DeclareMathOperator\Res{\mathsf{Res}}
 \DeclareMathOperator\coker{coker}
 \DeclareMathOperator\nat{nat}
-
-\DeclareMathOperator\SL{\mathsf{SL}}
+\DeclareMathOperator\Add{\mathsf{Add}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{
@@ -146,33 +145,34 @@ In other words, the forgetful functor $\O: \Mod^G A \to \Mod A$ sends
 projective objects to projective objects.
 
 If we replace ``projective'' by ``injective'' then the result is not true: 
-take $A = \k[x,x^{-1}]$ with the obvious $\ZZ$-grading: $A$ itself is 
-injective as an object of the category of graded modules of $A$, but it is not 
+take $A = \QQ[x,x^{-1}]$ with the obvious $\ZZ$-grading: $A$ itself is 
+injective as an object of the category of graded $A$-modules, but it is not 
 an injective $A$-module. The objective of this article is to study the efect 
 of the forgetful functor $\O$ on injective dimension. More generally, given a 
 group morphism $\phi: G \to H$ we can turn $G$-gradings into $H$-gradings, and
 we would like to know how the corresponding change of grading functor 
-$\phi_!: \Mod^G A \to \Mod^H A$ affects injective dimension of objects. See
-paragraph \ref{cog-functors} for the precise definition of $\phi_!$.
+$\phi_!: \Mod^G A \to \Mod^H A$ affects the injective dimension of an object. 
+See paragraph \ref{cog-functors} for the precise definition of $\phi_!$.
 
 While this is a very natural question, there is not much literature on the
 subject. A classical result of R. Fossum and H.-B. Foxby 
 \cite{FF-graded}*{Theorem 4.10} states that if $A$ is $\ZZ$-graded noetherian 
 and commutative then a $\ZZ$-graded-injective module has injective dimension 
-at most $1$. According to M. Van den Bergh \cite{VdB-existence-dc}*{Below 
-Definition 6.1}, this result extends to the noncommutative case; a proof
-of this fact can be found in the preprint \cite{Yek-note}. All these results 
-are obtained by the usual route of going from ungraded to graded objects 
-through filtrations and spectral sequences. If the group is not $\ZZ$ then 
-these techniques are not available; however, there is one more result in this 
-direction, namely if $A$ is graded over a finite group then it is known that a 
-graded module is graded injective if and only if it is injective, see 
-\cite{NV-graded-book3}*{2.5.2}.
+at most $1$. According to a comment in M. Van den Bergh 
+\cite{VdB-existence-dc}*{below Definition 6.1}, this result extends to the 
+noncommutative case; a proof of this fact can be found in the preprint
+\cite{Yek-note}. All these results are obtained by the usual route of going 
+from ungraded to graded objects through filtrations and spectral sequences. If 
+the group is not $\ZZ$ then these techniques are not available; however, there 
+is one more result in this direction, namely if $A$ is graded over a finite 
+group then it is known that a graded module is graded injective if and only if 
+it is injective, see \cite{NV-graded-book3}*{2.5.2}.
 
 We have already discussed the functor $\phi_!: \Mod^G A \to \Mod^H A$ induced
 by a group morphism $\phi: G \to H$. This functor is part of an adjoint triple
-$(\phi_!, \phi^*, \phi_*)$ which allow to transfer information between graded 
-categories in a systematic way. Using these functors we obtain bounds for the
+$(\phi_!, \phi^*, \phi_*)$ which allow to transfer information between these 
+categories in a systematic way (this is done for example in the article 
+\cite{RZ-twisted}). Using these functors we obtain bounds for the
 change in the injective dimension of $G$-graded objects when seen as 
 $H$-graded through $\phi$. Our results contain all the previous ones as 
 particular cases. The main one is the follwing.
@@ -196,12 +196,12 @@ he ommits) turns on the fact that a graded injective module has injective
 dimension at most $1$. We use our results to prove a slightly more precise
 version of this statement.
 
-The article is structured as follows. In section \ref{COG-FUNCTORS} we recall
-the general properties of the change of grading functors. In section 
-\ref{COG-INJDIM} we prove our main results on how re-grading affects
-injective dimension. Finally in section \ref{COG-DC} we prove similar results
-at the derived level and prove Van den Bergh's statement on regradings of 
-dualizing complexes.
+The article is structured as follows. In section \ref{COG-FUNCTORS} we review 
+some basic facts on the category of graded modules and recall the general 
+properties of the change of grading functors. In section \ref{COG-INJDIM} we 
+prove our main results on how re-grading affects injective dimension. Finally 
+in section \ref{COG-DC} we give similar results at the derived level and use 
+them to prove Van den Bergh's statement on regradings of dualizing complexes.
 
 Throughout this document $\k$ is a commutative ring, and unadorned $\hom$ and 
 tensor products are always over $\k$. 
@@ -242,8 +242,7 @@ the sequence formed by taking $g$-homogeneous components is exact.
 
 Given an object $V$ in $\Mod^G \k$ and $g \in G$, we denote by $V[g]$ the
 $G$-graded $\k$-module whose homogeneous component of degree $g'$ is
-$V[g]_{g'} = V_{g'g}$. This gives a natural autoequivalence of $\Mod^G \k$
-with itself.
+$V[g]_{g'} = V_{g'g}$. This gives a natural autoequivalence of $\Mod^G \k$.
 
 The category $\Mod^G V$ has arbitrary direct sums and products. The direct sum
 of graded modules is again graded in an obvious way, but this is not the case
@@ -267,7 +266,7 @@ $\k$-algebra, such that for all $g,g' \in G$ and all $a \in A_g, a' \in A_{g'}$
 we have that $aa' \in A_{gg'}$. If $A$ is a $G$-graded algebra then its
 \emph{structural map} $\rho: A \to A \ot \k[G]$ is defined as $a \in A_g 
 \mapsto a \ot g \in A_g \ot \k[G]_g$ for each $g \in G$; the fact that $A$ is 
-a $G$-graded algebra implies that this is an algebra map.
+a $G$-graded algebra implies that this is a morphism of algebras.
 
 A $G$-graded left $A$-module is a left $A$-module $M$ which is also a 
 $G$-graded $\k$-module such that for each $g,g' \in G$ and all $a \in A_g, 
@@ -301,8 +300,8 @@ derived functors by $\R^i\HOM_A^G$.
 \paragraph
 \label{cog-functors}
 Let $G,H$ be groups and let $A$ be a $G$-graded $\k$-algebra. As shown in 
-\cite{RZ-twisted}*{section 1.3}, any group homomorphism $\phi: G \to H$ 
-induces three functors $\phi_!, \phi_*: \Mod^G A \to \Mod^H \k$ and $\phi^*: 
+\cite{RZ-twisted}*{section 1.3}, any group homomorphism $\phi: G \to H$
+induces functors $\phi_!, \phi_*: \Mod^G A \to \Mod^H \k$ and $\phi^*: 
 \Mod^H A \to \Mod^G A$, which form an exact triple $(\phi_!, \phi^*, \phi_*)$.
 We quickly review the construction for the benefit of the reader.
 
@@ -363,14 +362,15 @@ $\rho: A \to A \ot \k[G]$; it is immediate to check that with this action it
 becomes a $G$-graded $A$-module with $(V' \ot \k[G])_g = V' \ot \vspan{g}$ for 
 each $g \in G$, and that $\phi^*(V') \subset V' \ot \k[G]$ is a $G$-graded 
 $A$-submodule. It is also easy to check that if $f'$ is homogeneous and 
-$A$-linear then so is $\phi^*(f)$. Thus we have defined a functor $\phi^*: 
+$A$-linear then so is $\phi^*(f')$. Thus we have defined a functor $\phi^*: 
 \Mod^H A \to \Mod^G A$.
 
 
 \paragraph
 \label{P:adjoint}
 We refer to $\phi_!, \phi^*$ and $\phi_*$ collectively as the \emph{change of
-grading functors}. As mentioned before, the change of grading functors form an adjoint triple, meaning that $\phi_!$ is left adjoint to $\phi^*$, which in 
+grading functors}. As mentioned before, the change of grading functors form an 
+adjoint triple, meaning that $\phi_!$ is left adjoint to $\phi^*$, which in 
 turn is left adjoint to $\phi_*$. A proof of this result can be found in 
 \cite{RZ-twisted}*{Proposition 3.2.1}. In that reference the groups are 
 assumed to be commutative, but this is not used in the proof.
@@ -378,6 +378,40 @@ It is clear from the definitions that the change of grading
 functors are exact, and that $\phi_!, \phi_*$ reflect exactness, i.e. a complex
 is exact if and only if its image by any of them is also exact. The functor 
 $\phi^*$ reflects exactness if and only if $\phi$ is surjective.
+
+\begin{Proposition*}
+The functor $\phi^*$ is right adjoint to $\phi_!$ and left adjoint to $\phi_*$.
+\end{Proposition*}
+\begin{proof}
+Let $M$ be an object of $\Mod^G A$ and $N$ an object of $\Mod^H A$. Define maps
+\begin{align*}
+\xymatrix{
+	\Hom_A^H(\phi_!(M), N) \ar@/^6pt/[r]^-\alpha
+		& \Hom_A^G(M, \phi^*(N)) \ar@/^6pt/[l]^-\beta
+}
+\end{align*}
+as follows. Given $f: \phi_!(M) \to N$, for each $g \in G$ and each $m \in M_g$
+set $\alpha(f)(m) = f(m) \ot g$. Conversely, given $f: M \to \phi^*(N)$, let 
+$\epsilon: \k[G] \to \k$ be the counit of $\k[G]$, i.e. the algebra map 
+defined by setting $\epsilon(g) = 1$, ans set $\beta(f) = 1 \ot \epsilon 
+\circ f$. Direct computation shows that these maps are well defined, natural,
+and mutual inverses. Thus $\phi_!$ is the left adjoint of $\phi^*$.
+
+Now we define maps 
+\begin{align*}
+\xymatrix{
+	\Hom_A^G(\phi^*(N), M) \ar@/^6pt/[r]^-\gamma
+		& \Hom_A^H(N, \phi_*(M)) \ar@/^6pt/[l]^-\delta
+}
+\end{align*}
+as follows. Given $f: \phi^*(N) \to M$, for each $h \in H$ and each $n \in N_h$
+we set $\gamma(f)(n) = (f(n \ot g))_{g \in \phi^{-1}(h)}$. Conversely, given
+$f: N \to \phi_*(M)$, for each $g \in G$ and $n \in N_{\phi(g)}$ we have $f(n)
+\in \prod_{g' \in \phi^{-1}(h)} M_{g'}$, so we can set $\delta(n \ot g)$ as 
+the $g$-th component of $f(n)$. Once again direct computation shows that these 
+maps are well defined, natural, and mutual inverses.
+\end{proof}
+
 
 \section{Injective dimension and change of grading}
 \label{COG-INJDIM}
@@ -405,21 +439,15 @@ Let $M$ be an object of $\Mod^G A$. Then the following hold.
 
 \paragraph
 \label{phi-finite}
-The natural inclusion of the direct sum of a family of modules into its 
+The natural inclusion of the direct sum of a family into its 
 product gives rise to a natural transformation $\eta: \phi_! \Rightarrow 
 \phi_*$. Notice that $\eta(M): \phi_!(M) \to \phi_*(M)$ is an isomorphism if 
 and only if for each $h \in H$ the set $\supp M \cap \phi^{-1}(h)$ is finite. 
-
-\begin{Definition*}
-An object $M$ of $\Mod^G A$ is called \emph{$\phi$-finite} if for each $h \in 
-H$ the set $\supp M \cap \phi^{-1}(h)$ is finite. 
-\end{Definition*}
-
-For example, if $|L| < \infty$ then every $G$-graded $A$-module is 
-$\phi$-finite. Also, if $A$ is $\phi$-finite then every finitely generated 
-$G$-graded $A$-module is $\phi$-finite. In view of this, the following obvious 
-consequence of Proposition \ref{hom-dim-inequalities} applies in all these 
-situations. 
+If this happens we say that $M$ is \emph{$\phi$-finite}.  For example, if $|L| 
+< \infty$ then every $G$-graded $A$-module is $\phi$-finite. Also, if $A$ is 
+$\phi$-finite then every finitely generated $G$-graded $A$-module is 
+$\phi$-finite. In view of this, the following obvious consequence of 
+Proposition \ref{hom-dim-inequalities} applies in all these situations. 
 \begin{Theorem*}
 If an object $M$ of $\Mod^G A$ is $\phi$-finite then $\injdim^G_A M = 
 \injdim_A^H \phi_!(M)$. 
@@ -427,8 +455,8 @@ If an object $M$ of $\Mod^G A$ is $\phi$-finite then $\injdim^G_A M =
 
 \begin{Remark*}
 Following the ideas of \cite{Lev-ncreg}*{section 3}, one can show that if $A$ 
-is $\NN$-graded and noetherian, and $N$ is a $\ZZ$-graded module such that 
-$N_n = 0$ for $n \ll 0$ then the graded injective dimension of $N$ coincides 
+is $\NN$-graded and noetherian, and $M$ is a $\ZZ$-graded module such that 
+$N_n = 0$ for $n \ll 0$ then the graded injective dimension of $M$ coincides 
 with its injective dimension as $A$-module. This result is obtained through the
 use of a spectral sequence which is not available if the grading group is
 not $\ZZ$. On the other hand, we have not been able to reprove this statement
@@ -454,17 +482,14 @@ the functor $- \ot \k[H]: \Mod \k[L] \to \Mod^H \k[G]$ is an equivalence of
 categories. In particular the projective dimension of $\k[H]$ in $\Mod^H \k[G]$
 equals $\projdim_{\k[L]} \k$, the cohomological dimension of $L$.
 
-Let $N$ be an $H$-graded $A$-module. Let us say that $N$ is almost $G$-graded
-if there exist an $H$-graded $A$-module $N'$ and a $G$-graded 
-$A$-module $M$ such that $N \oplus N' \cong \phi_!(M)$ as $H$-graded 
-$A$-modules. The following proposition states that every $H$-graded module 
-has a resolution by almost $G$-graded modules, and that the length of this 
-resolution is bounded by the cohomological dimension of $L$.
-
+Let $N$ be an $H$-graded $A$-module. We denote by $\Add(N)$ the smallest 
+full subcategory of $\Mod^H A$ containing $N$ that is closed by shifts, direct
+sums and taking direct summands. In other words an object of $\Add(N)$ is
+a direct summand of direct sums of shifted copies of $N$. 
 \begin{Proposition*}
-Set $d = \projdim_{\k[G]}^H \k[H] = \projdim_{\k[L]} \k$.
-For every object $N$ of $\Mod^H A$ there exists a resolution of $N$ by almost 
-$G$-graded modules of length at most $d$.
+Set $d = \projdim_{\k[G]}^H \k[H] = \projdim_{\k[L]} \k$. For every object $N$ 
+of $\Mod^H A$ there exists a resolution of $N$ of length at most $d$ by 
+objects of $\Add(\phi_!(\phi^*(N)))$.
 \end{Proposition*}
 \begin{proof}
 We define a functor $D_N: \Mod^H \k[G] \to \Mod^H A$.
@@ -474,45 +499,45 @@ and set $D_N(f)$ as the restriction and correstriction of $\Id_N \ot f$.
 Now $A \ot \k[G]$ acts on $D_N(V)$, and thus $D_N(V)$ is an $A$-module
 through the structural map $\rho: A \to A \ot G$. 
 
-It follows from the definitions that $D_N(\k[G]) \cong \phi_!(\phi^*(N))$. 
+It follows from the definitions that for any $h \in H$ we have an isomorphism
+$D_N((\k[G])[h]) \cong \phi_!(\phi^*(N))[h^{-1}]$. Furthermore, if $P$ is any 
+projective object in $\Mod^H \k[G]$ then there exists an object $Q$ such that 
+$P \oplus Q$ is a free $H$-graded $\k[G]$-module, which is isomorphic to 
+$\bigoplus_{i \in I} (\k[G])[h_i]$ for some index set $I$, not necessarily 
+finite, with $h_i \in H$. Now $D_N$ commutes with direct summs, $D_N(P)$ is a 
+direct summand of $D_N(P \oplus Q) \cong \bigoplus_{i \in I} D_N(\k[G][h_i])
+\cong \bigoplus_{i \in I} \phi_!(\phi^*(N))[h_i]$, which obviously lies in 
+$\Add(\phi_!(\phi^*(N)))$. 
+
 Now for each $h \in H$ we define a map $n \in N_h \mapsto n \ot h \in 
-D_N(\k[H])_h$; the direct sum of these maps gives us an isomorphism $N 
-\cong D_N(\k[H])$. Taking a projective resolution $P^\bullet$ of $\k[H]$ of 
+D_N(\k[H])_h$; the direct sum of these maps gives us an isomorphism $N \cong 
+D_N(\k[H])$. Taking a projective resolution $P^\bullet$ of $\k[H]$ of 
 length $d$ and applying $D_N$, we obtain a complex $D_N(P^\bullet) \to 
 D_N(\k[H]) \cong N$; since $\k[G]$ is a free $\k$-module, projective 
-$\k[G]$-modules are projective over $\k$ so this is an exact complex. To finish
-the proof it is enough to show that $D_N(P^\bullet)$ is a complex of almost
-$G$-graded modules.
-
-For each $i \geq 0$ there exists a projective object $Q^i$ in $\Mod^H 
-\k[G]$ such that $P^i \oplus Q^i$ is a free $\k[G]$-module. Writing $r_i$ for 
-the rank of $P^i \oplus Q^i$, we get that $D_N(P^i)$ is a direct summand of 
-$D_N(P^i \oplus Q^i)$, which isomorphic to the direct sum of $r_i$ copies of 
-$\phi_!(\phi^*(N))$. Since $\phi_!$ has a right adjoint, it commutes with 
-arbitrary direct sums and $D_N(P^i)$ is almost $G$-graded for each $i$. This 
-completes the proof.
+$\k[G]$-modules are projective over $\k$ so this is an exact complex, and
+from the previous paragraph we see that it is a resolution of $N$ by objects
+in $\Add(\phi_!(\phi^*(N)))$.
 \end{proof}
 
 \paragraph
-Let $M$ be a $G$-graded $A$-module. For each $l \in L$ we have a map $M[l] \to 
-\phi^*\phi_!(M)$ whose homogeneous component of degree $g \in G$ is given by 
-$m \in M[l]_g \mapsto m \ot gl \in \phi^*\phi_!(M)$. Taking the direct sum 
-over all $l \in L$ we obtain a natural isomorphism
-\begin{align*}
-\phi^*\phi_!(M) 
-  &\cong \bigoplus_{l \in L} M[l].
-\end{align*}
-This observation is used in the following lemma.
+Let $M$ be a $G$-graded $A$-module. Recall that $\phi^*\phi_!(M) \subset M 
+\ot \k[G]$ consists of all $m \ot g'$ with $m \in M_{g}$ and $\phi(g) = 
+\phi(g')$. For each $l \in L$ we have a map $M[l] \to \phi^*\phi_!(M)$ whose 
+homogeneous component of degree $g \in G$ is given by $m \in M[l]_g \mapsto m 
+\ot gl \in \phi^*\phi_!(M)$. This induces a natural map $\bigoplus_{l \in L} 
+M[l] \to \phi^*\phi_!(M)$. This map has an inverse, given by $m \ot g' \mapsto 
+m \in M[g^{-1}g']$, so we get a natural isomorphism $\phi^*(\phi_!(M)) \cong 
+\bigoplus_{l \in L} M[l]$. This observation is used in the following lemma.
 
 \label{L:acyclic}
 \begin{Lemma*}
-Assume $A$ is left $G$-graded noetherian. Let $I$ be an injective object of 
-$\Mod^G A$. If $N$ is almost $G$-graded then $\R^i\Hom_A^H(N, \phi_!(I)) = 0$
-for all $i > 0$.
+Assume $A$ is left $G$-graded noetherian. Let $M, I$ be objects of $\Mod^G A$,
+with $I$ injective, and let $N$ be an object of $\Add(\phi_!(M))$. Then 
+$\R^i\Hom_A^H(N, \phi_!(I)) = 0$ for all $i > 0$.
 \end{Lemma*}
 \begin{proof}
-Clearly it is enough to show that the result holds for $N = \phi_!(M)$ where
-$M$ is a $G$-graded $A$-module. In that case we have isomorphisms
+Clearly it is enough to show that the result holds for $N = \phi_!(M)$. In 
+that case we have isomorphisms
 \begin{align*}
 \Hom_A^H(\phi_!(M), \phi_!(I)) 
   &\cong \Hom_A^G(M, \phi^*(\phi_!(I)))
@@ -532,23 +557,38 @@ injective, and hence the last isomorphism implies $\R^i \Hom_A^H(\phi_!(M),
 \phi_!(I)) = 0$.
 \end{proof}
 
+\begin{Remark*}
+We point out that the proof does not use the full Bass-Papp theorem, just the
+fact that the direct sum of and arbitrary family shifted copies of the same 
+injective module is again injective, so we may wonder whether this property is 
+weaker than $G$-graded noetherianity. In the ungraded case a module is called 
+$\Sigma$-injective if the direct sum of arbitrarily many copies of itself is
+injective. Say that a $G$-graded $A$-module is graded $\Sigma$-injective if an
+arbitrary direct sum of shifted copies of itself is injective. Then by a 
+reasoning analogous to that of \cite{FW-direcsumreps}*{Theorem, pp. 205-6}
+one can prove that an algebra is left $G$-graded noetherian if and only if
+every injective object of $\Mod^G A$ is graded $\Sigma$-injective. We thank
+MathOverflow user Fred Rohrer for the reference.
+\end{Remark*}
+
 \paragraph
 \label{T:main-theorem}
 We are now ready to prove the main result of this section.
 \begin{Theorem*}
-Assume $A$ is left $G$-graded noetherian. For every object $M$ of $\Mod^G A$ 
-we get $\injdim^H_A \phi_!(M) \leq \injdim^G_A M + d$, where $d = 
-\projdim_{\k[L]} \k$.
+Set $d = \projdim_{\k[L]} \k$. Assume $A$ is left $G$-graded noetherian. For 
+every object $M$ of $\Mod^G A$ we have $\injdim_A^G M \leq \injdim^H_A 
+\phi_!(M) \leq \injdim^G_A M + d$
 \end{Theorem*}
 \begin{proof}
-The case where $M$ is of infinite injective dimension is trivially true, so let
+The first inequality holds by Proposition \ref{hom-dim-inequalities}. The case 
+where $M$ is of infinite injective dimension is trivially true, so let
 us consider the case where $n = \injdim_A^G M$ is finite. 
 
 If $n = 0$ then $M$ is injective in $\Mod^G A$. Let $N$ be an object of 
-$\Mod^H A$, and let $P^\bullet \to N$ be a resolution of $N$ by almost 
-$G$-graded objects of $\Mod^H A$ of length $d$ as in Proposition 
-\ref{P:resolution}. By Lemma \ref{L:acyclic}, $P^\bullet$ is a resolution of 
-$N$ by objects which are acyclic for the functor $\Hom_A^H(-,\phi_!(I))$, so 
+$\Mod^H A$, and let $P^\bullet \to N$ be a resolution of $N$ of length $d$ by
+objects of $\Add(\phi_!(\phi^*(N)))$ as in Proposition \ref{P:resolution}. By 
+Lemma \ref{L:acyclic}, $P^\bullet$ is a resolution of $N$ by objects which are 
+acyclic for the functor $\Hom_A^H(-,\phi_!(I))$, so 
 \begin{align*}
 \R^i\Hom_A^H(N, \phi_!(M)) 
   &\cong H^i(\Hom_A^H(P^\bullet, \phi_!(M)))
@@ -578,7 +618,9 @@ local cohomology; they have proven to be very useful in the study of ring
 theoretical properties of non commutative rings, see for example 
 \cites{Yek-dc, Jor-lc, VdB-existence-dc, WZ-survey-dc, YZ-rigid-dc}, etc. A 
 dualizing complex is essentially an object $R^\bullet$ in the derived category 
-of $\Mod A^e$ such that the functor $\R\HOM_A^G(-, R^\bullet)$ is a duality between $\D^b(\Mod A)$ and $\D(\Mod A^\op)$. 
+of $\Mod A^e$ such that the functor $\R\Hom_A(-, R^\bullet)$ is a duality 
+between $\D^b(\Mod A)$ and $\D(\Mod A^\op)$, for a precise definition see
+\ref{dc-definition}. 
 
 Throughout this section $\k$ is a field, $G$ is an abelian group, and $A$ is a 
 $G$-graded $\k$-algebra. We denote by $A^\op$ the opposite algebra of $A$ and 
@@ -657,7 +699,7 @@ projective as left $A$-module for each $i \in \ZZ$, then
 for every object $M^\bullet$ of $\D(\Mod^{G} A^e)$. This is proved in the case
 $G = \ZZ$ in \cite{Yek-dc}*{Theorem 2.2}, and the general proof follows the 
 same reasoning. There is a completely analogous functor $\HOM^{G}_{A^\op}$ 
-with a derived functor $\R\HOM_A^{G}$ with similar properties.
+with a derived functor $\R\HOM_{A^\op}^{G}$ with similar properties.
 
 \paragraph
 \label{natural-map}
@@ -715,7 +757,7 @@ complies with the ungraded analogue of the previous definition. Our objective
 is to show that a $\ZZ^r$-graded dualizing complex remains a dualizing complex 
 if we change (or forget) the grading. Since being finitely generated is 
 independent of grading, item \ref{fg-dc} of the definition remains true if we 
-change or forget the grading. To follow how item \ref{inj-dc} behaves with 
+change or forget the grading. To see how item \ref{inj-dc} behaves with 
 respect to change of grading requires a derived version of Theorem 
 \ref{T:main-theorem}, while item \ref{nat-dc} is also invariant by change
 of grading by a simple argument. We provide the details in the following 
@@ -877,19 +919,19 @@ $\ZZ^s$-graded noetherian, and hence $\phi_!(A)$ is locally finite; this
 implies that $A$ is $\phi$-finite, otherwise $\phi_!(A)$ would have a 
 homogeneous component of infinite dimension. Since the cohomology modules of 
 $R^\bullet$ are finitely generated, they are also $\phi$-finite and hence by 
-item \ref{phi-finite-derived-injdim} of Lemma \ref{natural-map}
+item \ref{phi-finite-derived-injdim} of Lemma \ref{derived-inj-dim}
 $\injdim_A^{\ZZ^s} \phi_!(R^\bullet) = \injdim_A^{\ZZ^r} R^\bullet$, so item
 \ref{inj-dc} of Definition \ref{dc-definition} also holds for $R^\bullet$. 
 Finally item \ref{nat-dc} of the definition follows immediately from item 
 \ref{nat-cog} of Lemma \ref{natural-map-lemma}.
 
-We noe prove item \ref{ungrading-dc}. Let $\psi: \ZZ^r \to \ZZ$ be the map 
+We now prove item \ref{ungrading-dc}. Let $\psi: \ZZ^r \to \ZZ$ be the map 
 $\psi(z_1, \ldots, z_r) = z_1 + \cdots + z_r$. Then $A$ is $\psi$-finite and 
 $\psi_!(A)$ is connected $\NN$-graded, so by the first item $\psi_!(R^\bullet)$
 is a $\ZZ$-graded dualizing complex over $A$ of injective dimension 
 $\injdim_A^{\ZZ^r} R^\bullet$. Now a similar reasoning as the one we used for 
 the first item, but this time using item \ref{noetherian-derived-injdim} of 
-Lemma \ref{natural-map-lemma} shows that $\O(\psi_!(R^\bullet)) = 
+Lemma \ref{derived-inj-dim} shows that $\O(\psi_!(R^\bullet)) = 
 \O(R^\bullet)$ is a dualizing complex and gives the bound for its injective 
 dimension.
 \end{proof}

@@ -107,6 +107,17 @@
   pages={220--245}, 
 }
 
+\bib{FW-direcsumreps}{article}{
+   author={Faith, Carl},
+   author={Walker, Elbert A.},
+   title={Direct-sum representations of injective modules},
+   journal={J. Algebra},
+   volume={5},
+   date={1967},
+   pages={203--221},
+   issn={0021-8693},
+}
+
 \bib{FF-graded}{article}{
    author={Fossum, Robert},
    author={Foxby, Hans-Bj{\o}rn},

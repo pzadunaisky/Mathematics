@@ -807,8 +807,16 @@ is $\gl(n,\CC)$-stable. Maybe changing $\Delta$ for $\Delta_\lambda$?
 \paragraph
 Fix $l < n$. The group $S_l$ acts on $\ZZ_0^N$, by permuting the entries in
 the $l$-th row of the tableaux. It also acts on $K = \CC(\lambda)$ by 
-permuting the generators $\lambda_{l,i}$ and fixing the others. Given $\sigma
-\in S_l$ we set 
+permuting the generators $\lambda_{l,i}$ and fixing the others. With this
+definition the algebra 
+\[
+B 
+	= \{f/g \in A \mid \mbox{ $g$ is not divisible by }
+		\lambda_{l,i} - \lambda_{l,j} \mbox{ for any } 1 \leq i < j \leq l\}
+\]
+is $S_l$-invariant.
+
+Given $\sigma \in S_l$ we set 
 \begin{align*}
 \sigma(k,i)
 	&= \begin{cases}
@@ -853,20 +861,55 @@ Taking $(k,i) = \sigma^{-1}(k,j)$ the last sum equals
 		\right) = \sigma (E_{k,k+1} T(v)).
 \end{align*}
 The proofs that $E_{k+1,k}$ is equivariant is similar. In the case of $E_{k,k}$
-the result follows immediately from the definitions.
+the result follows immediately from the definitions.s
 \end{proof}
 
 \paragraph
 We take the notation from \cite{FH-rt-book}*{chapter 4}. For each 
-partition $\lambda \vdash k$ we set $e_\lambda$ to be the corresponding 
+partition $\lambda \vdash l$ we set $e_\lambda$ to be the corresponding 
 normalized Young symmetrizer, i.e. $e_\lambda^2 = e_\lambda$. We claim that
 For each partition $\lambda$ there exists $\Delta_{\lambda} \in 
 \CC[\lambda_{k,i}]$ such that 
 \begin{align*}
-\bigoplus_{\lambda \vdash k} 
-	\frac{1}{\Delta_\lambda} B \ot_\CC e_\lambda(V_\CC)
+V_B 
+	&= \bigoplus_{\lambda \vdash l} \frac{1}{\Delta_\lambda} 
+		B \ot_\CC e_\lambda(V_\CC)
 \end{align*}
-is a sub $U$-module of $V_K$.
+is a sub $U$-module of $V_K$. My not-so-educated guess at this point is the
+following: write $E_{l,l+1}T(0) = \sum_{\lambda \vdash l} \sum_i 
+a_{\lambda, i}c_{\lambda}(T(\delta^{l,i}))$, and take $\Delta_\lambda$
+such that $\Delta_\lambda a_{\lambda,i} \in B$. for all $i$.
+
+\paragraph
+A typical element of $V_B$ is of the form $\frac{f}{\Delta_\lambda} 
+e_\lambda(T(v))$ with $v \in \ZZ^N_0$, with $f \in B$. Thus we must prove
+that $E_{k,k+1}(\frac{1}{\Delta_\lambda} e_\lambda(T(v))) \in V_B$. 
+
+\paragraph
+We associate to each $v \in \ZZ^l$ a partition of $l$ as follows. 
+Let us call $a$ the most common value in $v$, and set $\lambda_1$ as the 
+number of entries equal to $a$; calling $b$ the second most repeated value 
+then $\lambda_2$ is the number of entries equal to $b$, etc. For example, if 
+$l = 14$ and $v = (a,a,a,a,a,b,b,b,b,c,c,d,e,f)$ then $\lambda = 
+(5,4,2,1,1,1)$. We write $\lambda(v)$ for the partition associated to $v$.
+We say that $v$ is well-presented if all entries from $1$ to $\lambda_1$ are
+equal, and the same holds for all entries from $\lambda_1 + 1$ to $\lambda_1 +
+\lambda_2$, etc. Our example is well presented, and the same holds if we switch
+the last two entries, but not if we exchange the first and the last, or if
+we put the four $b$'s before the five $a$'s. Notice that the partition 
+associated to $v$ is an $S_l$-equivariant function, and in particular for each 
+$v$ there exists $\sigma \in S_l$ such that $\sigma(v)$ is well presented.
+
+Now let $v \in \ZZ^N_0$. We denote by $\lambda_l(v)$ the partition associated 
+to the $l$-th row of $v$.
+
+\begin{Proposition*}
+If $\mu < \lambda_l(v)$ then $c_\mu(T(v)) = 0$.
+\end{Proposition*}
+\begin{proof}
+Let $V(v) = \CC[S_n] \cdot T(v)$. Since $c_\mu(T(v)) \in c_\mu(V(v))$
+\end{proof}
+
 
 \newpage
 \begin{bibdiv}
