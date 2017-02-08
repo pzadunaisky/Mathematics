@@ -91,7 +91,7 @@
    pages={31--50},
 }
 
-\bib{Ek}{article}{ 
+\bib{Eks-auslander}{article}{ 
   author={Ekstr{\"o}m, Eva Kristina}, 
   title={The Auslander condition on graded and filtered Noetherian rings}, 
   conference={ 
