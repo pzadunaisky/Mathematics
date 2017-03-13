@@ -130,6 +130,17 @@
    review={\MR{0379473 (52 \#378)}},
 }
 
+\bib{FGR}{article}{
+   author={Futorny, Vyacheslav},
+   author={Grantcharov, Dimitar},
+   author={Ramirez, Luis Enrique},
+   title={Singular Gelfand-Tsetlin modules of ${\germ{gl}}(n)$},
+   journal={Adv. Math.},
+   volume={290},
+   date={2016},
+   pages={453--482},
+}
+
 \bib{GL-toric-deg}{article}{
    author={Gonciulea, N.},
    author={Lakshmibai, V.},
@@ -367,6 +378,20 @@
   place={Berlin}, 
   date={2004}, 
   pages={xiv+304},
+}
+
+\bib{Neu-NT-book}{book}{
+   author={Neukirch, J\"urgen},
+   title={Algebraic number theory},
+   series={Grundlehren der Mathematischen Wissenschaften [Fundamental
+   Principles of Mathematical Sciences]},
+   volume={322},
+   note={Translated from the 1992 German original and with a note by Norbert
+   Schappacher;
+   With a foreword by G. Harder},
+   publisher={Springer-Verlag, Berlin},
+   date={1999},
+   pages={xviii+571},
 }
 
 \bib{RZ-richardson}{article}{
