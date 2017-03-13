@@ -126,9 +126,11 @@ we denote the set of standard tableaux by $\CC^N_\std$.
 generic tableaux by $\CC^N_\gen$. 
 
 \item \newterm{singular} if it is non-generic tableau, i.e. there is a pair of 
-entries in the same line differing by an integer. If there is exactly one 
-such pair then the tableau is called \newterm{1-singular}. Finally if two 
-entries in the same row are equal the tableau is called \newterm{critical}.
+entries in the same line differing by an integer. We refer to any pair of such 
+entries as a \newterm{singular pair}. If there is exactly one singular pair 
+then the tableau is called \newterm{1-singular}. Finally if two 
+entries in the same row are equal the tableau is called \newterm{critical}, 
+and we refer ti them as a \newterm{critical pair}.
 \end{itemize}
 
 \paragraph
@@ -797,20 +799,37 @@ is $\gl(n,\CC)$-stable. Maybe changing $\Delta$ for $\Delta_\lambda$?
 
 \newpage
 
-\section{}
+\section{The construction of a GT-module associated to a fully critical 
+tableau}
 
-\paragraph
-Fix $l < n$. The group $S_l$ acts on $\ZZ_0^N$, by permuting the entries in
-the $l$-th row of the tableaux. It also acts on $K = \CC(\lambda)$ by 
-permuting the generators $\lambda_{l,i}$ and fixing the others. With this
-definition the algebra 
+Let $B \subset K$ be the subalgebra
 \[
 B 
 	= \{f/g \in A \mid \mbox{ $g$ is not divisible by }
 		\lambda_{l,i} - \lambda_{l,j} \mbox{ for any } 1 \leq i < j \leq l\}
 \]
-is $S_l$-invariant.
+Recall that we call a tableau fully critical if every singular pair is 
+critical. Notice that any fully critical tableau $v$ defines a one dimensional 
+$B$-module $\CC_v$. The main objective of this section is to find a 
+$B$-lattice of $V_K$ which is also $U$-stable.
 
+\paragraph
+\about{$S_l$-actions}
+Fix $l < n$. The group $S_l$ acts on $\ZZ_0^N$, by permuting the entries in
+the $l$-th row of the tableaux, and hence it naturally acts on the complex 
+vector space $V_\CC$; we will write $\sigma \cdot T(v)$ for $T(\sigma(v))$
+for each $\sigma \in S_l$. 
+
+The symmetric group also acts on $\Lambda = \CC[\lambda]$ by permuting the 
+generators $\lambda_{l,i}$ and fixing the others; by extension, it also acts 
+on $K = \CC(\lambda)$; we will denote the action of $\sigma \in S_l$ over $f 
+\in \Lambda$ by $\sigma \cdot f$ or ${}^\sigma f$. With this definition the 
+algebra $B$ is stable by the action of $S_l$. Also, since $V_K = K \ot V_\CC$, 
+the symmetric group acts on $V_K$ by a diagonal action, i.e. for each $\sigma 
+\in S_l, f \in K$ and $v \in \ZZ_0^N$ we have $\sigma \cdot (f \ot T(v)) = 
+ {}^\sigma f \ot T(\sigma(v))$. 
+
+\paragraph
 Given $\sigma \in S_l$ we set 
 \begin{align*}
 \sigma(k,i)
@@ -819,9 +838,11 @@ Given $\sigma \in S_l$ we set
 		(l,\sigma(i)) & k = l.
 	\end{cases}
 \end{align*}
-Thus $\sigma(\lambda_{k,j}) = \lambda_{\sigma(k,j)}$. Also we get that
-$\sigma \cdot p(v) = p(\sigma^{-1}(v))$ for each $\sigma \in S_l, p \in K$ and 
-$v \in \ZZ_0^N$ whenever this makes sense.
+With this notation $\sigma \cdot \delta^{k,i} = \delta^{\sigma(k,i)}$ and 
+$\sigma \cdot \lambda_{k,j} = \lambda_{\sigma(k,j)}$. Also we get that
+$\sigma \cdot p(v) = p(\sigma^{-1} \cdot v)$ for each $\sigma \in S_l, p \in K$
+and $v \in \ZZ_0^N$ whenever the evaluation makes sense. The next lemma follows
+from this.
 
 \begin{Lemma*}
 For each $1 \leq k \leq j \leq n$ and each $\sigma \in S_l$ the following 
@@ -832,11 +853,13 @@ formulas hold.
 	&\sigma \cdot q_{k,j} = q_{\sigma(k,j)}.
 \end{align*}
 Also $\sigma \cdot (p(\lambda^v)) = (\sigma \cdot p)(\lambda^{\sigma(v)})$
-for each $v \in \CC^N$.
+for each $p \in K$ and each $v \in \CC^N$.
 \end{Lemma*}
 
 \begin{Proposition}
 The operators $E_{k,k+1}, E_{k,k}, E_{k+1,k}$ are $S_l$-equivariant.
+In particular the subspace of invariant elements $V_K^{S_l}$ is stable
+by the action of $U$.
 \end{Proposition}
 \begin{proof}
 Fix $\sigma \in S_l$. We have
@@ -856,83 +879,79 @@ Taking $(k,i) = \sigma^{-1}(k,j)$ the last sum equals
 		\right) = \sigma (E_{k,k+1} T(v)).
 \end{align*}
 The proofs that $E_{k+1,k}$ is equivariant is similar. In the case of $E_{k,k}$
-the result follows immediately from the definitions.s
+the result follows immediately from the definitions.
 \end{proof}
 
 \paragraph
-We take the notation from \cite{FH-rt-book}*{chapter 4}. For each 
-partition $\lambda \vdash l$ we set $e_\lambda$ to be the corresponding 
-normalized Young symmetrizer, i.e. $e_\lambda^2 = e_\lambda$. We claim that
-For each partition $\lambda$ there exists $\Delta_{\lambda} \in 
-\CC[\lambda_{k,i}]$ such that 
-\begin{align*}
-V_B 
-	&= \bigoplus_{\lambda \vdash l} \frac{1}{\Delta_\lambda} 
-		B \ot_\CC e_\lambda(V_\CC)
-\end{align*}
-is a sub $U$-module of $V_K$. My not-so-educated guess at this point is the
-following: write $E_{l,l+1}T(0) = \sum_{\lambda \vdash l} \sum_i 
-a_{\lambda, i}c_{\lambda}(T(\delta^{l,i}))$, and take $\Delta_\lambda$
-such that $\Delta_\lambda a_{\lambda,i} \in B$. for all $i$.
+Recall that $\Lambda_l = \CC[\lambda_{l,i} \mid 1 \leq i \leq l]$. By classical
+results, $\Lambda_l^{S_l} \subset \Lambda_l$ is a polynomial ring generated by 
+the elementary symmetric polynomials, and there is an $S_l$-equivariant 
+isomorphism of $\Lambda_l^{S_l}$-modules $\Lambda_l \cong \Lambda_l^{S_l} \ot 
+\CC[S_l]$. In particular $\Lambda_l$ is a free $\Lambda_l^{S_l}$-module of 
+rank $l!$. 
 
-\paragraph
-A typical element of $V_B$ is of the form $\frac{f}{\Delta_\lambda} 
-e_\lambda(T(v))$ with $v \in \ZZ^N_0$, with $f \in B$. Thus we must prove
-that $E_{k,k+1}(\frac{1}{\Delta_\lambda} e_\lambda(T(v))) \in V_B$. 
-
-\paragraph
-We associate to each $v \in \ZZ^l$ a partition of $l$ as follows. 
-Let us call $a$ the most common value in $v$, and set $\lambda_1$ as the 
-number of entries equal to $a$; calling $b$ the second most repeated value 
-then $\lambda_2$ is the number of entries equal to $b$, etc. For example, if 
-$l = 14$ and $v = (a,a,a,a,a,b,b,b,b,c,c,d,e,f)$ then $\lambda = 
-(5,4,2,1,1,1)$. We write $\lambda(v)$ for the partition associated to $v$.
-We say that $v$ is well-presented if all entries from $1$ to $\lambda_1$ are
-equal, and the same holds for all entries from $\lambda_1 + 1$ to $\lambda_1 +
-\lambda_2$, etc. Our example is well presented, and the same holds if we switch
-the last two entries, but not if we exchange the first and the last, or if
-we put the four $b$'s before the five $a$'s. Notice that the partition 
-associated to $v$ is an $S_l$-equivariant function, and in particular for each 
-$v$ there exists $\sigma \in S_l$ such that $\sigma(v)$ is well presented.
-
-Now let $v \in \ZZ^N_0$. We denote by $\lambda_l(v)$ the partition associated 
-to the $l$-th row of $v$.
-
-\begin{Proposition*}
-If $\mu < \lambda_l(v)$ then $c_\mu(T(v)) = 0$.
-\end{Proposition*}
+\begin{Lemma*}
+Let $\{f_i \mid 1 \leq i \leq l!\}$ be a basis of $\Lambda_l$ as 
+$\Lambda_l^{S_l}$-module. Enumerate the elements of $S_l$ as $\sigma_1, 
+\sigma_2, \ldots, \sigma_{l!}$, with $s_1 = \Id$, and let 
+$X = ({}^{\sigma_i} f_j) \in M_{l!}(\Lambda_l)$. Then $\det X$ is a nonzero 
+polynomial. Furthermore, we have $\sigma \cdot \det X = 
+\begin{cases} \sg(\sigma) \det X & l \leq 3 \\
+\det X & l > 3 \end{cases}$.
+\end{Lemma*}
 \begin{proof}
-Let $V(v) = \CC[S_n] \cdot T(v)$. Since $c_\mu(T(v)) \in c_\mu(V(v))$
+Let $F$ be the fraction field of $\Lambda_l$, and $E$ the fraction field of 
+$\Lambda_l^{S_l}$. Then $E = F^{S_l}$, and the set $\{f_1, \ldots, f_{l!}\}$
+is $E$-linearly independent, and hence an $E$-basis of $F$. Thus the square of
+the determinant we are trying to find is the discriminant of this basis, and
+since the extension $E \subset F$ is Galois, we may apply 
+\cite{Neu-NT-book}*{(2.8) Proposition} to conclude that it is nonzero.
+
+Set $p = \det X$, and let $\tau = (i,j) \in S_l$. Since the enumeration of the
+elements of $S_l$ is arbitrary (this only changes the sign of the determinant 
+of $X$), we may and do assume that $\sigma_i = \tau \sigma_{l!/2+i}$ for all
+$i \in [l!/2]$, so $\tau \cdot p = \det ({}^{\tau\sigma_i} f_j) = (-1)^{l!/2} 
+\det X$, since we are interchanging $l!/2$ pairs of rows. Thus if $l > 3$ the
+sign is positive, while for $l = 2,3$ it is negative. Hence the vector space
+generated by $p$ is a $1$-dimensional representation of $S_l$: if $l =2,3$ it
+is the sign representation, and if $l > 3$ it is the trivial representation.  
 \end{proof}
 
+\paragraph
+Let $v \in \ZZ^l$ and let $\lambda \vdash l$. We say that $v$ has 
+\newterm{shape} $\lambda$ if the $i$-th most common value of its entries
+appears with frequency $\lambda_i$. For example, if $l = 10$ and
+$v = (a,a,a,a,a,b,b,b,c,d)$ then $v$ is of shape $(5,3,1,1)$. Clearly the
+shape of $v$ is invariant by the action of $S_l$. We will say that $v$
+of shape $\lambda$ is in \newterm{good shape} if all its coordinates from
+$\lambda_i + 1$ to $\lambda_{i+1}$ are equal. In our example $v$ is in good
+shape, and if we exchange the last two coordinates it remains in good shape,
+but this no longer holds if we exchange the first and the last coordinates,
+or if we put all the $b$'s in front of all the $a$'s. Clearly for any $v \in 
+\ZZ^l$ there exists $\sigma \in S_l$ such that $\sigma \cdot v$ is in good
+shape, but this is not unique. Say that $v$ is \newterm{fit} if it is in 
+good shape, and $v <_{lex} \sigma \cdot v$ whenever $\sigma \cdot v$ is also 
+in good shape; then for each $v \in \ZZ^l$ there is a unique $\sigma \in S_l$
+such that $\sigma \cdot v$ is fit.
+
+\paragraph
+Given $v \in \ZZ_0^N$, its \newterm{$l$-shape} is the shape of its $l$-th row.
+We can now define the $B$-lattice we are looking for.
+\begin{Definition*}
+Let $Z_l \subset \ZZ_0^N$ be the set of all elements whose $l$-shape is fit, 
+and let 
+\[
+\mathcal B 
+	= \left\{\sum_{\sigma S_l} \sigma \left( \frac{f_i}{\Delta}
+		T(v)\right) \mid v \in Z_l, 1 \leq i \leq l!\right\}.
+\] 
+We denote by $L_B$ the $B$-module generated by $\mathcal B$
+\end{Definition*}
 
 \newpage
 \begin{bibdiv}
 \begin{biblist}
-\bib{FGR}{article}{
-   author={Futorny, Vyacheslav},
-   author={Grantcharov, Dimitar},
-   author={Ramirez, Luis Enrique},
-   title={Singular Gelfand-Tsetlin modules of ${\germ{gl}}(n)$},
-   journal={Adv. Math.},
-   volume={290},
-   date={2016},
-   pages={453--482},
-}
-
-\bib{FH-rt-book}{book}{
-   author={Fulton, William},
-   author={Harris, Joe},
-   title={Representation theory},
-   series={Graduate Texts in Mathematics},
-   volume={129},
-   note={A first course;
-   Readings in Mathematics},
-   publisher={Springer-Verlag, New York},
-   date={1991},
-   pages={xvi+551}
-}
-
+\bibselect{biblio.ltb}
 \end{biblist}
 \end{bibdiv}
 \end{document}
