@@ -33,6 +33,8 @@
 \newcommand\gl{\mathfrak{gl}}
 \newcommand\gen{\mathsf{gen}}
 \newcommand\std{\mathsf{std}}
+\newcommand\crit{\mathsf{crit}}
+\newcommand\ceq{\stackrel{.}{=}}
 
 \newcommand\vectspan[1]{\left\langle #1 \right\rangle}
 
@@ -49,10 +51,11 @@
 
 The objective of these notes is to understand the construction of Singular
 Gelfand-Tsetlin modules due to Futorny, Grantcharov and Ramirez found in 
-\cite{FGR}. 
+\cite{FGR-singular-gt} and generalize it to build Gelfand-Tsetlin modules associated
+to arbitrary tableaux. 
 
 \section{GT Tableaux and GT algebras}
-References for all results can be found in \cite{FGR}*{section 3}.
+References for all results can be found in \cite{FGR-singular-gt}*{section 3}.
 
 \paragraph
 Fix $n \in \NN_{\geq 2}$, and set $N = \frac{n(n+1)}{2}$. For each $m \in \NN$ 
@@ -94,10 +97,6 @@ permuting the variables $\lambda_{m,k}$ with $1 \leq k \leq m$ and fixing the
 rest. This induces an action of the group $G = S_n \times S_{n-1} \times 
 \cdots \times S_1$ on $\Lambda$. Composing with the embedding from 
 \ref{HC-morphism} we get that $\Gamma$ is isomorphic to $\Lambda^G$.
-
-\note{I suppose this is just the Harish-Chandra morphism of each $Z_k$ pasted
-together. Actually, is there \emph{a} HC morphism? In any case restriction to 
-$Z_k$ gives an isomorphism with invariants in a polynomial algebra.}
 
 \paragraph
 \label{GT-tableaux}
@@ -424,7 +423,7 @@ Then $V_B \subset V_K$ is a sub-$U$-module.
 Suppose the proposition is proved, and let $v \in \CC^N$ be a $1$-critical 
 tableau with critical entries $v_{t,r}, v_{t,s}$. Then $v$ induces a 
 $1$-dimensional representation of $B$ denoted by $\CC_v$, and we can recover
-the $1$-critical module of \cite{FGR} taking $\CC_v \ot_B V_B$. In order to 
+the $1$-critical module of \cite{FGR-singular-gt} taking $\CC_v \ot_B V_B$. In order to 
 prove the proposition, we have to show that for all adequate $k$ the
 $B$-module $V_B$ is stable by the action of $E_{k,k}, E_{k,k+1}$ and 
 $E_{k+1,k}$. This is long and tedious, so we go step by step. We begin with
@@ -707,6 +706,114 @@ where $\displaystyle \hat p_{t \mp 1,i}^\pm = \prod_{j \neq r,s}^{t\mp 1}
 
 \section{The construction of a GT-module associated to a fully critical 
 tableau}
+For each $(k,i,j) \in \Sigma$ let $\alpha^k_{i,j} = \lambda_{k,i} - 
+\lambda_{k,j}$, and let $\mathcal H$ be the infinite hyperplane arrangement
+$\bigcup_{(k,i,j) \in \Sigma, z \in \ZZ} \{\alpha_{i,j}^k = z\}$. Clearly
+$\CC^N_\gen = \CC^N \setminus \H$, and $A$ is the set of regular functions
+defined in the complement of $\H$. Now let $\H^* = \bigcup_{(k,i,j) \in 
+\Sigma, z \in \ZZ\setminus \{0\}} \{\alpha_{i,j}^k = z\}$, which is clearly
+the set of all singular non-fully critical points in $\CC^N$. Set $\CC^N_\crit
+= \CC^N \setminus \H^*$ and let $B$ be the algebra of regular functions over
+$\CC^N_\crit$. Once again, we will look for $L_B \subset V_A$ a $U$-submodule
+stable by the action of $U$.
+
+\subsection{Polynomials over symmetric polynomials}
+Set $R = \CC[x_1, \ldots, x_m]$. As before, the symmetric group $S_m$ acts on 
+$R$ in the usual way, and for $\sigma \in S_m, f \in R$ we write $f^\sigma = 
+\sigma \cdot f$. Set $S = R^{S_m}$. By classical results, $R$
+is a free $S$-module and there exists a graded version of the regular 
+representation of $S_m$, say $U$, such that $R \cong S \ot U$ as $S$-modules 
+and $S_m$-modules. 
+
+We will now consider matrices with coefficients in $R$ with rows indexed by 
+$S_m$ and columns indexed by $[[m!]]$; the reader is free to choose some order 
+on $S_m$ but this is not strictly necessary. Whenever we say ``matrix'' in 
+this section we will mean such a matrix, unless it is explicitly stated. The 
+symmetric group $S_m$ acts on these matrices by acting on their coefficients 
+Given a matrix $M$, we will write $M^\sigma$ for its $\sigma$-row, $M_j$ for 
+its $j$-th column, and $M^\sigma_j$ for the element in row $\sigma$ and column 
+$j$. We will say that a matrix has equivariant rows if $\tau M^\sigma = 
+M^{\tau \sigma}$ for all $\tau, \sigma \in S_m$.
+
+\begin{Lemma}
+\label{L:equivariant-rows}
+Let $\Delta = \prod_{i < j} (x_i - x_j)$. If a matrix $M$ has equivariant rows 
+then $\Delta^{m!/2} \mid \det M$.
+\end{Lemma}
+\begin{proof}
+We first prove and intermediate result. Let $X$ be a set with an action by 
+$\langle (12)\rangle$ without fixed points of cardinality $s$. Let $T$ be a 
+square matrix with coefficients in $R$ and rows indexed by $X$ and columns by
+$[[s]]$, such that $(12)T^x = T^{(12)x}$. Then $(x_1 - x_2)^{|X|/2} \mid \det 
+T$. We will do this by induction on $s = |X|$ starting with $s = 2$. In that 
+case $M$ is of the form
+$\begin{pmatrix}
+f & g \\ f^{(12)} & g^{(12)} 
+\end{pmatrix}$, and $\det M = fg^{(12)} - f^{(12)}g = fg^{(12)} - 
+(fg^{(12)})^{(12)}$ which is divisible by $x_1 - x_2$. 
+
+Now assume the result holds for matrices of size less than $s$.
+The hypothesis that the action of $(12)$ has no fixed points implies that 
+$X$ can be decomposed as $Y \sqcup (12)Y$, with $|Y| = s/2$. Fix $y \in Y$,
+and for each $i,j \in [[s]]$ write $T(i,j)$ for the martix $T$ with rows
+$y, (12)y$ and columns $i,j$ erased. Then $T(i,j)$ is again a matrix of the
+desired type, and hence $(x_1 - x_2)^{s/2-1} \mid \det T(i,j)$, and
+\begin{align*}
+\det T
+	&= \sum_{i<j} (T^y_i T^{(12)y}_j - T^y_jT^{(12)y}_i) \det T(i,j),
+\end{align*}
+and since $x_1 - x_2 \mid T^y_i T^{(12)y}_j - T^y_jT^{(12)y}_i = T^y_i 
+T^{(12)y}_j - (T^y_iT^{(12)y}_j)^{(12)}$, the result follows. 
+
+In particular for any matrix $M$ with equivariant rows, taking $X = S_m$ we 
+obtain that $(x_1 - x_2)^{m!/2} \mid \det M$. Now fix $1 \leq i<j \leq m$ and 
+select $C \subset S_m$ such that $S_m = C \sqcup (ij) C$. By definition $(ij) 
+\cdot \det M = \det (ij) \cdot M$, and since $M$ has equivariant rows this 
+ammounts to interchanging $M^\tau$ and $M^{\sigma \tau}$. We are making $m!/2$ 
+such interchanges, so $(ij) \det M = (-1)^{m!/2} \det M$. This implies that
+$\sigma \det M = (\sg \sigma)^{m!/2} \det M$, so in particular $x_i - x_j$
+divides $\det M$ as many times as $x_1 - x_2$, and hence $\Delta^{m!/2} \mid
+\det M$.
+\end{proof}
+
+
+
+Now let $f_1, \ldots, f_{m!}$ be a basis of $R$ as $S$-module, and let $M = 
+M(f_1, \ldots, f_{m!})$ be the matrix $M^\sigma_j = f_j^\sigma$. Notice that 
+$\det M$ is well defined up to a sign. The \emph{discriminant} of the basis is 
+defined as $(\det M)^2$.
+
+\begin{Lemma*}
+Let $f_1, \ldots, f_{m!}$ be any basis of $R$ as $S$-module and let $M = 
+M(f_1, \ldots, f_{m!})$. Then $\sigma \cdot \det M = (\sg \sigma)^{m!/2}
+\det M$, so the discriminant is an invariant polynomial.
+\end{Lemma*}
+\begin{proof}
+It is enough to check that the formula holds for $\sigma = (ij)$ with $1 \leq 
+i < j \leq m$. Choose representatives $\tau_1, \ldots, \tau_{m!/2} \in S_m$ of
+the coclasses in $S_m/\langle \sigma \rangle$. For each $1 \leq t \leq m!/2$ 
+set $F_t = (\tau_i f_j)_{1 \leq j \leq m!}$ and $F_{t + m!/2} = \sigma F_t$,
+and let $N \in M_{m!}(R)$ be the matrix whose $t$-th row is $F_t$ for all 
+$t$, so $\det M = \pm \det N$. Now applying $\sigma$ to $N$ results in 
+exchanging rows $F_t$ and $F_{t + m!/2}$, so the sign of the determinant 
+changes exactly $m!/2$ times. 
+\end{proof}  
+
+We now introduce some notation. For $p,q \in K = Frac(R)$, write $p \ceq q$
+if there exists $c \in \CC^\times$ such that $p = c q$.
+\begin{Proposition}
+Let $f_1, \ldots, f_{m!}$ be a good basis of $R$ as $S$-module. Then $\det 
+M(f_1, \ldots, f_{m!}) \ceq \Delta^{m!/2}$.
+\end{Proposition}
+\begin{proof}
+Put $M = M(f_1, \ldots, f_{m!})$. Since $\sigma M^\tau = M^{\sigma \tau}$
+then $\Delta^{m!/2} \mid \det M$ by Lemma \ref{L:equivariant-rows}. Also the
+degree of $\det M$ equals the sum of the degrees of the $f_i$ which is 
+$\frac{m!}{2} \binom{m}{2}$ by Lemma \ref{L:sum-of-degrees}, and clearly this 
+is also the degree of $\Delta^{m!/2}$. Finally, since $\det M$ is not zero it
+follows that $\det M \ceq \Delta^{m!/2}$. 
+\end{proof}
+
 
 Let $B \subset K$ be the subalgebra
 \[
@@ -882,6 +989,13 @@ $\frac{(-1)^{l!/2}}{\Delta} \det X$, where $X$ is the matrix from Lemma
 	= T(\sigma_s(v)). 
 \end{align*}
 \end{proof}
+
+
+
+
+
+
+
 \newpage
 \begin{bibdiv}
 \begin{biblist}
