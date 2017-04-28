@@ -38,9 +38,12 @@
 
 \newcommand\vectspan[1]{\left\langle #1 \right\rangle}
 
+\renewcommand\ll{\llbracket}
+\newcommand\rr{\rrbracket}
+
 \DeclareMathOperator\End{End}
-\DeclareMathOperator\Sym{Sym}
-\DeclareMathOperator\Alt{Alt}
+\DeclareMathOperator\Frac{\mathsf{Frac}}
+\DeclareMathOperator\ev{ev}
 \DeclareMathOperator\sg{sg}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Singular Gelfand Tsetlin modules over $\gl$ à la Zadunaisky}
@@ -51,13 +54,14 @@
 
 The objective of these notes is to understand the construction of Singular
 Gelfand-Tsetlin modules due to Futorny, Grantcharov and Ramirez found in 
-\cite{FGR-singular-gt} and generalize it to build Gelfand-Tsetlin modules associated
-to arbitrary tableaux. 
+\cite{FGR-singular-gt} and generalize it to build Gelfand-Tsetlin modules associated to arbitrary tableaux. 
 
 \section{GT Tableaux and GT algebras}
 References for all results can be found in \cite{FGR-singular-gt}*{section 3}.
 
 \paragraph
+For each $m \in \NN$ set $\ll m \rr = \{1, 2, \ldots, m\}$.
+
 Fix $n \in \NN_{\geq 2}$, and set $N = \frac{n(n+1)}{2}$. For each $m \in \NN$ 
 set $U_m = U(\gl(m, \CC))$ and $Z_m \subset U_m$ its center, and set $U = 
 U_n$. We get a chain of inclusions $U_1 \subset U_2 \subset \cdots \subset U_n$
@@ -141,571 +145,117 @@ tableaux of the form $T(v)$ with $v \in \ZZ_0^N$. The group $G = S_n \times
 S_{n-1} \times \cdots \times S_1$ acts on $V_A$ in an obvious fashion.
 
 
-\section{GT-modules}
-
-\paragraph
-\label{GT-formulas}
-Set for each $1 \leq i \leq k \leq n$
-\begin{align*}
-p_{k,i}^\pm(\lambda) 
-	&= \prod_{j = 1}^{k\pm1}(\lambda_{k,i} -\lambda_{k\pm1,j}); &
-q_{k,i}(\lambda)
-	&= \prod_{j \neq i} (\lambda_{k,i} - \lambda_{k,j}). \\
-|\lambda|_k &= \lambda_{k,1} + \lambda_{k,2} + \cdots \lambda_{k,k}.
-\end{align*}
-Notice that $p_{k,i}^\pm(v)$ depends only on the $k, k \pm 1$-th rows of 
-$v \in \CC^N$, while $q_{k,i}(v)$ depends only on the $k$-th row.
-
-\paragraph
-If $w$ is a GT tableau set 
-\[
-V(w) = \langle T(w+z) \mid z \in \ZZ^N_0 \rangle_\CC.
-\]
-The $T$ is just a symbol to remind us that we have a basis indexed by 
-tableaux; in particular $T(v+z) \neq T(v) + T(z)$.
-
-The following is a classical theorem which we quote without proof.
-\begin{Theorem}[Gelfand-Tsetlin, '50]
-\label{GT}
-Let $\lambda = (\lambda_1, \ldots, \lambda_n)$ be a dominant weight of 
-$\gl(n,\CC)$, and let 
-\begin{align*}
-V(\lambda) 
-	&= \langle T(v) \mid v \in \CC^N_{\std} 
-		\mbox{ and } v_{n,1} = \lambda_1, v_{n,2} = \lambda_2 - 1, \ldots, 
-		v_{n,n} = \lambda_{n} - n +1
-	\rangle_\CC
-\end{align*}
-(by convention, if $v$ is non-standard then $T(v) = 0$ in $V(\lambda)$).
-Then
-\begin{enumerate}[(a)]
-\item \label{GT-structure}
-$V(\lambda)$ is a $U$-module with the action of the canonical generators 
-given by
-\begin{align*}
-E_{k,k+1} T(v) 
-	&= - \sum_{i=1}^k \frac{p^+_{k,i}(v)}{q_{k,i}(v)} T(v + \delta^{k,i}) \\
-E_{k+1,k} T(v) 
-	&= \sum_{i=1}^k \frac{p^-_{k,i}(v)}{q_{k,i}(v)} T(v - \delta^{k,i}) \\
-E_{k,k} T(v)
-	&= (|v|_k - |v|_{k-1} + k -1) T(v)
-\end{align*}
-
-
-\item \label{GT-action} 
-For each $1 \leq k \leq m \leq n$, we have $c_{m,k} T(v) 
-= \gamma_{m,k}(v) T(v)$.
-
-\item With this structure, $V(\lambda)$ is a finite dimensional representation
-of maximal weight $\lambda$.
-\end{enumerate}
-\end{Theorem}
-
-\paragraph
-\label{GT-generic}
-We will now reprove the following result due to Drozd, Futorny and Ovsienko.
-\begin{Theorem*}[Futorny-Droz-Ovsyenko]
-Let $w \in \CC^N$. If $w$ is generic then replacing $V(\lambda)$ with $V(w)$, 
-items (\ref{GT-structure}) and (\ref{GT-action}) of \ref{GT} hold mutatis 
-mutandis (in particular the condition on $v$ being standard is void).
-\end{Theorem*}
-
-We give a proof of this result. In order to do that we need a lemma.
-
-\begin{Lemma*}
-Let $W \subset \ZZ^N_0$ be a finite set and let $S_W = \bigcap_{w \in W} 
-\CC^N_\std - w$. Let $F \in \CC(\lambda_{k,i} \mid 1 \leq i \leq k \leq n)$ be 
-a rational function which is well defined in a set containing $S_W$. If $F(v) 
-= 0$ for all $v \in S_W$, then $F = 0$.
-\end{Lemma*}
-\begin{proof}
-Explicitly, $v$ lies in $S_W$ if and only if
-\begin{align*}
-v_{k,i} - v_{k-1,i} - \max_{w \in W}\{w_{k-1,i} - w_{k,i}, 0\} +1 
-	&\in \ZZ_{> 0}, \\
-v_{k-1,i} - v_{k,i+1} - \max_{w \in W}\{w_{k,i+1} - w_{k-1,i}\}.
-	&\in \ZZ_{>0} 
-\end{align*}
-We enumerate the coordinate functions of a tableau as follows: start by 
-$\lambda_{n,n}$, which we denote by $x_1$; then, looking at all entries with 
-second coordinate $n-1$, we enumerate them by taking $x_2 = 
-\lambda_{n-1,n-1}$, then $x_3 = \lambda_{n,n-1}$; next we take the elements 
-with second coordinate $n-2$ starting by $\lambda_{n-2,n-2}$ and moving in the 
-northwest direction. Explicitly, setting $\phi(i,j) = (i-j+1) + 
-\frac{(n-j)(n-j+1)}{2}$ we write $x_{\phi(i,j)} = \lambda_{i,j}$. The 
-following figure shows the enumeration corresponding to $n = 3$; two entries 
-are joined by an edge if and only if they appear in one of the inequalities 
-defining $S_W$, and in all cases the leftmost appears with a plus sing and the 
-rightmost with a minus.
-
-\begin{tikzpicture}
-\node (31) at (0,3) {$\lambda_{3,1}$};
-\node (32) at (2,3) {$\lambda_{3,2}$};
-\node (33) at (4,3) {$\lambda_{3,3}$};
-\node (21) at (1,2) {$\lambda_{2,1}$};
-\node (22) at (3,2) {$\lambda_{2,2}$};
-\node (11) at (2,1) {$\lambda_{1,1}$};
-
-\node (31a) at (6,3) {$x_6$};
-\node (32a) at (8,3) {$x_3$};
-\node (33a) at (10,3) {$x_1$};
-\node (21a) at (7,2) {$x_5$};
-\node (22a) at (9,2) {$x_2$};
-\node (11a) at (8,1) {$x_4$};
-
-\draw (33) -- (22) -- (11)  (32) -- (21);
-\draw (22) -- (32)  (11) -- (21) -- (31);
-
-\draw (33a) -- (22a) -- (11a)  (32a) -- (21a);
-\draw (22a) -- (32a)  (11a) -- (21a) -- (31a);
-\end{tikzpicture}
-
-With this enumeration, all the equations defining $S_W$ read as $x_r(v) - 
-x_s(v) - t_{r,s} \in \ZZ_{>0}$ for some $t_{r,s} \in \ZZ$, and in each case 
-$r > s$. Thus if we put $x_1(v) = 0$ then by induction for each $s = 1, 
-\ldots, N$ there is always an $x_s(v)$ satisfying all equations involving 
-$x_r$ with $r\leq s$. In this way we find a tableau in $S_W$, so in particular 
-$S_W$ is not empty. 
-
-For each $s \in [N]$, let $w_s \in \ZZ^N$ be the tableau such that $x_t(w_s) 
-= 1$ if $t \geq s$, and $x_t(w_s) = 0$ if $t < s$. Notice that $v \in S_W$ 
-implies $v + r w_s \in S_z$ for all $r \in \NN$. 
-Let $f/g$ be the reduced expression of $F$. The hypothesis implies that if 
-$v \in S_W$ then $f(v) = 0$ and $g(v) \neq 0$, and all we have to prove is 
-that $f = 0$; we will do this by induction on the highest $t$ such that $x_t$ 
-appears in $f$. If $f$ is a polynomial on $x_1$, then taking $v \in S_z$, our 
-hypothesis implies that $f(v + rw_1) = 0$ for all $r \in \NN$, which can only 
-happen if $f = 0$. Assuming the result holds for all numbers less than $t$, we 
-write $f$ as a polynomial in $x_t$ with coefficients in the ring of polynomial 
-functions on $x_1, \ldots, x_{t-1}$, so $f = f_0 + f_1 x_t + \cdots + f_l 
-x_t^l$. Fix $v \in S_z$. For each $r \in \NN$ the value of $f_i(v + rw_t)$ is 
-independent of $r$, since the entries below the $t$-th are fixed, so 
-$f(v+rw_t)$ is a polynomial in $r$ whose $i$-th coefficient equals $f(v)$.
-Since $f(v + rw_s) = 0$ for all $r \in \NN$, we see that $f_i(v) = 0$. Now $v$ 
-was arbitrary, so each $f_i$ is zero over $S_W$, which implies that $f_i = 0$ 
-for all $i$ by the inductive hypothesis.
-\end{proof}
-
-\paragraph
-Consider the action of $\ZZ^N$ over $\CC^N$, given by $v^z = v+z$. This induces
-an action on $\Lambda$, given by $(z \cdot f)(v) = f(v^z)$.
-This action extends naturally to the fraction field $K = 
-\operatorname{Frac}(\Lambda) = \CC(\lambda_{k,i} \mid 1 \leq i \leq k \leq 
-n)$. 
-
-For the rest of this section let $\H$ be the infinite hyperplane arrangement 
-in $\CC^N$ consisting of all hyperplanes defined by the equations 
-$\lambda_{k,i} - \lambda_{k,j} - r$ for all $1 \leq i < j \leq k \leq n$ and 
-all $r \in \ZZ$, and let $A \subset K$ be the algebra of rational functions 
-whose poles are contained in $\H$. Notice that $A$ is stable by the action of
-$\ZZ^N$.
-
-
-\begin{Proposition}
-Let $V_A$ be the $A$-module with basis $\{T(z) \mid z \in \ZZ^n_0\}$, and let 
-$V_K = K \ot_A V_A$. We see $V_A$ as $A$-submodule of $V_K$ in the obvious way.
-
-\begin{enumerate}[(a)]
-\item \label{generic-GT-structure}
-The vector space $V_K$ can be endowed with the structure of a $U$-module 
-with the action of the canonical generators given by
-\begin{align*}
-E_{k,k+1} T(z) 
-	&= - \sum_{i=1}^k \frac{p^+_{k,i}(\lambda^z)}{q_{k,i}(\lambda^z)} 
-		T(z + \delta^{k,i}); \\
-E_{k+1,k} T(z) 
-	&= \sum_{i=1}^k \frac{p^-_{k,i}(\lambda^z)}{q_{k,i}(\lambda^z)} 
-		T(z - \delta^{k,i}); \\
-E_{k,k} T(z)
-	&= (|\lambda^z|_k - |\lambda^z|_{k-1} + k -1) T(z).
-\end{align*}
-
-\item For each $1 \leq k \leq m \leq n$, we have $c_{m,k} T(z) = 
-\gamma_{m,k}(\lambda^z) T(z)$.
-
-\item The $A$-module $V_A$ is a sub $U$-module of $V_K$.
-\end{enumerate}
-\end{Proposition}
-
-\begin{proof}
-Let $F$ be the free $\CC$-algebra generated by $X_{k,k+1}, X_{k+1,k}$ for 
-$1 \leq k < n$, and $X_{k,k}$ for $1 \leq k \leq n$; there is an obvious map
-$\phi: F \to U$. The formulas in item \ref{generic-GT-structure} define an 
-$F$-module structure on $V_K$, so there is an algebra map $F \to \End_K V_K$, 
-and we must show that this map factors through $U$.
-
-Let $a \in F$ be a linear combination of monomials of length at most $r \geq 
-0$. Then for each $w \in \ZZ^N_0$ there exists a rational function $f_a(-,w) 
-\in K$ such that
-\[
-	aT(z) = \sum_{w \in \ZZ^N_0} f_a(\lambda^z,w) T(z+w)
-\]
-for all $z \in \ZZ^N_0$. Furthermore if the sum of the absolute values of the
-entries of $w$ is greater than $r$ then $f_a(-,w) = 0$, so in fact the sum is 
-over a finite set $W$. By Lemma \ref{GT-generic} the rational function 
-$f_a(-,w)$ is determined by its values on $S_W = \bigcap_{w \in W} 
-\CC_\std^N-w$.
-
-Fix $v \in S_W$ and let $\lambda = (v_{n,1}, v_{n,1} + 1, \ldots, v_{n,n} + 
-n -1)$. Since $v$ is standard $\lambda$ is a weight of $\gl(n,\CC)$, so we can
-consider the representation $V(\lambda)$ as defined in \ref{GT}. By 
-construction the set $\{T(v+w) \mid w \in W\} \subset V(\lambda)$ consists of 
-nonzero linearly independent elements, and by construction
-\[
-	\phi(a) T(v) = \sum_{w \in W} f_a(v, w) T(v+w).
-\]
-Thus if $\phi(a) = 0$ then $f_a(v,z) = 0$ for all $v \in S_W$ and hence 
-$f_a(-,w) = 0$, and the formulas in item \ref{generic-GT-structure} indeed 
-define a $U$-module structure on $V_K$. Furthermore, if $\phi(a) = c_{m,k}$ for
-some $k$ and $m$ then $f_a(v,z) = 0$ for all $z \neq 0$ and $f_a(v,0) = 
-\gamma_{m,k}(v)$, and again by Lemma \ref{GT-generic} we get item (b). Item 
-(c) follows from the definition.
-\end{proof}
-
-\paragraph
-\label{GT-generic-proof}
-\begin{proof}[Proof of Theorem \ref{GT-generic}]
-If $w \in \CC_\gen^N$ then the map $f \in A \mapsto f(w) \in \CC$ is well
-defined, and induces a one-dimensional representation of $A$ which we denote
-$\CC_w$. Now $\CC_w \ot_A V_A$ is a $U$-module, with the action of $U$ induced
-by its action on $V_A$, and furthermore it is isomorphic to $V(w)$ as 
-$\CC$-vector space through the assignation $1 \ot_A T(z) \mapsto T(w+z)$. 
-This provides the desired action of $U$ on $V(w)$.
-\end{proof}
-
-\section{$1$-singular GT-modules}
-We extend the construction from Theorem \ref{GT-generic} to the case were
-$w$ is $1$-critical.
-
-\paragraph
-Let $\Sigma = \{(k,i,j) \mid 1 \leq i < j \leq k \leq n\}$, and fix $(t,r,s) 
-\in \Sigma$; write $x = \lambda_{t,r}, y = \lambda_{t,s}$. Let $B \subset A$ 
-be the algebra of all rational functions in $A$ without poles in the hyperplane
-$x-y$, i.e. $B$ consists of all functions in $A$ that can be evaluated in a 
-$1$-critical tableau $v$ whose critical entries are precisely $x(v)$ and 
-$y(v)$.
-
-\paragraph
-Let $\tau \in S_t$ be the permutation $(rs)$. We see $\tau $ as an element of
-$G = S_1 \times S_2 \times \cdots \times S_n$ in the obvious way. This element
-induces a linear transformation $\tau : \CC^N \to \CC^N$, which on the 
-canonical basis is defined by 
-\begin{align*}
-\tau(\delta^{k,i})
-	&= \begin{cases}
-		\delta^{t,\tau(i)} & \mbox{ if } k = t; \\
-		\delta^{k,i} & \mbox{ otherwise. }
-	\end{cases}
-\end{align*}
-Clearly $\tau^2 = \Id$.
-
-Recall that $K = \CC(\lambda_{k,i} \mid 1 \leq k \leq i \leq n)$ and that $V_K$
-is the $K$-vector space with basis $\{T(z) \mid \ZZ^N_0\}$. For each $z \in 
-\ZZ_0^N$ we define   
-\begin{align*}
-S(z) 
-	&= \frac{T(z) + T(\tau(z))}{2},
-&A(z)
-	&= \frac{T(z) - T(\tau(z))}{2(x-y)}.
-\end{align*}
-Notice that $S(\tau(z)) = S(z)$ and $A(\tau(z)) = - A(z)$, so if $x(z) = y(v)$,
-or equivalently $\tau(z) = z$, then $S(z) = T(z)$ and $A(z) = 0$. Also notice
-that $T(z) = S(z) + (x-y)A(z)$, so the set $\{S(z), A(z) \mid z \in \ZZ_0^N\}$
-generates $V_K$, and removing $0$ it is in fact a $K$-basis.
-
-\paragraph
-\label{GT-singular}
-Our aim is to prove the following proposition.
-\begin{Proposition*}
-Let $V_B$ be the $B$-module generated by $\{S(z), A(z) \mid z \in \ZZ_0^N\}$.
-Then $V_B \subset V_K$ is a sub-$U$-module.
-\end{Proposition*}
-Suppose the proposition is proved, and let $v \in \CC^N$ be a $1$-critical 
-tableau with critical entries $v_{t,r}, v_{t,s}$. Then $v$ induces a 
-$1$-dimensional representation of $B$ denoted by $\CC_v$, and we can recover
-the $1$-critical module of \cite{FGR-singular-gt} taking $\CC_v \ot_B V_B$. In order to 
-prove the proposition, we have to show that for all adequate $k$ the
-$B$-module $V_B$ is stable by the action of $E_{k,k}, E_{k,k+1}$ and 
-$E_{k+1,k}$. This is long and tedious, so we go step by step. We begin with
-a lemma that gathers some properties of the relevant functions.
-
-\begin{Lemma*}
-\begin{enumerate}
-\item \label{depends}
-The polynomial $p_{k,i}^\pm$ depends only on $\lambda_{k,i}$ and 
-$\lambda_{k \pm 1,j}$ with $1 \leq j \leq k \pm 1$. 
-The polynomial $q_{k,i}$ depends only on $\lambda_{k,j}$ with $1 \leq j \leq 
-k$.
-
-\item \label{x-y-q}
-We have $(x-y) \mid q_{k,i}(\lambda^z)$ if and only if $(k,i) \in 
-\{(t,r), (t,s)\}$ and $z = \tau(z)$, and in that case $(x-y)^2$ does not
-divide $q_{k,i}(\lambda^z)$.
-
-\item \label{cosito}
-For each $z \in \ZZ^N_0$ 
-\[
-F^\pm_z = \frac{p^\pm_{t,r}(\lambda^z)}{q_{k,r}(\lambda^z)} 
-+ \frac{p^\pm_{t,s}(\lambda^{z})}{q_{k,s}(\lambda^{z})}\ \in B,
-\]
-
-\item \label{cosito2}
-For each $z \in \ZZ^N_0$
-\[
-D_z^\pm =
-\frac{1}{x-y}\left(\frac{p_{k,i}^\pm(\lambda^z)}{q_{k,i}(\lambda^z)} 
-- \frac{p_{k,i}^\pm(\lambda^{\tau(z)})}{q_{k,i}(\lambda^{\tau(z)})}\right) 
-\in B
-\]
-\end{enumerate}
-\end{Lemma*}
-\begin{proof}
-The first two items are obvious by inspection, and the third follows from the 
-second except if $\tau(z) = z$. Now $q_{t,r} = (x-y) \prod_{i \neq r,s}(x^z - 
-\lambda_{t,i})$ and $q_{t,s} = (y-x) \prod_{i \neq r,s}(y^z - \lambda_{t,i})$.
-Set
-\[
-G_z^\pm 
-= \frac{p^\pm_{t,r}(\lambda^z)}{\prod_{i \neq r,s}(x^z - \lambda_{t,i}^z)} 
-- \frac{p^\pm_{t,s}(\lambda^{z})}{\prod_{i \neq r,s}(y^z - \lambda_{t,i}^z)}
-\]
-Now $G_z^\pm \in B$ and $F_z = G_z/(x-y)$, so it is enough to show that 
-$(x-y) \mid G_z^\pm$ in $B$, or in other words that the image of $G_z^\pm$ in 
-the quotient ring $B/(x-y)$ is zero. Clearly the image of both denominators in 
-the quotient is the same, and direct inspection shows that the same happens 
-with the numerators. 
-
-For the fourth item, notice that $z = \tau(z)$ implies $D_z = 0$, so we have 
-$E_z^\pm = (x-y)D_z^\pm \in B$ for all $z$. Direct calculations show that
-$E_z \equiv 0 \mod x-y$.
-\end{proof}
-
-\paragraph
-\about{Action of $E_{k,k}$}
-
-Since $|\lambda^z|_k = |\lambda^{\tau(z)}|_k = |\lambda|_k + |z|_k$
-for all $k$, we obtain
-\begin{align*}
-E_{k,k} S(z) 
-	&= (|\lambda^z|_k - |\lambda^z|_{k-1} + k -1) S(z) \\
-E_{k,k} A(z) 
-	&= (|\lambda^z|_k - |\lambda^z|_{k-1} + k -1) A(z)
-\end{align*}
-Thus $V_B$ is stable by the action of $E_{k,k}$.
-
-\paragraph
-\about{Action of $E_{k,k+1}$ on $S(z)$ for $k \neq t$}
-
-The hypothesis that $k \neq t$ implies that $\tau(z) + \delta^{k,i} = 
-\tau(z + \delta^{k,i})$ and also that $q_{k,i}(\lambda^z) = 
-q_{k,i}(\lambda^{\tau(z)})$ for all $i$. Thus by definition
-\begin{align*}
-E_{k,k+1} S(z)
-	&= - \frac{1}{2}
-		 	\sum_{i=1}^k \frac{1}{q_{k,i}(\lambda^z)} 
-			\left(
-			p_{k,i}^+(\lambda^z) T(z+\delta^{k,i})
-			+ p_{k,i}^+(\lambda^{\tau(z)}) T(\tau(z + \delta^{k,i}))
-		\right) 
-\end{align*}
-By item \ref{x-y-q} of Lemma \ref{GT-singular} $1/q_{k,i}(\lambda^z) \in B$.
-Since $T(z) = S(z) + (x-y)A(z) \in V_B$ the right hand side of the equation 
-lies in $V_B$. 
-
-Let us refine that result. If we assume that $k \neq t,t-1$ then 
-$p_{k,i}(\lambda^z) = p_{k,i}(\lambda^{\tau(z)})$, so the previous formula 
-becomes
-\begin{align}
-\label{k-k+1-S}
-E_{k,k+1} S(z) 
-	&= - \sum_{i = 1}^k \frac{p^+_{k,i}(\lambda^z)}{q_{k,i}(\lambda^z)}
-	S(z+\delta^{k,i}).
-\end{align}
-If we take $k = t-1$ then we can replace $T(z)$ by $S(z) + (x-y)A(z)$ and
-obtain
-\begin{align}
-\label{t-1-t-S}
-E_{t-1,t} S(z)
-	&= -\frac{1}{2}\sum_{i=1}^{t-1} \frac{p^+_{t-1,i}(\lambda^z) + 
-	p^+_{t-1,i}(\lambda^{\tau(z)})}{q_{t-1,i}(\lambda^z)} 
-	S(z + \delta^{t-1,i}) + \\
-	&\qquad \quad + \frac{p^+_{t-1,i}(\lambda^z) - 
-	p^+_{t-1,i}(\lambda^{\tau(z)})}{q_{t-1,i}(\lambda^z)} (x-y)
-	A(z + \delta^{t-1,i}).
-\end{align}
-
-\paragraph
-\about{Action of $E_{t,t+1}$ on $S(z)$}
-Using the equality $T(z) = S(z) + (x-y)A(z)$, and the fact that $S(\tau(z) + 
-\delta^{k,i}) = S(z+\tau(\delta^{k,i}))$ and $A(\tau(z) + \delta^{k,i}) = - 
-A(z+\tau(\delta^{k,i}))$ we get
-\begin{align*}
-E_{t,t+1} S(z)
-	&= -\frac12\sum_{i=1}^t \frac{p^+_{t,i}(\lambda^z)}{q_{k,i}(\lambda^z)}
-		(S(z + \delta^{t,i}) + (x-y)A(z + \delta^{t,i})) + \\
-		&\qquad \qquad 
-		+ \frac{p^+_{t,i}(\lambda^{\tau(z)})}{q_{k,i}(\lambda^{\tau(z)})}
-		\Big(S(z + \tau(\delta^{t,i})) - (x-y)A(z + \tau(\delta^{t,i}))\Big)
-\end{align*}
-By definition of $\tau$, we get
-\begin{align}
-E_{t,t+1}S(z)
-	&=-\frac12\sum_{i = 1}^t 
-	\left(\frac{p^+_{t,i}(\lambda^z)}{q_{t,i}(\lambda^z)} 
-+ \frac{p^+_{t,\tau(i)}(\lambda^{\tau(z)})}{q_{t,\tau(i)}
-(\lambda^{\tau(z)})}\right)S(z + \delta^{t,i}) + \\
-& \qquad \qquad +
-\left(\frac{p^+_{t,i}(\lambda^z)}{q_{t,i}(\lambda^z)} 
-- \frac{p^+_{t,\tau(i)}(\lambda^{\tau(z)})}{q_{t,\tau(i)}
-(\lambda^{\tau(z)})}\right)(x-y)A(z+\delta^{t,i}).
-\end{align}
-The coefficients of the $S$'s and the $A$'s' in this formula lie in $B$ unless
-$z = \tau(z)$, in which case there might be problems when $i = r$ or $i = s$.
-In that case the coefficient of the $A$'s lie in $B$ because $(x-y)$ divides 
-$q_{t,r}$ and $q_{t,s}$ exactly once. Thus all we have to prove is that
-if $z = \tau(z)$ then the coefficients of $S(z+\delta^{t,r})$ and 
-$S(z+\delta^{t,s})$ lie in $B$ but this is precisely item \ref{cosito} of 
-Lemma \ref{GT-singular}.
-
-\paragraph
-\about{Action of $E_{k+1,k}$ on $S(z)$}
-Similar reasoning works for this case. We only state the results.
-\begin{align*}
-E_{k+1,k}S(z) 
-	&= \sum_{i=1}^k \frac{p_{k,i}^-(\lambda^z)}{q_{k,i}(\lambda^z)}
-	S(z - \delta^{k,i}) & (k \neq t,t+1)\\
-E_{t+2,t+1}S(z)
-	&= \frac12\sum_{i=1}^{t+1} 
-	\frac{p^-_{t+1,i}(\lambda^z) + p^-_{t+1,i}(\lambda^{\tau(z)})}
-	{q_{t+1,i}(\lambda^z)} S(z - \delta^{t+1,i}) + \\
-	&\qquad \quad 
-	+ \frac{p^-_{t+1,i}(\lambda^z) - p^-_{t+1,i}(\lambda^{\tau(z)})}
-	{q_{t+1,i}(\lambda^z)} (x-y) A(z - \delta^{t+1,i}) \\
-E_{t+1,t} S(z)
-	&= \frac12 \sum_{i=1}^t \left(
-	\frac{p^-_{t,i}(\lambda^z)}{q_{t,i}(\lambda^z)} 
-	+ \frac{p^-_{t,\tau(i)}(\lambda^{\tau(z)})}
-	{q_{t,\tau(i)}(\lambda^{\tau(z)})}\right) S(z - \delta^{t,i}) + \\
-	& \qquad \qquad +
-		\left(\frac{p^-_{t,i}(\lambda^z)}{q_{t,i}(\lambda^z)} - 
-		\frac{p^-_{t,\tau(i)}(\lambda^{\tau(z)})}{q_{t,\tau(i)}
-		(\lambda^{\tau(z)})}\right)(x-y)A(z - \delta^{t,i})
-\end{align*}
-
-\paragraph
-\about{The action on $A(z)$}
-Arguments similar to those above show that we get
-\begin{align*}
-E_{k,k+1} A(z) 
-	&= - \sum_{i = 1}^k \frac{p^+_{k,i}(\lambda^z)}{q_{k,i}(\lambda^z)}
-	A(z) & (k \neq t,t-1)\\
-E_{t-1,t} A(z)
-	&= -\frac12 \sum_{i=1}^{t-1} 
-	\frac{p_{t-1,i}^+(\lambda^z) - p_{t-1,i}^+(\lambda^{\tau(z)})}
-	{(x-y)q_{t-1,i}(\lambda^z)} S(z + \delta^{t-1,i}) \\
-	&\qquad \qquad + \frac{p_{t-1,i}^+(\lambda^z) + p_{t-1,i}^+(\lambda^{\tau(z)})}
-	{q_{t-1,i}(\lambda^z)}A(z + \delta^{t-1,i}) \\
-E_{t,t+1} A(z)
-	&= -\frac12 \sum_{i=1}^t \frac{1}{x-y}\left( 
-		\frac{p_{t,i}^+(\lambda^z)}{q_{t,i}(\lambda^z)} - 
-		\frac{p_{\tau(t,i)}^+(\lambda^{\tau(z)})}{q_{\tau(t,i)}(\lambda^{\tau(z)})}\right) 
-		S(z + \delta^{t,i}) \\
-	& \qquad \qquad 
-	+ \left(\frac{p_{t,i}^+(\lambda^z)}{q_{t,i}(\lambda^z)} 
-	+ \frac{p_{\tau(t,i)}^+(\lambda^{\tau(z)})}{q_{\tau(t,i)}(\lambda^{\tau(z)})}\right) 
-	A(z + \delta^{t,i}).
-\end{align*}
-
-Similarly we get
-\begin{align*}
-E_{k+1,k} A(z) 
-	&= \sum_{i=1}^k \frac{p_{k,i}^-(\lambda^{z})}{q_{k,i}(\lambda^{z})}
-	A(z - \delta^{k,i}) & (k \neq t,t+1) \\
-E_{t+2,t+1} A(z)
-	&= \frac12 \sum_{i=1}^{t+1} \frac{p_{t+1,i}^-(\lambda^z) - 
-	p_{t+1,i}^-(\lambda^{\tau(z)})}
-	{(x-y)q_{t+1,i}(\lambda^z)}S(z - \delta^{t+1,i}) \\
-	&\qquad \qquad + \frac{p_{t+1,i}^-(\lambda^z) + 
-	p_{t+1,i}^-(\lambda^{\tau(z)})}
-	{q_{t+1,i}(\lambda^z)}A(z-\delta^{t+1,i}) \\
-E_{t,t+1} A(z)
-	&= -\frac12 \sum_{i=1}^t \frac{1}{x-y}\left( 
-		\frac{p_{t,i}^-(\lambda^z)}{q_{t,i}(\lambda^z)} - 
-		\frac{p_{t,\tau(i)}^-(\lambda^{\tau(z)})}{q_{t,\tau(i)}(\lambda^{\tau(z)})}\right) 
-		S(z - \delta^{t,i}) \\
-	& \qquad \qquad 
-	+ \left(\frac{p_{t,i}^-(\lambda^z)}{q_{t,i}(\lambda^z)} 
-	+ \frac{p_{t,\tau(i)}^-(\lambda^{\tau(z)})}{q_{t,\tau(i)}(\lambda^{\tau(z)})}\right) 
-	A(z - \delta^{k,i}).
-\end{align*}
-
-\paragraph
-\about{The action of $\Gamma$ on $S(z), A(z)$}
-By carrying things out as before we get
-\begin{align*}
-c_{m,k} S(z)
-	&= \gamma_{m,k}(\lambda^z)S(z) 
-&c_{m,k} A(z)
-	&= \gamma_{m,k}(\lambda^z)A(z) 
-	&(m \neq t),
-\end{align*}
-while for $k = t$
-\begin{align*}
-c_{t,k} S(z)
-	&= \frac{\gamma_{m,k}(\lambda^z) + \gamma_{m,k}(\lambda^{\tau(z)})}{2} S(z)
-		+ (x-y)\frac{\gamma_{m,k}(\lambda^z) - \gamma_{m,k}(\lambda^{\tau(z)})}
-		{2}A(z) \\
-c_{t,k} A(z)
-	&= \frac{\gamma_{m,k}(\lambda^z) + \gamma_{m,k}(\lambda^{\tau(z)})}{2}A(z)
-		+ \frac{\gamma_{m,k}(\lambda^z) - \gamma_{m,k}(\lambda^{\tau(z)})}
-		{2(x-y)}S(z)
-\end{align*}
-Notice that this makes it less obvious whether $V_B$ is a GT-module.
-
-\paragraph
-\about{The generic $1$-singular $U$-module}
-Set $B' = B/(x-y)$, and $V' = B' \ot_B V_B$. Clearly for any $w \in \CC^N$ 
-with $x(w) = y(w)$ the $B$-module $\CC_w$ is also a $B'$-module. Thus to study 
-the generic $U$-module over a $1$-critical tableau we look at the action of
-$U$ on $V'$.
-
-\begin{align*}
-E_{k,k+1} S(z)
-	&\equiv -\sum_{i=1}^k \frac{p_{k,i}^+(\lambda^z)}{q_{k,i}(\lambda^z)} 
-	S(z+\delta^{k,i}) \mod (x-y) &(z \neq \tau(z) \mbox{ 0 } k \neq t); \\
-E_{t,t+1} S(z)
-	&\equiv -\sum_{i=1}^t \frac{p_{t,i}^+(\lambda^z)}{q_{t,i}(\lambda^z)} 
-	S(z+\delta^{t,i}) \\&\qquad \qquad + 2\frac{p^+_{t,r}(\lambda^z)}{\hat q_{t,r}(\lambda^z)} A(z+\delta^{t,r}) \mod (x-y) &(z = \tau(z)) \\
-E_{k+1,k} S(z)
-	&\equiv \sum_{i=1}^k \frac{p_{k,i}^-(\lambda^z)}{q_{k,i}(\lambda^z)} 
-	S(z-\delta^{k,i}) \mod (x-y) &(z \neq \tau(z) \mbox{ 0 } k \neq t); \\
-E_{t,t+1} S(z)
-	&\equiv \sum_{i=1}^t \frac{p_{t,i}^-(\lambda^z)}{q_{t,i}(\lambda^z)} 
-	S(z-\delta^{t,i}) \\&\qquad \qquad + 2\frac{p^-_{t,r}(\lambda^z)}{\hat q_{t,r}(\lambda^z)} A(z-\delta^{t,r}) \mod (x-y) &(z = \tau(z))
-\end{align*}
-where $\hat q_{t,r} = q_{t,r}/(x-y)$.
-\begin{align*}
-E_{k,k+1} A(z)
-	&\equiv -\sum_{j=1}^k \frac{p_{k,i}^+(\lambda^z)}{q_{k,i}(\lambda^z)}
-	A(z+\delta^{k,i}) \mod (x-y)&(k \neq t,t-1) \\
-E_{t-1,t} A(z) 
-	&\equiv -\sum_{j=1}^{t-1} \frac{p_{t-1,i}^+(\lambda^z)}
-	{q_{t-1,i}(\lambda^z)} A(z+\delta^{t-1,i}) \\
-	&\qquad \qquad + \frac{(b-a)}{2}\frac{\hat p^+_{t-1,i}(\lambda^z)}
-	{q_{t-1,i}(\lambda^z)} S(z + \delta^{t-1,i})\\
-E_{t,t+1} A(z)
-	&\equiv -\sum_{j=1}^{t} \frac{p_{t,i}^+(\lambda^z)}
-	{q_{t,i}(\lambda^z)} A(z+\delta^{t,i}) \\
-	&\qquad \qquad + \frac{a-b}{2} \frac{p_{t,i}^+(\lambda^z)}
-	{mcm(q_{t,i}(\lambda^z),q_{t,i}(\lambda^{\tau(z)}))} S(z + \delta^{t,i})
-\end{align*}
-where $\displaystyle \hat p_{t \mp 1,i}^\pm = \prod_{j \neq r,s}^{t\mp 1} 
-(\lambda_{t\mp 1, i} - \lambda_{t,j})$.
-
 \newpage
 
 \section{The construction of a GT-module associated to a fully critical 
 tableau}
+
+\subsection{Polynomials over symmetric polynomials}
+In this section we fix $m \in \ll n \rr$, and write $x_i = \lambda_{m,i}$
+for all $i \in \ll m \rr$, so $\Lambda_m = \CC[x_i \mid i \in \ll m \rr]$. 
+Set $\Gamma_m = \Lambda^{S_m}$. By classical results $\Gamma_m$ is isomorphic 
+to a polynomial algebra in $m$ generators and its Hilbert series is given by 
+$\prod_{i = 1}^m \frac{1}{1-t^i}$, and $\Lambda_m$ is a free 
+$\Gamma_m$-module, see \cite{Chev-reflection-groups}.
+
+Set $M = \{\lambda_{k,i} - \lambda_{k,j} - z \mid 1 \leq i, j \leq k < n, z 
+\in \NN\}$ and $M' = \{\lambda_{k,i} - \lambda_{k,j} - z \mid 1 \leq i, j 
+\leq k < n, z \in \NN^*\}$. Put $A = \Lambda[M^{-1}]$ and $B = 
+\Lambda[M'^{-1}]$, so $B \subset A \subset \Lambda$. We set $F = 
+\Frac(\Lambda)$ and $E = \Frac(\Gamma)$. The action of $S_m$
+extends to $F$, and $E = F^{S_m}$ so $E \subset F$ is a Galois extension with
+Galois group $S_m$. 
+
+
+\paragraph
+Let $J$ be the ideal generated by symmetric polynomials of positive degree
+in $\Lambda_m$. Since $J$ is a symmetric ideal, for each $l \in \NN$ the 
+space of polynomials of degree $l$ decomposes as $K_l \oplus J_l$. Setting 
+$K = \bigoplus_l K_l$ we get $\Lambda_m / J \cong K$ as a representation of 
+$S_m$. By \cite{Chev-reflection-groups} $K$ is a graded version of the standard
+representation of $S_m$, and its Hilbert series is given by $\prod_{j = 1}^m
+\frac{1-t^i}{1-t}$.
+
+Let $\Delta = \prod_{1 \leq i < j \leq m} (x_i - x_j)$. According to 
+\cite{Man-symm-book}*{2.5.3} there is a symmetric bilinear form on $\Lambda_m$
+defined by
+\begin{align*}
+(f,g)
+	&=\ev_0 \left(
+		\frac{1}{\Delta}\sum_{\sigma \in S_m} \sg(\sigma) f^\sigma g^\sigma
+	\right)
+\end{align*}
+where $\ev_0(p) =p(0)$. The kernel of this bilinear form is exactly $J$,
+so in particular its restriction to $K$ is non-degenerate. For $f,g \in K$
+the inner product 
+
+
+
+There is a bilinear form $\phi: S/J \times S/J \to \CC$ given by $\phi(f,g)
+= \overline{\sum_{\sigma \in S_m} \sigma(fg/\Delta)}$. Equivalently, 
+$\phi(f,g)$ is obtained by antisymmetrizing the product $fg$ and dividing by 
+$\Delta$. This is well-defined since all antisymmetric polynomials of degree
+less than $2m!$ are scalar multiples of $\Delta$. This is a non-degenerate 
+bilinear form, and hence every basis has a dual basis (this is \emph{not} a
+scalar product, since $\phi(f,f) = 0$ for any $f$).
+
+\paragraph
+Let $f_1, \ldots, f_{m!}$ be a homogeneous basis of $R$ as $S$-module, and let
+$f_i^*$ denote the $i$-th element of the dual basis. For each $v \in \ZZ^N_0$ 
+set 
+\begin{align*}
+D_iT(v) 
+	&= \sum_{\sigma \in S_m} \sigma \left( \frac{f_i}{\Delta} T(v)\right).
+\end{align*}	
+
+\begin{Lemma*}
+\begin{itemize}
+\item For all $\sigma \in S_m$ we have $\langle D_iT(v) \mid 1 \leq i \leq 
+m! \rangle_\CC = \langle D_iT(\sigma\cdot v) \mid 1 \leq i \leq m! 
+\rangle_\CC$.
+
+\item $T(\sigma(v)) \in \langle D_iT(v) \mid 1 \leq i \leq m! \rangle$.
+
+\item $\dim \langle D_iT(v) \mid 1 \leq i \leq m!\rangle_\CC = \# S_m \cdot v$.
+\end{itemize}
+
+\end{Lemma*}
+
+\begin{Definition}
+Set $L_B = \langle D_iT(v) \mid 1 \leq i \leq m!, v \in \ZZ^N_0 \rangle_\CC$
+\end{Definition}
+
+\begin{Lemma*}
+For all $v \in \ZZ^N_0$ we have $U T(v) \in L_B$.
+\end{Lemma*}
+\begin{proof}
+We claim that for all $v \in \ZZ^N_0$. 
+\begin{align*}
+\sum_{r=1}^t \frac{p_{t,r}^\pm(\lambda^v)}{q_{t,r}(\lambda^v)} \in B.
+\end{align*}
+Clearly this holds if $r \neq k$ or if all the entries in $v$ are diferent. If
+$v$ has entries $v_{k,i} = v_{k,j}$ let $\tau = (i,j)$, so $\tau(v) = v$, and
+\begin{align*}
+\tau \cdot \sum_{r=1}^k \frac{p_{k,r}^\pm(\lambda^v)}{q_{k,r}(\lambda^v)}
+	&= \sum_{r=1}^k \frac{p_{k,\tau(r)}^\pm(\lambda^{\tau(v)})}
+	{q_{k,\tau(r)}(\lambda^{\tau(v)})},
+\end{align*}
+so this is a rational function which is symmetric on $x =x_{k,i}, y =x_{k,j}$, 
+which implies that it can be written as $f/g (x-y)^{2l}$ for $f,g$ coprime 
+with $(x-y)$ and $l \in \ZZ$. Since $(x-y)$ appears once in 
+$q_{k,i}(\lambda^v)$ and $q_{k,j}(\lambda^v)$ and never in the other terms, it 
+is clear that the sum has a pole of order at most one in $(x-y)$, so $l \geq 
+0$. Since $i,j$ were arbitrary, we see that no polynomial of the form $x_{k,i} 
+- x_{k,j}$ appears in the denominator
+\end{proof}
+
+
+\begin{Proposition}
+$U L_B \subset L_B$
+\end{Proposition}
+
+
+\newpage
 For each $(k,i,j) \in \Sigma$ let $\alpha^k_{i,j} = \lambda_{k,i} - 
 \lambda_{k,j}$, and let $\mathcal H$ be the infinite hyperplane arrangement
 $\bigcup_{(k,i,j) \in \Sigma, z \in \ZZ} \{\alpha_{i,j}^k = z\}$. Clearly
@@ -717,13 +267,6 @@ the set of all singular non-fully critical points in $\CC^N$. Set $\CC^N_\crit
 $\CC^N_\crit$. Once again, we will look for $L_B \subset V_A$ a $U$-submodule
 stable by the action of $U$.
 
-\subsection{Polynomials over symmetric polynomials}
-Set $R = \CC[x_1, \ldots, x_m]$. As before, the symmetric group $S_m$ acts on 
-$R$ in the usual way, and for $\sigma \in S_m, f \in R$ we write $f^\sigma = 
-\sigma \cdot f$. Set $S = R^{S_m}$. By classical results, $R$
-is a free $S$-module and there exists a graded version of the regular 
-representation of $S_m$, say $U$, such that $R \cong S \ot U$ as $S$-modules 
-and $S_m$-modules. 
 
 We will now consider matrices with coefficients in $R$ with rows indexed by 
 $S_m$ and columns indexed by $[[m!]]$; the reader is free to choose some order 

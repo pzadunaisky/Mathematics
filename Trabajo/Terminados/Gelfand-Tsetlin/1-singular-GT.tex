@@ -7,7 +7,7 @@
 \pagenumbering{arabic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[small]{titlesec}
-\usepackage{paragraphs}
+%\usepackage{paragraphs}
 
 \usepackage{hyperref}
 
@@ -36,6 +36,33 @@
 
 %%%%%%%%%%%%Theorems, for paragraphs package%%%%%%%%%%%%%%%%%%%%%%%%%%
 % numbered versions
+
+\newskip\paraskip
+\paraskip=0.75ex plus .2ex minus .2ex
+
+\newcounter{para}[section]
+\setcounter{para}{0}
+\renewcommand\thepara{\thesection.\arabic{para}}
+\def\paragraph{%
+  \if@noskipsec \leavevmode \fi
+  \par
+  \if@nobreak
+    \everypar{}%
+  \else
+    \addpenalty{\@secpenalty}%
+    \addvspace{\paraskip}%
+  \fi
+  \noindent
+  \refstepcounter{para}%
+  \textbf{\thepara.}\hspace{1ex}%
+  \@nobreakfalse
+  \ignorespaces
+}
+
+\newcommand\pref[1]{\textbf{\ref{#1}}}
+
+%\newcommand\theHpara{\theHsection.\arabic{para}}
+
 \declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
 bodyfont=\itshape]{mystyle}
 \declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
@@ -586,18 +613,15 @@ following lemma can be verified by direct calculations.
 \label{L:helpful}
 Let $f \in B$.
 \begin{enumerate}
-\item 
-\label{derivative}
+\item \label{derivative}
 The rational function $\frac{f - \tau \cdot f}{x-y}$ lies in $B$, and is equal
 to $2 D(f)$.
 
-\item 
-\label{action1}
+\item \label{action1}
 For each $z \in \ZZ^N$ we have $\tau \cdot f(\lambda^z) = (\tau \cdot f)
 (\lambda^{\tau(z)})$. 
 
-\item 
-\label{action2}
+\item \label{action2}
 We have $\tau \cdot p_{t,s}^\pm = p_{\tau(t,s)}^\pm$ and $\tau \cdot 
 q_{t,s} = q_{\tau(t,s)}$.
 \end{enumerate}
@@ -865,7 +889,277 @@ From this we recover \cite{FGR-singular-gt}*{Corollary 4.13}.
 
 \begin{bibdiv}
 \begin{biblist}
-\bibselect{biblio}
+
+
+\bib{DFO-GT-modules-original}{article}{
+   author={Drozd, Yu. A.},
+   author={Ovsienko, S. A.},
+   author={Futorny, V. M.},
+   title={On Gel\cprime fand-Zetlin modules},
+   booktitle={Proceedings of the Winter School on Geometry and Physics
+   (Srn\'\i, 1990)},
+   journal={Rend. Circ. Mat. Palermo (2) Suppl.},
+   number={26},
+   date={1991},
+   pages={143--147},
+   review={\MR{1151899}},
+}
+ 
+\bib{DFO-gt-modules-sl3}{article}{
+   author={Drozd, Yu. A.},
+   author={Ovsienko, S. A.},
+   author={Futorny, V. M.},
+   title={Gel\cprime fand-Zetlin modules over Lie algebra ${\rm SL}(3)$},
+   conference={
+      title={Proceedings of the International Conference on Algebra, Part 2
+      },
+      address={Novosibirsk},
+      date={1989},
+   },
+   book={
+      series={Contemp. Math.},
+      volume={131},
+      publisher={Amer. Math. Soc., Providence, RI},
+   },
+   date={1992},
+   pages={23--29},
+}
+
+\bib{DFO-GT-modules}{article}{
+   author={Drozd, Yu. A.},
+   author={Futorny, V. M.},
+   author={Ovsienko, S. A.},
+   title={Harish-Chandra subalgebras and Gel\cprime fand-Zetlin modules},
+   conference={
+      title={Finite-dimensional algebras and related topics},
+      address={Ottawa, ON},
+      date={1992},
+   },
+   book={
+      series={NATO Adv. Sci. Inst. Ser. C Math. Phys. Sci.},
+      volume={424},
+      publisher={Kluwer Acad. Publ., Dordrecht},
+   },
+   date={1994},
+   pages={79--93},
+}
+
+\bib{FGR-irred-gt-sl3}{article}{
+   author={Futorny, Vyacheslav},
+   author={Grantcharov, Dimitar},
+   author={Ramirez, Luis Enrique},
+   title={On the classification of irreducible Gelfand-Tsetlin modules of
+   $\germ {sl}(3)$},
+   conference={
+      title={Recent advances in representation theory, quantum groups,
+      algebraic geometry, and related topics},
+   },
+   book={
+      series={Contemp. Math.},
+      volume={623},
+      publisher={Amer. Math. Soc., Providence, RI},
+   },
+   date={2014},
+   pages={63--79},
+}
+
+\bib{FGR-irred-gt-gl}{article}{
+   author={Futorny, Vyacheslav},
+   author={Grantcharov, Dimitar},
+   author={Ramirez, Luis Enrique},
+   title={Irreducible generic Gelfand-Tsetlin modules of $\germ{gl}(n)$},
+   journal={SIGMA Symmetry Integrability Geom. Methods Appl.},
+   volume={11},
+   date={2015},
+   pages={Paper 018, 13},
+}
+
+\bib{FGR-singular-gt}{article}{
+   author={Futorny, Vyacheslav},
+   author={Grantcharov, Dimitar},
+   author={Ramirez, Luis Enrique},
+   title={Singular Gelfand-Tsetlin modules of ${\germ{gl}}(n)$},
+   journal={Adv. Math.},
+   volume={290},
+   date={2016},
+   pages={453--482},
+}
+
+\bib{FMO-gk-conjecture-gt}{article}{
+   author={Futorny, Vyacheslav},
+   author={Molev, Alexander},
+   author={Ovsienko, Serge},
+   title={The Gelfand-Kirillov conjecture and Gelfand-Tsetlin modules for
+   finite $W$-algebras},
+   journal={Adv. Math.},
+   volume={223},
+   date={2010},
+   number={3},
+   pages={773--796},
+}
+\bib{FMO-hc-for-yangians}{article}{
+   author={Futorny, Vyacheslav},
+   author={Molev, Alexander},
+   author={Ovsienko, Serge},
+   title={Harish-Chandra modules for Yangians},
+   journal={Represent. Theory},
+   volume={9},
+   date={2005},
+   pages={426--454},
+}
+
+\bib{FOS-torsion}{article}{
+   author={Futorny, Vyacheslav},
+   author={Ovsienko, Serge},
+   author={Saor\'\i n, Manuel},
+   title={Torsion theories induced from commutative subalgebras},
+   journal={J. Pure Appl. Algebra},
+   volume={215},
+   date={2011},
+   number={12},
+   pages={2937--2948},
+}
+
+\bib{FOS-gt-categories}{article}{
+   author={Futorny, Vyacheslav},
+   author={Ovsienko, Serge},
+   author={Saorin, Manuel},
+   title={Gelfand-Tsetlin categories},
+   conference={
+      title={Groups, algebras and applications},
+   },
+   book={
+      series={Contemp. Math.},
+      volume={537},
+      publisher={Amer. Math. Soc., Providence, RI},
+   },
+   date={2011},
+   pages={193--203},
+}
+
+\bib{FO-galois}{article}{
+   author={Futorny, Vyacheslav},
+   author={Ovsienko, Serge},
+   title={Galois orders in skew monoid rings},
+   journal={J. Algebra},
+   volume={324},
+   date={2010},
+   number={4},
+   pages={598--630},
+}
+      
+\bib{FO-fibers-gt-categories}{article}{
+   author={Futorny, Vyacheslav},
+   author={Ovsienko, Serge},
+   title={Fibers of characters in Gelfand-Tsetlin categories},
+   journal={Trans. Amer. Math. Soc.},
+   volume={366},
+   date={2014},
+   number={8},
+   pages={4173--4208},
+}
+
+\bib{GT-modules}{article}{
+   author={Gel$\prime$fand, I. M.},
+   author={Cetlin, M. L.},
+   title={Finite-dimensional representations of the group of unimodular
+   matrices},
+   language={Russian},
+   journal={Doklady Akad. Nauk SSSR (N.S.)},
+   volume={71},
+   date={1950},
+}
+\bib{Maz-ort-gt}{article}{
+   author={Mazorchuk, Volodymyr},
+   title={Orthogonal Gelfand-Zetlin algebras. I},
+   journal={Beitr\"age Algebra Geom.},
+   volume={40},
+   date={1999},
+   number={2},
+   pages={399--415},
+   issn={0138-4821},
+}
+
+\bib{Maz-gt-ort-modules}{article}{
+   author={Mazorchuk, Volodymyr},
+   title={On Gelfand-Zetlin modules over orthogonal Lie algebras},
+   journal={Algebra Colloq.},
+   volume={8},
+   date={2001},
+   number={3},
+   pages={345--360},
+   issn={1005-3867},
+}
+
+\bib{Maz-GT-cats}{article}{
+   author={Mazorchuk, Volodymyr},
+   title={On categories of Gelfand-Zetlin modules},
+   conference={
+      title={Noncommutative structures in mathematics and physics},
+      address={Kiev},
+      date={2000},
+   },
+   book={
+      series={NATO Sci. Ser. II Math. Phys. Chem.},
+      volume={22},
+      publisher={Kluwer Acad. Publ., Dordrecht},
+   },
+   date={2001},
+   pages={299--307},
+}
+
+\bib{MO-verma-gt}{article}{
+   author={Mazorchuk, V. S.},
+   author={Ovsienko, S. A.},
+   title={Submodule structure of generalized Verma modules induced from
+   generic Gelfand-Zetlin modules},
+   journal={Algebr. Represent. Theory},
+   volume={1},
+   date={1998},
+   number={1},
+   pages={3--26},
+}
+
+
+
+\bib{MT-q-gt}{article}{
+   author={Mazorchuk, Volodymyr},
+   author={Turowska, Lyudmyla},
+   title={On Gelfand-Zetlin modules over $U_q({\rm gl}_n)$},
+   note={Quantum groups and integrable systems (Prague, 1999)},
+   journal={Czechoslovak J. Phys.},
+   volume={50},
+   date={2000},
+   number={1},
+   pages={139--144},
+}
+
+
+\bib{Ovs-finiteness-gt}{article}{
+   author={Ovsienko, Serge},
+   title={Finiteness statements for Gelfand-Zetlin modules},
+   conference={
+      title={Third International Algebraic Conference in the Ukraine
+      (Ukrainian)},
+   },
+   book={
+      publisher={Nats\=\i onal. Akad. Nauk Ukra\"\i ni, \=Inst. Mat., Kiev},
+   },
+   date={2002},
+}
+
+\bib{Ovs-strong-nilp}{article}{
+   author={Ovsienko, Serge},
+   title={Strongly nilpotent matrices and Gelfand-Zetlin modules},
+   note={Special issue on linear algebra methods in representation theory},
+   journal={Linear Algebra Appl.},
+   volume={365},
+   date={2003},
+   pages={349--367},
+   issn={0024-3795},
+}
+
+
 \end{biblist}
 \end{bibdiv}
 \end{document}

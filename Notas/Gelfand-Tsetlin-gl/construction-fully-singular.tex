@@ -1,0 +1,809 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{notas}
+\usepackage{tikz}
+\usepackage{mathdots}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\renewcommand\k{\Bbbk}
+
+\newcommand\B{\mathcal B}
+\newcommand\F{\mathcal F}
+\newcommand\V{\mathcal V}
+\newcommand\D{\mathcal D}
+\renewcommand\H{\mathcal H}
+\renewcommand\O{\mathcal O}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\Id{\mathsf{Id}}
+\newcommand\im{\mathsf{im}}
+\newcommand\coker{\mathsf{coker}}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\g{\mathfrak g}
+\newcommand\gl{\mathfrak{gl}}
+\newcommand\gen{\mathsf{gen}}
+\newcommand\std{\mathsf{std}}
+\newcommand\crit{\mathsf{crit}}
+\newcommand\ceq{\hat =}
+
+\newcommand\vectspan[1]{\left\langle #1 \right\rangle}
+
+\renewcommand\ll{\llbracket}
+\newcommand\rr{\rrbracket}
+
+\DeclareMathOperator\End{End}
+\DeclareMathOperator\Frac{\mathsf{Frac}}
+\DeclareMathOperator\Sym{\mathsf{Sym}}
+\DeclareMathOperator\Ant{\mathsf{Ant}}
+\DeclareMathOperator\ev{ev}
+\DeclareMathOperator\sg{sg}
+\DeclareMathOperator\sh{sh}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Fully Singular Gelfand-Tsetlin modules over $\gl(n,\CC)$}
+\author{[construction-fully-singular.tex]}
+\date{21/04/2017}
+\begin{document}
+\maketitle
+
+\section{Notation on tableaux}
+\textbf{Notation:} For each $n,m \in \NN$ with we set $\ll m,n \rr = \{i \in 
+\NN \mid m \leq i \leq n\}$. Given two elements $a, b$ of a $\CC$-algebra $A$, 
+we write $a \ceq b$ if there exists $z \in \CC^\times$ suc hthat $a = z b$.
+
+\paragraph
+Fix $n \in \NN_{\geq 2}$, and set $N = \frac{n(n+1)}{2}$. We think of 
+GT-tableaux as arrays with $N$ complex entries of the form
+
+\begin{tikzpicture}
+\node (n1) at (-2,2.5) {$v_{n,1}$};
+\node (n2) at (-1,2.5) {$v_{n,2}$};
+\node (ndots) at (0,2.5) {$\cdots$};
+\node (nn-1) at (1,2.5) {$v_{n,n-1}$};
+\node (nn) at (2,2.5) {$v_{n,n}$};
+
+\node (n-11) at (-1.5,2) {$v_{n-1,1}$};
+\node (n-1dots) at (0,2) {$\cdots$};
+\node (n-1n-11) at (1.5,2) {$v_{n-1,n-1}$};
+
+\node (dots1) at (-1,1.625) {$\ddots$};
+\node (dots2) at (0,1.5) {$\cdots$};
+\node (dots3) at (1,1.625) {$\iddots$};
+
+\node (21) at (-.5,1) {$v_{2,1}$};
+\node (22) at (.5,1) {$v_{2,2}$};
+\node (11) at (0,.5) {$v_{1,1}$};
+
+\node (A) at (-3.5, 2.75) {};
+\node (B) at (3.5, 2.75) {};
+\node (C) at (0,0) {};
+%\draw (A) -- (B) -- (C) -- (A);
+\end{tikzpicture}
+
+The set of all GT-tableaux can be identified with $\CC^N$ by indexing the 
+entries of a point $v \in \CC^N$ by $\{(k,i) \mid 1 \leq i \leq k \leq n\}$. 
+We will denote by $T(v)$ the tableau corresponding to $v \in \CC^N$.
+
+\begin{Definition}
+\label{D:various-tableaux}
+We say that a point $v \in \CC^N$, or the corresponding tableau $T(v)$, is:
+\begin{itemize}
+\item \emph{integral} if $v \in \ZZ^{N}$;
+
+\item \emph{standard} if for all $1 \leq i < j \leq k \leq n$ the difference 
+$v_{k,i}-v_{k-1,i} \in \ZZ_{\geq 0}$ and $v_{k-1,i}-v_{k,i+1} \in \ZZ_{>0}$;
+
+\item \emph{generic} if for all $1 \leq i < j \leq k < n$ the difference 
+$v_{k,i}-v_{k,j}$ is not in $\ZZ$;
+
+\item \emph{singular} if it is a non-generic tableau, i.e. there is a pair of 
+entries in the same row differing by an integer; if there is exactly one such 
+pair then we say that the tableau is \emph{$1$-singular};
+
+\item \emph{critical} if there are two entries in the same row which are 
+equal; if there is exactly one such pair then we say the tableau is
+\emph{$1$-critical}.
+\end{itemize}
+\end{Definition}
+We denote the set of standard points by $\CC^N_\std$, and the set of generic 
+points by $\CC^N_\gen$. Any pair of two entries differing by an integer will
+be called a \emph{singular pair}, and if they are equal they will be called
+a \emph{critical pair}. 
+
+\paragraph
+Let $m \in \ll n \rr$. The group $S_m$ acts on the space of GT-tableaux by 
+permuting the entries of the $m$-th row. Let $v \in \CC^N$. Its 
+\newterm{$m$-shape} is a partition $\sh_m(v) = (\lambda_1, \ldots, \lambda_r) 
+\vdash m$, where $\lambda_i$ is the frequency of the $i$-th most common value 
+of the entries of $v$. For example, $\sh((1,4,1,1,4,1,6)) = (4,2,1)$. In this 
+case the orbit of $v$ under the action of $S_m$ generates an $S_m$-module. 
+Setting $S_v = S_{\lambda_1} \times S_{\lambda_2} \times \cdots S_{\lambda_r}
+\subset S_m$, the orbit of $v$ is isomorphic to the induced representation
+$\operatorname{Ind}_{S_v}^{S_m} \mathbf{1}$, where $\mathbf 1$ is the trivial
+representation of $S_v$. In particular the dimension of the orbit of $v$ is 
+$m!/\lambda!$, where $\lambda! = \lambda_1! \lambda_2! \cdots \lambda_r!$.
+
+\section{Auxiliary results on invariant polynomials}
+
+\paragraph
+\about{Notation}
+\label{L:symmetric-varia}
+We denote by $\Lambda$ the polynomial ring $\CC[\lambda_{k,i} \mid 1 \leq i
+\leq k \leq n]$. We set $G = S_1 \times S_2 \times \cdots \times S_n$, which
+acts on $\Lambda$, and write $\Gamma = \Lambda^G$.
+
+Fix $m \in \NN$. We set $x_i = \lambda_{m,i}$ for $1 \leq i \leq m$, and
+$\Lambda_m = \CC[x_1, \ldots, x_m] \subset \Lambda$. Also set $\Gamma_m =
+\Lambda_m^{S_m} \subset \Gamma$. Given $f \in \Lambda_m$ we will sometimes 
+write $f^\sigma$ for the action of $\sigma$ on $f$. 
+
+Set
+\begin{align*}
+F &= \Frac(\Lambda)
+	&E &= \Frac(\Gamma) \\
+F_m &= \Frac(\Lambda_m)
+	&E_m &= \Frac(\Gamma_m)
+\end{align*}
+Given $f \in F$ we set
+\begin{align*}
+\Sym(f) 
+	&= \frac{1}{m!}\sum_{\sigma \in S_m} f^\sigma
+&\Ant(f)
+	&= \frac{1}{m!}\sum_{\sigma \in S_m} \sg(\sigma) f^\sigma
+\end{align*}
+We also set $\Delta = \prod_{i<j}(x_i-x_j)$. The following lemma will be very 
+useful in the sequel.
+
+\begin{Lemma*}
+Let $f \in A$ where $\Lambda_m \subset A \subset F$ is a ring stable by the 
+action of the symmetric group. Then the following hold. 
+\begin{enumerate}[(a)]
+\item $\Sym(f)^\sigma = \Sym(f)$ and $\Ant(f)^\sigma = \sg(\sigma) \Ant(f)$.
+
+\item The polynomial $f -f^{(i,j)}$ is divisible by $x_i - x_j$ in $A$.
+
+\item If $f^\sigma = \sg (\sigma) f$ for each $\sigma \in S_m$ then $\Delta$ 
+divides $f$ in $A$ and $f/\Delta$ is an invariant element of $A$. In particular
+$\Delta$ divides $\Ant(f)$, and $\Ant(f)/\Delta$ is invariant.
+\end{enumerate}
+\end{Lemma*}
+
+\paragraph
+\label{L:basis-lemma}
+The algebra $\Gamma_m$ is a graded subalgebra of $\Lambda_m$, isomorphic to a 
+polynomial algebra in $m$-variables and its $i$-th generator in degree $i$; 
+consequently, its Hilbert series is $\prod_{i = 1}^m \frac{1}{1-t^i}$, see 
+\cite{Macd-symmetric-hall}*{(2.4)}. 
+
+Let $J \subset \Lambda_m$ be the ideal generated by symmetric polynomials of 
+positive degree. This is a graded ideal stable by the action of $S_m$, and by 
+\cite{Chev-reflection-groups}*{Theorem (B)} the quotient $\Lambda_m/J$ is
+a graded version of the regular representation of $S_m$, with Hilbert series
+$\prod_{i=1}^m \frac{1-t^i}{1-t}$. By Nakayama's Lemma a subset of $\Lambda_m$
+is a minimal set of generators of $\Lambda_m$ over $\Gamma_m$ if and only if
+its projection on $\Lambda_m/J$ is basis of this vector space. Thus if the 
+generating set is formed by homogeneous elements then the degrees of its 
+elements are fixed, and looking at the Hilbert series of the algebras we see 
+that such a minimal set is free over $\Gamma_m$. From now on when we talk 
+about a basis of $\Lambda_m$ we will mean a homogeneous basis over $\Gamma_m$.
+
+Bases of $\Lambda_m$ are usually indexed by elements of the symmetric group,
+with $\deg f_\sigma = \ell(\sigma)$; here $\ell$ is the usual length function 
+of $S_m$ with respect to the generating set $\{(i,i+1) \mid 1 \leq i \leq m-1
+\}$. Two well known examples are Schubert polynomials  
+\cite{Man-symm-book}*{Definition 2.3.4} and a family of harmonic polynomials 
+\cite{Man-symm-book}*{Lemma 2.5.9}. Our bases will always follow these 
+conventions. From the discussion above the following lemma is clear.
+
+\begin{Lemma*}
+Let $\B = \{f_\sigma \mid \sigma \in S_m\}$ be a basis of $\Lambda_m$, and let
+$\B' = \{g_\sigma \mid \sigma \in S_m\} \subset \Lambda_m$ with each $g_\sigma$
+homogeneous of degree $\ell(\sigma)$. The following are equivalent: 
+\begin{enumerate}[(a)]
+\item \label{B'-basis}
+$\B'$ is a basis of $\Lambda_m$.
+
+\item 
+\label{projection-basis}
+The projection of $\B'$ to the quotient $\Lambda_m/J$ is basis.
+
+\item
+\label{coefficients-basis}
+There exist $\{p_{\sigma,\tau} \mid \ell(\sigma) \leq \ell(\tau), \sigma, \tau 
+\in S_m\} \subset \Gamma_m$ such that 
+\begin{enumerate}[(i)]
+\item $g_\tau = \sum_{\ell(\sigma) \leq \ell(\tau)} p_{\sigma,\tau}f_\sigma$;
+\item $\deg p_{\sigma, \tau} = \ell(\tau) - \ell(\sigma)$;
+\item for each $i \in \ll m \rr$ the square matrix $[p_{\sigma,\tau}]$ with 
+$\ell(\sigma) = \ell(\tau) = i$ is invertible.
+\end{enumerate}
+\end{enumerate}
+\end{Lemma*}
+
+\paragraph
+We define a $\Gamma_m$-bilinear form $\phi: \Lambda_m \ot_{\Gamma_m} 
+\Lambda_m \to \Gamma_m$, given by $\phi(f,g) = \frac{1}{\Delta}\Ant(fg)$. This 
+is well defined thanks to Lemma \ref{L:symmetric-varia}. By definition
+\begin{align*}
+\phi(f^\tau, g)
+	&= \frac{1}{\Delta} \sum_{\sigma \in S_m} \sg(\sigma) (f^\tau g)^\sigma
+	= \frac{1}{\Delta} \sum_{\sigma \in S_m} \sg(\sigma) 
+		(f g^{\tau^{-1}})^{\tau\sigma} \\
+	&= \frac{\sg(\tau^{-1})}{\Delta} \sum_{\sigma \in S_m} \sg(\sigma) 
+		(f g)^{\tau^{-1}\sigma}
+	= \sg(\tau^{-1})\phi(f, g^{\tau^{-1}})  
+\end{align*}
+The bilinear form introduced in \cite{Man-symm-book}*{2.5.3} is 
+$\phi(f,g)(0)$. Both forms induce the same bilinear pairing over $\Gamma_m/J$,
+which by \cite{Man-symm-book}*{Proposition 2.5.7} is non-degenerate, 
+although it is not a scalar product since for example $\phi(\Delta,\Delta) = 
+0$.
+
+We say that two bases $\{f_\sigma \mid \sigma \in S_m\}$ and $\{g_\sigma \mid 
+\sigma \in S_m\}$ are dual with respect to $\phi$ if $\phi(f_\sigma, g_\nu) = 
+\delta_{\sigma\nu, w_0}$, where $w_0$ is the longest word of $S_m$.
+
+\begin{Proposition*}
+Every homogeneous basis of $\Lambda_m$ has a dual basis with respect to 
+$\phi$. 
+\end{Proposition*}
+\begin{proof}
+Take the projection of a basis $\B = \{f_\sigma \mid \sigma \in S_m \}$ onto 
+$\Lambda_m/J$, and denote it $\pi(\B)$. Since $\phi$ induces a nondegenerate 
+bilinear form over this vector space, $\pi(\B)$ has a dual basis with respect
+to the induced form. Fix a set $\tilde \B = \{\tilde f_\sigma \mid \sigma \in 
+S_m\}$ of homogeneous polynomials whose projection to the quotient gives the dual bases, labelling them so $\phi(f_\sigma, \tilde f_{\nu}) = 
+\delta_{\sigma \nu, w_0} + p$, where $p$ is a polynomial of strictly positive 
+degree. Since its projection is a basis, $\tilde \B$ is a homogeneous basis 
+of $\Lambda_m$ over $\Gamma_m$.
+
+Let $X$ be the matrix with rows and columns indexed by $S_m$ with $X_{\sigma, 
+\nu} = \phi(f_\sigma, \tilde f_{\nu^{-1} w_0})$. By definition, $\phi(f,g)$ is 
+either zero or a homogeneous symetric polynomial of degree $\deg f + \deg g - 
+\deg \Delta$; this forces that $\deg f_{\nu^{-1} w_0} = \deg \Delta - \deg f
+= \ell(w_0) - \ell(\nu) = \ell(\nu^{-1}w_0)$, and hence $\tilde B$ is 
+compatible with our conventions regarding the degrees. Furthermore
+\begin{align*}
+\phi(f_\sigma, \tilde f_\nu) = \begin{cases}
+		0 & \mbox{ if } \deg f_\sigma + \deg \tilde f_\nu < \ell(w_0) \\
+		\delta_{\sigma\nu, w_0} 
+			& \mbox{ if } \deg f_\sigma + \deg \tilde f_\nu = \ell(w_0);  \\
+		p \in (\Gamma_m)_{>0} 
+			& \mbox{ if } \deg f_\sigma + \deg \tilde f_\nu > \ell(w_0).
+	\end{cases}
+\end{align*}
+Hence if we order the elements of $S_m$ by length then $X$ is a lower 
+triangular matrix with $1$'s in the diagonal, so there exists a matrix
+$M$ with coefficients in $\Gamma_m$ such that $X M = \Id$, i.e.
+\begin{align*}
+\sum_{\nu \in S_m} (f_\sigma,  M_{\nu,\tau} \tilde f_{\nu^{-1}w_0})
+	&= \delta_{\sigma, \tau}.
+\end{align*}
+Setting $f^*_\sigma = \sum_{\nu} M_{\nu, \sigma^{-1}w_0} \tilde 
+f_{\nu^{-1}w_0}$ we obtain the dual basis $\B^* = \{f^*_\sigma \mid \sigma \in
+S_m\}$.
+\end{proof}
+
+\paragraph
+\label{homogeneous-basis}
+Let $J_i$ be the homogeneous component of degree $i$ of $J$, which sits inside
+$(\Lambda_m)_i$. Since both are $S_m$-modules, $J_i$ has an $S_m$ equivariant
+complement (in fact many) which we denote by $H_i$. Set $H = \bigoplus_i H_i$,
+which is clearly isomorphic to $\Lambda_m / J$ as a graded $S_m$-module. Thus
+$H$ is a graded version of the regular representation of $S_m$, and in 
+particular we can choose a basis of $\Lambda_m$ consisting of homogeneous 
+generators of $H$. In that case we say that the basis realizes the regular 
+representation. Its distinguishing property is that $f_\sigma^\tau = \sum_\rho
+\lambda^\rho_{\sigma, \tau} f_\rho$, where the $\lambda_{\sigma,\tau}^\rho$
+are all complex coefficients (i.e. symmetric polynomials of degree $0$) with 
+$\ell(\rho) = \ell(\sigma)$. 
+
+\textcolor{red}{QUESTION: Can the basis be chosen so that it is self-dual with 
+respect to $\phi$, or at least so that its dual basis is easily described in 
+terms of the original? I found several self-dual bases for $m = 3$, but 
+Schubert polynomials are not one of them. They simplify many things.}
+
+\section{The universal fully critical GT-module}
+
+\paragraph
+Let $A$ be the algebra of regular functions defined over $\CC^N_\gen$; in other
+words, $A$ is the localization of $\Lambda = \CC[\lambda_{k,i} \mid 1 \leq i 
+\leq k \leq n]$ at the infinite set $\{\lambda_{k,i} - \lambda_{k,j} - a \mid
+1 \leq i < j \leq k \leq n, a \in \ZZ\}$. The algebra $A$ contains all the 
+rational functions appearing in the Gelfand-Tsetlin formulas. Thus if $v \in
+\CC_\gen^N$ then evaluation at $v$ is defined for every rational function 
+$f/g \in A$ and defines a $1$-dimensional representation of $A$, which we
+denote by $\CC_v$. Notice that $\Lambda \subset A \subset \Frac(\Lambda)$, and 
+that $A$ is stable by the action of $S_m$. Consider the action of $\ZZ^N$ over 
+$\CC^N$, given by $v^z = v+z$. This induces an action on $A$, given by 
+$(z \cdot f)(v) = f(v + z)$. We will sometimes write $f(\lambda^z)$ for 
+$(z \cdot f)$. 
+
+\paragraph
+Let $V_\CC$ be the $\CC$ vector space with basis $\{T(z) \mid z \in \ZZ^N_0\}$.
+The symmetric group $S_m$ acts on $V_\CC$ through its action on the $m$-th row
+a tableaux $z$. Set $V_A = A \ot_\CC V_\CC$; we write $fT(z)$ for the 
+elementary tensor $f \ot T(z)$ where $f \in A$ and $z \in \ZZ_0^N$. The 
+symmetric group acts on $V_A$ by a diagonal action, so $\sigma \cdot (f T(z)) 
+= f^\sigma T(\sigma(z))$. 
+
+The Gelfand-Tsetlin subalgebra of $U$ is isomorphic to $\Gamma$ by a 
+Harish-Chandra homomorphism. It has a standard family of generators $c_{k,i}$ 
+with $1 \leq i \leq k \leq n$, and the Harish-Chandra isomorphism maps them to 
+polynoamis $\gamma_{k,i}$. The following proposition was proved in 
+\cite{Zad-1-sing}.
+
+\begin{Proposition*}
+\label{P:universal-generic-GT-module}
+The $A$-module $V_A$ can be endowed with the structure of a $U$-module 
+with the action of the canonical generators given by
+\begin{align*}
+E_{k,k+1} T(z) 
+	&= - \sum_{i=1}^k \frac{p^+_{k,i}(\lambda^z)}{q_{k,i}(\lambda^z)} 
+		T(z + \delta^{k,i}); \\
+E_{k+1,k} T(z) 
+	&= \sum_{i=1}^k \frac{p^-_{k,i}(\lambda^z)}{q_{k,i}(\lambda^z)} 
+		T(z - \delta^{k,i}); \\
+E_{k,k} T(z)
+	&= (|\lambda^z|_k - |\lambda^z|_{k-1} + k -1) T(z),
+\end{align*}
+and for each $1 \leq i \leq k \leq n$, we have $c_{k,i} T(z) = 
+\gamma_{k,i}(\lambda^z) T(z)$. The action of $U$ thus defined is 
+$S_m$-equivariant.
+
+Furthermore, given $v \in \CC^N_\gen$, the Gelfand-Tsetlin module associated
+to the generic tableaux $T(v)$ is isomorphic to $V_A \ot_A \CC_v$.
+\end{Proposition*}
+
+\paragraph
+\label{derived-tableaux}
+Let $B \subset A$ be the subalgebra formed by rational functions $f/g \in A$
+such that $(x_i - x_j) \nmid g$ for $1 \leq i < j \leq k$.
+These are precisely the regular functions on $\CC_\gen^N$ that can be extended 
+to the space of tableaux with fully-critical $m$-th row (recall that $x_i = 
+\lambda_{m,i}$).
+
+Let $\B = \{f_\sigma \mid \sigma \in S_m\}$ be a basis of $\Lambda_m$ over 
+$\Gamma_m$. For each $v \in \ZZ^N_0$ set
+\begin{align*}
+D_\sigma^\B T(v)
+	&= \frac{1}{m!} \sum_{\tau \in S_m} 
+		\tau \left(\frac{f_\sigma}{\Delta}T(v)\right)
+	= \frac{1}{m!}
+		\sum_{\tau \in S_m} \sg(\tau) \frac{f_\sigma^\tau}{\Delta} T(\tau(v))
+		\in V_A.
+\end{align*}
+By construction $\tau \cdot D_\sigma^\B T(v) = D_\sigma^\B T(v)$ for all 
+$\tau \in S_m$. Let $g \in \Lambda_m$. Then there exist $p_\sigma \in 
+\Gamma_m$ such that $g = \sum_\sigma p_\sigma f_\sigma$ and
+\begin{align*}
+\frac{1}{m!} \sum_{\tau \in S_m} 
+	\tau \left(\frac{g}{\Delta}T(v)\right)
+	&= \frac{1}{m!} \sum_{\tau \in S_m} 
+		\tau \left(\frac{\sum_\sigma p_\sigma f_\sigma}{\Delta}T(v)\right) 
+	= \sum_\sigma p_\sigma D_\sigma^\B T(v).
+\end{align*}
+In particular the $\Gamma_m$-module generated by the set $\{D_\sigma^\B T(v) 
+\mid \sigma \in S_m\}$ inside $V_A$ is independent of $\B$. 
+
+\begin{Definition*}
+We refer to the elements of the set $\{D_\sigma^\B T(v) \mid \sigma \in S_m\}$ 
+as the \newterm{derived tableaux of $T(v)$ with respect to $\B$}. For any 
+algebra $\Gamma_m \subset C \subset B$ we denote by $L_C(v)$ the $C$-module 
+spanned by the derived tableaux of $T(v)$, and by $L_C$ the $C$-submodule
+$\sum_{v \in \ZZ^N_0} L_C(v) \subset V_A$.
+\end{Definition*}
+
+\paragraph
+Let $\B^* = \{g_\sigma \mid \sigma \in S_m \}$ be the dual basis of $\B$ 
+with respect to $\phi$. Let $X_{\sigma, \tau} = \frac{\sg(\tau) 
+f_\sigma^\tau}{\Delta}$ and $Y_{\rho, \nu} = g_{\nu^{-1}w_0}^\rho$.
+Then $\sum_\tau X_{\sigma, \tau} Y_{\tau, \nu} = \phi(f_\sigma, 
+g_{\nu^{-1}w_0}) = \delta_{\sigma, \nu}$, so $X$ and $Y$ are inverses. This
+implies that 
+\[
+	\delta_{\rho, \tau} = \sum_\nu Y_{\rho, \nu} X_{\nu, \tau}
+		= \sum_\nu \frac{\sg(\tau) g_{\nu^{-1}w_0}^\rho f_\nu^\tau}{\Delta}.
+\]
+Thus
+\begin{align*}
+\sum_{\nu \in S_m} m! g_{\nu^{-1}w_0}^\rho D_\nu^\B T(v)
+	&= \sum_{\tau \in S_m} \sum_\nu  
+		\frac{\sg(\tau) g_{\nu^{-1}w_0}^\rho f_\nu^\tau}{\Delta}
+			T(\tau(v))
+	= T(\rho(v)).
+\end{align*}
+Hence the orbit of $T(v)$ lies inside $L_{\Lambda_m}(v)$.
+
+\begin{Lemma}
+Let $\B$ be a basis realizing the regular representation, and let $L_\CC(v)$
+be the vector space generated by derived tableaux associated to $T(v)$ with
+respect to $\B$. Then $\dim L_\CC(v) = m!/\sh_m(v)!$ and $L_C(v) = C \ot_\CC
+L_\CC(v)$.
+\end{Lemma}
+\begin{proof}
+For simplicity we write $D_\sigma(v)$ for $D_\sigma^\B T(v)$.
+Let $H$ be the vector space generated by $\B$ in $\Lambda_m$; by defintion 
+this set is stable by the action of $S_m$ and realizes the regular 
+representation. As mentioned in \ref{homogeneous-basis}, the action of $S_m$
+over the polynomials of the basis is given by scalars 
+$\lambda_{\sigma, \tau}^\rho \in \CC^\times$ such that $f_\sigma^\tau = 
+\sum_\rho \lambda_{\sigma, \tau}^\rho f_\rho$. 
+
+Now let $F = \Frac(\Lambda_m)$. Clearly $L_F(v)$ is contained in the $F$-vector
+space generated by the orbit of $T(v)$, and by the previous paragraph it must
+be equal to this vector space, which is of dimension $m!/\sh(v)$. Thus there 
+must be a set of $m!/\sh(v)$ derived tableaux which are linearly independent 
+over $F$, and in particular over $\CC$. We will show that these tableaux are
+enough to generate $L_\CC(v)$.
+
+Let $\O(v)$ be the vector space generated by the orbit of $v$ through the 
+action of $S_m$. We put on $\O(v)$ a right $S_m$-action, given by $\tau(v) 
+\cdot \nu = \sg(\nu) \nu^{-1}\tau(v)$. Now let $D: \O(v) \ot H \to L_\CC(v)$
+be the map $D(\tau(v) \ot f_\sigma) = D_\sigma \tau^{-1}(v)$. By definition
+\begin{align*}
+D_\sigma (\tau^{-1}(v))
+	&= \frac{1}{m!} \sum_{\nu \in S_m} 
+		\nu \left(\frac{f_\sigma}{\Delta}T(\tau^{-1}(v))\right)
+	= \frac{1}{m!} \sum_{\nu \in S_m} 
+		\nu \tau^{-1} \left(\frac{f_\sigma^\tau}{\Delta^\tau}T(v)\right) \\
+	&= \frac{\sg(\tau^{-1})}{m!} \sum_{\nu \in S_m} 
+		\nu \left(\frac{\sum_\rho \lambda^\rho_{\sigma, \tau} f_\rho}{\Delta}
+			T(v)\right)
+	= \sg(\tau^{-1}) \sum_\rho \lambda_{\sigma, \tau}^\rho D_\rho (v). 
+\end{align*} 
+Thus $D(v \cdot \tau \ot f) = D(v \ot f^\tau)$, and hence $D$ induces an 
+surjective map $D: O(v) \ot_{S_m} H \to L_\CC(v)$. Now $H$ is the regular
+representation, so $O(v) \ot_{S_m} H \cong O(v)$ as vector space, which implies
+that $\dim_\CC L_\CC(v) \leq \dim O(v) = m!/\sh(v)!$. Thus the number of $\CC$
+linearly independent derived tableaux is at most $m!/\sh(v)!$, and we have
+seen that this set must also be $F$-linearly independent, so $L_C(v)$ is 
+a free $C$-module with these tableaux as a basis.
+\end{proof}
+
+
+\begin{Proposition}
+\label{derived-tableaux-basis}
+Let $\B$ be a basis realizing the regular representation of $S_m$.
+The $B$-module $L_B \subset V_A$ is free with a basis of derived tableaux.
+\end{Proposition}
+\begin{proof}
+We have proved that each $L_B(v)$ is free over $B$ with a basis of derived 
+tableaux. Now if $v = \sigma(w)$ for some $\sigma \in S_m$ then $L_B(v) = 
+L_B(w)$; thus taking $\overline v \in \ZZ^N_0 / S_m$, we may set 
+$L_B(\overline v) = L_B(v)$. Since $L_F(v)$ is the $F$-vector space generated 
+by the orbit of $v$, the spaces $\{L_B(\overline v) \mid \overline v \in 
+\ZZ^N_0\}$ are in direct sum, and $L_B = \bigoplus L_B(\overline v)$. 
+\end{proof}
+
+Let $v \in \ZZ^N_0$. Then there exists an element $\sigma \in S_m$ such that
+the $m$-th row of $\sigma(v)$ is an increasing sequence. Amongst all such 
+$\sigma$, there is exactly one which does not interchange two equal entries; 
+an uneducated guess is that it should be of minimal length among.
+Let us denote this element by $\sigma_v$. If $w = \tau(v)$, then $\sigma_w = 
+\sigma_v$ implies that $w = v$, so $\tau$ is in the stabilizer of $v$. In other
+words, $w \neq v$ implies that the coclasses of $\sigma_w$ and $\sigma_v$
+modulo the stabilizer of $v$ are different, and hence the set 
+$\{\sigma_{\tau(v)} \mid \tau (v)\}$ forms a complete collection of 
+representatives of coclasses modulo de stabilizer of $v$. 
+
+\textcolor{red}{QUESTION: Is there a basis of derived tableaux of $L(v)$, 
+naturally indexed by the set of pairs $(w,\sigma_w)$ with $w = \sigma(v)$?
+Enrique thinks yes, I like the idea, and the numbers match. In the end it
+depends on the chosen $\B$.}
+
+
+\begin{Lemma}
+Let $v\in \ZZ^N_0$. Then $E_{k,k+1} T(v) \in L_B$ and $E_{k+1,k}T(v) \in L_B$
+for every $k \in \ll n \rr$.
+\end{Lemma}
+\begin{proof}
+We work with a basis of derived tableaux, which we denote by $\{D_\sigma(w)
+\mid (w, \sigma) \in I\}$ where $I$ is some indexing set.
+
+The statement is true by the definition of the action of the generators of $U$
+unless $k = m$. Let $\Sigma(v) = \{(i,j) \mid v_{m,i} = v_{m,j} \mbox{ and } 
+i <j\}$, and let
+\[
+	\Delta(v) = \prod_{(i,j) \in \Sigma(v)} x_i - x_j.
+\]
+By definition $\Delta(v) E_{m,m+1} T(v)$ is a $B$-linear combination of 
+tableaux $T(w)$ with $w \in \ZZ^N_0$, and these tableaux lie in $L_B$. Thus we 
+can write
+\[
+\Delta(v) E_{m,m+1} T(v)
+	= \sum_{(w,\sigma)} p_{w,\sigma} D_\sigma T(w)
+\]
+where the sum is over $I$, and each $p_{w, \sigma} \in B$. Now if $(i,j) \in 
+\Sigma(v)$ then $(\Delta(v) E_{m,m+1} T(v))^{(i,j)}= - \Delta(v) E_{m,m+1} 
+T(v)$, and since $D_\rho T(w)^{(i,j)} = D_\rho T(w)$ and the writing is 
+unique, we see that $p_{w, \sigma}^{(i,j)} = - p_{w, \sigma}$, which in turn 
+implies that $p_{\rho,w}$ is divisible by $x_i - x_j$ in $B$ by Lemma 
+\ref{L:symmetric-varia}. Since $(i,j)$ was arbitrary, we see that $\Delta(v) 
+\mid p_{\rho,w}$ in $B$, and so
+\[
+E_{m,m+1} T(v)
+	= \sum \frac{p_{\rho, w}}{\Delta(v) } D_\rho T(w) \in L_B.
+\]
+The proof that $E_{k+1,k} T(v) \in L_B$ is similar.
+\end{proof}
+
+
+\begin{Proposition*}
+The $B$-module $L_B$ is a $U$-submodule of $V_A$.
+\end{Proposition*}
+\begin{proof}
+We wish to prove that $E_{k,k+1} D_\sigma T(v) \in L_B$ for all $k \in
+\ll n-1 \rr$ and all $\sigma \in S_m$. Now
+\begin{align*}
+\Delta E_{k,k+1} D_\sigma T(v)
+	&= \Delta \sum_{\tau \in S_m} \tau \left( 
+		\frac{f_\sigma}{\Delta} E_{k+1,k} T(v)
+	\right)
+	= \sum_{\tau \in S_m} \sg(\tau) \tau \left( 
+		f_\sigma E_{k+1,k} T(v)
+			\right) \in L_B
+\end{align*}
+and once again we can write
+\begin{align*}
+\Delta E_{k,k+1} D_\sigma T(v)
+	&= \sum_{D} p_{\rho, w} D_{\rho} T(w).
+\end{align*}
+The same reasoning as above shows that $p_{\rho,w}/\Delta \in B$, so
+\begin{align*}
+E_{k,k+1} D_\sigma T(v)
+	&= \sum_{D} \frac{p_{\rho, w}}{\Delta} D_{\rho} T(w) \in L_B.
+\end{align*}
+The proof that $E_{k+1,k} D_\sigma (v) \in L_B$ is analogous. Finally,
+since $L_B(v)$ is contained in the $A$-module generated by the orbit
+of $T(v)$, and each tableaux in the orbit of $T(v)$ is an eigenvector of
+$E_{k,k}$ of eigenvalue $|\lambda|_k - |\lambda|_{k-1} + k-1$, it follows
+that every element of $L_B(v)$ is an eigenvector of the same eigenvalue.
+\end{proof}
+
+\begin{Definition}
+Let $\overline B = B/I$, where $I$ is the ideal generated by $\{x_i - x_j \mid 
+1 \leq i < j \leq m\}$. The \newterm{universal fully critical GT-module} is the
+$\overline B$-module $L_{\overline B} = L_B \ot \overline B$.
+\end{Definition}
+
+\textcolor{red}{QUESTION: Can we find explicit formulas for the action of $U$ 
+on $L_B$ or $L_{\overline B}$?}
+
+Here is one idea on how to do it. Put on $V_A$ the only inner product with 
+coefficients in $A$ (ok, bilinear form) such that $\langle T(v), T(w) \rangle
+= \delta_{v,w}$. Now set $D^*_\sigma T(v) = \sum_\tau \tau(f_\sigma^* T(v))$, 
+where the $f_\sigma^*$'s are dual to the $f_\sigma$ with respect to $\phi$. 
+Then
+\begin{align*}
+\langle D_\sigma T(v), D^*_\nu T(v)\rangle
+	&= \cdots
+	= \sum_{\epsilon}\sg \epsilon \phi(f_\sigma^\epsilon, f^*_\nu)
+\end{align*}
+where $\epsilon$ runs over the stabilizer of $v$. In particular if $v$ is 
+sufficiently noncritical (say all entries differ by more than $2$) then this 
+is $\delta_{\sigma\nu, w_0}$, and the coefficient of $D_\sigma(T(v + 
+\delta^{k,j}))$ in $E_{m,m+1} D_\tau T(v)$ can be obtained by taking the inner
+product of this last guy with $D^*_\sigma T(v + \delta^{k,j})$. However, for 
+this to work in general we need a basis of derived tableaux and its dual basis.
+Hence Enrique's suggestion in \ref{derived-tableaux-basis}. Once we do that
+we still need to see what happens when we reduce these formulas modulo $x_1 = 
+x_2 = \cdots = x_m$, which in this context is equivalent to evaluating in a 
+(generic) fully critical tableaux.
+
+\paragraph
+Let us consider the action of the Gelfand-Tsetlin algebra on the module $L_B$.
+For each $1 \leq i \leq k \leq n$ we see
+\begin{align*}
+c_{k,i} D_\sigma T(z)
+	&= \frac{1}{m!} \sum_{\tau \in S_m} 
+		\tau \left(\frac{f_\sigma}{\Delta} c_{k,i}T(z)\right)
+	= \frac{1}{m!} \sum_{\tau \in S_m} 
+		\tau \left(\frac{f_\sigma}{\Delta}\gamma_{k,i}(\lambda^z)T(z)\right).
+\end{align*}
+Now $\tau \cdot \gamma_{k,i} = \gamma_{k,i}$, so we get that $\tau \cdot 
+\gamma_{k,i}(\lambda^z) = \gamma_{k,i}(\lambda^{\tau(z)})$, so 
+\begin{align*}
+c_{k,i} D_\sigma T(z)
+	&= \frac{1}{m!} \sum_{\tau \in S_m} \gamma_{k,i}(\lambda^{\tau(z)})
+		\tau \left(\frac{f_\sigma}{\Delta}T(z)\right).
+\end{align*}
+Using the inner product describe above
+\begin{align*}
+\langle D_\sigma T(z), D^*_\nu T(z) \rangle
+	&= \frac{1}{m!} \sum_{\tau(z) = \rho(z)} 
+		\gamma_{k,i}(\lambda^{\tau(z)})
+			\left(\frac{f_\sigma}{\Delta}\right)^\tau (f_\nu^*)^\rho
+\end{align*}
+
+
+
+\begin{bibdiv}
+\begin{biblist}
+\bibselect{biblio}
+\end{biblist}
+\end{bibdiv}
+
+\end{document}
+
+\newpage
+\appendix
+
+\section{Appendix: calculation of the discriminant of $S_m$}
+This was the original proof that $\phi$ was non-degenerate. It includes
+a non-trivial calculation of the discriminant of a reflection group that
+can probably be generalized. 
+
+\paragraph
+\label{L:equivariant-det}
+We will work for some time with matrices with coefficientes in $F$
+whose rows and columns are indexed by subsets $S_m$; one may interpret these 
+as $F$-linear homomorphisms between subspaces of the group algebra $F[S_m]$, 
+though we will not use such interpretation. If $X$ is any such matrix, we 
+denote by $X_\sigma$ its $\sigma$-th column and by $X^\tau$ its $\tau$-th row. 
+Consequently $X_\sigma^\tau$ is the element in row $\tau$, column $\sigma$.
+The action of $S_m$ on $\Lambda_m$ induces an action on the space of matrices.
+We will say that $X$ has equivariant rows, resp. colums, if $\nu X^\tau = 
+X^{\nu \tau}$, resp. $\nu X_\sigma = X_{\nu \sigma}$, for each $\nu \in S_m$. 
+It follows from the definitions that if a matrix is invertible and has 
+equivariant rows, then its inverse has equivariant columns.
+
+\begin{Lemma*}
+Assume $X$ has equivariant rows. Then $\Delta^{m!/2} \mid \det X$.
+\end{Lemma*}
+\begin{proof}
+We begin by proving a simpler result. Let $L$ be a set of cardinality $2r$ on 
+which $\langle (1,2) \rangle$ acts without fixed points, and let $Y$ be a 
+square matrix with coefficients in $\Lambda_m$ and rows and columns indexed by 
+$Y$. For each $l \in L$ we denote by $Y^l$ the $l$-th row of $Y$. We claim 
+that if $(1,2)Y^l = Y^{(1,2)l}$ then $(x_1-x_2)^r \mid \det Y$, and prove it 
+by induction on $r$. If $r = 1$ then up to a sign $\det Y$ equals 
+\begin{align*}
+\left|
+\begin{matrix}
+f & g \\ f^{(1,2)} & g^{(1,2)}
+\end{matrix}
+\right| 
+&= f g^{(1,2)} - f^{(1,2)} g = fg^{(1,2)} - (fg^{(1,2)})^{(1,2)}
+\end{align*}
+for some $f,g \in \Lambda_m$. By Lemma \ref{L:symmetric-varia} this is 
+divisible by $x_1 - x_2$.
+
+Let $l,l',l'' \in L$, and let $Y'$ be the matrix obtained from $Y$ by erasing
+rows $l, (1,2)l$ and columns $l',l''$. In the polynomial $\det Y$ the terms 
+$Y^{l}_{l'}Y^{(1,2)l}_{l''}$ and $Y^{l}_{l''}Y^{(1,2)l}_{l'}$ appear 
+multiplied by $\det Y'$ but with opposite signs. Now $Y'$ is a matrix of size 
+$r-2$ with $\langle (1,2)\rangle$-equivariant rows, so by the inductive 
+hypothesis $(x_1 - x_2)^{r/2-1} \mid Y'$, and hence
+\begin{align*}
+(x_1 - x_2)^{r/2} 
+	&\mid (Y^{l}_{l'}Y^{(1,2)l}_{l''} - Y^{l}_{l''}Y^{(1,2)l}_{l'}) \det Y'
+		= (Y^{l}_{l'}Y^{(1,2)l}_{l''} - (Y^{l}_{l'}Y^{(1,2)l}_{l''})^{(1,2)}) 
+		\det Y'.
+\end{align*}
+Now $\det Y$ is a sum of terms of this form, with the sum going over all 
+pairs $(l', l'')$ with $l' \neq l''$. Thus $\det Y$ is divisible by 
+$(x_1 - x_2)^{r/2}$.
+
+Now we go back to our original goal of proving that $\Delta^{r/2} \mid \det X$.
+Since $(1,2)$ acts on $S_m$ without fixed points and $X$ has equivariant rows,
+it follows that $(x_1 - x_2)^{m!/2} \mid \det X$.
+Let $i, j \in \ll m \rr$ with $i < j$. The transposition $(i,j)$ acts on 
+$X$ by interchanging $m!/2$ pairs of rows: it sends the $\sigma$-th row
+to $(i,j)\sigma$ and the $(i,j)\sigma$-th row to the $\sigma$-th row. Thus 
+$(i,j) \det X = \det (i,j) X = (-1)^{m!/2} \det X$. It follows that $\sigma 
+\cdot \det X = (\sg \sigma)^{m!/2} \det X$, whence it follows that 
+$x_i - x_j$ divides $\det X$ as many times as $x_1 - x_2$, so 
+$(x_i - x_j)^{r/2} \mid \det X$. Since $\Lambda_m$ is a unique factorization 
+domain and the set $\{x_i - x_j \mid 1 \leq i < j \leq m\}$ consists of 
+mutually coprime polynomials, it follows that $\Delta \mid \det X$.
+\end{proof}
+
+\paragraph
+\label{P:basis-det}
+Let $\B = \{f_\sigma \mid \sigma \in S_m\}$ be a basis of $\Lambda_m$. We write
+$M(\B)$ for the square matrix such that $M(\B)_\sigma^\tau = f_\sigma^\tau$. 
+By definition $M(\B)$ has equivariant rows. Notice that $\det M(B)$ is well
+defined up to a sign.
+\begin{Proposition*}
+Let $\B = \{f_\sigma \mid \sigma \in S_m\}$ be a homogeneous basis of 
+$\Lambda_m$ over $\Gamma_m$. Then $\det M(\B) \ceq \Delta^{m!/2}$. 
+\end{Proposition*}
+\begin{proof}
+First, notice that each $\tau \in S_m$
+defines an automorphism of $F$, that $E = F^{S_m}$ is the fraction field
+of $\Gamma_m$, and that $\B$ is a basis of $F$ as $E$-module. Now $S_m$ is
+naturally identified with the Galois group of the extension $F \mid E$. 
+Suppose $(p_\tau)_{\tau \in S_m}$ is a vector in the kernel of $M(\B)$, so 
+$\sum_\tau p_\tau \tau \cdot (f_\sigma)$. This implies that $\sum_\tau p_\tau 
+\tau$ is identically zero, and by Dedekind's Lemma 
+\cite{Mor-galois}*{Lemma 2.2} this implies $p_\tau = 0$ for all $\tau$, so
+$\det M(\B)$ is not zero. As we observed above, the rows of $M(\B)$ are 
+equivariant, and hence $\Delta^{m!/2} \mid \det M(\B)$ by Lemma 
+\ref{L:equivariant-det}. Also, its degree is precisely $\sum_\sigma f_\sigma$.
+Notice that the sum of the degrees can be calculated as $H'_{\Lambda_m/J}(1)$. 
+Now 
+\begin{align*}
+H'_{\Lambda_m/J}(1)
+	&= \sum_{i=1}^m \frac{d}{dt}\left( \frac{1-t^i}{1-t}\right) 
+		\mid_{t = 1} 
+		\prod_{j \neq i}^m \frac{1-t^j}{1-t} \mid_{t=1} \\
+	&= \sum_{i=1}^m (1+2+ \cdots + i-1) \frac{m!}{i}
+	= m! \sum_{i=1}^m \frac{i(i-1)}{2i}
+	= \frac{m!}{2} \binom{m}{2}= \deg \Delta^{m!/2}. 
+\end{align*}
+Thus $\det M(\B) \ceq \Delta^{m!/2}$.
+\end{proof}
+
+\begin{Proposition}
+Let $\phi$ be as above.
+\begin{enumerate}[(a)]
+\item 
+\label{dual-basis}
+Every basis of $\Lambda_m$ has a dual basis in $\Lambda_m$.
+
+\item 
+\label{quotient-bil-form}
+$\phi$ induces a non-degenerate $\CC$-bilinear form on $\Lambda_m/J$
+with values in $\CC$.
+\end{enumerate}
+\end{Proposition}
+\begin{proof}
+Let $\B = \{f_\sigma \mid \sigma \in S_m\}$ be a basis of $\Gamma_m$. As before
+we denote by $M = M(\B)$ the matrix $M^\tau_\sigma = f_\sigma^\tau$, and by $C$
+the matrix of cofactors of $M$. Now Cramer's rule says that $\sum_\tau 
+M^\tau_\sigma C_\tau^\nu = \Delta^{m!/2} \delta_{\sigma, \nu}$. 
+
+By definition $C_\rho^\nu$ is the determinant of the matrix obtained by
+deleting row $\nu$ and column $\rho$ of $M$. Let $1 \leq i < j \leq m$; 
+by taking the Laplace expansion of this reduced matrix along the $(i,j)\nu$-th 
+row, we see that $C_\rho^\nu$ can be written as a $\Lambda_m$-linear 
+combination of determinants of matrices of size $m!-2$ with 
+$(i,j)$-equivariant rows, and hence as shown in the proof of Lemma 
+\ref{L:equivariant-det} $(x_i-x_j)^{m!/2 -1}$ divides $C_\sigma^\tau$. Since 
+$(i,j)$ was arbitrary, we get that $\Delta^{m!/2-1} \mid C_\sigma^\tau$. 
+
+Let $w_0$ be the longest word of $S_m$. For each $\nu, \rho \in S_m$ set 
+$g_{\nu,\rho} = \sg(\rho) \frac{C^{w_0\nu^{-1}}_\rho}{\Delta^{m!/2-1}} \in 
+\Lambda_m$. With this notation the inverse matrix of $M$ is $(M^{-1})^\rho_\nu 
+= \frac{\sg(\rho) g_{w_0\nu^{-1}, \rho}}{\Delta}$. Now since $M$ has 
+equivariant rows, $M^{-1}$ has equivariant columns, which implies that 
+$g_{\nu, \rho} = g_{\nu,e}^\rho$. Setting $g_\nu = g_{\nu, e}$, the fact that 
+$M M^{-1} = \Id$ can be rewritten as
+\begin{align*}
+\delta_{\sigma, \nu}
+	&= \sum_{\tau \in S_m} f_\sigma^\tau \frac{C_\tau^\nu}{\Delta^{m!/2}} 
+	= \frac{1}{\Delta}\sum_{\tau \in S_m} 
+		\sg(\tau)f_\sigma^\tau g_{w_0\nu^{-1}}^\tau
+	= \phi(f_\sigma g_{w_0\nu^{-1}}),
+\end{align*}
+so $\phi(f_\sigma, g_\nu) = 1$ if and only if $\nu\sigma = w_0$, and zero 
+otherwise. Thus $\B' = \{g_\nu \mid \nu \in S_m\}$ is a dual set to $\B$. 
+
+Notice that $g_\nu$ is by definition a homogeneous polynomial, and that the 
+formula above implies that $\deg f_{\nu^{-1} w_0} + \deg g_{\nu} = 
+\binom{m}{2} = \ell(w_0)$, where $w_0$ is the longest word of $S_m$, so 
+$\deg g_{\nu} = \ell(w_0) - \ell(\nu^{-1} w_0) = \ell(\nu)$. 
+
+Finally, by definition $\phi$ induces a bilinear form $\overline \phi: 
+\Lambda_m/J \ot \Lambda_m/J \to \CC$, and the projections of the sets $\B$
+and $\B'$ on this quotient are dual bases; since dual bases exist, the form
+is non-degenerate.
+\end{proof}
+If $\B = \{f_\sigma \mid \sigma \in S_m \}$ is basis, we denote by $\B^* = 
+\{f_\tau^* \mid \tau \in S_m\}$ its dual basis. Thus $\phi(f_\sigma, f^*_\tau)
+= \delta_{\tau\sigma, w_0}$.
+\end{document}
