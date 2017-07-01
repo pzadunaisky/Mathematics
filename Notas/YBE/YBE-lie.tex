@@ -1,0 +1,114 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{notas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\renewcommand\k{\Bbbk}
+
+\newcommand\A{\mathcal A}
+\newcommand\B{\mathcal B}
+\newcommand\Z{\mathsf Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\id{\mathsf{Id}}
+\newcommand\im{\mathsf{im}}
+\newcommand\coker{\mathsf{coker}}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\g{\mathfrak g}
+\renewcommand\sl{\mathfrak{sl}}
+
+\DeclareMathOperator\rep{\mathsf{rep}}
+\DeclareMathOperator\Ret{\mathsf{Ret}}
+
+\DeclareMathOperator\Hom{\mathsf{Hom}}
+\DeclareMathOperator\End{\mathsf{End}}
+
+\newcommand\range[1]{\left\llbracket #1 \right\rrbracket}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Soluciones de YBE linealizadas}
+\date{27/06/2017}
+\author{[YBE-lie.tex]}
+\begin{document}
+\maketitle
+\paragraph
+Sea $V$ un espacio vectorial complejo dotado de un producto interno. Entonces 
+existe un isomorfismo $V \ot V \cong \End(V)$ dado por $x \ot y \mapsto  
+\langle y,-\rangle x$. Este a su vez induce un isomorfismo $\End(V) \ot 
+\End(V) \cong \End(\End(V))$, dado por $A \ot B \mapsto (C \mapsto A C^t B^*)$,
+donde $X^*$ es la transpuesta conjugada de $X$. Tomar $C^t$ en lugar de $C$ 
+introduce ciertas complicaciones técnicas, pero es coherente con la notación 
+habitual en el estudio de soluciones conjuntistas de YBE.
+
+Sea $\B = \{e_1, \ldots, e_n\}$ una base ortonormal de $V$. Entonces $V \ot 
+V \cong M_n(\CC)$ a través del isomorfismo $e_i \ot e_j \mapsto E^i_j$;
+notamos por $\B^2$ a la base formada por los $E^i_j$.  
+Notemos por $T_B: \End(V \ot V) \mapsto M_n(\CC) \ot M_n(\CC)$ a la función
+$T_B(f) = \sum_{i=1}^s A_i \ot B_i$ definida por $[f(e_i \ot e_j)]_{\B^2}
+= \sum_{i=1}^s A_i (E^i_j)^* B_i^*$. 
+
+Sea $\B' = \{f_1, \ldots, f_n\}$ otra base ortonormal de $V$, y sea $P$
+la matriz del cambio de base de $\B'$ a $\B$. Poniendo $X^P = P X P^*$
+tenemos que $T_{\B'}(f) = \sum_{i=1}^s A_i^P \ot B_i^P$.
+
+\paragraph
+Sea $(X,r)$ una solución conjuntista finita e involutiva de YBE. Como de
+costumbre tomamos la notación $r(x,y) = (f_x(y), g_y(x))$. Sin pérdida de 
+generalidad podemos suponer que $X = \range{n}$ con $n = \# X$. Identificamos 
+$\CC^n$ con el espacio vectorial complejo generado por $X$, poniendo $e_i$
+como el vector correspondiente a $i \in X$, y $\B$ la base canónica. Notamos
+ademas $R \in \End(\CC^n \ot \CC^n)$ a la transformación lineal inducida por 
+$r$. Se sigue de la definición que $T_\B(R) = \sum_{i,j \in \range{n}} 
+E_j^{f_i(j)} \ot E_i^{g_j(i)}$.
+
+\begin{Proposition}
+Sea 
+\end{Proposition}
+
+
+\paragraph
+Imponemos
+la relación de equivalencia $x \sim y$ si y solo si $f_x = f_y$. Esto
+implica que $g_x = g_y$ y que $\Ret(X,r) = (X/\sim, \overline r)$ es una 
+solución conjuntista de YBE. Llamamos a la clase de equivalencia de $x$
+el \newterm{bloque} de $x$; un $t$-bloque es una clase de equivalencia de 
+cardinal $t \in \NN$. Ordenando los bloques por cardinalidad decreciente, 
+notamos por $\lambda = \lambda(X,r)$ a la partición $(\lambda_1, \ldots, 
+\lambda_s) \vdash n$ donde $\lambda_i$ es el cardinal del $i$-ésimo bloque 
+Sin pérdida de generalidad podemos suponer que $X = \range{n}$ con $n = \# X$
+y que el $i$-ésimo bloque de $X$ es $\range{\sum_{j=1}^{i-1} \lambda_j + 1, 
+\sum_j^i \lambda_j}$. Dado $x \in X$ notamos por $\lambda(x)$ el tamamaño de
+su bloque.
+
+\begin{Lemma}
+Para todos $x,y \in X$ se tiene que $\lambda(y) = \lambda(f_x(y))$. En otras
+palabras $f_x$ permuta los $t$-bloques de $r$.
+\end{Lemma}
+\begin{proof}
+La función $f_x$ es inyectiva. La buena definición de $\sim$ implica que $f_x$
+envía cualquier elemento del bloque de $y$ en un elemento del bloque de 
+$f_x(y)$ y esto implica que $\lambda(y) \leq \lambda(f_x(y))$. Iterando este 
+argumento tenemos que $\lambda(y) \leq \lambda(f_x(y)) \leq \lambda(f_x^2(y)) 
+\leq \cdots \leq \lambda(f_x^s(y))$ para todo $s \in \NN$. Pero al ser $X$ un 
+conjunto finito y $f_x$ una permutación, existe un $s$ tal que $f_x^s = f_x$,
+y por lo tanto la cadena de desigualdades debe ser una cadena de igualdades.
+\end{proof}
+
+
+
+
+\end{document}

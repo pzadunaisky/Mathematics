@@ -60,9 +60,8 @@
 \maketitle
 
 \section{Notation on tableaux}
-\textbf{Notation:} For each $n,m \in \NN$ with we set $\ll m,n \rr = \{i \in 
-\NN \mid m \leq i \leq n\}$. Given two elements $a, b$ of a $\CC$-algebra $A$, 
-we write $a \ceq b$ if there exists $z \in \CC^\times$ suc hthat $a = z b$.
+\textbf{Notation:} For each $n,m \in \NN$ we set $\ll m,n \rr = \{i \in 
+\NN \mid m \leq i \leq n\}$; also $\ll n \rr = \ll 1, n\rr$. 
 
 \paragraph
 Fix $n \in \NN_{\geq 2}$, and set $N = \frac{n(n+1)}{2}$. We think of 
@@ -95,7 +94,9 @@ GT-tableaux as arrays with $N$ complex entries of the form
 
 The set of all GT-tableaux can be identified with $\CC^N$ by indexing the 
 entries of a point $v \in \CC^N$ by $\{(k,i) \mid 1 \leq i \leq k \leq n\}$. 
-We will denote by $T(v)$ the tableau corresponding to $v \in \CC^N$.
+We will denote by $T(v)$ the tableau corresponding to $v \in \CC^N$. We denote
+by $\ZZ^N_0$ the set of all tableaux with $z_{k,j} \in \ZZ$ and all $z_{n,i} 
+= 0$ (i.e. talbeaux with integral entries and top row $0$).
 
 \begin{Definition}
 \label{D:various-tableaux}
@@ -194,7 +195,7 @@ positive degree. This is a graded ideal stable by the action of $S_m$, and by
 a graded version of the regular representation of $S_m$, with Hilbert series
 $\prod_{i=1}^m \frac{1-t^i}{1-t}$. By Nakayama's Lemma a subset of $\Lambda_m$
 is a minimal set of generators of $\Lambda_m$ over $\Gamma_m$ if and only if
-its projection on $\Lambda_m/J$ is basis of this vector space. Thus if the 
+its projection on $\Lambda_m/J$ is a basis of this vector space. Thus if the 
 generating set is formed by homogeneous elements then the degrees of its 
 elements are fixed, and looking at the Hilbert series of the algebras we see 
 that such a minimal set is free over $\Gamma_m$. From now on when we talk 
@@ -218,7 +219,7 @@ $\B'$ is a basis of $\Lambda_m$.
 
 \item 
 \label{projection-basis}
-The projection of $\B'$ to the quotient $\Lambda_m/J$ is basis.
+The projection of $\B'$ to the quotient $\Lambda_m/J$ is a basis.
 
 \item
 \label{coefficients-basis}
@@ -232,6 +233,11 @@ $\ell(\sigma) = \ell(\tau) = i$ is invertible.
 \end{enumerate}
 \end{enumerate}
 \end{Lemma*}
+Notice that the $p_{\sigma,\tau}$ of item $(c)$ form the matrix of coordinates 
+of the $g_\tau$ in the basis of $f_\sigma$, and in particular the matrices 
+from subitem $(iii)$ are formed by the degree-wise coordinates of the classes
+of $g_\tau$ in $\Lambda_m/J$.
+
 
 \paragraph
 We define a $\Gamma_m$-bilinear form $\phi: \Lambda_m \ot_{\Gamma_m} 
@@ -316,27 +322,57 @@ respect to $\phi$, or at least so that its dual basis is easily described in
 terms of the original? I found several self-dual bases for $m = 3$, but 
 Schubert polynomials are not one of them. They simplify many things.}
 
+The following are a few self-dual bases (up to constants) for $m = 3$. Here
+$\omega$ is a primitive third root of unity.
+\begin{align*}
+f_1 &=1 
+	&f_{(12)}&=2 \left(x_1-x_2\right)
+	&f_{(23)}&=2 \left(x_2-x_3\right) \\
+f_{(132)} &= x_2 x_3-x_1 x_3
+	&f_{(123)} &= x_1 x_2-x_1 x_3
+	&f_{(13)} &= \Delta; \\ \\
+g_1 &=1
+	&g_{(12)}&=2 \left(x_1-x_2\right)
+	&g_{(23)}&=2 \left(x_2-x_3\right) \\
+g_{(132)} &= 2(x_1^2 - x_2^2)
+	&g_{(123)} &= 2(x_2^2 - x_3^2)
+	&g_{(13)} &= \Delta \\ \\
+h_1 &=1
+	&h_{(12)}&=x_1 + \omega x_2 + \omega^2 x_3
+	&h_{(23)}&=x_1 + \omega^2 x_2 + \omega x_3\\
+h_{(132)} &= x_1^2 + \omega x_2^2 + \omega^2 x_3^2
+	&h_{(123)} &= x_1 + \omega^2 x_2^2 + \omega x_3^2
+	&h_{(13)} &= \Delta \\  \\
+t_1 &=1 
+	&t_{(12)}&= \left(x_1-x_2\right)/3
+	&t_{(23)}&= \left(x_2-x_3\right)/3 \\
+t_{(132)} &= 2(2 x_1-x_2-x_3)(x_2-x_3) 
+	&t_{(123)} &= 2(x_1+x_2-2 x_3)(x_1-x_2)
+	&t_{(13)} &= \Delta
+\end{align*}
+
+
 \section{The universal fully critical GT-module}
 
 \paragraph
 Let $A$ be the algebra of regular functions defined over $\CC^N_\gen$; in other
 words, $A$ is the localization of $\Lambda = \CC[\lambda_{k,i} \mid 1 \leq i 
 \leq k \leq n]$ at the infinite set $\{\lambda_{k,i} - \lambda_{k,j} - a \mid
-1 \leq i < j \leq k \leq n, a \in \ZZ\}$. The algebra $A$ contains all the 
+1 \leq i < j \leq k < n, a \in \ZZ\}$. The algebra $A$ contains all the 
 rational functions appearing in the Gelfand-Tsetlin formulas. Thus if $v \in
 \CC_\gen^N$ then evaluation at $v$ is defined for every rational function 
 $f/g \in A$ and defines a $1$-dimensional representation of $A$, which we
 denote by $\CC_v$. Notice that $\Lambda \subset A \subset \Frac(\Lambda)$, and 
-that $A$ is stable by the action of $S_m$. Consider the action of $\ZZ^N$ over 
-$\CC^N$, given by $v^z = v+z$. This induces an action on $A$, given by 
+that $A$ is stable by the action of $S_m$. Consider the action of $\ZZ^N_0$ 
+over $\CC^N$, given by $v^z = v+z$. This induces an action on $A$, given by 
 $(z \cdot f)(v) = f(v + z)$. We will sometimes write $f(\lambda^z)$ for 
 $(z \cdot f)$. 
 
 \paragraph
 Let $V_\CC$ be the $\CC$ vector space with basis $\{T(z) \mid z \in \ZZ^N_0\}$.
 The symmetric group $S_m$ acts on $V_\CC$ through its action on the $m$-th row
-a tableaux $z$. Set $V_A = A \ot_\CC V_\CC$; we write $fT(z)$ for the 
-elementary tensor $f \ot T(z)$ where $f \in A$ and $z \in \ZZ_0^N$. The 
+a tableau $z$. Set $V_A = A \ot_\CC V_\CC$; we write $fT(z)$ for the 
+elementary tensor $f \ot_\CC T(z)$ where $f \in A$ and $z \in \ZZ_0^N$. The 
 symmetric group acts on $V_A$ by a diagonal action, so $\sigma \cdot (f T(z)) 
 = f^\sigma T(\sigma(z))$. 
 
@@ -465,12 +501,12 @@ D_\sigma (\tau^{-1}(v))
 			T(v)\right)
 	= \sg(\tau^{-1}) \sum_\rho \lambda_{\sigma, \tau}^\rho D_\rho (v). 
 \end{align*} 
-Thus $D(v \cdot \tau \ot f) = D(v \ot f^\tau)$, and hence $D$ induces an 
-surjective map $D: O(v) \ot_{S_m} H \to L_\CC(v)$. Now $H$ is the regular
-representation, so $O(v) \ot_{S_m} H \cong O(v)$ as vector space, which implies
-that $\dim_\CC L_\CC(v) \leq \dim O(v) = m!/\sh(v)!$. Thus the number of $\CC$
-linearly independent derived tableaux is at most $m!/\sh(v)!$, and we have
-seen that this set must also be $F$-linearly independent, so $L_C(v)$ is 
+Thus $D(v \cdot \tau \ot f) = D(v \ot f^\tau)$, and hence $D$ induces a
+surjective map $D: \O(v) \ot_{S_m} H \to L_\CC(v)$. Now $H$ is the regular
+representation, so $\O(v) \ot_{S_m} H \cong O(v)$ as vector space, which 
+implies that $\dim_\CC L_\CC(v) \leq \dim \O(v) = m!/\sh(v)!$. Thus the number 
+of $\CC$ linearly independent derived tableaux is at most $m!/\sh(v)!$, and we 
+have seen that this set must also be $F$-linearly independent, so $L_C(v)$ is 
 a free $C$-module with these tableaux as a basis.
 \end{proof}
 
@@ -570,8 +606,9 @@ E_{k,k+1} D_\sigma T(v)
 The proof that $E_{k+1,k} D_\sigma (v) \in L_B$ is analogous. Finally,
 since $L_B(v)$ is contained in the $A$-module generated by the orbit
 of $T(v)$, and each tableaux in the orbit of $T(v)$ is an eigenvector of
-$E_{k,k}$ of eigenvalue $|\lambda|_k - |\lambda|_{k-1} + k-1$, it follows
-that every element of $L_B(v)$ is an eigenvector of the same eigenvalue.
+$E_{k,k}$ of eigenvalue $|\lambda + v|_k - |\lambda + v|_{k-1} + k-1$, it 
+follows that every element of $L_B(v)$ is an eigenvector of the same 
+eigenvalue.
 \end{proof}
 
 \begin{Definition}
@@ -593,9 +630,9 @@ Then
 	&= \cdots
 	= \sum_{\epsilon}\sg \epsilon \phi(f_\sigma^\epsilon, f^*_\nu)
 \end{align*}
-where $\epsilon$ runs over the stabilizer of $v$. In particular if $v$ is 
-sufficiently noncritical (say all entries differ by more than $2$) then this 
-is $\delta_{\sigma\nu, w_0}$, and the coefficient of $D_\sigma(T(v + 
+where $\epsilon$ runs over the stabilizer of $v$ in $S_m$. In particular if $v$
+is noncritical (all entries are different and hence the stabilizer is trivial) 
+then this is $\delta_{\sigma\nu, w_0}$, and the coefficient of $D_\sigma(T(v + 
 \delta^{k,j}))$ in $E_{m,m+1} D_\tau T(v)$ can be obtained by taking the inner
 product of this last guy with $D^*_\sigma T(v + \delta^{k,j})$. However, for 
 this to work in general we need a basis of derived tableaux and its dual basis.
@@ -621,16 +658,35 @@ c_{k,i} D_\sigma T(z)
 	&= \frac{1}{m!} \sum_{\tau \in S_m} \gamma_{k,i}(\lambda^{\tau(z)})
 		\tau \left(\frac{f_\sigma}{\Delta}T(z)\right).
 \end{align*}
-Using the inner product describe above
+Using the inner product described above
 \begin{align*}
 \langle D_\sigma T(z), D^*_\nu T(z) \rangle
 	&= \frac{1}{m!} \sum_{\tau(z) = \rho(z)} 
 		\gamma_{k,i}(\lambda^{\tau(z)})
-			\left(\frac{f_\sigma}{\Delta}\right)^\tau (f_\nu^*)^\rho
+			\left(\frac{f_\sigma}{\Delta}\right)^\tau (f_\nu^*)^\rho \\
+	&= \frac{1}{m!}\sum_\epsilon \sg(\epsilon)
+		\phi(\gamma_{k,i}(\lambda^{\tau(z)}) f_\sigma^\epsilon f_\nu^*),
 \end{align*}
+where once again $\epsilon$ runs over the stabilizer of $v$ in $S_m$.
 
+\textcolor{red}{QUESTION: How does this reduce modulo $x_1 = x_2 = \cdots = 
+x_m$?}
 
+\paragraph
+\about{Specialization of $L_B$ is a GT-module}
+Let $w$ be a fully-critical tableau, let $\CC_w$ be the one dimensional 
+representation of $B$ corresponding to $w$, and let $V(w) = L_B \ot_B \CC_w$.
+We will prove that $V(w)$ is a Gelfand-Tsetlin module.
 
+First notice that $V(w) = \bigoplus_{\overline v} L_B(\overline v) \ot_B 
+\CC_w$ where the $\overline v$ run over all the classes of $\ZZ^N / S_m$, and 
+that since $L_B(\overline v)$ is finitely generated over $B$ for
+each $v \in \ZZ^N_0$, the tensor product $L_B(\overline v) \ot_B \CC_v$ is a 
+finite dimensional $\CC$-vector space. Direct inspection shows that 
+$L_B(\overline v)$ is a $\Gamma$-module, and hence so is $L_B(\overline v)
+\ot_B \CC_w$. Thus $V(w)$ can be written as the direct sum of $\Gamma$-modules 
+of finite dimension. This implies that for each vector $a \in V(w)$ the module 
+$\Gamma a$ is finite dimensional, and hence $V(w)$ is a GT-module.
 \begin{bibdiv}
 \begin{biblist}
 \bibselect{biblio}
@@ -645,7 +701,8 @@ Using the inner product describe above
 \section{Appendix: calculation of the discriminant of $S_m$}
 This was the original proof that $\phi$ was non-degenerate. It includes
 a non-trivial calculation of the discriminant of a reflection group that
-can probably be generalized. 
+can probably be generalized. Given two elements $a, b$ of a $\CC$-algebra $A$, 
+we write $a \ceq b$ if there exists $z \in \CC^\times$ suc hthat $a = z b$.
 
 \paragraph
 \label{L:equivariant-det}
