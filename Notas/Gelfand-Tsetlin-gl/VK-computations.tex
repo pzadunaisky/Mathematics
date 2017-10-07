@@ -1,0 +1,558 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{notas}
+\usepackage{tikz}
+\usepackage{mathdots}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\renewcommand\k{\Bbbk}
+
+\newcommand\B{\mathcal B}
+\newcommand\F{\mathcal F}
+\newcommand\V{\mathcal V}
+\newcommand\D{\mathcal D}
+\newcommand\DD{\mathfrak D}
+\renewcommand\H{\mathcal H}
+\renewcommand\O{\mathcal O}
+\newcommand\I{\mathcal I}
+\newcommand\J{\mathcal J}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\Id{\mathsf{Id}}
+\newcommand\im{\mathsf{im}}
+\newcommand\coker{\mathsf{coker}}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\g{\mathfrak g}
+\newcommand\p{\mathfrak p}
+\newcommand\m{\mathfrak m}
+\newcommand\gl{\mathfrak{gl}}
+\newcommand\gen{\mathsf{gen}}
+\newcommand\std{\mathsf{std}}
+\newcommand\sh{\mathsf{sh}}
+\newcommand\OTheta{\overline \Theta}
+
+
+\newcommand\vectspan[1]{\left\langle #1 \right\rangle}
+\newcommand\interval[1]{\llbracket #1 \rrbracket}
+\newcommand\Shuffle{\mathsf{Shuffle}}
+
+\DeclareMathOperator\Frac{Frac}
+\DeclareMathOperator\Specm{Specm}
+
+\DeclareMathOperator\sym{sym}
+\DeclareMathOperator\asym{asym}
+\DeclareMathOperator\sg{sg}
+\DeclareMathOperator\st{\mathsf{st}}
+\DeclareMathOperator\n{norm}
+
+\newcommand\bigmodule{big GT module}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Computations on $V_K$}
+%\author{[gamma-structure.tex]}
+\date{}
+
+\begin{document}
+\maketitle
+%\vspace{-2cm}
+
+\section{Notation}
+Throughout this document we fix $n \in \NN$ and $N = \frac{n(n+1)}{2}$. We
+also set $\mu = (1, 2, \ldots, n)$ and $\Sigma = \{(k,i) \mid 1 \leq i \leq k 
+\leq n\}$.
+
+\paragraph
+Given $a,b,k \in \NN$ we set $\interval{a,b} = \{i \in \NN \mid a \leq i \leq 
+b\}$ and $\interval{b} = \interval{1,b}$; also set $\interval{a,b}_k = \{
+(k,i) \mid i \in \interval{a,b}\}$. If $I = \interval{a,b}$ we define $a(I)
+= a$ and $b(I) = b$ and also set $\ell(I) = b(I) - a(I) + 1$. 
+
+An interval of $\Sigma$ is a set $\interval{a,b}_k \subset \Sigma$, so
+$1 \leq a \leq b \leq k$. An composition of $\Sigma$ is a disjoint 
+family $\I$ of intervals of $\Sigma$ whose union is $\Sigma$. If $\I$
+is an interval composition of $\Sigma$ then for each $k \in \interval n$ 
+there exists an integer $a_k$ such that $\I = \sqcup_{k=1}^n \{I^k_1, 
+\ldots I^k_{a_k}\}$, where $a(I^k_1) = 1, b(I^k_{a_k}) = k$ and $a(I^k_{j+1}) 
+= b(I^k_j)$; we write $\I_k = \{I^k_i \mid 1 \leq i \leq a_k\}$. Given two 
+interval partitions $\I, \J$ of $\Sigma$, we say that $\J$ refines $\I$ and 
+write $\J < \I$ if for each $J \in \J$ there exists $I \in \I$ such that $J 
+\subset I$. 
+
+A composition of $\mu$ is an $n$-tuple $\eta = (\eta^{(1)}, \ldots, 
+\eta^{(n)})$ where $\eta^{(k)}$ is a composition of $k$; since $\mu$ is fixed
+we can identify $\eta$ with the concatenation of its parts. To each
+composition $\I$ of $\Sigma$ we assign a composition $\eta(\I)$ of $\mu$, 
+setting $\eta^{(k)}_j = |I^k_j|$. This assignation is bijective, and for each
+composition $\eta$ of $\mu$ we denote by $\I(\eta)$ the unique composition of
+$\Sigma$ corresponding to $\eta$. We say that a composition $\epsilon$
+refines $\eta$, and write $\epsilon < \eta$, whenever $\I(\epsilon) < 
+\I(\eta)$. Compositions of $\mu$ form a finite poset with maximum $\mu$, so 
+whenever we write $\eta < \mu$ we will mean that $\eta$ is a composition of 
+$\mu$.
+
+\paragraph
+For each finite set $X$ we denote by $S(X)$ the set of all bijections from
+$X$ to $X$. Set $S_\mu = S(\interval{1}_1) \times S(\interval{2}_2) \times
+\cdots \times S(\interval{n}_n)$, which is a subset of $S(\Sigma)$. If $I 
+\subset \Sigma$ is an interval then we see $S(I) \subset S_\mu$ in the obvious 
+way. Foreach composition $\I$ of $\Sigma$ we define $S_\I = \prod_{I \in \I} 
+S(I) \subset S_\mu$, and for each $\eta < \mu$ we set $S_\eta = S_{\I(\eta)}$.
+Every element $\sigma \in S_\mu$ can be written as $\sigma^{(1)} \sigma^{(2)}
+\cdots \sigma^{(n)}$ with $\sigma^{(k)} \in S(\interval{k}_k)$. Obviously
+$S(\interval{k}_k)$ is isomorphic to the symmetric group in $k$ elements,
+and given a permutation $\sigma \in S_k$ we will denote the corresponding
+element of $S(\interval{k}_k)$ by $\sigma^{(k)}$.
+Since it is a product of symmetric groups, $S_\mu$ is a Coxeter group
+with a well defined notion of length, and each $S_\eta$ is a parabolic
+subgroup of $S_\mu$. 
+
+\paragraph
+Set $\CC^\mu = \CC^{1} \times \CC^{2} \times \cdots \times \CC^{n}$. A point 
+in $\CC^\mu$ is thus an $n$-tuple $(v_1, \ldots, v_n)$ with each $v_k$ a 
+vector of $k$ entries; we refer to the $v_k$'s as the \emph{rows} of $v$
+and denote by $v_{k,i}$ the $i$-th entry of $v_k$. Also given an interval
+$\interval{a,b}_k \subset \Sigma$ we write $v(\interval{a,b}_k) = (v_{k,a},
+\cdots, v_{k,b})$. Given $\eta < \mu$ and $\I = \I(\eta)$ the $\eta$-blocks
+of $v$ are the elements of the set $\{v(I) \mid I \in \I\}$.
+
+The group $S_\mu$ acts on $\CC^\mu$ by permuting the entries, i.e. 
+$\sigma(v)_{k,i} = v_{\sigma(k,i)} = v_{k,\sigma^{(k)}(i)}$. We set 
+$\Lambda = \CC[x_{k,i} \mid (k,i) \in \Sigma(\mu)]$, the ring of polynomial 
+functions on $\CC^\mu$, and by $K = \Frac(\Lambda)$ its fraction field. The 
+action of $S_\mu$ on $\CC^\mu$ induces an action on $\Lambda$ which is given 
+by $\sigma(x_{k,i}) = x_{\sigma(k,i)} = x_{k,\sigma^{(k)}(i)}$, and extends to 
+the fraction field. If $\eta < \mu$ then $S_\eta$ acts on $\CC^\mu$ by 
+restriction, which induces $S_\eta$ actions on $\Lambda$ and $K$. Notice that
+the action of $S_\eta$ only permutes elements in the same $\eta$-block.
+
+\paragraph
+We denote by $\ZZ^\mu_0 \subset \CC^\mu$ the set of points with integral 
+entries and $z_{n,i} = 0$ for all $i \in \interval{n}$. Fix $\eta < \mu$ and 
+let $\I = \I(\eta)$ be the corresponding composition of $\Sigma$. 
+We say that $z \in \ZZ^\mu_0$ is in normal $\eta$-form, or just normal form if 
+$\eta$ is clear from the context, if each $\eta$-block of $z$ is a weakly 
+descending sequence. For each $z \in \ZZ^\mu_0$ there is exactly one element 
+in the orbit $S_\eta z$ which is in $\eta$-normal form, and we denote it by 
+$\n_\eta(z)$. Thus the set $\n_\eta(\ZZ^\mu_0) = \{\n_\eta(z) \mid \ZZ^\mu_0\}$
+is a complete set of representatives of the equivalence classes in $\ZZ^\mu_0 
+/S_\eta$. Furthermore there exists a unique refinement $\epsilon_\eta(z) < 
+\eta$ such that the stabilizer of $\n_\eta(z)$ in $S_\eta$ is 
+$S_{\epsilon_\eta(z)} \subset S_\eta$. We will say that $z$ is 
+$\eta$-critical, resp. fully $\eta$-critical, if $\epsilon(z)$ is nontrivial, 
+resp. equal to $S_\eta$. Notice that $\I(z) = \I(\epsilon(z))$ is the maximal
+element among all refinements of $\I(\eta)$ such that $z(I)$ is a constant
+sequence for each $I \in \I(z)$. 
+
+\section{The algebra $B_\eta$}
+Throughout this section we fix $\eta$ a composition of $\mu$ and write
+$\I = \I(\eta)$.
+\paragraph
+As usual we denote by $K \# S_\mu$ the smash product algebra.
+Let $I \subset \Sigma(\mu)$ be an interval. We set 
+\begin{align*}
+\sym_I 	
+	&= \frac{1}{\ell(I)!}\sum_{\sigma \in S_I} \sigma;
+&\asym_I 	
+	&= \frac{1}{\ell(I)!}\sum_{\sigma \in S_I} \sg(\sigma)\sigma.
+\end{align*} 
+Since we are seeing $S_I$ as a subrgroup of $S_\mu$, these are idempotent 
+elements in $K \# S_\mu$. We also set
+\begin{align*}
+\sym_\eta 	
+	&= \prod_{I \in \I(\eta)} \sym_I;
+&\asym_\eta	
+	&= \prod_{I \in \I(\eta)} \asym_I.
+\end{align*} 
+For each $\sigma \in S_\mu$ there is a divided difference operator 
+$\partial_\sigma$ as defined in \cite{RZ-singular-characters}*{}. We set
+$D_\sigma^\eta = \sym_\eta \cdot \partial_\sigma$.
+
+Let $V$ be a $K$-vector space with an $S_\mu$-equivariant action. We say that 
+an additive subgroup $W \subset V$ is a $\partial_\eta$-module if it is closed
+by the action of $S_\eta$ and $\partial_\sigma$ for each $\sigma \in S_\eta$.
+In particular it is closed by the action of $D_\sigma^\eta$ for each $\sigma
+\in S_\eta$. For example $\Lambda \subset K$ is a $\partial_\mu$-module.
+
+\paragraph
+For each interval $I = \interval{a,b}_k \subset \Sigma(\mu)$ we define $D(I) = 
+\{x_{k,i} - x_{k,j} \mid a \leq i < j \leq b\}$ and $\Delta_I = 
+\prod_{p \in D(I)} p$. Accordingly $D(\eta) = \sqcup_{I \in \I(\eta)} D(I)$
+and $\Delta_\eta = \prod_{I \in \I(\eta)} \Delta_I$. By a classical result
+$\asym_I(\Lambda) = \Lambda \Delta_I$ and $\asym_\eta(\Lambda) = \Lambda 
+\Delta_\eta$.
+
+We denote by $w(I)$ the longest word of $S_I$, and by $w_\eta$ the longest 
+word in $S_\eta$. If $W \subset V$ is a $\partial_\eta$ submodule and $I \in
+\I(\eta)$ then the following hold for each $f \in W$.
+\begin{align*}
+\frac{1}{|I|!}\partial_{w(I)}(f) 
+	&= \frac{1}{\Delta_I} \asym_I(f) 
+	= \sym_I \left(\frac{1}{\Delta_I} f \right) \\
+\frac{1}{\prod_{I \in \mathcal I(\eta)}|I|!}\partial_{w_\eta}(f) 
+	&= \frac{1}{\Delta_\eta} \asym_\eta(f) 
+	= \sym_\eta \left(\frac{1}{\Delta_\eta} f \right) \\
+D^\eta_\sigma(f) 
+	&= \sym_\eta \left(
+		\frac{\partial_{\sigma^{-1}} \Delta_I}{\Delta_I} f 
+	\right)
+\end{align*}
+
+\paragraph
+\about{The algebras $B_\eta, A_\eta$} 
+Set $C = \{x_{k,i} - x_{k,j} - z \mid 1 \leq i < j \leq k < n, z \in \ZZ 
+\subset \Lambda$ and $C_\eta = C \setminus D(\eta)$. We define $B_\eta = 
+C_\eta^{-1} \Lambda$. It follows from the definitions that $B_\eta \subset K$ 
+is a $\partial_\eta$ submodule.
+Now set $\p_\eta$ to be the ideal generated by $D(\eta)$. This is a prime
+ideal and $\Lambda / \p_\eta \cong \CC[Y_1, \ldots, Y_r]$, where $r = 
+|\I(\eta)|$. The ideal $\p_\eta$ extends to a prime ideal $B_\eta \p_\eta 
+\subset B_\eta$, and we set $A_\eta = B_\eta / B_\eta \p_\eta$. We denote by
+$\pi_\eta: B_\eta \to A_\eta$ the obvious projection map.
+
+Set $\eta! = \prod_{I \in \I(\eta)} |I|!$ and $s^\eta_\sigma = \frac{1}{\eta!}
+\partial_{\sigma^{-1} w_\eta \Delta_\eta}$. By definition $\deg s^\eta_\sigma
+= \ell(\sigma)$, and if $\ell(\sigma) > 0$ then $s_\sigma^\eta \in \p_\eta$.
+The set $\{s^\eta_\sigma \mid \sigma \in S_\eta\}$ is a basis of $B_\eta$ as a 
+$\B_\eta^{S_\eta}$-module, and for each $f \in B_\eta$ we write $f_{(\sigma)}$
+for its coordinate in this basis, so $f = \sum_{\sigma \in S_\eta} f_{(\sigma)}
+s_\sigma^\eta$.
+
+\begin{Lemma}
+\label{L:schubert-basis}
+For each $f \in B_\eta$ and each $\sigma \in S_\eta$ we have $f_{\sigma}
+\equiv D_{\sigma}^\eta(f) \mod (B_\eta\p_\eta)^{S_\eta}$.
+\end{Lemma}
+\begin{proof}
+Applying $D^\eta_\sigma$ to $f$ we get
+\begin{align*}
+D^\eta_\sigma(f) 
+	&= \sum_{\tau \in S_\eta} f_{(\tau)} D^\eta_\sigma(s_\tau^\eta)
+	= \sum_{\tau \in S_\eta} 
+		f_{(\tau)} \sym_\eta (\partial_\sigma s_{\tau}^\eta)
+\end{align*}
+If $\ell(\sigma) \geq \ell(t)$ then $\partial_\sigma s_\tau^\eta = 0$ unless
+$\tau = \sigma$, in which case we get $1$; on the other hand, if 
+$\ell(\sigma) < \ell(\tau)$ then $\partial_\sigma s_\tau^\eta \in \p_\eta$,
+and since this ideal is stable by the action of $S_\eta$ we get
+\begin{align*}
+D_\sigma^\eta(f) 
+	&= f_{(\sigma)} + \sum_{\ell(\tau) > \ell(\sigma)} 
+		f_{(\tau)} \sym_\eta (\partial_\sigma s^\eta_\tau) 
+		\equiv f_{(\sigma)} \mod (B_\eta\p_\eta)^{S_\eta}
+\end{align*}
+\end{proof}
+It follows that the coefficient of $s_\sigma$ in the product $s_\rho s_\tau$
+is $D_\sigma^\eta(s_\rho s_\tau)$. We set $c^\sigma_{\rho, \tau} = 
+\pi_\eta(D_\sigma^\eta(s_\rho s_\tau))$; notice that this is zero unless
+$\ell(\sigma) = \ell(\rho) + \ell(\tau)$.
+
+In \cite{PS-chains-bruhat} Postnikov and Stanley introduce a family of
+differential operators $\{\DD_\sigma^\eta \mid \sigma \in S_\eta\}$ with the
+property that $\DD_\sigma(f) \equiv f_{(\sigma)} \mod \p_\eta$; by 
+\cite{PS-chains-bruhat}*{Corollary 12.1} these differential operators can 
+be written in terms of Schubert polynomials as follows:
+\begin{align*}
+\DD_{\sigma, \tau}^\eta 
+	&= \frac{1}{C}
+		((\mathfrak S_{\sigma}\mathfrak S_{w_0\tau})(\partial)
+			(\Delta_\eta))(\partial)
+\end{align*}
+where $C = \prod_{i=1}^r \frac{1}{2! 3! \cdots \eta_r !}$. The lemma 
+implies that $\pi \circ \DD_\sigma = \pi \circ D_\sigma^\eta$. 
+
+\section{The module $V_K$}
+Set 
+\begin{align*}
+p_{k,i}^\pm 
+	&= \prod_{j = 1}^{k \pm 1} (x_{k,i} - x_{k \pm 1, j}); 
+&q_{k,i} 
+	&= \prod_{j \neq i} (x_{k,i} - x_{k,j}); 
+&r_{k} &= x_{k,1} + \cdots + x_{k,k}.
+\end{align*}
+The definitions imply that $\sigma p_{k,i}^\pm = p_{\sigma(k,i)}^\pm$ and 
+$\sigma q_{k,i} = q_{\sigma(k,i)}$, while $\sigma r_k = r_k$ for all $\sigma 
+\in S_\mu$.
+
+\paragraph
+\about{The action of $\ZZ^\mu_0$ on $K$}
+For each $(k,i) \in \Sigma(\mu)$ set $\delta^{k,i} \in \CC^\mu$ to be the point
+whose $(k,i)$-entry is equal to $1$, and whose other entries equal zero. The 
+set $\{\delta^{k,i} \mid 1 \leq i \leq k < n\}$ generates the abelian group
+$\ZZ^\mu_0$, and this group acts on $\Lambda$ by setting $\delta^{k,i} \cdot 
+x_{l,j} = x_{l,j} + \delta_{k,l} \delta_{i,j}$; cleary the action extends to 
+the fraction field $K$. Given $z \in \ZZ^\mu_0$ and $f \in K$ we sometimes
+write $f(x+z)$ for $z \cdot f$. Notice that the actions of $\ZZ^\mu_0$ and 
+$S_\mu$ are related by the formula $\sigma f(x + z) = (\sigma f)(x + 
+\sigma(z))$.
+
+
+\paragraph
+Set $V_\CC$ to be the $\CC$-vector-space freely generated by the set $\{T(z)
+\mid z \in \ZZ^\mu_0\}$, and for each $\CC$-algebra $R$ set $V_R = R \ot_\CC
+V_\CC$; we refer to $T(z)$ as the tableaux corresponding to $z$, and to $z$
+as the point correspoding to $T(z)$. The group $S_\mu$ acts on the set of all 
+tableaux by action on the correspoding points. Since $V_K = K \ot_\CC V_\CC$
+is a tensor product of $S_\mu$-modules, it is again an $S_\mu$-module. 
+Furthermore $V_K$ is a $\gl(n,\CC)$-module with action given by
+\begin{align*}
+E_{k,k+1} T(z) 
+	&= -\sum_{j=1}^k \frac{p^+_{k,i}(x+z)}{q_{k,i}(x+z)}T(z + \delta^{k,i})
+	& (1 \leq k \leq n-1)\\
+E_{k+1,k} T(z) 
+	&= \sum_{j=1}^k \frac{p^-_{k,i}(x+z)}{q_{k,i}(x+z)}T(z - \delta^{k,i})
+	& (1 \leq k \leq n-1) \\
+E_{k,k} T(z)
+	&= r_k(x+z) T(z)
+	& (1 \leq k \leq n).
+\end{align*}
+A direct computation shows that the action of $\gl(n,\CC)$ is 
+$S_\mu$-equivariant. Furthermore for each $c \in \Gamma$ there exists a 
+symmetric polynomial $\gamma \in \Lambda^{S_\mu}$, given by Zhelobenko's
+isomorphism, such that $c T(z) = \gamma(x+z) T(z)$.
+
+\paragraph
+\about{Operators on $V_K$}
+\label{L:pre-formulas}
+Since $V_K$ is a $K$-vector space with an equivariant $S_\mu$ action we can
+apply divided difference operators to it. We will now rewrite the operators
+$E_{k,k+1}, F_{k+1,k}$ in a way better suited to the study of singular modules.
+Let $I = \interval{a,b}_k \subset \Sigma$ be an interval. We set 
+\begin{align*}
+e_{k,I}^a
+	&= \frac{\prod_{j = 1}^{k+1} (x_{k,a(I)} - x_{k+1,j})}
+		{\prod_{(k,j) \notin I} x_{k,a(I)} - x_{k,j}} 
+&
+e_{k,I}^b
+	&= \frac{\prod_{j = 1}^{k-1} (x_{k,b(I)} - x_{k+1,j})}
+		{\prod_{(k,j) \notin I} x_{k,b(I)} - x_{k,j}}.
+\end{align*}
+Notice that $e_{k,I}^a = \Delta_Ie_{k,a(I)}^+$ and $e_{k,I}^b = \Delta_I
+e_{k,b(I)}^-$, so if $I \in \I(\eta)$ then $e_{k,I}^a, e_{k,I}^b \in B_\eta$
+We also set $\alpha(I) = (b(I)b(I)-1 \cdots a(I))^{(k)}, \beta(I) = 
+(a(I) a(I)+1 \cdots b(I))^k \in S_I$.
+
+\begin{Lemma*}
+Let $\eta < \mu$ and suppose $z$ is in normal $\eta$-form. Then for each $1 
+\leq k < n$ we have
+\begin{align*}
+E_{k,k+1} T(z)
+	&= - \sum_{I \in \I_k^\eta(z)} \partial_{\alpha(I)} 
+		\left(
+			e_{k,I}^a(x+z) T(z + \delta^{k,a(I)})
+		\right) \\
+E_{k+1,k} T(z)
+	&= \sum_{I \in \I_k^\eta(z)} \partial_{\beta(I)}
+		\left(
+			e_{k,I}^b(x+z) T(z - \delta^{k,b(I)})
+		\right).
+\end{align*}
+\end{Lemma*}
+This is completely analogous to \cite{EMV-orthogonal}*{Proposition 6}.
+
+
+\begin{proof}
+First notice that if $I \in \I_k^\eta(z)$ then every element of $S_I$ leaves 
+$z$ fixed, so $T(z) = \sym_I T(z)$, which implies that $\sym_I E_{k,k+1} T(z)
+= E_{k,k+1} T(z)$. By definition
+\begin{align*}
+\sym_I e_{k,j}^+(x+z) T(z+\delta^{k,j}) 
+&= \begin{cases}
+e_{k,j}^+(x+z) T(z+\delta^{k,j}) & j \notin I; \\
+\sym_I(e_{k,a(I)}^+(x+z) T(z + \delta^{k, a(I)})) & j \in I.
+\end{cases}
+\end{align*}
+Thus 
+\begin{align}
+\label{action}
+\tag{1}
+E_{k,k+1} T(z)
+	&= \left( 
+		\prod_{I \in \I_k^\eta(z)} \sym_I 
+	\right) (E_{k,k+1} T(z))\\
+	&= \sum_{I \in \I_k^\eta(z)} 
+		|I| \sym_I(e_{k,a(I)}^+(x+z) T(z+ \delta^{k, a(I)}))
+\end{align}
+We rewrite the term $\sym_I(e_{k,a(I)}^+(x+z) T(z+ \delta^{k, a(I)}))$ as a 
+divided difference
+\begin{align*}
+\frac{1}{|I|!}
+	\partial_{w(I)}(\Delta_I e_{k,a(I)}^+(x+z) T(z+ \delta^{k, a(I)}))
+\end{align*}
+Notice that $\Delta_I e_{k,a(I)}^+(x+z) = \Delta_{I \setminus \{a(I)\}} 
+e_{k,I}^a(x+z)$, so we can further rewrite this as
+\begin{align*}
+\frac{1}{|I|!}
+	&(\partial_{\alpha(I)} \circ \partial_{w(I \setminus \{a(I)\})})
+	(\Delta_{I\setminus \{a(I)\}} e_{k,I}^a(x+z) T(z+ \delta^{k, a(I)})) \\
+&= \frac{1}{|I|}
+	\partial_{\alpha(I)} (\sym_{I \setminus \{a(I)\}}
+	(e_{k,I}^a(x+z) T(z+ \delta^{k, a(I)})))\\
+&= \frac{1}{|I|} \partial_{\alpha(I)} 
+	(e_{k,I}^a(x+z) T(z+ \delta^{k, a(I)})),
+\end{align*}
+where the last equality follows from the fact that $e_{k,I}^a(x+z) 
+T(z+ \delta^{k, a(I)})$ is invariant by any permutation in $S_I$ that leaves
+$(k,a(I))$ fixed. Replacing this in \ref{action} we obtain the formula for
+$E_{k,k+1}T(z)$. The proof of the other formula is analogous.
+\end{proof}
+
+\paragraph
+\label{L:function-tableaux}
+Fiz $\eta < \mu$, and for each $z \in \ZZ^\mu_0$ write $D_\sigma^\eta(z)$
+for $D_\sigma^\eta(T(z))$. As shown in \cite{RZ-singular-characters} the set 
+\begin{align*}
+\B(\eta) =
+\left\{D_\sigma^\eta(z) \mid z \in \n_\eta(\ZZ^\mu_0), \sigma \in 
+\Shuffle_{\epsilon(z)}^\eta\right\}
+\end{align*}
+is a $K$-basis of $V_K$. Furthermore there exist polynomials $\{
+s_{\sigma}^* \in \Lambda \mid \sigma \in S_\eta\}$ such that
+\begin{align*}
+T(\tau(z))
+	&= \sum_{\sigma \in S_\eta} \tau(s_\sigma^*) D_\sigma^\eta(z).
+\end{align*}
+The polynomials $s_\sigma^*$ are determined implicitly by the condition
+$D_\tau^\eta(s_\sigma^*) = \delta_{\sigma, \tau}$, so in view of Lemma
+\ref{L:schubert-basis} $s_\sigma^* \equiv s_\sigma \mod 
+\p_\eta^{S_\eta}$. We denote by $L_\eta$ the $B_\eta$-lattice generated
+by $\B(\eta)$.
+
+Set $V_\eta = L_\eta/\p_\eta L_\eta$. We will prove that it is a 
+$U(\gl(n,\CC))$-module and will give explicit equations for the action of
+$\gl(n,\CC)$ on it. 
+\begin{Lemma*}
+Let $f \in B_\eta$ and $z \in \n_\eta(\ZZ^\mu_0)$. Then for each $\sigma \in
+S_\eta$
+\begin{align*}
+D_\sigma^\eta(f T(z))
+	&= \sum_{\tau \in S_\eta} 
+		D_\sigma^\eta(f s_\tau^*) D_\tau^\eta(z)
+	\equiv \sum_{\tau \in S_\eta} 
+		\left(
+			\sum_{\rho \in S_\eta} c_{\rho, \tau}^\sigma
+				D_\rho^\eta(f)
+		\right) D_\tau^\eta(z)
+	\mod \p_\eta L_\eta.
+\end{align*}
+\end{Lemma*}
+\begin{proof}
+The equality follows by replacing $T(z)$ with $\sum_{\tau} s_\tau 
+D_\tau^\eta(z)$. To obtain the congruence replace $f$ with $\sum_\rho 
+f_{(\rho)} s_\rho$ and apply Lemma \ref{L:schubert-basis}; instead of
+the coefficients $c^\sigma_{\rho, \tau}$ we get $D_\sigma^\eta(s_\rho 
+s_\tau^*)$, but since $s_\tau^* \equiv s_\tau \mod \p_\eta^{S_\eta}$
+this equals $c^\sigma_{\rho, \tau}$ modulo $\p_\eta$.
+\end{proof}
+
+\begin{Definition*}
+Given $\sigma, \tau \in S_\eta$ we define $D_{\sigma,\tau}^\eta: B_\eta \to
+B_\eta$ as $D_{\sigma,\tau}^\eta(f) = \sum_{\rho \in S_\eta} 
+c_{\rho, \tau}^\sigma D_\rho^\eta(f)$. 
+\end{Definition*} 
+
+Notice that Stanley and Postnikov have analogous operators $\DD_{\sigma,\tau}
+= \sum_{\rho} c_{\rho, \tau}^\sigma \DD_\rho$. Since $\pi \circ D_\sigma^\eta 
+= \pi \circ \DD_\sigma$ we also have that $\pi \circ D_{\sigma,\tau}^\eta 
+= \pi \circ \DD_{\sigma, \tau}$.
+
+\paragraph
+We fix some notation. We denote the image of $D_\sigma^\eta(z)$ in the 
+quotient by the same symbol. Given $f \in B_\eta$ we write 
+$\overline f(x+z)$ for $\pi(f(x+z))$.
+
+\begin{Theorem*}
+The free $A_\eta$-module $V_\eta$ is a $U(\gl(n,\CC))$-module, and the
+action of $\gl(n,\CC)$ is given by the following formulas
+\begin{align*}
+E_{k,k+1} D_\sigma^\eta(z)
+	&= - \sum_{I \in \I_k^\eta(z)}
+	\sum_{\tau \in S_\eta}
+	\overline{\DD^\eta_{\sigma\alpha(I),\tau} 
+		\left(
+			e_{k,I}^a
+		\right)}(x+z) D_\tau^\eta(z+\delta^{k,a(I)}); \\
+E_{k+1,k} D_\sigma^\eta(z)
+	&= \sum_{I \in \I_k^\eta(z)} 
+		\sum_{\tau \in S_\eta} 
+		\overline{\DD_{\sigma\beta(I),\tau}^\eta \left(e_{k,I}^b \right)} 
+		(x+z) D_\tau^\eta(z - \delta^{k,b(I)});\\
+E_{k,k} D_\sigma^\eta(z)
+	&= \overline r_k(x+z) D_\sigma^\eta(z) +
+		\sum_{\ell(\tau) < \ell(\sigma)} 
+		\overline{\DD_{\sigma, \tau}^\eta(r_k)}(x+z) 
+			D_\tau^\eta(z).
+\end{align*}
+Furthermore, for each $c \in \Gamma$ we have
+\begin{align*}
+c D_\sigma^\eta(z)
+	&= \overline \gamma(x+z) D_\sigma^\eta(z) +
+		\sum_{\ell(\tau) < \ell(\sigma)} 
+			\overline{\DD_{\sigma, \tau}^\eta(\gamma)}(x+z) 
+			D_\tau^\eta(z).
+\end{align*}
+\end{Theorem*}
+\begin{proof}
+We work first in $V_K$. If $c \in \Gamma$ then $c T(z) = \gamma(x+z) T(z)$, so
+applying Lemma \ref{L:function-tableaux} and passing to the quotient we obtain
+\begin{align*}
+c D_\sigma^\eta(z)
+	&= \overline \gamma(x+z) D_\sigma^\eta(z) +
+		\sum_{\ell(\tau) < \ell(\sigma)} 
+			\pi(D_{\sigma, \tau}^\eta(\gamma(x+z))) 
+			D_\tau^\eta(z).
+\end{align*}
+Now $\pi(D_{\sigma, \tau}^\eta(\gamma(x+z))) = \pi(\DD_{\sigma,\tau}^\eta(
+\gamma(x+z))$. Since the $\DD_{\sigma,\tau}$ are differential operators and
+$x+z$ is an affine change of variables we see that $\pi(\DD_{\sigma,\tau}^\eta
+(\gamma(x+z)) = \overline{\DD_{\sigma,\tau}^\eta(\gamma)}(x+z)$, and this 
+proves the last equality. Since $E_{k,k} \in \Gamma$ the third formula is just 
+a particular case of this.
+
+From Lemma \ref{L:pre-formulas} we get
+\begin{align*}
+E_{k,k+1} D_\sigma^\eta T(z)
+	&= - \sum_{I \in \I_k^\eta(z)} D_\sigma^\eta (\partial_{\alpha(I)} 
+		\left(
+			e_{k,I}^a(x+z) T(z + \delta^{k,a(I)})
+		\right))
+\end{align*}
+Now $\sigma \in \Shuffle_{\epsilon(z)}^\eta$ and $\alpha(I) \in 
+S_{\epsilon(z)}$, so by \cite{BB-coxeter-book}*{Proposition 2.4.4}
+$\ell(\sigma \alpha(I)) = \ell(\sigma) + \ell(\alpha(I))$ and
+$D_\sigma^\eta \partial_{\alpha(I)} = D^\eta_{\sigma \alpha(I)}$. Thus
+\begin{align*}
+E_{k,k+1} D_\sigma^\eta T(z)
+	&= - \sum_{I \in \I_k^\eta(z)} D_{\sigma\alpha(I)}^\eta  
+		\left(
+			e_{k,I}^a(x+z) T(z + \delta^{k,a(I)})
+		\right).
+\end{align*}
+By definition $e_{k,I}^a(x+z) \in B_\eta$ for each $I \in \I_\eta(z)$, so
+we can apply again Lemma \ref{L:function-tableaux} and pass to the quotient
+to obtain a formula involving operators of the form $D_{\sigma\alpha(I), 
+\tau}^\eta$, and using a similar argument as before we can replace them with
+differential operators $\DD_{\sigma\alpha(I), \tau}^\eta$ and obtain the 
+first formula in the statement. A simmilar proof works for the second one.
+\end{proof}
+
+\begin{bibdiv}
+\begin{biblist}
+\bibselect{biblio}
+\end{biblist}
+\end{bibdiv}
+
+\end{document}

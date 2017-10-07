@@ -157,79 +157,81 @@ complexes through change of grading.
 \textbf{Keywords:} injective modules, change of grading, dualizing complexes.
 
 \section{Introduction}
+Graded rings are ubiquous in algebra. One of the main reasons is that the
+presence of a grading simplifies proofs and allows to generalize many results
+(for example, the theory of commutative and noncommutative graded algebras are 
+easier to reconcile than their ungraded counterparts). Furthermore results can 
+often be transfered from the graded to the ungraded context through standard 
+techniques. In more categorical terms, there is a natural forgetful functor 
+from the category $\Mod^G A$ of graded modules over a $G$-graded algebra 
+$A$, to the category $\Mod A$ of modules over $A$, and the challenge is to 
+find a way to transfer information in the opposite direction. When $G = \ZZ$ 
+this is usually done through ``filtered-and-graded'' arguments and spectral 
+sequences. In this article we exploit a different technique, 
+namely the existence of a functor triple between $\Mod^G A$ and $\Mod A$, 
+whose first member is the obvious forgetful functor. This technique has two 
+advantages over the usual filtered-and-graded methods, namely that it does not 
+depend on the choice of a non-canonical filtration, and that the group $G$ is
+arbitrary. Its main drawback is that the functors in this triple do not 
+preserve finite generation, noetherianity, or other ``finiteness'' properties
+unless further hypotheses are in place.
 
-Suppose $A$ is a ring graded by a group $G$, and denote by $\Mod^G A$ the 
-category of $G$-graded $A$-modules. It is a well-known fact that a $G$-graded 
-$A$-module $P$ is graded-projective if and only if it is projective as 
-$A$-module. In other words, the forgetful functor $\O: \Mod^G A \to \Mod A$ 
-preserves the projective dimension of objects.
+The problem we consider is the following. Suppose you are given an injective 
+object $I$ in the category $\Mod^\ZZ A$. It is known that $I$ is not 
+injective as $A$-module, but if $A$ is noetherian then 
+its injective dimension is at most one. Now, what happens if we consider more 
+gradings by more general groups? In general, given groups $G, H$ and 
+a group morphism $\phi: G \to H$, any $G$-graded object can be seen as an 
+$H$-graded object through $\phi$, see paragraph \ref{cog-functors}. In 
+particular a $G$-graded algebra $A$ inherits an $H$-grading, and there is a 
+natural functor $\phi_!: \Mod^G A \to \Mod^H A$, between the categories of 
+$G$-graded and $H$-graded modules. The question thus becomes: given an 
+injective object $I$ in $\Mod^G A$, what is the injective dimension of 
+$\phi_!(I)$ in $\Mod^H A$?
 
-If we replace ``projective'' by ``injective'' in the previous paragraph then 
-the result is not true. Take $A = \CC[x,x^{-1}]$ with the obvious 
-$\ZZ$-grading: $A$ itself is injective as an object of the category of graded 
-$A$-modules, but it is not an injective $A$-module. More generally, as 
-discussed in Paragraph \ref{cog-functors}, given a group morphism $\phi: G 
-\to H$ we can turn $G$-gradings into $H$-gradings, and we would like to know 
-how the corresponding change of grading functor $\phi_!: \Mod^G A \to \Mod^H A$
-affects the injective dimension of an object. 
-
-While this is a very natural question, there is not much literature on the
-subject. A classical result of R. Fossum and H.-B. Foxby 
+This question has been considered several times in the literature, but it has 
+received no unified treatment. A classical result of R. Fossum and H.-B. Foxby 
 \cite{FF-graded}*{Theorem 4.10} states that if $A$ is $\ZZ$-graded noetherian 
 and commutative then a $\ZZ$-graded-injective module has injective dimension 
-at most $1$. According to a comment in M. Van den Bergh's article 
-\cite{VdB-existence-dc}*{below Definition 6.1}, this result extends to the 
-noncommutative case; a proof of this fact can be found in the preprint
-\cite{Yek-note}. Other antecedents include \cite{Eks-auslander}, where it is 
-shown that if $A$ is a $\ZZ$-graded algebra then the injective dimension of $A$
-is at most one plus its graded injective dimension. Following the ideas of 
+at most $1$. M. Van den Bergh claims in the article 
+\cite{VdB-existence-dc}*{below Definition 6.1} that this result extends to the 
+noncommutative case if $A_0$ is equal to the base field; a proof of this fact 
+can be found in the preprint \cite{Yek-note}. Other antecedents include 
+\cite{Eks-auslander}, where it is shown that if $A$ is a noetherian 
+$\ZZ$-graded algebra then the injective dimension of $A$ is at most one plus 
+its graded injective dimension. Following the ideas of 
 \cite{Lev-ncreg}*{section 3}, one can show that if $A$ is $\NN$-graded and 
-noetherian, and $M$ is a $\ZZ$-graded module such that $N_n = 0$ for $n \ll 0$ 
+noetherian, and $M$ is a $\ZZ$-graded module such that $M_n = 0$ for $n \ll 0$ 
 then the graded injective dimension of $M$ coincides with its injective 
 dimension as $A$-module. Most of these results are obtained by the usual route 
 of going from ungraded to graded objects through filtrations and spectral 
-sequences. If the group is not $\ZZ$ then these techniques are not available. 
-The only result we know of in this direction states that if $A$ is graded over 
-a finite group then it is known that a graded module is graded injective if 
-and only if it is injective, see 
-\cite{NV-graded-book3}*{2.5.2}.
+sequences. The only result that we could find in the literature regarding 
+injective modules graded by groups other than $\ZZ$ states that if $A$
+is graded over a finite group then a graded module is graded injective if and 
+only if it is injective \cite{NV-graded-book3}*{2.5.2}. 
 
-We have already mentioned the functor $\phi_!: \Mod^G A \to \Mod^H A$ induced
-by a group morphism $\phi: G \to H$. This functor is part of an adjoint triple
-$(\phi_!, \phi^*, \phi_*)$ which allows to transfer information between these 
-categories in a systematic way (this is done for example in the article 
-\cite{RZ-twisted}). Using these functors we obtain bounds for the
-change in the injective dimension of $G$-graded objects when seen as 
-$H$-graded through $\phi$. Our main result is the following.
+In order to give a general answer to the question we work with the functor 
+triple $(\phi_!, \phi^*, \phi_*)$ between the categories $\Mod^G A$ and 
+$\Mod^H A$, originally introduced by A. Polishchuk and L. Positselski in 
+\cite{PP-secondHH}. These functors, collectively called the \emph{change of 
+grading functors}, turn out to be particularly well-adapted to the transfer of 
+information of homological nature. Our main result, which includes most of the 
+previous ones as special cases, is the following.
 \begin{Theorem*}
 Let $\phi: G \to H$ be a group morphism, let $L = \ker \phi$ and let $d$ be 
 the cohomological dimension of $L$. Let $A$ be a $G$-graded noetherian 
 algebra, and let $I$ be an injective object of $\Mod^G A$. Then the injective
 dimension of $\phi_!(I)$ is at most $d$. 
 \end{Theorem*}
-The proof of this result depends on two facts. First, that if $I$ is 
+The proof depends on two facts. First, that if $I$ is 
 $G$-graded injective then $\phi_!(I)$ is an injective object in the additive 
 subcategory generated by all modules of the form $\phi_!(M)$ with $M$ a 
-$G$-graded $A$-module, i.e. they are $\Hom_A^H(-,\phi_!(M))$-acyclic and hence 
-can be used to build acyclic resolutions, see Lemma  
-\ref{L:acyclic}. Second, that given an $H$-graded $A$-module $N$, we can 
-obtain an acyclic resolution from a projective resolution of length $d$ of the 
-trivial $L$-module $\k$, see Proposition \ref{P:resolution}.  
-
-\bigskip
-Van den Bergh's noncommutative version of Fossum and Foxby's result for 
-$\ZZ$-graded algebras was stated while discussing a certain object in the 
-derived category of $\Mod A$ called a noncommutative dualizing complex. 
-Roughly speaking, a dualizing complex is an object $R^\bullet$ of the derived 
-category of the category of $A$-bimodules satisfying certain conditions which 
-guarantee that $\R\HOM_A(-, R^\bullet)$ gives a duality between $\D(\Mod A)$ 
-and $\D(\Mod A^\op)$, where $A^\op$ denotes the opposite algebra of $A$. 
-A graded dualizing complex in principle only guarantees 
-dualities at the graded level, but according to Van den Bergh, a graded 
-dualizing complex is also an ungraded dualizing complex, and the proof (which
-he omits) turns on the fact that a graded injective module has injective 
-dimension at most $1$. We use our results to prove a slightly more precise
-version of this statement.
+$G$-graded $A$-module; in other words, modules in the image of $\phi_!$ are 
+$\Hom_A^H(-,\phi_!(I))$-acyclic and hence can be used to build acyclic 
+resolutions, see Lemma \ref{L:acyclic}. The second is a result of independent 
+interest, stating that given an $H$-graded $A$-module $N$ we can obtain a 
+resolution of $N$ by objects in the additive category generated by 
+$\phi_!(\phi^*(N))$, see Proposition \ref{P:resolution}.  
 
 \bigskip
 The article is structured as follows. In Section \ref{COG-FUNCTORS} we review 
@@ -237,8 +239,10 @@ some basic facts on the category of graded modules and recall the general
 properties of the change of grading functors. In Section \ref{COG-INJDIM} we 
 prove our main results on how regrading affects injective dimension. Finally 
 in Section \ref{COG-DC} we give similar results at the derived level and use 
-them to prove Van den Bergh's statement on regradings of dualizing complexes.
+them to  study the behavior of dualizing complexes with respect to regradings,
+a question originally raised by Van den Bergh in \cite{VdB-existence-dc}.
 
+\bigskip
 Throughout the article $\k$ is a commutative ring, and unadorned $\hom$ 
 spaces and tensor products are always over $\k$. Also all modules over rings
 are left modules unless otherwise stated. The letters $G, H$ will always denote
@@ -289,7 +293,7 @@ $V[g]_{g'} = V_{g'g}$. This gives a natural autoequivalence of $\Mod^G \k$.
 \paragraph
 \label{G-graded-algebras}
 We now recall the general definitions regarding $G$-graded $\k$-algebras.
-The reader is refered to \cite{NV-graded-book3}*{Chapter 2} for proofs and 
+The reader is referred to \cite{NV-graded-book3}*{Chapter 2} for proofs and 
 details.
 
 A $G$-graded $\k$-algebra is a $G$-graded $\k$-module $A$ which is also a 
@@ -656,7 +660,11 @@ theoretical properties of non commutative rings, see for example
 dualizing complex is essentially an object $R^\bullet$ in the derived category 
 of $\Mod A^e$ such that the functor $\R\Hom_A(-, R^\bullet)$ is a duality 
 between $\D^b(\Mod A)$ and $\D^b(\Mod A^\op)$, for a precise definition see
-\ref{dc-definition}. 
+Definition \ref{dc-definition}. A graded dualizing complex in principle only 
+guarantees dualities at the graded level, but according to Van den Bergh, a 
+graded dualizing complex is also an ungraded dualizing complex 
+\cite{VdB-existence-dc}. We use our results to prove a slightly more general e 
+version of this statement.
 
 Throughout this section $\k$ is a field, $G$ is an abelian group, and $A$ is a 
 $G$-graded $\k$-algebra. We denote by $A^e$ the enveloping algebra $A \ot 
@@ -755,7 +763,7 @@ it as the \emph{natural map} from $A^\op$ to $\R\HOM_A^{\ZZ^r}(R^\bullet,
 R^\bullet)$. In the same way there is a natural map from $A$ to 
 $\R\HOM_{A^\op}^{\ZZ^r}(R^\bullet, R^\bullet)$. The proof that these maps are 
 independent of the chosen resolution is quite tedious but elementary; the 
-reader is refered to \cite{Zad-thesis}*{Appendix A} for details.
+reader is referred to \cite{Zad-thesis}*{Appendix A} for details.
 
 \paragraph
 \label{dc-definition}
@@ -827,7 +835,7 @@ the following inequalities hold
 \end{Lemma*}
 \begin{proof}
 Let $R^\bullet \to I^\bullet$ be an injective resolution of minimal length.
-It is enough to prove the statemenet with $I^\bullet$ instead of $R^\bullet$.
+It is enough to prove the statement with $I^\bullet$ instead of $R^\bullet$.
 
 Suppose $I^\bullet$ has $\phi$-finite cohomology modules. Recall that there is 
 a natural transformation $\eta: \phi_! \Rightarrow \phi_*$, and that $\eta(M)$ 
@@ -837,7 +845,7 @@ $\phi$-finite $G$-graded $A$-modules is closed by extensions, so applying
 ``closed by extensions'') we get that the map $\phi_!(I^\bullet) \to 
 \phi_*(I^\bullet)$ is a quasi-isomorphism, and since $\phi_*$ preserves 
 injectives it is an injective resolution, so $\injdim_A^{G} R^\bullet \geq 
-\injdim_A^H \phi_!(R^\bullet)$. If the inequality wereb strict, then we could 
+\injdim_A^H \phi_!(R^\bullet)$. If the inequality were strict, then we could 
 truncate $\phi_*(I^\bullet)$ to obtain a shorter complex of the form
 \[
 \cdots 
