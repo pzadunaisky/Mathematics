@@ -1,0 +1,357 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{notas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\renewcommand\k{\Bbbk}
+
+\newcommand\A{\mathcal A}
+\newcommand\M{\mathcal M}
+\newcommand\Z{\mathsf Z}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\id{\mathsf{Id}}
+\newcommand\im{\mathsf{im}}
+\newcommand\coker{\mathsf{coker}}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\declaretheorem[name=Ejercicio, style=mystyle-empty]{Ejercicio}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{El teorema de Chevalley-Shepherd-Todd}
+\date{Septiembre 2017}
+\author{Pablo Zadunaisky}
+\begin{document}
+\maketitle
+
+\section{El álgebra de polinomios}
+Dado un número natural $n \in \NN$ notamos por $P_n$ el anillo de polinomios 
+en $n$ variables $\CC[x_1, \ldots, x_n]$. Cuando $n \leq 3$ a veces notamos 
+$x = x_1, y = x_2, z = x_3$. 
+
+\paragraph
+El anillo $P_n$ es un espacio vectorial complejo de dimensión infinita. Por 
+ejemplo los conjuntos $M_2, M_3$ son bases de $P_2$ y $P_3$, respectivamente.
+\begin{align*}
+\M_2 
+	&= \{x^i y^j \mid i,j \in \NN_0\}; \\
+\M_3 
+	&= \{x^i y^j z^k \mid i,j,k \in \NN_0\},
+\end{align*}
+y en general una base de $P_n$ es
+\begin{align*}
+\M_n 
+	&= \{x_1^{i_1} x_2^{i_2} \cdots x_n^{i_n} \mid i_1, \ldots, i_n \in 
+	\NN_0\}.
+\end{align*}
+Los elementos de esta base se llaman \newterm{monomios}.
+
+\begin{Ejercicio}
+Probar que $\M_n$ es una base de $P_n$.
+\end{Ejercicio}
+
+\paragraph
+Cada monomio tiene un grado, que es la suma de los exponentes que aparecen en 
+el. Por ejemplo el grado de $x^2y^7$ es $7+2 = 9$, y el grado de $x^i y^j z^k$
+es $i+j+k$. Un polinomio $p \in P_n$ se dice \newterm{homogéneo de grado $d$} 
+si es una combinación lineal de monomios de grado $d$; por ejemplo $x^2y^7 + 
+5 x^3y^3z^3 + (i + \pi) z^9$ es un polinomio homogéneo de grado $9$. Notar que 
+$0$ es un polinomio homogéneo de grado arbitrario.
+
+\begin{Ejercicio}
+Sean $n, d \in \NN$ y sea $P_n^{(d)}$ el conjunto de todos los polinomios 
+homogéneos de grado $d$. Probar que $P_n^{(d)}$ es un subespacio vectorial 
+de $P_n$.
+\end{Ejercicio}
+
+\paragraph
+Como dijimos, el álgebra de polinomios es un espacio vectorial complejo de 
+dimensión infinita, así que no tiene sentido preguntarse cuál es su dimensión.
+Sin embargo el subespacio de los polinomios homogéneos de grado $d$ en
+$P_n$ tiene dimensión finita; para ver esto alcanza con observar que 
+$P_n^{(d)}$ tiene como base los monomios $x_1^{i_1} \cdots x_n^{i_n}$
+tales que $i_1 + \cdots + i_n = d$; como cada $i_j$ es un entero no negativo
+tenemos que $0 \leq i_j \leq d$, y por lo tanto hay a lo sumo $d^n$ monomios
+distintos en $P_n^{(d)}$, con lo cual este espacio tiene dimensión a lo 
+sumo $d^n$.
+
+Este argumento alcanza para probar que $\dim P_n^{(d)} \leq d^n$, pero 
+claramente es muy poco eficiente. Sería mejor calcular explícitamente la 
+dimensión de este espacio, o lo que es lo mismo, el número de monomios 
+distintos de grado $d$. Vamos a encontrar esta dimensión de dos formas
+distintas en el caso $n = 3$.
+
+\noindent \about{Cálculo de $\dim P_3^{(d)}$, primera forma} 
+Nuestro problema es encontrar todos los monomios $x^i y^j z^k$ tales que
+$i+j+k = d$, o lo que es lo mismo encontrar todas las $3$-uplas de enteros
+$(i,j,k)$ que suman $d$. El problema es equivalente a distribuir $d$ piedras
+en $3$ grupos separados, y si representamos cada piedra con un punto y cada
+separación con una linea vertical, obtenemos diagramas como los siguientes
+\begin{align*}
+..|...|. && (i,j,k) &= (2,3,1) & d&=6 \\
+....|....| && (i,j,k) &= (4,4,0) & d&=8 \\
+.....|...|....... && (i,j,k) &= (5,3,7) & d&=15 
+\end{align*}
+Así, el problema se reduce a encontrar de cuántas formas podemos colocar $2$
+barras entre $d$ puntos. La primera barra puede colocarse en $d+1$ lugares, y
+la segunda en $d+2$ (se agregó la posibilidad de colocarla antes o después de 
+la primera barra). Como nos dá lo mismo el orden de las barras, el resultado 
+final es $\frac{(d+1)(d+2)}{2}$. Así $\dim P_3^{(d)} = \frac{(d+1)(d+2)}{2}$.
+
+\noindent \about{Cálculo de $\dim P_3^{(d)}$, segunda forma}
+Consideremos la serie en varias variables 
+\[
+A(x,y,z) 
+= \frac{1}{1-x} \cdot \frac{1}{1-y} \cdot \frac{1}{1-z}
+= (1 + x + x^2 + \cdots)(1 + y + y^2 + \cdots) (1 + z + z^2 + \cdots) 
+\]
+La serie $A(x,y,z)$ es la suma de todos los monomios de $M_3$, y cada uno
+aparece exactamente una vez. Evaluando esta serie en una nueva variable $t$
+tenemos
+\[
+A(t,t,t) = \frac{1}{(1-t)^3}
+\]
+Ahora cada monomio $x^i y^j z^k$ con $i+j+k = d$ aporta exactamente un sumando
+de la forma $t^d$, por lo tanto el coeficiente de $t^d$ en $A(t,t,t)$ es 
+exactamente el número de monomios de grado $d$. Usando el teorema de Taylor
+tenemos que este coeficiente es 
+\begin{align*}
+ \frac{1}{d!} \partial_t^d (1-t)^{-3} 
+ 	= \frac{(d+2)!}{2 d!} 
+ 	= \frac{(d+1)(d+2)}{2}
+\end{align*}
+
+\begin{Ejercicio}
+Calcular la dimensión de $P^{(d)}_n$ para $d, n \in \NN$ cualquiera.
+\end{Ejercicio}
+
+\paragraph
+Todo polinomio $p \in P_n$ se puede escribir como una suma $p = p_{(0)} + 
+p_{(1)} + \cdots + p_{(d)}$, con $p_{(i)}$ un polinomio homogéneo de grado $i$ 
+y $p_{(d)} \neq 0$. Llamamos a $d$ el \newterm{grado} de $p$ y lo notamos por 
+$\deg p$. Además esta escritura es única, lo que implica que $P_n = 
+\bigoplus_{d \geq 0} P_n^{(d)}$. Es facil ver que si $f \in P_n^{(d)}$ y
+$g \in P_n^{(e)}$ entonces $fg \in P_n^{(d+e)}$. 
+
+\begin{Definicion*}
+La \newterm{serie de Hilbert} de $P_n$ es la serie $\displaystyle 
+\sum_{d = 0}^\infty (\dim_\CC P_n^{(d)}) t^d$.
+\end{Definicion*}
+La serie de Hilbert es una manera cómoda de recordar que, aunque $P_n$ tiene
+dimensión infinita, tiene una descomposición como suma directa de espacios
+de dimensión finita muy natural. Notar que gracias a la segunda forma de 
+calcular $\dim_\CC P_n^{(d)}$ sabemos que la serie de Hilbert de $P_3$ es (la 
+serie de Taylor de la función) $\frac{1}{(1-t)^3}$
+\begin{Ejercicio}
+Hallar un cociente de polinomios cuya serie de Taylor sea igual a la serie de 
+Hilbert de $P_n$.
+\end{Ejercicio}
+
+\section{Polinomios simétricos}
+
+\paragraph
+Para cada $n \in \NN$ notamos por $S_n$ al conjunto de funciones biyectivas
+de $\{1, 2, \ldots, n\}$ en sí mismo. Cada función $\sigma \in S_n$ induce
+una función $f_\sigma: P_n \to P_n$ que se puede expresar en la base de 
+monomios como
+\begin{align*}
+f_\sigma(x_1^{i_1} x_2^{i_2} \cdots x_n^{i_n}) 
+	&= x_{\sigma(1)}^{i_1} x_{\sigma(2)}^{i_2} \cdots x_{\sigma(n)}^{i_n}
+	= x_1^{i_{\sigma^{-1}(1)}}
+		x_2^{i_{\sigma^{-1}(2)}} \cdots x_n^{i_{\sigma^{-1}(n)}}
+\end{align*}
+
+Por ejemplo, si $n = 2$ entonces $S_2$ consiste de dos funciones: la identidad
+y aquella que intercambia $1$ y $2$. La primera induce la función identidad, 
+mientras que la segunda es la transformación lineal dada por $x^i y^j \mapsto 
+x^j y^i$. Si $n = 3$ entonces $S_3$ contiene tres funciones, entre ellas la 
+función $\sigma$ tal que $\sigma(1) = 3, \sigma(2) = 1, \sigma(3) = 2$. Por 
+definición $f_{\sigma}(x^i y^j z^k) = x^j y^k z^i$. Es ilustrativo encontrar
+la imagen de $x^i y^j z^k$ por $f_\sigma$ para cada $\sigma \in S_3$.
+
+\begin{Ejercicio}
+Sea $n \in \NN$ y $\sigma \in S_n$. Probar las siguientes afirmaciones
+\begin{enumerate}
+\item $f_{\sigma} = \id_{P_n}$ si y solo si $\sigma$ es la función
+identidad de $\{1, 2, \ldots, n\}$.
+
+\item Si $p,q \in P_n$ entonces $f_\sigma(pq) = f_\sigma(p) f_\sigma(q)$,
+y $f_\sigma(1) = 1$. En otras palabras, $f_\sigma$ es un morfismo de anillos.
+Además $f_\sigma \circ f_\tau = f_{\sigma \circ \tau}$ para cualquier $\tau 
+\in S_n$. 
+
+\item Para todo $d \in \NN$ y todo $\sigma \in S_n$ vale que
+$f_\sigma(P_n^{(d)}) = P_n^{(d)}$.
+\end{enumerate}
+\end{Ejercicio}
+
+
+Un polinomio $p \in \CC[x,y]$ se dice simétrico si $p(x,y) = p(y,x)$. En otras
+palabras, si escribimos a $p$ como suma de monomios, y reemplazamos cada $x$ 
+por una $y$ y cada $y$ por una $x$ entonces obtenemos el mismo polinomio.
+Estos son algunos polinomios simétricos en dos variables
+\begin{align*}
+x+y, 
+	&& x^2 + y^2, 
+	&& x^2 + 2xy + y^2, 
+	&& 7x^3y + 7y^3x + x^2y^2 + 5xy + 1.
+\end{align*}
+
+Los polinomios simétricos en tres variables se definen análogamente: si 
+intercambiamos $x$ e $y$, o $y$ y $z$, o $z$ y $x$, debemos obtener el mismo 
+polinomio. Aquí tenemos algunos ejemplos de polinomios simétricos en tres 
+variables.
+\begin{align*}
+&\mathbf{1},
+	&\mathbf{x + y +z},
+	&& x^2 + y^2 + z^2,
+	&&\mathbf{xy + yz + xz}, \\
+& x^3 + y^3 + z^3 
+	&& x^2y + y^2z + xz^2
+	&& \mathbf{xyz}
+\end{align*}
+
+\begin{Definicion}
+Fijamos $n \in \NN$.
+Un polinomio $p \in P_n$ se dice \newterm{simétrico} si $f_\sigma(p) = p$ para
+cualquier $\sigma \in S_n$. Notamos por $A_n$ al conjunto de todos los 
+polinomios simétricos.
+\end{Definicion}
+
+\begin{Ejercicio}
+Probar que $A_n$ es un anillo. Además, si para cada $d \in \NN$ ponemos 
+$A_n^{(d)} = P_n \cap A_n^{(d)}$ entonces $A = \bigoplus_{d \geq 0} A^{(d)}$.
+\end{Ejercicio}
+
+\paragraph
+A partir de ahora fijamos $n$ y notamos $P = P_n, A = A_n$.
+Nuestro objetivo es comprender el anillo $A$. Por ejemplo, nos gustaría 
+encontrar alguna forma de describir todos sus elementos, o mejor aún hallar
+bases de cada espacio $A^{(d)}$. La respuesta es un teorema conocido como
+el Teorema Fundamental de las Funciones Simétricas.
+
+Para empezar, señalamos que hay una forma muy sencilla de construir una función
+simétrica. Dado un polinomio $p \in P$, el polinomio $M(p) = \frac{1}{n!}
+\sum_{\sigma \in S_n} f_\sigma(p)$ es simétrico, y si $p$ es homogéneo 
+entonces $M(p)$ también lo es. 
+
+\begin{Definicion}
+Para cada $1 \leq i \leq n$, el $i$-ésimo polinomio simétrico elemental es 
+\begin{align*}
+s_{n,i} = M(x_1 x_2 \cdots x_i) 
+	= \frac{1}{n!} \sum_{j_1 < j_2 <\cdots < j_i} x_{j_1}x_{j_2} \cdots x_{j_i}
+\end{align*}
+\end{Definicion}
+Notar que $\deg s_{n,i} = i$, y que $s_{n,i}(x_1, \ldots, x_{n-1}, 0) = 
+s_{n-1,i}$ si $i < n$. Los polinomios simétricos para $n=3$ aparecen en 
+negrita en el ejemplo anterior.
+
+\begin{Teorema}
+Cualquier polinomio simétrico se escribe como una combinación lineal de 
+polinomios de la forma $s_{n,1}^{r_1} s_{n,2}^{r_2} \cdots s_{n,n}^{r_n}$ con 
+cada $r_i \in \NN$, y esa escritura es única.
+\end{Teorema}
+Otra forma de enunciar este teorema es decir que el conjunto $\{s_i \mid
+1 \leq i \leq n\}$ es un conjunto algebraicamente independiente de generadores
+de $A$. Dicho de otra forma, para todo polinomio $p \in A_n$ existe un 
+polinomio $q \in \CC[z_1, \ldots, z_n]$ tal que $q(s_1, \ldots, s_n) = p$
+
+\begin{proof}
+Demostramos el teorema por inducción en $n$. Cuando $n = 1$ no tenemos nada 
+que probar. Ahora, dado un polinomio $p \in P_n$ notamos por $p' \in A_{n-1}$
+el polinomio $p(x_1, \ldots, x_{n-1}, 0)$, así que en particular $s_{n,i}' = 
+s_{n-1,i}$ si $1 \leq i < n$.
+
+Si $p \in A_n^{(d)}$ entonces $p' \in A_{n-1}$ y por hipótesis inductiva 
+existe un único polinomio $q \in \CC[z_1, \ldots, z_{n-1}]$ tal que 
+$q(s'_{n,1}, \ldots, s'_{n,n-1}) = p'$. Sea $f(x_1, \ldots, x_n) = p(x_1, 
+\ldots, x_n) - q(s_{n,1}, \ldots, s_{n,n-1})$. Si evaluamos $x_n = 0$ en esta 
+expresión obtenemos
+\begin{align*}
+p' - q(s'_{n,1}, \ldots, s'_{n,n-1},0) = 0,
+\end{align*}
+es decir que $x_n$ dvide a $f$. Como $f$ es simétrico tenemos que cada $x_i$
+divide a $f$ y por lo tanto $s_n$ divide a $f$. Así $p = q(s_{n,1}, \ldots,
+s_{n,n-1}) + h s_{n,n}$ con $h$ un polinomio simétrico de grado $d-n$ 
+unívocamente determinado. Haciendo inducción en el grado de $h$ vemos que $h$ 
+también es un polinomio en las funciones simétricas elementales de forma única.
+
+Supongamos que $q_1, q_2 \in \CC[z_1, \ldots, z_n]$ son tales que
+$p = q_1(s_{n,1}, \ldots, s_{n,n}) = _1(s_{n,1}, \ldots, s_{n,n})$. Entonces 
+$q_1' = q_2' = q$ por unicidad de la escritura de $p'$. Esto implica que  
+\end{proof}
+
+\section{Un poco de teoría de Galois}
+En toda esta sección $L \subset K \subset \CC$ son cuerpos. En particular 
+$K$ es un $L$-espacio-vectorial.
+
+\paragraph
+Decimos que $K$ es una extensión finita de $L$ si $\dim_L K$ es finita. Vamos 
+a usar sin demostración un resultado clásico de Teoría de Galois, conocido 
+como el Teorema del Elemento Primitivo.
+
+\begin{Teorema*}
+Existe un elemento en $K$, digamos $\gamma$, tal que $K = L[\gamma]$.
+\end{Teorema*}
+
+El elemento $\gamma$ no es dificil de encontrar. Notar que basta con encontrar 
+un elemento $\gamma$ tal que el conjunto $\{1, \gamma, \gamma^2, \ldots, 
+\gamma^{n-1}\}$ sea linealmente independiente. Los elementos que cumplen esa
+condición son un conjunto denso en $K$.
+
+\paragraph
+Sea $G$ un subgrupo finito del grupo de automorfismos de $K$. Notamos por $K^G$
+el conjunto de todos los elementos $a \in K$ tales que $\sigma(a) = a$ para
+cualquier $\sigma \in G$. Es facil probar que $K^G$ también es un cuerpo.
+
+\begin{Proposicion*}
+Sea $L = K^G$. Entonces $K$ es un $L$-espacio vectorial de dimensión $|G|$.
+\end{Proposicion*}  
+\begin{proof}
+Sea $\alpha \in K$, y sea $p_\alpha(x) = \prod_{g \in G} (x-g(\alpha))$. 
+Entonces $p_\alpha(x)$ es un polinomio de grado $|G|$ con coeficientes en $L$ 
+(¡probarlo!) tal que $p_\alpha(\alpha) = 0$, por lo tanto el conjunto $\{
+\alpha^i \mid 0 \leq i \leq |G|\}$ es linealmente dependiente. Ahora si $K' 
+\subset K$ contiene a $L$ y es una extensión finita, entonces $K' = L(\alpha)$
+y por lo tanto es finita y $\dim_L K' \leq |G|$. 
+
+Supongamos que $\dim_L K = \infty$. Entonces podemos tomar $\alpha_1 \in K 
+\setminus L $ y $K_1 = L(\alpha_1)$. Por el párrafo anterior $\dim_L K_1 \leq 
+|G|$ y por lo tanto las inclusiones $L \subset K_1 \subset K$ son estrictas, y 
+por lo tanto $\dim_L K_1 \geq 2$. Tomando $\alpha_2 \in K \setminus K_1$ y 
+poniendo $K_2 = K_1(\alpha_2)$ obtenemos una cadena más larga $L \subset K_1 
+\subset K_2 \subset K$ con $\dim_L K_2 \geq 3$, y continuando asi construimos 
+$K_{|G|}$ de dimensión $|G| + 1$. Por el teorema del elemento primitivo 
+$K_{|G|} = L[\alpha]$ y por lo visto antes $\dim_L L[\alpha] \leq |G|$, lo que
+da una contradicción, así que $\dim_L K < \infty$ y por lo tanto $\dim_L K \leq
+|G|$.
+
+Por el teorema del elemento primitivo existe $\gamma \in K$ tal que $K = 
+L[\gamma]$. Si algún $g \in G$ cumple que $g(\gamma) = \gamma$ entonces
+$g = \id_K$, por lo tanto el conjunto $\{g(\gamma), g \in G\}$ tiene cardinal
+$|G|$. Si $p \in L[x]$ es un polinomio tal que $p(\gamma) = 0$ entonces
+$p(g(\gamma)) = g(p(\gamma)) = 0$, y por lo tanto $p_\gamma \mid p$. En otras 
+palabras, el conjunto $\{\gamma^i \mid 0 \leq i \leq |G| - 1\}$ es linealmente
+independiente sobre $L$, así que $\dim_L K = |G|$.
+\end{proof}
+
+
+\section{El teorema de Chevalley-Shepherd-Todd}
+
+\section{Más ejemplos}
+\end{document}

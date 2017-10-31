@@ -44,7 +44,7 @@
 \newcommand\std{\mathsf{std}}
 \newcommand\sh{\mathsf{sh}}
 \newcommand\OTheta{\overline \Theta}
-
+\newcommand\vv{\overline{v}}
 
 \newcommand\vectspan[1]{\left\langle #1 \right\rangle}
 \newcommand\interval[1]{\llbracket #1 \rrbracket}
@@ -469,42 +469,37 @@ Notice that Stanley and Postnikov have analogous operators $\DD_{\sigma,\tau}
 = \pi \circ \DD_\sigma$ we also have that $\pi \circ D_{\sigma,\tau}^\eta 
 = \pi \circ \DD_{\sigma, \tau}$.
 
-\paragraph
-We fix some notation. We denote the image of $D_\sigma^\eta(z)$ in the 
-quotient by the same symbol. Given $f \in B_\eta$ we write 
-$\overline f(x+z)$ for $\pi(f(x+z))$.
-
-\begin{Theorem*}
-The free $A_\eta$-module $V_\eta$ is a $U(\gl(n,\CC))$-module, and the
-action of $\gl(n,\CC)$ is given by the following formulas
+\begin{Proposition}
+\label{P:module-congruence}
+The following congruences hold in $L_\eta$ modulo $\p_\eta L_\eta$
 \begin{align*}
 E_{k,k+1} D_\sigma^\eta(z)
-	&= - \sum_{I \in \I_k^\eta(z)}
+	&\equiv - \sum_{I \in \I_k^\eta(z)}
 	\sum_{\tau \in S_\eta}
-	\overline{\DD^\eta_{\sigma\alpha(I),\tau} 
+	\DD^\eta_{\sigma\alpha(I),\tau}
 		\left(
 			e_{k,I}^a
-		\right)}(x+z) D_\tau^\eta(z+\delta^{k,a(I)}); \\
+		\right)(x+z) D_\tau^\eta(z+\delta^{k,a(I)}); \\
 E_{k+1,k} D_\sigma^\eta(z)
-	&= \sum_{I \in \I_k^\eta(z)} 
+	&\equiv \sum_{I \in \I_k^\eta(z)} 
 		\sum_{\tau \in S_\eta} 
-		\overline{\DD_{\sigma\beta(I),\tau}^\eta \left(e_{k,I}^b \right)} 
+		\DD_{\sigma\beta(I),\tau}^\eta \left(e_{k,I}^b \right)
 		(x+z) D_\tau^\eta(z - \delta^{k,b(I)});\\
 E_{k,k} D_\sigma^\eta(z)
-	&= \overline r_k(x+z) D_\sigma^\eta(z) +
+	&\equiv r_k(x+z) D_\sigma^\eta(z) +
 		\sum_{\ell(\tau) < \ell(\sigma)} 
-		\overline{\DD_{\sigma, \tau}^\eta(r_k)}(x+z) 
+		\DD_{\sigma, \tau}^\eta(r_k)(x+z) 
 			D_\tau^\eta(z).
 \end{align*}
 Furthermore, for each $c \in \Gamma$ we have
 \begin{align*}
 c D_\sigma^\eta(z)
-	&= \overline \gamma(x+z) D_\sigma^\eta(z) +
+	&\equiv \gamma_c(x+z) D_\sigma^\eta(z) +
 		\sum_{\ell(\tau) < \ell(\sigma)} 
-			\overline{\DD_{\sigma, \tau}^\eta(\gamma)}(x+z) 
+			\DD_{\sigma, \tau}^\eta(\gamma_c)(x+z) 
 			D_\tau^\eta(z).
 \end{align*}
-\end{Theorem*}
+\end{Proposition}
 \begin{proof}
 We work first in $V_K$. If $c \in \Gamma$ then $c T(z) = \gamma(x+z) T(z)$, so
 applying Lemma \ref{L:function-tableaux} and passing to the quotient we obtain
@@ -547,6 +542,171 @@ to obtain a formula involving operators of the form $D_{\sigma\alpha(I),
 \tau}^\eta$, and using a similar argument as before we can replace them with
 differential operators $\DD_{\sigma\alpha(I), \tau}^\eta$ and obtain the 
 first formula in the statement. A simmilar proof works for the second one.
+\end{proof}
+
+\section{The GT module associated to an arbitrary character}
+
+\paragraph
+To each $v \in \CC^\mu$ we associate a composition $\eta = \eta(v)$ of $\mu$ 
+as follows. For any $k \in \interval{n-1}$ form a graph with vertices 
+$\interval{k}$, and put an edge between $i$ and $j$ if and only if $v_{k,i} - 
+v_{k,j} \in \ZZ$; the resulting graph is the disjoint union of complete 
+graphs, and we set $\eta^{(k)}$ to be the cardinalities of each connected 
+component arranged in descending order. Finally we set $\eta(v) = (\eta^{(1)}, 
+\ldots, \eta^{(n-1)}, 1^n)$, where $1^n$ denotes the composition of $n$ 
+consisting of $n$ ones. Thus if $v$ is generic then $\eta^{(k)}(v) = 1^k$, and 
+if it is singular then $\eta(v)$ will have at least one part larger than $1$. 
+Notice that $\eta(v) = \eta(\sigma(v) + z)$ for any $\sigma \in S_\eta$ and 
+$z \in \ZZ^\mu_0$, and that by replacing $v$ with a suitable element $\vv = 
+\sigma(v) + z$ we can characterize $S_\eta$ as the stabilizer of $\vv$; we 
+call any such element a \emph{fully critical} representative of $v$. By 
+definition of $B_\eta$, evaluation at $\vv$ defines a $1$-dimensional 
+representation of $B_\eta$ which we will denote by $\CC_{\vv}$. Also notice 
+that if $\vv'$ is another fully critical representative of $v$ then translation
+by $\vv' - \vv$ is a well defined automorphism of $B_\eta$ which in turn 
+induces an isomorphism $\CC_{\vv} \cong \CC_{\vv'}$
+
+\begin{Definition*}
+Let $v \in \CC^\mu$, let $\eta = \eta(v)$ and let $\vv$ be a fully critical 
+representative of $v$. We set $V(T(v)) = \CC_{\vv} \ot_{B_\eta} L_\eta$, and 
+for each $\sigma \in \eta$ and each $z \in \ZZ^\mu_0$ we write $D_\sigma(\vv 
++ z) = 1_{\vv} \ot_{B_\eta} D_\sigma^\eta(z)$.
+\end{Definition*}
+
+By the last remark before the definition, $V(T(v))$ is well defined up to
+isomorphism. We set some notation for the rest of the document. Let $v \in 
+\CC^\mu$. Given $\sigma, \tau \in S_\mu$ we write $\DD_\sigma^v = ev_v \circ 
+\DD_\sigma^\eta$ and $\DD_{\sigma, \tau}^v = ev_{v} \circ \DD_{\sigma, \tau}$.
+Since $ev_{\vv}(\p_{\eta(v)}) = 0$ by definition, we get the following 
+from Proposition \ref{P:module-congruence}.
+
+\begin{Theorem}
+Let $v \in \CC^\mu$ and let $\vv$ be a fully critical representative of
+$v$. The action of $\gl(n,\CC)$ on $V(T(v))$ is given by the following
+formulas
+\begin{align*}
+E_{k,k+1} D_\sigma(\vv + z)
+	&= - \sum_{I \in \I_k^\eta(z)}
+	\sum_{\tau \in S_\eta}
+	\DD^{\vv +z}_{\sigma\alpha(I),\tau}
+		\left(
+			e_{k,I}^a
+		\right) D_\tau (\vv + z+\delta^{k,a(I)}); \\
+E_{k+1,k} D_\sigma(\vv + z)
+	&= \sum_{I \in \I_k^\eta(z)} 
+		\sum_{\tau \in S_\eta} 
+		\DD_{\sigma\beta(I),\tau}^{\vv+z} \left(e_{k,I}^b \right)
+		D_\tau(\vv + z - \delta^{k,b(I)});\\
+E_{k,k} D_\sigma(\vv + z)
+	&= r_k(\vv+z) D_\sigma(\vv+z) +
+		\sum_{\ell(\tau) < \ell(\sigma)} 
+		\DD_{\sigma, \tau}^{\vv + z}(r_k) 
+			D_\tau(\vv + z).
+\end{align*}
+Furthermore, for each $c \in \Gamma$ we have
+\begin{align*}
+c D_\sigma(\vv + z)
+	&= \gamma_c(\vv+z) D_\sigma(\vv + z) +
+		\sum_{\ell(\tau) < \ell(\sigma)} 
+			\DD_{\sigma, \tau}^{\vv+z}(\gamma_c) 
+			D_\tau (\vv+ z).
+\end{align*}
+\end{Theorem}
+
+\paragraph
+\label{L:invariants-dual-basis}
+Let $\eta < \mu$. By \cite{PS-chains-bruhat}*{Corollary 6.1} the ideal $I_\eta
+= \bigcap_{\sigma \in S_\eta} \ker \DD_\sigma^0 \subset \Lambda$ is exactly 
+the ideal generated by $S_\eta$-symmetric polynomials with nonzero constant 
+term, and the induced functionals $\{\DD_\sigma^0: \Lambda / I \to \CC \mid 
+\sigma \in S_\eta\}$ form a homogeneous basis of the graded dual of 
+$\Lambda/I$, with $\deg \DD_\sigma^0 = - \ell(\sigma)$. 
+For each $v \in \CC^\mu$ we set $\m_{v} \subset \Gamma$ to be the ideal of 
+elements $c \in \Gamma$ such that $\gamma_c(v) = 0$.
+
+\begin{Lemma*}
+Let $\epsilon < \eta$ and suppose $v \in \CC^\mu$ is such that its stabilizer
+in $S_\eta$ is $S_\epsilon$. 
+\begin{enumerate}[(a)]
+\item The set $\{\DD_\rho^0 \mid \rho \in \Shuffle_\epsilon^\eta\}$ is a 
+	homogeneous basis of the graded dual of the invariant space
+	$(\Lambda/I)^{S_\epsilon}$.
+\item The map $c\in \Gamma \mapsto \phi_v(c)
+	= \overline{\gamma_c(x+v)} \in (\Lambda/I)^{S_\epsilon}$ is surjective.
+\item For each $\sigma \in \Shuffle_{\epsilon}^\eta$ there exists $c_\sigma \in
+\m_v$ such that $\DD_\sigma^0(c_\sigma^{\ell(\sigma)}) = 1$.
+\end{enumerate}
+\end{Lemma*}
+\begin{proof}
+Since $I_\eta$ is $S_\epsilon$-invariant $(\Lambda/I_\eta)^{S_\epsilon}$ is the
+image of $\Lambda^{S_\epsilon}$ in the quotient. Now for $p \in 
+\Lambda^{S_\epsilon}$ and $\sigma$ not an $\epsilon$-shuffle we have 
+$\partial_\sigma p = 0$ so $\DD_\sigma^0(p) = (\partial_\sigma p)(0) = 0$.
+Hence $\displaystyle (\Lambda/I_\eta)^{S_\epsilon} \subset \bigcap_{\sigma 
+\notin \Shuffle_\epsilon^\eta} \ker \DD_\sigma^0$. Since both spaces have 
+dimension $\eta!/\epsilon!$ the inclusion must be an equality, and the dual 
+space of $(\Lambda/I_\eta)^{S_\epsilon}$ is generated by the restrictions of
+the linear functionals $\{\DD_\sigma^0 \mid \sigma \in \Shuffle_\epsilon^\eta
+\}$. This proves the first item. The second item is classical according to
+Soergel; it probably goes back at least to Weyl in The Classical Groups, part 
+3 of Chapter II.
+
+Recall that by definition $\DD^0_\sigma$ is a positive multiple of the sum of 
+differential operators $m_C$, where $C = (e < \tau_1 < \cdots < 
+\tau_{\ell(\sigma)} = \sigma)$ is a saturated chain in the Bruhat order and 
+$m_C$ is the product of all $\partial_{a_i} - \partial_{b_i}$ where 
+$\tau_{i+1} = \tau_i (a_i,b_i)$, followed by evaluation at zero. If $f(v) = 0$ 
+then $m_C(f^{\ell(\sigma)})$ is the product of all $\partial_{a_i}(f) - 
+\partial_{b_i}(f)$ evaluated at $0$. By the previous two items we can choose
+$f \in (\Lambda/I)^{S_\epsilon}$ such that $D_{(i,i+1)}^0(f) = 1$ for all 
+$(i,i+1) \in \Shuffle_\epsilon^\eta$, so $m_C(f) \geq 0$ and hence 
+$\DD_\sigma^0(f^j) \geq 0$. Now by the chain property of shuffles 
+\cite{BB-coxeter-book}*{Theorem 2.5.5} there is at least one chain $C$
+from $e$ to $\sigma$ consisting of $\epsilon$-shuffles; we claim that in this
+case $m_C(f^j) \neq 0$. Indeed, if $\tau_{i+1} = \tau_i (a_i,b_i)$ then
+$(a_i, b_i) v \neq v$, since otherwise $\tau_{i+1}$ would not be of minimal
+length in $\tau_{i+1} S_\epsilon$, and hence there exists an $\epsilon$-shuffle
+$(j,j+1)$ such that $a_i \leq j < b_i$, which in turn implies that 
+\begin{align*}
+	(\partial_{a_i} - \partial_{b_i})(f)(0)
+		&= \sum_{r = a_i}^{b_i-1} (\partial_{r} - \partial_{r+1})(f)(0)
+		> 0,
+\end{align*}
+so $m_C(f^j)(0) > 0$ and hence $\DD_\sigma^0(f^j) > 0$. Multiplying $f$ by
+a suitable constant we get $\DD_\sigma^0(f^j) = 1$. Now take $c \in \Gamma$
+such that $\phi_v(c) = \overline f$. Since $f(v) = 0$ we see that $c \in 
+\m_v$, so we are done.
+\end{proof}
+
+
+\begin{Proposition}
+Let $\vv \in \CC^\mu$ be $\eta$-critical, let $z \in \ZZ^\mu_0$ be in 
+$\eta$-normal form. Set $\epsilon = \epsilon(z)$ and $v = \vv + z$. 
+For generic elements $c \in \Gamma$ we have $(c-\gamma_c(v))^{\ell(\sigma)} 
+D_\sigma(v) \neq 0$. In particular the Jordan form of the endomorphism of 
+$V(T(\vv))[\m_{v}]$ induced by $c$ has a unique largest block of size 
+$\ell(w_\epsilon)$, where $w_\epsilon$ is the $\epsilon$-shuffle associated to 
+the longest word $w_\eta$. 
+\end{Proposition}
+\begin{proof}
+Let $f \in (\Lambda/I)^{S_\epsilon}$. The proof of the previous lemma shows 
+that $\DD_\sigma^0(f^{\ell(\sigma)} - f(v))$ is a nontrivial polynomial in 
+$(\partial_i - \partial_{i+1})(f)(0)$ where $i$ runs over all $(i,i+1)$ which 
+are $\epsilon$-shuffles. This implies that the set of all $f$ such that 
+$\DD_\sigma^0(f^{\ell(\sigma)}) \neq 0$ is a nonempty Zarisky open set of 
+$(\Lambda/I)^{S_\epsilon}$, which we denote $V_\sigma$. If $c \in \Gamma$ 
+is such that the class of $\gamma_c - \gamma_c(v)$ lies in $V_\sigma$
+then $(c- \gamma_c(v))^{\ell(\sigma)} D_\sigma(v) = \DD_\sigma^0(c - 
+\gamma_c(v)^{\ell(\sigma)}) D_e(v) \neq 0$.
+
+Now take $c \in \Gamma$ such that $\gamma_c - \gamma_c(v) \in V_{w_\epsilon}$.
+Then $(c-\gamma_c)^j D_{w_\epsilon}(v)$ is nonzero if and only if $j \leq 
+\ell(w_\epsilon)$, which shows that the Jordan form of $c$ over 
+$V(T(\vv))[\m_v]$ must have a block of size $\ell(w_\epsilon)$. Since 
+$w_\epsilon$ is the unique longest element in $\Shuffle_\epsilon^\eta$, we
+get $(c-\gamma_c)^{\ell(w_\epsilon)} D_\sigma(v) = 0$ for any $\sigma < 
+w_\epsilon$ so there can be no other Jordan block of size $\ell(w_\epsilon)$
+in the Jordan form of $c$.
 \end{proof}
 
 \begin{bibdiv}

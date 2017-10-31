@@ -46,11 +46,11 @@
 \def\pausa{\pause \bigskip}
 
 
-\title[]{Gelfand-Tsetlin modules of $\gl(n,\CC)$ with arbitrary characters}
+\title[]{Gelfand-Tsetlin modules}
 \author[]{Pablo Zadunaisky\footnote{FAPESP Postdoc 
 grant 2016/25984-1} - USP, S\~ao Paulo \\
 (Joint work with L.E. Ramírez)}
-\date{CAECE-UBA, September   2017}
+\date{Natal, october  2017}
 
 \begin{document}
 % Remove this to get the pauses...
@@ -59,8 +59,6 @@ grant 2016/25984-1} - USP, S\~ao Paulo \\
 \begin{frame}
 \titlepage
 \end{frame}
-
-
 \begin{frame}
 \frametitle{Gelfand-Tsetlin tableaux}
 A GT-tableau of height $n$ is an array $T(v)$ of $\frac{n(n+1)}{2}$ complex 
@@ -100,10 +98,38 @@ numbers
 \draw[->] (11) -- (22);
 \end{tikzpicture}
 
-$z \in \ZZ^{\frac{n(n-1)}{2}}$ is identified with integral tableau, top 
-row $0$.
+Tableaux are parametrized by $v \in \CC^{\frac{n(n+1)}{2}}$. 
 
-\textbf{Generic:} $v_{k,i} - v_{k,j} \notin \ZZ, 1 \leq k < n$.
+We identify $\ZZ^{\frac{n(n-1)}{2}}$ with integral tableaux with top 
+row $0$.
+\end{frame}
+
+\begin{frame}
+\frametitle{Generic Gelfand-Tsetlin modules}
+
+Let $v \in \CC^{\frac{n(n+1)}{2}}$ and set 
+\begin{align*}
+V(T(v))
+	&= \langle T(v+z) \mid z \in \ZZ^{\frac{n(n-1)}{2}} \rangle_\CC
+\end{align*}
+
+\begin{Theorem}[Drozd, Futorny and Ovsienko, 88-92]
+If $v$ is such that $v_{k,i} - v_{k,j} \notin \ZZ, 1 \leq k < n$,
+ then $V(T(v))$ can be endowed with the structure of a 
+$\gl(n,\CC)$-module.
+\end{Theorem}
+
+\vspace{-.7cm}
+
+\pause
+\begin{align*}
+E_{k,k+1} T(w) &= - \sum_{i=1}^k \theta^+_{k,i}(w) 
+  T(w+\delta^{k,i}); \\
+E_{k+1,k} T(w) &= \sum_{i=1}^k \theta^-_{k,i}(w) 
+  T(w -\delta^{k,i}); \\
+E_{k,k} T(w) &= \theta_k(w) T(w).
+\end{align*}
+The functions $\theta$ are rational functions.
 \end{frame}
 
 \begin{frame}
@@ -119,13 +145,91 @@ U(\gl(1,\CC))
 \subset U(\gl(n,\CC))
 \end{align*}
 
-By Harish-Chandra + Zhelobenko
+By works of Harish-Chandra + Zhelobenko
 \begin{align*}
 \Gamma 
 	&\cong \CC[\lambda_{k,i} \mid 1 \leq i \leq k 
 		\leq n]^{S_1 \times \cdots S_n} \\
-c &\longmapsto \sigma
+c &\longmapsto \gamma_c
 \end{align*}
+
+\pause
+
+\begin{Theorem}[DFO, continued]
+If $v$ is generic, the obvious basis of $V(T(v))$ is a $\Gamma$-eigenbasis, 
+with $$c T(v+z) = \gamma_c(v+z) T(v+z).$$
+\end{Theorem}
+\end{frame}
+
+\begin{frame}
+\frametitle{Singular Gelfand-Tsetlin modules}
+A point $v \in \CC^{\frac{n(n+1)}{2}}$ is \emph{critical} if $v_{k,i} - 
+v_{k,j} \in \ZZ$ implies $v_{k,i} = v_{k,j}$.
+
+\begin{Theorem}[Ramírez, Z. -- 2017]
+Let $v \in \CC^{\frac{n(n+1)}{2}}$ be critical. Then there exists a 
+$\gl(n,\CC)$-module structure over $V(T(v))$ such that $(c - \gamma_c(v+z))^n 
+T(v+z) = 0$ for $n \gg 0$.
+\end{Theorem}
+
+\textbf{Observation:} We have 
+\begin{align*}
+V(T(v))[v+z] 
+	&= \{x \in V(T(v)) \mid (c - \gamma_{c}(v+z))^n x = n \gg 0\} \\
+	&=\{T(v+z') \mid \sigma(v+z) = \sigma(v+z') 
+		\mbox{ for some } \sigma \in G\} \\
+	& = \{T(v+\sigma(z)) \mid \sigma \in G_v \subset G\} 
+\end{align*}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples of character spaces}
+Set $v \in \CC^{\frac{n(n+1)}{2}}, z \in \ZZ^{\frac{n(n-1)}{2}}$, with $v_3 = 
+(0,0,0)$ and $z_3 = (a,b,c)$ with $a > b > c$.
+\begin{align*}
+\xymatrix{
+& T(v+(c,b,a)) & \\
+	T(v+(b,c,a)) \ar@{-}[ur]& & T(v+(c,a,b)) \ar@{-}[ul]\\
+	T(v+(b,a,c)) \ar@{-}[u] \ar@{-}[urr] &  & T(v+(a,c,b)) \ar@{-}[u] 
+		\ar@{-}[ull]\\
+	& T(v+(a,b,c)) \ar@{-}[ur] \ar@{-}[ul] & 
+}
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples of character spaces}
+Set $v \in \CC^{\frac{n(n+1)}{2}}, z \in \ZZ^{\frac{n(n-1)}{2}}$, with $v_3 = 
+(0,0,0)$ and $z_3 = (a,a,b)$ with $a > b$.
+\begin{align*}
+\xymatrix{
+	T(v+(b,a,a)) \\
+	T(v+(a,b,a)) \ar@{-}[u] \\
+	T(v+(a,a,b)) \ar@{-}[u]
+}
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples of character spaces}
+Set $v \in \CC^{\frac{n(n+1)}{2}}, z \in \ZZ^{\frac{n(n-1)}{2}}$, with $v_4 = 
+(0,0,0,0)$ and $z_4 = (a,a,b,b)$ with $a > b$.
+\begin{align*}
+\xymatrix{
+& T(z+(b,b,a,a)) & \\
+& T(z+(b,a,b,a)) \ar@{-}[u]& \\
+T(z+(a,b,b,a)) \ar@{-}[ur] & & T(z+(b,a,a,b)) \ar@{-}[ul] \\
+& T(z+(a,b,a,b)) \ar@{-}[ul] \ar@{-}[ur]& \\
+& T(z+(a,a,b,b)) \ar@{-}[u]& 
+}
+\end{align*}
+\end{frame}
+
+\end{document}
+
+
+\begin{frame}
 \end{frame}
 
 \begin{frame}

@@ -1,0 +1,232 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{enumerate}
+\usepackage[osf,noBBpl]{mathpazo}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{mathtools}
+
+\newcommand\CC{\mathbb C}
+\newcommand\NN{\mathbb N}
+\newcommand\ZZ{\mathbb Z}
+\newcommand\RR{\mathbb R}
+
+\title{Review of 
+``Irreducible subquotients of generic Gelfand-Tsetlin modules over 
+$U_q(\mathfrak{gl}_n)$''}
+\author{V. Futorny, L.E. Ramírez, J. Zhiang}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Recommendation:} Revise and resubmit.
+
+Fix $n \in \NN$. Let $U$ be the enveloping algebra of $gl_n(\CC)$ and let 
+$\Gamma \subset U$ be the Gelfand-Tsetlin subalgebra of $U$. A Gelfand-Tsetlin
+module is a $U$-module on which the action of $\Gamma$ is locally finite. The 
+class of Gelfand-Tsetlin modules has been of great interest in the last thirty 
+years, and the first author and his collaborators have made large 
+contributions to our understanding of this class. Since an analogous notion 
+of Gelfand-Tsetlin modules exists for quantized enveloping algebras, it is 
+natural to pursue a similar study in the quantum context and this article
+aims to begin with this project. 
+
+The results presented in this article are very interesting and certainly 
+within the aims and scope of the JPAA; also, they would represent the first 
+step for a very ambitious and interesting research program. I am 
+particularly intrigued by applications to representations of quantized 
+enveloping algebras at roots of unity. However the present document suffers 
+from far too many typos, careless writing and missing arguments to be 
+considered more than a draft. It needs a thorough revision before I can 
+recommend it for publication, which I will gladly do once the authors take 
+care of the problems discussed below.
+
+
+\bigskip
+
+\noindent\textbf{Comments, corrections and suggestions}
+
+Page 1, line 3. The phrase 'a classical Gelfand-Tsetlin basis' should say
+'classical Gelfand-Tsetlin bases'
+
+Page 1, line 10. Delete the 'the' in the phrase 'among the others'.
+
+Page 1, lines 14-17. Reference [11] is unpublished and yet is spoken of in the 
+past tense. In any case it is unclear whether the authors mean [11] or the 
+paper under review by the phrase 'this paper'.
+
+Page 2, lines 7-9. The authors fix the proverbial $q \in \CC$, and set $1(q) 
+= \{x \in \CC \mid q^x = 1\}$. Since complex exponentiation is not uniquely 
+defined, this set is not well-defined and yet the authors make no comment 
+regarding it. This is a common omission in the literature on quantum groups,
+and whole books have been written on the subject without giving this problem 
+any thought, since one usually considers only integral powers of $q$ in which 
+case there is no ambiguity. However the set $1(q)$ plays a central role in 
+this article, and several statements are made obscure by this omission, in 
+particular Definition 6.1 and Theorem 6.2 (the main results!). This is not 
+really a problem if, as in [22], one first fixes $h \in \CC$ and sets $q^x = 
+\mathsf{exp}(hx)$, in particular $q = \mathsf{exp}(h)$. Only once this is done 
+does the definition of $1(q)$ makes sense, and $1(q) = \{\frac{2 k \pi}{h}i 
+\mid k \in \ZZ\}$. Notice in particular that unless $q$ is a root of unity, a 
+different choice of $h$ will change the set $1(q)$. Since most of the contents 
+of this article hinge on the property that certain numbers lie in 
+$\frac{1(q)}{2} + \ZZ$, this should be addressed at some point. See also the
+comment about Definition 6.1 and Theorem 6.2.
+
+Page 2, line 10. The 'n' after 'rank' should be between \$'s.
+
+Page 2, line 14. $U_q$ is 'the' algebra and not 'a' algebra defined by the 
+relations (1)-(7). Also the index $i$ should only go up to $n-1$.
+
+Page 2, line 25. The word 'representation' should be 'presentation'.
+
+NOTE: Reference [13] is only available in Russian, or in an awful
+English translation where the numeration has been changed and statements 
+abbreviated. Is there any alternative source, or alternative translation?
+
+Page 3, lines 3-4. There should be no point between '$\mathfrak{gl_m}$' and 
+'We'. The word 'denotes' should be 'denote'.
+
+Page 3, line 6. Theorem 3.2.
+As far as I can tell the statement in [11] is about $sl_n$ and not 
+$gl_n$, and $k = 1, \ldots, n-1$ there, so the statement does not seem to
+follow immediately. Also, what does it mean when $l_{i,j}^+$ or $l_{j,i}^-$ 
+with $i > j$ appear in this formula? Finally, does the result hold with $q$ a 
+root of unity? (This is the first of several instances in which this question
+is ignored in statements, but used in the proofs.)
+
+Page 3, line 16. Proof of Lemma 3.4. The proof in [9] is short and the idea is
+quite simple: the algebra $\Gamma$ separates elements with different 
+characters. A short comment, or better yet a copy of the short proof, would 
+make this part of the article five lines longer and much more readable.
+
+Page 3, line 22. The choice of notation is a bit unfortunate, as we now have
+$l_{i,j}^\pm$ and $l_{i,j}$, which mean completely different things.
+
+Page 4, line 1. As stated in [22], the theorem was originally proved in M. 
+Jimbo, ``Quantum $R$ matrix related to the generalized Toda system: an 
+algebraic approach'', section 5. Also the formulation found here is more like
+the one found in [19] than the one found in [25]. Finally in this case $q$
+must certainly not be a root of unity, and this has to be clearly stated.
+(More on this later.) 
+
+Page 4, line 9. Proposition 4.3 and proof. At some point $\sigma(i)$ becomes 
+$\sigma_i$ without any clarification. The permutations described in the 
+statement are usually called $(k,n-k)$-shuffles. Let us denote the set of 
+$(k,n-k)$-shuffles by $Sh$. The last string of equalities would be easier to 
+follow with a comment such as ``Since $\sum_{\sigma \in S_n} q^{\ell(\sigma)} 
+= (n)_q$ and since $S_n = \bigsqcup_{\tau \in Sh} (S_k \times S_{n-k})\tau$, 
+the following equality holds
+\begin{align*}
+\sum_{\sigma \in S_n} q^{-2\ell(\sigma)} 
+	= \sum_{\sigma' \in S_k} q^{-2\ell(\sigma')} 
+	\sum_{\sigma'' \in S_{n-k}} q^{-2\ell(\sigma'')}
+	\sum_{\tau \in Sh} q^{-2\ell(\tau)}
+	= (k)_{q^{-2}}! (n-k)_{q^{-2}}! \sum_{\tau \in Sh} q^{-2\ell(\tau)}
+\end{align*}
+so...''
+
+Page 5, Corollary 4.4. It is not clear a priori that the eigenvalues of 
+$c_{mk}$ depend only on the $m$-th row, or that $c_{mk}$ is diagonalizable at 
+all, since $c_{mk}$ involves $l_{ij}^\pm$ with $1 \leq i,j \leq m$. I believe
+a more correct statement would be that $c_{mk} \in (U_m)_q \subset U_q$, and 
+the action of $(U_m)_q$ on the bottom $m$-rows is given by the Gelfand-Tsetlin
+formulas, so $c_{mk}$ acts as if the table $T(R)$ was of height $m$, ignoring
+all rows above $m$.
+
+Page 5, Definition 5.1. As stated above, this depends not just on $q$ but on 
+$h$, and equivalently states that
+\begin{align*}
+l_{ij} - l_{ik} \notin \{\frac{2r\pi}{h}i + s \mbox{ with } r,s \in \ZZ\}.
+\end{align*}
+
+Page 5, Theorem 5.2. $q$ should not be a root of unity.
+
+Page 5, Proposition 5.3. 'separate' should be 'separates'. Also the proof 
+assumes that $q$ is not a root of unity.
+
+Page 6, Definition 5.5. Add 'irreducible' after the word 'unique'.
+
+Page 6, Notation 5.6. In the statement $L \in \CC^{n(n+1)/2}$ but $z \in 
+\ZZ^{\frac{n(n-1)}{2}}$, so what is $L+z$?. 
+
+Page 6, Definition 5.7. 'exist' should be 'exists'.
+
+Page 6, Theorem 5.9. Point (i) is equivalent to saying that $W(T(R))$ is a 
+submodule of $V(T(R))$, and this seems clearer. In 
+page 7 line 4, the proof begins by assuming $e_k T(S) \notin W(T(R))$ but ends
+proving that $e_k T(S) \in W(T(R))$ without using the hypothesis. Finally, 
+at the bottom of page 7, the inductive step is almost incomprehensible and 
+should be rewritten.
+
+Page 8, Definition 6.1. Since the last few results are only true if $q$ is not
+a root of unity, I am assuming that this hypothesis is also in place here. 
+Notice that this implies that $\frac{1(q)}{2} + \ZZ = \ZZ\frac{\pi}{h}i \oplus 
+\ZZ$. Now fix $1 \leq u < p \leq n$. By the definition of a 
+$q$-generic tableaux there is at most one $1 \leq s \leq p$ such that
+$(p,s,u) \in \Omega(T(R))$, and since the sum above is direct $d_{p,u}$ is 
+either $1$ or $0$, depending on whether $\Omega(T(R))$ contains an element of 
+the form $(p,s,u)$ or not.
+
+Page 8, Theorem 6.2. In the statement, there is an 'a' missing before 
+'$q$-generic tableau'. Also item (i) is not really clear, since by Theorem 5.9 
+$\mathcal I(T(R))$ does not generate a submodule of $V(T(L))$ in general; the 
+proof makes it clear that one should see tableaux $T(S)$ with $\Omega^+(T(R))
+\subsetneq \Omega^+(T(S))$ as zero. Finally, by the previous comment the number
+of irreducible modules in the block associated with $T(L)$ is $2^\omega$, with
+$\omega = | \Omega(T(L))|$.
+
+Page 9, Remark 7.2. The first claim only holds if $T(L)$ is standard. 
+The claim that Theorem 5.2 holds when $q$ is a root of unity deserves at least 
+a separate statement as a lemma and a proof. The argument that generic 
+Gelfand-Tsetlin modules are indeed modules in the non-root-of-unity case is 
+done by arguing that every standard tableaux appears in a finite dimensional 
+representation, which does not happen in the present context.
+
+Page 9, Theorem 7.3. The equality should be a congruence. In the first line of 
+the proof, delete the word 'two'. The last line of the proof states that since
+two numbers are different modulo $e$, they are equal.
+
+Page 9, Proposition 7.4. Is $T(L)$ generic? Also, the second to last line of 
+the proof mentions $W(T(R))$, which is not defined yet.
+
+Page 10, line 23. $W_{ij}(R)$ is defined as a submodule, but it is never stated
+a submodule of what.
+
+Page 10, proof of Theorem 7.7. There is no Proposition 7.3.
+
+Page 10, Definition 7.9. What is $v_{i+1,s}$? Without this definition I was 
+unable to understand Definition 7.10 and Theorem 7.11.
+
+Page 11, Example. Set $n = 2$. This should also be made explicit in 
+Theorem 7.12.
+
+\noindent\textbf{References.}
+
+\noindent [11] V. Futorny,J. Hartwig, M. Rosso, Gelfand-Tsetlin characters for 
+quantum $gl(n)$. In progress.
+
+\noindent [13] L. Faddeev, N. Reshetikhin and L. Takhtadzhyan, Quantization of 
+Lie groups and Lie algebras, Leningrad Math. J. 1 (1990), 193–225.
+
+\noindent [19] A.Klimyc, K. Schmüdgen, Quantum groups and their 
+representations, Springer-Verlag, Berlin Heidelberg, 1997.
+
+\noindent [22] V. Mazorchuk, L. Turowska, On Gelfand-Tsetlin modules over 
+$U_q (gl(n))$, Czechoslovak Journal of Physics, (2000), 139–141
+
+\noindent [25] K. Ueno, Y. Shibukawa, T. Takebayashi, Construction of 
+Gelfand-Tsetlin Basis for $U_q(gl(N +1))$-modules. Publ. RIMS, Kyoto Univ. 26 
+(1990), 667-679.
+\end{document}
