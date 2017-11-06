@@ -709,6 +709,286 @@ w_\epsilon$ so there can be no other Jordan block of size $\ell(w_\epsilon)$
 in the Jordan form of $c$.
 \end{proof}
 
+\paragraph
+\about{Gelfand-Tsetlin components}
+\label{L:most-derived-tableaux}
+Fix $w = v + z$ and $\epsilon = \epsilon(w) \subset \S_\eta$. Denote by 
+$\omega \in S_\eta^\epsilon$ the $\epsilon$-shuffle corresponding to
+the longest word of $S_\eta$.
+
+\begin{Lemma*}
+Let $x = \sum_{\sigma \in S_\eta^\epsilon} a_\sigma D_\sigma(w)$. Then 
+$\Gamma x = V(T(v))[\chi_w]$ if and only if $a_{\omega} \neq 0$.
+\end{Lemma*}  
+\begin{proof}
+If $a_\omega = 0$ then $\Gamma x$ is contained in the $\CC$-span of derived
+tableaux $D_\sigma(w)$ with $\sigma < \omega$, so the condition $a_\omega \neq
+0$ is clearly necessary. Now assume $a_\omega \neq 0$. For each $\sigma \in 
+S_\eta^\epsilon$ let $c_\sigma \in \Gamma$ be such that $\DD_{\omega, \tau}
+(c_\sigma) = \delta_{\sigma, \tau}$. Then $c_\sigma x = a_\omega D_\sigma(w)$
+plus a linear combination of tableaux $D_\tau(w)$ with $\tau < \sigma$. Thus
+each $D_\sigma(w) \in \Gamma x$.
+\end{proof}
+
+\paragraph
+\label{L:domination}
+Fix a fully critical seed $\overline v \in \CC^\mu$ with $\eta = 
+\eta(\overline v)$. We say that the intervals $\interval{a,b}_{k+1}, 
+\interval{c,d}_{k} \in \I$ are related if $\overline v_{k+1, a} - \overline 
+v_{k,c} \in \ZZ$. Notice that this implies $\overline v_{k+1, i} - v_{k,j} 
+\in \ZZ$ for all $i \in \interval{a,b}$ and all $j \in \interval{c,d}$; also 
+notice that an interval at level $k$ is related to at most one interval at 
+level $k+1$. A family of intervals is a sequence $\{I_k, I_{k+1}, \cdots, 
+I_{k+r}\}$ such that $I_j$ is related to $I_{j+1}$. We say two intervals are
+related if they belong to the same maximal family of intervals; clearly each
+interval belongs to a unique maximal family. We say two entries are related
+if they lie in related intervals. Clearly if $(k,i)$ and $(l,j)$ are related 
+then $v_{k,i} - v_{l,j} \in \ZZ$.
+
+\begin{Definition*}
+Let $w, w' \in \overline v + \n(\eta)$. We say that $w$ \emph{dominates}
+$w'$, and denote this by $w \searrow w'$ if $w_{k,i} - w'_{k,i} \in 
+\ZZ_{\geq 0}$ for all $(k,i) \in \Sigma$ 
+and the following condition holds: for each $\interval{a,b}_k \in \I(\eta)$,
+if there exists $t \in \interval{a,b}$ such that $w_{k,t} > w_{k,t+1}$ then
+$w_{k,i-1} > w_{k,i}$ for all $i \leq t$.
+\end{Definition*}
+
+We refer to the last condition in the definition as monotonicity on intervals.
+Visually this can be represented as follows. Setting $z = w - \overline v$ 
+and $z' = w' - \overline v$ we consider the graphs of $z$ and $z'$ over a 
+fixed interval $I \in \I$, in red and blue respectively. In these graphs
+$w$ dominates $w'$ in the first and third case, but not in the second.
+
+\begin{tikzpicture}
+\draw (0,-0.2) -- (0,3);
+\draw (-0.2,0) -- (4,0);
+
+\draw[red] (0,2.5) -- (1, 2.5) -- (1,2) -- (2,2) -- (2,1.5) 
+	-- (3,1.5) -- (3,0.5) -- (4,0.5);
+\draw[blue] (0,1.9) -- (1,1.9) -- (1,0.9) 
+	-- (3,0.9) -- (3,0.4) -- (4,0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+\draw (0,-0.2) -- (0,3);
+\draw (-0.2,0) -- (4,0);
+
+\draw[red] (0,2.5) -- (2,2.5) -- (2,1.5) 
+	-- (3,1.5) -- (3,0.5) -- (4,0.5);
+\draw[blue] (0,1.9) -- (1,1.9) -- (1,0.9) 
+	-- (3,0.9) -- (3,0.4) -- (4,0.4);
+\end{tikzpicture} 
+\begin{tikzpicture}
+\draw (0,-0.2) -- (0,3);
+\draw (-0.2,0) -- (4,0);
+
+\draw[red] (0,2.5) -- (1, 2.5) -- (1,2) -- (2,2) -- (2,1.5) 
+	-- (3,1.5) -- (3,0.5) -- (4,0.5);
+\draw[blue] (0,2.4) -- (1,2.4) -- (1,0.9) 
+	-- (3,0.9) -- (3,0.4) -- (4,0.4);
+\end{tikzpicture}
+
+With this aide it is easy to see that domination is an order relation. Also, 
+if $v, v' \in \n(\eta)$ with $v_{k,i} \geq v'_{k,i}$ and $v_{k,i}$ is 
+noncritical then $v \searrow v'$.
+
+\begin{Lemma*}
+Let $v,v' \in \overline v + \ZZ^\mu_0$, and assume that $v'$ is in normal
+$\eta$-form. 
+\begin{enumerate}
+\item 
+\label{i:normal}
+If $v \searrow v'$ then $v$ is in $\eta$-normal form and every 
+$\epsilon(v')$-shuffle is an $\epsilon(v)$-shuffle.
+
+\item
+\label{i:common}
+If $v, v'$ are in $\eta$-normal form then there exists a noncritical $v''
+\in \overline v + \n(\eta)$ such that $v'' \searrow v, v'$ and 
+$\Omega^+(v) \cap \Omega^+(v') \subset \Omega^+(v'') \subset \Omega^+(v) \cup 
+\Omega^+(v')$. 
+\end{enumerate}
+\end{Lemma*}
+\begin{proof}
+It is clear from the definition that if $v'$ is in normal $\eta$-form then
+so is $v$, and that $\I_\eta(v) < \I_\eta(v')$. Now $\sigma \in S_\eta$
+is an $\epsilon(v')$-shuffle if and only if it is monotonous on each interval
+of $\I_\eta(v')$, which implies that it is monotonous in each interval of 
+$\I_\eta(v)$ and hence it is an $\epsilon(v)$-shuffle. This proves item 
+\ref{i:normal}.
+
+Set $\tilde v$ with $\tilde v_{k,i} = \max\{v_{k,i}, v'_{k,i}\}$ for all $(k,i)
+\in \Sigma$. It is easy to check that $\Omega^+(\tilde v)$ satisfies the
+inclusions in the statement, so we only need to prove that we can find a 
+noncritical $v''$ such that $v''_{k,i} \geq \tilde v_{k,i}$ for all $(k,i)
+\in \Sigma$ and $\Omega^+(v'') = \Omega^+(\tilde v)$. Given $(k,i), (l,j)$
+two related entries we write $(k,i) \rightarrow_1 (l,j)$ if one of the 
+following conditions holds:
+\begin{itemize}
+\item $k = l$ and $j = i+1$;
+\item $k = l+1$ and $\tilde v_{k,i} \geq \tilde v_{l,j}$, or equivalently 
+$(k,i,j) \in \Omega^+(\tilde v)$;
+\item $k = l-1$ and $\tilde v_{k,i} > \tilde v_{l,j}$ or equivalently 
+$(k+1,j,i) \notin \Omega^+(\tilde v)$.
+\end{itemize}
+By definition, if we have a sequence $v_{k_1,i_1} \rightarrow_1 v_{k_2, i_2}
+\rightarrow_1 \cdots \rightarrow_1 v_{k_r, i_r} \rightarrow_1 v_{k_1, i_1}$
+then $v_{k_1, i_1} = v_{k_2, i_2} = \cdots = v_{k_r,i_r}$, which implies that
+$k_1 \geq k_2 \geq \cdots \geq k_r$, and so $k_1 = k_2 = \cdots = k_r$ and
+finally $i_1 = \cdots = i_r$, which is impossible. Thus the system of 
+inequalities $\{v''_{k,i} > v''_{l,j} \mid(k,i) \rightarrow_1 
+(l,j)\}$ has a solution. By construction $\Omega^+(v'') = \Omega^+(\tilde v)$
+and $v''$ is noncritical, so we are done.
+\end{proof}
+
+
+\begin{Lemma}
+\label{L:sequence}
+Let $v,v' \in \overline v + \ZZ^\mu_0$ and suppose $v \searrow v'$. 
+There exists a sequence $v = v^{(0)} \searrow v^{(1)} \searrow \cdots \searrow 
+v^{(r)} = v'$ with the following properties.
+\begin{enumerate}[(a)]
+\item 
+\label{i:ik}
+For each $s \in \interval{r}$ there exists $(k_s, i_s) \in \Sigma$ such 
+that $v^{(s)} = v^{(s-1)} - \delta^{k_s,i_s}$.
+
+\item 
+\label{i:omega}
+$\Omega^+(v) \cap \Omega^+(v') \subset \Omega^+(v^{(s)}) \subset
+\Omega^+(v) \cup \Omega^+(v')$ for each $s \in \interval{r}$.
+
+\item 
+\label{i:interval}
+Set $I \in \I(v^{(s)})_{k_s}$ to be the unique interval containing $(k_s,
+i_s)$. Then $a(I) = i_s$ and $\omega^{(s)} = \omega^{(s+1)} \alpha(I)$. 
+\end{enumerate}
+
+\end{Lemma}
+\begin{proof}
+If $v = v'$ then the statements are trivial, so we can assume that $v \neq v'$,
+or equivalently that the set $\Sigma' = \{(r,s) \mid v_{r,s} - v'_{r,s} > 0\}$
+is not empty. Let $\Sigma'' \subset \Sigma'$ be the subset consisting of those
+$(r,s)$ with the following property: if $(t,l)$ is in $\Sigma$ and related to 
+$(r,s)$, then $v_{r,s} - v_{t,l} \leq 0$. Such elements always exist, since 
+they are the minimal elements in the intersection of a maximal family of 
+related entries with $\Sigma'$. Finally choose $(k,i) \in \Sigma''$ with
+$k$ minimal and $i$ maximal for that $k$, and set $v^{(1)} = v - 
+\delta^{k,i}$. We claim that the lemma holds for $s = 1$.
+
+First let us check that $v^{(1)} \searrow v'$. Since $v_{k,i} > v'_{k,i}$ by 
+the choice of $v_{k,i}$, it is clear that $v^{(1)}_{r,s} \geq v'_{r,s}$ for all
+$(r,s) \in \Sigma$. Since we have only changed the $(k,i)$-th entry of $v$, we
+only need to check the condition for the interval containing $(k,i)$, say
+$\interval{a,b}_k$. If $i < j \leq b$ then $v_{k,i} \geq v_{k,j}$ since $v$
+is in $\eta$-normal form, and the choice of $(k,i)$ implies that $v_{k,j} = 
+v'_{k,j}$. Thus if there exists $t \in \interval{a,b}$ such that $v^{(1)}_{k,t}
+> v'_{k,t}$ then $t \in \interval{a,i}$, and since $v_{k,i} > v'_{k,i}$
+we have that $v_{k,a} > v_{k,a+1} > \cdots > v_{k,i-1} > v_{k,i} -1$, which
+is precisely the monotonicity condition for $v^{(1)}$ over the interval $I$.
+Thus $v^{(1)} \searrow v'$ and since $v'$ is in $\eta$-normal form so is 
+$v^{(1)}$. Thus $v^{(1)}$ satsfies item \ref{i:ik}.
+
+Let us check item \ref{i:omega} for $v^{(1)}$. Once again, since $v^{(1)}$ 
+differs from $v$ only in the $(k,i)$-th entry, we only have to check the
+inclusions for elements of the form $(k+1,j,i)$ and $(k,i,j)$. For simplicity 
+we denote $X = \Omega^+(v) \cap \Omega^+(v')$ and $Y = \Omega^+(v) \cup 
+\Omega^+(v')$
+\begin{itemize}
+\item Suppose $(k+1,j,i) \in X$. Then $v_{k+1,j} - v_{k,i} \geq 0$ and hence 
+$v^{(1)}_{k+1,j} - v^{(1)}_{k,i} = v_{k+1,j} - v_{k,i} + 1 \geq 0$, so 
+$(k+1,i,j) \in \Omega^+(v^{(1)})$.
+
+\item Suppose $(k,i,j) \in X$. Then $v_{k,i} - v_{k-1,j} \geq 0$, and the 
+choice of $(k,i)$ implies that $v_{k-1,j} = v'_{k-1,j}$. Since $v_{k,i} - 
+v_{k,j} \geq v'_{k,i} - v'_{k-1,j} \geq 0$, we have $(k,i,j) \in 
+\Omega^+(v^{(1)})$.
+
+\item Suppose $(k+1,j,i) \in \Omega^+(v^{(1)})$. Then $v_{k+1,j} - v_{k,i} + 1
+\geq 0$. If $v_{k+1,j} - v_{k,i} \geq 0$ then $(k+1, j,i) \in \Omega^+(v) 
+\subset Y$ and we are done. Otherwise $v_{k+1,j} - v_{k,i} = - 1$, and again
+the choice of $(k,i)$ implies that $v'_{k+1,j} = v_{k+1,j}$. Thus $v'_{k+1,j}
+- v'_{k,j} \geq v_{k+1,j} - v_{k,i} + 1 \geq 0$ and $(k+1,i,j) \in \Omega^+(v')
+\subset Y$.
+
+\item Suppose $(k,i,j) \in \Omega^+(v^{(1)})$. Then $v_{k,i} - 1 - v_{k-1,j}
+\geq 0$ and hence $(k,i,j) \in \Omega^+(v) \subset Y$.
+\end{itemize}
+This completes the proof for item \ref{i:omega}.
+
+Recall that $\interval{a,b}_k$ is the unique interval in $\I_\eta(v)$ 
+containing $(k,i)$, and that we have already observed that the choice of 
+$(k,i)$ along with the fact that $v$ dominates $v'$ implies that 
+$v_{k,i-1} > v_{k,i} > v_{k,i+1}$ and $v_{k,t} = v'_{k,t}$ for all $i < t 
+\leq b$, and this implies that $a(I) = i$. Now if $v_{k,i} - 1 > v_{k,i}$
+then $I = \{(k,i)\}$ so $\alpha(I)$ is the identity and $\I_\eta(v) = 
+\I_\eta(v')$, which implies that $\omega(v) = \omega(v')$. Thus we only
+need to check that item \ref{i:interval} holds when $v_{k,i} - 1 = v_{k,i+1}$.
+Let $I' = I \setminus \{(k,i)\}$. Then $\I(v) = \I(v') \setminus 
+\{I', \{(k,i)\}\} \cup \{I\}$, and so
+\begin{align*}
+\omega(v) 
+	&= \omega_\eta \prod_{J \in \I_\eta(v)} \omega_J 
+	= \omega_\eta \left(\prod_{J \neq I'} \omega_J\right) \omega_{I'}
+\end{align*} 
+and it is easy to check that $\omega_{I'} = \omega_I \alpha(I)$. This shows 
+that $v^{(1)}$ has all the desired properties. Now let $N = \sum_{(r,s) \in 
+\Sigma} v_{r,s} - v'_{r,s}$ and set $v^{(s)} = (v^{(s-1)})^{(1)}$ for all $s 
+\in \interval N$. An inductive argument shows that this sequence has the 
+desired properties, and that $v^{(N)} = v'$. This completes the proof.
+\end{proof}
+
+\begin{Proposition}
+Let $v,v' \in \overline v + \n(\eta)$. If $\Omega^+(v) \subset \Omega^+(v')$ 
+then $V(T(\overline v))[\chi_{v'}] \subset U D_{\omega(v)}(v)$. In particular
+if $v$ is fully critical and $\Omega^+(v) = \emptyset$ then $V(T(\overline v))$
+is cyclic generated by $D_e(v)$.
+\end{Proposition}
+\begin{proof}
+By item \ref{i:common} of Lemma \ref{L:domination} there exists $v'' \searrow 
+v, v'$ with $\Omega^+(v) = \Omega^+(v') \subset \Omega^+(v'')$. Thus it is 
+enough to prove the statement for $v \searrow v'$ and $v \nearrow v'$, and by 
+Lemma \ref{L:sequence} we may restrict to the case $v' = v \pm \delta^{k,i}$ 
+for some $(k,i) \in \Sigma$. 
+
+If $v' = v - \delta^{(k,i)}$ then $\omega(v')$ is an $\epsilon(v)$-shuffle, 
+and hence $D_{\omega(v')}(v) \neq 0$. Furthermore, the coefficient of 
+$D_{\omega(v')}(v')$ in $E_{k+1,k} D_{\omega(v)}(v)$ is
+\begin{align*}
+\DD_{\omega(v'), \omega(v')}^v(e_{k,i}^a)
+	&= e_{k,i}^a(v) 
+		= \frac{\prod_{j=1}^{k-1} v_{k,i} - v_{k-1,j}}
+			{\prod_{I \in \I_k(v)} v_{k,i} - v_{k, a(I)}}.
+\end{align*}
+This is zero if and only if $v_{k,i} = v_{k-1, j}$ for some $j \in \interval 
+{k-1}$ which would imply $(k,i,j) \in \Omega^+(v) \subset \Omega^+(v')$,
+and hence $-1 = v_{k,i} - v_{k-1,j} -1 = v'_{k,i} - v'_{k-1,j}  \geq 0$, a
+contradiction. Thus the projection of $E_{k+1,k}$ to the component 
+$V(T(\overline v))[\chi_v]$ is a linear combination of derived tableaux of
+character $\chi_{v'}$ in which $D_{\omega(v')}(v')$ appears with nonzero
+coefficient. By lemma \ref{L:most-derived-tableaux} this linear combination
+generates $V(T(\overline v))[\chi_{v'}]$.
+
+If $v' = v + \delta^{k,i}$ then the coefficient of $D_{\omega(v)}(v)$ in
+$E_{k,k+1} D_{\omega(v')}(v')$ is
+\begin{align*}
+\DD_{\omega(v')\alpha(I), \omega(v)}^{v'}(e_{k,i}^a)
+	&= \DD_{\omega(v),\omega(v)}^{v'}(e_{k,i}^b)
+		= \frac{\prod_{j=1}^{k+1} v_{k,i} - v_{k+1,j}}
+			{\prod_{I \in \I_k(v)} v_{k,i} - v_{k, a(I)}}.
+\end{align*}
+As before this is not zero, since otherwise $v_{k+1,j} = v_{k,i}$ for some
+$j \in \interval{k+1}$, which in turn implies that $-1 = v_{k+1,i} - v_{k,i}
+-1 = v'_{k+1,j} - v'_{k,i} \geq 0$, a contradiction. Hence just as before
+$V(T(\overline v))[\chi_{v'}]$ is contained in the module generated by 
+$D_{\omega(v)}(v)$.
+\end{proof}
+The following is an immediate corollary.
+\begin{Corollary*}
+Let $v \in \overline v + \n(\eta)$ be fully critical with $\Omega^+(v) = 
+\emptyset$. Then $D_e(v)$ generates $V(T(\overline v))$ over $U$.
+\end{Corollary*}
+
 \begin{bibdiv}
 \begin{biblist}
 \bibselect{biblio}
