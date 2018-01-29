@@ -1,0 +1,638 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[small]{titlesec}
+%\usepackage{paragraphs}
+
+\usepackage{hyperref}
+
+\usepackage{amsthm,thmtools}
+%\usepackage{showlabels}
+%\linespread{1.2}
+\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{enumerate}
+\usepackage[osf,noBBpl]{mathpazo}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{helvet}
+\usepackage{stmaryrd}
+\usepackage[normalem]{ulem}
+
+\renewcommand\labelitemi{--}
+
+
+%%%%%%%%%%%%Theorems, for paragraphs package%%%%%%%%%%%%%%%%%%%%%%%%%%
+% numbered versions
+
+\newskip\paraskip
+\paraskip=0.75ex plus .2ex minus .2ex
+
+\newcounter{para}[section]
+\setcounter{para}{0}
+\renewcommand\thepara{\thesection.\arabic{para}}
+\def\paragraph{%
+  \if@noskipsec \leavevmode \fi
+  \par
+  \if@nobreak
+    \everypar{}%
+  \else
+    \addpenalty{\@secpenalty}%
+    \addvspace{\paraskip}%
+  \fi
+  \noindent
+  \refstepcounter{para}%
+  \textbf{\thepara.}\hspace{1ex}%
+  \@nobreakfalse
+  \ignorespaces
+}
+
+\newcommand\pref[1]{\textbf{\ref{#1}}}
+
+%\newcommand\theHpara{\theHsection.\arabic{para}}
+
+\declaretheoremstyle[headformat=swapnumber, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle}
+\declaretheorem[name=Lemma, sibling=para, style=mystyle]{Lemma}
+\declaretheorem[name=Proposition, sibling=para, style=mystyle]{Proposition}
+\declaretheorem[name=Theorem, sibling=para, style=mystyle]{Theorem}
+\declaretheorem[name=Corollary, sibling=para, style=mystyle]{Corollary}
+\declaretheorem[name=Definition, sibling=para, style=mystyle]{Definition}
+%\declaretheorem[name=Examples, sibling=para, style=mystyle]{Example}
+%\declaretheorem[name=Remark, sibling=para, style=mystyle]{Remark}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, spaceabove=\paraskip,
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+\declaretheorem[name=Examples, style=mystyle-empty]{Example*}
+\declaretheorem[name=Remark, style=mystyle-empty]{Remark*}
+
+% plain style
+\declaretheoremstyle[
+        headformat={{\bfseries\NUMBER.}{ \bfseries\NAME}},
+        spaceabove=\paraskip, 
+        headpunct={. },
+        headfont=\bfseries,
+        bodyfont=\normalfont
+        ]{mystyle-plain}
+\declaretheorem[name=Ejemplo, sibling=para, style=mystyle-plain]{Example}
+\declaretheorem[name=Observaci\'on, sibling=para, style=mystyle-plain]{Remark}
+
+\makeatletter
+\renewenvironment{proof}[1][\textit{Proof}]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep.75\paraskip\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\usepackage{tikz}
+\usepackage{mathdots}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\renewcommand\k{\Bbbk}
+
+\newcommand\F{\mathcal F}
+\newcommand\V{\mathcal V}
+\newcommand\D{\mathcal D}
+\renewcommand\H{\mathcal H}
+\newcommand\I{\mathcal I}
+\newcommand\p{\mathfrak p}
+
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\Id{\mathsf{Id}}
+\newcommand\im{\mathsf{im}}
+\newcommand\coker{\mathsf{coker}}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\g{\mathfrak g}
+\newcommand\gl{\mathfrak{gl}}
+\newcommand\gen{\mathsf{gen}}
+\newcommand\std{\mathsf{std}}
+
+\newcommand\vectspan[1]{\left\langle #1 \right\rangle}
+\newcommand\interval[1]{\llbracket #1 \rrbracket}
+
+\DeclareMathOperator\End{End}
+\DeclareMathOperator\Specm{Specm}
+
+\DeclareMathOperator\sym{sym}
+\DeclareMathOperator\asym{asym}
+\DeclareMathOperator\sg{sg}
+\DeclareMathOperator\Frac{Frac}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Singular Gelfand-Tsetlin modules
+\footnote{
+  This is a DRAFT for a section to be included in a future article with 
+  Futorny et al. This section will contain the construction of what I think is 
+  the universal Gelfand-Tsetlin module associated to an arbitrary GT-tableaux, 
+  and all the information we can obtain about it.
+  }
+}
+
+\author{Pablo Zadunaisky
+\footnote{Instituto de Matem\'atica e Estat\'istica, Universidade de S\~ao
+Paulo,  S\~ao Paulo SP, Brasil. \texttt{email:} pzadun@ime.usp.br.
+PZ is a FAPESP PostDoc Fellow, grant: 2016-25984-1 
+S\~ao Paulo Research Foundation (FAPESP).}
+}
+
+\date{05/05/2017}
+
+\begin{document}
+\maketitle
+
+\section*{Notation}
+
+All the notation included here should be in the final article.
+
+Fix $n \in \NN_{\geq 2}$ and $N = \binom{n}{2}$.
+
+$U = U(\gl(n,\CC))$, $\Gamma \subset U$ the Gelfand-Tsetlin algebra associated
+with inclusion in the top right corner. $c_{k,i}$ the usual generators of 
+$\Gamma$, $\gamma_{k,i}$ the symmetric polynomials that give the action.
+
+$e_{k,i}^\pm, e_k$ the rational functions appearing in the GT-formulas.
+
+$\CC(\lambda) = \CC[\lambda_{k,i} \mid 1 \leq i \leq k \leq n]$, and 
+$\CC(\lambda_m) = \CC[\lambda_{m,i} \mid 1 \leq i \leq m] \subset \Lambda$
+for each $m \in \interval{n}$.
+
+$G = S_1 \times S_2 \times \cdots \times S_n$.
+
+$G$ acts on $\CC(\lambda)$ as follows: an element $\sigma \in S_m$ permutes 
+the variables in $\CC(\lambda_m)$ in the obvious way and fixes all others. 
+Given $\sigma \in S_m$ and $f \in \CC(\lambda_m)$, set $f^\sigma = \sigma 
+\cdot f$.
+
+$\ZZ^N$ acts on $\CC(\lambda)$ as follows: for each $z \in \ZZ^N$, set $(z 
+\cdot f)(\lambda) = f(\lambda + z)$. Sometimes we write $f(\lambda^z) = z \cdot
+f$.
+
+$\Lambda_m = \CC(\lambda_m)^{S_m}$. 
+
+$J_m \subset \CC(\lambda_m)$ is the ideal generated by symmetric polynomials of
+positive degree in $\CC(\lambda_m)$.
+
+We identify $\CC^N$ with the space of all tableaux. Write $\ZZ^N$ for integral 
+tableaux, $\ZZ^N_0$ for integral tableaux with top row $0$, $\CC^N_\gen$ for 
+generic tableaux, $\CC^N_\std$ for standard tableaux.
+
+\section{The universal Gelfand-Tsetlin module associated to a tableaux}
+
+Let $v \in \CC^N$ be an arbitrary tableaux, and let $\chi$ be the character of 
+$\Gamma$ associated to $v$. Our objective is to build a Gelfand-Tsetlin module 
+$M$ such that $M(\chi) \neq 0$. 
+
+\begin{Definition}
+We denote by $V_\CC$ the $\CC$ vector-space generated by the set 
+\[
+  \{T(z) \mid z \in \ZZ^N_0\}.
+\]
+For any $\CC$-algebra $R$ we write $V_R = R \ot_\CC V_\CC$.
+\end{Definition} 
+
+Let $A$ be the localization of $\CC(\lambda)$ at the infinite set 
+$\{\lambda_{k,i} - \lambda_{k,j} - a \mid 1 \leq i < j \leq k < n, a \in 
+\ZZ\}$. This is the algebra of rational functions over $\CC^N_\gen$, Notice 
+that the algebra $A$ contains the rational functions $e_{k,i}^\pm, e_k$. 
+For each $v \in \CC_\gen$ there is a $1$-dimensional representation of $A$ 
+which we denote as $\CC_v$; we fix a generator of this $1$-dimensional module, 
+which we denote by $1_v$. The free $A$-module $V_A$ can be endowed with the 
+structure of a $U$-module. The following result is 
+\cite{Zad-1-sing}*{Proposition 1}.
+
+\begin{Proposition}
+\label{P:universal-generic-GT-module}
+The $A$-module $V_A$ can be endowed with the structure of a $U$-module 
+with the action of the canonical generators given by
+\begin{align*}
+E_{k,k+1} T(z) 
+  &= - \sum_{i=1}^k e_{k,i}^+(\lambda^z) T(z + \delta^{k,i}); \\
+E_{k+1,k} T(z) 
+  &= \sum_{i=1}^k e_{k,i}^-(\lambda^z) T(z - \delta^{k,i}); \\
+E_{k,k} T(z)
+  &= e_k(\lambda^z) T(z),
+\end{align*}
+and for each $1 \leq i \leq k \leq n$, we have $c_{k,i} T(z) = 
+\gamma_{k,i}(\lambda^z) T(z)$. 
+\end{Proposition}
+
+Given $v \in \CC^N_\gen$, the Gelfand-Tsetlin module associated to the generic 
+tableaux $T(v)$ was constructed by Drozd, Futorny and Ovsienko in 
+\cite{DFO-GT-modules}. This module, denoted by $V(T(v))$, is a $\CC$-vector 
+space generated by all tableaux $\{T(v+z) \mid z \in \ZZ^N_0\}$, and the 
+action of $U$ is given by the Gelfand-Tsetlin formulae. Now the $A$-module 
+$V_A$, along with its $U$-module structure, can be thought of as a generic 
+version of a module associated to a generic tableauxin the following sense. 
+The $\CC$-vector space $V_A \ot_A \CC_v$ inherits a $U$-module structure from 
+$V_A$, and it has a $\CC$-basis consisting of all vectors $T(z) \ot_A 1_v$. 
+By definition 
+\[
+  c_{k,i} T(z) \ot_A 1_v 
+    = \gamma_{k,i}(\lambda^z) T(z) \ot_A 1_v 
+    = \gamma_{k,i}(v + z) T(z) \ot_A 1_v,
+\]
+so $T(z) \ot 1_v$ is an eigenvector of eigenvalue $v + z$. The assignation 
+$T(z) \ot 1_v \in V_A \ot_A \CC_v \mapsto T(v+z) V(T(v))$ is an isomorphism of 
+$U$-modules. \textcolor{red}{There is a unique irreducible GT-module such that 
+$V(\chi_v) \neq 0$, which thus must be a subquotient of $V(T(v))$, and thus 
+all these modules can be obtained through $V_A$ by specialization and taking 
+subquotients.}
+
+An ideal objective would be to obtain a universal GT-module $V$, such that for
+all tableaux $v \in \CC^N$ we could obtain a module $V(T(v))$ by some form of
+specialization at $v$. We will give a construction of such a module in this 
+section, and realize it as a submodule of $V_A$.
+
+\begin{Definition}
+We denote by $B$ the localization of $\CC(\lambda)$ at the infinite set
+$\{\lambda_{k,i} - \lambda_{k,j} - a \mid 1 \leq i < j \leq k < n, a \in 
+\ZZ \setminus \{0\}\}$.
+\end{Definition}
+Let $v \in \CC^N$. We will say that $v$ is $\emph{fully-singular}$ if whenever
+$v_{k,i} - v_{k,j} \in \ZZ$ for some $1 \leq i < j \leq k < n$, then $v_{k,i}
+- v_{k,j} = 0$. Notice that if $v \in \CC^N$ is arbitrary there always exists
+$z \in \ZZ^N_0$ such that $v+z$ is fully singular.
+
+If $v$ is fully-singular and $f \in B$ then $f(v)$ is well defined, and so we 
+get a one dimensional representation of $B$, which we will also denote by 
+$\CC_v$; extending the previous notation, we fix a generator $1_v \in \CC_v$. 
+If $v \in \CC^N_\gen$ then it is fully singular and the $B$-module $\CC_v$ is 
+the restriction of the $A$-module $\CC_v$, so the slight abuse of notation in 
+this definition is well justified. We will find our universal module $L_B$ as 
+a complete $B$-lattice of $V_A$, and for each fully singular $v \in \CC^N$
+we will set $V(T(v)) = L_B \ot_B \CC_v$. The support of this module will
+contain all characters of the form $\chi_{v+z}$ with $z \in \ZZ^N_0$, and hence
+every character will appear in one of these modules.
+
+\subsection{The action of the symmetric group}
+Recall that $G = S_1 \times S_2 \times \cdots \times S_n$; we will see $S_k$ 
+as a subgroup of $G$ for all $k \in \interval{n}$. For any $g \in G$ and any 
+$k \in \interval n$ we write $g[k]$ for the projection of $g$ on $S_k$; also
+given a subgroup $E < G$ we will write $E_k$ for $E \cap S_k$, so $E = E_1 
+\times E_2 \times \cdots \times E_n$.
+
+Set $\I = \{(k,i) \mid 1 \leq i \leq k \leq n\}$. For each $\sigma \in S_m$ set
+$\sigma(m,i) = (m,\sigma(i))$ for all $i \in \interval m$ and $\sigma(k,i) = 
+(k,i)$ whenever $k \neq m$ and $i \in \interval k$. This defines an action of 
+$G$ on $\I$. Thus $G$ acts on the algebra $\CC(\lambda)$ by $g\cdot 
+\lambda_{k,i} = \lambda_{g(k,i)}$ (we are making a slight abuse of notation 
+by setting $\lambda_{(k,i)} = \lambda_{k,i}$). This action extends
+to the field of rational functions $F = \Frac(\CC(\lambda))$, and the 
+subalgebras $A$ and $B$ defined above are stable by the action of $G$. We 
+sometimes write $f^g$ for $g \cdot f$; with this notation we get $(f^g)^{g'} = 
+f^{g'g}$.
+
+The group $G$ also acts on the space of all tableaux by $g \cdot \delta^{k,i} 
+= \delta^{g(k,i)}$, and this action extends to an action on $V_\CC$. Finally,
+since $V_A = A \ot_\CC V_\CC$, it follows that $G$ acts diagonally on $V_A$,
+i.e. $g \cdot f \ot T(z) = f^g \ot T(g \cdot z)$. The next lemma gathers
+some useful facts relating all these actions.
+
+\begin{Lemma}
+The following hold.
+\label{L:G-equivariant}
+\begin{enumerate}[(a)]
+\item \label{G-on-shifts}
+For each $g \in G, f \in \Frac(\CC(\lambda))$ and $v \in \CC^N$ we have
+$f^g (\lambda^z) = (g \cdot f)(\lambda^{g(z)})$.
+
+\item \label{G-on-GT-functions}
+For each $g \in G$ and each $(k,i) \in \I$, we have that $g \cdot 
+e_{k,i}^\pm = e_{g(k,i)}$ and $g \cdot e_k = e_k$.
+
+\item \label{G-U-equivariant}
+The action of $U$ on $V_A$ is $G$-equivariant.
+\end{enumerate}
+\end{Lemma}
+\begin{proof}
+To prove items (\ref{G-on-shifts}) and (\ref{G-on-GT-functions}) it is enough 
+to show that the formulas hold for $g = \sigma \in S_k$ for some $k \in 
+\interval n$, and in both cases the verification is direct. 
+
+Now for any $v \in \CC^N, g \in G$ and $k \in \interval n$ we have
+\begin{align*}
+g \cdot (E_{k,k+1} T(v))
+  &= - \sum_{i = 1}^k g \cdot 
+    \left(e_{k,i}(\lambda^v) T(v + \delta^{k,i}) \right)
+    = -\sum_{i=1}^k e_{g[k](k,i)} T((g \cdot v)+\delta^{g[k](k,i)}).
+\end{align*}
+The element $g[k]$ is a permutation of all $(k,i)$ with $k$ fixed, so this 
+equals
+\begin{align*}
+- \sum_{i=1}^k e_{k,i}(\lambda^{g \cdot v}) T((g \cdot v)+\delta^{k,i}) = 
+E_{k,k+1} T(g \cdot v).
+\end{align*}
+A similar proof works for $E_{k+1,k}$ and $E_{k,k}$.
+\end{proof}
+
+\subsection{Divided diferences}
+Fix $m \in \interval{n}$ and write $x_i = \lambda_{m,i}$. By definition $\CC[x]
+= \CC[x_1, \ldots, x_m] \subset \CC[\lambda]$. The symmetric group $S_m$ acts 
+on $\CC[x]$ in the obvious way. We denote by $\Delta$ the polynomial
+$\prod_{i<j} x_i - x_j$. Clearly for each $i \in \interval m$ we have 
+$\Delta^{(i,i+1)} = - \Delta$, so $\Delta^\sigma = (\sg \sigma) \Delta$, and
+if $f \in \CC[x]$ is such that $f^\sigma = (\sg \sigma) f$ then $f = p \Delta$,
+where $p \in \CC[x]^{S_m}$.
+
+Let $F = \CC(x) = \Frac(\CC[x])$; clearly the action of $S_m$ extends to $F$
+For each $i \in \interval{m-1}$ let $s_i = (i,i+1) \in S_m$ and let $\partial_i
+= \frac{1}{x_i - x_{i+1}}(1 - s_i) \in F \# S_m$. Given $\sigma \in 
+S_m$, define the divided difference operator $\partial_\sigma$ as in 
+\cite{Man-symm-book}*{Defintion 2.3.1}. Notice that $\CC[x] \# S_m$ is a 
+subalgebra of $F \# S_m$; we denote by $\CC[x, \partial]$ the $\CC[x] \# S_m$
+subalgebra of $F \# S_m$ generated by divided differences.
+
+Let $M$ be an $S_m$-equivariant $\CC[x]$-module. We will say that $M$ is 
+divided difference $\CC[x]$-module if $M$ is a $\CC[x,\partial]$-module.
+For example, $\CC[x]$ is a divided difference $\CC[x]$-module, and so is the
+$U$-module $V_A$ described above. If $S \subset \CC[x]$ is a multiplicatively
+closed subset and is also closed by the action of $S_m$ then $S^{-1}\CC[x]$
+is a divided difference $\CC[x]$-module.
+
+Set
+\begin{align*}
+\sym 
+  &= \frac{1}{m!}\sum_{\sigma \in S_m} \sigma; 
+  &\asym 
+  &= \frac{1}{m!}\sum_{\sigma \in S_m} \sg(\sigma) \sigma.
+\end{align*}
+These elements lie in $\CC[x] \# S_m$. If $M$ is a $\CC[x]$-module with an 
+equivariant $S_m$-action, then multiplication by $\sym$ is the projection to 
+the symmetric component of $M$ and multiplication by $\asym$ is the projection
+to its antysimmetric component. If $R$ is a $\CC[x]$-subalgebra of $F$ stable 
+by the action of $S_m$ then for each $f \in R$ we have $\asym(f)/\Delta \in R$.
+
+For the rest of this section we denote by $\p$ the ideal generated by the 
+elements $p_i = x_i - x_{i+1}$ for $1 \leq i \leq m-1$. Clearly this is a prime
+ideal. The localization $\CC[x]_\p$ consists of all rational functions in $F$
+that can be evaluated at a point of the form $(a,a, \ldots, a)$.
+
+\begin{Lemma}
+Let $f,g \in \CC[x]_\p$ and let $\sigma, \tau \in S_m$. The following hold.
+\begin{enumerate}
+\item $\sym(f) \equiv f \mod I$.
+
+\item $\asym((\partial_\sigma f) g) = \asym(f (\partial_{\sigma^{-1}}g))$.
+
+\item $\asym(\partial_{\sigma^{-1}} \Delta \partial_\tau \Delta) = 
+\begin{cases}
+\Delta \sym(\partial_{\sigma \tau} \Delta) & \mbox{ if } 
+\ell(\sigma) + \ell(\tau) = \ell(\sigma\tau) \\
+0 & \mbox{otherwise}.
+\end{cases}$
+
+\item $\partial_\sigma \Delta \equiv \delta_{\sigma, w_0} \mod I$.
+\end{enumerate}
+\end{Lemma}
+\begin{proof}
+Let $t = (a, a, \ldots, a)$, so $\tau \cdot t = t$. Then $\sym(f)(t) = f(\sym 
+\cdot t) = f(t)$, so $\sym(f) - f$ is zero over the variety $V(\p)$, which 
+implies $\sym(f) \equiv f \mod \p$. 
+
+Notice that if $f^{(i,i+1)} = f$ then $\asym(f) = \frac{\asym(f) + 
+\asym(f^{(i,i+1)})}{2} = 0$, so in particular $\asym(\partial_{s_i}(f)) = 0$.
+Now $\partial_{s_i}(fg) = \partial_{s_i}(f)g + f^{s_i}\partial_{s_i})g)$, so
+\begin{align*}
+0 
+  &= \asym(\partial_i(fg)) 
+  = \asym(\partial_i(f) g) + \asym(f^{s_i}\partial_i(g))\\
+  &= \asym(\partial_i(f) g) - \asym((f^{s_i}\partial_i(g))^{s_i})\\
+  &= \asym(\partial_i(f) g) - \asym(f\partial_i(g))
+\end{align*}
+so $\asym(\partial_i(f)g) = \asym(f \partial_i(g))$. The result follows by 
+induction on the length of $\sigma$, and this immediately implies that 
+$\asym(\partial_{\sigma^{-1}} \Delta \partial_\tau \Delta) = \asym(\Delta 
+\partial_\sigma \partial_{\tau} \Delta$, and using the fact that 
+$\Delta$ is antisymmetric we get that this equals $\Delta 
+\sym(\partial_{\sigma^{-1}})\partial_{\tau} \Delta)$. The result follows
+from the definition of symmetric differences.
+
+Finally, Let $\CC[\p]$ be the subalgebra of $\CC$ generated by the ideal $\p$.
+It is easy to check that $\CC[\p]$ is stable by $\partial_i$ and that this is
+an operator of degree $-1$. Since $\Delta \in \CC[\p]$, so do all of its 
+derived differences. Now $\partial_\sigma \Delta$ is a nonzero homogeneous 
+polynomial of degree $\binom{n}{2} - \ell(\sigma)$, so it lies in $\p$ unless
+$\sigma = w_0$.
+\end{proof}
+
+\subsection{Derived tableaux}
+For each $i \in \interval{m-1}$ define $\partial_i: V_A \to V_A$ as the linear
+extension of the assignation $\partial_i(T(v)) = \frac{T(v) - T(s_i \cdot v)}
+{x_i - x_{i+1}}$. For each $\sigma \in S_m$ we define $\partial_\sigma$ by...
+
+\begin{Definition}
+Given $\sigma \in S_m$ and $v \in \ZZ_0^N$, we set $D_\sigma(v) = 
+\sym(\partial_\sigma T(v)) \in V_A$.
+\end{Definition}
+
+\begin{Lemma}
+For each $\sigma \in S_m$ we have
+\begin{align*}
+D_\sigma(v) 
+  &= \sym \left(
+    \frac{\partial_{\sigma^{-1}} \Delta}{\Delta} T(v)
+  \right).
+\end{align*}
+Also for each $\tau \in S_m$ there exist $c_{\nu} \in \CC[x]$ such 
+that $T(\rho(v)) = \sum_{\sigma \in S_m} c^\rho_\nu D_\nu(v)$.
+Furthermore, $c^{\rho}_\nu \equiv (\partial_\nu \Delta)^\rho \mod 
+\p^{S_m}$.
+\end{Lemma}
+\begin{proof}
+The same proof as above shows that for each element $T \in V_A$ and each $f \in
+A$ we have $\asym(f \partial_\sigma T) = \asym(\partial_{\sigma^{-1}}(f) T)$.
+Thus
+\begin{align*}
+\sym(\partial_\sigma T(v))
+  &= \frac{1}{\Delta}\asym(\Delta \partial_\sigma T(v))
+  = \frac{1}{\Delta} \asym(\partial_{\sigma^{-1}}\Delta T(v)) 
+  = \sym\left(\frac{\partial_{\sigma^{-1}}\Delta}{\Delta} T(v)\right).
+\end{align*}
+
+We denote by $R$ the ring of square matrices with coefficients in $F$ and rows 
+and columns indexed by $S_m$; for each $\sigma, \rho \in S_m$ and each $X \in 
+R$ we denote by $X^\sigma_\rho$ the entry in row $\sigma$ and column $\rho$ of 
+$X$, so if $Y \in R$ then $(X Y)^\sigma_\rho = \sum_\nu X^\sigma_\nu 
+Y^\nu_\rho$.
+
+Let $X, Y \in R$ be the matrices defined by $X_\sigma^\rho = \left( 
+\frac{\partial_{\sigma^{-1}} \Delta}{\Delta} \right)^\rho$, and $Y_\tau^\nu = 
+(\partial_{\nu^{-1} w_0} \Delta)^\tau$. Then
+\begin{align*}
+(YX)^\nu_\sigma 
+  &= \sum_\rho Y_\rho^\nu X^\rho_\sigma
+  = \sum_{\rho} (\partial_{\nu^{-1} w_0} \Delta)^\rho 
+    \left( 
+      \frac{\partial_{\sigma^{-1}} \Delta}{\Delta} 
+    \right)^\rho
+  = \frac{\asym(\partial_{\nu^{-1} w_0} \Delta\partial_{\sigma^{-1}} \Delta)}
+    {\Delta}
+  = \sym(\partial_\sigma \partial_{\nu^{-1} w_0} \Delta) 
+\end{align*}
+If $\ell(\sigma) + \ell(\nu^{-1} w_0) > \ell(w_0)$, or equvalently 
+$\ell(\sigma) > \ell(\nu)$, then $(YX)^{\nu}_\sigma = 0$. On the other hand, 
+if $\ell(\sigma) + \ell(\nu^{-1} w_0) = \ell(w_0)$ then $\partial_\sigma 
+\partial_{\nu^{-1} w_0} = 0$ unless $\sigma = \nu$. Thus if we order the 
+elements of $S_m$ by length, then $YX$ is an upper triangular matrix with
+$1$'s in the diagonal and polynomials of the form $\sym(\partial_\rho \Delta)$
+in the upper triangular part; since $\partial_\rho \Delta \in \p$ and 
+$\p$ is invariant by the action of $S_m$, it follows that the strictly
+upper triangular part of $YX$ lies in $\p^{S_m}$. Thus $X$ is invertible in 
+$R$, and its inverse is of the form $Y + Z$ with $Z$ a strictly upper 
+triangular matrix with coefficients in $\p^{S_m}$.
+
+Put $c_\sigma = (Y+Z)^\sigma_e$, where $e \in S_m$ is the identity element.
+Since $\rho\cdot X^e_\sigma = X^{\rho}_\sigma$, we have that
+$(Y+Z)^\nu_\rho = \rho \cdot (Y+Z)^\nu_e = c_\nu^\rho$. It follows 
+that $c_\nu^\rho \equiv (\partial_{\nu^{-1} w_0}(\Delta))^\rho \mod \p^{S_m}$, 
+and that
+\begin{align*}
+\sum_{\nu} c_\nu^\rho D_\nu(T(v))
+  &= \sum_\nu c_\nu^\rho 
+    \sum_\tau \left(
+      \frac{\partial_{\nu^{-1}} \Delta}{\Delta}
+    \right)^\tau T(\tau(v))\\
+  &= \sum_\tau \left(
+      \sum_\nu (Y+Z)^\nu_\rho X_\nu^\tau
+    \right) T(\tau(v))\\
+  &= \sum_\tau(\delta_{\rho,\tau})T(\tau(v)) 
+  = T(\rho(v))
+\end{align*}
+\end{proof}
+
+
+Let $E \subset S_m$ be the stabilizer of $v$. Then $D_\sigma(v) \neq 0$ if and 
+only if $\sigma$ is the element of minimal length in $\sigma E$.
+
+The set $\{D_\sigma(v) \mid \sigma \in S_m\} \setminus \{0\}$ is an
+$A$-basis of the $A$-module with basis $\{T(\sigma(v)) \mid \sigma \in S_m\}$,
+and the coefficients of $T(\sigma(v))$ in the basis of derived tableaux lie in
+$\CC[x]$.
+
+We denote by $B$ the localization of $\CC[x]$ at the inifinte set $\{x_i - x_j 
+- z \mid 1 \leq i < j \leq m, z \in \ZZ \setminus \{0\}\}$. We denote by $I$ 
+the ideal generated by $x_i - x_{i+1}$ in $B$ and set $\overline B = B/I$.
+
+\begin{Definition}
+Write $L_B(v)$ for the $B$-module generated by $\{D_\sigma(v) \mid \sigma \in 
+S_m\}$, and $L_B = \bigoplus_{v \in \ZZ^N_0/S_m} L_B(v)$. Finally we set
+$L = L_B \ot_B \overline B = L_B/I L_B = \bigoplus_v L_B(v) / I L_B(v)$.
+\end{Definition}
+
+Write $\overline T(v)$ and $\overline D_\sigma(v)$ for the image of 
+$T(v)$ and $D_\sigma(v)$ in $L$, respectively.
+
+\begin{Lemma}
+$\overline T(\tau(v)) = \sum_\sigma (\partial_\sigma \Delta)^\tau \overline 
+D_\sigma(v)$
+\end{Lemma}
+
+\begin{Lemma}
+$L_B$ is a $U$-module.
+\end{Lemma}
+\begin{proof}
+The only ones hard to check are $E^+ = E_{m,m+1}$ and $E^- = E_{m+1,m}$.
+\begin{align*}
+E^+ D_\sigma(v)
+  &= \sym (\partial_\sigma E T(v))
+  = \sym\left(
+    \partial_\sigma 
+      \left(
+        \sum_j e_{m,j}^+(\lambda + v) T(v + \delta^{m,j})
+      \right)
+    \right)\\
+  & \equiv \sym \left(
+      \partial_\sigma \left(
+        \sum_j e_{m,j}^+(\lambda + v) 
+        \sum_\tau (\partial_\tau \Delta) D_\tau (v + \delta^{m,j})
+      \right)
+    \right) \\
+  &= \sum_{j,\tau} \sym(\partial_\sigma (e_{m,j}^+(\lambda+v)) 
+    \partial_{\tau} \Delta) D_\tau(v+\delta^{m,j}) \\
+  &\equiv \sum_{\tau, j}  \partial_{\tau^{-1}} 
+      \partial_\sigma (e_{m,j}^+(\lambda + v) \Delta) D_\tau(v+\delta^{m,j}).
+\end{align*}
+Since $e_{m,j}^+(\lambda + v) \Delta \in B$, so does 
+$\partial_\sigma(e_{m,j}^+(\lambda + v) \Delta)$ for any $\sigma \in S_m$.
+This completes the proof for $E^+$, the one for $E^-$ is analogous.
+\end{proof}
+
+\begin{bibdiv}
+\begin{biblist}
+\bib{DFO-GT-modules}{article}{
+   author={Drozd, Yu. A.},
+   author={Futorny, V. M.},
+   author={Ovsienko, S. A.},
+   title={Harish-Chandra subalgebras and Gel$\prime$fand-Zetlin modules},
+   conference={
+      title={Finite-dimensional algebras and related topics},
+      address={Ottawa, ON},
+      date={1992},
+   },
+   book={
+      series={NATO Adv. Sci. Inst. Ser. C Math. Phys. Sci.},
+      volume={424},
+      publisher={Kluwer Acad. Publ., Dordrecht},
+   },
+   date={1994},
+   pages={79--93},
+}
+
+\bib{Man-symm-book}{book}{
+   author={Manivel, Laurent},
+   title={Symmetric functions, Schubert polynomials and degeneracy loci},
+   series={SMF/AMS Texts and Monographs},
+   volume={6},
+   note={Translated from the 1998 French original by John R. Swallow;
+      Cours Sp\'ecialis\'es [Specialized Courses], 3},
+   publisher={American Mathematical Society, Providence, RI; Soci\'et\'e
+      Math\'ematique de France, Paris},
+   date={2001},
+   pages={viii+167},
+}    
+
+\bib{Zad-1-sing}{article}{
+  author={Zadunaisky, Pablo},
+  title={A new way to construct $1$-singular Gelfand-Tsetlin modules},
+  journal={Alg. and Discrete Math.},
+  volume={23},
+  number={1},
+  date={2017},
+}
+
+
+\end{biblist}
+\end{bibdiv}
+\end{document}
