@@ -40,6 +40,10 @@
 \newcommand\p{\mathfrak p}
 \newcommand\m{\mathfrak m}
 \newcommand\gl{\mathfrak{gl}}
+\renewcommand\sl{\mathfrak{sl}}
+\newcommand\nn{\mathfrak{n}}
+
+
 \newcommand\gen{\mathsf{gen}}
 \newcommand\std{\mathsf{std}}
 \newcommand\sh{\mathsf{sh}}
@@ -79,15 +83,13 @@ also set $\mu = (1, 2, \ldots, n)$ and $\Sigma = \{(k,i) \mid 1 \leq i \leq k
 Given $a,b,k \in \NN$ we set $\interval{a,b} = \{i \in \NN \mid a \leq i \leq 
 b\}$ and $\interval{b} = \interval{1,b}$; also set $\interval{a,b}_k = \{
 (k,i) \mid i \in \interval{a,b}\}$. If $I = \interval{a,b}$ we define $a(I)
-= a$ and $b(I) = b$ and also set $\ell(I) = b(I) - a(I) + 1$. 
+= a$ and $b(I) = b$ and also set $|I| = b(I) - a(I) + 1$. 
 
 An interval of $\Sigma$ is a set $\interval{a,b}_k \subset \Sigma$, so
 $1 \leq a \leq b \leq k$. An composition of $\Sigma$ is a disjoint 
-family $\I$ of intervals of $\Sigma$ whose union is $\Sigma$. If $\I$
-is an interval composition of $\Sigma$ then for each $k \in \interval n$ 
-there exists an integer $a_k$ such that $\I = \sqcup_{k=1}^n \{I^k_1, 
-\ldots I^k_{a_k}\}$, where $a(I^k_1) = 1, b(I^k_{a_k}) = k$ and $a(I^k_{j+1}) 
-= b(I^k_j)$; we write $\I_k = \{I^k_i \mid 1 \leq i \leq a_k\}$. Given two 
+family $\I$ of intervals of $\Sigma$ whose union is $\Sigma$. Given a 
+composition $\I$ of $\Sigma$ and $k \in \interval n$, we denote by $\I_k$ the
+set of all intervals $\interval{a,b}_k \in \I$. Given two 
 interval partitions $\I, \J$ of $\Sigma$, we say that $\J$ refines $\I$ and 
 write $\J < \I$ if for each $J \in \J$ there exists $I \in \I$ such that $J 
 \subset I$. 
@@ -96,26 +98,26 @@ A composition of $\mu$ is an $n$-tuple $\eta = (\eta^{(1)}, \ldots,
 \eta^{(n)})$ where $\eta^{(k)}$ is a composition of $k$; since $\mu$ is fixed
 we can identify $\eta$ with the concatenation of its parts. To each
 composition $\I$ of $\Sigma$ we assign a composition $\eta(\I)$ of $\mu$, 
-setting $\eta^{(k)}_j = |I^k_j|$. This assignation is bijective, and for each
-composition $\eta$ of $\mu$ we denote by $\I(\eta)$ the unique composition of
-$\Sigma$ corresponding to $\eta$. We say that a composition $\epsilon$
-refines $\eta$, and write $\epsilon < \eta$, whenever $\I(\epsilon) < 
-\I(\eta)$. Compositions of $\mu$ form a finite poset with maximum $\mu$, so 
-whenever we write $\eta < \mu$ we will mean that $\eta$ is a composition of 
-$\mu$.
+setting $\eta^{(k)}_j$ to be the cardinality of the $j$-th interval in $\I_k$. 
+This assignation is bijective, and for each composition $\eta$ of $\mu$ we 
+denote by $\I(\eta)$ the unique composition of $\Sigma$ corresponding to 
+$\eta$. We say that a composition $\epsilon$ refines $\eta$, and write 
+$\epsilon < \eta$, whenever $\I(\epsilon) < \I(\eta)$. Compositions of $\mu$ 
+form a finite poset with maximum $\mu$, so whenever we write $\eta < \mu$ we 
+will mean that $\eta$ is a composition of $\mu$.
 
 \paragraph
 For each finite set $X$ we denote by $S(X)$ the set of all bijections from
 $X$ to $X$. Set $S_\mu = S(\interval{1}_1) \times S(\interval{2}_2) \times
-\cdots \times S(\interval{n}_n)$, which is a subset of $S(\Sigma)$. If $I 
-\subset \Sigma$ is an interval then we see $S(I) \subset S_\mu$ in the obvious 
-way. Foreach composition $\I$ of $\Sigma$ we define $S_\I = \prod_{I \in \I} 
-S(I) \subset S_\mu$, and for each $\eta < \mu$ we set $S_\eta = S_{\I(\eta)}$.
+\cdots \times S(\interval{n}_n)$, which is a subset of $S(\Sigma)$. 
 Every element $\sigma \in S_\mu$ can be written as $\sigma^{(1)} \sigma^{(2)}
 \cdots \sigma^{(n)}$ with $\sigma^{(k)} \in S(\interval{k}_k)$. Obviously
 $S(\interval{k}_k)$ is isomorphic to the symmetric group in $k$ elements,
 and given a permutation $\sigma \in S_k$ we will denote the corresponding
-element of $S(\interval{k}_k)$ by $\sigma^{(k)}$.
+element of $S(\interval{k}_k)$ by $\sigma^{(k)}$. If $I 
+\subset \Sigma$ is an interval then we see $S(I) \subset S_\mu$ in the obvious 
+way. For each composition $\I$ of $\Sigma$ we define $S_\I = \prod_{I \in \I} 
+S(I) \subset S_\mu$, and for each $\eta < \mu$ we set $S_\eta = S_{\I(\eta)}$.
 Since it is a product of symmetric groups, $S_\mu$ is a Coxeter group
 with a well defined notion of length, and each $S_\eta$ is a parabolic
 subgroup of $S_\mu$. 
@@ -126,12 +128,12 @@ in $\CC^\mu$ is thus an $n$-tuple $(v_1, \ldots, v_n)$ with each $v_k$ a
 vector of $k$ entries; we refer to the $v_k$'s as the \emph{rows} of $v$
 and denote by $v_{k,i}$ the $i$-th entry of $v_k$. Also given an interval
 $\interval{a,b}_k \subset \Sigma$ we write $v(\interval{a,b}_k) = (v_{k,a},
-\cdots, v_{k,b})$. Given $\eta < \mu$ and $\I = \I(\eta)$ the $\eta$-blocks
+\ldots, v_{k,b})$. Given $\eta < \mu$ and $\I = \I(\eta)$ the $\eta$-blocks
 of $v$ are the elements of the set $\{v(I) \mid I \in \I\}$.
 
 The group $S_\mu$ acts on $\CC^\mu$ by permuting the entries, i.e. 
 $\sigma(v)_{k,i} = v_{\sigma(k,i)} = v_{k,\sigma^{(k)}(i)}$. We set 
-$\Lambda = \CC[x_{k,i} \mid (k,i) \in \Sigma(\mu)]$, the ring of polynomial 
+$\Lambda = \CC[x_{k,i} \mid (k,i) \in \Sigma]$, the ring of polynomial 
 functions on $\CC^\mu$, and by $K = \Frac(\Lambda)$ its fraction field. The 
 action of $S_\mu$ on $\CC^\mu$ induces an action on $\Lambda$ which is given 
 by $\sigma(x_{k,i}) = x_{\sigma(k,i)} = x_{k,\sigma^{(k)}(i)}$, and extends to 
@@ -143,31 +145,39 @@ the action of $S_\eta$ only permutes elements in the same $\eta$-block.
 We denote by $\ZZ^\mu_0 \subset \CC^\mu$ the set of points with integral 
 entries and $z_{n,i} = 0$ for all $i \in \interval{n}$. Fix $\eta < \mu$ and 
 let $\I = \I(\eta)$ be the corresponding composition of $\Sigma$. 
-We say that $z \in \ZZ^\mu_0$ is in normal $\eta$-form, or just normal form if 
-$\eta$ is clear from the context, if each $\eta$-block of $z$ is a weakly 
-descending sequence. For each $z \in \ZZ^\mu_0$ there is exactly one element 
-in the orbit $S_\eta z$ which is in $\eta$-normal form, and we denote it by 
-$\n_\eta(z)$. Thus the set $\n_\eta(\ZZ^\mu_0) = \{\n_\eta(z) \mid \ZZ^\mu_0\}$
-is a complete set of representatives of the equivalence classes in $\ZZ^\mu_0 
-/S_\eta$. Furthermore there exists a unique refinement $\epsilon_\eta(z) < 
-\eta$ such that the stabilizer of $\n_\eta(z)$ in $S_\eta$ is 
-$S_{\epsilon_\eta(z)} \subset S_\eta$. We will say that $z$ is 
-$\eta$-critical, resp. fully $\eta$-critical, if $\epsilon(z)$ is nontrivial, 
-resp. equal to $S_\eta$. Notice that $\I(z) = \I(\epsilon(z))$ is the maximal
-element among all refinements of $\I(\eta)$ such that $z(I)$ is a constant
-sequence for each $I \in \I(z)$. 
+We say that $z \in \ZZ^\mu_0$ is in \emph{$\eta$-normal form}, or just normal 
+form if $\eta$ is clear from the context, if each $\eta$-block of $z$ is a 
+weakly descending sequence. For each $z \in \ZZ^\mu_0$ there is exactly one 
+element in the orbit $S_\eta z$ which is in $\eta$-normal form, and we denote 
+it by $\n_\eta(z)$. Thus the set $\n(\eta) = \{\n_\eta(z) \mid 
+\ZZ^\mu_0\}$ is a complete set of representatives of the equivalence classes 
+in $\ZZ^\mu_0 /S_\eta$. 
+
+Given $z \in \n(\eta)$ we denote by $\I^\eta(z)$ the maximal refinement of 
+$\I(\eta)$ such that for any $I \in \I^\eta(z)$ all the entries in the block 
+$z(I)$  are equal, and we denote by $\epsilon_\eta(z)$ the corresponding 
+refinement of $\eta$. This is equivalent to stating that $S_{\epsilon_\eta(z)}$
+is the stabilizer of $z$ in $S_\eta$. We will say that $z$ is $\eta$-critical, 
+resp. fully $\eta$-critical, if $\epsilon(z)$ is nontrivial, resp. equal to 
+$S_\eta$.  
 
 \section{The algebra $B_\eta$}
 Throughout this section we fix $\eta$ a composition of $\mu$ and write
-$\I = \I(\eta)$.
+$\I = \I(\eta)$. All notions such as being in normal form, critical,  
+fully critical, etc. are relative to this fixed composition unless stated
+otherwise.
+
 \paragraph
-As usual we denote by $K \# S_\mu$ the smash product algebra.
+Recall that $K$ is the field of rational functions over $\CC^\mu$, and that
+$S_\mu$ acts on it by permuting the variables. As usual we denote by $K \# 
+S_\mu$ the smash product algebra. 
+
 Let $I \subset \Sigma(\mu)$ be an interval. We set 
 \begin{align*}
 \sym_I 	
-	&= \frac{1}{\ell(I)!}\sum_{\sigma \in S_I} \sigma;
+	&= \frac{1}{|I|!}\sum_{\sigma \in S_I} \sigma;
 &\asym_I 	
-	&= \frac{1}{\ell(I)!}\sum_{\sigma \in S_I} \sg(\sigma)\sigma.
+	&= \frac{1}{|I|!}\sum_{\sigma \in S_I} \sg(\sigma)\sigma.
 \end{align*} 
 Since we are seeing $S_I$ as a subrgroup of $S_\mu$, these are idempotent 
 elements in $K \# S_\mu$. We also set
@@ -178,8 +188,8 @@ elements in $K \# S_\mu$. We also set
 	&= \prod_{I \in \I(\eta)} \asym_I.
 \end{align*} 
 For each $\sigma \in S_\mu$ there is a divided difference operator 
-$\partial_\sigma$ as defined in \cite{RZ-singular-characters}*{}. We set
-$D_\sigma^\eta = \sym_\eta \cdot \partial_\sigma$.
+$\partial_\sigma$. We set $D_\sigma^\eta = \sym_\eta \cdot \partial_\sigma$.
+By definition these operators are $\Lambda^{S_\eta}$-linear.
 
 Let $V$ be a $K$-vector space with an $S_\mu$-equivariant action. We say that 
 an additive subgroup $W \subset V$ is a $\partial_\eta$-module if it is closed
@@ -188,12 +198,12 @@ In particular it is closed by the action of $D_\sigma^\eta$ for each $\sigma
 \in S_\eta$. For example $\Lambda \subset K$ is a $\partial_\mu$-module.
 
 \paragraph
-For each interval $I = \interval{a,b}_k \subset \Sigma(\mu)$ we define $D(I) = 
+For each interval $I = \interval{a,b}_k \subset \Sigma$ we define $D(I) = 
 \{x_{k,i} - x_{k,j} \mid a \leq i < j \leq b\}$ and $\Delta_I = 
 \prod_{p \in D(I)} p$. Accordingly $D(\eta) = \sqcup_{I \in \I(\eta)} D(I)$
 and $\Delta_\eta = \prod_{I \in \I(\eta)} \Delta_I$. By a classical result
-$\asym_I(\Lambda) = \Lambda \Delta_I$ and $\asym_\eta(\Lambda) = \Lambda 
-\Delta_\eta$.
+$\asym_I(\Lambda) = \Lambda^{S_\eta} \Delta_I$ and $\asym_\eta(\Lambda) = 
+\Lambda^{S_\eta} \Delta_\eta$.
 
 We denote by $w(I)$ the longest word of $S_I$, and by $w_\eta$ the longest 
 word in $S_\eta$. If $W \subset V$ is a $\partial_\eta$ submodule and $I \in
@@ -213,31 +223,36 @@ D^\eta_\sigma(f)
 
 \paragraph
 \about{The algebras $B_\eta, A_\eta$} 
-Set $C = \{x_{k,i} - x_{k,j} - z \mid 1 \leq i < j \leq k < n, z \in \ZZ 
-\subset \Lambda$ and $C_\eta = C \setminus D(\eta)$. We define $B_\eta = 
-C_\eta^{-1} \Lambda$. It follows from the definitions that $B_\eta \subset K$ 
-is a $\partial_\eta$ submodule.
-Now set $\p_\eta$ to be the ideal generated by $D(\eta)$. This is a prime
-ideal and $\Lambda / \p_\eta \cong \CC[Y_1, \ldots, Y_r]$, where $r = 
-|\I(\eta)|$. The ideal $\p_\eta$ extends to a prime ideal $B_\eta \p_\eta 
-\subset B_\eta$, and we set $A_\eta = B_\eta / B_\eta \p_\eta$. We denote by
-$\pi_\eta: B_\eta \to A_\eta$ the obvious projection map.
+\label{L:schubert-basis}
+Set 
+\begin{align*}
+C = \{x_{k,i} - x_{k,j} - z \mid 1 \leq i < j \leq k < n, z \in \ZZ 
+\}\subset \Lambda
+\end{align*} 
+and set $C_\eta = C \setminus D(\eta)$. We define $B_\eta = C_\eta^{-1} 
+\Lambda$. It follows from the definitions that $B_\eta \subset K$ 
+is a $\partial_\eta$ submodule. Now set $\p_\eta$ to be the ideal generated by 
+$D(\eta)$. This is a prime ideal and $\Lambda / \p_\eta \cong \CC[Y_1, 
+\ldots, Y_r]$, where $r = |\I(\eta)|$. The ideal $\p_\eta$ extends to a prime 
+ideal $B_\eta \p_\eta \subset B_\eta$, and we set $A_\eta = B_\eta / B_\eta 
+\p_\eta$. We denote by $\pi_\eta: B_\eta \to A_\eta$ the obvious projection 
+map.
 
 Set $\eta! = \prod_{I \in \I(\eta)} |I|!$ and $s^\eta_\sigma = \frac{1}{\eta!}
-\partial_{\sigma^{-1} w_\eta \Delta_\eta}$. By definition $\deg s^\eta_\sigma
+\partial_{\sigma^{-1} w_\eta} \Delta_\eta$. By definition $\deg s^\eta_\sigma
 = \ell(\sigma)$, and if $\ell(\sigma) > 0$ then $s_\sigma^\eta \in \p_\eta$.
 The set $\{s^\eta_\sigma \mid \sigma \in S_\eta\}$ is a basis of $B_\eta$ as a 
-$\B_\eta^{S_\eta}$-module, and for each $f \in B_\eta$ we write $f_{(\sigma)}$
+$B_\eta^{S_\eta}$-module, and for each $f \in B_\eta$ we write $f_{(\sigma)}$
 for its coordinate in this basis, so $f = \sum_{\sigma \in S_\eta} f_{(\sigma)}
 s_\sigma^\eta$.
 
-\begin{Lemma}
-\label{L:schubert-basis}
+\begin{Lemma*}
 For each $f \in B_\eta$ and each $\sigma \in S_\eta$ we have $f_{\sigma}
 \equiv D_{\sigma}^\eta(f) \mod (B_\eta\p_\eta)^{S_\eta}$.
-\end{Lemma}
+\end{Lemma*}
 \begin{proof}
-Applying $D^\eta_\sigma$ to $f$ we get
+Applying $D^\eta_\sigma$ to $f$ and using that $\D_\sigma^\eta$ is 
+$\Lambda^{S_\eta}$-linear we get
 \begin{align*}
 D^\eta_\sigma(f) 
 	&= \sum_{\tau \in S_\eta} f_{(\tau)} D^\eta_\sigma(s_\tau^\eta)
@@ -262,17 +277,7 @@ $\ell(\sigma) = \ell(\rho) + \ell(\tau)$.
 
 In \cite{PS-chains-bruhat} Postnikov and Stanley introduce a family of
 differential operators $\{\DD_\sigma^\eta \mid \sigma \in S_\eta\}$ with the
-property that $\DD_\sigma(f) \equiv f_{(\sigma)} \mod \p_\eta$; by 
-\cite{PS-chains-bruhat}*{Corollary 12.1} these differential operators can 
-be written in terms of Schubert polynomials as follows:
-\begin{align*}
-\DD_{\sigma, \tau}^\eta 
-	&= \frac{1}{C}
-		((\mathfrak S_{\sigma}\mathfrak S_{w_0\tau})(\partial)
-			(\Delta_\eta))(\partial)
-\end{align*}
-where $C = \prod_{i=1}^r \frac{1}{2! 3! \cdots \eta_r !}$. The lemma 
-implies that $\pi \circ \DD_\sigma = \pi \circ D_\sigma^\eta$. 
+property that $\DD_\sigma(f)(0) = f_{(\sigma)}(0))$.
 
 \section{The module $V_K$}
 Set 
@@ -280,8 +285,9 @@ Set
 p_{k,i}^\pm 
 	&= \prod_{j = 1}^{k \pm 1} (x_{k,i} - x_{k \pm 1, j}); 
 &q_{k,i} 
-	&= \prod_{j \neq i} (x_{k,i} - x_{k,j}); 
-&r_{k} &= x_{k,1} + \cdots + x_{k,k}.
+	&= \prod_{j \neq i} (x_{k,i} - x_{k,j}); \\
+r_{k} 
+	&= x_{k,1} + \cdots + x_{k,k} - (x_{k-1,1} + \cdots + x_{k-1,k-1}) + k -1.
 \end{align*}
 The definitions imply that $\sigma p_{k,i}^\pm = p_{\sigma(k,i)}^\pm$ and 
 $\sigma q_{k,i} = q_{\sigma(k,i)}$, while $\sigma r_k = r_k$ for all $\sigma 
@@ -290,10 +296,10 @@ $\sigma q_{k,i} = q_{\sigma(k,i)}$, while $\sigma r_k = r_k$ for all $\sigma
 \paragraph
 \about{The action of $\ZZ^\mu_0$ on $K$}
 For each $(k,i) \in \Sigma(\mu)$ set $\delta^{k,i} \in \CC^\mu$ to be the point
-whose $(k,i)$-entry is equal to $1$, and whose other entries equal zero. The 
-set $\{\delta^{k,i} \mid 1 \leq i \leq k < n\}$ generates the abelian group
-$\ZZ^\mu_0$, and this group acts on $\Lambda$ by setting $\delta^{k,i} \cdot 
-x_{l,j} = x_{l,j} + \delta_{k,l} \delta_{i,j}$; cleary the action extends to 
+whose $(k,i)$-th entry is equal to $1$, and whose other entries equal zero. 
+The set $\{\delta^{k,i} \mid 1 \leq i \leq k < n\}$ generates the abelian group
+$\ZZ^\mu_0$. This group acts on $\Lambda$ by setting $\delta^{k,i} \cdot 
+x_{l,j} = x_{l,j} + \delta_{k,l} \delta_{i,j}$ and the action extends to 
 the fraction field $K$. Given $z \in \ZZ^\mu_0$ and $f \in K$ we sometimes
 write $f(x+z)$ for $z \cdot f$. Notice that the actions of $\ZZ^\mu_0$ and 
 $S_\mu$ are related by the formula $\sigma f(x + z) = (\sigma f)(x + 
@@ -305,7 +311,7 @@ Set $V_\CC$ to be the $\CC$-vector-space freely generated by the set $\{T(z)
 \mid z \in \ZZ^\mu_0\}$, and for each $\CC$-algebra $R$ set $V_R = R \ot_\CC
 V_\CC$; we refer to $T(z)$ as the tableaux corresponding to $z$, and to $z$
 as the point correspoding to $T(z)$. The group $S_\mu$ acts on the set of all 
-tableaux by action on the correspoding points. Since $V_K = K \ot_\CC V_\CC$
+tableaux by acting on the correspoding points. Since $V_K = K \ot_\CC V_\CC$
 is a tensor product of $S_\mu$-modules, it is again an $S_\mu$-module. 
 Furthermore $V_K$ is a $\gl(n,\CC)$-module with action given by
 \begin{align*}
@@ -332,36 +338,35 @@ apply divided difference operators to it. We will now rewrite the operators
 $E_{k,k+1}, F_{k+1,k}$ in a way better suited to the study of singular modules.
 Let $I = \interval{a,b}_k \subset \Sigma$ be an interval. We set 
 \begin{align*}
-e_{k,I}^a
+e_{k,I}^+
 	&= \frac{\prod_{j = 1}^{k+1} (x_{k,a(I)} - x_{k+1,j})}
 		{\prod_{(k,j) \notin I} x_{k,a(I)} - x_{k,j}} 
 &
-e_{k,I}^b
+e_{k,I}^-
 	&= \frac{\prod_{j = 1}^{k-1} (x_{k,b(I)} - x_{k+1,j})}
 		{\prod_{(k,j) \notin I} x_{k,b(I)} - x_{k,j}}.
 \end{align*}
-Notice that $e_{k,I}^a = \Delta_Ie_{k,a(I)}^+$ and $e_{k,I}^b = \Delta_I
-e_{k,b(I)}^-$, so if $I \in \I(\eta)$ then $e_{k,I}^a, e_{k,I}^b \in B_\eta$
-We also set $\alpha(I) = (b(I)b(I)-1 \cdots a(I))^{(k)}, \beta(I) = 
-(a(I) a(I)+1 \cdots b(I))^k \in S_I$.
+Notice that if $I \in \I(\eta)$ then $e_{k,I}^+, e_{k,I}^- \in B_\eta$.
+We also set $\alpha(I) = (b,b-1, \cdots, a)^{(k)}, \beta(I) = 
+(a, a(I)+1, \cdots, b)^{(k)} \in S_I$.
 
 \begin{Lemma*}
-Let $\eta < \mu$ and suppose $z$ is in normal $\eta$-form. Then for each $1 
+Let $\eta < \mu$ and suppose $z$ is in normal form. Then for each $1 
 \leq k < n$ we have
 \begin{align*}
 E_{k,k+1} T(z)
 	&= - \sum_{I \in \I_k^\eta(z)} \partial_{\alpha(I)} 
 		\left(
-			e_{k,I}^a(x+z) T(z + \delta^{k,a(I)})
+			e_{k,I}^+(x+z) T(z + \delta^{k,a(I)})
 		\right) \\
 E_{k+1,k} T(z)
 	&= \sum_{I \in \I_k^\eta(z)} \partial_{\beta(I)}
 		\left(
-			e_{k,I}^b(x+z) T(z - \delta^{k,b(I)})
+			e_{k,I}^-(x+z) T(z - \delta^{k,b(I)})
 		\right).
 \end{align*}
 \end{Lemma*}
-This is completely analogous to \cite{EMV-orthogonal}*{Proposition 6}.
+This is analogous to \cite{EMV-orthogonal}*{Proposition 6}.
 
 
 \begin{proof}
@@ -386,25 +391,25 @@ E_{k,k+1} T(z)
 	&= \sum_{I \in \I_k^\eta(z)} 
 		|I| \sym_I(e_{k,a(I)}^+(x+z) T(z+ \delta^{k, a(I)}))
 \end{align}
-We rewrite the term $\sym_I(e_{k,a(I)}^+(x+z) T(z+ \delta^{k, a(I)}))$ as a 
-divided difference
+Fix an interval $I = \interval{a,b}_k$. We rewrite the term 
+$\sym_I(e_{k,a}^+(x+z) T(z+ \delta^{k, a}))$ as a divided difference
 \begin{align*}
 \frac{1}{|I|!}
-	\partial_{w(I)}(\Delta_I e_{k,a(I)}^+(x+z) T(z+ \delta^{k, a(I)}))
+	\partial_{w(I)}(\Delta_I e_{k,a}^+(x+z) T(z+ \delta^{k, a}))
 \end{align*}
-Notice that $\Delta_I e_{k,a(I)}^+(x+z) = \Delta_{I \setminus \{a(I)\}} 
-e_{k,I}^a(x+z)$, so we can further rewrite this as
+Notice that $\Delta_I e_{k,a}^+(x+z) = \Delta_{I \setminus \{(a,k)\}} 
+e_{k,I}^+(x+z)$, so we can further rewrite this as
 \begin{align*}
 \frac{1}{|I|!}
 	&(\partial_{\alpha(I)} \circ \partial_{w(I \setminus \{a(I)\})})
-	(\Delta_{I\setminus \{a(I)\}} e_{k,I}^a(x+z) T(z+ \delta^{k, a(I)})) \\
+	(\Delta_{I\setminus \{a(I)\}} e_{k,I}^+(x+z) T(z+ \delta^{k, a(I)})) \\
 &= \frac{1}{|I|}
 	\partial_{\alpha(I)} (\sym_{I \setminus \{a(I)\}}
-	(e_{k,I}^a(x+z) T(z+ \delta^{k, a(I)})))\\
+	(e_{k,I}^+(x+z) T(z+ \delta^{k, a(I)})))\\
 &= \frac{1}{|I|} \partial_{\alpha(I)} 
-	(e_{k,I}^a(x+z) T(z+ \delta^{k, a(I)})),
+	(e_{k,I}^+(x+z) T(z+ \delta^{k, a(I)})),
 \end{align*}
-where the last equality follows from the fact that $e_{k,I}^a(x+z) 
+where the last equality follows from the fact that $e_{k,I}^+(x+z) 
 T(z+ \delta^{k, a(I)})$ is invariant by any permutation in $S_I$ that leaves
 $(k,a(I))$ fixed. Replacing this in \ref{action} we obtain the formula for
 $E_{k,k+1}T(z)$. The proof of the other formula is analogous.
@@ -412,7 +417,7 @@ $E_{k,k+1}T(z)$. The proof of the other formula is analogous.
 
 \paragraph
 \label{L:function-tableaux}
-Fiz $\eta < \mu$, and for each $z \in \ZZ^\mu_0$ write $D_\sigma^\eta(z)$
+For each $z \in \ZZ^\mu_0$ write $D_\sigma^\eta(z)$
 for $D_\sigma^\eta(T(z))$. As shown in \cite{RZ-singular-characters} the set 
 \begin{align*}
 \B(\eta) =
@@ -429,10 +434,8 @@ The polynomials $s_\sigma^*$ are determined implicitly by the condition
 $D_\tau^\eta(s_\sigma^*) = \delta_{\sigma, \tau}$, so in view of Lemma
 \ref{L:schubert-basis} $s_\sigma^* \equiv s_\sigma \mod 
 \p_\eta^{S_\eta}$. We denote by $L_\eta$ the $B_\eta$-lattice generated
-by $\B(\eta)$.
-
-Set $V_\eta = L_\eta/\p_\eta L_\eta$. We will prove that it is a 
-$U(\gl(n,\CC))$-module and will give explicit equations for the action of
+by $\B(\eta)$. Set $V_\eta = L_\eta/\p_\eta L_\eta$. We will prove that it is 
+a $U(\gl(n,\CC))$-module and will give explicit equations for the action of
 $\gl(n,\CC)$ on it. 
 \begin{Lemma*}
 Let $f \in B_\eta$ and $z \in \n_\eta(\ZZ^\mu_0)$. Then for each $\sigma \in
@@ -478,12 +481,12 @@ E_{k,k+1} D_\sigma^\eta(z)
 	\sum_{\tau \in S_\eta}
 	\DD^\eta_{\sigma\alpha(I),\tau}
 		\left(
-			e_{k,I}^a
+			e_{k,I}^+
 		\right)(x+z) D_\tau^\eta(z+\delta^{k,a(I)}); \\
 E_{k+1,k} D_\sigma^\eta(z)
 	&\equiv \sum_{I \in \I_k^\eta(z)} 
 		\sum_{\tau \in S_\eta} 
-		\DD_{\sigma\beta(I),\tau}^\eta \left(e_{k,I}^b \right)
+		\DD_{\sigma\beta(I),\tau}^\eta \left(e_{k,I}^- \right)
 		(x+z) D_\tau^\eta(z - \delta^{k,b(I)});\\
 E_{k,k} D_\sigma^\eta(z)
 	&\equiv r_k(x+z) D_\sigma^\eta(z) +
@@ -522,7 +525,7 @@ From Lemma \ref{L:pre-formulas} we get
 E_{k,k+1} D_\sigma^\eta T(z)
 	&= - \sum_{I \in \I_k^\eta(z)} D_\sigma^\eta (\partial_{\alpha(I)} 
 		\left(
-			e_{k,I}^a(x+z) T(z + \delta^{k,a(I)})
+			e_{k,I}^+(x+z) T(z + \delta^{k,a(I)})
 		\right))
 \end{align*}
 Now $\sigma \in \Shuffle_{\epsilon(z)}^\eta$ and $\alpha(I) \in 
@@ -533,10 +536,10 @@ $D_\sigma^\eta \partial_{\alpha(I)} = D^\eta_{\sigma \alpha(I)}$. Thus
 E_{k,k+1} D_\sigma^\eta T(z)
 	&= - \sum_{I \in \I_k^\eta(z)} D_{\sigma\alpha(I)}^\eta  
 		\left(
-			e_{k,I}^a(x+z) T(z + \delta^{k,a(I)})
+			e_{k,I}^+(x+z) T(z + \delta^{k,a(I)})
 		\right).
 \end{align*}
-By definition $e_{k,I}^a(x+z) \in B_\eta$ for each $I \in \I_\eta(z)$, so
+By definition $e_{k,I}^+(x+z) \in B_\eta$ for each $I \in \I_\eta(z)$, so
 we can apply again Lemma \ref{L:function-tableaux} and pass to the quotient
 to obtain a formula involving operators of the form $D_{\sigma\alpha(I), 
 \tau}^\eta$, and using a similar argument as before we can replace them with
@@ -581,6 +584,7 @@ Since $ev_{\vv}(\p_{\eta(v)}) = 0$ by definition, we get the following
 from Proposition \ref{P:module-congruence}.
 
 \begin{Theorem}
+\label{T:big-module}
 Let $v \in \CC^\mu$ and let $\vv$ be a fully critical representative of
 $v$. The action of $\gl(n,\CC)$ on $V(T(v))$ is given by the following
 formulas
@@ -590,12 +594,12 @@ E_{k,k+1} D_\sigma(\vv + z)
 	\sum_{\tau \in S_\eta}
 	\DD^{\vv +z}_{\sigma\alpha(I),\tau}
 		\left(
-			e_{k,I}^a
+			e_{k,I}^+
 		\right) D_\tau (\vv + z+\delta^{k,a(I)}); \\
 E_{k+1,k} D_\sigma(\vv + z)
 	&= \sum_{I \in \I_k^\eta(z)} 
 		\sum_{\tau \in S_\eta} 
-		\DD_{\sigma\beta(I),\tau}^{\vv+z} \left(e_{k,I}^b \right)
+		\DD_{\sigma\beta(I),\tau}^{\vv+z} \left(e_{k,I}^- \right)
 		D_\tau(\vv + z - \delta^{k,b(I)});\\
 E_{k,k} D_\sigma(\vv + z)
 	&= r_k(\vv+z) D_\sigma(\vv+z) +
@@ -939,6 +943,7 @@ desired properties, and that $v^{(N)} = v'$. This completes the proof.
 \end{proof}
 
 \begin{Proposition}
+\label{P:omega}
 Let $v,v' \in \overline v + \n(\eta)$. If $\Omega^+(v) \subset \Omega^+(v')$ 
 then $V(T(\overline v))[\chi_{v'}] \subset U D_{\omega(v)}(v)$. In particular
 if $v$ is fully critical and $\Omega^+(v) = \emptyset$ then $V(T(\overline v))$
@@ -955,8 +960,8 @@ If $v' = v - \delta^{(k,i)}$ then $\omega(v')$ is an $\epsilon(v)$-shuffle,
 and hence $D_{\omega(v')}(v) \neq 0$. Furthermore, the coefficient of 
 $D_{\omega(v')}(v')$ in $E_{k+1,k} D_{\omega(v)}(v)$ is
 \begin{align*}
-\DD_{\omega(v'), \omega(v')}^v(e_{k,i}^a)
-	&= e_{k,i}^a(v) 
+\DD_{\omega(v'), \omega(v')}^v(e_{k,I}^+)
+	&= e_{k,I}^+(v) 
 		= \frac{\prod_{j=1}^{k-1} v_{k,i} - v_{k-1,j}}
 			{\prod_{I \in \I_k(v)} v_{k,i} - v_{k, a(I)}}.
 \end{align*}
@@ -972,8 +977,8 @@ generates $V(T(\overline v))[\chi_{v'}]$.
 If $v' = v + \delta^{k,i}$ then the coefficient of $D_{\omega(v)}(v)$ in
 $E_{k,k+1} D_{\omega(v')}(v')$ is
 \begin{align*}
-\DD_{\omega(v')\alpha(I), \omega(v)}^{v'}(e_{k,i}^a)
-	&= \DD_{\omega(v),\omega(v)}^{v'}(e_{k,i}^b)
+\DD_{\omega(v')\alpha(I), \omega(v)}^{v'}(e_{k,I}^+)
+	&= \DD_{\omega(v),\omega(v)}^{v'}(e_{k,I}^-)
 		= \frac{\prod_{j=1}^{k+1} v_{k,i} - v_{k+1,j}}
 			{\prod_{I \in \I_k(v)} v_{k,i} - v_{k, a(I)}}.
 \end{align*}
@@ -983,11 +988,106 @@ $j \in \interval{k+1}$, which in turn implies that $-1 = v_{k+1,i} - v_{k,i}
 $V(T(\overline v))[\chi_{v'}]$ is contained in the module generated by 
 $D_{\omega(v)}(v)$.
 \end{proof}
-The following is an immediate corollary.
+The following are some immediate consequences of the Proposition.
 \begin{Corollary*}
-Let $v \in \overline v + \n(\eta)$ be fully critical with $\Omega^+(v) = 
-\emptyset$. Then $D_e(v)$ generates $V(T(\overline v))$ over $U$.
+Let $v \in \overline v + \n(\eta)$ be fully critical.
+\begin{enumerate}[(a)]
+\item If $\Omega^+(v) = \emptyset$ then $D_e(v)$ generates $V(T(\overline v))$ 
+over $U$.
+
+\item There is a unique minimal submodule $N_\Omega \subset V(T(\overline v))$.
+If $\Omega^+(v) = \Omega(v)$ then $N_\Omega = U D_e(v)$.
+\end{enumerate}
 \end{Corollary*}
+\begin{proof}
+The first item is an obvious consequence of the Proposition. For the second, 
+let $N \subset V(T(\overline v))$ be any submodule and let $x \in N$ be a 
+nonzero element. Since $N$ is a Gelfand-Tsetlin submodule of $V(T(\overline 
+v))$ we can assume that $x \in V(T(\overline v))[\chi_{v'}]$ for some $v' \in 
+\overline v + \n(\eta)$, and hence $D_e(v') \in N$. Thus by Proposition 
+\ref{P:omega} $D_e(v) \in N$ and hence $U D_e(v) \subset N$, so $N_\Omega = U
+D_e(v)$ is a minimal element in the lattice of submodules of $V(T(\overline 
+v))$.
+\end{proof}
+
+\section{A very special Verma module}
+In this section we focus on the minimal module associated to the tableau
+$\overline v$ whose entries are all equal to a fixed scalar $a \in \CC$.
+We fix $V = V(T(\vv))$, and given $v \in \vv + \n(\ZZ)$ write $V[v]$ instead of
+$V[\chi_v]$.
+
+\paragraph
+Clearly $V[\chi_{\overline v}] = \CC D_e(\overline v)$. 
+Furthermore $\Omega^+(\vv) = \Omega(\vv)$ and hence $N = U D_e(\vv)$ is the
+unique minimal module of $V(T(\vv))$. On the other hand $D_e(\overline v)$ is 
+a highest weight vector of weight $\lambda = (a, a+1, a+2, \cdots)$ and hence 
+there is a map $M(\lambda) \to N$ from the Verma module of highest weight 
+$\lambda$ to $N$. 
+
+\begin{Lemma*}
+The map $p: M(\lambda) \to N$ is an isomorphism.
+\end{Lemma*}
+\begin{proof}
+Let us see $M(\lambda)$ as an $\sl(n,\CC)$ module. Then with respect to the
+usual Cartan algebra its weight is $(-1, -1, \ldots, -1)$ which is the half sum
+of the roots. Thus $M(\lambda)$ is simple as $\sl(n,\CC)$ module and hence
+as $\gl(n,\CC)$ module. Since both $M(\lambda)$ and $N$ are simple and $p$ is
+nonzero, it must be an isomorphism.
+\end{proof}
+
+\paragraph
+Let $\nn_-$ be the Lie algebra formed by the strictly lower triangular matrices
+in $\gl(n,\CC)$. The previous lemma implies that the map $U(\nn_-) \to N$ 
+given by $u \mapsto u D_e(\vv)$ is an isomorphism. Using the PBW theorem we 
+obtain a weight basis of $N$. We will now show that $N$ does not have a basis 
+formed by derived tableaux. Given $i > j$ we denote by $\delta[i,j] = 
+\delta^{i-1,i-1} + \delta^{i-2, i-2} + \cdots \delta^{j,j}$.
+
+\begin{Lemma}
+\begin{enumerate}
+\item For each $i > j $ we have $E_{i,j} D_e(\vv) \subset V[v - 
+\delta[i,j]]$.
+
+\item There is no other tableau in $N$ of the same weight as $v - 
+\delta[i,j]$.
+\end{enumerate}
+\end{Lemma}
+\begin{proof}
+\textcolor{blue}{DO!}
+\end{proof}
+It follows from the lemma that the set \[\{E_{4,3} E_{3,2} E_{2,1} D_e(\vv),
+E_{4,3} E_{2,1} E_{3,2} D_e(\vv), E_{3,2} E_{4,3} E_{2,1} D_e(\vv), E_{2,1} 
+E_{3,2} E_{4,3} D_e(\vv)\}\] is a basis of $V[\vv-\delta^{1,1}-\delta^{2,2} 
+- \delta^{3,3}]$, which thus has dimension $4$.
+
+On the other hand $E_{2,1} D_e(\vv) = D_e(\vv - \delta^{1,1})$, and 
+\begin{align*}
+E_{3,2} D_e(\vv - \delta^{1,1})
+	&= - D_e(\vv - \delta[3,1]) + D_{(12)^2}(\vv - \delta[3,1]).
+\end{align*}
+Since $N[\vv - \delta[3,1]] \neq 0$ it must contain the element $D_e(\vv- 
+\delta[3,1])$. On the other hand it is easy to check that this space has 
+dimension $2$, and hence $N[\vv - \delta[3,1]] = \langle D_e(\vv-\delta[3,1]), 
+D_{(12)^2}(\vv - \delta[3,1])\rangle$. Next we compute
+\begin{align*}
+E_{4,3} D_e(\vv - \delta[3,1])
+	&= D_{(23)^3}(\vv - \delta[4,1]) - D_e(\vv - \delta[4,1]) \\
+E_{4,3} D_{(12)^2}(\vv - \delta[3,1])
+	&= - 2 D_{(12)^2}(\vv - \delta[4,1]) - D_{(123)^3}(\vv - \delta[4,1]) \\
+		& \qquad + 	D_{(23)^3(12)^2}(\vv - \delta[4,1]).
+\end{align*}
+Now this expressions involve five different derived tableaux of $T(\vv - 
+\delta[4,1])$. Since the corresponding space has dimension $4$ it follows that
+it cannot have a basis of derived tableaux. Further computations show that
+\begin{align*}
+V[\vv - \delta[4,1]]
+	&= \langle D_e(\vv - \delta[4,1]), D_{(12)^2}(\vv - \delta[4,1]),
+	D_{(23)^3}(\vv - \delta[4,1]),  \\
+	& \qquad D_{(123)^3}(\vv - \delta[4,1]) - 
+	D_{(12)^2(23)^3}(\vv - \delta[4,1])
+	\rangle.
+\end{align*}
+
 
 \begin{bibdiv}
 \begin{biblist}

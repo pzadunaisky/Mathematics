@@ -1,0 +1,551 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{amsart}
+\usepackage[paper=a4paper]
+ {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[small]{titlesec}
+\usepackage{hyperref}
+
+\usepackage{amsthm,thmtools}
+\usepackage{showlabels}
+\linespread{1.05}
+\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{enumerate}
+\usepackage[osf,noBBpl]{mathpazo}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{helvet}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+\usepackage{mathdots}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Theorems et al%%%%%%%%%%%%%%%%%%%%%%%%%%
+\declaretheoremstyle[
+%headformat=swapnumber, 
+bodyfont=\itshape,]{mystyle}
+\declaretheorem[name=Lemma, style=mystyle, numberwithin=section]{Lemma}
+\declaretheorem[name=Proposition, style=mystyle, sibling=Lemma]{Proposition}
+\declaretheorem[name=Theorem, style=mystyle, sibling=Lemma]{Theorem}
+\declaretheorem[name=Corollary, style=mystyle, sibling=Lemma]{Corollary}
+\declaretheorem[name=Definition, style=mystyle, sibling=Lemma]{Definition}
+%\declaretheorem[name=Example(s), style=mystyle]{Example}
+%\declaretheorem[name=Remark, style=mystyle]{Remark}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, 
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+\declaretheorem[name=Example(s), style=mystyle-empty]{Example*}
+\declaretheorem[name=Remark, style=mystyle-empty]{Remark*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Paragraphs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand\thesection{\arabic{section}}
+\titleformat{\section}
+ {\normalfont\bfseries\large}
+ {\thesection. \space}{0em}{}
+
+\renewcommand\thesubsection{\arabic{subsection}}
+\titleformat{\subsection}
+ {\normalfont\bfseries}
+ {\thesection.\thesubsection \space}{0em}{}
+
+\renewcommand\proofname{Proof}
+
+\makeatletter
+\renewenvironment{proof}[1][\textit{\proofname}]{\par
+ \pushQED{\qed}%
+ \normalfont \topsep.75\paraskip\relax
+ \trivlist
+ \item[\hskip\labelsep
+ \itshape
+ #1\@addpunct{.}]\ignorespaces
+}{%
+ \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\newskip\paraskip
+\paraskip=0.75ex plus .2ex minus .2ex
+
+\newcounter{para}[section]
+\setcounter{para}{0}
+\renewcommand\thepara{\thesection.\arabic{para}}
+\def\paragraph{%
+ \noindent
+ \refstepcounter{para}%
+ \textbf{\thepara.}\hspace{1ex}%
+}
+
+\newcommand\about[1]{%
+ {\bfseries#1.}%
+}
+
+\newcommand\pref[1]{\textbf{\ref{#1}}}
+
+\renewcommand\theHpara{\theHsection.\arabic{para}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\newcommand\II{\mathbb I}
+\renewcommand\k{\Bbbk}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\Id{\mathsf{Id}}
+\newcommand\im{\mathsf{im}}
+\newcommand\coker{\mathsf{coker}}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\A{\mathcal A}
+
+\newcommand\g{\mathfrak g}
+\newcommand\h{\mathfrak h}
+\newcommand\gl{\mathfrak{gl}}
+\newcommand\so{\mathfrak{so}}
+\newcommand\ii{\mathtt{i}}
+
+\newcommand\vectspan[1]{\left\langle #1 \right\rangle}
+\newcommand\interval[1]{\llbracket #1 \rrbracket}
+\newcommand\floor[1]{\left\lfloor#1\right\rfloor}
+
+\DeclareMathOperator\Frac{Frac}
+\DeclareMathOperator\Specm{Specm}
+\DeclareMathOperator\End{End}
+
+\renewcommand\labelitemi{--}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Twisted generalized Weyl algebras and Gelfand-Tsetlin theory for 	
+	orthogonal Lie algebras}
+\author{[TGW-orthogonal.tex]}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Objectives:}
+\begin{enumerate}
+\item Introduce the rational skew twisted algebra $\A$.
+\item Prove that $U(\so(\CC, n))$ embedds in $\A$.
+\end{enumerate}
+
+Our base field is the complex numbers, so all vector spaces, tensor products,
+etc. are over $\CC$ unless explicitly stated.
+
+\section{Preeliminaries on $\so(\CC, n)$}
+\paragraph
+\about{Notation}
+\label{notation}
+Given $n, m, k \in \ZZ$ we set $\interval{n,m} = \{l \in \ZZ \mid n \leq l 
+\leq m \}$, $\interval{m,n}_k = \{(k,l) \in \ZZ^2 \mid l \in \interval{n,m}\}$
+and $\interval{n} = \interval{1,n}$. Given two elements $x,y$ of a set $Z$, 
+the symbol $\delta_{x,y}$ will denote the usual Kronecker delta.
+
+\paragraph
+\about{The orthogonal Lie algebra}
+\label{orhtogonal-lie-algebra}
+Fix $n \in \NN$. We denote by $\gl_n$ the general linear Lie algebra of $n$
+by $n$ complex matrices. This algebra is generated as a vector space by the
+elementary matrices $\{E_{i,j} \mid i,j \in \interval{n}\}$, and their product 
+is given by $[E_{i,j}, E_{k,l}] = \delta_{j,k} E_{i,l} - \delta_{l,i} 
+E_{k,j}$. 
+
+As usual we denote by $\so_n$ the Lie subalgebra of $\gl_n$ formed by matrices 
+$X$ such that $X^t = -X$. The elementary skew symmetric matrices are $F_{i,j} 
+= E_{i,j} - E_{j,i}$, and the set $\{F_{i,j} \mid 1 \leq i < j \leq n\}$ is a
+basis of $\so_n$ (notice that $F_{j,i} = - F_{i,j}$). The Lie product among 
+these matrices is given by
+\begin{align*}
+[F_{i,j}, F_{k,l}]
+	&= \delta_{j,k} F_{i,l} + \delta_{i,l} F_{j,k} 
+		- \delta_{i,k} F_{j,l} - \delta_{j,l} F_{i,k}.
+\end{align*}
+The bracket of $\so_n$ can be easily remembered as follows: for any four 
+different integers $i,j,k,l$ we have $[F_{i,j}, F_{j,k}] = F_{i,k}$ and 
+$[F_{i,j}, F_{k,l}] = 0$. 
+
+\paragraph
+\label{psi-n}
+We denote by $\Psi_n$ be the Lie algebra generated by $\{A_k \mid k \in 
+\interval{n-1}\}$ modulo the relations
+\begin{align*}
+[A_{k}, A_{l}]
+	&= 0 & \mbox{ if } |k-l| > 1; \\
+[[A_{k}, A_{l}], A_{l}] 
+	&= - A_{k} & \mbox{ if } |k-l| = 1; \\
+[[[A_{k}, A_{k+1}], A_{k+2}], A_{k+1}] 
+	&= 0 & \mbox{ for all } k \in \interval{n-2}.
+\end{align*}
+If we replace $A_k$ by $F_{k,k+1}$ in these formulas then we obtain equalities
+that hold in $\so_n$. In other words there is a Lie algebra morphism $c_n:
+\Psi_n \to \so_n$ given by $A_k \mapsto F_{k,k+1}$. We will prove that this 
+map is an isomorphism. 
+
+For each $k \in \interval{n-1}$ set $A_{k,k+1} = A_k$ and for each $j \in
+\interval{k+1,n-1}$ set $A_{k,j+1} = [A_{k,j} A_{j,j+1}]$. By definition 
+$c_n(A_{i,j}) = F_{i,j}$ for any $1 \leq i < j \leq n$. If we set $A_{i,i} = 0$
+and $A_{j,i} = - A_{i,j}$ then $c_n(A_{i,j}) = E_{i,j}$ for any $i,j \in 
+\interval n$. With this notation we can rewrite the defining relations of
+$\Psi_n$ as
+\begin{align}
+[A_{i,i+1}, A_{k,k+1}]
+	&= 0 & \mbox{ if } |i-k| > 1; \\
+[A_{i,i+2}, A_{i+1,i+2}] 
+	&= - A_{i,i+1} & \mbox{ for all } i \in \interval{n-2} \\
+	[A_{i,i+1}, A_{i,i+2}] 
+	&= - A_{i+1,i+2}; & \mbox{ for all } i \in \interval{n-2}  \\
+[A_{i,i+3}, A_{i+1,i+2}] 
+	&= 0 & \mbox{ for all } i \in \interval{n-3}.
+\end{align}
+\begin{Lemma*}
+The following equalities hold in $\Psi_n$ for all $1 \leq i < j < k < l \leq 
+n$.
+\begin{align*}
+[A_{i,j}, A_{k,l}]
+	&= 0; 
+&[A_{i,j}, A_{j,k}]
+	&= A_{i,k}; \\
+[A_{i,l}, A_{j,k}] 
+	&= 0.
+&[A_{i,k}, A_{j,k}] 
+	&= - A_{i,j}; \\
+[A_{i,j}, A_{i,k}] 
+	&= - A_{j,k}; 
+&[A_{i,k}, A_{j,l}] 
+	&=0
+\end{align*}
+\end{Lemma*}
+\begin{proof}
+The element $A_{i,j}$ belongs to the Lie subalgebra of $\Psi_n$ generated by
+$A_i, A_{i+1}, \ldots, A_{j-1}$, while $A_{k,l}$ lies in the subalgebra 
+generated by $A_k, A_{k+1}, \ldots, A_{l-1}$. Since the generators of the first
+subalgebra commute with those of the second subalgebra, it follows that 
+$[A_{i,j}, A_{k,l}] = 0$.
+
+Let us prove that $[A_{i,j}, A_{j,k}] = A_{i,k}$ by induction on $k$, starting
+at $k = i+2$. In that case $j = i+1$ and this holds by definition. Now 
+assuming the result is true for some $k$, we have
+\begin{align*}
+[A_{i,j}, A_{j,k+1}]
+	&= [A_{i,j}, [A_{j,k}, A_{k,k+1}]]
+	= [[A_{i,j}, A_{j,k}], A_{k,k+1}] + [A_{j,k},[A_{i,j}, A_{k,k+1}]].
+\end{align*}
+Applying the inductive hypothesis to the first term and the first equality to
+the second term this equals $[A_{i,k}, A_{k,k+1}] + 0 = A_{i,k+1}$, so we are 
+done.
+
+We now prove that $[A_{i,l}, A_{j,k}] = 0$. First consider the case $i = j-1, 
+k = j+1, l = j+2$, which is the last defining relation of $\Psi_n$. Fix 
+momentarily $k = j+1, l = j+2$ and suppose that the equality holds for some 
+$i \in \interval{2, j-1}$. Then
+\begin{align*}
+[A_{i-1,j+2}, A_{j,j+1}]
+	&=[[A_{i-1,i}, A_{i,j+2}], A_{j,j-1}] \\
+	&=[[A_{i-1,i}, A_{j,j-1}], A_{i,j+2}] + [A_{i-1,i}, [A_{i,j+2},A_{j,j-1}]].
+\end{align*}
+The hypothesis implies that the second term is zero, and since $i < j$ the 
+previous equality implies that the first term is zero. Knowing that the result
+holds for all $i$, one can proceed simmilarly by induction on $l$. Once 
+established that the result holds for arbitrary $i,l$, a similar induction on
+$k-j$ proves the result in general.
+
+Let us now prove that $[A_{i,k}, A_{k-1,k}] = - A_{i,k-1}$ by descending 
+induction on $i$, starting at $i = k-2$, in which case this is just the second 
+defining relation of $\Psi_n$. Using the previous two equalities and the
+inductive hypothesis we get
+\begin{align*}
+[A_{i-1,k}, A_{k-1,k}]
+	&= [[A_{i-1,i}, A_{i,k}], A_{k-1, k}]\\
+	&= [[A_{i-1,i}, A_{k-1,k}], A_{i,k}] + [A_{i-1,i}, [A_{i,k}, A_{k-1,k}]] \\
+	&= 0 - [A_{i-1,i}, A_{i,k-1}] = A_{i-1, k-1}.
+\end{align*}
+To complete the proof of the third equality, we do finite descending induction
+on $j$. We have just proved the case $j = k-1$, and if the equality holds for
+$j$ and $i < j-1$ then
+\begin{align*}
+[A_{i,k}, A_{j-1, k}]
+	&= [A_{i,k}, [A_{j-1,j}, A_{j,k}]] \\
+	&= [[A_{i,k}, A_{j-1,j}], A_{j,k}] + [A_{j-1,j},[A_{i,k}, A_{j,k}]] \\
+	&= 0 - [A_{j-1,j}, A_{i,j}] = [A_{i,j}, A_{j-1,j}] = - A_{i,j-1}.
+\end{align*}
+A similar argument shows that $[A_{i,j}, A_{i,k}] = - A_{j,k}$.
+
+Finally we prove that $[A_{i,k}, A_{j,l}] = 0$. We begin with the base case
+\begin{align*}
+[A_{j-1,j+1},A_{j,j+2}]
+	&= [[A_{j-1,j}, A_{j,j+1}], A_{j,j+2}] \\
+	&= [[A_{j-1,j}, A_{j,j+2}], A_{j,j+1}] + [A_{j-1,j},[A_{j,j+1}, A_{j,j+2}]]
+		\\
+	&= [A_{j-1,j+2}, A_{j,j+1}] + [A_{j-1,j}, -A_{j+1,j+2}] = 0.
+\end{align*}
+As before, we proceed by descending induction on $i$, by ascending induction on
+$l$, and finally by induction on $k-j$.
+\end{proof}
+
+This has as an immediate consequence the following.
+\begin{Proposition*}
+The map $c_n: \Psi_n \to \so_n$ is an isomorphism.
+\end{Proposition*}
+\begin{proof}
+It follows from the lemma that the vector space spanned by $\{A_{i,j} \mid 1 
+\leq i < j \leq n-1\}$ is a Lie subalgebra of $\Psi_n$, and since it contains 
+all $A_i$'s it is equal to $\Psi_n$. Since $c_n(A_{i,j}) = F_{i,j}$ the 
+morphism $c_n$ maps a spanning set of $\Psi_n$ onto a basis of $\so_n$, and 
+hence is an isomorphism.
+\end{proof}
+
+
+\section{The twisted generalized Weyl algebra $\A$}
+Recall that we have fixed $n \in \NN$. 
+
+\paragraph
+\label{polynomial-algebra}
+\about{Polynomial algebra}
+For each $k \in \NN$ set $p(k) = \floor{\frac{k+1}{2}}$. Set $\mu = (p(1), 
+p(2), \ldots, p(n)) = (1,1,2,2,3, \ldots) \in \NN^n$ and $\Sigma = 
+\{(k,i) \mid 1 \leq k \leq n-1, 1 \leq i \leq p(k)\}$.
+
+We put $\Lambda_k = \CC[\lambda_{k,i} \mid i \in \interval{p(k)}]$ and $\Lambda
+= \CC[\lambda_{k,i} \mid 1 \leq k \leq n, 1 \leq i \leq p(k)]$. Also we denote 
+by $L$ the fraction field of $\Lambda$.
+
+The group $S_{p(k)}$ acts on $\Lambda_k$ by permuting the variables. We define
+a ring automorphism of $\Lambda_k$ called $\epsilon_k$ as follows:
+\begin{align*}
+\lambda_{k,i} \stackrel{\epsilon_k}\longmapsto \lambda_{k,i}^* &= \begin{cases}
+1 - \lambda_{k,i} & \mbox{ if } k \equiv 0 \mod 2 \\
+- \lambda_{k,i} & \mbox{ if } k \equiv 1 \mod 2
+\end{cases}
+\end{align*}
+We set $\epsilon = \prod_{i=1}^n \epsilon_k $, and for each $f \in L$ we write 
+$f^*$ instead of $\epsilon(f)$. Notice that if we set $\rho_{k,i}$ to be 
+$\lambda_{k,i} + \frac12$ for $k$ even and $\lambda_{k,i}$ for $k$ odd then 
+$\rho_{k,i}^* = - \rho_{k,i}$ for all $(k,i)$. We set $G = \langle \epsilon 
+\rangle \times \prod_{k=1}^{n} S_{p(k)}$, so $G$ acts on $\Lambda$ in the 
+obvious way.
+
+\paragraph
+\label{the-algebra-a}
+\about{The algebra $\A$}
+Let $\ZZ^\mu = \ZZ^{p(1)} \times \cdots \times \ZZ^{p(n)}$, and write $e_{k,i}$
+for the $i$-th element in the canonical basis of $\ZZ^{p(k)}$. The abelian
+group $\ZZ^\mu$ acts on $\Lambda$ by $e_{k,i} \cdot \lambda_{l,j} = 
+\lambda_{l,j} + \delta_{k,l}\delta_{i,j}$. Given $f \in \Lambda$ and $z \in 
+\ZZ^\mu$ we will usually write $f^z$ or $f(\lambda+z)$ for $z \cdot f$. This 
+extends to an action of $\ZZ^\mu$ on $L$, and we denote by $\A$ the smash 
+product $L \# \ZZ^\mu$. This a $\CC$-algebra whose underlying space is the 
+$L$-vector space with basis $\{t_z \mid z \in \ZZ^\mu\}$ and product $f t_z 
+\cdot g t_{z'} = f g^z t_{z+z'}$. There is an injective map $\A \to 
+\End_\CC(L)$ mapping $f t_z$ to the linear endomorphism given by $g \mapsto f 
+g(\lambda + z)$.
+
+For each $(k,i) \in \Sigma$ we set $t_{k,i} = t_{e_{k,i}}$, and set
+\begin{align*}
+p^X_{k,i}
+	&= \begin{cases}
+		\displaystyle
+		\prod_{j=1}^{p(k+1)} (\lambda_{k,i}^* + \lambda_{k+1,j})
+			(\lambda_{k,i}^* + \lambda_{k+1,j}^*)
+			& \mbox{ if } k \equiv 0 \mod 2; \\
+		\displaystyle
+		\prod_{j=1}^{p(k+1)} (\lambda_{k,i}^* + \lambda_{k+1,j})
+			\prod_{j=1}^{p(k-1)}(\lambda_{k,i}^* + \lambda_{k-1,j}^*)
+			& \mbox{ if } k \equiv 1 \mod 2.
+	\end{cases} \\
+p^Y_{k,i}
+	&= \begin{cases}
+		\displaystyle
+		\prod_{j=1}^{p(k+1)} (\lambda_{k,i} + \lambda_{k-1,j})
+			(\lambda_{k,i} + \lambda_{k-1,j}^*)
+			& \mbox{ if } k \equiv 0 \mod 2; \\
+		\displaystyle
+		\prod_{j=1}^{p(k+1)} (\lambda_{k,i} + \lambda_{k+1,j})
+			\prod_{j=1}^{p(k-1)}(\lambda_{k,i} + \lambda_{k-1,j}^*)
+			& \mbox{ if } k \equiv 1 \mod 2.
+	\end{cases} \\
+q_{k,i}
+	&= 
+		\displaystyle
+	\prod_{j\neq i} (\lambda_{k,i} - \lambda_{k,j})
+		(\lambda_{k,i} - \lambda_{k,j}^*).
+\end{align*}
+
+We set
+\begin{align*}
+X_{k,i}
+	&= \frac{p_{k,i}^X}{q_{k,i}};
+	&Y_{k,i}
+	&= \frac{p_{k,i}^Y}{h_{k,i} q_{k,i}};
+\end{align*}
+where $h_{k,i} = \lambda_{k,i}^2 (\lambda_{k,i}^2 -1/4)$ if $k$ is even and
+$1$ if $k$ is odd.
+\textcolor{red}{These elements satisfy Natalia's commutation relations}
+
+For each $(k,i), (m,j) \in \Sigma$ set
+\begin{align*}
+\mu_{(m,j),(k,i)}
+	= &\begin{cases}
+		1 
+			& \mbox{ if } (k,i) = (m,j); \\
+		\frac{\lambda_{k,j}-\lambda_{k,i}+1}{\lambda_{k,j}-\lambda_{k,i}-1}
+			& \mbox{ if } k = m, i \neq j; \\
+		-\frac{\lambda_{m,j}^*+\lambda_{k,i}}{\lambda_{m,j}+\lambda_{k,i}^*}
+			& \mbox{ if } |k-m| = 1; \\
+		1 
+			& \mbox{ otherwise}.
+	\end{cases}
+\end{align*}
+Then $X_{k,i} X_{m,j} = \mu_{(k,i);(m,j)} X_{m,j} X_{k,i}$.
+
+\end{document}
+\paragraph
+We set
+\begin{align*}
+H_{k,i}
+	&= \prod_{j\neq i} (\lambda_{k,i} - \lambda_{k,j})(\lambda_{k,i} - \lambda_{k,j}^*)
+	= \begin{cases}
+		\displaystyle 
+			\prod_{j\neq i} (\lambda_{k,i}^2 - \lambda_{k,j}^2 - \lambda_{k,i} + \lambda_{k,j} )
+			& \mbox{ if } k \equiv 0 \mod 2 \\
+		\displaystyle \prod_{j\neq i} (\lambda_{k,i}^2 - \lambda_{k,j}^2) 
+			& \mbox{ if } k \equiv 1 \mod 2
+	\end{cases} \\
+R_{k,i}
+	&= \prod_{j = 1}^{p(k+1)} (\lambda_{k,i} + \lambda_{k+1,j})(\lambda_{k,i} + \lambda_{k+1,j}^*)
+		\prod_{j = 1}^{p(k-1)} (\lambda_{k,i} + \lambda_{k-1,j})(\lambda_{k,i} + \lambda_{k-1,j}^*) \\
+h_{k,i}
+	&= \lambda_{k,i}^2 (4 \lambda_{k,i}^2 - 1) \\
+t_{k,i}
+	&= - \frac{R_{k,i}}{h_{k,i} H_{k,i} H_{k,i}^{e_{k,i}}} \\
+t_{k,i}
+	&= -\frac{\displaystyle \prod_{j = 1}^{p(k+1)}
+		(\lambda_{k,i}+\lambda_{k+1,j})(\lambda_{k,i} + \lambda_{k+1,j}^*)
+		\displaystyle \prod_{j = 1}^{p(k-1)} (\lambda_{k,i} + \lambda_{k-1,j})
+			(\lambda_{k,i} + \lambda_{k-1,j}^*)}
+	{\lambda_{k,i}^2 (4 \lambda_{k,i}^2 - 1) \displaystyle \prod_{j\neq i} 
+		(\lambda_{k,i} - \lambda_{k,j})(\lambda_{k,i} - \lambda_{k,j}^*)}
+\end{align*}
+
+\paragraph
+We set
+\begin{align*}
+q_{(k,i),(m,j)}
+	&= \begin{cases}
+		1 
+			& \mbox{ if } k = m, i = j \\
+		\frac{\lambda_{k,i} - \lambda_{k,j} + 1}{\lambda_{k,i} - \lambda_{k,j} - 1}
+			& \mbox{ if } k = m, i \neq j \\
+		- \frac{\lambda_{k,i}^* + \lambda_{m,j}}{\lambda_{k,i} + \lambda_{m,j}^*}
+			& \mbox{ if } |k - m| = 1 \\
+		1 
+			& \mbox{ if } |k - m|>1 
+	\end{cases}
+\end{align*}
+
+\paragraph
+We set
+\begin{align*}
+r_{(k,i),(m,j)}
+	&= \begin{cases}
+		1 
+			& \mbox{ if } k = m, i = j \\
+		\frac{\lambda_{k,i} - \lambda_{k,j}^* + 1}{\lambda_{k,i} - \lambda_{k,j}^* - 1}
+			& \mbox{ if } k = m, i \neq j \\
+		- \frac{\lambda_{k,i}^* + \lambda_{m,j}^*}{\lambda_{k,i} + \lambda_{m,j}}
+			& \mbox{ if } |k - m| = 1 \\
+		\frac{t_{k,i}^*}{t_{k,i}} 
+			& \mbox{ if } |k - m|>1 \\
+	\end{cases}
+\end{align*}
+
+\paragraph
+We set
+\begin{align*}
+C_{k}
+	&= \begin{cases}
+		0 & \mbox{ if } k = 2q + 1 \\
+		(-1)^q \ii \frac{\prod_{r=1}^q \lambda_{k-1, r} \prod_{r=1}^{q+1} 
+		\lambda_{k+1,r}}
+			{\prod_{r=1}^q \lambda_{k,r} \lambda_{k,r}^*} 
+			& \mbox{ if } k = 2q
+	\end{cases}
+\end{align*}
+
+\begin{Definition}
+The algebra $\A$ is the $\CC$-algebra generated by $L$ and the variables 
+$\{X_{k,i}, Y_{k,i} \mid (k,i) \in \Sigma\}$ subject to the following relations
+\begin{align*}
+X_{k,i} f 
+	&= f(\lambda+e_{k,i}) X_{k,i}
+&Y_{k,i} f 
+	&= f(\lambda-e_{k,i}) Y_{k,i}
+	&\mbox{ for all } f \in L, (k,i) \in \Sigma \\
+X_{k,i} X_{m,j} 
+	&= q_{(k,i),(m,j)} X_{m,j} X_{k,i} 
+&Y_{m,j} Y_{k,i}
+	&= q_{(k,i),(m,j)}^* Y_{k,i} Y_{m,j}
+	& \mbox{ for all } (k,i), (m,j) \in \Sigma \\
+X_{k,i} Y_{k,i} 
+	&= t_{k,i}
+& Y_{k,i} X_{k,i}
+	&= t_{k,i}^*
+	& \mbox{ for all } (k,i) \in \Sigma \\
+X_{k,i} Y_{m,j}
+	&= r_{(k,i),(m,j)} Y_{m,j} X_{k,i}
+	&&	& \mbox{ for all } (k,i) \neq (m,j) \in \Sigma 
+\end{align*}
+\end{Definition}
+
+\begin{Proposition}
+The group $G$ acts on $\A$ by ring automorphisms. For each $k \in \interval n$ 
+and each $\sigma \in S_{p(k)}$ we have 
+\begin{align*}
+\sigma \cdot (X_{m,i}, Y_{m,i})
+	&= \begin{cases}
+		(X_{k,\sigma(i)}, Y_{k, \sigma(i)})
+			&\mbox{ if } m = k; \\
+		(X_{m,i}, Y_{m,i})
+			&\mbox{otherwise.}
+	\end{cases} \\
+\epsilon_k \cdot (X_{m,i}, Y_{m,i})
+	&= \begin{cases}
+		(-Y_{m,i}, -X_{k,i})
+			&\mbox{ if } m = k; \\
+		(X_{m,i}, Y_{m,i})
+			&\mbox{otherwise.}
+	\end{cases}
+\end{align*}
+Furthermore the action of $G$ restricted to $L \subset \A$ coincides with the
+action described in \ref{polynomial-algebra}.
+\end{Proposition}
+
+\begin{Theorem}
+Set
+\begin{align*}
+A_k 
+	&= C_k + \sum_{i=1}^{p(k)} X_{k,i} - Y_{k,i} \in \A
+\end{align*}
+Then each $A_k \in \A^G$, and the Lie algebra generated by these elements is 
+isomorphic to $\Psi_n$.
+\end{Theorem}
+
+
+
+\end{document}
