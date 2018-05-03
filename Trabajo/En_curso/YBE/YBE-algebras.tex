@@ -107,11 +107,11 @@ bodyfont=\itshape]{mystyle-empty-plain}
 
 \newcommand\range[1]{\left\llbracket#1\right\rrbracket}
 
-\DeclareMathOperator\Mod{\mathsf{Mod}}
+\DeclareMathOperator\ISyb{\mathsf{ISyb}}
+\DeclareMathOperator\YB{\mathsf{YB}}
+\DeclareMathOperator\End{\mathsf{End}}
 \DeclareMathOperator\Hom{\mathsf{Hom}}
-\DeclareMathOperator\Ext{\mathsf{Ext}}
-\DeclareMathOperator\Tor{\mathsf{Tor}}
-\DeclareMathOperator\HOM{\underline{\mathsf{Hom}}}
+\DeclareMathOperator\Mat{\mathsf{Mat}}
 \DeclareMathOperator\EXT{\underline{\mathsf{Ext}}}
 \DeclareMathOperator\TOR{\underline{\mathsf{Tor}}}
 
@@ -136,8 +136,67 @@ Given $n,m \in \ZZ$ we set $\range{n,m} = \{ k \in \ZZ \mid n \leq k \leq
 m\}$, and if $n \in \NN$ we will also write $\range{n} = \range{1,n}$. We work
 over $\CC$, so all vector spaces, tensor products, etc. are over this field.
 
-\paragraph
+We denote by $\ISyb$ the category of all non-degenerate and involutive set 
+theoretical solutions to the Yang-Baxter equation, and by $\YB$ the category
+of all finite dimensional solutions over the complex numbers.
 
+\paragraph
+Let $n \in \NN$. Given $i,j \in \range{n}$ we denote by $e_i \in \CC^n$ the
+$i$-th element of the canonical basis, and by $E^i_j \in \mathsf{Mat}_n(\CC)$
+the matrix having a $1$ as its $(i,j)$-th entry, all other entries equal to 
+zero. We identify $\CC^n \ot \CC^n$ with $\Mat_n(\CC)$ through the linear
+correspondence $e_i \ot e_j \mapsto E^i_j$.
+
+Define the map $i: \Mat_n(\CC) \otimes \Mat_n(\CC) \to \End(\Mat_n(\CC))$ where
+for each $A, B, C \in \Mat_n(\CC)$ we have $i(A\ot B)(C) = A C^t B$. If $F 
+\in \End(\Mat_n(\CC))$ and $F(E^i_j) = \sum_{k,l} \alpha_{i,k}^{j,l} E^k_l$ 
+then setting $\overline F = \sum_{i,j,k,l} \alpha^{j,l}_{i,k} E^k_j \ot E^i_l$ 
+we obtain $i(\overline F) =F$. Thus $i$ is an epimorphism, and since the 
+dimensions of domain and codomain are the same it is an isomorphism, with 
+inverse $F \mapsto \overline F$.
+
+Denote by $\tau \in \End(\Mat_n(\CC))$ the transposition map. Then we have
+\begin{align*}
+\overline{F \circ \tau}
+  &= \sum_{i,j,k,l} \alpha^{i,l}_{j,k} E^k_j \ot E^i_l
+  = \sum_{i,j,k,l} \alpha^{j,l}_{i,k} E^k_i \ot E^j_l; \\
+\overline{\tau \circ F}
+  &= \sum_{i,j,k,l} \alpha^{j,l}_{i,k} E^l_j \ot E^i_k
+  = \sum_{i,j,k,l} \alpha^{j,k}_{i,l} E^k_j \ot E^i_l.
+\end{align*}
+
+Denote by $\langle-, -\rangle$ the only inner product on $\CC^n \to \CC^n$ 
+such that $\{e_i \ot e_j \mid i,j \in \range{n}\}$ forms an orthogonal basis. 
+This is the pullback of the usual inner product on $\Mat_n(\CC)$ for which the
+basis $\{E^i_j \mid i,j \in \range{n}\}$ is an orthogonal basis. We denote by 
+$F^{t_1}$ the only map such that $\langle F^{t_1}(E^k_j), E^i_l \rangle = 
+\langle F(E^i_j), E^k_l \rangle$. In other words $F^{t_1}(E^k_j) = \sum_{i,l}
+\alpha^{j,l}_{i,k} E^i_l$. We define $F^{t_2}$ analogously, so $F^{t_2}(E^i_l)
+= \sum_{k,j} \alpha_{i,k}^{j,l} E^k_j$. Thus we have
+\begin{align*}
+\overline{F^{t_1}}
+  &= \sum_{i,j,k,l} \alpha_{k,i}^{j,l} E^k_j \ot E^i_l 
+  = \sum_{i,j,k,l} \alpha_{i,k}^{j,l} E^i_j \ot E^k_l \\
+\overline{F^{t_2}}
+  &= \sum_{i,j,k,l} \alpha_{i,k}^{l,j} E^k_j \ot E^i_l
+  = \sum_{i,j,k,l} \alpha_{i,k}^{j,l} E_i^k \ot E^i_j.
+\end{align*}
+
+\paragraph
+Let $n \in \NN$ and let $(\range{n}, S)$ be an symmetric set, and for each 
+$i,j \in \range{n}$ put $S(i,j) = (g_i(j), f_j(i))$. Then $S$ induces a 
+classical solution to the YBE by setting $S(e_i \ot e_j) = e_{g_i(j)} \ot 
+e_{f_j(i)}$. Using the notation from the previous paragraph
+\begin{align*}
+\overline S 
+  &= \sum_{i,j} E_j^{g_i(j)} \ot E^i_{f_j(i)};
+& \overline{ \tau \circ S }
+  &= \sum_{i,j} E_j^{f_j(i)} \ot E^i_{g_i(j)};\\  
+\overline{S^{t_1}}
+  &= \sum_{i,j} E_j^i \ot E^{g_i(j)}_{f_j(i)}; 
+&\overline{S^{t_2}}
+  &= \sum_{i,j} E^{g_i(j)}_{f_j(i)} \ot E^i_j.
+\end{align*}
 
 
 \end{document}
