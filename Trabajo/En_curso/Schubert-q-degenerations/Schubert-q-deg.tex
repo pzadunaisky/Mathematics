@@ -174,50 +174,116 @@ bodyfont=\itshape]{mystyle-empty-plain}
 Quantum toric degeneration of quantum Schubert varieties
 \footnote{file:[lrpz3-paris-1.tex]}
 }
-\date{13/04/2018}
+\date{31/05/2018}
 \author{L. Rigal, P. Zadunaisky}
 
 \begin{document}
 \maketitle
 
+\begin{abstract}
+We show that certain homological regularity properties of graded connected 
+algebras, such as being AS-Gorenstein or AS-Cohen-Macaulay, can be tested by 
+passing to associated graded rings. In the spirit of noncommutative algebraic 
+geometry, this can be seen as an analogue of the classical result that, in a 
+flat family of varieties over the affine line, regularity properties of one 
+fiber extend to all fibers. 
+We then show that quantized coordinate rings of flag varieties and Schubert 
+varieties can filtered so that the associated graded rings are twisted 
+semigroup rings in the sense of \cite{RZ}. This is a noncommutative version
+of the result due to Caldero \cite{C} stating that flag varieties degenerate
+into toric varieties, and implies that quantized coordinate rings of flag
+varieties are AS-Cohen-Macaulay.
+\end{abstract}
+
 
 %\newpage 
 \section{Introduction}
+Let $\k$ be a field, and let $A$ be a noetherian commutative algebra. If we put
+an ascending filtration on $A$ then we can build the Rees ring of the 
+filtration, which is a free $\k[t]$-algebra $\mathcal R$ such that $A \cong 
+\mathcal R / (t - \lambda)\mathcal R$ for all $\lambda \in \k^\times$, while
+$\mathcal R / t \mathcal R$ is isomorphic to the associated graded ring. In 
+geometric terms, the variety associated to $\mathcal R$ is a flat family over
+the affine line, whose generic fiber is isomorphic to $\Spec R$ and whose
+fiber over $0$ is isomorphic to $\Spec \gr R$. Now a standard result says that
+fibers in a flat family have similar properties: if one fiber is regular, or 
+Gorenstein, or Cohen-Macaulay, or has any other of a long list of properties, 
+then the other fibers also have this property.
+
+Of course, the idea of studying a ring by imposing a filtration and passing to 
+the associated graded ring is a basic tool in an algebraist's toolbox, and 
+applies well beyond the geometric context we just described. In 
+particular the hypotheses of noetherianity and commutativity are not necessary
+for the filtered-to-graded methods to work. However, in the spirit of 
+noncommutative algebraic geometry, we should look at the case where $A$ is
+noetherian, $\NN$-graded and connected (i.e. $A_0 = \k$) with an eye on the
+geometric case. In this case, although there are no varieties associated to
+our algebras, we have suitable analogues of being regular, or Gorenstein, or 
+Cohen-Macaulay, defined in purely homological terms. Hence it makes sense to 
+ask whether the algebra $A$ has any of these properties, and whether they are 
+``stable by flat deformation'', i.e. if the fact that $\gr A$ has any of these 
+properties implies that $A$ also has it. 
+
+The main result of this article is that this is the case under a mild 
+homological hypothesis over $\gr A$ known as property $\chi$, which was 
+identified as central in noncommutative geometry already in the 
+foundational paper \cite{AZ}. Notice that, in our context, $A$ is already 
+graded (in fact as is usual in noncommutative geometry, in most examples it 
+will be multigraded), so we must ask for the filtration to be by graded 
+subspaces, and hence $\gr A$ comes with two gradings. This requires some 
+careful bookkeepping, and property $\chi$ guarantees that all the relevant 
+homological invariants have finite dimensional homogeneous components with 
+respect to the multigrading.
+
+As an example, we show that quantized coordinate rings of flag varieties and 
+their Schubert subvarieties can be filtered so that the assocaited graded 
+rings are semigroup rings, twisted by a $2$-cocycle. These latter algebras can 
+be seen as noncommutative analogues of affine toric varieties, and where 
+studied from this point of view in \cite{RZ2}. In particular, we know that
+they are all AS-Cohen-Macaulay, and in view of our results the same holds for
+quantum flag and Schubert varieties. We were originally inspired in our 
+research by the article \cite{C}, where Caldero shows that classical flag and 
+Schubert varieties have toric degenerations. Caldero proves this by finding a 
+filtration in the quantized case, using as his base field a trascendental 
+extenssion of $\CC$, and then specializing to the classical algebras. We 
+include a modified version of his argument to show that such a degeneration is 
+possible over an arbitrary transcendental extension of $\QQ$, which requires 
+some technical results on canonical and monomial bases of quantized enveloping 
+algebras. 
+
+Toric degenerations of varieties (i.e. flat families with generic fiber 
+isomorphic to the original variety, and special fiber a toric variety) 
+are a staple in algebraic geometry, see for example the recent survey 
+\cite{FFL}. As mentioned there, geometric properties of toric varieties can be 
+translated into combinatorial properties of associated lattices, cones and 
+polytopes. In the affine case this information is mostly codified by the 
+associated affine semigroup ring, and as shown in \cite{RZ2} the $2$-cocycle 
+twists of these rings hold essentially the same combinatorial information. 
+Thus quantum affine toric varieties are valuable test models in noncommutative 
+geometry, and hence obvious targets for noncommutative degenerations. We hope 
+that, just as in the commutative case, quantum toric degenerations will become 
+a valuable tool for the noncommutative geometer.
+\\
 
 The article is organized as follows: section \ref{graded-connected-algebras} 
-contains general material on connected $\NN^r$-graded algebras. We adapt some 
-well-known defintions for connected $\NN$-graded algebras to the 
-$\NN^r$-graded context. The regularity properties of $\NN^r$-graded algebras 
-are defined in terms of its category of $\ZZ^r$-graded modules, and since an 
-algebra may posses several diferent gradings we study how these properties 
-change when the grading changes. In the last subsection we 
-prove our main transfer result: if a connected $\NN^r$-graded has a filtration 
-by finite dimensional graded subspaces then, under mild technical conditions, 
-the original algebra inherits the regularity properties of the associated 
-graded ring, see Theorem \ref{transfer}. The key result is Proposition 
-\ref{P:ext-ss}, which is an $\NN^r$-graded version of the classical spectral 
-sequence relating $\Ext$-spaces of a filtered algebra with those of its 
-associated graded algebra. However the finer grading forces us 
-to do some careful bookkeeping, and it turns out that property $\chi$, or 
-rather its $\NN^{r+1}$-graded analogue, plays a delicate role, see Corollary 
-\ref{ldim}.
+contains general material on connected $\NN^r$-graded, their homological 
+regularity properties, and how they behave with respect to a change of 
+grading. In the last subsection we prove our main transfer result: if a 
+connected $\NN^r$-graded has a filtration by finite dimensional graded 
+subspaces and the associated graded ring has property $\chi$, then the 
+original algebra inherits the regularity properties of the associated graded 
+ring, see Theorem \ref{transfer}. 
 
 In section \ref{qatv} we review the basic theory of affine semigroups and 
-recall some results from our previous article \cite{RZ2} on semigroup algebras 
-twisted by a cocycle, which are quantum analogues of affine toric varieties. 
-Then we introduce a family of algebras with a presentation modeled on that of 
-an affine semigroup; this definition is inspired in the classical definition 
-of Hodge algebras and their descendants, namely algebras with a straightening 
-law and their quantum versions. We show that these algebras have a natural 
-filtration, and give  sufficient conditions for their associated graded rings 
-to be quantum affine toric varieties.
+the regularity properties of quantum affine toric varieties from \cite{RZ2}. 
+We then give an axiomatic description of algebras with a quantum toric 
+degeneration for a fixed affine semigroup.
 
 Section \ref{q-flag-schubert} contains a quick review of the definitions of 
-quantum flag varieties and their Schubert subvarieties. We then review 
-Caldero's results on cannonical bases for these varieties found in \cite{C}, 
-use them to show that Schubert varieties have quantum toric degenerations, and 
-apply the results from the previous section to deduce some of their 
-homological regularity properties in Theorem \ref{Schubert-deg}. 
+quantum flag varieties and their Schubert subvarieties. We prove that these
+algebras have a quantum toric degeneration and apply results from the previous
+section to show that they are always AS-Cohen Macaulay in Theorem 
+\ref{Schubert-deg}. 
 
 We finish with a short section \ref{richardson}, where we revisit the results 
 of our previous article \cite{RZ} in the context of this article.
@@ -2128,6 +2194,21 @@ $A$ has a quantum toric degeneration with associated semigroup $S(\L)$.
 }
 
 
+\bib{FFL}{article}{
+   author={Fang, Xin},
+   author={Fourier, Ghislain},
+   author={Littelmann, Peter},
+   title={On toric degenerations of flag varieties},
+   conference={
+      title={Representation theory---current trends and perspectives},
+   },
+   book={
+      series={EMS Ser. Congr. Rep.},
+      publisher={Eur. Math. Soc., Z\"urich},
+   },
+   date={2017},
+   pages={187--232},
+}
 
 \bib{RGS}{book}{
    author={Rosales, J. C.},
@@ -2138,9 +2219,6 @@ $A$ has a quantum toric degeneration with associated semigroup $S(\L)$.
    pages={xiv+185},
 }
     
-
-
-
 \bib{GL}{article}{
    author={Gonciulea, N.},
    author={Lakshmibai, V.},
@@ -2250,7 +2328,6 @@ $A$ has a quantum toric degeneration with associated semigroup $S(\L)$.
   date={2010}, 
   pages={xiv+346}, 
 }
-
 
 \bib{Mau}{book}{
    author={Maury, Guy},
