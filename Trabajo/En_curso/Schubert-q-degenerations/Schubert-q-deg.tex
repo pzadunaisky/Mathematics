@@ -204,27 +204,27 @@ filtration, which is a free $\k[t]$-algebra $\mathcal R$ such that $A \cong
 \mathcal R / (t - \lambda)\mathcal R$ for all $\lambda \in \k^\times$, while
 $\mathcal R / t \mathcal R$ is isomorphic to the associated graded ring. In 
 geometric terms, the variety associated to $\mathcal R$ is a flat family over
-the affine line, whose generic fiber is isomorphic to $\Spec R$ and whose
-fiber over $0$ is isomorphic to $\Spec \gr R$. Now a standard result says that
-fibers in a flat family have similar properties: if one fiber is regular, or 
-Gorenstein, or Cohen-Macaulay, or has any other of a long list of properties, 
-then the other fibers also have this property.
+the affine line, whose generic fiber is isomorphic to $\Spec A$ and whose
+fiber over $0$ is isomorphic to $\Spec~\gr~A$. A standard result from 
+algebraic geometry says that fibers in a flat family have similar properties: 
+if one fiber is regular (resp. Gorenstein, Cohen-Macaulay, or any other of 
+a long list of properties) then \emph{all} fibers are also regular (resp. 
+Gorenstein, Cohen-Macaulay, etc.)
 
 Of course, the idea of studying a ring by imposing a filtration and passing to 
 the associated graded ring is a basic tool in an algebraist's toolbox, and 
-applies well beyond the geometric context we just described. In 
+can be applied outside of a geometric context. In 
 particular the hypotheses of noetherianity and commutativity are not necessary
-for the filtered-to-graded methods to work. However, in the spirit of 
+for filtered-to-graded methods to work. However, in the spirit of 
 noncommutative algebraic geometry, we should look at the case where $A$ is
 noetherian, $\NN$-graded and connected (i.e. $A_0 = \k$) with an eye on the
-geometric case. In this case, although there are no varieties associated to
-our algebras, we have suitable analogues of being regular, or Gorenstein, or 
-Cohen-Macaulay, defined in purely homological terms. Hence it makes sense to 
-ask whether the algebra $A$ has any of these properties, and whether they are 
-``stable by flat deformation'', i.e. if the fact that $\gr A$ has any of these 
-properties implies that $A$ also has it. 
-
-The main result of this article is that this is the case under a mild 
+geometric case. Although here there are no varieties associated to our 
+algebras, we have suitable analogues of the notions of being regular, or 
+Gorenstein, or Cohen-Macaulay, defined in purely homological terms (see 
+paragraph \ref{AS-reg}). Hence it makes sense to ask whether these properties 
+are ``stable by flat deformation'', i.e. if the fact that $\gr A$ has any of 
+these properties implies that $A$ also has that property. 
+The main result of this article \ref{transfer-of-regularity} is that this is the case under a mild 
 homological hypothesis over $\gr A$ known as property $\chi$, which was 
 identified as central in noncommutative geometry already in the 
 foundational paper \cite{AZ}. Notice that, in our context, $A$ is already 
@@ -835,7 +835,7 @@ the set
     = \left\{\sum_{i=1}^n r_i s_i \mid r_i \in \RR_{\geq 0}, 
               s_i \in S, n \in \NN\right\}.
 \]
-The \emph{real interior} of $S$ is defined as $\relint S = S \cap 
+The \emph{relative interior} of $S$ is defined as $\relint S = S \cap 
 \RR_+S^\circ$, where $\RR_+S^\circ$ is the topological interior of $\RR_+ S$ 
 as a subset of the vector space $\RR S$ endowed with the subspace topology 
 induced from $\RR^r$. The relative interior is intrinsic to $S$ and does not 
@@ -851,8 +851,8 @@ states that $S$ is normal if and only if $S = \ZZ^r \cap \RR_+S$.
 \paragraph
 \label{hilbert-basis}
 Let $S$ be an affine semigroup. An element $s \in S$ is called 
-\emph{irreducible} if whenever $s = x + y$ with $x,y \in S$, the elements $x$ 
-and $y$ are invertible. On the other hand $S$ is called \emph{positive} if its 
+\emph{irreducible} if whenever $s = x + y$ with $x,y \in S$, then either $x$ 
+or $y$ is invertible. On the other hand $S$ is called \emph{positive} if its 
 only invertible element is $0$. If $S$ is positive then the set of its 
 irreducible elements is finite and generates $S$; for this reason it is called 
 the \emph{Hilbert basis} of $S$. The fact that $S$ is positive also implies 
@@ -888,7 +888,7 @@ every positive affine semigroup has a presentation.
 
 \paragraph
 \label{twisted-semigroup-algebras}
-Let $S$ be a commutative semigroup.
+Let $S$ be a commutative semigroup with identity.
 A $2$-cocycle over $S$ is a function $\alpha: S \times S \to \k^\times$ such 
 that $\alpha (s,s') \alpha(s+s',s'') = \alpha(s,s'+s'')\alpha(s',s'')$ for all 
 $s,s',s'' \in S$. Given a $2$-cocycle $\alpha$ over $S$, the 
@@ -896,7 +896,9 @@ $s,s',s'' \in S$. Given a $2$-cocycle $\alpha$ over $S$, the
 $\k$-algebra whose underlying vector space has basis $\{X^s \mid s \in S\}$ 
 and whose product over these generators is given by $X^s X^t = \alpha(s,t)
 X^{s+t}$. This is a noncommutative deformation of the classical semigroup 
-algebra $\k[S]$. 
+algebra $\k[S]$. For more details see \cite{RZ2}*{section 3}; in this 
+reference the group is assumed to be cancellative, but this is not relevant
+for the definition of the twisted algebra.
 
 \begin{Definition*}
 Let $A$ be a connected $\NN^r$-graded algebra. We say that $A$ is a 
@@ -912,7 +914,8 @@ Let $r \geq 1$ and let $\psi: S \to \NN^r$ be a monoid morphism such that
 $\psi^{-1}(0) = \{0\}$. The twisted semigroup algebra $\k^\alpha[S]$ can be
 endowed with a connected $\NN^r$-grading setting $\deg X^s = \psi(s)$ for each
 $s \in S$. Conversely, any connected grading such that the elements of the 
-form $X^s$ are homogeneous arises in this manner. In particular, if $A$ is a 
+form $X^s$ are homogeneous arises in this manner \cite{RZ2}*{Proposition 
+3.2.5}. In particular, if $A$ is a 
 quantum positive toric variety with underlying semigroup $S$ then there is a 
 corresponding monoid morphism $\psi: S \to \NN^r$, to which we will refer as 
 the \emph{grading} morphism. 
@@ -1202,11 +1205,11 @@ s'+s''$.
 
 \begin{Definition*}
 Let $S$ be a commutative semigroup, and let $<$ be a well-order on $S$ 
-compatible with the semigroup structure. Let $A$ be a connected $\NN^r$-graded 
-algebra. An \emph{$(S,<)$-basis} for $A$ is an ordered basis $\{b_s \mid s 
-\in S\}$ consisting of homogeneous elements, such that for all $s,s',s'' \in 
-S$ with $s'' < s+s'$ there exist $c_{s,s'} \in \k^\times$ and $c_{s,s'}^{s''} 
-\in \k$ such that
+compatible with the semigroup structure. Let $A$ be a connected $\NN^l$-graded 
+algebra for some $l \in \NN$. An \emph{$(S,<)$-basis} for $A$ is an ordered 
+basis $\{b_s \mid s \in S\}$ consisting of homogeneous elements, such that for 
+all $s,s',s'' \in S$ with $s'' < s+s'$ there exist $c_{s,s'} \in \k^\times$ 
+and $c_{s,s'}^{s''} \in \k$ such that
 \[
   b_s b_{s'} = c_{s,s'} b_{s+s'} + \sum_{s'' < s+s'} c_{s,s'}^{s''} b_{s''}.
 \]
@@ -1214,14 +1217,18 @@ S$ with $s'' < s+s'$ there exist $c_{s,s'} \in \k^\times$ and $c_{s,s'}^{s''}
 
 \paragraph
 \label{S-order-bases}
-Let $S$ be a commutative semigroup. Assume $<$ is a well-order on $S$ 
-compatible with its additive structure, and let $A$ be an algebra. An 
-$(S,<)$-filtration on $A$ is a collection of vector spaces $\F = \{F_sA \mid 
-s \in S\}$, such that $F_sA \cdot F_{s'} A \subset F_{s+s'}A$ for all $s,s' 
-\in S$, and such that $F_sA \subset F_{s'}A$ whenever $s < s'$. The standard 
-notions related to $\NN$-filtrations translate easily to the context of 
-$(S,<)$-filtrations. In particular, one can define the associated graded 
-algebra $\gr_\F A$ by setting $F_{<s}A = \sum_{t<s} F_tA$ and taking
+Let $S$ be a commutative semigroup with neural element $0$. Assume $<$ is a 
+well-order on $S$ compatible with its additive structure, and let $A$ be an 
+algebra. An $(S,<)$-filtration on $A$ is a collection of vector spaces $\F = 
+\{F_sA \mid s \in S\}$, such that $F_sA \cdot F_{s'} A \subset F_{s+s'}A$ for 
+all $s,s' \in S$, and such that $F_sA \subseteq F_{s'}A$ whenever $s \leq s'$. 
+The standard notions related to $\NN$-filtrations translate easily to the 
+context of $(S,<)$-filtrations. We will assume that our filtrations are always 
+\emph{exhaustive}, so $A = \bigcup_{s \in S} F_s A$, and \emph{discrete},
+so $F_{s}A = 0$ for all $s<0$.
+
+Let $A$ be an $S$-filtered algebra. The associated graded algebra 
+$\gr_\F A$ is defined setting $F_{<s}A = \sum_{t<s} F_tA$ and taking
 \[
   \gr_\F A = \bigoplus_{s \in S} \frac{F_sA}{F_{<s}A}.
 \] 
@@ -1234,25 +1241,16 @@ namely if $a,b \in A$ and $s,t$ are minimal elements such that $a \in F_sA, b
 F_{<s+t}A$, which equals $\gr(ab)$ if $t+s$ is minimal with respect to the 
 property that $ab \in F_{t+s}A$ and zero otherwise.
 
-We now describe a mechanism to obtain well-orders on positive affine 
-semigroups. Since $S$ is a positive affine semigroup it can be embedded in 
-$\NN^r$ for some $r \geq 0$ through a monoid morphism $\iota: S \to \NN^r$. 
-Now $\NN^r$ is a well-ordered semigroup with the lexicographic order, which is 
-compatible with its additive structure, so we may pull-back the lexicographic 
-order thourgh $\iota$ and thus obtain a well-order $<^\iota$ over $S$, which 
-is also compatible with its additive structure. Notice that in this case $0$ 
-is always the minimal element of $S$.
-
 \begin{Lemma*}
-Let $S$ be a positive affine semigroup, let $\iota: S \to \NN^r$ be an 
-embedding, and let $< = <^\iota$ be the pull-back of the lexicographic order 
-on $S$. Let $A$ be a noetherian $\NN^r$-graded connected algebra, and assume 
-it has an $(S,<)$-basis $\B = \{b_s \mid s \in S\}$. Set $F_sA = \langle b_t 
-\mid t \leq s \in S \rangle$ and $\F = \{F_sA \mid s \in S\}$. Also let 
-$\{s_1, \ldots, s_n\}$ be the Hilbert basis of $S$ and set $b_i = b_{s_i}$ for 
-all $1 \leq i \leq n$. The following hold.
+Let $S$ be a positive affine semigroup and let $<$ be a well-order of $S$
+compatible with the semigroup structure. 
+Let $A$ be a noetherian $\NN^l$-graded connected algebra for some $l \in \NN$, 
+and assume $A$ has an $(S,<)$-basis $\B = \{b_s \mid s \in S\}$. 
+Set $F_sA = \langle b_t \mid t \leq s \in S \rangle$ and $\F = \{F_sA \mid s 
+\in S\}$. Also let $\{s_1, \ldots, s_n\}$ be the Hilbert basis of $S$ and set 
+$b_i = b_{s_i}$ for all $1 \leq i \leq n$. The following hold.
 \begin{enumerate}
-\item The family $\F$ is an exhaustive $(S,<)$-filtration. Furthermore,
+\item The family $\F$ is an $(S,<)$-filtration. Furthermore,
 each quotient $F_sA / F_{<s}A$ is of dimension $1$ and $F_0A = \langle 1 
 \rangle$.
 
@@ -1263,18 +1261,21 @@ isomorphic as $S$-graded algebra to $\k^\alpha[S]$.
 \end{enumerate} 
 \end{Lemma*}
 \begin{proof}
-The fact that $\F$ is an exhaustive $(S,<)$-filtration is an immediate 
+The fact that $\F$ is an exhaustive and discrete $(S,<)$-filtration is an 
+immediate 
 consequence of the defintion of an $(S,<)$-basis. Also $F_{<s}A = \langle b_t 
 \mid t < s\rangle$, so $F_sA / F_{<s}A$ is generated by the image of $b_s$ in 
-the quotient. Finally, writing $1$ as a linear combination of the $b_s$
-and using a leading term argument, it is easy to see that $1 \in F_0A$ and 
-hence it must generate it. Notice that this implies that $b_0$ is a scalar, 
-and without loss of generality we may assume that $b_0 = 1$.
+the quotient, which is nonzero. Finally, writing $1$ as a linear combination 
+of the $b_s$ and using a leading term argument, it is easy to see that $1 \in 
+F_0A$ and hence it must generate it. Notice that this implies that $b_0$ is a 
+scalar so without loss of generality we may assume that $b_0 = 1$. This proves
+item $1$.
 
-Set $\alpha(s,s') = c_{s,s'}$ for each $s,s' \in S$. By item $1$, the set 
-$\{\gr b_s \mid s \in S\}$ is a basis of $\gr_\F A$, and by definition of the 
-product on the associated graded ring $(\gr b_s) (\gr b_{s'}) = c_{s,s'} \gr 
-b_{s+s'}$. Associativity of the product in $\gr_\F A$ implies then that 
+Set $\alpha(s,s') = c_{s,s'}$ for each $s,s' \in S$. By the first item the set 
+$\{\gr b_s \mid s \in S\}$ is a basis of $\gr_\F A$, and $(\gr b_s) 
+(\gr b_{s'}) = c_{s,s'} \gr b_{s+s'}$ by definition of the product on the 
+associated graded ring. Associativity of the product in $\gr_\F A$ implies 
+then that 
 $\alpha$ is a $2$-cocycle over $S$, and furthermore the map $\gr_\F A \to 
 \k^\alpha[S]$ sending $\gr b_s$ to $X^s$ is a multiplicative $S$-graded 
 vector-space isomorphism. Since we are assuming that $b_0 = 1$, it follows 
@@ -1286,35 +1287,46 @@ Finally, in order to prove that the $b_i$'s generate $A$ it is enough to show
 that each $b_s$ is in the algebra generated by these elements. Suppose this is 
 not the case. Then, since $S$ is well-ordered by $<$, there exists a minimal 
 $s$ such that $b_s$ is not in the algebra generated by the $b_i$'s. Take $\xi 
-\in \NN^r$ such that $\pi(\xi) = s$. By the definition of the product of the 
-associated graded ring, $\prod_i(\gr b_i)^{\xi_i}$ equals either $\gr (\b^\xi)$
-or zero, and since $\gr_\F A \cong \k^\alpha[S]$ is integral the second 
-possibility can not occur. Thus $\gr(\b^\xi)$ is a nonzero element of $\gr_\F 
-A$ of degree $\pi(\xi)$, so item 1 of this lemma implies that $\gr b_s = 
-c\gr(\b^\xi)$ for some $c \in \k^\times$, and hence $b_s  = c\b^\xi + 
-\sum_{t<s} c_t b_t$. By the minimality of $s$ all the $b_t$'s appearing in the 
-sum on the right hand side of the equation lie in the algebra generated by the 
-$b_i$'s, and clearly so does $\b^\xi$, a contradiction. 
+= (\xi_1, \ldots, \xi_n) \in \NN^n$ such that $\sum_i \xi_i s_i = s$. By the 
+definition of the product in the associated graded ring, $\prod_i
+(\gr b_i)^{\xi_i}$ equals either $\gr (\b^\xi)$ or zero, and since $\gr_\F A 
+\cong \k^\alpha[S]$ is integral (see \cite{RZ2}*{Lemma 3.2.3}) the second possibility can not occur. Thus 
+$\gr(\b^\xi)$ is a nonzero element of $\gr_\F A$ of degree $\pi(\xi)$, so item 
+1 of this lemma implies that $\gr b_s = c\gr(\b^\xi)$ for some $c \in 
+\k^\times$, and hence $b_s  = c\b^\xi + \sum_{t<s} c_t b_t$. By the minimality 
+of $s$ all the $b_t$'s appearing in the sum on the right hand side of the 
+equation lie in the algebra generated by the $b_i$'s, and clearly so does 
+$\b^\xi$, a contradiction. 
 \end{proof}
 
-\begin{Proposition}
+\paragraph
 \label{S-ordered-basis-degeneration}
+There is an obvious way to obtain well-orderings on positive affine 
+semigroups. Since $S$ is a positive affine semigroup it can be embedded in 
+$\NN^r$ for some $r \geq 0$ through a monoid morphism $\iota: S \to \NN^r$. 
+Now $\NN^r$ is a well-ordered semigroup with the lexicographic order, which is 
+compatible with its additive structure, so we may pull-back the lexicographic 
+order thourgh $\iota$ and thus obtain a well-order $<^\iota$ over $S$, which 
+is also compatible with its additive structure. Notice that in this case $0$ 
+is always the minimal element of $S$.
+
+\begin{Proposition*}
 Let $S$ be a positive affine semigroup, and let $A$ be a noetherian connected 
-$\NN^r$-graded algebra. The algebra $A$ has a quantum affine toric 
-degeneration with underlying semigroup $S$ if and only if there exists an 
-embedding $\iota: S \to \NN^t$ such that $A$ has an ordered 
+$\NN^l$-graded algebra for some $l \in \NN$. The algebra $A$ has a quantum 
+affine toric degeneration with underlying semigroup $S$ if and only if there 
+exists an embedding $\iota: S \to \NN^t$ such that $A$ has an ordered 
 $(S, <^\iota)$-basis.
-\end{Proposition}
+\end{Proposition*}
 \begin{proof}
 Suppose $A$ has a quantum affine toric degeneration with underlying semigroup 
 $S$. Then by Proposition \ref{P:equivalent-qatd} there exists a semigroup 
 morphism $\phi: S\to \NN$ such that $A$ is of $(S, \phi)$-type, and we may 
 choose any section $\tau: S \to \NN^n$ to obtain a basis $\mathcal B = 
-\{\b^{\tau(s)} \mid s \in S\}$. Let $\rho: S \to \NN^{t}$ be an embedding and 
-let $\iota: S \to \NN^{t+1}$ be defined as $\iota(s) = (\phi(s), \rho(s))$, 
-which is an embedding of $S$ since $\rho$ is an embedding. Write $<$ for 
-$<^\iota$, and notice that $\phi(s) < \phi(s')$ implies $s<s'$. By Lemma 
-\ref{type-filtration}, for all $s,s' \in S$ and all $s''$ such that 
+\{\b^{\tau(s)} \mid s \in S\}$. Let $\rho: S \to \NN^{t-1}$ be an embedding 
+($t>1$) and let $\iota: S \to \NN^t$ be defined as $\iota(s) = (\phi(s), 
+\rho(s))$, which is an embedding of $S$ since $\rho$ is an embedding. Write 
+$<$ for $<^\iota$, and notice that $\phi(s) < \phi(s')$ implies $s<s'$. By 
+Lemma \ref{type-filtration}, for all $s,s' \in S$ and all $s''$ such that 
 $\phi(s'') < \phi(s+s')$ there exist $c_{s,s'} \in \k^\times$ and 
 $c_{s,s'}^{s''} \in \k$ such that
 \[
@@ -1329,9 +1341,11 @@ induced by an embedding $\iota: S \to \NN^t$. Since $<$ is the pull-back of
 the lexicographic order through an embedding, we might as well assume $S 
 \subset \NN^t$ and that $<$ is the lexicographic order. By the previous lemma, 
 we already know that the $b_i$'s generate $A$, so all that is left to do is to 
-prove the existence of an additive map $\phi:S \to \NN$ and that of the 
-desired relations.
+prove the existence of an additive map $\phi:S \to \NN$ and that the 
+desired relations hold.
 
+As before, we denote by $\pi: \NN^n \to S$ the map $(\xi_1, \ldots, \xi_n)
+\mapsto \sum_i \xi_i s_i$.
 Recall that using the $(S,<)$-filtration $\F$ defined in the previous lemma, 
 we proved that $\gr_\F A \cong \k^\alpha[S]$ for some $2$-cocycle $S$. This 
 implies that for all $1 \leq i < j \leq n$ and all $\xi \in \NN^n$ such that 
@@ -1345,7 +1359,7 @@ b_j b_i
 and for each $1 \leq i \leq m$ and each $\xi \in \NN^n$ such that $\pi(\xi) < 
 p_i$ there exist $d_i \in \k^\times$ and $d^i_\xi \in \k$ such that
 \begin{align*}
-  \b^{p'_i} = d_i \b^{p_i} + \sum_{\pi(\xi) < p} d^i_\xi \b^\xi.
+  \b^{p'_i} = d_i \b^{p_i} + \sum_{\pi(\xi) < p_i} d^i_\xi \b^\xi.
 \end{align*}
 Let $C \subset S$ be the set consisting of the following elements:
 \begin{itemize}
@@ -1355,11 +1369,13 @@ Let $C \subset S$ be the set consisting of the following elements:
   \leq n$;
 \item and all $\pi(\xi)$ such that $d^i_\xi \neq 0$ for some $1 \leq i \leq m$.
 \end{itemize}  
-The set $C$ is finite and hence is contained in a cube $[0,N+1]^t$ for $N$ 
-large enough, so the morphism $\phi: \NN^t \to \NN$ mapping $e_i$ to $(N+1)^i$ 
-sends each $c \in C$ to the natural number having $N+1$-adic expansion $c$. In 
-particular $\phi$ respects the restriction of the lexicographic order to $C$, 
-and thus $A$ is of $(S,\phi)$-type. 
+The set $C$ is finite and hence is contained in a cube $[0,N]^t$ for $N$ 
+large enough. Set $\phi: \NN^t \to \NN$ to be the semigroup morphism defined 
+by $(c_1, \ldots, c_t) \mapsto \sum_{i=1}^t c_i (N+1)^{t-i}$. If $c \in C$ 
+then $\phi(c)$ is the unique natural number such that its $N+1$-adic expansion
+has $c_i$ as its $i$-th digit. This implies that $\phi$ respects the 
+restriction of the lexicographic order to $C$, and thus $A$ is of 
+$(S,\phi)$-type. 
 
 Let $\tau: S \to \NN^n$ be any section of $\pi$. The algebra $\gr_\F A$ has a 
 natural $S$-grading, and for each $s \in S$ the element $\gr \b^{\tau(s)}$ is 
@@ -1441,7 +1457,7 @@ root lattice. We also fix a basis $\Pi \subset \Phi$ of positive roots, and
 write $P = \{\varpi_\alpha \mid \alpha \in \Pi\}$ for the set of 
 corresponding fundamental weights. We denote by $\Lambda$ the weight lattice 
 $\sum_{\alpha \in \Pi} \ZZ \varpi_\alpha$ and by $\Lambda^+$ the set of 
-dominant weights $\sum_{\alpha \in \Pi} \NN \varpi_\alpha$. 
+dominant integral weights $\sum_{\alpha \in \Pi} \NN \varpi_\alpha$. 
 
 Let $W$ be the Weyl group of $\g$, and $s_\alpha \in W$ the reflection 
 corresponding to $\alpha \in \Pi$. Given an element $w \in W$ we denote 
@@ -1462,9 +1478,9 @@ Fix $q \in \k^\times$. Let $U_q(\g)$ be the quantum enveloping algebra of
 $\g$; this is an algebra generated by elements $F_\alpha, E_\alpha, K_\alpha$
 for $\alpha \in \Pi$, with the relations given in \cite{Jan}*{Definition 4.3}. 
 We denote by $U_q^+(\g), U_q^-(\g)$ the subalgebras generated by the 
-$F_\alpha$'s and the $E_\alpha$'s, which are respectively called the positive 
+$E_\alpha$'s and the $F_\alpha$'s, which are respectively called the positive 
 and negative parts of $U_q(\g)$ \cite{Jan}*{4.4}. As shown in 
-\cite{Jan}*{Proposition 4.11}, these are all Hopf algebras.
+\cite{Jan}*{Proposition 4.11}, $U_q(\g)$ is a Hopf algebra.
 
 If $q$ is not a root of unity then by \cite{Jan}*{chapter 5} for each $\lambda 
 \in \Lambda^+$ there is an irreducible highest-weight representation of 
@@ -1475,8 +1491,8 @@ same as the corresponding representation over $\g$, so the Weyl character
 formula holds for these representations, see \cite{Jan}*{5.15}. 
 
 \paragraph
-Let $G$ be the connected and simply connected Lie group corresponding to $\g$. 
-Since $U_q(\g)$ is a Hopf algebra, its dual $U_q(\g)^*$ is an algebra 
+Let $G$ be the simply connected, connected algebraic group with Lie algebra 
+$\g$. Since $U_q(\g)$ is a Hopf algebra, its dual $U_q(\g)^*$ is an algebra 
 with convolution product induced by the coproduct of $U_q(\g)$. There is a map 
 $V_q(\lambda)^* \ot V_q(\lambda) \to U_q(\g)^*$ defined by
 sending $\phi \ot v \in V_q(\lambda)^* \ot V_q(\lambda)$ to the linear 
@@ -1489,7 +1505,7 @@ $G$ \cite{Jan}*{7.11}.
 
 \paragraph
 \label{q-full-flag-varieties}
-Quantum analogiues of flag varieties and their Schubert subvarieties were 
+Quantum analogues of flag varieties and their Schubert subvarieties were 
 introduced by Soibelman in \cite{S} and by Lakshmibai and Reshetikhin in 
 \cite{qLR}; we review their definition. 
 We assume that $q$ is not a root of unity. Fix a maximal Borel subgroup $B$ of
@@ -1540,21 +1556,22 @@ $w$. The quotient algebra $\O_q[G/P_I]_w = \O_q[G/P_I]/J^I_w$ is called the
 \subsection*{Degeneration of quantum Schubert varieties}
 %\label{qtad-flag}
 In this subsection we assume that $\k$ is of characteristic zero and that 
-$q \in \k^\times$ is trascendental over $\QQ$. Our aim is to show that under 
+$q \in \k^\times$ is transcendental over $\QQ$. Our aim is to show that under 
 these conditions quantum Schubert varieties have quantum affine toric 
 degenerations. In order to do so we work for a moment over the field $\QQ(v)$, 
 where $v$ is an indeterminate over $\QQ$, and consider the $\QQ(v)$-algebra 
 $U = U_v(\g)$. The general case will follow by extension of scalars. 
 
-We now review Caldero's argument on the existence of an $(S,<_{\lex})$-basis 
+We now review Caldero's proof of the existence of an $(S,<_{\lex})$-basis 
 of $\O_q[G/B]$, and its natural extension to arbitrary partial flag and 
-Schubert varieties. Since he was interested in classical flag varieties, 
-Caldero works with a large base field $\CC(q)$ that allows him to specialize 
+Schubert varieties \cite{C}. Since Caldero is interested in classical flag 
+varieties, 
+he works with a large base field $\CC(q)$ that allows him to specialize 
 at $q=1$ and still get algebraic varieties over the complex numbers. We give a
 simplified version of his argument which works over $\QQ(v)$.
 
 \paragraph
-Fix as our base field $\QQ(v)$, and set $U=U_v(\G)$. We denote by 
+Fix as our base field $\QQ(v)$, and set $U=U_v(\g)$. We denote by 
 $U^+$ and $U^-$ the algebras $U^+_v(\g)$ and $U^-_v(\g)$, respectively. 
 
 Let $\A = \ZZ[v, v^{-1}] \subset \QQ(v)$. For each $n \in \NN$ we write
@@ -1571,14 +1588,13 @@ These $\A$-forms are compatible with the weight decomposition of $U$.
 By construction $U \cong \QQ(v) \ot_\A U_\A$, and analogous results hold for 
 $U_\A^+$ and $U_\A^-$. 
 
-The highest weight modules $V_v(\lambda)$ have corresponding $\A$-forms which 
-we denote by $V_\A(\lambda)$; these are obtained by fixing a highest weight 
-vector $v_\lambda$ and looking at the $\A$-lattice $U^-_\A v_\lambda \subset 
-V_v(\lambda)$. These $\A$-forms are compatible with the weight decompositions 
-of the original objects, see \cite{Jan}*{chapters 9,10}. Now let $\lambda$ be 
-a dominant weight and fix $w \in W$. The $\A$-form of the Demazure module 
-$V_q(\lambda)_{w}$ is defined as $V_\A(\lambda)_{w} = U_\A^+ 
-V_\A(\lambda)_{w\lambda}$.
+For the rest of this section we fix a nonzero highest weight vector $v_\lambda 
+\in V_v(\lambda)$. Setting $V_\A(\lambda) = U^-_\A v_\lambda \subset 
+V_v(\lambda)$ we obtain $\A$-forms of $U$-modules. These $\A$-forms are 
+compatible with the weight decompositions of the original objects, see 
+\cite{Jan}*{chapter 11}. Now let $\lambda$ be a dominant integral weight and 
+fix $w \in W$. The $\A$-form of the Demazure module $V_v(\lambda)_{w}$ is 
+defined as $V_\A(\lambda)_{w} = U_\A^+ V_\A(\lambda)_{w\lambda}$.
 
 \paragraph
 \label{T:A-crystal-basis} 
@@ -1602,13 +1618,13 @@ Set
 \begin{align*}
 \B(\infty)_{-\nu} 
   &=  \left\{\tilde F_{\alpha_1} \tilde F_{\alpha_2} \cdots 
-    \tilde F_{\alpha_r}(1) + q\L(\infty) \mid \sum_{i} \alpha_{i} = \nu\right\}
-    \subset \L(\infty)_{-\nu}/q\L(\infty)_{-\nu},
+    \tilde F_{\alpha_r}(1) + v\L(\infty) \mid \sum_{i} \alpha_{i} = \nu\right\}
+    \subset \L(\infty)_{-\nu}/v\L(\infty)_{-\nu},
 \end{align*}
 and set $\B(\infty) = \bigsqcup_{\nu \geq 0} \B(\infty)_{-\nu}$. Although it is
 not obvious, $\B(\infty)_{-\nu}$ is a basis of $\L(\infty)_{-\nu} / 
-q \L(\infty)_{-\nu}$ \cite{Jan}*{Proposition 10.11}; this is the \emph{crystal}
-basis of $U^-_{-\nu}$ at $q = 0$. It turns out that each 
+v \L(\infty)_{-\nu}$ \cite{Jan}*{Proposition 10.11}; this is the \emph{crystal}
+basis of $U^-_{-\nu}$ at $v = 0$. It turns out that each 
 $b \in \B(\infty)_{-\nu}$ has a unique lift $G(b) \in \L(\infty)_{-\nu} \cap 
 U_\A^-$, which is invariant under the action of certain automorphisms 
 of $U$ \cite{Jan}*{Theorem 11.10 a)}. The set $G(\B)$ of all $G(b)$ with $b 
@@ -1626,14 +1642,13 @@ Let $\nu \in \ZZ \Phi$ with $\nu \geq 0$.
 \item The set $\{G(b) \mid b \in \B(\infty)_{-\nu}\}$ is an $\A$-basis of 
 $(U_\A^-)_{- \nu}$.
 
-\item Let $\lambda$ be a dominant weight and let $v_\lambda$ be a highest 
-weight vector of $V_\A(\lambda)$. The set $\{G(b)v_\lambda \mid b \in 
-\B(\infty)_{-\nu}\} \setminus \{0\}$ is an $\A$-basis of 
+\item Let $\lambda$ be a dominant integral weight. The set $\{G(b)v_\lambda 
+\mid b \in \B(\infty)_{-\nu}\} \setminus \{0\}$ is an $\A$-basis of 
 $V_\A(\lambda)_{\lambda - \nu}$. Furthermore, if $G(b)v_\lambda = 
 G(b')v_\lambda \neq 0$ then $b = b'$.
 
-\item Let $w \in W$. The set $\{G(b)v_\lambda \mid b \in \B_w(\infty)\} 
-\setminus \{0\}$ is an $\A$-basis of $V_\A(\lambda)_{w}$. 
+\item Let $w \in W$. The set $B_w(\lambda) = \{G(b)v_\lambda \mid b \in 
+\B_w(\infty)\} \setminus \{0\}$ is an $\A$-basis of $V_\A(\lambda)_{w}$. 
 \end{enumerate}
 \end{Theorem*}
 \begin{proof}
@@ -1644,8 +1659,8 @@ The first two items are part of \cite{Jan}*{Theorem 11.10}. The third is
 \paragraph
 \label{q-var-bases}
 We now use the crystal basis to produce bases for quantum Schubert varieties.
-For each dominant weight $\lambda$ we fix a highest weight vector $v_\lambda 
-\in V_v(\lambda)$ and write $\B(\lambda) = \{b \in \B(\infty) \mid G(b)
+For each dominant integral weight $\lambda$ we write $\B(\lambda) = \{b \in 
+\B(\infty) \mid G(b)
 v_\lambda \neq 0\}$. By the previous theorem the set $\{G(b) v_\lambda \mid b 
 \in \B(\lambda)\}$ is a basis of $V_v(\lambda)$, so we can take its dual 
 basis. Given $b \in \B(\lambda)$, we denote by $b_\lambda^*$ the unique 
@@ -1655,8 +1670,8 @@ element of $V_v(\lambda)^*$ such that $b^*_\lambda(G(b') v_\lambda) =
 c^{\lambda}_{b^*_\lambda,v_\lambda} \in C^+_v(\lambda)$, and the set 
 $\{b_\lambda \mid b \in \B(\lambda)\}$ is a basis of $C^+_v(\lambda)$. Since 
 the quantum flag variety is the direct sum of all these spaces with $\lambda$ 
-running over all dominant weights, we obtain a basis of $\O_v[G/B]$ as defined
-in \ref{q-full-flag-varieties} by taking
+running over all dominant integral weights, we obtain a basis of $\O_v[G/B]$ 
+as defined in \ref{q-full-flag-varieties} by taking
 \[
   \flagbasis = \{b_\lambda \mid b \in \B(\lambda), \lambda \in \Lambda^+\}.
 \]
@@ -1674,8 +1689,7 @@ elements of the form $b_\lambda$ with $b \in \B(\lambda) \setminus
 $\O_v[G/P_I]_w$ by taking the image of
 \[
   \schubertbasis_I(w) 
-    = \{b_\lambda \mid b \in \B(\lambda) \cap \B_w(\infty), \lambda \in 
-    \mathcal J(I) \}.
+    = \{b_\lambda \mid b \in \B_w(\lambda), \lambda \in \mathcal J(I) \}.
 \]
 in the quotient.
 
@@ -1683,15 +1697,17 @@ in the quotient.
 \label{Littelman-parametrizations}
 The operators $\tilde E_\alpha, \tilde F_\alpha$ induce operators $\tilde 
 E_\alpha, \tilde F_\alpha: \B(\infty) \to \B(\infty) \cup \{0\}$ 
-\cite{Jan}*{10.12}. The operators $\tilde E_\alpha$ are locally nilpotent, so 
-it makes sense to set $e_{\alpha}(b) = \max \{k \in \NN \mid \tilde 
-E_\alpha^k(b) \neq 0\}$ for each $b \in \B$. We write $\overline E_\alpha(b)
-= \tilde E_{\alpha}^{e_\alpha(b)}(b)$.
+\cite{Jan}*{10.12}. By defintion the operators $\tilde E_\alpha$ are locally 
+nilpotent as operators on $U$ \cite{Jan}*{10.2} and hence as operators on 
+$\B(\infty)$, so it makes sense to set $e_{\alpha}(b) = \max \{k \in \NN \mid 
+\tilde E_\alpha^k(b) \neq 0\}$ for each $b \in \B(\infty)$. We write 
+$\overline E_\alpha(b) = \tilde E_{\alpha}^{e_\alpha(b)}(b)$.
 
 In \cite{Lit}, P. Littelman proves that to each reduced decomposition of 
-$w \in W$ we can associate a parametrization of $B_w(\infty)$ as 
+$w \in W$ we can associate a parametrization of $\B_w(\infty)$ as 
 follows. If $\tilde w = s_{\alpha_1} \cdots s_{\alpha_r}$ is the chosen 
-decomposition then we define $\Lambda_{\tilde w}: \B \to \NN^r$ by the formula
+decomposition then we define $\Lambda_{\tilde w}: \B(\infty) \to \NN^r$ by the 
+formula
 \[
   \Lambda_{\tilde w}(b) 
     = (e_{\alpha_1}(b), e_{\alpha_2}(\overline E_{\alpha_1}(b)), \ldots,
@@ -1889,15 +1905,16 @@ where the last congruence follows from \ref{1}. Thus $F_\alpha^{(r)}G(b)
 an $\A$-basis of $M_{r+e+1}$, so item \ref{pre} follows.
 
 Item \ref{in-image} is a simple consequence of \cite{Lit}*{Proposition 10.3},
-which states that given a dominant weight $\lambda$ and a highest weight 
-$v_\lambda \in V_\A(\lambda)$, then if $G(b^a) v_{\lambda} \neq 0$ there exist 
-$x_{a,a'}$ as in the statement such that
+which states that given a dominant integral weight $\lambda$ and a highest 
+weight vector $v_\lambda \in V_\A(\lambda)$, then if $G(b^a) v_{\lambda} \neq 
+0$ there exist $x_{a,a'}$ as in the statement such that
 \begin{align*}
 F^{(a)}v_\lambda
   &= G(b^a)v_\lambda + \sum_{a' >_{\lex} a} x_{a,a'} G(b^{a'})v_\lambda.
 \end{align*}
 As shown in the proof of \cite{Jan}*{Theorem 10.10}, there exists a dominant
-weight $\lambda$ such that the map $U^-_{-\nu} \to V_q(\lambda)_{\lambda - 
+integral weight $\lambda$ such that the map $U^-_{-\nu} \to 
+V_q(\lambda)_{\lambda - 
 \nu}$ given by $G(b) \mapsto G(b)v_\lambda$ is an isomorphism, so the first 
 formula is proved. The second follows from the first since there is only a 
 finite number of elements $a' >_{\lex} a$ such that $b^{a'} \in 
@@ -1975,11 +1992,12 @@ skew-field of fractions.
 We put on $\k$ the right $\A$-module structure given by $1_\k \cdot v = q$.
 Thus $\O_q[G/P_I]_w \cong \k \ot_\A \O_v[G/P_I]_w$. 
 
-For each dominant weight $\lambda$ and each $a \in \Lambda_{\tilde w_0}
+For each dominant integral weight $\lambda$ and each $a \in \Lambda_{\tilde 
+w_0}
 (\B(\lambda))$, we denote by $b^a_\lambda$ the element $1 \ot_\A b_\lambda
 \in \k \ot_\A \O_v[G/P_I]_w$ where $b = \GG_{\tilde w_0}^{-1}(a)$.
 With this notation, it follows from \ref{coproduct-coefficients-convex} that 
-for each pair of dominant weights $\lambda, \lambda'$ and each $a \in 
+for each pair of dominant integral weights $\lambda, \lambda'$ and each $a \in 
 \Lambda_{\tilde w_0}(\B(\lambda)), a' \in \Lambda_{\tilde w_0}(\B(\lambda')), 
 a'' \in \Lambda_{\tilde w_0}(\B(\lambda + \lambda'))$ such that $a'' 
 \geq_{\lex} a + a'$, there exists $x_{a''} \in \A$ such that 
@@ -2009,49 +2027,64 @@ Chapitre V, Corollaire 2.6} that $\O_q[G/P_I]_w$ is also a maximal order.
 law over a distributive lattice}
 \label{richardson}
 
-We finish this article by relating our previous work \cite{RZ} with the material found 
-here. In that article we proved that Richardson varieties in the quantum grassmanian as 
-defined in \cite{RZ}*{Definition 5.2.1} are symmetric quantum graded algebras with a 
-straightening law over a poset \cite{RZ}*{Definition 3.1}, and that they satisfy a 
-technical ``Condition (C)'' \cite{RZ}*{Definition 4.1}. In \cite{RZ}*{Theorem 4.9} we 
-proved that, in the language of the present article, all symmetric quantum graded ASL's 
-satisfying condition (C) have quantum toric degenerations. We now prove a similar result
-under conditions milder than (C). In order to do this, we place 
-ourselves in the context of \cite{RZ2}*{section 3}, the reader is referred to it for 
-definitions and unexplained notation.
+We finish this article by revisiting our previous work \cite{RZ} in light of 
+the results we have presented. In that previous article we proved that 
+Richardson varieties in the quantum grassmanian as defined in 
+\cite{RZ}*{Definition 5.2.1} are symmetric quantum graded algebras with a 
+straightening law over a poset \cite{RZ}*{Definition 3.1}, and that they 
+satisfy a technical ``Condition (C)'' \cite{RZ}*{Definition 4.1}. In 
+\cite{RZ}*{Theorem 4.9} we proved that, in the language of the present 
+article, all symmetric quantum graded ASL's satisfying condition (C) have 
+quantum toric degenerations. We now prove a similar result under a more 
+natural condition. In order to do this, we place ourselves in the context of 
+\cite{RZ2}*{section 3}, the reader is referred to it for definitions and 
+unexplained notation.
 
 \paragraph
-For the rest of this subsection $\L$ denotes a finite distributive lattice. Given $x,y 
-\in \L$ we denote their meet by $x \meet y$ and their join by $x \join y$, as usual. 
-Recall that the rank of $\L$ is defined as the length of any maximal chain in $\L$, which
-we denote by $r$. We also denote by $J(\L)$ the set of join irreducible elements of 
-$\L$, so $r = |J(\L)|$. We see $J(\L)$ as a poset with the order induced by $\L$, and
-extend this to a total order, so $J(\L) = \{p_1, \ldots, p_n\}$ and $p_i < p_j$ implies 
-$i < j$. Birkhoff's representation theorem states that $\L$ is isomorphic to the lattice
-of poset ideals of $J(\L)$, through the assignation $l \in \L \mapsto \{p \in J(I) \mid 
-p \leq l\}$.
+For the rest of this subsection $\L$ denotes a finite distributive lattice. 
+Given $x,y \in \L$ we denote their meet by $x \meet y$ and their join by $x 
+\join y$, as usual. Recall that the rank of $\L$ is defined as the length of 
+any maximal chain in $\L$, which we denote by $r$. We also denote by $J(\L)$ 
+the set of join irreducible elements of $\L$; in particular $r = |J(\L)|$.
+We see $J(\L)$ as a poset with 
+the order induced by $\L$, and extend this to a total order, so $J(\L) = 
+\{p_1, \ldots, p_r\}$ and $p_i < p_j$ implies $i < j$. Birkhoff's 
+representation theorem states that $\L$ is isomorphic to the lattice of poset 
+ideals of $J(\L)$, through the assignation $l \in \L \mapsto \{p \in J(I) 
+\mid p \leq l\}$.
 
 \paragraph 
-As shown in \cite{RZ2}*{section 3.3}, associated to $\L$ there is a semigroup $S(\L)$, 
-defined as follows: $S(\L)$ is the abelian semigroup generated by $\L$ modulo the 
-relations $\{x + y \equiv (x \meet y) + (x \join y) \mid x,y \in \L\}$.
-The map $\iota: \L \to \NN^{r}$ defined as
+As shown in \cite{RZ2}*{section 3.3}, associated to $\L$ there is a semigroup 
+$S(\L)$, defined as follows: $S(\L)$ is the abelian semigroup generated by 
+$\L$ modulo the relations $\{x + y \equiv (x \meet y) + (x \join y) \mid x,y 
+\in \L\}$. The map $\iota: \L \to \NN^{r}$ defined as
 \[
   \iota(l) = \sum_{\{i : p_i \leq l\}} e_i,
 \]
-for each $l \in L$ is injective and a lattice morphism. 
-By \cite{RZ2}*{Proposition 3.3.3}, $\iota$ induces an injective semigroup morphism 
-$\iota: S(\L) \to \NN^{r}$ whose image is a full normal subsemigroup, so $S(\L)$ is a
-normal affine semigroup. 
+for each $l \in L$ is injective and a lattice morphism. By 
+\cite{RZ2}*{Proposition 3.3.3}, $\iota$ induces an injective semigroup 
+morphism $\iota: S(\L) \to \NN^{r}$ whose image is a full normal subsemigroup, 
+so $S(\L)$ is a normal affine semigroup. We put the product order on $\NN^r$,
+where $(a_1, \ldots, a_r) \leq (b_1, \ldots, b_r)$ if and only if $a_i \leq 
+b_i$ for all $i = 1, \ldots, r$. With this partial order $\NN^r$ becomes a 
+distributive lattice, and the restriction $\iota: \L \to \NN^r$ is a lattice
+morphism.
 
-Set $n = |\L|$; write $\L = \{x_1, \ldots, x_n\}$, and set $s_i = \iota(x_i)$ for each 
-$1 \leq i \leq n$. Let $\pi: \NN^n \to S(\L)$ be the semigroup morphism induced 
-by the assignation $e_i \mapsto s_i$ for all $i$. It follows from 
-\cite{RZ2}*{Lemma 3.3.2} that every element of $S(\L)$ can be 
-written in a unique way as $s = \sum_{i=1}^n m_i s_i$ with the condition that the set 
-$\{x_i \mid m_i \neq 0\}$ is a chain of $\L$. Setting $t(s) = (m_1, \ldots, m_n)$ we 
-obtain a section $t: S(\L) \to \NN^n$ of $\pi$. We refer to $t$ as the \emph{standard 
-section} of $\pi$. 
+Set $n = |\L|$, write $\L = \{x_1, \ldots, x_n\}$, and set $s_i = \iota(x_i)$ 
+for each $1 \leq i \leq n$. By definition the set of all $s_i$ generates 
+$\iota(S(\L))$, and since the first coordinate of each $s_i$ is $1$, we see 
+that the first coordinate of $\iota(x)$ is a positive integer for all $x \in 
+S(\L)$. This implies that the $s_i$'s are irreducible, and since they generate
+the semigroup the set $\{s_1, \ldots, s_n\}$ is the Hilbert basis of $\iota(
+S(\L))$.
+
+Let $\pi: \NN^n \to S(\L)$ be the semigroup morphism induced by the 
+assignation $e_i \mapsto s_i$ for all $i$. It follows from 
+\cite{RZ2}*{Lemma 3.3.2} that every element of $S(\L)$ can be written in a 
+unique way as $s = \sum_{i=1}^n m_i s_i$ with the condition that the set 
+$\{x_i \mid m_i \neq 0\}$ is a chain of $\L$. Setting $\tau(s) = (m_1, \ldots, 
+m_n)$ we obtain a section $t: S(\L) \to \NN^n$ of $\pi$. We refer to $t$ as 
+the \emph{standard section} of $\pi$. 
 
 \paragraph
 For every pair of elements $x,y \in \L$ we define
@@ -2062,15 +2095,15 @@ We write $R(x,y)^*$ for $R(x,y) \setminus (x \meet y, x \join y)$.
 
 \paragraph
 We continue to denote by $A$ an $\NN^r$-graded noetherian algebra.
-Suppose that there is an injective function $[-]: \L \to A$. A \emph{standard monomial} 
-in $A$ is a product of the form $[x_0] [x_1] \ldots [x_n]$ with $x_{i} \leq x_{i+1}$ for 
-all $1 \leq i < n$. 
+Suppose that there is an injective function $[-]: \L \to A$. A \emph{standard 
+monomial} in $A$ is a product of the form $[x_0] [x_1] \ldots [x_l]$ with 
+$x_{i} \leq x_{i+1}$ for all $1 \leq i < l$. 
 \begin{Definition*}
 \label{D:symm-q-gr-asl} 
-Let $\L$ be a finite distributive lattice, and let $[-]: \L \to A$ be an injective 
-function. We say that $A$ is a 
-\emph{symmetric quantum graded algebra with a straightening law over $\L$}, or symmetric 
-quantum ASL for short, if the following hold.
+Let $\L$ be a finite distributive lattice, and let $[-]: \L \to A$ be an 
+injective function. We say that $A$ is a \emph{symmetric quantum graded 
+algebra with a straightening law over $\L$}, or symmetric quantum ASL for 
+short, if the following hold.
 
 \begin{enumerate} 
   \item The set $\{[x] \mid x \in \L\}$ consists of homogeneous elements of nonzero
@@ -2081,45 +2114,51 @@ quantum ASL for short, if the following hold.
   \item For every $x,y \in \L$ there exist $\{c^{z,z'}_{x,y}\}_{(z,z') \in R(x,y)^*}
   \subset \k$ and $c_{x,y} \in \k^\times$, such that 
   \begin{align*} 
-    [y][x] = c_{x,y} [x][y] + \sum_{(z,z') \in R(x,y)^*} c^{z,z'}_{x,y} [z][z'].  
+    [y][x] = c_{x,y} [x][y] + 
+      \sum_{(z,z') \in R(x,y)^*} c^{z,z'}_{x,y} [z][z'].  
   \end{align*}
 
   \item For every pair of incomparable elements $x,y \in \L$ there exist
-  $\{d^{z,z'}_{x,y}\}_{(z,z') \in R(x,y)^*} \subset \k$ and $d_{x,y} \in \k^\times$, such
-  that
+  $\{d^{z,z'}_{x,y}\}_{(z,z') \in R(x,y)^*} \subset \k$ and $d_{x,y} \in 
+  \k^\times$, such that
   \begin{align*} 
     [x][y] = d_{x,y} [x \meet y][x \join y] +
     \sum_{(z,z') \in R(x,y)^*} d^{z,z'}_{x,y} [z][z'].  \end{align*}
   \end{enumerate} 
 \end{Definition*}
 \begin{Remark*}
-The word \emph{symmetric} is there to distinguish this class from the more general class
-of quantum graded ASL's over a poset, defined in \cite{LR1}*{Definition 1.1.1}. Also
-notice that the definition of a symmetric quantum ASL over a general poset $P$ given in
-\cite{RZ}*{Definition 3.1} is slightly more general, as it does not require that 
-$d_{x,y} \neq 0$. This simple requirement is what takes the place of the much more 
-technical condition $(C)$.
+The word \emph{symmetric} is there to distinguish this class from the more 
+general class of quantum graded ASL's over a poset, defined in 
+\cite{LR1}*{Definition 1.1.1}. Also notice that the definition of a symmetric 
+quantum ASL over a general poset $P$ given in \cite{RZ}*{Definition 3.1} is 
+slightly more general, as it does not require that $d_{x,y} \neq 0$. This 
+simple requirement is what takes the place of the much more technical 
+condition $(C)$.
 \end{Remark*}
 
 \begin{Theorem} 
 \label{T:ASL-are-dominated} 
-If $A$ is a symmetric quantum graded ASL over $\L$ then it has a quantum affine toric 
-degeneration with associated semigroup $S(\L)$.
+If $A$ is a symmetric quantum graded ASL over $\L$ then it has a quantum 
+affine toric degeneration with associated semigroup $S(\L)$. In particular
+it is AS-Cohen-Macaulay, has property $\chi$, and has a balanced dualizing 
+complex.
 \end{Theorem} 
 \begin{proof} 
-Let $C = \{\iota(x) + \iota(y) \mid x,y \in \L\}$. This is a finite set, and so by 
-reasoning as in the proof of Proposition \ref{lex-degeneration} there is a morphism 
-$\phi: \NN^{\rk \L} \to \NN$ such that $\xi <_{\lex} \nu$ implies $\phi(\xi) < 
-\phi(\nu)$ for all $\xi, \nu \in C$. 
+Let $C = \{\iota(x) + \iota(y) \mid x,y \in \L\}$. This is a finite set, and 
+so by reasoning as in the proof of Proposition \ref{lex-degeneration} there is 
+a morphism $\phi: \NN^{\rk \L} \to \NN$ such that $\xi <_{\lex} \nu$ implies 
+$\phi(\xi) < \phi(\nu)$ for all $\xi, \nu \in C$. 
 
-Let $x,y \in \L$ and let $(z,z') \in R(x,y)^*$. Using Birkhoff's representation theorem, 
-it follows from the defintion of $\iota$ that $\iota(z') - \iota(y) <_{\lex} \iota(x) - 
-\iota(z)$, or equivalently $\iota(z) + \iota(z') <_{\lex} \iota(x) + \iota(y)$. Thus by 
-definition $A$ is of $(S,\phi)$-type with generators $b_i = [x_i]$. Also, by 
-\cite{LR1}*{Proposition 1.14}, standard monomials form a basis of $A$. The set of 
-standard monomials is the generating set associated to the standard section $t$ as 
-defined in \ref{P:equivalent-qatd}, so the proposition in that paragraph implies that
-$A$ has a quantum toric degeneration with associated semigroup $S(\L)$.
+Let $x,y \in \L$ and let $(z,z') \in R(x,y)^*$. Using Birkhoff's 
+representation theorem, it follows from the defintion of $\iota$ that 
+$\iota(z') - \iota(y) <_{\lex} \iota(x) - \iota(z)$, or equivalently $\iota(z) 
++ \iota(z') <_{\lex} \iota(x) + \iota(y)$. Thus by definition $A$ is of 
+$(S,\phi)$-type with generators $b_i = [x_i]$. Also, by 
+\cite{LR1}*{Proposition 1.14}, standard monomials form a basis of $A$. The set 
+of standard monomials is the generating set associated to the standard section 
+$\tau$ as defined in \ref{P:equivalent-qatd}, so the proposition in that 
+paragraph implies that $A$ has a quantum toric degeneration with associated 
+semigroup $S(\L)$.
 \end{proof}
 
 %\newpage
