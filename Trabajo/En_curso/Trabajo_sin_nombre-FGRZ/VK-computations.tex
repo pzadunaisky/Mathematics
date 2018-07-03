@@ -1,0 +1,1098 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{article}
+\usepackage[paper=a4paper]
+  {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{notas}
+\usepackage{tikz}
+\usepackage{mathdots}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\renewcommand\k{\Bbbk}
+
+\newcommand\B{\mathcal B}
+\newcommand\F{\mathcal F}
+\newcommand\V{\mathcal V}
+\newcommand\D{\mathcal D}
+\newcommand\DD{\mathfrak D}
+\renewcommand\H{\mathcal H}
+\renewcommand\O{\mathcal O}
+\newcommand\I{\mathcal I}
+\newcommand\J{\mathcal J}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\Id{\mathsf{Id}}
+\newcommand\im{\mathsf{im}}
+\newcommand\coker{\mathsf{coker}}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\g{\mathfrak g}
+\newcommand\p{\mathfrak p}
+\newcommand\m{\mathfrak m}
+\newcommand\gl{\mathfrak{gl}}
+\renewcommand\sl{\mathfrak{sl}}
+\newcommand\nn{\mathfrak{n}}
+
+
+\newcommand\gen{\mathsf{gen}}
+\newcommand\std{\mathsf{std}}
+\newcommand\sh{\mathsf{sh}}
+\newcommand\OTheta{\overline \Theta}
+\newcommand\vv{\overline{v}}
+
+\newcommand\vectspan[1]{\left\langle #1 \right\rangle}
+\newcommand\interval[1]{\llbracket #1 \rrbracket}
+\newcommand\Shuffle{\mathsf{Shuffle}}
+
+\DeclareMathOperator\Frac{Frac}
+\DeclareMathOperator\Specm{Specm}
+
+\DeclareMathOperator\sym{sym}
+\DeclareMathOperator\asym{asym}
+\DeclareMathOperator\sg{sg}
+\DeclareMathOperator\st{\mathsf{st}}
+\DeclareMathOperator\n{norm}
+
+\newcommand\bigmodule{big GT module}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Computations on the Big Module}
+%\author{[gamma-structure.tex]}
+\date{}
+
+\begin{document}
+\maketitle
+%\vspace{-2cm}
+
+\section{Notation}
+Throughout this document we fix $n \in \NN$ and $N = \frac{n(n+1)}{2}$. We
+also set $\mu = (1, 2, \ldots, n)$ and $\Sigma = \{(k,i) \mid 1 \leq i \leq k 
+\leq n\}$.
+
+\paragraph
+Given $a,b,k \in \NN$ we set $\interval{a,b} = \{i \in \NN \mid a \leq i \leq 
+b\}$ and $\interval{b} = \interval{1,b}$; also set $\interval{a,b}_k = \{
+(k,i) \mid i \in \interval{a,b}\}$. If $I = \interval{a,b}$ we define $a(I)
+= a$ and $b(I) = b$ and also set $|I| = b(I) - a(I) + 1$. 
+
+An interval of $\Sigma$ is a set $\interval{a,b}_k \subset \Sigma$, so
+$1 \leq a \leq b \leq k$. An composition of $\Sigma$ is a disjoint 
+family $\I$ of intervals of $\Sigma$ whose union is $\Sigma$. Given a 
+composition $\I$ of $\Sigma$ and $k \in \interval n$, we denote by $\I_k$ the
+set of all intervals $\interval{a,b}_k \in \I$. Given two 
+interval partitions $\I, \J$ of $\Sigma$, we say that $\J$ refines $\I$ and 
+write $\J < \I$ if for each $J \in \J$ there exists $I \in \I$ such that $J 
+\subset I$. 
+
+A composition of $\mu$ is an $n$-tuple $\eta = (\eta^{(1)}, \ldots, 
+\eta^{(n)})$ where $\eta^{(k)}$ is a composition of $k$; since $\mu$ is fixed
+we can identify $\eta$ with the concatenation of its parts. To each
+composition $\I$ of $\Sigma$ we assign a composition $\eta(\I)$ of $\mu$, 
+setting $\eta^{(k)}_j$ to be the cardinality of the $j$-th interval in $\I_k$. 
+This assignation is bijective, and for each composition $\eta$ of $\mu$ we 
+denote by $\I(\eta)$ the unique composition of $\Sigma$ corresponding to 
+$\eta$. We say that a composition $\epsilon$ refines $\eta$, and write 
+$\epsilon < \eta$, whenever $\I(\epsilon) < \I(\eta)$. Compositions of $\mu$ 
+form a finite poset with maximum $\mu$, so whenever we write $\eta < \mu$ we 
+will mean that $\eta$ is a composition of $\mu$.
+
+\paragraph
+For each finite set $X$ we denote by $S(X)$ the set of all bijections from
+$X$ to $X$. Set $S_\mu = S(\interval{1}_1) \times S(\interval{2}_2) \times
+\cdots \times S(\interval{n}_n)$, which is a subset of $S(\Sigma)$. 
+Every element $\sigma \in S_\mu$ can be written as $\sigma^{(1)} \sigma^{(2)}
+\cdots \sigma^{(n)}$ with $\sigma^{(k)} \in S(\interval{k}_k)$. Obviously
+$S(\interval{k}_k)$ is isomorphic to the symmetric group in $k$ elements,
+and given a permutation $\sigma \in S_k$ we will denote the corresponding
+element of $S(\interval{k}_k)$ by $\sigma^{(k)}$. If $I 
+\subset \Sigma$ is an interval then we see $S(I) \subset S_\mu$ in the obvious 
+way. For each composition $\I$ of $\Sigma$ we define $S_\I = \prod_{I \in \I} 
+S(I) \subset S_\mu$, and for each $\eta < \mu$ we set $S_\eta = S_{\I(\eta)}$.
+Since it is a product of symmetric groups, $S_\mu$ is a Coxeter group
+with a well defined notion of length, and each $S_\eta$ is a parabolic
+subgroup of $S_\mu$. 
+
+\paragraph
+Set $\CC^\mu = \CC^{1} \times \CC^{2} \times \cdots \times \CC^{n}$. A point 
+in $\CC^\mu$ is thus an $n$-tuple $(v_1, \ldots, v_n)$ with each $v_k$ a 
+vector of $k$ entries; we refer to the $v_k$'s as the \emph{rows} of $v$
+and denote by $v_{k,i}$ the $i$-th entry of $v_k$. Also given an interval
+$\interval{a,b}_k \subset \Sigma$ we write $v(\interval{a,b}_k) = (v_{k,a},
+\ldots, v_{k,b})$. Given $\eta < \mu$ and $\I = \I(\eta)$ the $\eta$-blocks
+of $v$ are the elements of the set $\{v(I) \mid I \in \I\}$.
+
+The group $S_\mu$ acts on $\CC^\mu$ by permuting the entries, i.e. 
+$\sigma(v)_{k,i} = v_{\sigma(k,i)} = v_{k,\sigma^{(k)}(i)}$. We set 
+$\Lambda = \CC[x_{k,i} \mid (k,i) \in \Sigma]$, the ring of polynomial 
+functions on $\CC^\mu$, and by $K = \Frac(\Lambda)$ its fraction field. The 
+action of $S_\mu$ on $\CC^\mu$ induces an action on $\Lambda$ which is given 
+by $\sigma(x_{k,i}) = x_{\sigma(k,i)} = x_{k,\sigma^{(k)}(i)}$, and extends to 
+the fraction field. If $\eta < \mu$ then $S_\eta$ acts on $\CC^\mu$ by 
+restriction, which induces $S_\eta$ actions on $\Lambda$ and $K$. Notice that
+the action of $S_\eta$ only permutes elements in the same $\eta$-block.
+
+\paragraph
+We denote by $\ZZ^\mu_0 \subset \CC^\mu$ the set of points with integral 
+entries and $z_{n,i} = 0$ for all $i \in \interval{n}$. Fix $\eta < \mu$ and 
+let $\I = \I(\eta)$ be the corresponding composition of $\Sigma$. 
+We say that $z \in \ZZ^\mu_0$ is in \emph{$\eta$-normal form}, or just normal 
+form if $\eta$ is clear from the context, if each $\eta$-block of $z$ is a 
+weakly descending sequence. For each $z \in \ZZ^\mu_0$ there is exactly one 
+element in the orbit $S_\eta z$ which is in $\eta$-normal form, and we denote 
+it by $\n_\eta(z)$. Thus the set $\n(\eta) = \{\n_\eta(z) \mid 
+\ZZ^\mu_0\}$ is a complete set of representatives of the equivalence classes 
+in $\ZZ^\mu_0 /S_\eta$. 
+
+Given $z \in \n(\eta)$ we denote by $\I^\eta(z)$ the maximal refinement of 
+$\I(\eta)$ such that for any $I \in \I^\eta(z)$ all the entries in the block 
+$z(I)$  are equal, and we denote by $\epsilon_\eta(z)$ the corresponding 
+refinement of $\eta$. This is equivalent to stating that $S_{\epsilon_\eta(z)}$
+is the stabilizer of $z$ in $S_\eta$. We will say that $z$ is $\eta$-critical, 
+resp. fully $\eta$-critical, if $\epsilon(z)$ is nontrivial, resp. equal to 
+$S_\eta$.  
+
+\section{The algebra $B_\eta$}
+Throughout this section we fix $\eta$ a composition of $\mu$ and write
+$\I = \I(\eta)$. All notions such as being in normal form, critical,  
+fully critical, etc. are relative to this fixed composition unless stated
+otherwise.
+
+\paragraph
+Recall that $K$ is the field of rational functions over $\CC^\mu$, and that
+$S_\mu$ acts on it by permuting the variables. As usual we denote by $K \# 
+S_\mu$ the smash product algebra. 
+
+Let $I \subset \Sigma(\mu)$ be an interval. We set 
+\begin{align*}
+\sym_I 	
+	&= \frac{1}{|I|!}\sum_{\sigma \in S_I} \sigma;
+&\asym_I 	
+	&= \frac{1}{|I|!}\sum_{\sigma \in S_I} \sg(\sigma)\sigma.
+\end{align*} 
+Since we are seeing $S_I$ as a subrgroup of $S_\mu$, these are idempotent 
+elements in $K \# S_\mu$. We also set
+\begin{align*}
+\sym_\eta 	
+	&= \prod_{I \in \I(\eta)} \sym_I;
+&\asym_\eta	
+	&= \prod_{I \in \I(\eta)} \asym_I.
+\end{align*} 
+For each $\sigma \in S_\mu$ there is a divided difference operator 
+$\partial_\sigma$. We set $D_\sigma^\eta = \sym_\eta \cdot \partial_\sigma$.
+By definition these operators are $\Lambda^{S_\eta}$-linear.
+
+Let $V$ be a $K$-vector space with an $S_\mu$-equivariant action. We say that 
+an additive subgroup $W \subset V$ is a $\partial_\eta$-module if it is closed
+by the action of $S_\eta$ and $\partial_\sigma$ for each $\sigma \in S_\eta$.
+In particular it is closed by the action of $D_\sigma^\eta$ for each $\sigma
+\in S_\eta$. For example $\Lambda \subset K$ is a $\partial_\mu$-module.
+
+\paragraph
+For each interval $I = \interval{a,b}_k \subset \Sigma$ we define $D(I) = 
+\{x_{k,i} - x_{k,j} \mid a \leq i < j \leq b\}$ and $\Delta_I = 
+\prod_{p \in D(I)} p$. Accordingly $D(\eta) = \sqcup_{I \in \I(\eta)} D(I)$
+and $\Delta_\eta = \prod_{I \in \I(\eta)} \Delta_I$. By a classical result
+$\asym_I(\Lambda) = \Lambda^{S_\eta} \Delta_I$ and $\asym_\eta(\Lambda) = 
+\Lambda^{S_\eta} \Delta_\eta$.
+
+We denote by $w(I)$ the longest word of $S_I$, and by $w_\eta$ the longest 
+word in $S_\eta$. If $W \subset V$ is a $\partial_\eta$ submodule and $I \in
+\I(\eta)$ then the following hold for each $f \in W$.
+\begin{align*}
+\frac{1}{|I|!}\partial_{w(I)}(f) 
+	&= \frac{1}{\Delta_I} \asym_I(f) 
+	= \sym_I \left(\frac{1}{\Delta_I} f \right) \\
+\frac{1}{\prod_{I \in \mathcal I(\eta)}|I|!}\partial_{w_\eta}(f) 
+	&= \frac{1}{\Delta_\eta} \asym_\eta(f) 
+	= \sym_\eta \left(\frac{1}{\Delta_\eta} f \right) \\
+D^\eta_\sigma(f) 
+	&= \sym_\eta \left(
+		\frac{\partial_{\sigma^{-1}} \Delta_I}{\Delta_I} f 
+	\right)
+\end{align*}
+
+\paragraph
+\about{The algebras $B_\eta, A_\eta$} 
+\label{L:schubert-basis}
+Set 
+\begin{align*}
+C = \{x_{k,i} - x_{k,j} - z \mid 1 \leq i < j \leq k < n, z \in \ZZ 
+\}\subset \Lambda
+\end{align*} 
+and set $C_\eta = C \setminus D(\eta)$. We define $B_\eta = C_\eta^{-1} 
+\Lambda$. It follows from the definitions that $B_\eta \subset K$ 
+is a $\partial_\eta$ submodule. Now set $\p_\eta$ to be the ideal generated by 
+$D(\eta)$. This is a prime ideal and $\Lambda / \p_\eta \cong \CC[Y_1, 
+\ldots, Y_r]$, where $r = |\I(\eta)|$. The ideal $\p_\eta$ extends to a prime 
+ideal $B_\eta \p_\eta \subset B_\eta$, and we set $A_\eta = B_\eta / B_\eta 
+\p_\eta$. We denote by $\pi_\eta: B_\eta \to A_\eta$ the obvious projection 
+map.
+
+Set $\eta! = \prod_{I \in \I(\eta)} |I|!$ and $s^\eta_\sigma = \frac{1}{\eta!}
+\partial_{\sigma^{-1} w_\eta} \Delta_\eta$. By definition $\deg s^\eta_\sigma
+= \ell(\sigma)$, and if $\ell(\sigma) > 0$ then $s_\sigma^\eta \in \p_\eta$.
+The set $\{s^\eta_\sigma \mid \sigma \in S_\eta\}$ is a basis of $B_\eta$ as a 
+$B_\eta^{S_\eta}$-module, and for each $f \in B_\eta$ we write $f_{(\sigma)}$
+for its coordinate in this basis, so $f = \sum_{\sigma \in S_\eta} f_{(\sigma)}
+s_\sigma^\eta$.
+
+\begin{Lemma*}
+For each $f \in B_\eta$ and each $\sigma \in S_\eta$ we have $f_{\sigma}
+\equiv D_{\sigma}^\eta(f) \mod (B_\eta\p_\eta)^{S_\eta}$.
+\end{Lemma*}
+\begin{proof}
+Applying $D^\eta_\sigma$ to $f$ and using that $\D_\sigma^\eta$ is 
+$\Lambda^{S_\eta}$-linear we get
+\begin{align*}
+D^\eta_\sigma(f) 
+	&= \sum_{\tau \in S_\eta} f_{(\tau)} D^\eta_\sigma(s_\tau^\eta)
+	= \sum_{\tau \in S_\eta} 
+		f_{(\tau)} \sym_\eta (\partial_\sigma s_{\tau}^\eta)
+\end{align*}
+If $\ell(\sigma) \geq \ell(t)$ then $\partial_\sigma s_\tau^\eta = 0$ unless
+$\tau = \sigma$, in which case we get $1$; on the other hand, if 
+$\ell(\sigma) < \ell(\tau)$ then $\partial_\sigma s_\tau^\eta \in \p_\eta$,
+and since this ideal is stable by the action of $S_\eta$ we get
+\begin{align*}
+D_\sigma^\eta(f) 
+	&= f_{(\sigma)} + \sum_{\ell(\tau) > \ell(\sigma)} 
+		f_{(\tau)} \sym_\eta (\partial_\sigma s^\eta_\tau) 
+		\equiv f_{(\sigma)} \mod (B_\eta\p_\eta)^{S_\eta}
+\end{align*}
+\end{proof}
+It follows that the coefficient of $s_\sigma$ in the product $s_\rho s_\tau$
+is $D_\sigma^\eta(s_\rho s_\tau)$. We set $c^\sigma_{\rho, \tau} = 
+\pi_\eta(D_\sigma^\eta(s_\rho s_\tau))$; notice that this is zero unless
+$\ell(\sigma) = \ell(\rho) + \ell(\tau)$.
+
+In \cite{PS-chains-bruhat} Postnikov and Stanley introduce a family of
+differential operators $\{\DD_\sigma^\eta \mid \sigma \in S_\eta\}$ with the
+property that $\DD_\sigma(f)(0) = f_{(\sigma)}(0))$.
+
+\section{The module $V_K$}
+Set 
+\begin{align*}
+p_{k,i}^\pm 
+	&= \prod_{j = 1}^{k \pm 1} (x_{k,i} - x_{k \pm 1, j}); 
+&q_{k,i} 
+	&= \prod_{j \neq i} (x_{k,i} - x_{k,j}); \\
+r_{k} 
+	&= x_{k,1} + \cdots + x_{k,k} - (x_{k-1,1} + \cdots + x_{k-1,k-1}) + k -1.
+\end{align*}
+The definitions imply that $\sigma p_{k,i}^\pm = p_{\sigma(k,i)}^\pm$ and 
+$\sigma q_{k,i} = q_{\sigma(k,i)}$, while $\sigma r_k = r_k$ for all $\sigma 
+\in S_\mu$.
+
+\paragraph
+\about{The action of $\ZZ^\mu_0$ on $K$}
+For each $(k,i) \in \Sigma(\mu)$ set $\delta^{k,i} \in \CC^\mu$ to be the point
+whose $(k,i)$-th entry is equal to $1$, and whose other entries equal zero. 
+The set $\{\delta^{k,i} \mid 1 \leq i \leq k < n\}$ generates the abelian group
+$\ZZ^\mu_0$. This group acts on $\Lambda$ by setting $\delta^{k,i} \cdot 
+x_{l,j} = x_{l,j} + \delta_{k,l} \delta_{i,j}$ and the action extends to 
+the fraction field $K$. Given $z \in \ZZ^\mu_0$ and $f \in K$ we sometimes
+write $f(x+z)$ for $z \cdot f$. Notice that the actions of $\ZZ^\mu_0$ and 
+$S_\mu$ are related by the formula $\sigma f(x + z) = (\sigma f)(x + 
+\sigma(z))$.
+
+
+\paragraph
+Set $V_\CC$ to be the $\CC$-vector-space freely generated by the set $\{T(z)
+\mid z \in \ZZ^\mu_0\}$, and for each $\CC$-algebra $R$ set $V_R = R \ot_\CC
+V_\CC$; we refer to $T(z)$ as the tableaux corresponding to $z$, and to $z$
+as the point correspoding to $T(z)$. The group $S_\mu$ acts on the set of all 
+tableaux by acting on the correspoding points. Since $V_K = K \ot_\CC V_\CC$
+is a tensor product of $S_\mu$-modules, it is again an $S_\mu$-module. 
+Furthermore $V_K$ is a $\gl(n,\CC)$-module with action given by
+\begin{align*}
+E_{k,k+1} T(z) 
+	&= -\sum_{j=1}^k \frac{p^+_{k,i}(x+z)}{q_{k,i}(x+z)}T(z + \delta^{k,i})
+	& (1 \leq k \leq n-1)\\
+E_{k+1,k} T(z) 
+	&= \sum_{j=1}^k \frac{p^-_{k,i}(x+z)}{q_{k,i}(x+z)}T(z - \delta^{k,i})
+	& (1 \leq k \leq n-1) \\
+E_{k,k} T(z)
+	&= r_k(x+z) T(z)
+	& (1 \leq k \leq n).
+\end{align*}
+A direct computation shows that the action of $\gl(n,\CC)$ is 
+$S_\mu$-equivariant. Furthermore for each $c \in \Gamma$ there exists a 
+symmetric polynomial $\gamma \in \Lambda^{S_\mu}$, given by Zhelobenko's
+isomorphism, such that $c T(z) = \gamma(x+z) T(z)$.
+
+\paragraph
+\about{Operators on $V_K$}
+\label{L:pre-formulas}
+Since $V_K$ is a $K$-vector space with an equivariant $S_\mu$ action we can
+apply divided difference operators to it. We will now rewrite the operators
+$E_{k,k+1}, F_{k+1,k}$ in a way better suited to the study of singular modules.
+Let $I = \interval{a,b}_k \subset \Sigma$ be an interval. We set 
+\begin{align*}
+e_{k,I}^+
+	&= \frac{\prod_{j = 1}^{k+1} (x_{k,a(I)} - x_{k+1,j})}
+		{\prod_{(k,j) \notin I} x_{k,a(I)} - x_{k,j}} 
+&
+e_{k,I}^-
+	&= \frac{\prod_{j = 1}^{k-1} (x_{k,b(I)} - x_{k+1,j})}
+		{\prod_{(k,j) \notin I} x_{k,b(I)} - x_{k,j}}.
+\end{align*}
+Notice that if $I \in \I(\eta)$ then $e_{k,I}^+, e_{k,I}^- \in B_\eta$.
+We also set $\alpha(I) = (b,b-1, \cdots, a)^{(k)}, \beta(I) = 
+(a, a(I)+1, \cdots, b)^{(k)} \in S_I$.
+
+\begin{Lemma*}
+Let $\eta < \mu$ and suppose $z$ is in normal form. Then for each $1 
+\leq k < n$ we have
+\begin{align*}
+E_{k,k+1} T(z)
+	&= - \sum_{I \in \I_k^\eta(z)} \partial_{\alpha(I)} 
+		\left(
+			e_{k,I}^+(x+z) T(z + \delta^{k,a(I)})
+		\right) \\
+E_{k+1,k} T(z)
+	&= \sum_{I \in \I_k^\eta(z)} \partial_{\beta(I)}
+		\left(
+			e_{k,I}^-(x+z) T(z - \delta^{k,b(I)})
+		\right).
+\end{align*}
+\end{Lemma*}
+This is analogous to \cite{EMV-orthogonal}*{Proposition 6}.
+
+
+\begin{proof}
+First notice that if $I \in \I_k^\eta(z)$ then every element of $S_I$ leaves 
+$z$ fixed, so $T(z) = \sym_I T(z)$, which implies that $\sym_I E_{k,k+1} T(z)
+= E_{k,k+1} T(z)$. By definition
+\begin{align*}
+\sym_I e_{k,j}^+(x+z) T(z+\delta^{k,j}) 
+&= \begin{cases}
+e_{k,j}^+(x+z) T(z+\delta^{k,j}) & j \notin I; \\
+\sym_I(e_{k,a(I)}^+(x+z) T(z + \delta^{k, a(I)})) & j \in I.
+\end{cases}
+\end{align*}
+Thus 
+\begin{align}
+\label{action}
+\tag{1}
+E_{k,k+1} T(z)
+	&= \left( 
+		\prod_{I \in \I_k^\eta(z)} \sym_I 
+	\right) (E_{k,k+1} T(z))\\
+	&= \sum_{I \in \I_k^\eta(z)} 
+		|I| \sym_I(e_{k,a(I)}^+(x+z) T(z+ \delta^{k, a(I)}))
+\end{align}
+Fix an interval $I = \interval{a,b}_k$. We rewrite the term 
+$\sym_I(e_{k,a}^+(x+z) T(z+ \delta^{k, a}))$ as a divided difference
+\begin{align*}
+\frac{1}{|I|!}
+	\partial_{w(I)}(\Delta_I e_{k,a}^+(x+z) T(z+ \delta^{k, a}))
+\end{align*}
+Notice that $\Delta_I e_{k,a}^+(x+z) = \Delta_{I \setminus \{(a,k)\}} 
+e_{k,I}^+(x+z)$, so we can further rewrite this as
+\begin{align*}
+\frac{1}{|I|!}
+	&(\partial_{\alpha(I)} \circ \partial_{w(I \setminus \{a(I)\})})
+	(\Delta_{I\setminus \{a(I)\}} e_{k,I}^+(x+z) T(z+ \delta^{k, a(I)})) \\
+&= \frac{1}{|I|}
+	\partial_{\alpha(I)} (\sym_{I \setminus \{a(I)\}}
+	(e_{k,I}^+(x+z) T(z+ \delta^{k, a(I)})))\\
+&= \frac{1}{|I|} \partial_{\alpha(I)} 
+	(e_{k,I}^+(x+z) T(z+ \delta^{k, a(I)})),
+\end{align*}
+where the last equality follows from the fact that $e_{k,I}^+(x+z) 
+T(z+ \delta^{k, a(I)})$ is invariant by any permutation in $S_I$ that leaves
+$(k,a(I))$ fixed. Replacing this in \ref{action} we obtain the formula for
+$E_{k,k+1}T(z)$. The proof of the other formula is analogous.
+\end{proof}
+
+\paragraph
+\label{L:function-tableaux}
+For each $z \in \ZZ^\mu_0$ write $D_\sigma^\eta(z)$
+for $D_\sigma^\eta(T(z))$. As shown in \cite{RZ-singular-characters} the set 
+\begin{align*}
+\B(\eta) =
+\left\{D_\sigma^\eta(z) \mid z \in \n_\eta(\ZZ^\mu_0), \sigma \in 
+\Shuffle_{\epsilon(z)}^\eta\right\}
+\end{align*}
+is a $K$-basis of $V_K$. Furthermore there exist polynomials $\{
+s_{\sigma}^* \in \Lambda \mid \sigma \in S_\eta\}$ such that
+\begin{align*}
+T(\tau(z))
+	&= \sum_{\sigma \in S_\eta} \tau(s_\sigma^*) D_\sigma^\eta(z).
+\end{align*}
+The polynomials $s_\sigma^*$ are determined implicitly by the condition
+$D_\tau^\eta(s_\sigma^*) = \delta_{\sigma, \tau}$, so in view of Lemma
+\ref{L:schubert-basis} $s_\sigma^* \equiv s_\sigma \mod 
+\p_\eta^{S_\eta}$. We denote by $L_\eta$ the $B_\eta$-lattice generated
+by $\B(\eta)$. Set $V_\eta = L_\eta/\p_\eta L_\eta$. We will prove that it is 
+a $U(\gl(n,\CC))$-module and will give explicit equations for the action of
+$\gl(n,\CC)$ on it. 
+\begin{Lemma*}
+Let $f \in B_\eta$ and $z \in \n_\eta(\ZZ^\mu_0)$. Then for each $\sigma \in
+S_\eta$
+\begin{align*}
+D_\sigma^\eta(f T(z))
+	&= \sum_{\tau \in S_\eta} 
+		D_\sigma^\eta(f s_\tau^*) D_\tau^\eta(z)
+	\equiv \sum_{\tau \in S_\eta} 
+		\left(
+			\sum_{\rho \in S_\eta} c_{\rho, \tau}^\sigma
+				D_\rho^\eta(f)
+		\right) D_\tau^\eta(z)
+	\mod \p_\eta L_\eta.
+\end{align*}
+\end{Lemma*}
+\begin{proof}
+The equality follows by replacing $T(z)$ with $\sum_{\tau} s_\tau 
+D_\tau^\eta(z)$. To obtain the congruence replace $f$ with $\sum_\rho 
+f_{(\rho)} s_\rho$ and apply Lemma \ref{L:schubert-basis}; instead of
+the coefficients $c^\sigma_{\rho, \tau}$ we get $D_\sigma^\eta(s_\rho 
+s_\tau^*)$, but since $s_\tau^* \equiv s_\tau \mod \p_\eta^{S_\eta}$
+this equals $c^\sigma_{\rho, \tau}$ modulo $\p_\eta$.
+\end{proof}
+
+\begin{Definition*}
+Given $\sigma, \tau \in S_\eta$ we define $D_{\sigma,\tau}^\eta: B_\eta \to
+B_\eta$ as $D_{\sigma,\tau}^\eta(f) = \sum_{\rho \in S_\eta} 
+c_{\rho, \tau}^\sigma D_\rho^\eta(f)$. 
+\end{Definition*} 
+
+Notice that Stanley and Postnikov have analogous operators $\DD_{\sigma,\tau}
+= \sum_{\rho} c_{\rho, \tau}^\sigma \DD_\rho$. Since $\pi \circ D_\sigma^\eta 
+= \pi \circ \DD_\sigma$ we also have that $\pi \circ D_{\sigma,\tau}^\eta 
+= \pi \circ \DD_{\sigma, \tau}$.
+
+\begin{Proposition}
+\label{P:module-congruence}
+The following congruences hold in $L_\eta$ modulo $\p_\eta L_\eta$
+\begin{align*}
+E_{k,k+1} D_\sigma^\eta(z)
+	&\equiv - \sum_{I \in \I_k^\eta(z)}
+	\sum_{\tau \in S_\eta}
+	\DD^\eta_{\sigma\alpha(I),\tau}
+		\left(
+			e_{k,I}^+
+		\right)(x+z) D_\tau^\eta(z+\delta^{k,a(I)}); \\
+E_{k+1,k} D_\sigma^\eta(z)
+	&\equiv \sum_{I \in \I_k^\eta(z)} 
+		\sum_{\tau \in S_\eta} 
+		\DD_{\sigma\beta(I),\tau}^\eta \left(e_{k,I}^- \right)
+		(x+z) D_\tau^\eta(z - \delta^{k,b(I)});\\
+E_{k,k} D_\sigma^\eta(z)
+	&\equiv r_k(x+z) D_\sigma^\eta(z) +
+		\sum_{\ell(\tau) < \ell(\sigma)} 
+		\DD_{\sigma, \tau}^\eta(r_k)(x+z) 
+			D_\tau^\eta(z).
+\end{align*}
+Furthermore, for each $c \in \Gamma$ we have
+\begin{align*}
+c D_\sigma^\eta(z)
+	&\equiv \gamma_c(x+z) D_\sigma^\eta(z) +
+		\sum_{\ell(\tau) < \ell(\sigma)} 
+			\DD_{\sigma, \tau}^\eta(\gamma_c)(x+z) 
+			D_\tau^\eta(z).
+\end{align*}
+\end{Proposition}
+\begin{proof}
+We work first in $V_K$. If $c \in \Gamma$ then $c T(z) = \gamma(x+z) T(z)$, so
+applying Lemma \ref{L:function-tableaux} and passing to the quotient we obtain
+\begin{align*}
+c D_\sigma^\eta(z)
+	&= \overline \gamma(x+z) D_\sigma^\eta(z) +
+		\sum_{\ell(\tau) < \ell(\sigma)} 
+			\pi(D_{\sigma, \tau}^\eta(\gamma(x+z))) 
+			D_\tau^\eta(z).
+\end{align*}
+Now $\pi(D_{\sigma, \tau}^\eta(\gamma(x+z))) = \pi(\DD_{\sigma,\tau}^\eta(
+\gamma(x+z))$. Since the $\DD_{\sigma,\tau}$ are differential operators and
+$x+z$ is an affine change of variables we see that $\pi(\DD_{\sigma,\tau}^\eta
+(\gamma(x+z)) = \overline{\DD_{\sigma,\tau}^\eta(\gamma)}(x+z)$, and this 
+proves the last equality. Since $E_{k,k} \in \Gamma$ the third formula is just 
+a particular case of this.
+
+From Lemma \ref{L:pre-formulas} we get
+\begin{align*}
+E_{k,k+1} D_\sigma^\eta T(z)
+	&= - \sum_{I \in \I_k^\eta(z)} D_\sigma^\eta (\partial_{\alpha(I)} 
+		\left(
+			e_{k,I}^+(x+z) T(z + \delta^{k,a(I)})
+		\right))
+\end{align*}
+Now $\sigma \in \Shuffle_{\epsilon(z)}^\eta$ and $\alpha(I) \in 
+S_{\epsilon(z)}$, so by \cite{BB-coxeter-book}*{Proposition 2.4.4}
+$\ell(\sigma \alpha(I)) = \ell(\sigma) + \ell(\alpha(I))$ and
+$D_\sigma^\eta \partial_{\alpha(I)} = D^\eta_{\sigma \alpha(I)}$. Thus
+\begin{align*}
+E_{k,k+1} D_\sigma^\eta T(z)
+	&= - \sum_{I \in \I_k^\eta(z)} D_{\sigma\alpha(I)}^\eta  
+		\left(
+			e_{k,I}^+(x+z) T(z + \delta^{k,a(I)})
+		\right).
+\end{align*}
+By definition $e_{k,I}^+(x+z) \in B_\eta$ for each $I \in \I_\eta(z)$, so
+we can apply again Lemma \ref{L:function-tableaux} and pass to the quotient
+to obtain a formula involving operators of the form $D_{\sigma\alpha(I), 
+\tau}^\eta$, and using a similar argument as before we can replace them with
+differential operators $\DD_{\sigma\alpha(I), \tau}^\eta$ and obtain the 
+first formula in the statement. A simmilar proof works for the second one.
+\end{proof}
+
+\section{The GT module associated to an arbitrary character}
+
+\paragraph
+To each $v \in \CC^\mu$ we associate a composition $\eta = \eta(v)$ of $\mu$ 
+as follows. For any $k \in \interval{n-1}$ form a graph with vertices 
+$\interval{k}$, and put an edge between $i$ and $j$ if and only if $v_{k,i} - 
+v_{k,j} \in \ZZ$; the resulting graph is the disjoint union of complete 
+graphs, and we set $\eta^{(k)}$ to be the cardinalities of each connected 
+component arranged in descending order. Finally we set $\eta(v) = (\eta^{(1)}, 
+\ldots, \eta^{(n-1)}, 1^n)$, where $1^n$ denotes the composition of $n$ 
+consisting of $n$ ones. Thus if $v$ is generic then $\eta^{(k)}(v) = 1^k$, and 
+if it is singular then $\eta(v)$ will have at least one part larger than $1$. 
+Notice that $\eta(v) = \eta(\sigma(v) + z)$ for any $\sigma \in S_\eta$ and 
+$z \in \ZZ^\mu_0$, and that by replacing $v$ with a suitable element $\vv = 
+\sigma(v) + z$ we can characterize $S_\eta$ as the stabilizer of $\vv$; we 
+call any such element a \emph{fully critical} representative of $v$. By 
+definition of $B_\eta$, evaluation at $\vv$ defines a $1$-dimensional 
+representation of $B_\eta$ which we will denote by $\CC_{\vv}$. Also notice 
+that if $\vv'$ is another fully critical representative of $v$ then translation
+by $\vv' - \vv$ is a well defined automorphism of $B_\eta$ which in turn 
+induces an isomorphism $\CC_{\vv} \cong \CC_{\vv'}$
+
+\begin{Definition*}
+Let $v \in \CC^\mu$, let $\eta = \eta(v)$ and let $\vv$ be a fully critical 
+representative of $v$. We set $V(T(v)) = \CC_{\vv} \ot_{B_\eta} L_\eta$, and 
+for each $\sigma \in \eta$ and each $z \in \ZZ^\mu_0$ we write $D_\sigma(\vv 
++ z) = 1_{\vv} \ot_{B_\eta} D_\sigma^\eta(z)$.
+\end{Definition*}
+
+By the last remark before the definition, $V(T(v))$ is well defined up to
+isomorphism. We set some notation for the rest of the document. Let $v \in 
+\CC^\mu$. Given $\sigma, \tau \in S_\mu$ we write $\DD_\sigma^v = ev_v \circ 
+\DD_\sigma^\eta$ and $\DD_{\sigma, \tau}^v = ev_{v} \circ \DD_{\sigma, \tau}$.
+Since $ev_{\vv}(\p_{\eta(v)}) = 0$ by definition, we get the following 
+from Proposition \ref{P:module-congruence}.
+
+\begin{Theorem}
+\label{T:big-module}
+Let $v \in \CC^\mu$ and let $\vv$ be a fully critical representative of
+$v$. The action of $\gl(n,\CC)$ on $V(T(v))$ is given by the following
+formulas
+\begin{align*}
+E_{k,k+1} D_\sigma(\vv + z)
+	&= - \sum_{I \in \I_k^\eta(z)}
+	\sum_{\tau \in S_\eta}
+	\DD^{\vv +z}_{\sigma\alpha(I),\tau}
+		\left(
+			e_{k,I}^+
+		\right) D_\tau (\vv + z+\delta^{k,a(I)}); \\
+E_{k+1,k} D_\sigma(\vv + z)
+	&= \sum_{I \in \I_k^\eta(z)} 
+		\sum_{\tau \in S_\eta} 
+		\DD_{\sigma\beta(I),\tau}^{\vv+z} \left(e_{k,I}^- \right)
+		D_\tau(\vv + z - \delta^{k,b(I)});\\
+E_{k,k} D_\sigma(\vv + z)
+	&= r_k(\vv+z) D_\sigma(\vv+z) +
+		\sum_{\ell(\tau) < \ell(\sigma)} 
+		\DD_{\sigma, \tau}^{\vv + z}(r_k) 
+			D_\tau(\vv + z).
+\end{align*}
+Furthermore, for each $c \in \Gamma$ we have
+\begin{align*}
+c D_\sigma(\vv + z)
+	&= \gamma_c(\vv+z) D_\sigma(\vv + z) +
+		\sum_{\ell(\tau) < \ell(\sigma)} 
+			\DD_{\sigma, \tau}^{\vv+z}(\gamma_c) 
+			D_\tau (\vv+ z).
+\end{align*}
+\end{Theorem}
+
+\paragraph
+\label{L:invariants-dual-basis}
+Let $\eta < \mu$. By \cite{PS-chains-bruhat}*{Corollary 6.1} the ideal $I_\eta
+= \bigcap_{\sigma \in S_\eta} \ker \DD_\sigma^0 \subset \Lambda$ is exactly 
+the ideal generated by $S_\eta$-symmetric polynomials with nonzero constant 
+term, and the induced functionals $\{\DD_\sigma^0: \Lambda / I \to \CC \mid 
+\sigma \in S_\eta\}$ form a homogeneous basis of the graded dual of 
+$\Lambda/I$, with $\deg \DD_\sigma^0 = - \ell(\sigma)$. 
+For each $v \in \CC^\mu$ we set $\m_{v} \subset \Gamma$ to be the ideal of 
+elements $c \in \Gamma$ such that $\gamma_c(v) = 0$.
+
+\begin{Lemma*}
+Let $\epsilon < \eta$ and suppose $v \in \CC^\mu$ is such that its stabilizer
+in $S_\eta$ is $S_\epsilon$. 
+\begin{enumerate}[(a)]
+\item The set $\{\DD_\rho^0 \mid \rho \in \Shuffle_\epsilon^\eta\}$ is a 
+	homogeneous basis of the graded dual of the invariant space
+	$(\Lambda/I)^{S_\epsilon}$.
+\item The map $c\in \Gamma \mapsto \phi_v(c)
+	= \overline{\gamma_c(x+v)} \in (\Lambda/I)^{S_\epsilon}$ is surjective.
+\item For each $\sigma \in \Shuffle_{\epsilon}^\eta$ there exists $c_\sigma \in
+\m_v$ such that $\DD_\sigma^0(c_\sigma^{\ell(\sigma)}) = 1$.
+\end{enumerate}
+\end{Lemma*}
+\begin{proof}
+Since $I_\eta$ is $S_\epsilon$-invariant $(\Lambda/I_\eta)^{S_\epsilon}$ is the
+image of $\Lambda^{S_\epsilon}$ in the quotient. Now for $p \in 
+\Lambda^{S_\epsilon}$ and $\sigma$ not an $\epsilon$-shuffle we have 
+$\partial_\sigma p = 0$ so $\DD_\sigma^0(p) = (\partial_\sigma p)(0) = 0$.
+Hence $\displaystyle (\Lambda/I_\eta)^{S_\epsilon} \subset \bigcap_{\sigma 
+\notin \Shuffle_\epsilon^\eta} \ker \DD_\sigma^0$. Since both spaces have 
+dimension $\eta!/\epsilon!$ the inclusion must be an equality, and the dual 
+space of $(\Lambda/I_\eta)^{S_\epsilon}$ is generated by the restrictions of
+the linear functionals $\{\DD_\sigma^0 \mid \sigma \in \Shuffle_\epsilon^\eta
+\}$. This proves the first item. The second item is classical according to
+Soergel; it probably goes back at least to Weyl in The Classical Groups, part 
+3 of Chapter II.
+
+Recall that by definition $\DD^0_\sigma$ is a positive multiple of the sum of 
+differential operators $m_C$, where $C = (e < \tau_1 < \cdots < 
+\tau_{\ell(\sigma)} = \sigma)$ is a saturated chain in the Bruhat order and 
+$m_C$ is the product of all $\partial_{a_i} - \partial_{b_i}$ where 
+$\tau_{i+1} = \tau_i (a_i,b_i)$, followed by evaluation at zero. If $f(v) = 0$ 
+then $m_C(f^{\ell(\sigma)})$ is the product of all $\partial_{a_i}(f) - 
+\partial_{b_i}(f)$ evaluated at $0$. By the previous two items we can choose
+$f \in (\Lambda/I)^{S_\epsilon}$ such that $D_{(i,i+1)}^0(f) = 1$ for all 
+$(i,i+1) \in \Shuffle_\epsilon^\eta$, so $m_C(f) \geq 0$ and hence 
+$\DD_\sigma^0(f^j) \geq 0$. Now by the chain property of shuffles 
+\cite{BB-coxeter-book}*{Theorem 2.5.5} there is at least one chain $C$
+from $e$ to $\sigma$ consisting of $\epsilon$-shuffles; we claim that in this
+case $m_C(f^j) \neq 0$. Indeed, if $\tau_{i+1} = \tau_i (a_i,b_i)$ then
+$(a_i, b_i) v \neq v$, since otherwise $\tau_{i+1}$ would not be of minimal
+length in $\tau_{i+1} S_\epsilon$, and hence there exists an $\epsilon$-shuffle
+$(j,j+1)$ such that $a_i \leq j < b_i$, which in turn implies that 
+\begin{align*}
+	(\partial_{a_i} - \partial_{b_i})(f)(0)
+		&= \sum_{r = a_i}^{b_i-1} (\partial_{r} - \partial_{r+1})(f)(0)
+		> 0,
+\end{align*}
+so $m_C(f^j)(0) > 0$ and hence $\DD_\sigma^0(f^j) > 0$. Multiplying $f$ by
+a suitable constant we get $\DD_\sigma^0(f^j) = 1$. Now take $c \in \Gamma$
+such that $\phi_v(c) = \overline f$. Since $f(v) = 0$ we see that $c \in 
+\m_v$, so we are done.
+\end{proof}
+
+
+\begin{Proposition}
+Let $\vv \in \CC^\mu$ be $\eta$-critical, let $z \in \ZZ^\mu_0$ be in 
+$\eta$-normal form. Set $\epsilon = \epsilon(z)$ and $v = \vv + z$. 
+For generic elements $c \in \Gamma$ we have $(c-\gamma_c(v))^{\ell(\sigma)} 
+D_\sigma(v) \neq 0$. In particular the Jordan form of the endomorphism of 
+$V(T(\vv))[\m_{v}]$ induced by $c$ has a unique largest block of size 
+$\ell(w_\epsilon)$, where $w_\epsilon$ is the $\epsilon$-shuffle associated to 
+the longest word $w_\eta$. 
+\end{Proposition}
+\begin{proof}
+Let $f \in (\Lambda/I)^{S_\epsilon}$. The proof of the previous lemma shows 
+that $\DD_\sigma^0(f^{\ell(\sigma)} - f(v))$ is a nontrivial polynomial in 
+$(\partial_i - \partial_{i+1})(f)(0)$ where $i$ runs over all $(i,i+1)$ which 
+are $\epsilon$-shuffles. This implies that the set of all $f$ such that 
+$\DD_\sigma^0(f^{\ell(\sigma)}) \neq 0$ is a nonempty Zarisky open set of 
+$(\Lambda/I)^{S_\epsilon}$, which we denote $V_\sigma$. If $c \in \Gamma$ 
+is such that the class of $\gamma_c - \gamma_c(v)$ lies in $V_\sigma$
+then $(c- \gamma_c(v))^{\ell(\sigma)} D_\sigma(v) = \DD_\sigma^0(c - 
+\gamma_c(v)^{\ell(\sigma)}) D_e(v) \neq 0$.
+
+Now take $c \in \Gamma$ such that $\gamma_c - \gamma_c(v) \in V_{w_\epsilon}$.
+Then $(c-\gamma_c)^j D_{w_\epsilon}(v)$ is nonzero if and only if $j \leq 
+\ell(w_\epsilon)$, which shows that the Jordan form of $c$ over 
+$V(T(\vv))[\m_v]$ must have a block of size $\ell(w_\epsilon)$. Since 
+$w_\epsilon$ is the unique longest element in $\Shuffle_\epsilon^\eta$, we
+get $(c-\gamma_c)^{\ell(w_\epsilon)} D_\sigma(v) = 0$ for any $\sigma < 
+w_\epsilon$ so there can be no other Jordan block of size $\ell(w_\epsilon)$
+in the Jordan form of $c$.
+\end{proof}
+
+\paragraph
+\about{Gelfand-Tsetlin components}
+\label{L:most-derived-tableaux}
+Fix $w = v + z$ and $\epsilon = \epsilon(w) \subset \S_\eta$. Denote by 
+$\omega \in S_\eta^\epsilon$ the $\epsilon$-shuffle corresponding to
+the longest word of $S_\eta$.
+
+\begin{Lemma*}
+Let $x = \sum_{\sigma \in S_\eta^\epsilon} a_\sigma D_\sigma(w)$. Then 
+$\Gamma x = V(T(v))[\chi_w]$ if and only if $a_{\omega} \neq 0$.
+\end{Lemma*}  
+\begin{proof}
+If $a_\omega = 0$ then $\Gamma x$ is contained in the $\CC$-span of derived
+tableaux $D_\sigma(w)$ with $\sigma < \omega$, so the condition $a_\omega \neq
+0$ is clearly necessary. Now assume $a_\omega \neq 0$. For each $\sigma \in 
+S_\eta^\epsilon$ let $c_\sigma \in \Gamma$ be such that $\DD_{\omega, \tau}
+(c_\sigma) = \delta_{\sigma, \tau}$. Then $c_\sigma x = a_\omega D_\sigma(w)$
+plus a linear combination of tableaux $D_\tau(w)$ with $\tau < \sigma$. Thus
+each $D_\sigma(w) \in \Gamma x$.
+\end{proof}
+
+\paragraph
+\label{L:domination}
+Fix a fully critical seed $\overline v \in \CC^\mu$ with $\eta = 
+\eta(\overline v)$. We say that the intervals $\interval{a,b}_{k+1}, 
+\interval{c,d}_{k} \in \I$ are related if $\overline v_{k+1, a} - \overline 
+v_{k,c} \in \ZZ$. Notice that this implies $\overline v_{k+1, i} - v_{k,j} 
+\in \ZZ$ for all $i \in \interval{a,b}$ and all $j \in \interval{c,d}$; also 
+notice that an interval at level $k$ is related to at most one interval at 
+level $k+1$. A family of intervals is a sequence $\{I_k, I_{k+1}, \cdots, 
+I_{k+r}\}$ such that $I_j$ is related to $I_{j+1}$. We say two intervals are
+related if they belong to the same maximal family of intervals; clearly each
+interval belongs to a unique maximal family. We say two entries are related
+if they lie in related intervals. Clearly if $(k,i)$ and $(l,j)$ are related 
+then $v_{k,i} - v_{l,j} \in \ZZ$.
+
+\begin{Definition*}
+Let $w, w' \in \overline v + \n(\eta)$. We say that $w$ \emph{dominates}
+$w'$, and denote this by $w \searrow w'$ if $w_{k,i} - w'_{k,i} \in 
+\ZZ_{\geq 0}$ for all $(k,i) \in \Sigma$ 
+and the following condition holds: for each $\interval{a,b}_k \in \I(\eta)$,
+if there exists $t \in \interval{a,b}$ such that $w_{k,t} > w_{k,t+1}$ then
+$w_{k,i-1} > w_{k,i}$ for all $i \leq t$.
+\end{Definition*}
+
+We refer to the last condition in the definition as monotonicity on intervals.
+Visually this can be represented as follows. Setting $z = w - \overline v$ 
+and $z' = w' - \overline v$ we consider the graphs of $z$ and $z'$ over a 
+fixed interval $I \in \I$, in red and blue respectively. In these graphs
+$w$ dominates $w'$ in the first and third case, but not in the second.
+
+\begin{tikzpicture}
+\draw (0,-0.2) -- (0,3);
+\draw (-0.2,0) -- (4,0);
+
+\draw[red] (0,2.5) -- (1, 2.5) -- (1,2) -- (2,2) -- (2,1.5) 
+	-- (3,1.5) -- (3,0.5) -- (4,0.5);
+\draw[blue] (0,1.9) -- (1,1.9) -- (1,0.9) 
+	-- (3,0.9) -- (3,0.4) -- (4,0.4);
+\end{tikzpicture}
+\begin{tikzpicture}
+\draw (0,-0.2) -- (0,3);
+\draw (-0.2,0) -- (4,0);
+
+\draw[red] (0,2.5) -- (2,2.5) -- (2,1.5) 
+	-- (3,1.5) -- (3,0.5) -- (4,0.5);
+\draw[blue] (0,1.9) -- (1,1.9) -- (1,0.9) 
+	-- (3,0.9) -- (3,0.4) -- (4,0.4);
+\end{tikzpicture} 
+\begin{tikzpicture}
+\draw (0,-0.2) -- (0,3);
+\draw (-0.2,0) -- (4,0);
+
+\draw[red] (0,2.5) -- (1, 2.5) -- (1,2) -- (2,2) -- (2,1.5) 
+	-- (3,1.5) -- (3,0.5) -- (4,0.5);
+\draw[blue] (0,2.4) -- (1,2.4) -- (1,0.9) 
+	-- (3,0.9) -- (3,0.4) -- (4,0.4);
+\end{tikzpicture}
+
+With this aide it is easy to see that domination is an order relation. Also, 
+if $v, v' \in \n(\eta)$ with $v_{k,i} \geq v'_{k,i}$ and $v_{k,i}$ is 
+noncritical then $v \searrow v'$.
+
+\begin{Lemma*}
+Let $v,v' \in \overline v + \ZZ^\mu_0$, and assume that $v'$ is in normal
+$\eta$-form. 
+\begin{enumerate}
+\item 
+\label{i:normal}
+If $v \searrow v'$ then $v$ is in $\eta$-normal form and every 
+$\epsilon(v')$-shuffle is an $\epsilon(v)$-shuffle.
+
+\item
+\label{i:common}
+If $v, v'$ are in $\eta$-normal form then there exists a noncritical $v''
+\in \overline v + \n(\eta)$ such that $v'' \searrow v, v'$ and 
+$\Omega^+(v) \cap \Omega^+(v') \subset \Omega^+(v'') \subset \Omega^+(v) \cup 
+\Omega^+(v')$. 
+\end{enumerate}
+\end{Lemma*}
+\begin{proof}
+It is clear from the definition that if $v'$ is in normal $\eta$-form then
+so is $v$, and that $\I_\eta(v) < \I_\eta(v')$. Now $\sigma \in S_\eta$
+is an $\epsilon(v')$-shuffle if and only if it is monotonous on each interval
+of $\I_\eta(v')$, which implies that it is monotonous in each interval of 
+$\I_\eta(v)$ and hence it is an $\epsilon(v)$-shuffle. This proves item 
+\ref{i:normal}.
+
+Set $\tilde v$ with $\tilde v_{k,i} = \max\{v_{k,i}, v'_{k,i}\}$ for all $(k,i)
+\in \Sigma$. It is easy to check that $\Omega^+(\tilde v)$ satisfies the
+inclusions in the statement, so we only need to prove that we can find a 
+noncritical $v''$ such that $v''_{k,i} \geq \tilde v_{k,i}$ for all $(k,i)
+\in \Sigma$ and $\Omega^+(v'') = \Omega^+(\tilde v)$. Given $(k,i), (l,j)$
+two related entries we write $(k,i) \rightarrow_1 (l,j)$ if one of the 
+following conditions holds:
+\begin{itemize}
+\item $k = l$ and $j = i+1$;
+\item $k = l+1$ and $\tilde v_{k,i} \geq \tilde v_{l,j}$, or equivalently 
+$(k,i,j) \in \Omega^+(\tilde v)$;
+\item $k = l-1$ and $\tilde v_{k,i} > \tilde v_{l,j}$ or equivalently 
+$(k+1,j,i) \notin \Omega^+(\tilde v)$.
+\end{itemize}
+By definition, if we have a sequence $v_{k_1,i_1} \rightarrow_1 v_{k_2, i_2}
+\rightarrow_1 \cdots \rightarrow_1 v_{k_r, i_r} \rightarrow_1 v_{k_1, i_1}$
+then $v_{k_1, i_1} = v_{k_2, i_2} = \cdots = v_{k_r,i_r}$, which implies that
+$k_1 \geq k_2 \geq \cdots \geq k_r$, and so $k_1 = k_2 = \cdots = k_r$ and
+finally $i_1 = \cdots = i_r$, which is impossible. Thus the system of 
+inequalities $\{v''_{k,i} > v''_{l,j} \mid(k,i) \rightarrow_1 
+(l,j)\}$ has a solution. By construction $\Omega^+(v'') = \Omega^+(\tilde v)$
+and $v''$ is noncritical, so we are done.
+\end{proof}
+
+
+\begin{Lemma}
+\label{L:sequence}
+Let $v,v' \in \overline v + \ZZ^\mu_0$ and suppose $v \searrow v'$. 
+There exists a sequence $v = v^{(0)} \searrow v^{(1)} \searrow \cdots \searrow 
+v^{(r)} = v'$ with the following properties.
+\begin{enumerate}[(a)]
+\item 
+\label{i:ik}
+For each $s \in \interval{r}$ there exists $(k_s, i_s) \in \Sigma$ such 
+that $v^{(s)} = v^{(s-1)} - \delta^{k_s,i_s}$.
+
+\item 
+\label{i:omega}
+$\Omega^+(v) \cap \Omega^+(v') \subset \Omega^+(v^{(s)}) \subset
+\Omega^+(v) \cup \Omega^+(v')$ for each $s \in \interval{r}$.
+
+\item 
+\label{i:interval}
+Set $I \in \I(v^{(s)})_{k_s}$ to be the unique interval containing $(k_s,
+i_s)$. Then $a(I) = i_s$ and $\omega^{(s)} = \omega^{(s+1)} \alpha(I)$. 
+\end{enumerate}
+
+\end{Lemma}
+\begin{proof}
+If $v = v'$ then the statements are trivial, so we can assume that $v \neq v'$,
+or equivalently that the set $\Sigma' = \{(r,s) \mid v_{r,s} - v'_{r,s} > 0\}$
+is not empty. Let $\Sigma'' \subset \Sigma'$ be the subset consisting of those
+$(r,s)$ with the following property: if $(t,l)$ is in $\Sigma$ and related to 
+$(r,s)$, then $v_{r,s} - v_{t,l} \leq 0$. Such elements always exist, since 
+they are the minimal elements in the intersection of a maximal family of 
+related entries with $\Sigma'$. Finally choose $(k,i) \in \Sigma''$ with
+$k$ minimal and $i$ maximal for that $k$, and set $v^{(1)} = v - 
+\delta^{k,i}$. We claim that the lemma holds for $s = 1$.
+
+First let us check that $v^{(1)} \searrow v'$. Since $v_{k,i} > v'_{k,i}$ by 
+the choice of $v_{k,i}$, it is clear that $v^{(1)}_{r,s} \geq v'_{r,s}$ for all
+$(r,s) \in \Sigma$. Since we have only changed the $(k,i)$-th entry of $v$, we
+only need to check the condition for the interval containing $(k,i)$, say
+$\interval{a,b}_k$. If $i < j \leq b$ then $v_{k,i} \geq v_{k,j}$ since $v$
+is in $\eta$-normal form, and the choice of $(k,i)$ implies that $v_{k,j} = 
+v'_{k,j}$. Thus if there exists $t \in \interval{a,b}$ such that $v^{(1)}_{k,t}
+> v'_{k,t}$ then $t \in \interval{a,i}$, and since $v_{k,i} > v'_{k,i}$
+we have that $v_{k,a} > v_{k,a+1} > \cdots > v_{k,i-1} > v_{k,i} -1$, which
+is precisely the monotonicity condition for $v^{(1)}$ over the interval $I$.
+Thus $v^{(1)} \searrow v'$ and since $v'$ is in $\eta$-normal form so is 
+$v^{(1)}$. Thus $v^{(1)}$ satsfies item \ref{i:ik}.
+
+Let us check item \ref{i:omega} for $v^{(1)}$. Once again, since $v^{(1)}$ 
+differs from $v$ only in the $(k,i)$-th entry, we only have to check the
+inclusions for elements of the form $(k+1,j,i)$ and $(k,i,j)$. For simplicity 
+we denote $X = \Omega^+(v) \cap \Omega^+(v')$ and $Y = \Omega^+(v) \cup 
+\Omega^+(v')$
+\begin{itemize}
+\item Suppose $(k+1,j,i) \in X$. Then $v_{k+1,j} - v_{k,i} \geq 0$ and hence 
+$v^{(1)}_{k+1,j} - v^{(1)}_{k,i} = v_{k+1,j} - v_{k,i} + 1 \geq 0$, so 
+$(k+1,i,j) \in \Omega^+(v^{(1)})$.
+
+\item Suppose $(k,i,j) \in X$. Then $v_{k,i} - v_{k-1,j} \geq 0$, and the 
+choice of $(k,i)$ implies that $v_{k-1,j} = v'_{k-1,j}$. Since $v_{k,i} - 
+v_{k,j} \geq v'_{k,i} - v'_{k-1,j} \geq 0$, we have $(k,i,j) \in 
+\Omega^+(v^{(1)})$.
+
+\item Suppose $(k+1,j,i) \in \Omega^+(v^{(1)})$. Then $v_{k+1,j} - v_{k,i} + 1
+\geq 0$. If $v_{k+1,j} - v_{k,i} \geq 0$ then $(k+1, j,i) \in \Omega^+(v) 
+\subset Y$ and we are done. Otherwise $v_{k+1,j} - v_{k,i} = - 1$, and again
+the choice of $(k,i)$ implies that $v'_{k+1,j} = v_{k+1,j}$. Thus $v'_{k+1,j}
+- v'_{k,j} \geq v_{k+1,j} - v_{k,i} + 1 \geq 0$ and $(k+1,i,j) \in \Omega^+(v')
+\subset Y$.
+
+\item Suppose $(k,i,j) \in \Omega^+(v^{(1)})$. Then $v_{k,i} - 1 - v_{k-1,j}
+\geq 0$ and hence $(k,i,j) \in \Omega^+(v) \subset Y$.
+\end{itemize}
+This completes the proof for item \ref{i:omega}.
+
+Recall that $\interval{a,b}_k$ is the unique interval in $\I_\eta(v)$ 
+containing $(k,i)$, and that we have already observed that the choice of 
+$(k,i)$ along with the fact that $v$ dominates $v'$ implies that 
+$v_{k,i-1} > v_{k,i} > v_{k,i+1}$ and $v_{k,t} = v'_{k,t}$ for all $i < t 
+\leq b$, and this implies that $a(I) = i$. Now if $v_{k,i} - 1 > v_{k,i}$
+then $I = \{(k,i)\}$ so $\alpha(I)$ is the identity and $\I_\eta(v) = 
+\I_\eta(v')$, which implies that $\omega(v) = \omega(v')$. Thus we only
+need to check that item \ref{i:interval} holds when $v_{k,i} - 1 = v_{k,i+1}$.
+Let $I' = I \setminus \{(k,i)\}$. Then $\I(v) = \I(v') \setminus 
+\{I', \{(k,i)\}\} \cup \{I\}$, and so
+\begin{align*}
+\omega(v) 
+	&= \omega_\eta \prod_{J \in \I_\eta(v)} \omega_J 
+	= \omega_\eta \left(\prod_{J \neq I'} \omega_J\right) \omega_{I'}
+\end{align*} 
+and it is easy to check that $\omega_{I'} = \omega_I \alpha(I)$. This shows 
+that $v^{(1)}$ has all the desired properties. Now let $N = \sum_{(r,s) \in 
+\Sigma} v_{r,s} - v'_{r,s}$ and set $v^{(s)} = (v^{(s-1)})^{(1)}$ for all $s 
+\in \interval N$. An inductive argument shows that this sequence has the 
+desired properties, and that $v^{(N)} = v'$. This completes the proof.
+\end{proof}
+
+\begin{Proposition}
+\label{P:omega}
+Let $v,v' \in \overline v + \n(\eta)$. If $\Omega^+(v) \subset \Omega^+(v')$ 
+then $V(T(\overline v))[\chi_{v'}] \subset U D_{\omega(v)}(v)$. In particular
+if $v$ is fully critical and $\Omega^+(v) = \emptyset$ then $V(T(\overline v))$
+is cyclic generated by $D_e(v)$.
+\end{Proposition}
+\begin{proof}
+By item \ref{i:common} of Lemma \ref{L:domination} there exists $v'' \searrow 
+v, v'$ with $\Omega^+(v) = \Omega^+(v') \subset \Omega^+(v'')$. Thus it is 
+enough to prove the statement for $v \searrow v'$ and $v \nearrow v'$, and by 
+Lemma \ref{L:sequence} we may restrict to the case $v' = v \pm \delta^{k,i}$ 
+for some $(k,i) \in \Sigma$. 
+
+If $v' = v - \delta^{(k,i)}$ then $\omega(v')$ is an $\epsilon(v)$-shuffle, 
+and hence $D_{\omega(v')}(v) \neq 0$. Furthermore, the coefficient of 
+$D_{\omega(v')}(v')$ in $E_{k+1,k} D_{\omega(v)}(v)$ is
+\begin{align*}
+\DD_{\omega(v'), \omega(v')}^v(e_{k,I}^+)
+	&= e_{k,I}^+(v) 
+		= \frac{\prod_{j=1}^{k-1} v_{k,i} - v_{k-1,j}}
+			{\prod_{I \in \I_k(v)} v_{k,i} - v_{k, a(I)}}.
+\end{align*}
+This is zero if and only if $v_{k,i} = v_{k-1, j}$ for some $j \in \interval 
+{k-1}$ which would imply $(k,i,j) \in \Omega^+(v) \subset \Omega^+(v')$,
+and hence $-1 = v_{k,i} - v_{k-1,j} -1 = v'_{k,i} - v'_{k-1,j}  \geq 0$, a
+contradiction. Thus the projection of $E_{k+1,k}$ to the component 
+$V(T(\overline v))[\chi_v]$ is a linear combination of derived tableaux of
+character $\chi_{v'}$ in which $D_{\omega(v')}(v')$ appears with nonzero
+coefficient. By lemma \ref{L:most-derived-tableaux} this linear combination
+generates $V(T(\overline v))[\chi_{v'}]$.
+
+If $v' = v + \delta^{k,i}$ then the coefficient of $D_{\omega(v)}(v)$ in
+$E_{k,k+1} D_{\omega(v')}(v')$ is
+\begin{align*}
+\DD_{\omega(v')\alpha(I), \omega(v)}^{v'}(e_{k,I}^+)
+	&= \DD_{\omega(v),\omega(v)}^{v'}(e_{k,I}^-)
+		= \frac{\prod_{j=1}^{k+1} v_{k,i} - v_{k+1,j}}
+			{\prod_{I \in \I_k(v)} v_{k,i} - v_{k, a(I)}}.
+\end{align*}
+As before this is not zero, since otherwise $v_{k+1,j} = v_{k,i}$ for some
+$j \in \interval{k+1}$, which in turn implies that $-1 = v_{k+1,i} - v_{k,i}
+-1 = v'_{k+1,j} - v'_{k,i} \geq 0$, a contradiction. Hence just as before
+$V(T(\overline v))[\chi_{v'}]$ is contained in the module generated by 
+$D_{\omega(v)}(v)$.
+\end{proof}
+The following are some immediate consequences of the Proposition.
+\begin{Corollary*}
+Let $v \in \overline v + \n(\eta)$ be fully critical.
+\begin{enumerate}[(a)]
+\item If $\Omega^+(v) = \emptyset$ then $D_e(v)$ generates $V(T(\overline v))$ 
+over $U$.
+
+\item There is a unique minimal submodule $N_\Omega \subset V(T(\overline v))$.
+If $\Omega^+(v) = \Omega(v)$ then $N_\Omega = U D_e(v)$.
+\end{enumerate}
+\end{Corollary*}
+\begin{proof}
+The first item is an obvious consequence of the Proposition. For the second, 
+let $N \subset V(T(\overline v))$ be any submodule and let $x \in N$ be a 
+nonzero element. Since $N$ is a Gelfand-Tsetlin submodule of $V(T(\overline 
+v))$ we can assume that $x \in V(T(\overline v))[\chi_{v'}]$ for some $v' \in 
+\overline v + \n(\eta)$, and hence $D_e(v') \in N$. Thus by Proposition 
+\ref{P:omega} $D_e(v) \in N$ and hence $U D_e(v) \subset N$, so $N_\Omega = U
+D_e(v)$ is a minimal element in the lattice of submodules of $V(T(\overline 
+v))$.
+\end{proof}
+
+\section{A very special Verma module}
+In this section we focus on the minimal module associated to the tableau
+$\overline v$ whose entries are all equal to a fixed scalar $a \in \CC$.
+We fix $V = V(T(\vv))$, and given $v \in \vv + \n(\ZZ)$ write $V[v]$ instead of
+$V[\chi_v]$.
+
+\paragraph
+Clearly $V[\chi_{\overline v}] = \CC D_e(\overline v)$. 
+Furthermore $\Omega^+(\vv) = \Omega(\vv)$ and hence $N = U D_e(\vv)$ is the
+unique minimal module of $V(T(\vv))$. On the other hand $D_e(\overline v)$ is 
+a highest weight vector of weight $\lambda = (a, a+1, a+2, \cdots)$ and hence 
+there is a map $M(\lambda) \to N$ from the Verma module of highest weight 
+$\lambda$ to $N$. 
+
+\begin{Lemma*}
+The map $p: M(\lambda) \to N$ is an isomorphism.
+\end{Lemma*}
+\begin{proof}
+Let us see $M(\lambda)$ as an $\sl(n,\CC)$ module. Then with respect to the
+usual Cartan algebra its weight is $(-1, -1, \ldots, -1)$ which is the half sum
+of the roots. Thus $M(\lambda)$ is simple as $\sl(n,\CC)$ module and hence
+as $\gl(n,\CC)$ module. Since both $M(\lambda)$ and $N$ are simple and $p$ is
+nonzero, it must be an isomorphism.
+\end{proof}
+
+\paragraph
+Let $\nn_-$ be the Lie algebra formed by the strictly lower triangular matrices
+in $\gl(n,\CC)$. The previous lemma implies that the map $U(\nn_-) \to N$ 
+given by $u \mapsto u D_e(\vv)$ is an isomorphism. Using the PBW theorem we 
+obtain a weight basis of $N$. We will now show that $N$ does not have a basis 
+formed by derived tableaux. Given $i > j$ we denote by $\delta[i,j] = 
+\delta^{i-1,i-1} + \delta^{i-2, i-2} + \cdots \delta^{j,j}$.
+
+\begin{Lemma}
+\begin{enumerate}
+\item For each $i > j $ we have $E_{i,j} D_e(\vv) \subset V[v - 
+\delta[i,j]]$.
+
+\item There is no other tableau in $N$ of the same weight as $v - 
+\delta[i,j]$.
+\end{enumerate}
+\end{Lemma}
+\begin{proof}
+\textcolor{blue}{DO!}
+\end{proof}
+It follows from the lemma that the set \[\{E_{4,3} E_{3,2} E_{2,1} D_e(\vv),
+E_{4,3} E_{2,1} E_{3,2} D_e(\vv), E_{3,2} E_{4,3} E_{2,1} D_e(\vv), E_{2,1} 
+E_{3,2} E_{4,3} D_e(\vv)\}\] is a basis of $V[\vv-\delta^{1,1}-\delta^{2,2} 
+- \delta^{3,3}]$, which thus has dimension $4$.
+
+On the other hand $E_{2,1} D_e(\vv) = D_e(\vv - \delta^{1,1})$, and 
+\begin{align*}
+E_{3,2} D_e(\vv - \delta^{1,1})
+	&= - D_e(\vv - \delta[3,1]) + D_{(12)^2}(\vv - \delta[3,1]).
+\end{align*}
+Since $N[\vv - \delta[3,1]] \neq 0$ it must contain the element $D_e(\vv- 
+\delta[3,1])$. On the other hand it is easy to check that this space has 
+dimension $2$, and hence $N[\vv - \delta[3,1]] = \langle D_e(\vv-\delta[3,1]), 
+D_{(12)^2}(\vv - \delta[3,1])\rangle$. Next we compute
+\begin{align*}
+E_{4,3} D_e(\vv - \delta[3,1])
+	&= D_{(23)^3}(\vv - \delta[4,1]) - D_e(\vv - \delta[4,1]) \\
+E_{4,3} D_{(12)^2}(\vv - \delta[3,1])
+	&= - 2 D_{(12)^2}(\vv - \delta[4,1]) - D_{(123)^3}(\vv - \delta[4,1]) \\
+		& \qquad + 	D_{(23)^3(12)^2}(\vv - \delta[4,1]).
+\end{align*}
+Now this expressions involve five different derived tableaux of $T(\vv - 
+\delta[4,1])$. Since the corresponding space has dimension $4$ it follows that
+it cannot have a basis of derived tableaux. Further computations show that
+\begin{align*}
+V[\vv - \delta[4,1]]
+	&= \langle D_e(\vv - \delta[4,1]), D_{(12)^2}(\vv - \delta[4,1]),
+	D_{(23)^3}(\vv - \delta[4,1]),  \\
+	& \qquad D_{(123)^3}(\vv - \delta[4,1]) - 
+	D_{(12)^2(23)^3}(\vv - \delta[4,1])
+	\rangle.
+\end{align*}
+
+
+\begin{bibdiv}
+\begin{biblist}
+\bibselect{biblio}
+\end{biblist}
+\end{bibdiv}
+
+\end{document}

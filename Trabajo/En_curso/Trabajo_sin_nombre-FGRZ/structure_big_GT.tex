@@ -1,0 +1,279 @@
+%%%%%%%%%%%%%%%%%%%%%% Generalities %%%%%%%%%%%%%%%%%%5
+\documentclass[11pt,fleqn]{amsart}
+\usepackage[paper=a4paper]
+ {geometry}
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[small]{titlesec}
+\usepackage{hyperref}
+\usepackage{amsthm,thmtools}
+%\usepackage{showlabels}
+\linespread{1.05}
+%\setlength{\parskip}{1.2ex}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{enumerate}
+\usepackage[osf,noBBpl]{mathpazo}
+\usepackage[alphabetic,initials]{amsrefs}
+\usepackage{amsfonts,amssymb,amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage[poly,arrow,curve,matrix]{xy}
+%\usepackage{wrapfig}
+%\usepackage{xcolor}
+\usepackage{helvet}
+\usepackage{stmaryrd}
+%\usepackage{tikz}
+%\usepackage{mathdots}
+%\usepackage[normalem]{ulem}
+
+\renewcommand\thesection{\arabic{section}}
+\titleformat{\section}
+ {\normalfont\bfseries\large}
+ {\thesection. \space}{0em}{}
+
+\renewcommand\thesubsection{\arabic{subsection}}
+\titleformat{\subsection}
+ {\normalfont\bfseries}
+ {\thesection.\thesubsection \space}{0em}{}
+
+\renewcommand\proofname{Proof}
+
+\makeatletter
+\renewenvironment{proof}[1][\textit{\proofname}]{\par
+ \pushQED{\qed}%
+ \normalfont \topsep.75\paraskip\relax
+ \trivlist
+ \item[\hskip\labelsep
+ \itshape
+ #1\@addpunct{.}]\ignorespaces
+}{%
+ \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Theorems et al%%%%%%%%%%%%%%%%%%%%%%%%%%
+\declaretheoremstyle[
+%headformat=swapnumber, 
+bodyfont=\itshape,]{mystyle}
+\declaretheorem[name=Lemma, style=mystyle, numberwithin=section]{Lemma}
+\declaretheorem[name=Proposition, style=mystyle, sibling=Lemma]{Proposition}
+\declaretheorem[name=Theorem, style=mystyle, sibling=Lemma]{Theorem}
+\declaretheorem[name=Corollary, style=mystyle, sibling=Lemma]{Corollary}
+\declaretheorem[name=Definition, style=mystyle, sibling=Lemma]{Definition}
+\declaretheorem[name=Example, style=mystyle, sibling=Lemma]{Example}
+\declaretheorem[name=Remark, style=mystyle, sibling=Lemma]{Remark}
+
+% unnumbered versions
+\declaretheoremstyle[numbered=no, 
+bodyfont=\itshape]{mystyle-empty}
+\declaretheorem[name=Lemma, style=mystyle-empty]{Lemma*}
+\declaretheorem[name=Proposition, style=mystyle-empty]{Proposition*}
+\declaretheorem[name=Theorem, style=mystyle-empty]{Theorem*}
+\declaretheorem[name=Corollary, style=mystyle-empty]{Corollary*}
+\declaretheorem[name=Definition, style=mystyle-empty]{Definition*}
+\declaretheorem[name=Example, style=mystyle-empty]{Example*}
+\declaretheorem[name=Remark, style=mystyle-empty]{Remark*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Paragraphs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newskip\paraskip
+\paraskip=0.75ex plus .2ex minus .2ex
+
+\newcounter{para}[section]
+\setcounter{para}{0}
+\renewcommand\thepara{\thesection.\arabic{para}}
+\def\paragraph{%
+ \noindent
+ \refstepcounter{para}%
+ \textbf{\thepara.}\hspace{1ex}%
+}
+
+\newcommand\about[1]{%
+ {\bfseries#1.}%
+}
+
+\newcommand\pref[1]{\textbf{\ref{#1}}}
+
+\renewcommand\theHpara{\theHsection.\arabic{para}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%% The usual stuff%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\NN{\mathbb N}
+\newcommand\CC{\mathbb C}
+\newcommand\QQ{\mathbb Q}
+\newcommand\RR{\mathbb R}
+\newcommand\ZZ{\mathbb Z}
+\newcommand\PiI{\mathbb I}
+\renewcommand\k{\Bbbk}
+
+\newcommand\maps{\longmapsto}
+\newcommand\ot{\otimes}
+\renewcommand\to{\longrightarrow}
+\renewcommand\phi{\varphi}
+\newcommand\Pid{\mathsf{Id}}
+\newcommand\im{\mathsf{im}}
+\newcommand\coker{\mathsf{coker}}
+%%%%%%%%%%%%%%%%%%%%%%%%% Specific notation %%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand\Pi{\mathcal I}
+%\newcommand\Pi'{\mathcal J}
+\newcommand\D[3]{{}^{#1} \mathfrak D_{#2}^{#3}}
+\newcommand\DD[3]{{}^{#1} \mathcal D_{#2}^{#3}}
+\newcommand\Z{\mathsf Z}
+
+\newcommand\g{\mathfrak g}
+\newcommand\p{\mathfrak p}
+\newcommand\m{\mathfrak m}
+\newcommand\gl{\mathfrak{gl}}
+\newcommand\gen{\mathsf{gen}}
+\newcommand\std{\mathsf{std}}
+\newcommand\sh{\mathsf{sh}}
+\renewcommand\SS{\mathfrak S}
+\newcommand\vv{\overline{v}}
+
+\newcommand\vectspan[1]{\left\langle #1 \right\rangle}
+\newcommand\interval[1]{\llbracket #1 \rrbracket}
+
+\DeclareMathOperator\Frac{Frac}
+\DeclareMathOperator\Specm{Specm}
+\DeclareMathOperator\End{End}
+\DeclareMathOperator\Hom{Hom}
+
+\DeclareMathOperator\sym{sym}
+\DeclareMathOperator\asym{asym}
+\DeclareMathOperator\sg{sg}
+\DeclareMathOperator\ev{\mathsf{ev}}
+\DeclareMathOperator\ann{ann}
+\DeclareMathOperator\supp{supp}
+
+
+\newcommand\bigmodule{big GT module~}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{On the structure of the Big GT-module associated to a character}
+%\author{[structure.tex]}
+\date{}
+
+
+\begin{document}
+\maketitle
+%\vspace{-2cm}
+The \bigmodule is the one built in \cite{RZ18}.
+
+\section{Notation}
+Fix $n \in \NN$ and let $\mu = (n, n-1, \ldots, 1)$. 
+Given $a,b,k \in \NN$ we set 
+$\interval{a,b} = \{i \in \NN \mid a \leq i \leq b\}$ and $\interval{b} = 
+\interval{1,b}$; also set $\interval{a,b}_k = \{(k,i) \mid i \in 
+\interval{a,b}\}$. If $I = \interval{a,b}$ we define $a(I) = a$ and $b(I)=b$, 
+so $|I| = b(I) - a(I) + 1$. Finaly we set $\Sigma = \{\interval{k}_k \mid
+1 \leq k \leq n\} = \{(k,i) \mid 1 \leq i \leq k \leq n\}$.
+
+\paragraph
+\about{Partitions and compositions}
+\label{partitions-compositions}
+An interval of $\Sigma$ is a set $\interval{a,b}_k \subset \Sigma$, so
+$1 \leq a \leq b \leq k$. An composition of $\Sigma$ is a disjoint 
+family $\Pi$ of intervals of $\Sigma$ whose union is $\Sigma$. Given a 
+composition $\Pi$ of $\Sigma$ and $k \in \interval n$, we denote by $\Pi_k$ the
+set of all intervals $\interval{a,b}_k \in \Pi$. Given two 
+interval partitions $\Pi, \Pi'$ of $\Sigma$, we say that $\Pi'$ refines $\Pi$ 
+and write $\Pi' < \Pi$ if for each $J \in \Pi'$ there exists $I \in \Pi$ such 
+that $J \subset I$. 
+
+A composition of $\mu$ is an $n$-tuple $\pi = (\pi^{(1)}, \ldots, 
+\pi^{(n)})$ where $\pi^{(k)}$ is a composition of $k$; since $\mu$ is fixed
+we can identify $\pi$ with the concatenation of its parts. To each
+composition $\Pi$ of $\Sigma$ we assign a composition $\pi(\Pi)$ of $\mu$, 
+setting $\pi^{(k)}_j$ to be the cardinality of the $j$-th interval in $\Pi_k$. 
+This assignation is bijective, and for each composition $\pi$ of $\mu$ we 
+denote by $\Pi(\pi)$ the unique composition of $\Sigma$ corresponding to 
+$\pi$. We say that a composition $\epsilon$ refines $\pi$, and write 
+$\epsilon < \pi$, whenever $\Pi(\epsilon) < \Pi(\pi)$. Compositions of $\mu$ 
+form a finite poset with maximum $\mu$, so whenever we write $\pi < \mu$ we 
+will mean that $\pi$ is a composition of $\mu$.
+
+For each finite set $X$ we denote by $S(X)$ the set of all bijections from
+$X$ to $X$. Set $S_\mu = S(\interval{1}_1) \times S(\interval{2}_2) \times
+\cdots \times S(\interval{n}_n)$, which is a subset of $S(\Sigma)$. 
+Every element $\sigma \in S_\mu$ can be written as $\sigma_{(1)} \sigma_{(2)}
+\cdots \sigma_{(n)}$ with $\sigma_{(k)} \in S(\interval{k}_k)$. Obviously
+$S(\interval{k}_k)$ is isomorphic to the symmetric group in $k$ elements,
+and given a permutation $\sigma \in S_k$ we will denote the corresponding
+element of $S(\interval{k}_k)$ by $\sigma_{(k)}$. If $I 
+\subset \Sigma$ is an interval then we see $S(I) \subset S_\mu$ in the obvious 
+way. For each composition $\Pi$ of $\Sigma$ we define $S_\Pi = \prod_{I \in \Pi} 
+S(I) \subset S_\mu$, and for each $\pi < \mu$ we set $S_\pi = S_{\Pi(\pi)}$.
+Since it is a product of symmetric groups, $S_\mu$ is a Coxeter group
+with generating set $\{(i,i+1)_{(k)} \mid 1 \leq i \leq k-1, 1 \leq k \leq 
+n\}$, and each $S_\pi$ is a parabolic subgroup of $S_\mu$. We define the 
+length of an element always with respect to this generating set.
+
+\paragraph
+\about{$\mu$-points}
+\label{mu-points}
+Set $\CC^\mu = \CC^{n} \times \CC^{n-1} \times \cdots \times \CC^{1}$. A point 
+in $\CC^\mu$ is thus an $n$-tuple $(v_n, \ldots, v_1)$ with each $v_k$ a 
+vector with $k$ entries. We will refer to the $v_k$'s as the \emph{rows} of 
+$v$ and denote by $v_{k,i}$ the $i$-th entry of $v_k$. Also given an interval
+$\interval{a,b}_k \subset \Sigma$ we write $v(\interval{a,b}_k) = (v_{k,a},
+\ldots, v_{k,b})$. Given $\pi < \mu$ and $\Pi = \Pi(\pi)$ the $\pi$-blocks
+of $v$ are the elements of the set $\{v(I) \mid I \in \Pi\}$.
+
+The group $S_\mu$ acts on $\CC^\mu$ by permuting the entries, i.e. 
+$\sigma(v)_{k,i} = v_{\sigma(k,i)} = v_{k,\sigma_{(k)}(i)}$. We set 
+$\Lambda = \CC[x_{k,i} \mid (k,i) \in \Sigma]$, the ring of polynomial 
+functions on $\CC^\mu$, and by $K = \Frac(\Lambda)$ its fraction field. The 
+action of $S_\mu$ on $\CC^\mu$ induces an action on $\Lambda$ which is given 
+by $\sigma(x_{k,i}) = x_{\sigma(k,i)} = x_{k,\sigma_{(k)}(i)}$, and extends to 
+the fraction field. If $\pi < \mu$ then $S_\pi$ acts on $\CC^\mu$ by 
+restriction, which induces $S_\pi$ actions on $\Lambda$ and $K$. Notice that
+the action of $S_\pi$ only permutes elements in the same $\pi$-block.
+
+We denote by $\ZZ^\mu_0 \subset \CC^\mu$ the set of points with integral 
+entries and $z_{n,i} = 0$ for all $i \in \interval{n}$. Fix $\pi < \mu$ and 
+let $\Pi = \Pi(\pi)$ be the corresponding composition of $\Sigma$. We say that 
+$z \in \ZZ^\mu_0$ is \emph{$\pi$-standard}, or just standard if $\pi$ is 
+clear from the context, if for each $\interval{a,b}_k \in \Pi(\pi)$ we have 
+$z_{k,a} \geq z_{k,a+1} \geq \cdots \geq z_{k,b}$; in other words, each 
+$\pi$-block of $z$ is a weakly decreasing sequence. For each $z \in \ZZ^\mu_0$
+there is exactly one element in the orbit $S_\pi z$ which is $\pi$-standard, 
+and we denote it by $\std_\pi(z)$. Thus the set $\std(\pi) = \{\std_\pi(z) 
+\mid \ZZ^\mu_0\}$ is a complete set of representatives of the equivalence 
+classes in $\ZZ^\mu_0 /S_\pi$. 
+
+If $z \in \std(\pi)$ then there existes a refinement $\epsilon(z) < \pi$ 
+such that $S_{\epsilon(z)}$ is the stabilizer of $z$ in $S_\pi$. The 
+corresponding partition is denoted by $E(z)$. 
+
+
+\section{The modules}
+Let $v \in \CC^\mu$. We will say that $(k,i), (l,j) \in \Sigma$ are $v$-related
+if $v_{k,i} - v_{l,j} \in \ZZ$ and $|k-l| \leq 1$. If we restrict to a single 
+row $k \in \interval n$ then $v$-relation is an equivalence relation; we 
+set $\Pi(v)_k$ to be the partition of $\interval{k}_k$ given by this 
+equivalence relation, and $\Pi(v) = \bigsqcup_k \Pi(v)_k$. Notice that $\Pi(v)$
+is a partition of $\Sigma$, but not necessarily a composition since its 
+elements need not be intervals. Indeed, $\Pi(v)$ is a composition if and only 
+if whenever $v_{k,i} - v_{k,j} \in \ZZ$ then $v_{k,i'} - v_{k,j'} \in \ZZ$
+for all $i',j' \in \interval{i,j}$.
+
+\begin{Definition}
+A \emph{seed} is a point $\vv \in \CC^\mu$ such that $\Pi(\vv)$ is an interval 
+partition, and whenever $(k,i), (l,j)$ are $\vv$-related then $\vv_{k,i} = 
+\vv_{l,j}$.
+\end{Definition}
+Notice that given $v \in \CC^\mu$ there is always a seed $\vv \in (S_\mu \# 
+\ZZ^\mu_0) \cdot v$ (not unique), so $V(T(v)) \cong V(T(\vv))$. Hence we can
+always assume that our big module is the big module associated to a seed. 
+For the rest of this section we will fix a seed $\vv$, and write $\Pi$ for 
+$\Pi(v)$ and $\pi$ for the partition of $\mu$ associated to $\Pi$.
+
+
+
+\begin{bibdiv}
+\begin{biblist}
+\bibselect{references}
+\end{biblist}
+\end{bibdiv}
+
+\end{document}
