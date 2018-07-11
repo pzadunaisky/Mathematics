@@ -2067,8 +2067,9 @@ morphism $\iota: S(\L) \to \NN^{r}$ whose image is a full normal subsemigroup,
 so $S(\L)$ is a normal affine semigroup. We put the product order on $\NN^r$,
 where $(a_1, \ldots, a_r) \leq (b_1, \ldots, b_r)$ if and only if $a_i \leq 
 b_i$ for all $i = 1, \ldots, r$. With this partial order $\NN^r$ becomes a 
-distributive lattice, and the restriction $\iota: \L \to \NN^r$ is a lattice
-morphism.
+distributive lattice, where $(a \meet b)_i = \min\{a_i, b_i\}$ and $(a \join 
+b)_i = \max\{a_i, b_i\}$ for all $i \in \{1, 2, \ldots, r\}$. The restriction 
+$\iota: \L \to \NN^r$ is thus a lattice morphism.
 
 Set $n = |\L|$, write $\L = \{x_1, \ldots, x_n\}$, and set $s_i = \iota(x_i)$ 
 for each $1 \leq i \leq n$. By definition the set of all $s_i$ generates 
@@ -2092,6 +2093,18 @@ For every pair of elements $x,y \in \L$ we define
   R(x,y) &= \{(z,z') \in \L \times \L \mid z < x, y  <z'\}.  
 \end{align*} 
 We write $R(x,y)^*$ for $R(x,y) \setminus (x \meet y, x \join y)$.
+
+\begin{Lemma}
+Let $a,b,c,d \in {0,1}^r$ and suppose $a + d = b + c$. Then $b+c >_{\lex} 
+a+d$.
+\end{Lemma}
+\begin{proof}
+The condition $a < b \meet c$ implies that there exists $j \in \{1, 2, \ldots
+r\}$ such that $a_i = \min\{b_i, c_i\}$ for all $i < j$, while $a_j = 0$ and
+$b_j = c_j = 1$. In particular for $i < j$ we have $a_i = 1$ if and only if
+$b_i = c_i = 1$. Now assume $d = (1, 1, \ldots, 1)$, then $a_i + d_i = b_i+
+c_i$ since 
+\end{proof}
 
 \paragraph
 We continue to denote by $A$ an $\NN^r$-graded noetherian algebra.

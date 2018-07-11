@@ -26,7 +26,7 @@
 %\usepackage{xcolor}
 \usepackage{helvet}
 \usepackage{stmaryrd}
-%\usepackage{tikz}
+\usepackage{tikz}
 %\usepackage{mathdots}
 %\usepackage[normalem]{ulem}
 
@@ -290,22 +290,90 @@ corresponding partition is denoted by $E(z)$.
 \section{The modules}
 From now on we fix $\mu = (1,2,\ldots, n)$ and $\Sigma = \Sigma(\mu)$.
 
-Let $v \in \CC^\mu$. We will say that $(k,i), (l,j) \in \Sigma$ with $k,l \neq 
-n$ are $v$-related $v_{k,i} - v_{l,j} \in \ZZ$ and $|k-l| \leq 1$. 
+Let $v \in \CC^\mu$. We build a graph with vertex set $\Sigma$, with 
+an edge between $(k,i)$ and $(l,j)$ if and only if $k,l < n$, $v_{k,i} - 
+v_{l,j} \in \ZZ$, and $|k-l| \leq 1$. We will say that $(k,i)$ and $(l,j)$
+are $v$-related if and only if they lie in the same connected component of
+$v$.
+
+\begin{Example}
+In each case we have drawn an edge between related entries in the 
+corresponding tableau, assuming $\{1, a, b, c\}$ are $\ZZ$-linearly 
+independent.
+
+\begin{tikzpicture}
+\node (empty) at (0,2.5) {\phantom{h}};
+
+\node (41) at (-1.5,2.25) {$3$};
+\node (42) at (-0.5,2.25) {$2$};
+\node (43) at (0.5,2.25) {$0$};
+\node (44) at (1.5,2.25) {$0$};
+
+\node (31) at (-1,1.5) {$1$};
+\node (32) at (0,1.5) {$a$};
+\node (33) at (1,1.5) {$a+1$};
+
+\node (21) at (-.5,0.75) {$2$};
+\node (22) at (.5,0.75) {$0$};
+
+\node (11) at (0,0) {$a$};
+
+\draw (33) -- (32) (31) -- (21) -- (22) -- (31);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\node (41) at (-1.5,2.25) {$0$};
+\node (42) at (-0.5,2.25) {$0$};
+\node (43) at (0.5,2.25) {$0$};
+\node (44) at (1.5,2.25) {$0$};
+
+\node (31) at (-1,1.5) {$a$};
+\node (32) at (0,1.5) {$a$};
+\node (33) at (1,1.5) {$1+a$};
+
+\node (21) at (-.5,0.75) {$2$};
+\node (22) at (.5,0.75) {$0$};
+
+\node (11) at (0,0) {$1$};
+
+\draw (31) -- (32) -- (33) (21) -- (22) -- (11) -- (21);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\node (41) at (-1.5,2.25) {$0$};
+\node (42) at (-0.5,2.25) {$a$};
+\node (43) at (0.5,2.25) {$b$};
+\node (44) at (1.5,2.25) {$c$};
+
+\node (31) at (-1,1.5) {$0$};
+\node (32) at (0,1.5) {$a$};
+\node (33) at (1,1.5) {$b$};
+
+\node (21) at (-.5,0.75) {$0$};
+\node (22) at (.5,0.75) {$b$};
+
+\node (11) at (0,0) {$c$};
+
+\draw (31) -- (21) (33) -- (22);
+\end{tikzpicture}
+\end{Example}
+
 \begin{Definition}
 A \emph{seed} is a point $\vv \in \CC^\mu$ in normal form such that 
 $\vv_{k,i} = \vv_{l,j}$ whenever $(k,i)$ and $(l,j)$ are $\vv$-related.
 \end{Definition}
-Notice that given $v \in \CC^\mu$ there is always a seed $\vv \in (S_\mu \# 
-\ZZ^\mu_0) \cdot v$ (not unique), so $V(T(v)) \cong V(T(\vv))$. Hence we can
-always assume that our big module is the big module associated to a seed. 
+Notice that given $v \in \CC^\mu$ there are infinitely many seeds in
+$(S_\mu \# \ZZ^\mu_0) \cdot v$. In particular there is always a seed $\vv$ 
+such that $V(T(v)) \cong V(T(\vv))$, and we may always assume that our big 
+module is the big module associated to a seed. 
+
 For the rest of this section we will fix a seed $\vv$, and write $\Pi$ for 
 $\Pi(v)$ and $\pi$ for the partition of $\mu$ associated to $\Pi$. We also 
 write $\Desc{\pi}$ for all $z \in \ZZ^\mu_0$ such that $z_{k,i} > z_{k,j}$
 whenever $i<j$ and $(k,i), (k,j)$ are $\vv$-related. In other words, $z \in
-\Desc{\pi}$ if and only if $z(I)$ is a 
-decreasing sequence for all $I \in \Pi$. With
-this notation the derived tableaux basis for the module $V(T(\vv))$ is
+\Desc{\pi}$ if and only if $z(I)$ is a decreasing sequence for all $I \in
+\Pi$. With this notation the derived tableaux basis for the module 
+$V(T(\vv))$ is
 \begin{align*}
 \{D_\sigma(\vv + z) \mid z \in \Desc{\pi}, \sigma \in S_\pi^z\}.
 \end{align*}
@@ -366,13 +434,8 @@ following hold for each $s \in \interval r$.
 \begin{enumerate}
 \item 
 \label{i:delta}
-There exists $(k_s, i_s) \in \Sigma$ such that $z^{(i+1)} = z^{(i)} - 
+There exists $(k_s, i_s) \in \Sigma$ such that $z^{(s+1)} = z^{(s)} - 
 \delta^{(k_s, i_s)}$.
-
-\item 
-\label{i:omega}
-$\Omega^+(z) \cap \Omega^+(z') \subset \Omega^+(z^{(s)}) \subset \Omega^+(z) 
-\cup \Omega^+(z')$.
 
 \item 
 \label{i:interval}
@@ -382,13 +445,37 @@ of the form $\interval{i_s,j_s}$.
 \item 
 \label{i:longest}
 Let $\alpha_s$ be the cycle $(i_s i_s+1 \cdots j_s)_{(k_s)} \in S_\pi$, and
-let $\omega^{(s)}$ be the unique $w^{(s)}$-shuffle in the coclass of the
-longest word of $S_\pi$. Then $\omega^{(s+1)} = \omega^{(s)} \alpha(I_s)$.
+let $\omega^{(s)}$ be the unique $z^{(s)}$-shuffle in the coclass of the
+longest word of $S_\pi$. Then $\omega^{(s)} = \omega^{(s-1)} \alpha(I_s)$.
+
+\item 
+\label{i:omega}
+$\Omega^+(z) \cap \Omega^+(z') \subset \Omega^+(z^{(s)}) \subset \Omega^+(z) 
+\cup \Omega^+(z')$.
 \end{enumerate}
 \end{Lemma*}
 \begin{proof}
 Set $\Sigma' = \{(k,i) \in \Sigma \mid z_{k,i} > z'_{k,i}\}$. If $\Sigma' =
-\emptyset$ then $z = z'$ and the lemma is obvious. 
+\emptyset$ then $z = z'$ and the lemma is obvious. If $\Sigma'$ is not empty
+we build a direct graph with vertex set $\Sigma'$. The directed vertices of
+our graph are given by the following rules:
+\begin{itemize}
+\item we add an arrow $(k,i) \to (k,i+1)$ if the two entries are related;
+
+\item we add an arrow $(k,i) \to (k-1,j)$ if $(k,i,j) \in \Omega^+(z)$;
+
+\item we add an arrow $(k-1,j) \to (k,i)$ if $(k,i,j) \in \Omega \setminus 
+\Omega^+(z)$.
+\end{itemize}
+The definition implies that this graph has no loops, and hence the set of 
+vertices with no incoming arrows is nonempty. Among all such vertices we choose
+$(k_1, i_1)$ such that $k_1$ is minimal and $i_1$ is maximal for that fixed 
+$k_1$, and set $z^{(1)} = z - \delta^{(k_1, i_1)}$. We will prove that
+$z^{(1)}$ satisfies all the items of the statement.
+
+Items \ref{i:delta} and \ref{i:interval} follow immediately from the
+definition. Set $\Pi^{(1)} = \Pi(z^{(1)})$ and denote by $S_\pi^{(1)}$ the
+set of all $z^{(1)}$-shuffles. 
 \end{proof}
 
 \begin{bibdiv}
