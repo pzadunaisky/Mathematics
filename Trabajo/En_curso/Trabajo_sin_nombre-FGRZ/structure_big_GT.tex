@@ -142,7 +142,7 @@ bodyfont=\itshape]{mystyle-empty}
 \DeclareMathOperator\asym{asym}
 \DeclareMathOperator\sg{sg}
 \DeclareMathOperator\ev{\mathsf{ev}}
-\DeclareMathOperator\ann{ann}
+\DeclareMathOperator\abs[1]{| #1 |}
 \DeclareMathOperator\supp{supp}
 
 \newcommand\Desc[1]{\mathbb D(#1)}
@@ -160,15 +160,84 @@ bodyfont=\itshape]{mystyle-empty}
 %\vspace{-2cm}
 The \bigmodule is the one built in \cite{RZ18}.
 
-\section{Notation}
-Fix $n \in \NN$ and let $\mu = (n, n-1, \ldots, 1)$. 
-Given $a,b,k \in \NN$ we set 
-$\interval{a,b} = \{i \in \NN \mid a \leq i \leq b\}$ and $\interval{b} = 
-\interval{1,b}$; also set $\interval{a,b}_k = \{(k,i) \mid i \in 
-\interval{a,b}\}$. If $I = \interval{a,b}$ we define $a(I) = a$ and $b(I)=b$, 
-so $|I| = b(I) - a(I) + 1$. Given $\mu = (\mu_1, \ldots, \mu_n) \in \NN^n$
-we write $\Sigma(\mu) = \{\interval{\mu_k}_k \mid 1 \leq k \leq n\} = \{(k,i) 
-\mid k \in \interval{n}, i \in \interval{\mu_k}\}$.
+\section{Combinatorial preliminaries}
+
+\paragraph
+\about{Notation}
+\label{notation}
+Given $a,b,k \in \NN$ we set $\interval{a,b} = \{i \in \NN \mid a \leq i \leq 
+b\}$ and $\interval{b} = \interval{1,b}$. Also we denote by $S_k$ the 
+symmetric group in $k$-elements, and given $\pi = (\pi_1, \ldots, \pi_r)$
+with $\sum_i \pi_i = k$ we denote by $S_\pi$ the product of symmetric groups
+$S_{\pi_1} \times S_{\pi_2} \times \cdots \times S_{\pi_r}$, seen in the 
+natural way as subgroup of $S_k$.
+
+Fix $n \in \NN$ and let $\mu = (1, 2, \ldots, n)$. Given $\sigma \in S_\mu$ we 
+write $\sigma_{(k)}$ for its projection to $S_k$. Alternatively, given $\sigma 
+\in S_k$ we write $\sigma_{(k)}$ for the unique element in $S_\mu$ whose 
+projection to $S_k$ is $\sigma$ and whose projection to all other $S_i$ is the
+identity. Thus we can write $\sigma = \sigma_{(1)} \sigma_{(2)} \cdots 
+\sigma_{(n)}$.
+
+The group $S_\mu$ is a Coxeter group with generating set $\{(i,i+1)_{(k)}
+\mid k \in \interval{n}, i \in \interval{k-1}\}$. The usual notions of length,
+Bruhat order, parabolic subgroups, etc. will be considered with respect to 
+this generating set. In particular the length of $\sigma \in 
+S_\mu$ is equal to $\ell_1(\sigma_{(1)}) + \ell_2(\sigma_{(2)}) + \cdots + 
+\ell_n(\sigma_{(n)})$, where $\ell_k$ is the usual notion of length in $S_k$.
+Also $\sigma < \tau$ in the strong or weak Bruhat order if and only if 
+$\sigma_{(k)} < \tau_{(k)}$ for all $k$.
+
+Set $\Sigma = \{(k,i) \mid 1 \leq i \leq k \leq n\}$. Setting $\sigma \cdot 
+(k,i) = (k, \sigma_{(k)}(i))$ we obtain an action of $S_\mu$ over $\Sigma$.
+The subset $\Sigma' = \{(k,i) \mid 1 \leq i \leq k \leq n-1\}$ is clearly 
+invariant by this action.
+
+Let $\CC^\mu = \CC \times \CC^2 \times \cdots \times \CC^n$, so $v \in \CC^\mu$
+is an $n$-tuple $(v_1, v_2, \ldots, v_n)$ with $v_k = (v_{k,1}, v_{k,2},
+\ldots, v_{k,k}) \in \CC^k$. For each $(k,i) \in \Sigma$ we denote by $e^{k,i}
+\in \CC^\mu$ the unique element in $\CC^\mu$ such that $e^{k,i}_{l,j} = 
+\delta_{k,l} \delta_{i,j}$, and refer to the set $\{e^{k,i}\mid (k,i) \in 
+\Sigma\}$ as the canonical basis of $\CC^\mu$. The group $S_\mu$ acts on 
+$\CC^\mu$ by linear operators whose action on the canonical basis is given by
+$\sigma \cdot e^{k,i} = e^{\sigma \cdot (k,i)} = e^{k \sigma_{(k)}(i)}$.
+
+\paragraph
+\about{Partitions of $\Sigma$}
+Given $v \in \CC^\mu$ we construct a graph $G(v)$ as follows. The set of 
+vertices of $G(v)$ is $\Sigma$, and we have an edge between $(k,i)$ and $(l,j)$
+if and only if $v_{k,i} - v_{l,j} \in \ZZ$ and $\abs{k-l} \leq 1$. We will 
+write $(k,i) - (l,j)$ as an abbreviation for ``there is an edge between $(k,i)$
+and $(l,j)$ in $G(v)$''. We define $G'(v)$ to be the induced subgraph of 
+$\Sigma$ with vertex set $\Sigma'$.
+\begin{Definition}
+We will say that $v \in \CC^\mu$ is in \emph{normal form} if $(k,a) - (k,b)$
+and $a < b$ implies that $v_{k,i} - v_{k,j} \in \NN_0$ for all $i,j \in 
+\interval{a,b}$ with $i < j$. 
+\end{Definition}
+Clearly for each $v \in \CC^\mu$ there exists at least one element in its 
+$S_\mu$-orbit which is in normal form. 
+
+Given $1 \leq a \leq b \leq k$ we denote by $\interval{a,b}_k$ the set
+$\{(k,i) \mid i \in \interval{a,b}\} \subset \Sigma$, and we call such a set
+an \emph{interval} of $\Sigma$. Given an interval $I = \interval{a,b}_k$ we set
+$a(I) = a$ and $b(I) = b$. Given $v$ in normal form we denote by 
+$\Pi(v,k)$ the set of all maximal intervals of the form $\interval{a,b}_k$ 
+such that $(k,a) - (k,a+1) - \cdots - (k,b)$; maximal in this case means that
+there is no interval $\interval{c,d}_k \supset \interval{a,b}_k$ with the same
+property. Thus the intervals in $\Pi(v,k)$ are disjoint, and $\bigcup_k 
+\Pi(v,k) = \Sigma$.
+
+Suppose $\Pi(v,k) = \{I_1, I_2, \ldots, I_r\}$, with $a(I_i) = b(I_{i-1}) + 1$.
+We set $\pi(v)_k = (\abs{I_1},\abs{I_2}, \ldots,\abs{I_r})$, so $S_{\pi(v)_k}$ 
+is a parabolic subgroup of $S_k$, and hence $S_{\pi(v)} = S_{\pi(v)_1} \times 
+S_{\pi(v)_2} \cdot S_{\pi(v)_n} \subset S_\mu$ is also a parabolic subgroup.
+\begin{Definition}
+We say that $v \in \CC^\mu$ is a \emph{seed} if it is in normal form and 
+$(k,i) - (k,j)$ with $k < n$ and $i<j$ implies $v_{k,i} = v_{k,j}$.
+\end{Definition}
+
+
 
 \paragraph
 Let $r \in \NN$ and $v \in \CC^r$. We say that $v$ is in \emph{normal form} if 
