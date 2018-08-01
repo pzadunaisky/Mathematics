@@ -1,0 +1,466 @@
+\documentclass[11pt,a4paper,pdftex]{amsart}
+\usepackage[psamsfonts]{amssymb}
+\usepackage{amsmath,amsfonts,latexsym}
+\usepackage[dvips]{graphicx}
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{epsfig}
+\usepackage{amscd}
+\usepackage{verbatim}
+\usepackage{multicol}
+
+\newtheorem{teo}{Teorema}[section]%establece un contador para
+%el entorno 'teo' que aparecer� con el nombre 'Teorema' y que
+%volver� a empezar cuando cambien de 'chapter'.
+
+\newtheorem{coro}[teo]{Corolario}%vincula las numeraciones de 'coro'
+%con las de 'teo'.
+
+\newtheorem{lema}{Lema}[section]
+%\newtheorem{lema}[lema]{Lema}
+
+
+\newtheorem{definition}{Definici\'on}[section]
+
+\newtheorem{conc}{Conclusión}[section]
+
+\newtheorem{prop}{Proposición}[section]
+%\newtheorem{prop}[prop]{Propiedad}
+
+\newtheorem{obs}{Observación}[section]
+
+\renewcommand{\thesection}{{}}
+
+%\newtheorem{obs}{Observaci�n} %numera las 'Observaciones' de corrido
+%sin volver a resetear.
+
+\newtheorem{ax}{Axioma}[section]
+
+%\newtheorem{defini}{Definici�n}[section]
+
+\newtheorem{ej}{Ejercicio}%[section] %numera os 'Ejercicios' reseteando
+%en cada 'cap�tulo'.
+
+
+\numberwithin{equation}{section}%numera las formulas reseteando
+%cada vez que cambia de 'capítulo'.
+
+\newcommand{\bej}[1]{\begin{ej}\rm{#1}}
+\newcommand{\eej}{\end{ej}\vspace{-0.2cm}}
+
+%---------------------------------------
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\bq}{\begin{quotation}}
+\newcommand{\eq}{\end{quotation}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mb}[1]{\;\mbox{#1}\;}
+\newcommand{\su}[1]{\underline{#1}}
+\newcommand{\so}[1]{\overline{#1}}
+\newcommand{\ang}[1]{\widehat{#1}}
+\newcommand{\arc}[1]{\wideparen{#1}}
+\newcommand{\Cc}{QQ\;}
+\renewcommand{\bf}{\textbf}
+\newcommand{\Comb}[2]{\left(\!\!\!\ba{c}#1\\[1ex]#2 \ea
+\!\!\!\right)}
+\newcommand{\di}{\displaystyle}
+%-----------------------------------------
+%conjuntos
+\newcommand{\W}{\mathbb W}
+\newcommand{\K}{\mathbb K}
+\newcommand{\N}{\mathbb N}
+\newcommand{\C}{\mathcal C}
+\newcommand{\Su}{\mathcal S}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\F}{\mathbb F}
+\newcommand{\A}{\mathbb A}
+\newcommand{\V}{\mathbb V}
+\newcommand{\I}{\mathbb I}
+\newcommand{\0}{\mathbb O}
+%------------------------------------------
+%operaciones
+\newcommand{\8}{\infty}
+\newcommand{\ie}{\langle}
+\newcommand{\de}{\rangle}
+\newcommand{\pe}[2]{\ie {#1} \, ; \, {#2} \de }
+\newcommand{\f}[1]{\overrightarrow{#1}}
+\newcommand{\DT}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\dg}{\Delta}
+\newcommand{\g}{\nabla}
+\newcommand{\D}{\mbox{div}}
+\newcommand{\Dp}[1]{\partial_{#1}}
+\newcommand{\DP}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\sen}[1]{\mbox{sen}\;{#1}}
+\newcommand{\Lp}[1]{L^{#1}}
+\newcommand{\To}{\longrightarrow}
+%-------------------------------------
+%griegos
+\newcommand{\vi}{\varphi}
+\newcommand{\om}{\omega}
+\newcommand{\Om}{\Omega}
+\newcommand{\ve}{\varepsilon}
+%-------------------------
+%comandos particulares
+\newcommand{\id}[1]{\text{id}_{#1}}
+\newcommand{\mD}{\mc{D}}
+\newcommand{\mC}{\mc{S}}
+\newcommand{\mS}{\mc{SS}}
+\newcommand{\mH}{\mc{H}}
+\newcommand{\HD}{\mc{H}_\mD}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Un comando para insertar dibujos
+\newcommand{\putfig}[4]{\bigskip \bigskip
+             \begin{figure}[ht]
+             \epsfxsize=#1cm\hfil{\epsfbox{#2}}
+             \caption{#3}
+         \label{#4}
+             \end{figure}\bigskip}
+%La sintaxis
+%\putfig{ancho}{.eps}{titulo}{label}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Un comando para insertar dos dibujos
+\newcommand{\putfigg}[4]{\bigskip \bigskip
+             \begin{figure}[ht]
+             \epsfxsize=5cm\hfil{\epsfbox{#1}}
+             \epsfxsize=5cm\hfil{\epsfbox{#2}}
+             \caption{#3}
+         \label{#4}
+             \end{figure}\bigskip}
+%La sintaxis
+%\putfigg{.eps}{.eps}{titulo1}{label1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%un dibujo en jpg
+\newcommand{\putjpg}[3]{\bigskip
+\begin{center}
+ \begin{figure}[ht]
+  \hspace{5cm}\includegraphics[scale=1.7]{#1.jpg}
+  \caption{#2}
+  \label{#3}
+  \bigskip
+  \bigskip
+ \end{figure}
+\end{center}
+}
+%la sintaxis \putjpg{.jpg}{Titulo}{label}
+%----------------------------------------------------
+%diseñoo de la página
+
+\vfuzz7pt % Don't report over-full v-boxes if over-edge is 7pt small
+\hfuzz7pt % Don't report over-full h-boxes if over-edge is 7pt small
+
+\pagestyle{myheadings}
+
+\renewcommand{\labelenumi}{({\it \alph{enumi}})}
+\renewcommand{\labelenumii}{\arabic{enumii})}
+
+\flushbottom \topmargin-0.5cm \textwidth17cm \textheight24.5cm \hoffset=-2cm
+\voffset=-0.5cm
+
+
+\begin{document}
+
+
+
+%----------------------------------------------------------
+%Encabezado:
+
+\centerline{{\small Universidad de Buenos Aires - Facultad de Ciencias Exactas y Naturales - Depto. de Matemática}}
+
+ \vskip 0.2cm
+ \hrulefill
+ \vskip 0.2cm
+
+ \centerline{{\bf{\Large{\sc Análisis II - Análisis Matemático II - Matemática 3}}}}
+ \vskip 0.2cm
+ \centerline{\ttfamily Primer Cuatrimestre 2018}
+ \hrulefill
+
+ \medskip
+ \centerline{\bf {Práctica 6: Ecuaciones de segundo orden y sistemas de de primer orden.}}
+ \medskip
+
+\setcounter{equation}{0}
+
+
+
+\bej  Encontrar un sistema fundamental de soluciones reales de las siguientes
+ecuaciones:
+\[
+\begin{array}{ll}
+\mbox{i)}&y''-8y'+16y=0\\
+\mbox{ii)}&y''-2y'+10y=0\\
+\mbox{iii)}&y''-y'-2y=0
+\end{array}
+\]
+
+ En cada uno de los casos anteriores encontrar una soluci\'on exacta
+de la ecuaci\'on no homog\'enea correspondiente con t\'ermino
+independiente $x, e^x,1 \mbox{ y } e^{-x}$.
+
+\eej
+
+\bej Sean $(a_{1},b_{1})$ y $(a_{2},b_{2})$ dos puntos del plano tales que
+$\frac{a_{1}-a_{2}}{\pi}$ no es un n\'umero entero.
+\begin{enumerate}
+\item Probar que existe exactamente una soluci\'on de la ecuaci\'on
+diferencial $y''+y=0$ cuya gr\'afica pasa por esos puntos.
+
+\item ?`Se cumple en alg\'un caso la parte (a) si $a_{1}-a_{2}$ es un m\'ultiplo
+entero de $\pi$?
+
+\item Generalizar el resultado de (a) para la ecuaci\'on $y''+k^{2}y=0$. Discutir
+tambi\'en el caso $k=0$.
+\end{enumerate}
+\eej
+
+\bej Hallar todas las soluciones de $y''-y'-2y=0$ y de $y''-y'-2y= e^{-x}$
+que verifiquen:
+\[
+\begin{array}{llllll}
+\mbox{i)} &y(0)=0,\ &y'(0)=1\qquad\quad&\mbox{ii)}&y(0)=1,\ \ \ y'(0)=0\\
+\mbox{iii)}&y(0)=0,&y'(0)=0&\mbox{iv)}&\lim_{x \rightarrow +\infty} y(x)=0&\\
+\mbox{v)}&y(0)=1&&\mbox{vi)}&y'(0)=1&
+\end{array}
+\]
+\eej
+
+\bej En el interior de la Tierra, la fuerza de gravedad es
+proporcional a la distancia al centro. Si se perfora un orificio
+que atraviese la Tierra pasando por el centro, y se deja caer
+una piedra en el orificio, ?`con qu\'e velocidad llegar\'a al centro?.
+\eej
+
+\bej La ecuaci\'on $x^{2}y''+pxy'+qy=0$ ($p,q$ constantes) se denomina
+ecuaci\'on de Euler.
+
+\begin{enumerate}
+\item Demuestre que el cambio de variables $x= \mbox{e}^{t}$ transforma la
+ecuaci\'on en una con coeficientes constantes.
+
+\item Aplique (a) para resolver en $\R_{>0}$ las ecuaciones:
+\[
+\begin{array}{ll}
+\mbox{i)}&x^{2}y''+2xy'-6y=0\\
+\mbox{ii)}&x^{2}y''-xy'+y=2x
+\end{array}
+\]
+\end{enumerate}
+\eej
+
+\bej Vibraciones en sistemas mec\'anicos.
+
+
+
+Una carreta de masa $M$ est\'a sujeta a una pared por medio de un resorte,
+que no ejerce fuerza cuando la carreta est\'a en la posici\'on de
+equilibrio $x=0$. Si la carreta se desplaza a una distancia $x$, el
+resorte ejerce una fuerza de restauraci\'on igual a $-\kappa x$, donde
+$\kappa $ es una constante positiva que mide la rigidez del resorte.
+Por la segunda ley del movimiento de Newton, se tiene que:
+\begin{equation}
+ M \frac{d^{2}x}{dt^{2}} = -\kappa x \ \mbox{ o bien} \ x''+a^{2}x=0,
+\ \ a=\sqrt{\kappa /M}
+\label{resortelibre}
+\end{equation}
+
+\begin{enumerate}
+\item Si la carreta se lleva a la posición $x=x_{0}$ y se libera sin velocidad
+inicial en el instante $t=0$, hallar la función $x(t)$. Verificar
+que se trata de una función peri\'odica. Calcular su período $\tau$, y
+su frecuencia $f= 1/\tau$ (la cantidad de ciclos por unidad de tiempo).
+Verificar que la frecuencia de vibraci\'on aumenta al aumentar la rigidez
+del resorte, o al reducir la masa de la carreta (como dice el sentido
+com\'un) y que la amplitud de esta oscilaci\'on es $x_{0}$.
+
+\medskip
+
+Si se produce una amortiguaci\'on que se opone al movimiento, y de magnitud
+proporcional a la velocidad ($=-c \frac{dx}{dt}$) debida al rozamiento,
+la ecuaci\'on (\ref{resortelibre}) que describe el movimiento de la carreta
+en funci\'on del tiempo se convierte en:
+\[ M \frac{d^{2}x}{dt^{2}} + c \frac{dx}{dt} + \kappa x =0\]
+o bien:
+\begin{eqnarray}
+\frac{d^{2}x}{dt^{2}}+2b\frac{dx}{dt}+a^{2}x=0,  \label{resortefrenado}\\
+b=\frac{c}{2M},\ \ \ a=\sqrt{\frac{\kappa}{M}}. \nonumber
+\end{eqnarray}
+
+\item Si $b>a$ (la fuerza de fricci\'on debida al rozaminto es grande en
+comparaci\'on con la rigidez del resorte), encontrar la soluci\'on de
+(\ref{resortefrenado}) que verifique como antes $x(0)=x_{0},\ x'(0)=0 $.
+Probar que no hay ninguna vibraci\'on y que la carreta vuelve simplemente
+a su posici\'on de equilibrio. Se dice que el movimiento est\'a
+sobreamortiguado.
+
+
+\item Si $b=a$, ver que tampoco hay vibraci\'on y que el comportamiento es similar
+al del caso anterior. Se dice que el movimiento es críticamente amortiguado.
+
+\item Si ahora $b<a$ (caso subamortiguado), probar que la soluci\'on de
+(\ref{resortefrenado}) con las condiciones iniciales $x(0)=x_{0},\ x'(0)=0 $
+es:
+\begin{equation}
+ x(t)= x_{0} \frac{\sqrt{\alpha ^{2} + b^{2}}}{\alpha} \mbox{e}^{-bt}
+\cos (\alpha t - \theta)
+\end{equation}
+donde $\alpha = \sqrt{a^{2}-b^{2}}$, y $\tan\theta= b/\alpha$.
+
+Esta funci\'on oscila con una amplitud que se reduce exponencialmente.
+Su gr\'afica cruza la posici\'on de equilibrio $x=0$ a intervalos regulares,
+aunque no es peri\'odica. Hacer un dibujo. Probar que el tiempo requerido
+para volver a la posici\'on de equilibrio es:
+\[ T=\frac{2 \pi}{\sqrt{\frac{\kappa}{M}-\frac{c^{2}}{4 M^{2}}}} \]
+y su ``frecuencia'' est\'a dada por $f=1/T$, llamada {\it frecuencia natural del
+sistema}. Notar que esta frecuencia disminuye al disminuir la constante
+de amortiguaci\'on $c$.
+
+
+\medskip
+
+Hasta ahora hemos considerado vibraciones libres, porque s\'olo act\'uan
+fuerzas internas al sistema. Si una fuerza $F(t)$ act\'ua sobre la carreta,
+la ecuaci\'on ser\'a:
+\begin{equation}
+M \frac{d^{2}x}{dt^{2}} + c \frac{dx}{dt} + \kappa x =F(t)
+\label{resorteforzado}
+\end{equation}
+
+\item Si esta fuerza es peri\'odica de la forma $F(t)=F_{0} \cos(\omega t)$, con
+$F_{0}, \omega$ constantes, hallar $x(t)$. Al valor $\omega /2\pi$ se lo
+llama frecuencia impresa \typeout{que feo esto de impresa} al sistema.
+
+ Si $\tan(\phi) = \frac{\omega c}{\kappa - \omega^{2}M}$, probar que la
+soluci\'on general de (\ref{resorteforzado}), con  $F(t)=F_{0} \cos(\omega t)$
+puede escribirse:
+\begin{equation}
+x(t)= \mbox{e}^{-bt} (C_{1} \cos (\alpha t) + C_{2} \mbox{sen} (\alpha t))
++ \frac{F_{0}}{\sqrt{(\kappa-\omega^{2}M)^{2}+\omega^{2} c^{2}}} \cos( \omega
+t - \phi)
+\end{equation}
+El primer término tiende a cero para $t \to +\infty$, luego es
+``transitorio'', es decir, a medida que pasa el tiempo, la soluci\'on se
+parece m\'as y m\'as al segundo sumando. Notar que la frecuencia de esta
+funci\'on es la frecuencia impresa al sistema, y que la amplitud es el
+coeficiente
+$\displaystyle \frac{F_{0}}{\sqrt{(\kappa-\omega^{2}M)^{2}+\omega^{2} c^{2}}}$.
+ ?`Qu\'e pasa cuando la frecuencia impresa se
+acerca a la frecuencia natural del sistema? (Este fen\'omeno se conoce
+con el nombre de resonancia).
+
+\item Si $b<a$ (caso subamortiguado) hallar la frecuencia impresa $\omega$ que
+provoca amplitud m\'axima. ?`Siempre existe este valor? Este valor de
+frecuencia impresa  (cuando existe) se denomina frecuencia de resonancia.
+Demostrar que la frecuencia de resonancia es siempre menor que la frecuencia
+natural.
+\end{enumerate}
+\eej
+
+\bej Hallar la soluci\'on general de las siguientes ecuaciones, empleando la
+soluci\'on dada:
+\[
+\begin{array}{llll}
+\mbox{i)}&xy''+2y'+xy=0, & I=\R_{>0}, & y_{1}(x)=\frac{\mbox{sen}x}{x}.\\
+\mbox{ii)}&xy''-y'-4x^{3}y=0, & I=\R_{>0}, & y_{1}(x)=\exp (x^{2}).\\
+\mbox{iii)}&xy''-y'-4x^{3}y=0, & I=\R_{<0}, & y_{1}(x)=\exp (x^{2}).\\
+\mbox{iv)}&(1-x^{2})y''-2xy'+2y=0, & I=(-\infty,-1), (-1,1), (1, \infty),
+& y_{1}(x)=x.
+\end{array}
+\]
+El último ítem es un caso especial de la ecuaci\'on $(1-x^{2})y''
+-2xy'+p(p+1)y=0$ (ecuaci\'on de Legendre), correspondiente al caso $p=1$,
+ en los intevalos en que la
+ecuaci\'on es normal.
+\eej
+
+\bej Sabiendo que $y_{1}(x)=e^{x^2}$ es
+soluci\'on de la ecuaci\'on homog\'enea asociada, hallar todas las
+soluciones de $xy''-y'-4x^3y=x^3$.
+
+\eej
+
+\bej Probar que las funciones
+\[
+\begin{array}{cc}
+\begin{array}{ll}
+\phi _{1}(t)= &\left\{ \begin{array}{ll}
+t^{2}&t \le 0\\
+0&t\geq 0
+\end{array}
+\right.
+\end{array}
+&
+\begin{array}{ll}
+\quad \text{ y }\quad \phi _{2}(t)= &\left\{ \begin{array}{ll}
+0&t \le 0\\
+t^{2}&t\geq 0
+\end{array}
+\right.
+\end{array}
+\end{array}
+\]
+son linealmente independientes en $\R$ pero que $W(\phi_{1}, \phi_{2})(0)=0$.
+¿Existe algún sistema lineal normal de orden 2 definido en algún intervalo
+$(-\epsilon, \epsilon)$ que admita a $\{ \phi_{1}, \phi_{2}\}$ como base de
+soluciones?
+\eej
+
+
+\bej Hallar la soluci\'on general de los siguientes sistemas
+$$
+\hskip-.2cm\text{(a)}\: \left\{\ba{l} x_1'=-x_2 \\x_2'=2x_1+3x_2 \ea \right.\qquad\qquad\qquad
+\hskip.3cm\text{(b)}\: \left\{\ba{l} x_1'=-8x_1-5x_2\\x_2'=10x_1+7x_2\ea\right.
+$$
+$$
+\hskip1cm\text{(c)}\: \left\{\ba{l}  x_1'=-4x_1+3x_2 \\x_2'=-2x_1+x_2\ea\right.\qquad\hskip1.5cm
+\text{(d)}\:\left\{\ba{l} x_1'=-x_1+3x_2-3x_3\\   x_2'=-2x_1+x_2\\ x_3'=-2x_1+3x_2-2x_3
+\ea\right.
+$$
+
+En cada caso, hallar el conjunto de datos iniciales tales que la
+solución correspondiente tienda a 0 cuando $t$ tienda a
+$+\infty$. Ídem con $t$ tendiendo a $-\infty$.
+
+\eej
+
+\bej Dos tanques, conectados mediante tubos, contienen cada uno 24 litros de una soluci\'on salina. Al tanque I entra agua pura a raz\'on de 6 litros por minuto y del tanque II sale, al exterior, el agua que contiene a raz\'on de 6 litros por minuto. Adem\'as el l\'iquido se bombea del tanque I al tanque II a
+una velocidad de 8 litros por minuto y del tanque II al tanque I a una
+velocidad de 2 litros por minuto. Se supone que los tanques se agitan de igual forma constantemente de manera tal que la mezcla sea homog\'enea. Si en un principio hay $x_0$ kg de sal en el tanque I e $y_0$ Kg de sal en el tanque II, determinar la cantidad de sal en cada tanque a tiempo $t>0$. Cu\'al es el l\'imite, cuando $t\to +\infty$, de las respectivas concentraciones de sal en cada tanque.?
+\eej
+
+%\bej Inicialmente el tanque I contiene 100 litros de agua salada a una
+%concentraci\'on de 1 kg por litro y el tanque II tiene 100 litros
+%de agua pura. El l\ii quido se bombea del tanque I al tanque II a
+%una velocidad de 1 litro por minuto, y del tanque II al I a una
+%velocidad de 2 litros por minuto. Los tanques se agitan
+%constantemente. \textquestiondown Cu\'al es la concentraci\'on en el tanque I
+%despu\'es de 10 minutos?
+%\eej
+
+\bej Hallar la soluci\'on general de los siguientes sistemas
+
+$$\text{(a)}\; \left\{\ba{l}x_1'=x_1-x_2\\ x_2'=x_1+x_2  \ea \right. \qquad
+\ \ \text{(b)}\; \left\{\ba{l}x_1'=2x_1-x_2\\ x_2'=4x_1+2x_2  \ea \right. \qquad
+$$
+$$\ \ \ \text{(c)}\; \left\{\ba{l}x_1'=2x_1+x_2   \\ x_2'=2x_2    \ea \right. \qquad
+\text{(d)}\; \left\{\ba{l}x_1'=-5x_1+9x_2\\ x_2'=-4x_1+7x_2  \ea \right. \qquad
+$$
+
+\eej
+
+\bej Hallar la soluci\'on general de los siguientes sistemas
+$$
+\text{(a)}\: \left\{\ba{l}x_1'=-x_2+2\\ x_2'=2x_1+3x_2+t \ea\right.\qquad
+\text{(b)} \:\left\{\ba{l} x_1'=2x_1-x_2+e^{2t}\\ x_2'=4x_1+2x_2+4 \ea\right.
+$$
+\eej
+
+\end{document}

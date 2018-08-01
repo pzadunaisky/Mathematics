@@ -1,0 +1,452 @@
+\documentclass[11pt,a4paper,pdftex]{amsart}
+\usepackage[psamsfonts]{amssymb}
+\usepackage{amsmath,amsfonts,latexsym}
+\usepackage[dvips]{graphicx}
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{epsfig}
+\usepackage{amscd}
+\usepackage{verbatim}
+\usepackage{multicol}
+
+\newtheorem{teo}{Teorema}[section]%establece un contador para
+%el entorno 'teo' que aparecer� con el nombre 'Teorema' y que
+%volver� a empezar cuando cambien de 'chapter'.
+
+\newtheorem{coro}[teo]{Corolario}%vincula las numeraciones de 'coro'
+%con las de 'teo'.
+
+\newtheorem{lema}{Lema}[section]
+%\newtheorem{lema}[lema]{Lema}
+
+
+\newtheorem{definition}{Definici\'on}[section]
+
+\newtheorem{conc}{Conclusión}[section]
+
+\newtheorem{prop}{Proposición}[section]
+%\newtheorem{prop}[prop]{Propiedad}
+
+\newtheorem{obs}{Observación}[section]
+
+\renewcommand{\thesection}{{}}
+
+%\newtheorem{obs}{Observaci�n} %numera las 'Observaciones' de corrido
+%sin volver a resetear.
+
+\newtheorem{ax}{Axioma}[section]
+
+%\newtheorem{defini}{Definici�n}[section]
+
+\newtheorem{ej}{Ejercicio}%[section] %numera os 'Ejercicios' reseteando
+%en cada 'cap�tulo'.
+
+
+\numberwithin{equation}{section}%numera las formulas reseteando
+%cada vez que cambia de 'capítulo'.
+
+\newcommand{\bej}[1]{\begin{ej}\rm{#1}}
+\newcommand{\eej}{\end{ej}\vspace{-0.2cm}}
+
+%---------------------------------------
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\bq}{\begin{quotation}}
+\newcommand{\eq}{\end{quotation}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mb}[1]{\;\mbox{#1}\;}
+\newcommand{\su}[1]{\underline{#1}}
+\newcommand{\so}[1]{\overline{#1}}
+\newcommand{\ang}[1]{\widehat{#1}}
+\newcommand{\arc}[1]{\wideparen{#1}}
+\newcommand{\Cc}{QQ\;}
+\renewcommand{\bf}{\textbf}
+\newcommand{\Comb}[2]{\left(\!\!\!\ba{c}#1\\[1ex]#2 \ea
+\!\!\!\right)}
+\newcommand{\di}{\displaystyle}
+%-----------------------------------------
+%conjuntos
+\newcommand{\W}{\mathbb W}
+\newcommand{\K}{\mathbb K}
+\newcommand{\N}{\mathbb N}
+\newcommand{\C}{\mathcal C}
+\newcommand{\Su}{\mathcal S}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\F}{\mathbb F}
+\newcommand{\A}{\mathbb A}
+\newcommand{\V}{\mathbb V}
+\newcommand{\I}{\mathbb I}
+\newcommand{\0}{\mathbb O}
+%------------------------------------------
+%operaciones
+\newcommand{\8}{\infty}
+\newcommand{\ie}{\langle}
+\newcommand{\de}{\rangle}
+\newcommand{\pe}[2]{\ie {#1} \, ; \, {#2} \de }
+\newcommand{\f}[1]{\overrightarrow{#1}}
+\newcommand{\DT}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\dg}{\Delta}
+\newcommand{\g}{\nabla}
+\newcommand{\D}{\mbox{div}}
+\newcommand{\Dp}[1]{\partial_{#1}}
+\newcommand{\DP}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\sen}[1]{\mbox{sen}\;{#1}}
+\newcommand{\Lp}[1]{L^{#1}}
+\newcommand{\To}{\longrightarrow}
+%-------------------------------------
+%griegos
+\newcommand{\vi}{\varphi}
+\newcommand{\om}{\omega}
+\newcommand{\Om}{\Omega}
+\newcommand{\ve}{\varepsilon}
+%-------------------------
+%comandos particulares
+\newcommand{\id}[1]{\text{id}_{#1}}
+\newcommand{\mD}{\mc{D}}
+\newcommand{\mC}{\mc{S}}
+\newcommand{\mS}{\mc{SS}}
+\newcommand{\mH}{\mc{H}}
+\newcommand{\HD}{\mc{H}_\mD}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Un comando para insertar dibujos
+\newcommand{\putfig}[4]{\bigskip \bigskip
+             \begin{figure}[ht]
+             \epsfxsize=#1cm\hfil{\epsfbox{#2}}
+             \caption{#3}
+         \label{#4}
+             \end{figure}\bigskip}
+%La sintaxis
+%\putfig{ancho}{.eps}{titulo}{label}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Un comando para insertar dos dibujos
+\newcommand{\putfigg}[4]{\bigskip \bigskip
+             \begin{figure}[ht]
+             \epsfxsize=5cm\hfil{\epsfbox{#1}}
+             \epsfxsize=5cm\hfil{\epsfbox{#2}}
+             \caption{#3}
+         \label{#4}
+             \end{figure}\bigskip}
+%La sintaxis
+%\putfigg{.eps}{.eps}{titulo1}{label1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%un dibujo en jpg
+\newcommand{\putjpg}[3]{\bigskip
+\begin{center}
+ \begin{figure}[ht]
+  \hspace{5cm}\includegraphics[scale=1.7]{#1.jpg}
+  \caption{#2}
+  \label{#3}
+  \bigskip
+  \bigskip
+ \end{figure}
+\end{center}
+}
+%la sintaxis \putjpg{.jpg}{Titulo}{label}
+%----------------------------------------------------
+%diseñoo de la página
+
+\vfuzz7pt % Don't report over-full v-boxes if over-edge is 7pt small
+\hfuzz7pt % Don't report over-full h-boxes if over-edge is 7pt small
+
+\pagestyle{myheadings}
+
+\renewcommand{\labelenumi}{({\it \alph{enumi}})}
+\renewcommand{\labelenumii}{\arabic{enumii})}
+
+\flushbottom \topmargin-0.5cm \textwidth17cm \textheight24.5cm \hoffset=-2cm
+\voffset=-0.5cm
+
+
+\begin{document}
+
+
+
+%----------------------------------------------------------
+%Encabezado:
+
+\centerline{{\small Universidad de Buenos Aires - Facultad de Ciencias Exactas y Naturales - Depto. de Matemática}}
+
+ \vskip 0.2cm
+ \hrulefill
+ \vskip 0.2cm
+
+ \centerline{{\bf{\Large{\sc Análisis II - Análisis Matemático II - Matemática 3}}}}
+ \vskip 0.2cm
+ \centerline{\ttfamily Primer Cuatrimestre 2018}
+ \hrulefill
+
+ \medskip
+ \centerline{\bf {Práctica 5: Ecuaciones Diferenciales de Primer Orden.}}
+ \medskip
+
+
+\bej Para cada una de las ecuaciones diferenciales que siguen,
+encontrar la soluci\'on general y la
+soluci\'on  particular que satisfaga la condici\'on dada:
+\[
+\begin{array}{llll}
+\mbox{a)}&x'-2tx=t,\ \, \quad x(1)=0,\qquad
+\ \, \mbox{b)}&x'=\di\frac{1+x^2}{1+t^2},\quad x(1)=0,\\
+\\
+\mbox{c)}&x'=\di
+\frac{1+x}{1+t}, \qquad x(0)=1,\qquad
+\,\mbox{d)}&x'=\di\frac{1+x}{1-t^2}, \quad x(0)=1, \\
+\\
+\mbox{e)} &x'-x^{1/3}=0,\ \quad x(0)=0, \qquad
+\mbox{f)}&x'=\di\frac{1+x}{1+t}, \quad x(0)=-1.
+\end{array}
+\]
+
+En todos los casos  dar el intervalo maximal de existencia de las soluciones y
+decir si son \'unicas. En los casos en que el intervalo maximal de existencia no es
+la recta real, analizar cu\'al es la posible causa.
+\eej
+
+\bigskip
+ \bej Si $y=y(t)$ denota el n\'umero de habitantes
+de una poblaci\'on en funci\'on del tiempo, se denomina tasa de
+cre\-ci\-miento de la poblaci\'on a la funci\'on definida como el
+cociente $y'/y$.
+
+\begin{enumerate}
+\item[(a)] Caracterizar (encontrar la ecuaci\'on) de las poblaciones con
+tasa de cre\-ci\-miento cons\-tante.
+
+\item[(b)] Dibujar el gr\'afico de $y(t)$ para poblaciones con tasa de
+crecimiento cons\-tante, positiva y negativa.
+
+\item[(c)] ?`Cu\'ales son las poblaciones con tasa de crecimiento nula?
+
+\item[(d)] Una población tiene tasa de crecimiento constante. El 1 de
+enero de 2002 tenía 1000 individuos, y cuatro meses despu\'es
+tenía 1020. Estimar el número de individuos que tendr\'a el
+1 de enero del año 2022, usando los resultados anteriores.
+
+\item[(e)] Caracterizar las poblaciones cuya tasa de crecimiento es una
+funci\'on lineal de $t$ ($at + b$).
+
+\item[(f)] Caracterizar las poblaciones cuya tasa de crecimiento es
+igual a $r-cy$, donde $r$ y $c$ son constantes positivas. Este es
+el llamado crecimiento logístico, en tanto que el
+correspondiente a tasas constantes es llamado crecimiento
+exponencial (por razones obvias ?`no?). Para poblaciones
+pequeñas, ambas formas de crecimiento son muy similares.
+Comprobar esta afirmaci\'on y comprobar tambi\'en que en el
+crecimiento logístico $y(t)$ tiende asint\'oticamente a la
+recta $y=r/c$.
+\end{enumerate}
+\eej
+
+\bigskip
+
+
+\bej Si un cultivo de bacterias crece con un coeficiente de
+variación proporcional a la cantidad existente y se sabe
+además que la población se duplica en 1 hora ¿Cuánto
+habrá aumentado en 2 horas?.
+\eej
+
+\bigskip
+
+\bej Verifique que las siguientes ecuaciones son homog\'eneas de
+grado cero y
+resuelva:
+\[
+\mbox{(a)}\ tx'=x+2t \exp(-x/t)\qquad \mbox{(b)}\ txx'=2x^2-t^{2}\qquad
+\mbox{(c)}\ x'=\di\frac{x+t}{t},\ \ x(1)=0
+\]
+\eej
+
+\bigskip
+
+\bej Demuestre que la sustituci\'on $y=at+bx+c$ cambia
+$x'=f(at+bx+c)$ en una ecuaci\'on con variables separables y
+aplique este m\'etodo para resolver las ecuaciones siguientes:
+$$ \mbox{(a)}\ x'=(x+t)^{2} \qquad\qquad
+ \mbox{(b)}\ x'=\mbox{sen}^{2}(t-x+1) $$
+\eej
+
+%\bigskip
+\newpage
+
+\bej\ \newline
+
+\begin{enumerate}
+\item Si $ae \ne bd$ demuestre que pueden elegirse constantes $h,
+k$ de modo que las sustituciones $t=s-h$, $x=y -k$ reducen
+la ecuaci\'on:
+\[ \frac{dx}{dt}= F \left( \frac{at+bx+c}{dt+ex+f} \right) \]
+a una ecuaci\'on homog\'enea.
+
+\item
+ Resuelva las ecuaciones:
+ \[
+ \begin{aligned}&\qquad\qquad\mbox{a) } x'=\frac{2x-t+4}{x+t-1}
+ \qquad \qquad\mbox{b) }x'=\frac{x+t+4}{t-x-6}\\
+ &\qquad\qquad \mbox{c) }x'=\frac{x+t+4}{x+t-6},\quad{x(0)=2.\mbox{\ \
+ \textquestiondown Se satisface $ae\neq bd$
+ en este caso?}}
+ \end{aligned}
+ \]
+\end{enumerate}
+\eej
+
+\bigskip
+
+\bej Resuelva las siguientes ecuaciones:
+\[
+\begin{array}{ll}
+\mbox{a)} \ (y-x^{3})dx+(x+y^{3})dy =0
+&\hskip-1.2cm\mbox{b)} \ \cos x \cos^{2} y\, dx - 2 \sen x \,\sen y
+\cos y\, dy=0 \\
+\ \\
+\mbox{c)} \ (3x^{2}-y^{2})\,dy -2xy\, dx =0
+&\hskip-1.2cm\mbox{d)} \ x\, dy= (x^{5}+x^{3}y^{2} +y)\,dx   \\
+\ \\
+\text{(e)}\:2(x+y)\sen y\,dx+\big(2(x+y)\sen y+\cos y\big)\,dy=0
+&\hskip-1.2cm\mbox{f)} \ 3y \,dx+x\, dy=0
+\\
+\ \\
+\text{(g)}\:  \big(1-y(x+y)\text{tan}\,(xy)\big)\,dx+\big(1-x(x+y)\text{tan}\,(xy)\big)\,dy=0.
+\end{array}
+\]
+\eej
+
+\bigskip
+
+\bej Considere la ecuación lineal de primer orden
+\begin{equation}\label{lineal}
+\tag{*}
+y'+p(x)\,y=q(x).
+\end{equation}
+\begin{enumerate}
+\item Busque una función $\mu(x)$ tal que
+$$
+\mu(x)\big(y'(x)+p(x)\,y(x)\big)=\big(\mu(x)\,y(x)\big)'.
+$$
+
+\item Multiplique la ecuación \eqref{lineal} por $\mu$ y halle su solución general.
+
+\noindent $\mu$ se denomina {\it factor integrante}.
+\end{enumerate}
+
+\eej
+
+\bigskip
+
+\bej Hallar la ecuaci\'on de una curva tal que la pendiente de la
+recta tangente en un punto cualquiera es la mitad de la
+pendiente de la recta que une el punto con el origen.
+\eej
+
+\bigskip
+
+\bej Hallar la ecuaci\'on de las curvas tales que la normal en un
+punto cualquiera pasa por el origen.
+\eej
+\bigskip
+
+\bej Demostrar que la curva para la cual la pendiente de la
+tangente en cualquier punto es proporcional a la abscisa del
+punto de contacto es una par\'abola.
+\eej
+\bigskip
+
+\bej Hallar la ecuación de una curva del primer cuadrante tal que para cada punto
+$(x_0,y_0)$ de
+la misma, la ordenada al origen de la recta tangente a la curva en $(x_0,y_0)$ sea
+$2(x_0+y_0)$.
+\eej
+
+ \ \ \newpage
+\bej\ \ \newline
+
+\begin{enumerate}
+\item Hallar las soluciones de:
+\[
+\begin{array}{ll}
+\mbox{i)}&y'+y= \sen(x), \\
+\mbox{ii)}&y'+y=3 \cos(2x).
+\end{array}
+\]
+
+\item Halle las soluciones de $ y'+y=\sen(x) +3 \cos(2x)  $
+cuya gr\'afica pase por el origen (Piense, y no haga cuentas de m\'as).
+\end{enumerate}
+\eej
+\bigskip
+
+\bej Sea la ecuaci\'on no homog\'enea $y'+a(x)y=b(x)$ donde
+$a,b:\mathbb{R}\to \R$ son continuas con período $p>0$ y $b
+\not \equiv 0$:
+\begin{enumerate}
+\item Pruebe que una soluci\'on $\Phi$ de esta ecuaci\'on verifica:
+\[ \Phi (x+p) = \Phi (x),\, \forall x\in\R\
+\Leftrightarrow \ \ \Phi(0)= \Phi (p). \]
+\item Encuentre las soluciones de período $2 \pi$ para las ecuaciones:
+\[ y'+3y= \cos(x), \qquad  y'+\cos (x) y = \mbox{sen} (2x). \]
+\end{enumerate}
+\eej
+\bigskip
+
+\bej Suponga que el ritmo al que se enfría un cuerpo caliente
+es proporcional a la diferencia de temperatura entre \'el y el
+ambiente que lo rodea (ley de enfriamiento de Newton). Un cuerpo
+se calienta 110 $^{\circ}$C y se expone al aire libre a una
+temperatura de 10 $\mbox{}^{\circ }$C. Al cabo de una hora su
+temperatura es de 60 $^{\circ}$C. ?`Cu\'anto tiempo adicional
+debe transcurrir para que se enfríe a 30 $^{\circ}$C?
+\eej
+\bigskip
+
+\bej Se sabe que el Carbono 14 tiene una semivida de 5600 años. Es decir, su cantidad
+se reduce a la mitad por desintegración radioactiva en ese lapso de tiempo.
+
+Si en una roca sedimentaria había al formarse un 40\% de Carbono 14 y ahora hay un 2\%
+\textquestiondown Cuánto tiempo pasó desde que se depositaron los sedimentos?
+
+Observación: la tasa de cambio del Carbono 14, $\dot x/x$, es constante.
+\eej
+
+\bigskip
+
+\bej Si la resistencia del aire que act\'ua sobre un cuerpo de
+masa $m$ en caída libre ejerce una fuerza retardadora sobre
+el mismo proporcional a la velocidad ($=-k
+v$), la ecuaci\'on diferencial del movimiento es:
+\[ \frac{d^{2}y}{dt^{2}}=g -c \frac{dy}{dt}, \mbox{ o bien }
+\frac{dv}{dt}= g - cv \]
+donde $c=k/m$. Supongamos $v=0$ en el instante $t=0$, y $c>0$. Encontrar
+$\lim _{t \rightarrow \infty} v(t)$ (llamada velocidad terminal).
+
+Si la fuerza retardadora es proporcional al cuadrado de la
+velocidad, la ecuaci\'on se convierte en:
+\[ \frac{dv}{dt}=g-c v^{2}. \]
+Si $v(0)=0$, encuentre la velocidad terminal en este caso.
+\eej
+\bigskip
+
+\bej La ecuación $y'+P(x) y =Q(x) y^{n}$, que se conoce como la
+ecuación de Bernoulli, es lineal cuando $n=0,1$. Demuestre que
+se puede reducir a una ecuación lineal para cualquier valor de
+$n \ne 1$ por el cambio de variable $z=y^{1-n}$, y aplique este
+método para resolver las ecuaciones siguientes:
+\[
+\begin{array}{ll}
+\mbox{(a)}&xy'+y=x^{4}y^{3},\\
+\mbox{(b)}&xy^{2}y'+y^{3}=x \cos x,\\
+\mbox{(c)}&x y'-3y=x^{4}.
+\end{array}
+\]
+\eej
+
+\end{document}

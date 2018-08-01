@@ -1,0 +1,464 @@
+\documentclass[11pt,a4paper,pdftex]{amsart}
+\usepackage[psamsfonts]{amssymb}
+\usepackage{amsmath,amsfonts,latexsym}
+\usepackage[dvips]{graphicx}
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{epsfig}
+\usepackage{amscd}
+\usepackage{verbatim}
+\usepackage{multicol}
+
+\newtheorem{teo}{Teorema}[section]%establece un contador para
+%el entorno 'teo' que aparecer� con el nombre 'Teorema' y que
+%volver� a empezar cuando cambien de 'chapter'.
+
+\newtheorem{coro}[teo]{Corolario}%vincula las numeraciones de 'coro'
+%con las de 'teo'.
+
+\newtheorem{lema}{Lema}[section]
+%\newtheorem{lema}[lema]{Lema}
+
+
+\newtheorem{definition}{Definici\'on}[section]
+
+\newtheorem{conc}{Conclusión}[section]
+
+\newtheorem{prop}{Proposición}[section]
+%\newtheorem{prop}[prop]{Propiedad}
+
+\newtheorem{obs}{Observación}[section]
+
+\renewcommand{\thesection}{{}}
+
+%\newtheorem{obs}{Observaci�n} %numera las 'Observaciones' de corrido
+%sin volver a resetear.
+
+\newtheorem{ax}{Axioma}[section]
+
+%\newtheorem{defini}{Definici�n}[section]
+
+\newtheorem{ej}{Ejercicio}%[section] %numera os 'Ejercicios' reseteando
+%en cada 'cap�tulo'.
+
+
+\numberwithin{equation}{section}%numera las formulas reseteando
+%cada vez que cambia de 'capítulo'.
+
+\newcommand{\bej}[1]{\begin{ej}\rm{#1}}
+\newcommand{\eej}{\end{ej}\vspace{-0.2cm}}
+
+%---------------------------------------
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bit}{\begin{itemize}}
+\newcommand{\eit}{\end{itemize}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\ba}{\begin{array}}
+\newcommand{\ea}{\end{array}}
+\newcommand{\bq}{\begin{quotation}}
+\newcommand{\eq}{\end{quotation}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mb}[1]{\;\mbox{#1}\;}
+\newcommand{\su}[1]{\underline{#1}}
+\newcommand{\so}[1]{\overline{#1}}
+\newcommand{\ang}[1]{\widehat{#1}}
+\newcommand{\arc}[1]{\wideparen{#1}}
+\newcommand{\Cc}{QQ\;}
+\renewcommand{\bf}{\textbf}
+\newcommand{\Comb}[2]{\left(\!\!\!\ba{c}#1\\[1ex]#2 \ea
+\!\!\!\right)}
+\newcommand{\di}{\displaystyle}
+%-----------------------------------------
+%conjuntos
+\newcommand{\W}{\mathbb W}
+\newcommand{\K}{\mathbb K}
+\newcommand{\N}{\mathbb N}
+\newcommand{\C}{\mathcal C}
+\newcommand{\Su}{\mathcal S}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\F}{\mathbb F}
+\newcommand{\A}{\mathbb A}
+\newcommand{\V}{\mathbb V}
+\newcommand{\I}{\mathbb I}
+\newcommand{\0}{\mathbb O}
+%------------------------------------------
+%operaciones
+\newcommand{\8}{\infty}
+\newcommand{\ie}{\langle}
+\newcommand{\de}{\rangle}
+\newcommand{\pe}[2]{\ie {#1} \, ; \, {#2} \de }
+\newcommand{\f}[1]{\overrightarrow{#1}}
+\newcommand{\DT}[2]{\frac{d{#1}}{d{#2}}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\dg}{\Delta}
+\newcommand{\g}{\nabla}
+\newcommand{\D}{\mbox{div}}
+\newcommand{\Dp}[1]{\partial_{#1}}
+\newcommand{\DP}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\sen}[1]{\mbox{sen}\;{#1}}
+\newcommand{\Lp}[1]{L^{#1}}
+\newcommand{\To}{\longrightarrow}
+%-------------------------------------
+%griegos
+\newcommand{\vi}{\varphi}
+\newcommand{\om}{\omega}
+\newcommand{\Om}{\Omega}
+\newcommand{\ve}{\varepsilon}
+%-------------------------
+%comandos particulares
+\newcommand{\id}[1]{\text{id}_{#1}}
+\newcommand{\mD}{\mc{D}}
+\newcommand{\mC}{\mc{S}}
+\newcommand{\mS}{\mc{SS}}
+\newcommand{\mH}{\mc{H}}
+\newcommand{\HD}{\mc{H}_\mD}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Un comando para insertar dibujos
+\newcommand{\putfig}[4]{\bigskip \bigskip
+             \begin{figure}[ht]
+             \epsfxsize=#1cm\hfil{\epsfbox{#2}}
+             \caption{#3}
+         \label{#4}
+             \end{figure}\bigskip}
+%La sintaxis
+%\putfig{ancho}{.eps}{titulo}{label}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Un comando para insertar dos dibujos
+\newcommand{\putfigg}[4]{\bigskip \bigskip
+             \begin{figure}[ht]
+             \epsfxsize=5cm\hfil{\epsfbox{#1}}
+             \epsfxsize=5cm\hfil{\epsfbox{#2}}
+             \caption{#3}
+         \label{#4}
+             \end{figure}\bigskip}
+%La sintaxis
+%\putfigg{.eps}{.eps}{titulo1}{label1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%un dibujo en jpg
+\newcommand{\putjpg}[3]{\bigskip
+\begin{center}
+ \begin{figure}[ht]
+  \hspace{5cm}\includegraphics[scale=1.7]{#1.jpg}
+  \caption{#2}
+  \label{#3}
+  \bigskip
+  \bigskip
+ \end{figure}
+\end{center}
+}
+%la sintaxis \putjpg{.jpg}{Titulo}{label}
+%----------------------------------------------------
+%diseñoo de la página
+
+\vfuzz7pt % Don't report over-full v-boxes if over-edge is 7pt small
+\hfuzz7pt % Don't report over-full h-boxes if over-edge is 7pt small
+
+\pagestyle{myheadings}
+
+\renewcommand{\labelenumi}{({\it \alph{enumi}})}
+\renewcommand{\labelenumii}{\arabic{enumii})}
+
+\flushbottom \topmargin-0.5cm \textwidth17cm \textheight24.5cm \hoffset=-2cm
+\voffset=-0.5cm
+
+
+\begin{document}
+
+
+
+%----------------------------------------------------------
+%Encabezado:
+
+\centerline{{\small Universidad de Buenos Aires - Facultad de Ciencias Exactas y Naturales - Depto. de Matemática}}
+
+ \vskip 0.2cm
+ \hrulefill
+ \vskip 0.2cm
+
+ \centerline{{\bf{\Large{\sc Análisis II - Análisis Matemático II - Matemática 3}}}}
+ \vskip 0.2cm
+ \centerline{\ttfamily Primer Cuatrimestre 2018}
+ \hrulefill
+
+ \medskip
+ \centerline{\bf {Práctica 7: Diagramas de fase.}}
+ \medskip
+
+\setcounter{equation}{0}
+
+\bej
+{\emph {Din\'amica unidimensional}.} En cada una de las siguientes ecuaciones de la forma $\dot{x}=f(x),$ realizar el gráfico de $f(x),$ hallar los puntos de equilibrio y realizar un bosquejo de la din\'amica en el eje $x.$ A partir de esto analizar la estabilidad de los puntos de equilibrio.
+$$
+\text{(a)}\; \dot{x}=1-x^2, \hspace{1cm} \text{(b)}\; \dot{x}=x^3-x, \hspace{1cm} \text{(c)}\; \dot{x}=\sen(x).
+$$
+\eej
+
+\bej Dibujar los campos vectoriales siguientes y tratar de deducir cuáles son las correspondientes
+líneas de flujo:
+\[%
+\begin{array}
+[c]{clcccl}%
+\text{(a)} & F(x,y)=(x,y), &  &  & \text{(b)} & F(x,y)=(-y,x),\\
+&  &  &  &  & \\
+\text{(c)} & F(x,y)=(y,0), &  &  & \text{(d)} & F(x,y)=(-x+2y,-2x-y).
+\end{array}
+\]%
+\eej
+
+%\bej Esbozar el plano de fases de la ecuaci\'on $x'=Ax$, sin resolver
+%para,
+%$$\mbox{(a)}\ A = \left(\begin{array}{rr}
+%            3 & 0 \\
+%            0 & 3
+%        \end{array}\right)\quad
+%\mbox{(b)}\ A = \left(\begin{array}{rr}
+%            1/2 & -2 \\
+%            2 & 0
+%        \end{array}\right)\quad
+%\mbox{(c)}\ A = \left(\begin{array}{rr}
+%            0 & 0 \\
+%            -2 & 0
+%        \end{array}\right).$$
+%\eej
+
+\bej Considerar el sistema a un par\'ametro,
+$$\begin{aligned}
+\dot{x}=2x, &\\
+\dot{y}=\lambda y, &\ \ \ \ \ \mbox{ con } \lambda \in \mathbb{R}.
+\end{aligned}$$
+Determinar todas las soluciones y hacer un bosquejo del diagrama
+de fases para $\lambda=-1,0,1,2$.
+\eej
+
+\bej Sea $A$ una matiz diagonal de $2\times 2$. Encontrar condiciones
+sobre $A$ que garanticen que:
+$$\lim_{t\to +\infty} x(t)=0$$ para todas las soluciones de $\dot{x}=Ax$.
+\eej
+
+\bej Sea $A$ una matriz de $2\times 2$.
+\begin{enumerate}
+\item[(a)] ?`Cu\'al es la relaci\'on entre los campos $x\rightarrow Ax$
+y $x\rightarrow (-A)x$?
+\item[(b)] ?`Cu\'al es la relaci\'on geom\'etrica entre la soluci\'on
+de $\dot{x}=Ax$ y $\dot{x}=-Ax$?
+\end{enumerate}
+\eej
+
+\bej Determinar todas las soluciones del sistema
+$$\left(\begin{aligned}\dot{x}\\ \dot{y}\end{aligned}\right)=
+\left(\begin{array}{rr}5 & 3\\-6 & -4\end{array}\right)
+\left(\begin{aligned}x\\ y\end{aligned}\right)$$ y hacer un
+bosquejo del diagrama de fases.
+\eej
+
+\bej Hallar las soluciones y realizar un bosquejo del diagrama de fases para los
+sistemas (b) y (d) del Ejercicio 2.
+\eej
+
+\bej Realizar un {gráfico aproximado} de las líneas de flujo de los siguientes campos vectoriales:
+\[%
+\text{(a)} \ F(x,y)=(x^{2},y^{2}) \qquad \text{(b)} \ F(x,y)=(x,x^{2}) \qquad
+ \text{(c)} \ F\left(  x,y\right)
+=\left(  1,x+y\right)
+\]
+\eej
+
+\bej Para los siguientes  sistemas, hallar los equilibrios y analizar su estabilidad.
+$$\text{(a)}\; \left\{\ba{l}\dot{x}=\sen x+\cos y\\ \dot{y}=xy \ea \right. \qquad
+\text{(b)}\; \left\{\ba{l}\dot{x}=(x+1)e^y-1\\ \dot{y}=x+ y \ea \right.
+\qquad \text(c)\left\{\ba{l}\dot x=x^2-y-1\\ \dot y = xy\ea\right.$$
+\eej
+
+\bej Para las siguientes  ecuaciones, hallar los equilibrios y analizar su estabilidad:
+$$\text{(d)}\quad\ddot x+c\dot x-x^3=1,
+\quad\quad \qquad\text{(e)}\quad\ddot x+x^3-x=0,
+\quad       \quad \qquad\text{(f)}\quad\ddot x-x+\cos x=0.    $$
+\eej
+
+\bej Para cada uno de los siguientes sistemas no lineales hallar los puntos de equilibrio y { esbozar} el diagrama de fases
+alrededor de cada uno de ellos:
+
+$$\text{(a)}\; \left\{\ba{l}\dot{x}=x e^y\\ \dot{y}=-1+y+\sen(x) \ea \right. \qquad
+\text{(b)}\; \left\{\ba{l}\dot{x}=e^{x-y}-1\\ \dot{y}=x y-1 \ea \right.
+\qquad \text(c)\left\{\ba{l}\dot x=x(y-1)-4\\ \dot y = x^2-(y-1)^2\ea\right.$$
+\eej
+
+\bigskip
+
+\bigskip
+
+
+
+\bf{Modelos de crecimiento poblacional.}
+
+
+
+\bej  Dada una población $x(t)$ se denomina
+\bf{tasa de crecimiento} a la razón $\frac{\dot x}x$.
+
+Como se vió en la Práctica 5, un modelo que considera que hay una población límite
+$K$ es el modelo logístico en el que la razón de crecimiento es de la forma
+$r\big(1-\frac xK\big)$.
+
+Cuando hay dos poblaciones que conviven, digamos
+$x$ e $y$, las razones de crecimiento de éstas dependen de ambas poblaciones. El modelo más sencillo que considera una población
+de depredadores $y$ y sus presas $x$ es el de Lotka--Volterra:
+$$
+\left\{\begin{aligned}
+&\dot x=x(a-by)\\
+&\dot y=y(-c+dx)
+\end{aligned}\right.
+$$
+con $a,\,b,\,c,\,d>0$.
+
+Si a este modelo se le agrega el hecho de que cada población tiene por sí misma
+un límite para su supervivencia se obtiene el modelo
+$$
+\left\{\begin{aligned}
+&\dot x=x(a-\delta x-by)\\
+&\dot y=y(-c+dx-\gamma y)
+\end{aligned}
+\right.
+$$
+con todas las constantes positivas.
+
+\medskip
+
+Considerar los siguientes sistemas correspondientes a poblaciones de depredador--presa
+con crecimiento limitado:
+$$
+\text{(a)}\; \left\{\ba{l}\dot{x}=x(2-x-y)\\ \dot{y}=y(-1+x-y) \ea \right. \qquad
+\text{(b)}\:\left\{\ba{l}\dot{x}=x(2-3x-y)\\ \dot{y}=y(-1+x-y) \ea \right.
+$$
+
+Para cada uno de estos sistemas, encontrar los puntos de equilibrio y esbozar
+ el diagrama de fases alrededor de cada uno de ellos. Observar que el comportamiento
+ depende fuertemente de los valores de los parámetros.
+\eej
+
+\bigskip
+
+\bf {Din\'amica en un campo de fuerzas conservativo.}
+
+\medskip
+
+Dado $V(x)\in C^2(\mathbb{R})$ consideremos la ecuaci\'on diferencial
+$$\ddot{x}=-V'(x),$$
+que toma la siguiente forma de sistema en el plano de fases
+\[%
+\left\{
+\begin{aligned}
+&\dot{x} =  y,\\
+&\dot{y}  =  -V'(x).
+\end{aligned}
+\right.
+\]%
+
+En mecánica $V(x)$ es el potencial y $-V^\prime(x)$ es la fuerza.
+
+\bej Demostrar que la energía $$H(x,y)=\frac12 y^2+V(x)$$ es una constante del movimiento.
+El primer t\'ermino es el de la energ\'{\i}a cin\'etica y el segundo, la potencial.
+
+\eej
+
+\bej Considerar $V(x)=\frac 12 k x^2.$ Esbozar el diagrama de fases considerando diferentes niveles de la energ\'{\i}a $H(x,y).$ Verificar que todas las trayectorias son acotadas. Utilizar la cantidad conservada obtenida en el punto anterior para obtener la posición máxima en funcion del dato inicial.
+Este potencial es el del oscilador armónico, es decir un resorte sin la acci\'on de fuerzas externas.
+
+\eej
+
+\bej
+
+$V(x)=\frac12 kx^2-mgx$ es el potencial que da origen a la fuerza a la que est\'a
+sometida una masa $m$ que cuelga de un resorte con costante $k$ (llamamos $x$ a
+la posici\'on aunque el movimiento se desarrolla en sentido vertical para
+no confundir con la variable $y$ del plano de fases que representa la velocidad).
+Compare este caso con  el del ejercicio anterior.
+
+\eej
+
+\bej
+Considerar el potencial $V(x)=\frac{a}{x^2}-\frac{1}{x},$ con $x>0,\ a>0.$
+Esbozar el diagrama de fases considerando diferentes niveles de la energía.
+Describir cualitativamente el movimiento para valores iniciales tales que la
+energ\'{\i}a sea positiva, negativa o nula. Se trata del movimiento radial
+(es decir, $x$ representa la distancia al origen) de una partícula sometida a un campo gravitatorio, la cantidad $\frac{1}{x^2}$ suele interpretarse como un {\em potencial centrífugo}, y $V(x)$ es el {\em potencial eficaz}.
+
+\eej
+
+\bej Considerar el potencial del punto anterior. Fijado $x_0$  obtener el valor mínimo de $|y_0|$ para el cual la trayectoria cuyo nivel de energía es $H(x_0, y_0)$ es no acotada. (La cantidad $y_0$ es la {\em velocidad de escape}.)
+
+\eej
+
+%\bej Considerar $V(x)=1-\cos x$ (el potencial asociado al p�ndulo). Esbozar el
+%diagrama de fases. Verificar que todas las trayectorias est�n acotadas en el eje $y.$ Para cada $x_0\in [-\pi, \pi]$ obtener la {\em velocidad de escape}.
+%
+%\eej
+%
+%\bej Se lanza hacia arriba un cuerpo de masa $m$ con una
+%velocidad inicial $v_0$. Sabiendo que la fuerza gravitatoria
+%($F=-mg$) es conservativa.
+%\begin{enumerate}
+%\item Hallar la energ\'ia potencial y cin\'etica del cuerpo cuando
+%alcanza una altura $h$. \item Graficar el potencial y encontrar el
+%valor de $h$ donde el movimeiento cambia de direcci\'on.
+%\end{enumerate}
+%
+%\eej
+
+\bej  Hacer el bosquejo del diagrama de fases de los siguientes
+potenciales:
+\begin{center}
+\includegraphics[width=5cm]{potencial1.eps}
+\qquad
+\includegraphics[width=5cm]{potencial2.eps}
+\end{center}
+
+\eej
+
+\vspace{4.cm}
+
+\bf{Dinámica de un campo gradiente.}
+
+\bej Sea $V(x,y)=ax^2+by^2+x^2y,$ con $a,b \in \mathbb{R}$ no nulos. Consideremos
+el sistema $\dot{X}=-\nabla V(X),$ donde $X=(x,y)$.
+
+\begin{enumerate}
+
+\item[(a)] Verificar que el origen es un punto de equilibrio y clasificar su estabilidad en función de los parámetros $a$ y $b.$
+
+\item[(b)] Si $a$ y $b$ son no nulos, hallar los restantes puntos de equilibrio y analizar su estabilidad.
+
+\item[(c)] Para una función $V(x)$ general, observar que los equilibrios son los puntos
+críticos de $V$. \textquestiondown De qué depende su estabilidad?
+\end{enumerate}
+
+\eej
+
+
+
+\bigskip
+
+\bf {Campo central de fuerzas}
+
+\bej Considerar el movimiento de una part\'icula en un campo de
+fuerzas central, esto es, se considera la ecuaci\'on
+$$m\ddot{x}=-\nabla V(x) \ \ x\in \mathbb{R}^3/\{0\}$$ donde
+$V(x)=V_0(|x|), \, \mbox{ con } V_0 \in C^2((0,\infty),\mathbb{R}).$
+
+\begin{enumerate}
+\item[(a)] Probar que se conserva el momento angular $M$, relativo al
+origen, donde $M=x\times m\dot{x}$ (producto vectorial).
+\item[(b)] Mostrar que todas las \'orbitas son planares (en el plano
+perpendicular a $M$).% \item Probar la ley de Kepler, que dice que
+%el radiovector barre \'areas iguales en tiempos iguales.\\
+%(Sug: Usar la formula de Green $\int_{\bigtriangleup} dx dy=\frac{1}{2}\int_{\partial \bigtriangleup} x dy-y dx $ para
+%calcular el \'area del tri\'angulo curvo).
+\end{enumerate}
+
+\eej
+
+\end{document}
