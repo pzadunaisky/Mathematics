@@ -173,25 +173,26 @@
 %----------------------------------------------------------
 %Encabezado:
 
-\centerline{{\small Universidad de Buenos Aires - Facultad de Ciencias Exactas y Naturales - Depto. de Matemática}}
+\centerline{{\small Universidad CAECE}}
 
  \vskip 0.2cm
  \hrulefill
  \vskip 0.2cm
 
- \centerline{{\bf{\Large{\sc Análisis II - Análisis Matemático II - Matemática 3}}}}
+ \centerline{{\bf{\Large{\sc Ecuaciones Diferenciales Ordinarias}}}}
  \vskip 0.2cm
- \centerline{\ttfamily Primer Cuatrimestre 2018}
+ \centerline{\ttfamily Segundo Cuatrimestre 2018}
  \hrulefill
 
  \medskip
- \centerline{\bf {Práctica 5: Ecuaciones Diferenciales de Primer Orden.}}
+ \centerline{\bf {Práctica 1: Ecuaciones Diferenciales de Primer Orden.}}
  \medskip
 
 
-\bej Para cada una de las ecuaciones diferenciales que siguen,
-encontrar la soluci\'on general y la
-soluci\'on  particular que satisfaga la condici\'on dada:
+\bej Para cada una de las ecuaciones diferenciales que siguen, encontrar la 
+solución general y la soluci\'on  particular que satisfaga la condici\'on 
+dada. En todos los casos hallar el intervalo maximal de existencia de las 
+soluciones y decir si cada solución es única en ese intervalo. 
 \[
 \begin{array}{llll}
 \mbox{a)}&x'-2tx=t,\ \, \quad x(1)=0,\qquad
@@ -206,54 +207,40 @@ soluci\'on  particular que satisfaga la condici\'on dada:
 \end{array}
 \]
 
-En todos los casos  dar el intervalo maximal de existencia de las soluciones y
-decir si son \'unicas. En los casos en que el intervalo maximal de existencia no es
-la recta real, analizar cu\'al es la posible causa.
 \eej
 
 \bigskip
- \bej Si $y=y(t)$ denota el n\'umero de habitantes
-de una poblaci\'on en funci\'on del tiempo, se denomina tasa de
-cre\-ci\-miento de la poblaci\'on a la funci\'on definida como el
-cociente $y'/y$.
+\bej Si $y=y(t)$ denota el n\'umero de habitantes de una poblaci\'on en 
+funci\'on del tiempo, se denomina tasa de cre\-ci\-miento de la poblaci\'on a 
+la funci\'on $y'/y$.
 
 \begin{enumerate}
-\item[(a)] Caracterizar (encontrar la ecuaci\'on) de las poblaciones con
-tasa de cre\-ci\-miento cons\-tante.
+\item[(a)] Dibujar el gr\'afico de $y(t)$ para poblaciones con tasa de
+crecimiento cons\-tante, positiva y negativa. ¿Cu\'ales son las poblaciones 
+con tasa de crecimiento nula?
 
-\item[(b)] Dibujar el gr\'afico de $y(t)$ para poblaciones con tasa de
-crecimiento cons\-tante, positiva y negativa.
-
-\item[(c)] ?`Cu\'ales son las poblaciones con tasa de crecimiento nula?
-
-\item[(d)] Una población tiene tasa de crecimiento constante. El 1 de
+\item[(b)] Una población tiene tasa de crecimiento constante. El 1 de
 enero de 2002 tenía 1000 individuos, y cuatro meses despu\'es
 tenía 1020. Estimar el número de individuos que tendr\'a el
 1 de enero del año 2022, usando los resultados anteriores.
 
-\item[(e)] Caracterizar las poblaciones cuya tasa de crecimiento es una
-funci\'on lineal de $t$ ($at + b$).
+\item[(e)] Caracterizar las poblaciones con tasa de crecimiento $at + b$ para
+$a,b \in \R$.
 
 \item[(f)] Caracterizar las poblaciones cuya tasa de crecimiento es
-igual a $r-cy$, donde $r$ y $c$ son constantes positivas. Este es
-el llamado crecimiento logístico, en tanto que el
-correspondiente a tasas constantes es llamado crecimiento
-exponencial (por razones obvias ?`no?). Para poblaciones
-pequeñas, ambas formas de crecimiento son muy similares.
-Comprobar esta afirmaci\'on y comprobar tambi\'en que en el
-crecimiento logístico $y(t)$ tiende asint\'oticamente a la
-recta $y=r/c$.
+igual a $r-cy$, donde $r$ y $c$ son constantes positivas. Hallar posiciones
+de equilibrio y analizar la evolución de la población a largo plazo.
 \end{enumerate}
 \eej
 
-\bigskip
+% \bigskip
 
 
-\bej Si un cultivo de bacterias crece con un coeficiente de
-variación proporcional a la cantidad existente y se sabe
-además que la población se duplica en 1 hora ¿Cuánto
-habrá aumentado en 2 horas?.
-\eej
+% \bej Si un cultivo de bacterias crece con un coeficiente de
+% variación proporcional a la cantidad existente y se sabe
+% además que la población se duplica en 1 hora ¿Cuánto
+% habrá aumentado en 2 horas?.
+% \eej
 
 \bigskip
 
@@ -275,100 +262,88 @@ $$ \mbox{(a)}\ x'=(x+t)^{2} \qquad\qquad
  \mbox{(b)}\ x'=\mbox{sen}^{2}(t-x+1) $$
 \eej
 
-%\bigskip
-\newpage
 
-\bej\ \newline
-
-\begin{enumerate}
-\item Si $ae \ne bd$ demuestre que pueden elegirse constantes $h,
-k$ de modo que las sustituciones $t=s-h$, $x=y -k$ reducen
-la ecuaci\'on:
+\bej Supongamos que $ae \ne bd$. Hallar constantes $h, k$ de modo que las 
+sustituciones $t=s-h$, $x=y -k$ reduzcan la ecuaci\'on
 \[ \frac{dx}{dt}= F \left( \frac{at+bx+c}{dt+ex+f} \right) \]
-a una ecuaci\'on homog\'enea.
-
-\item
- Resuelva las ecuaciones:
+a una ecuaci\'on homog\'enea. Usando esta idea resuelva las siguientes 
+ecuaciones.
  \[
  \begin{aligned}&\qquad\qquad\mbox{a) } x'=\frac{2x-t+4}{x+t-1}
- \qquad \qquad\mbox{b) }x'=\frac{x+t+4}{t-x-6}\\
- &\qquad\qquad \mbox{c) }x'=\frac{x+t+4}{x+t-6},\quad{x(0)=2.\mbox{\ \
- \textquestiondown Se satisface $ae\neq bd$
- en este caso?}}
+ \qquad \qquad\mbox{b) }x'=\frac{x+t+4}{t-x-6}
+ &\qquad\qquad \mbox{c) }x'=\frac{x+t+4}{x+t-6},\quad{x(0)=2}.
  \end{aligned}
  \]
-\end{enumerate}
 \eej
 
 \bigskip
 
-\bej Resuelva las siguientes ecuaciones:
-\[
-\begin{array}{ll}
-\mbox{a)} \ (y-x^{3})dx+(x+y^{3})dy =0
-&\hskip-1.2cm\mbox{b)} \ \cos x \cos^{2} y\, dx - 2 \sen x \,\sen y
-\cos y\, dy=0 \\
-\ \\
-\mbox{c)} \ (3x^{2}-y^{2})\,dy -2xy\, dx =0
-&\hskip-1.2cm\mbox{d)} \ x\, dy= (x^{5}+x^{3}y^{2} +y)\,dx   \\
-\ \\
-\text{(e)}\:2(x+y)\sen y\,dx+\big(2(x+y)\sen y+\cos y\big)\,dy=0
-&\hskip-1.2cm\mbox{f)} \ 3y \,dx+x\, dy=0
-\\
-\ \\
-\text{(g)}\:  \big(1-y(x+y)\text{tan}\,(xy)\big)\,dx+\big(1-x(x+y)\text{tan}\,(xy)\big)\,dy=0.
-\end{array}
-\]
-\eej
+% \bej Resuelva las siguientes ecuaciones:
+% \[
+% \begin{array}{ll}
+% \mbox{a)} \ (y-x^{3})dx+(x+y^{3})dy =0
+% &\hskip-1.2cm\mbox{b)} \ \cos x \cos^{2} y\, dx - 2 \sen x \,\sen y
+% \cos y\, dy=0 \\
+% \ \\
+% \mbox{c)} \ (3x^{2}-y^{2})\,dy -2xy\, dx =0
+% &\hskip-1.2cm\mbox{d)} \ x\, dy= (x^{5}+x^{3}y^{2} +y)\,dx   \\
+% \ \\
+% \text{(e)}\:2(x+y)\sen y\,dx+\big(2(x+y)\sen y+\cos y\big)\,dy=0
+% &\hskip-1.2cm\mbox{f)} \ 3y \,dx+x\, dy=0
+% \\
+% \ \\
+% \text{(g)}\:  \big(1-y(x+y)\text{tan}\,(xy)\big)\,dx+\big(1-x(x+y)\text{tan}\,(xy)\big)\,dy=0.
+% \end{array}
+% \]
+% \eej
 
-\bigskip
+% \bigskip
 
 \bej Considere la ecuación lineal de primer orden
-\begin{equation}\label{lineal}
-\tag{*}
-y'+p(x)\,y=q(x).
-\end{equation}
+$x'+p(t)\,x=q(t)$.
 \begin{enumerate}
-\item Busque una función $\mu(x)$ tal que
+\item Busque una función $\mu(t)$ tal que
 $$
-\mu(x)\big(y'(x)+p(x)\,y(x)\big)=\big(\mu(x)\,y(x)\big)'.
+\mu(t)\big(x'(t)+p(t)\,x(t)\big)=\big(\mu(t)\,x(t)\big)'.
 $$
 
-\item Multiplique la ecuación \eqref{lineal} por $\mu$ y halle su solución general.
-
-\noindent $\mu$ se denomina {\it factor integrante}.
+\item Multiplique la ecuación por $\mu$ y halle su solución 
+general. La función $\mu$ se denomina {\it factor integrante}.
 \end{enumerate}
 
 \eej
 
 \bigskip
 
-\bej Hallar la ecuaci\'on de una curva tal que la pendiente de la
+\bej 
+Algunas aplicaciones a la geometría.
+\begin{enumerate}
+\item Hallar la ecuaci\'on de una curva tal que la pendiente de la
 recta tangente en un punto cualquiera es la mitad de la
 pendiente de la recta que une el punto con el origen.
+
+\item Hallar la ecuaci\'on de las curvas con la siguiente propiedad: si $P$ es 
+un punto de la curva, $L$ la recta tangente a la curva en $P$, entonces la 
+única recta que pasa por $P$ y es perpendicular a $L'$ también pasa por el 
+origen.
+
+\item Tenemos una curva con la siguiente propiedad: si $(x,y)$ es un punto de 
+la curva y $L$ es la tangente entonces la pendiente de $L$ es $a x$, donde $a$
+es una constante. Probar que la curva está contenida en una parábola. 
+\end{enumerate}
 \eej
 
-\bigskip
 
-\bej Hallar la ecuaci\'on de las curvas tales que la normal en un
-punto cualquiera pasa por el origen.
-\eej
-\bigskip
+% \bigskip
 
-\bej Demostrar que la curva para la cual la pendiente de la
-tangente en cualquier punto es proporcional a la abscisa del
-punto de contacto es una par\'abola.
-\eej
-\bigskip
+% \bej Hallar la ecuación de una curva del primer cuadrante tal que para cada punto
+% $(x_0,y_0)$ de
+% la misma, la ordenada al origen de la recta tangente a la curva en $(x_0,y_0)$ sea
+% $2(x_0+y_0)$.
+% \eej
 
-\bej Hallar la ecuación de una curva del primer cuadrante tal que para cada punto
-$(x_0,y_0)$ de
-la misma, la ordenada al origen de la recta tangente a la curva en $(x_0,y_0)$ sea
-$2(x_0+y_0)$.
-\eej
-
- \ \ \newpage
-\bej\ \ \newline
+%  \ \ \newpage
+ \bej\ \ \newline
 
 \begin{enumerate}
 \item Hallar las soluciones de:
@@ -385,18 +360,18 @@ cuya gr\'afica pase por el origen (Piense, y no haga cuentas de m\'as).
 \eej
 \bigskip
 
-\bej Sea la ecuaci\'on no homog\'enea $y'+a(x)y=b(x)$ donde
-$a,b:\mathbb{R}\to \R$ son continuas con período $p>0$ y $b
-\not \equiv 0$:
-\begin{enumerate}
-\item Pruebe que una soluci\'on $\Phi$ de esta ecuaci\'on verifica:
-\[ \Phi (x+p) = \Phi (x),\, \forall x\in\R\
-\Leftrightarrow \ \ \Phi(0)= \Phi (p). \]
-\item Encuentre las soluciones de período $2 \pi$ para las ecuaciones:
-\[ y'+3y= \cos(x), \qquad  y'+\cos (x) y = \mbox{sen} (2x). \]
-\end{enumerate}
-\eej
-\bigskip
+% \bej Sea la ecuaci\'on no homog\'enea $y'+a(x)y=b(x)$ donde
+% $a,b:\mathbb{R}\to \R$ son continuas con período $p>0$ y $b
+% \not \equiv 0$:
+% \begin{enumerate}
+% \item Pruebe que una soluci\'on $\Phi$ de esta ecuaci\'on verifica:
+% \[ \Phi (x+p) = \Phi (x),\, \forall x\in\R\
+% \Leftrightarrow \ \ \Phi(0)= \Phi (p). \]
+% \item Encuentre las soluciones de período $2 \pi$ para las ecuaciones:
+% \[ y'+3y= \cos(x), \qquad  y'+\cos (x) y = \mbox{sen} (2x). \]
+% \end{enumerate}
+% \eej
+% \bigskip
 
 \bej Suponga que el ritmo al que se enfría un cuerpo caliente
 es proporcional a la diferencia de temperatura entre \'el y el
@@ -408,45 +383,49 @@ debe transcurrir para que se enfríe a 30 $^{\circ}$C?
 \eej
 \bigskip
 
-\bej Se sabe que el Carbono 14 tiene una semivida de 5600 años. Es decir, su cantidad
-se reduce a la mitad por desintegración radioactiva en ese lapso de tiempo.
+\bej Se sabe que el Carbono 14 tiene una semivida de 5600 años, es decir que 
+su cantidad se reduce a la mitad por desintegración radioactiva en ese lapso 
+de tiempo. Un sedimento se formó a partir de material con una concentración 
+del 40\% de Carbono 14, pero hoy en día solo tiene una concentración del 2\%. 
+Suponiendo que la tasa de cambio del Carbono 14 $\dot x/x$ es constante a lo 
+largo del tiempo calcular cuánto tiempo pasó desde que se depositaron los 
+sedimentos.
 
-Si en una roca sedimentaria había al formarse un 40\% de Carbono 14 y ahora hay un 2\%
-\textquestiondown Cuánto tiempo pasó desde que se depositaron los sedimentos?
-
-Observación: la tasa de cambio del Carbono 14, $\dot x/x$, es constante.
+Observación: La suposición sobre la tasa de cambio no es realista, pero las 
+estimaciones obtenidas con este método pueden corregirse para datar restos 
+arqueológicos o paleontológicos con alta precisión.
 \eej
 
-\bigskip
+% \bigskip
 
-\bej Si la resistencia del aire que act\'ua sobre un cuerpo de
-masa $m$ en caída libre ejerce una fuerza retardadora sobre
-el mismo proporcional a la velocidad ($=-k
-v$), la ecuaci\'on diferencial del movimiento es:
-\[ \frac{d^{2}y}{dt^{2}}=g -c \frac{dy}{dt}, \mbox{ o bien }
-\frac{dv}{dt}= g - cv \]
-donde $c=k/m$. Supongamos $v=0$ en el instante $t=0$, y $c>0$. Encontrar
-$\lim _{t \rightarrow \infty} v(t)$ (llamada velocidad terminal).
+% \bej Si la resistencia del aire que act\'ua sobre un cuerpo de
+% masa $m$ en caída libre ejerce una fuerza retardadora sobre
+% el mismo proporcional a la velocidad ($=-k
+% v$), la ecuaci\'on diferencial del movimiento es:
+% \[ \frac{d^{2}y}{dt^{2}}=g -c \frac{dy}{dt}, \mbox{ o bien }
+% \frac{dv}{dt}= g - cv \]
+% donde $c=k/m$. Supongamos $v=0$ en el instante $t=0$, y $c>0$. Encontrar
+% $\lim _{t \rightarrow \infty} v(t)$ (llamada velocidad terminal).
 
-Si la fuerza retardadora es proporcional al cuadrado de la
-velocidad, la ecuaci\'on se convierte en:
-\[ \frac{dv}{dt}=g-c v^{2}. \]
-Si $v(0)=0$, encuentre la velocidad terminal en este caso.
-\eej
-\bigskip
+% Si la fuerza retardadora es proporcional al cuadrado de la
+% velocidad, la ecuaci\'on se convierte en:
+% \[ \frac{dv}{dt}=g-c v^{2}. \]
+% Si $v(0)=0$, encuentre la velocidad terminal en este caso.
+% \eej
+% \bigskip
 
-\bej La ecuación $y'+P(x) y =Q(x) y^{n}$, que se conoce como la
-ecuación de Bernoulli, es lineal cuando $n=0,1$. Demuestre que
-se puede reducir a una ecuación lineal para cualquier valor de
-$n \ne 1$ por el cambio de variable $z=y^{1-n}$, y aplique este
-método para resolver las ecuaciones siguientes:
-\[
-\begin{array}{ll}
-\mbox{(a)}&xy'+y=x^{4}y^{3},\\
-\mbox{(b)}&xy^{2}y'+y^{3}=x \cos x,\\
-\mbox{(c)}&x y'-3y=x^{4}.
-\end{array}
-\]
-\eej
+% \bej La ecuación $y'+P(x) y =Q(x) y^{n}$, que se conoce como la
+% ecuación de Bernoulli, es lineal cuando $n=0,1$. Demuestre que
+% se puede reducir a una ecuación lineal para cualquier valor de
+% $n \ne 1$ por el cambio de variable $z=y^{1-n}$, y aplique este
+% método para resolver las ecuaciones siguientes:
+% \[
+% \begin{array}{ll}
+% \mbox{(a)}&xy'+y=x^{4}y^{3},\\
+% \mbox{(b)}&xy^{2}y'+y^{3}=x \cos x,\\
+% \mbox{(c)}&x y'-3y=x^{4}.
+% \end{array}
+% \]
+% \eej
 
 \end{document}
